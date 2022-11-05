@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>처음보이게하는 곳</title>
+<title>메인페이지</title>
 </head>
 <body>
-zz
+
 </body>
 </html>
