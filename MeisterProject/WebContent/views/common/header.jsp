@@ -209,6 +209,9 @@ header .main-menu ul.item li a:hover {
 	                    <li>
 	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
 	                    </li>
+	                    <li>
+	                    	<a href="<%=contextPath %>/logout.me">로그아웃</a>
+	                    </li>
 	
 	                </ul>
 	            </div>
