@@ -174,7 +174,7 @@ header .main-menu ul.item li a:hover {
                 </li>
             </ul>
 
-
+			<!-- 로그인 안되어 있을 시 -->
 			<% if  (loginUser == null ) {%>
 	            <div class="sub-menu">
 	                <ul class="menu">
@@ -192,7 +192,8 @@ header .main-menu ul.item li a:hover {
 	
 	                </ul>
 	            </div>
-            <% } else { %>
+	        <!-- 로그인 했을 시 -->
+            <% } else { %> 
             	<div class="sub-menu">
 	                <ul class="menu">
 	                	<li>
