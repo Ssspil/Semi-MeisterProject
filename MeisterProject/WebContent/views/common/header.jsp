@@ -28,8 +28,8 @@ img {
     padding-top: initial;
 }
   
-/*INNER*/
-.inner {
+/*Header-INNER*/
+.header-inner {
     width: 1100px;
     margin: 0 auto;
     position: relative;
@@ -44,7 +44,7 @@ header {
     background-color: white;
     border-bottom: 1px solid #c8c8c8;
 }
-header > .inner {
+header > .header-inner {
     height: 100px;
 }
 header .logo {
@@ -98,7 +98,7 @@ header .sub-menu .search {
     height: 34px;
 }
 header .sub-menu .search input {
-    width: 36px;
+    width: 100px;
     height: inherit;
     padding: 4px 10px;
     border: 1px solid white;
@@ -111,7 +111,7 @@ header .sub-menu .search input {
     transition: width .4s;
 }
 header .sub-menu .search input:focus {
-    width: 190px;
+    width: 290px;
     border-color: #669900;
 }
 
@@ -137,51 +137,43 @@ header .main-menu ul.item li a:hover {
 
 </head>
 <body>
-<header>
-        <div class="inner">
-    
+    <header>
+        <div class="header-inner">
+
             <a href="#" class="logo">
                 <img src="/resources/image/logo.png" />
-                사진이 안떠..
+                여긴 로고 자리..
             </a>
         
+            <ul class="main-menu">
+                <li>
+                    <a href="<%= contextPath %>/market.se">마켓</a>
+                </li>
+                <li>
+                    <a href="<%= contextPath %>/boardlist.bo">커뮤니티</a>
+                </li>
+            </ul>
+
             <div class="sub-menu">
                 <ul class="menu">
-                    <li>
-                        <a href="#">전문가 등록</a>
+                	<li>
+	                    <div class="search">
+	                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
+	                    </div>
                     </li>
                     <li>
-                        <a href="#">로그인</a>
+                        <a href="<%= contextPath %>/loginForm.me">로그인</a>
                     </li>
                     <li>
-                        <a href="#">회원가입</a>
+                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a>
                     </li>
-                    <li>
-                        <a href="#">Find a Store</a>
-                    </li>
+
                 </ul>
-                <div class="search">
-                    <input type="text" placeholder="원하는 영상을 검색해 보세요.">
-                </div>
+
             </div>
             
             
-            <ul class="main-menu">
-                <li class="item">
-                    <a href="#">
-                        <span>고수매칭</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">고수찾기</a>
-                </li>
-                <li>
-                    <a href="#">마켓</a>
-                </li>
-                <li>
-                    <a href="#">커뮤니티</a>
-                </li>
-            </ul>
+
         </div>
     </header>
 </body>
