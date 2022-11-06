@@ -36,24 +36,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-	<script>
-			let msg = "<%= alertMsg %>"; // let msg = 성공적으로 로그인이 되었습니다.
-			
-			if(msg != "null"){
-				alert(msg);
-				// 알림창을 띄워준 후 session에 담긴 해당 메시지는 지워줘야함.
-				// 안그러면 menubar.jsp가 로딩 될때마다 매번 alert가 계속 뜰것
-				
-				<% session.removeAttribute("alertMsg"); %>
-			}
-			
-	</script>
+
 
     <div class="outer">
         <br>
         <h2 style="text-align: center;">로그인</h2>
    
-  	 <% if(loginUser == null){ %>
+
 	    <form id="login-form" action="<%=contextPath %>//login.me" method="post">
 	        <table>
 	            <tr>
@@ -76,17 +65,7 @@
 	        </table>
 	
 	  	  </form>
-	  <% } else {%>
-   <!-- 로그인 성공 후 -->
-   
-   <div id="user-info">
-   		<b><%= loginUser.getNickName() %></b>님 환영합니다.<br><br>
-   		<div align="center">
-   			<a href="<%=contextPath%>/myPage.me">마이페이지</a>
-   			<a href="<%=contextPath %>/logout.me">로그아웃</a>
-   		</div>
-   </div>
-   <% } %>
+
     </div>
     
    
