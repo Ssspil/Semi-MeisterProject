@@ -194,18 +194,8 @@ header .main-menu ul.item li a:hover {
 	            </div>
 	        <!-- 로그인 했을 시 -->
             <% } else { %> 
-                <script>
-					let msg = "<%=alertMsg %>";	// let msg = 성공적으로 로그인 되었습니다.
-					
-					// 알람을 띄워준후 session에 담긴 해당메세지는 지워줘야한다.
-					// 안그러면 menuber.jsp가 로딩될때마다 계속 알림창잉 뜬다.
-					if(msg != "null"){
-						alert(msg);
-						
-						<% session.removeAttribute("alertMsg"); %>
-					} 
-					
-				</script>
+
+				
             	<div class="sub-menu">
 	                <ul class="menu">
 	                	<li>
