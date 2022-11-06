@@ -3,88 +3,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        footer{
-            border: 1px solid black;
-            width: 100%;
-            
-        }
-        .div-head{
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            padding: 40px;
-        }
-        .div-body{
-            box-sizing: border-box;
-            width: 100%;
-            height:50%;
-            padding: 50px;
-        }
-        #menu1{
-            float: left;
-            margin: auto;
-            width: 20%;
-            height: 300px;
-          
-        }
-        #menu2{
-            float: left;
-            margin: auto;
-            width:20%;
-            height: 300px;
-            text-align: center;
-        }
-        #menu3{
-            float: left;
-            margin: auto;
-            width:20%;
-            height: 300px;
-            text-align: center;
-        }
-        #menu4{
-            float:left;
-            margin: auto;
-            width:20%;
-            height: 300px;
-            text-align: center;
-        }
-        #menu5{
-            float:left;
-            margin: auto;
-            width:20%;
-            height: 300px;
-            text-align: center;
-           
-        }
-        ul{
-            list-style-type: none;
-            margin: auto
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>푸터바</title>
+<style>
+    footer{
+        border: 1px solid black;
+        width: 100%;
         
-        }
-        .font{
-            font-weight:bold;
-            font-size: 20px;
-        }
-        .font1{
-            text-align:center;
-            font-weight:bold;
-        }
-        .font2{
-            text-align: center;
-            font-size: 13px;
-            color: grey;
-        }
-        #gray{
-            color: grey;
-        }
+    }
+    .div-head{
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+    }
+    .div-body{
+        box-sizing: border-box;
+        width: 100%;
+        height:50%;
+        padding: 50px;
+    }
+    #menu1{
+        float: left;
+        margin: auto;
+        width: 20%;
+        height: 300px;
       
+    }
+    #menu2{
+        float: left;
+        margin: auto;
+        width:20%;
+        height: 300px;
+        text-align: center;
+    }
+    #menu3{
+        float: left;
+        margin: auto;
+        width:20%;
+        height: 300px;
+        text-align: center;
+    }
+    #menu4{
+        float:left;
+        margin: auto;
+        width:20%;
+        height: 300px;
+        text-align: center;
+    }
+    #menu5{
+        float:left;
+        margin: auto;
+        width:20%;
+        height: 300px;
+        text-align: center;
        
-    </style>
+    }
+    ul{
+        list-style-type: none;
+        margin: auto
+    
+    }
+    .font{
+        font-weight:bold;
+        font-size: 20px;
+    }
+    .font1{
+        text-align:center;
+        font-weight:bold;
+    }
+    .font2{
+        text-align: center;
+        font-size: 13px;
+        color: grey;
+    }
+    #gray{
+        color: grey;
+    }
+  
+   
+</style>
 </head>
 <body>
   <footer class="footer">
