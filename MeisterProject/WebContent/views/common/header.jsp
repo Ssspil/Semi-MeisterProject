@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
 <%
     String contextPath = request.getContextPath();
+
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	// 로그인 이전 or 로그인 실패 : null
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	// 서비스 요청 전 : null
+	// 서비스 요청 성공 후 : alert로 띄워줄 메시지 문구.
 %>
 <!DOCTYPE html>
 <html>
@@ -138,10 +145,23 @@ header .main-menu ul.item li a:hover {
 </head>
 <body>
     <header>
+    <script>
+		let msg = "<%=alertMsg %>";	// let msg = 성공적으로 로그인 되었습니다.
+		
+		// 알람을 띄워준후 session에 담긴 해당메세지는 지워줘야한다.
+		// 안그러면 menuber.jsp가 로딩될때마다 계속 알림창잉 뜬다.
+		if(msg != "null"){
+			alert(msg);
+			
+			<% session.removeAttribute("alertMsg"); %>
+		} 
+		
+	</script>
         <div class="header-inner">
 
             <a href="#" class="logo">
-                <img src="/resources/image/logo.png" />
+                <img src="../resources/image/logo.png" />
+                <img src="../../resources/image/logo.png" />
                 여긴 로고 자리..
             </a>
         
@@ -154,24 +174,42 @@ header .main-menu ul.item li a:hover {
                 </li>
             </ul>
 
-            <div class="sub-menu">
-                <ul class="menu">
-                	<li>
-	                    <div class="search">
-	                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
-	                    </div>
-                    </li>
-                    <li>
-                        <a href="<%= contextPath %>/loginForm.me">로그인</a>
-                    </li>
-                    <li>
-                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a>
-                    </li>
 
-                </ul>
-
-            </div>
-            
+			<% if  (loginUser == null ) {%>
+	            <div class="sub-menu">
+	                <ul class="menu">
+	                	<li>
+		                    <div class="search">
+		                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
+		                    </div>
+	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/loginForm.me">로그인</a>
+	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/enrollForm.me">회원가입</a>
+	                    </li>
+	
+	                </ul>
+	            </div>
+            <% } else { %>
+            	<div class="sub-menu">
+	                <ul class="menu">
+	                	<li>
+		                    <div class="search">
+		                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
+		                    </div>
+	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/alert.me">알림</a>
+	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
+	                    </li>
+	
+	                </ul>
+	            </div>
+            <% } %>
             
 
         </div>
