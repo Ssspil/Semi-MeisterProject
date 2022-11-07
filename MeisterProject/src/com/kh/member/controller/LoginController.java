@@ -60,8 +60,10 @@ public class LoginController extends HttpServlet {
 			
 			session.setAttribute("alertMsg", "성공적으로 로그인이 되었습니다.");
 
+			
 			response.sendRedirect(request.getContextPath());
 			
+			System.out.println("로그인이 되었습니다.");
 			
 		}
 	}

@@ -36,7 +36,7 @@
         <h2 style="text-align: center;">로그인</h2>
         <br><br>
         
-        <img src="resources/resources/image/meister.png" width="300px" height="150">
+        <img src="<%=contextPath %>/resources/image/logo.png" width="300px" height="150">
    
 
 	    <form id="login-form" action="<%=contextPath %>/login.me" method="post">
