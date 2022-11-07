@@ -208,6 +208,9 @@ header .main-menu ul.item li a:hover {
 	                    <li>
 	                        <a href="<%= contextPath %>/manager.ad">관리자 페이지</a>
 	                    </li>
+	                    <li>
+	                    	<a href="<%=contextPath %>/logout.me">로그아웃</a>
+	                    </li>
 	
 	                </ul>
 	            </div>
