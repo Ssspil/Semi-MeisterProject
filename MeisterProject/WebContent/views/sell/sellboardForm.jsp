@@ -7,15 +7,13 @@
 <title>판매게시판 메인</title>
 <style>
 	div{
-		border: 1px solid chartreuse;
-		box-sizing: border-box;
+		
 	}
 	div>ul {
 		list-style-type: none;
 		display: inline;
-		padding:150px;
-		width:300px;
-		margin: 100px;
+		
+		margin: auto;
 	}
 
 
