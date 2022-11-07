@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberInsertController
@@ -26,8 +30,33 @@ public class MemberInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+request.setCharacterEncoding("UTF-8");
+		
+		// 2) 요청시 전달값을 뽑아서 변수 및 객체에 기록하기.
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		String nickName = request.getParameter("nickName");
+		String[] interestsArr = request.getParameterValues("interest");
+		
+		
+		String interest = interestsArr != null ? String.join(", ", interestsArr) : "";
+		
+		Member m = new Member(userId, userPwd, nickName, interest);
+		
+		int result = new MemberService().insertMember(m);
+		
+		if(result > 0) { // 성공.
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		} else { // 실패 => 에러페이지
+			request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**
