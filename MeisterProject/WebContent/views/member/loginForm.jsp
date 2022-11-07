@@ -14,6 +14,7 @@
         height : auto;
         margin: auto;
         margin-top: 180px;
+        border-radius:5px;
     }
     #login-form table{
         margin:auto;
@@ -24,25 +25,25 @@
     .under-menu ul.menu li a:hover {
     color: pink;
     text-decoration-line: none;
+    
 	}
-	a:link {
- 	 color : gray;
-	}
-	ul{
-	 list-style:none;
-	}
+		
 	li{
-     float:left;
-     margin-right : 30px;
+     	float:left;
+     	margin-right : 30px;
      
 	}
-	div{
-	border-radius:5px;
-	}
-    .outer .under-menu{
+	
+    .outer .under-under-menu{
     	width : 300px;
     	margin : auto;
-    	background-color :red;
+    	list-style:none;
+    }
+    
+    #logo{
+	     width : 300px;
+	     height : 100px;
+	     margin: auto;
     }
     
 </style>
@@ -57,10 +58,10 @@
 	
     <div class="outer" style="height: 600px; width: 450px; border:2px solid gold;">
         <br>
-        <h2 style="text-align: center;">로그인</h2> <br><br>
         <br><br>
+        <img src="<%=contextPath %>/resources/image/logo.png" id="logo">
         
-       
+        <br><br><br>
 
 	   	<form id="login-form" action="<%=contextPath %>/login.me" method="post">
 	        <table>
@@ -75,14 +76,14 @@
 	            <tr>
 	                <td colspan="2">
 	                	<!-- <input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label> -->
-	                    <button type="submit"class="btn btn-warning" onclick="submitLogin();">로그인</button> <br><br>
+	                    <button type="submit"class="btn btn-warning" onclick="submitLogin();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> <br><br>
 	                    
 	                </td>
 	            </tr>
 	        </table> 
 	  	  </form>
 	  	  <div class="under-menu">
-	           	<ul class="menu">
+	           	<ul class="under-under-menu">
 	           		<li>
 	           		<a href="<%= contextPath %>/alert.me">비밀번호 찾기</a>
 	           		</li>
