@@ -4,7 +4,20 @@
 <properties>
 
 	<entry key="loginMember">
-		SELECT *
+		SELECT USER_NO,
+			   USER_ID,
+			   USER_PWD,
+			   NICKNAME,
+			   INTEREST,
+			   ENROLL_DATE,
+			   USER_NAME,
+			   GENDER,
+			   EMAIL,
+			   PHONE,
+			   STATUS,
+			   BLACKLIST,
+			   SPECIALITY,
+			   EXPERT
 		FROM MEMBER
 		WHERE USER_ID = ?
 			AND USER_PWD = ?

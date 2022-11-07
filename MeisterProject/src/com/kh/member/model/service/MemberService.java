@@ -18,6 +18,7 @@ public class MemberService {
 	public Member loginMember(String userId, String userPwd) {
 		
 		Connection conn = JDBCTemplate.getConnection();
+		
 		Member m = new MemberDao().loginMember(userId, userPwd, conn);
 		
 		JDBCTemplate.close();
