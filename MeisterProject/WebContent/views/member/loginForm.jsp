@@ -43,7 +43,7 @@
 	        <table>
 	            <tr>
 	                <th>아이디 & 이메일</th>
-	                <td><input type="email" name="userId" placeholder="KH@meister.com" required></td>
+	                <td><input type="text" name="userId" placeholder="KH@meister.com" required></td>
 	            </tr>
 	            <tr>
 	                <th>비밀번호  </th>
