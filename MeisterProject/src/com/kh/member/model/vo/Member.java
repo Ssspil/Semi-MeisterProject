@@ -17,6 +17,7 @@ public class Member {
 	private String balckList;
 	private String speciality;
 	private String expert;
+	private String profileImg;
 	
 	// 로그인 부분 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
@@ -182,12 +183,23 @@ public class Member {
 		this.expert = expert;
 	}
 
+	public String getProfileImg() {
+		return profileImg;
+	}
+	
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", nickName=" + nickName
 				+ ", interest=" + interest + ", enrollDate=" + enrollDate + ", userName=" + userName + ", gender="
 				+ gender + ", email=" + email + ", phone=" + phone + ", status=" + status + ", balckList=" + balckList
-				+ ", speciality=" + speciality + ", expert=" + expert + "]";
+				+ ", speciality=" + speciality + ", expert=" + expert + ", profileImg=" + profileImg + "]";
 	}	
+	
+	
+
 	
 }

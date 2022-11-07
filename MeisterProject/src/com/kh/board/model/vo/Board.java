@@ -47,7 +47,7 @@ public class Board {
 	}
 	
 	// 게시글 목록 불러오기 부분 생성자
-	// titleImg는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
+	// title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
 	public Board(int boardNo, String boardTitle, int boardCount, int boardRecommend, Date boardDate, int userNO,
 			String titleImg) {
 		super();

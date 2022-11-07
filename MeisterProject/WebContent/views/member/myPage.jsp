@@ -32,7 +32,7 @@
 		<div class="profile">
 			<table>
 				<tr>
-					<td rowspan="3" width="30"><img src="/resources/image/logo.png"></td>
+					<td rowspan="3" width="30"><img src="<%=contextPath %>/resources/image/logo.png"></td>
 					<td>
 						<input type="text" value="<%=userName %>" readonly>
 					</td>
