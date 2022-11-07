@@ -6,15 +6,23 @@
 <meta charset="UTF-8">
 <title>판매게시판 메인</title>
 <style>
-	div{
-		
+	.outer{
+		margin:150px 0px 0px 50px;
 	}
 	div>ul {
 		list-style-type: none;
-		display: inline;
-		
-		margin: auto;
+		margin:0px 0px 0px 50px;
+		padding-bottom: 16px;
 	}
+	div>ul>li {
+		
+	}
+	h3{
+		border-bottom: 5px solid rgb(255, 212, 0);
+	    padding-bottom: 16px;
+	    margin-bottom: 8px;
+	}
+	
 
 
 
@@ -26,44 +34,44 @@
 	
 
 	<div class="outer" >
-		<br>
+		
 		<h3>마켓</h3>
 		<ul id="menu_interest">
 			<li style="font-size: larger;" ><a href=""></a>전체</li>
-			<br>
+			
 			<li><a href=""></a>영상</li>
-			<br>
+			
 			<li><a href=""></a>영화</li>
-			<br>
+			
 			<li><a href=""></a>게임</li>
-			<br>
+			
 			<li><a href=""></a>IT</li>
-			<br>
+			
 			<li><a href=""></a>운동</li>
-			<br>
+			
 			<li><a href=""></a>요리</li>
 		</ul>
 		<ul id="menu_local">
 			<li><a href=""></a>서울</li>
-			<br>
+			
 			<li><a href=""></a>인천</li>
-			<br>
+			
 			<li><a href=""></a>부산</li>
-			<br>
+			
 			<li><a href=""></a>울산</li>
-			<br>
+			
 			<li><a href=""></a>대전</li>
-			<br>
+			
 			<li><a href=""></a>광주</li>
-			<br>
+			
 			<li><a href=""></a>경기</li>
-			<br>
+			
 			<li><a href=""></a>충북/충남</li>
-			<br>
+			
 			<li><a href=""></a>전북/전남</li>
-			<br>
+			
 			<li><a href=""></a>경북/경남</li>
-			<br>
+			
 			<li><a href=""></a>제주</li>
 		</ul>
 
