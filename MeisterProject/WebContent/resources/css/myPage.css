@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.outer {
+        color: black;
+        width: 700px;
+        margin: auto;
+        margin-top: 100px;
+        margin-bottom: 150px;
+        height: 1000px;
+    }
+    .profile{
+    	width: 80%;
+    	margin: auto;
+    }
+    input{
+    	 background-color:inherit; 
+    	 border:none;
+    }
+    .outer>h6>b>a{
+    	text-decoration:none;
+    	color:black; 
+    	line-height:50px;
+    }
+    #editProfile{
+    	border: 1px black solid; 
+    	background-color: #CCCACA; 
+    	text-decoration:none; 
+    	color: #858383;
+    	border: 1px #CCCACA solid; 
+    	border-radius:50px / 100px;
+    }
