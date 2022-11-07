@@ -81,7 +81,7 @@ public class MemberDao {
 	}
 	
 	public int insertMember(Member m, Connection conn) {
-		// insert문 처리된 행의 갯수를 반환하여 result에 저장시킬것.
+		
 		int result = 0;
 		
 		PreparedStatement psmt = null;
