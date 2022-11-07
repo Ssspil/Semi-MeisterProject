@@ -29,7 +29,7 @@ public class SellBoardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		//필요한 값들 추가해야함
 		
 		
 	   request.getRequestDispatcher("views/sell/sellboardForm.jsp").forward(request, response);

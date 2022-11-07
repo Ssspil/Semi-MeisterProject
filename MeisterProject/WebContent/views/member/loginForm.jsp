@@ -11,9 +11,10 @@
         background-color: white;
         color: gray;
         width: 450px;
-        height : 500px;
+        height : auto;
         margin: auto;
         margin-top: 180px;
+        border-radius:5px;
     }
     #login-form table{
         margin:auto;
@@ -21,6 +22,30 @@
     #login-form input{
         margin: 4px;
     }
+    .under-menu ul.menu li a:hover {
+    color: pink;
+    text-decoration-line: none;
+    
+	}
+		
+	li{
+     	float:left;
+     	margin-right : 30px;
+     
+	}
+	
+    .outer .under-under-menu{
+    	width : 300px;
+    	margin : auto;
+    	list-style:none;
+    }
+    
+    #logo{
+	     width : 300px;
+	     height : 100px;
+	     margin: auto;
+    }
+    
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -28,21 +53,20 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
-<body>
+<body style="background-color: lightgray;">
 	<%@ include file="../common/header.jsp" %>
 	
-    <div class="outer" style="height: auto; width: 450px; border:2px solid gold;">
+    <div class="outer" style="height: 600px; width: 450px; border:2px solid gold;">
         <br>
-        <h2 style="text-align: center;">로그인</h2>
         <br><br>
+        <img src="<%=contextPath %>/resources/image/logo.png" id="logo">
         
-        <img src="<%=contextPath %>/resources/image/logo.png" width="300px" height="150">
-   
+        <br><br><br>
 
-	    <form id="login-form" action="<%=contextPath %>/login.me" method="post">
+	   	<form id="login-form" action="<%=contextPath %>/login.me" method="post">
 	        <table>
 	            <tr>
-	                <th>아이디 & 이메일</th>
+	                <th>아이디</th>
 	                <td><input type="text" name="userId" placeholder="KH@meister.com" required></td>
 	            </tr>
 	            <tr>
@@ -50,19 +74,29 @@
 	                <td><input type="password" name="userPwd" required></td>
 	            </tr>
 	            <tr>
-	                <th colspan="2">
-	                	<input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label>
-	                    <button type="submit"class="btn btn-warning" onclick="submitLogin();">이메일로 로그인</button> <br><br>
-	                    <button type="button" class="btn btn-primary btn-sm" onclick="findPwd();">비밀번호 찾기</button>
-	                    <button type="button" class="btn btn-primary btn-sm" onclick="enrollPage();">회원가입</button>
-	                </th>
+	                <td colspan="2">
+	                	<!-- <input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label> -->
+	                    <button type="submit"class="btn btn-warning" onclick="submitLogin();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> <br><br>
+	                    
+	                </td>
 	            </tr>
-	
-	
-	        </table>
-	
+	        </table> 
 	  	  </form>
+	  	  <div class="under-menu">
+	           	<ul class="under-under-menu">
+	           		<li>
+	           		<a href="<%= contextPath %>/alert.me">비밀번호 찾기</a>
+	           		</li>
+	           		<li>
+	           		|
+	           		</li>
+	           		<li>
+	           		<a href="<%= contextPath %>/alert.me">회원가입</a>
+	           		</li>
+	           	</ul>
+	     </div>
     </div>
+    
     
     <br><br>
     <%@ include file="../common/footer.jsp" %>
