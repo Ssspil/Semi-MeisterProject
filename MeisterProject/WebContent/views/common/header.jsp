@@ -100,11 +100,11 @@ header .sub-menu ul.menu li a {
 header .sub-menu ul.menu li a:hover {
     color: black;
 }
-header .sub-menu .search {
+header .main-menu .search {
     position: relative;
     height: 34px;
 }
-header .sub-menu .search input {
+header .main-menu .search input {
     width: 100px;
     height: inherit;
     padding: 4px 10px;
@@ -117,7 +117,7 @@ header .sub-menu .search input {
     font-size: 12px;
     transition: width .4s;
 }
-header .sub-menu .search input:focus {
+header .main-menu .search input:focus {
     width: 290px;
     border-color: #669900;
 }
@@ -172,17 +172,17 @@ header .main-menu ul.item li a:hover {
                 <li>
                     <a href="<%= contextPath %>/boardlist.bo">커뮤니티</a>
                 </li>
+                <li>
+		        	<div class="search">
+		            	<input type="text" placeholder="원하는 영상을 검색해 보세요.">
+		            </div>
+	            </li>
             </ul>
 
 			<!-- 로그인 안되어 있을 시 -->
 			<% if  (loginUser == null ) {%>
 	            <div class="sub-menu">
 	                <ul class="menu">
-	                	<li>
-		                    <div class="search">
-		                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
-		                    </div>
-	                    </li>
 	                    <li>
 	                        <a href="<%= contextPath %>/loginForm.me">로그인</a>
 	                    </li>
@@ -193,16 +193,28 @@ header .main-menu ul.item li a:hover {
 	                </ul>
 	            </div>
 	        <!-- 로그인 했을 시 -->
-            <% } else { %> 
+            <% } else if ((loginUser != null) && (loginUser.getUserId().equals("admin")) ){ %> 
 
 				
             	<div class="sub-menu">
 	                <ul class="menu">
-	                	<li>
-		                    <div class="search">
-		                        <input type="text" placeholder="원하는 영상을 검색해 보세요.">
-		                    </div>
+
+	                    <li>
+	                        <a href="<%= contextPath %>/alert.me">알림</a>
 	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
+	                    </li>
+	                    <li>
+	                        <a href="<%= contextPath %>/manager.ad">관리자 페이지</a>
+	                    </li>
+	
+	                </ul>
+	            </div>
+            <% } else { %>
+            	<div class="sub-menu">
+	                <ul class="menu">
+
 	                    <li>
 	                        <a href="<%= contextPath %>/alert.me">알림</a>
 	                    </li>
@@ -212,6 +224,9 @@ header .main-menu ul.item li a:hover {
 	
 	                </ul>
 	            </div>
+            
+            
+            
             <% } %>
             
 

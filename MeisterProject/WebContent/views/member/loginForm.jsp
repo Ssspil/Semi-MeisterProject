@@ -43,7 +43,7 @@
         <h2 style="text-align: center;">로그인</h2>
    
 
-	    <form id="login-form" action="<%=contextPath %>//login.me" method="post">
+	    <form id="login-form" action="<%=contextPath %>/login.me" method="post">
 	        <table>
 	            <tr>
 	                <th>아이디 이메일</th>
