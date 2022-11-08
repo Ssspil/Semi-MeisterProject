@@ -12,6 +12,10 @@ public class Attachment {
 	private int fileLevel;
 	private String status;
 	
+	public Attachment() {
+		
+	}
+	
 	// 기본생성자
 	public Attachment(int fileNo, int refNo, String originName, String changeName, String filePath, Date uploadDate,
 			int fileLevel, String status) {

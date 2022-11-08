@@ -42,8 +42,23 @@ public class PasswordFindController extends HttpServlet {
 		
 		Member pwUser = ms.pwdFind(userId);
 		
-		System.out.println(email);
+		
+//		HttpSession session = request.getSession();
+//		
+//		if(session.getAttribute("pwUser") == null) { //아이디를 잘못 입력했을 경우
+//			session.setAttribute("alertMsg", "올바른 아이디를 입력해주세요. ");
+//		}else {
+//			session.setAttribute("alertMsg", "임시 비밀번호 전송 완료! 메일함을 확인해주세요.");
+//			session.setAttribute("pwUser", pwUser);
+//			
+//			System.out.println("비밀번호 찾기 성공");
+//		}
+//		response.sendRedirect(request.getContextPath()+"/pwdfindform.me");
+		
+		
+	
 		System.out.println(pwUser);
+		System.out.println(email);
 			
 		response.sendRedirect(request.getContextPath());
 		System.out.println("비밀번호 찾기 성공");

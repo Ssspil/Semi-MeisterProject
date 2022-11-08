@@ -4,6 +4,11 @@ public class Local {
 	private int localNo;
 	private String localName;
 	
+	
+	public Local() {
+		
+	}
+	
 	public Local(int localNo, String localName) {
 		super();
 		this.localNo = localNo;

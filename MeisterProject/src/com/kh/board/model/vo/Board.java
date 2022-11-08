@@ -13,6 +13,11 @@ public class Board {
 	private int userNO;
 	private String titleImg;	// 커뮤니티 게시판에 썸네일 표시용
 	
+	
+	public Board() {
+		
+	}
+	
 	// 기본생성자
 	public Board(int boardNo, String boardTitle, String boardContent, int boardCount, int boardRecommend,
 			Date boardDate, String status, int userNO, String titleImg) {
