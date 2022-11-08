@@ -8,48 +8,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.vo.Member;
-import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class PasswordFindController
+ * Servlet implementation class PasswordFindFormController
  */
-@WebServlet("/pwdFind.me")
-public class PasswordFindController extends HttpServlet {
+@WebServlet("/pwdfindform.me")
+public class PasswordFindFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PasswordFindController() {
+    public PasswordFindFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    private MemberService ms = new MemberService();
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		String userId = request.getParameter("userId");
-		String email = request.getParameter("email");
-		
-		Member pwUser = ms.pwdFind(userId);
-		
-		System.out.println(email);
-		System.out.println(pwUser);
-			
-		response.sendRedirect(request.getContextPath());
-		System.out.println("비밀번호 찾기 성공");
-		}
+
+		// 포워딩 방식
+	    RequestDispatcher view = request.getRequestDispatcher("views/member/passwordFindForm.jsp");
+		view.forward(request, response);
 	
-	
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

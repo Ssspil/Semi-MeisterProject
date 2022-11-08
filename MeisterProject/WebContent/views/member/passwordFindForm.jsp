@@ -93,8 +93,8 @@
 
 	</div>
 	
-		<script>
-			<!--넣어야되는게 맞는지?-->
+<!-- 		<script>
+			<!--넣어야되는게 맞는지?
 			function sendEmail(){
 				if($("input[name=userId]").val() != $("input[name=userId]").val()){
 					alert("올바른 아이디를 입력해주세요.")
@@ -106,7 +106,7 @@
 				return true;
 			}
 
-		</script>
+		</script> -->
 				   
 	
     <%@ include file="../common/footer.jsp" %>
