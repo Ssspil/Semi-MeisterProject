@@ -23,7 +23,7 @@
     <style>
     	#table-outer {
     		background-color : rgb(255, 230, 173);
-    		height : 700px;
+    		height : 500px;
     	}
     
     	table {
@@ -123,7 +123,7 @@
 	                    	</tr>
 	                    	<tr>
 	                    		<td>1</td>
-	                    		<td>관리제제 회원목록</td>
+	                    		<td>dkjsl anjfksmsru 회원목록</td>
 	                    		<td>관리자</td>
 	                    		<td>100</td>
 	                    		<td>2022.11.11</td>
