@@ -70,7 +70,10 @@ public class Member {
 		this.email = email;
 		this.phone = phone;
 	}
-
+	public Member() {
+		
+	}
+	
 	public int getUserNo() {
 		return userNo;
 	}

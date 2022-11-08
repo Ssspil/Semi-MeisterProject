@@ -39,6 +39,19 @@
 					)
 	</entry>
 	
+	<entry key="pwdFind">
+		SELECT USER_ID
+		FROM MEMBER
+		WHERE USER_ID=?
+	</entry>
+	
+	
+	
+	<entry key="idCheck">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_ID = ?
+	</entry>
 	
 	
 </properties>

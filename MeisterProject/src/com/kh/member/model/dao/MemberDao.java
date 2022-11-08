@@ -110,7 +110,67 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public Member pwdFind(String userId, Connection conn) {
+
+		Member m = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pwdFind");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, userId);
+			
+			rset = psmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setUserId(rset.getString("USER_ID"));
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		System.out.println(m);
+		return m;
+	}
 	
+	public int idCheck(Connection conn, String checkId) {
+		
+		// select -> ResultSET (숫자하나)
+		int count = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, checkId);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return count;
+		
+	}
 	
 	
 }
