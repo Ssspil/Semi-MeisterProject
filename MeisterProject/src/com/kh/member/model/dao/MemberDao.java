@@ -110,6 +110,35 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public Member pwdFind(String userId, Connection conn) {
+
+		Member m = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pwdFind");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, userId);
+			
+			rset = psmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setUserId(rset.getString("USER_ID"));
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		System.out.println(m);
+		return m;
+	}
 	
 	
 	
