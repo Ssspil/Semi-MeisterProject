@@ -9,33 +9,19 @@
 <style>
     .outer{
         background-color: white;
-        color: gray;
-        width: 450px;
-        height : auto;
+        color: black;
+        width: 410px;
+        height : 600px;
         margin: auto;
-        margin-top: 180px;
+        margin-top: 45px;
         border-radius:5px;
     }
-    #login-form table{
-        margin:auto;
-    }
     #login-form input{
-        margin: 4px;
+        margin: 6px;
     }
-    .under-menu ul.menu li a:hover {
-    color: pink;
-    text-decoration-line: none;
-    
-	}
 		
-	li{
-     	float:left;
-     	margin-right : 30px;
-     
-	}
-	
-    .outer .under-under-menu{
-    	width : 300px;
+	.under-under-menu li{
+    	width : 270px;
     	margin : auto;
     	list-style:none;
     }
@@ -45,6 +31,22 @@
 	     height : 100px;
 	     margin: auto;
     }
+	#btn1{
+		display: block;
+		margin: auto;
+	}
+	.under-menu li a{
+    padding: 1px 20px;
+    display: block;
+    font-size: 13px;
+    color: #656565;
+    float : left;
+	
+	}
+	.under-menu li a:hover {
+		color: black;
+	}
+    
     
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -55,50 +57,46 @@
 </head>
 <body style="background-color: lightgray;">
 	<%@ include file="../common/header.jsp" %>
+	<br><br><br><br><br>
+	<h3 style="text-align:center"> 로그인 </h3>
 	
-    <div class="outer" style="height: 600px; width: 450px; border:2px solid gold;">
-        <br>
+    <div class="outer" style="border:2px solid gold;">
         <br><br>
         <img src="<%=contextPath %>/resources/image/logo.png" id="logo">
         
         <br><br><br>
 
 	   	<form id="login-form" action="<%=contextPath %>/login.me" method="post">
-	        <table>
-	            <tr>
-	                <th>아이디</th>
-	                <td><input type="text" name="userId" placeholder="KH@meister.com" required></td>
-	            </tr>
-	            <tr>
-	                <th>비밀번호  </th>
-	                <td><input type="password" name="userPwd" required></td>
-	            </tr>
-	            <tr>
-	                <td colspan="2">
-	                	<!-- <input type="checkbox" id="saveId"><label for="saveId">아이디 저장</label> -->
-	                    <button type="submit"class="btn btn-warning" onclick="submitLogin();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button> <br><br>
-	                    
-	                </td>
-	            </tr>
-	        </table> 
-	  	  </form>
+	   		
+	   		<div>
+	   			
+				<div style="display:block">
+	   			<label for="input1">아이디</label><br>				
+	   			<input id="input1" type="text" name="userId" class="text-input form-control is-invalid invalid" style= "width:97%; height: 45px;" style="text-align:center; display:block; margin: 0 auto;" placeholder="아이디를 입력해주세요." autocomplete="off" required><div data-v-149435f8="" class="invalid-feedback">아이디를 입력해주세요.</div> <br>
+	   			</div>
+	   			
+	   			<label for="input2">비밀번호</label><br>
+	   			<input id="input2" type="password" name="userPwd" class="text-input form-control is-invalid invalid" style= "width:97%; height: 45px;" placeholder="비밀번호를 입력해주세요." autocomplete="off" required><small data-v-149435f8="" class="form-text text-invalid" style="color: red;">비밀번호를 입력해주세요.</small> <br>
+	   			
+	   			<button id="btn1" type="submit" class="btn btn-warning" onclick="submitLogin();" style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	   			
+	   		</div>
+	   	</form>
+	   		
+
 	  	  <div class="under-menu">
 	           	<ul class="under-under-menu">
 	           		<li>
 	           		<a href="<%= contextPath %>/alert.me">비밀번호 찾기</a>
 	           		</li>
 	           		<li>
-	           		|
-	           		</li>
-	           		<li>
 	           		<a href="<%= contextPath %>/alert.me">회원가입</a>
 	           		</li>
 	           	</ul>
 	     </div>
-    </div>
-    
-    
-    <br><br>
+	     
+	     </div>
+  
     <%@ include file="../common/footer.jsp" %>
     
    
