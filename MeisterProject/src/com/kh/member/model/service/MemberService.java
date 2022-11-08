@@ -63,7 +63,17 @@ public class MemberService {
 		
 	}
 
-	   
+	// 아이디 중복체크
+	 public int idCheck(String checkId) {
+			
+			Connection conn = JDBCTemplate.getConnection();
+			
+			int count = new MemberDao().idCheck(conn, checkId);
+			
+			JDBCTemplate.close();
+			
+			return count;
+		}   
 	   
 	   
 	   
