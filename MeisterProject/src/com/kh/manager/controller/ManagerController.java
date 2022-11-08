@@ -1,4 +1,4 @@
-package com.kh.manager.Controller;
+package com.kh.manager.controller;
 
 import com.kh.member.model.vo.Member;
 
