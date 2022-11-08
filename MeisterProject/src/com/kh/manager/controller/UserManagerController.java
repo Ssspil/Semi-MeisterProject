@@ -1,6 +1,4 @@
-package com.kh.manager.Controller;
-
-import com.kh.member.model.vo.Member;
+package com.kh.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
+
 /**
- * Servlet implementation class ManagerController
+ * Servlet implementation class UserManagerController
  */
-@WebServlet("/manager.ad")
-public class ManagerController extends HttpServlet {
+@WebServlet("/users.ad")
+public class UserManagerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerController() {
+    public UserManagerController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,6 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	    // 관리자가 아니면 실행 안되게 하는 것.
 	    if( !(request.getSession().getAttribute("loginUser") != null && 
 	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
@@ -43,7 +42,7 @@ public class ManagerController extends HttpServlet {
 	    if(request.getSession().getAttribute("loginUser") != null && 
 	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com")) {   
 	    	
-	    	request.getRequestDispatcher("views/manager/managerPage.jsp").forward(request, response);
+	    	request.getRequestDispatcher("views/manager/userManager.jsp").forward(request, response);
 	    	
 	    } else {   
 	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
@@ -51,11 +50,9 @@ public class ManagerController extends HttpServlet {
 
 	    }
 	    
-	    System.out.println("관리자 페이지로 이동");
-	}
-	    
-	   
+	    System.out.println("유저관리 페이지로 이동");
 	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
