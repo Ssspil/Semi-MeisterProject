@@ -38,8 +38,12 @@ public class NoticeManagerController extends HttpServlet {
 	        return;
 	    }
 	    
+	    
 		request.getRequestDispatcher("views/manager/noticeManager.jsp").forward(request, response);
+	
+		System.out.println("공지사항 관리 페이지로 이동");
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
