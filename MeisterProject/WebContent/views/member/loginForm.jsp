@@ -87,7 +87,7 @@
 	  	  <div class="under-menu">
 	           	<ul class="under-under-menu">
 	           		<li>
-	           		<a href="<%= contextPath %>/alert.me">비밀번호 찾기</a>
+	           		<a href="<%= contextPath %>/pwdfindform.me">비밀번호 찾기</a>
 	           		</li>
 	           		<li>
 	           		<a href="<%= contextPath %>/alert.me">회원가입</a>
