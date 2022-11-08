@@ -162,8 +162,55 @@
 <body>
 <%@ include file="../common/header.jsp" %>
 
-	
- <div class="body" >
+<body>
+    <header>
+        <div class="inner">
+    
+            <a href="#" class="logo">
+                <img src="resources//image/KakaoTalk_20221101_005911025.png" alt="soomgo" />
+            </a>
+        
+            <div class="sub-menu">
+                <ul class="menu">
+                    <li>
+                        <a href="#">전문가 등록</a>
+                    </li>
+                    <li>
+                        <a href="#">로그인</a>
+                    </li>
+                    <li>
+                        <a href="#">회원가입</a>
+                    </li>
+                    <li>
+                        <a href="#">Find a Store</a>
+                    </li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="원하는 영상을 검색해 보세요.">
+                </div>
+            </div>
+            
+            
+            <ul class="main-menu">
+                    <li class="item">
+                        <a href="#">
+                            <span>고수매칭</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">고수찾기</a>
+                    </li>
+                    <li>
+                        <a href="#">마켓</a>
+                    </li>
+                    <li>
+                        <a href="#">커뮤니티</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="body" >
         <h1 id="mainid">커뮤니티</h1>
         <div id="body-1" >
             <span id="ge">게시판</span>
@@ -176,7 +223,7 @@
         <div class="body2">
             <div id="body2-1"> 
 
-                <div id="body2-2"><button data-v-3db8ff2e="" type="button" class="btn write-button btn-primary"> 글쓰기 <i data-v-3db8ff2e="" class="write"></i></button></div><hr>
+                <div id="body2-2" align="right"><a href="<%=contextPath %>/insert.bo" class="btn btn-secondary">글작성</a></div><hr>
                 <div id="body2-3">
                     <div id="body2-3-1"><br>
                         <span class="hotfont">어제 핫한글</span><br>
@@ -217,6 +264,7 @@
            
             
         </div>
+        
   
         
    
