@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-      .body{
+          .body{
             box-sizing: border-box;
             height: 100%;
             margin: auto;
@@ -14,13 +14,12 @@
         }
         #body-1{
             box-sizing: border-box;
-            height: 53px;
-            
+            height: 55px;
         }
         #body2-1{
             box-sizing: border-box; 
             margin: auto; 
-            height: 1000px;
+            height: 1400px;
             width: 800px;
             
         }
@@ -35,6 +34,7 @@
             box-sizing: border-box;
             margin: auto;
             height: 19%;
+           
         }
         #body2-3-1{
             box-sizing: border-box;
@@ -72,29 +72,22 @@
             box-sizing: border-box;
             height: 19%;
             width: 100%;
-            padding: 15px;
+            padding: 20px;
         }
         #body2-4-1{
-            box-sizing: border-box;
-            height: 100%;
-            width: 50%;
-            padding: 5px;
-            float: left;
-        } 
-        #body2-4-2{
-            box-sizing: border-box;
-            height: 100%;
-            width: 50%;
-            float: left;
-        } 
+          position: relative;
+          float:right;
+          top:-35%;
+          right: 5%;
+        }
+     
         #date{
             border: 1px solid black;
             color: grey;
             font-size: 14px;
-            
-            
-            
-           
+            position: relative;
+            top:52%;
+            left: 73%;
         }
         #body2-5{
             box-sizing: border-box;
@@ -143,12 +136,12 @@
         }
      
         #img1{
-            float: right;
-            margin: auto;
-            padding-top : 15px;
-            padding-right : 40px;
+          width: 10rem;
+          height: 10rem;
+            vertical-align: middle;
         }
-        #ddobong,#ask{
+        #icon1,#ask{
+            
             float: left;
         }
         #hottitle{
@@ -156,52 +149,61 @@
             text-align: center;
             padding-top: 30px;
         }
+        #text{
+            margin-top: 35px;
+        }
+        #titlefooter{
+            position: relative;
+            top:55%;
+
+        }
     
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
 
 	
-  <div class="body">
+ <div class="body" >
         <h1 id="mainid">커뮤니티</h1>
-        <div id="body-1">
-            <a id="ge">게시판</a>
-            <a id="gung">궁금해요</a>
+        <div id="body-1" >
+            <span id="ge">게시판</span>
+            <span id="gung">궁금해요</span>
         </div>
+    </div>
             <div class="body-2">
-                <div></div>
-                <div></div>
+                
             </div>
-        </div>
         <div class="body2">
             <div id="body2-1"> 
 
-                <div id="body2-2" align="right"><a href="<%=contextPath %>/insert.bo" class="btn btn-secondary">글작성</a></div><hr>
+                <div id="body2-2"><button data-v-3db8ff2e="" type="button" class="btn write-button btn-primary"> 글쓰기 <i data-v-3db8ff2e="" class="write"></i></button></div><hr>
                 <div id="body2-3">
                     <div id="body2-3-1"><br>
                         <span class="hotfont">어제 핫한글</span><br>
-                        
-                            <div id="hot1"></div>
+                            <div id="hot1">
+                                <a id="hottitle"></a>
+                            </div>
                     </div>
                     <div id="body2-3-2"><br><br>
-                        <div id="hot1"></div>
+                        <div id="hot1">
+                          
+                        </div>
                     </div>
                     
-                    <div id="body2-3-3"><br><br>
+                    <div id="body2-3-3" ><br><br>
                         <div id="hot1"></div>
                     </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <div id="body2-4-1">
-                        <a class="font">글제목</a><br><br>
-                        <a>글내용</a><br><br>
-                        <span class="spantext">
-                            <input type="submit" id="ddabong">
-                        </span>
-                    </div>
-                    <div id="body2-4-2">
-                       <img src="resources/image/nuguri1.gif" id="img1" height="100px" width="350px">
-                        <span id="date">1시간전</span>
+                  
+                    <a class="font">글제목</a>
+                    </li><p id="text">글내용글내용글내용</p>
+                   <span id="titlefooter">댓글 6 조회수6</span>
+                   <span id="date">2시간전</span>
+                </ul>
+                <div id="body2-4-1">
+                        <img src="resources/image/peng.jpg" id="img1">
+                        
                     </div>
                 </div>
                 <div id="body2-5"><hr>
@@ -215,7 +217,6 @@
            
             
         </div>
-        
   
         
    
