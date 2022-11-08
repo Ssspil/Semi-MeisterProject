@@ -80,6 +80,37 @@ public class MemberDao {
 		
 	}
 	
+	public int insertMember(Member m, Connection conn) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			/*
+			 * INSERT INTO MEMBER
+			 * VALUES (.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, SYSDATE, NULL, 'Y'(생략가능));
+			 */
+			
+			psmt.setString(1, m.getUserId());
+			psmt.setString(2, m.getUserPwd());
+			psmt.setString(3, m.getNickName());
+			psmt.setString(4, m.getInterest());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 }
