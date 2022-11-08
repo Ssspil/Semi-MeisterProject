@@ -50,6 +50,37 @@ public class MemberService {
 	      return result;
 	      
 	   }
+
+	public Member pwdFind(String userId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member m = new MemberDao().pwdFind(userId, conn);
+		
+		JDBCTemplate.close();
+		
+		return m; 
+		
+	}
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	  
+
 	
 	
 }

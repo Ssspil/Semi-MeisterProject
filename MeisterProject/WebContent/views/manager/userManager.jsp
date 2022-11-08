@@ -3,9 +3,6 @@
 <%
     String contextPath = request.getContextPath();
 
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	// 로그인 이전 or 로그인 실패 : null
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -99,14 +96,14 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">회원 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">회원관리2</li>
+                            <li class="breadcrumb-item active">이용자 목록</li>
                         </ol>
                         
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                무슨관리 테이블??
+                                회원 테이블
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">

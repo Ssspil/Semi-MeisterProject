@@ -1,55 +1,46 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.vo.Member;
 import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class PasswordFindController
+ * Servlet implementation class IdCheckController
  */
-@WebServlet("/pwdFind.me")
-public class PasswordFindController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class IdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PasswordFindController() {
+    public IdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    private MemberService ms = new MemberService();
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		String userId = request.getParameter("userId");
-		String email = request.getParameter("email");
-		
-		Member pwUser = ms.pwdFind(userId);
-		
-		System.out.println(email);
-		System.out.println(pwUser);
-			
-		response.sendRedirect(request.getContextPath());
-		System.out.println("비밀번호 찾기 성공");
+
+		String checkId = request.getParameter("checkId");
+
+		int count = new MemberService().idCheck(checkId);
+
+		if (count > 0) { // 중복된 아이디가 존재한다. => 사용불가.
+			response.getWriter().print("NNNNN");
+		} else { // 존재하는 아이디가 없을경우 => 사용가능.
+			response.getWriter().print("NNNNY");
 		}
 	
-	
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
