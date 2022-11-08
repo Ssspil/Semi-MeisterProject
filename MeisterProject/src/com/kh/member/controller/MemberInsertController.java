@@ -31,7 +31,7 @@ public class MemberInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		// 2) 요청시 전달값을 뽑아서 변수 및 객체에 기록하기.
 		String userId = request.getParameter("userId");
