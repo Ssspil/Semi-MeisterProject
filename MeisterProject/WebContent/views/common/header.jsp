@@ -194,7 +194,7 @@ header .main-menu ul.item li a:hover {
 	                </ul>
 	            </div>
 	        <!-- 로그인 했을 시 -->
-            <% } else if ((loginUser != null) && (loginUser.getUserId().equals("admin")) ){ %> 
+            <% } else if ((loginUser != null) && (loginUser.getUserId().equals("admin@admin")) ){ %> 
 
 				
             	<div class="sub-menu">
