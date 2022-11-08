@@ -1,4 +1,4 @@
-package com.kh.manager.Controller;
+package com.kh.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class NoticeManagerController
+ * Servlet implementation class UserManagerController
  */
-@WebServlet("/notice.ad")
-public class NoticeManagerController extends HttpServlet {
+@WebServlet("/users.ad")
+public class UserManagerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeManagerController() {
+    public UserManagerController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,6 @@ public class NoticeManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	    // 관리자가 아니면 실행 안되게 하는 것.
 	    if( !(request.getSession().getAttribute("loginUser") != null && 
 	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
@@ -38,7 +37,21 @@ public class NoticeManagerController extends HttpServlet {
 	        return;
 	    }
 	    
-		request.getRequestDispatcher("views/manager/noticeManager.jsp").forward(request, response);
+
+	    
+	    if(request.getSession().getAttribute("loginUser") != null && 
+	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com")) {   
+	    	
+	    	request.getRequestDispatcher("views/manager/userManager.jsp").forward(request, response);
+	    	
+	    } else {   
+	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
+	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+
+	    }
+	    
+	    System.out.println("유저관리 페이지로 이동");
+	
 	}
 
 	/**

@@ -82,7 +82,7 @@
 		<h6><b><a href="<%=contextPath %>/noticeList.no">&nbsp;&nbsp;&nbsp;&nbsp;공지사항</a></b></h6>
 		<br>
 	</div>
-	<br>
+	<br><br><br><br><br><br><br><br><br><br>
 	<hr>
 	<%@include file="../common/footer.jsp" %>
 </body>
