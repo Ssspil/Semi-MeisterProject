@@ -35,11 +35,9 @@
 		margin-left: 20px;
 	}
 
-	div #input2 input[type=email]:focus {
+	.form-control input:focus {
 		border-color: orange;
-		border-width: 4px;
-
-            
+		border-width: 4px;      
     }
 
 	#btn1{
@@ -47,8 +45,15 @@
 		margin: auto;
 	}
 
+	div input[type=email]:focus {
+		border:2px  solid orange;
+	}
+	div input[type=text]:focus {
+		border:2px  solid orange;
+	}
+
+
 	
-    
     
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -68,17 +73,18 @@
         
         <br><br><br>
 
-	   	<form id="pwdfind-form" action="<%=contextPath %>/pwdFindForm.me" method="post">
+	   	<form id="pwdfind-form" action="<%=contextPath %>/pwdFind.me" method="post">
 	   		<div>
 				<div style="display:block">
-					<label for="input1"> &nbsp; 아이디</label><br>				
-					<input id="input1" type="text" name="userId" class="text-input form-control " style= "width:90%; height: 40px; " style="text-align:center; display:block; " placeholder="아이디를 입력해주세요." autocomplete="off" required>
+					<label for="input1">아이디</label><br>				
+					<input id="input1" type="text" name="userId" class="text-input form-control" style= "width:90%; height: 40px; " style="text-align:center; display:block; " placeholder="아이디를 입력해주세요." autocomplete="off" required>
 					 <br>
 	   			</div>
 	   			
-	   			<label for="input2">&nbsp;이메일 주소</label><br>
-	   			<input id="input2" type="email" name="email" class="text-input form-control" style= "width:90%; height: 45px;" placeholder="@를 포함한 이메일 주소를 입력해주세요." autocomplete="off" required>
-	   			<br>
+	   			<label for="input2">이메일 주소</label><br>
+	   			<input id="input2" type="email" name="email" class="text-input form-control"  style= "width:90%; height: 45px; " placeholder="@를 포함한 이메일 주소를 입력해주세요." autocomplete="off" required>
+	   			
+				<br>
 				
 	   			<button id="btn1" type="submit" class="btn btn-warning" onclick="sendEmail();" style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일로 전송하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 	   			
