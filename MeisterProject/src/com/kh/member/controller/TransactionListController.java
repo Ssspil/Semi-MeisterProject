@@ -6,21 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class TransactionListController
  */
-@WebServlet("/update.me")
-public class MemberUpdateController extends HttpServlet {
+@WebServlet("/myTransaction.me")
+public class TransactionListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public TransactionListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +27,14 @@ public class MemberUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
-		String userId = request.getParameter("userId");
-		String nickName = request.getParameter("nickName");
-		String interest = request.getParameter("interest");
-		String userName = request.getParameter("userName");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		
-		Member m  = new Member(userId, nickName, interest, userName, phone, email);
-		
-		Member updateMem = new MemberService().updateMember(m);
+		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태
+			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
+			response.sendRedirect(request.getContextPath());
+		} else { // 로그인 한 상태
+			request.getRequestDispatcher("views/member/myTransactionPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

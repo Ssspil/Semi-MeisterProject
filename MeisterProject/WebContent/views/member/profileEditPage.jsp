@@ -56,10 +56,11 @@
 			$("#interest").val("<%=interests%>").prop("selected", true);
 		})
 	</script>
+	
 	<form action="<%=contextPath %>/update.me" method="post">	
 		<div class="outer">
 			<br>
-			<h2><b>&nbsp;개인정보 수정</b></h2>
+			<h2><b>&nbsp;개인정보 변경</b></h2>
 			<br>
 			<hr>
 			<h5><b>&nbsp;프로필 변경</b></h5>
