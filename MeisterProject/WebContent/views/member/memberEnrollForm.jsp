@@ -39,6 +39,7 @@
         right: 5px;
         margin: auto 0;
         border-radius: 6px;
+        border: none;
         background-color: orange;
     }
 
@@ -47,15 +48,17 @@
         margin-bottom: 5px;
     }
 
-    .member input:not(input[type=checkbox]), .member #btn[type=submit], .member select {
+    .member input:not(input[type=checkbox]), .member #btn[type=submit], .member select{
     	border-radius: 6px;
         padding: 15px;
         width: 100%;
         margin-bottom: 5px;
+        border: 1px solid orange;
     }
     
-    .member input[type=button], .member #btn[type=submit] {
+    .member button[type=button], .member #btn[type=submit] {
         background-color: orange;
+        color: white;
     }
 
     .userId {
@@ -85,7 +88,7 @@
         <br>
         <h1 style="text-align: center">회원가입</h1>
         
-        <form action="<%=contextPath %>/insert.me" method="post">
+        <form id="enroll-form" action="<%=contextPath %>/insert.me" method="post">
         
 	        <!-- 1. 로고 -->
 	        <img class="logo" src="<%= contextPath %>/resources/image/logo.png" />
@@ -93,14 +96,14 @@
 	        <!-- 2. 필드 -->
 	        <div id="field">
 	            <b>아이디 & 이메일 *</b>
-	            <input id="userId" class="test" type="text" maxlength="30" placeholder="example@meister.com" required>
-	            <button type="button" onclick="idcheck()">중복확인</button>
+	            <input id="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
+	            <button type="button" onclick="idCheck();">중복확인</button>
 	        </div>
 	        <br>
 	        <div class="field">
 	            <b>비밀번호 *</b>
-	            <input type="password" class="test" maxlength="20" placeholder="비밀번호를 입력해주세요. (6자리 이상)" required></span>
-	            <input type="password" class="test" maxlength="20" required>
+	            <input type="password" id="userPwd" class="userPwd" name="userPwd" maxlength="20" placeholder="비밀번호를 입력해주세요. (6자리 이상)" required>
+	            <input type="password" id="userPwd2" class="userPwd2" name="userPwd2" maxlength="20" required>
 	        </div>
 	        <br>
 	        <div class="field">
@@ -113,26 +116,28 @@
 	            <b>관심사 선택 *</b>
 	            <div>
 	                <select  required>
-	                    <option value="">관심사를 선택해 주세요.</option>
-	                    <option value="">운동</option>
-	                    <option value="">영화</option>
-	                    <option value="">영상</option>
-	                    <option value="">게임</option>
-	                    <option value="">IT</option>
-	                    <option value="">요리</option>
+	                    <option style="text-align: center;" value="">관심사를 선택해 주세요.</option>
+	                    <option style="text-align: center;" value="">운동</option>
+	                    <option style="text-align: center;" value="">영화</option>
+	                    <option style="text-align: center;" value="">영상</option>
+	                    <option style="text-align: center;" value="">게임</option>
+	                    <option style="text-align: center;" value="">IT</option>
+	                    <option style="text-align: center;" value="">요리</option>
 	                </select>
 	            </div>
 	        </div>
+	        
+	        <br>
 
 	        <!-- 4. 필드(이용약관) -->
 	        <div class="field" id="checkbox_group">
 	            <input type="checkbox" id="check_all" class="normal" value="동의">
 	            <label for="check_all">전체 동의</label>
-	            <br>
+	            <br><br>
 	           	<input type="checkbox" id="check_1" class="normal" value="동의">
 	            <label for="check_1">개인정보 제3자 제공 (필수)</label><br>
 	            <textarea style="resize: none; width:100%; height: 60px;">위 개인정보는 수집⦁ 이용에 관한 동의일로부터 채용절차 종료 시까지 위 이용목적을 위하여 보유 및 이용하며 단 채용절차 종료 후에는 고용계약의 유지, 분쟁해결 및 법령상의무이행을 위하여 보유 이용한다.</textarea>
-	            <br>
+	            <br><br>
 	            <input type="checkbox" id="check_2" class="normal" value="동의">
 	            <label for="check_2">개인정보 처리방침 동의 (필수)</label><br>
 	            <textarea style="resize: none; width:100%; height: 60px;">개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다. 
@@ -147,16 +152,18 @@
 네이버에서 제공하는 위치기반 서비스에 대해서는 '네이버 위치기반서비스 이용약관'에서 자세하게 규정하고 있습니다.
 이와 같이 수집된 정보는 개인정보와의 연계 여부 등에 따라 개인정보에 해당할 수 있고, 개인정보에 해당하지 않을 수도 있습니다.
 				</textarea>
-	            <br>
+	            <br><br>
 	            <input type="checkbox" id="check_3" class="normal" value="동의">
 	            <label for="check_3">마케팅 수신 동의 (선택)</label><br>
 	            <b>일부 서비스(별도 회원 체계로 운영하거나 meister 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</b>
 	        </div>
-
+			<br>
         	<!-- 5. 가입하기 버튼 -->
-        	<button id="btn" type="submit" onclick="validate();">가입하기</button>
+        	<button id="btn" type="submit" onclick="return validate();">가입하기</button>
         </form>
     </div>
+    
+    <%@ include file="../common/footer.jsp" %>
     
     <script>
     
@@ -177,14 +184,56 @@
 		    });
     </script>
     
+    <script>
+    	function validate() {
+// 			let reg = Reg(/^[A-Za-z0-9]);
+// 			let reg2 = "";
+// 			let reg3 = "";
+// 			let reg4 = ""
+
+			let userId = document.querySelector("#userId");
+			let uerPwd1 = document.querySelector("#userPwd");
+            let uerPwd2 = document.querySelector("#userPwd2");
+	    	
+			let regExp = /^[a-z][a-z\d]{3,11}$/;
+            if(!regExp.test(userId.value)) {
+                alert("유효한 아이디를 입력해주세요.");
+                userId.innerhtml = "이미 존재하는 아이디입니다.";
+                userId.select();
+                return false;
+            } else {
+                userId.innerHTML = "사용가능한 아이디입니다.";
+            }
+	    	
+	    
+            let regEx = /^[a-z\d!@#$%^]{8,15}$/;
+	        if(!regEx.test(userPwd.value)) {
+	            alert("유효한 비밀번호를 입력해주세요.");
+	            userPwd1.value = "";
+	            userPwd1.focus();
+	            return false;
+	        }
+	
+	        // 3) 비밀번호 일치
+	        if(userPwd1.value != userPwd2.value) {
+	            alert("동일한 비밀번호로 입력해주세요.");
+	            userPwd2.value = "";
+	            userPwd2.focus();
+	            return false;
+	        }
+	        
+	        return true;
+    		
+    	}
+    </script>
     
     <script>
 	    function idCheck() {
 	    	
 	    	// 아이디를 입력하는 input 요소 객체
 	        let $userId = $("#enroll-form input[name=userId]");
-	    	// name이 userId인 요소가 member.jsp에도 있어서 확실하게 어디에ㅔ 속해있는 요소인지 잘 적어줘야함.
-	    	
+	    	// name이 userId인 요소가 member.jsp에도 있어서 확실하게 어디에 속해있는 요소인지 잘 적어줘야함.
+	    	let ConText = "";
 	    	$.ajax({
 	    		url : "idCheck.me",
 	    		data : {checkId : $userId.val()},
