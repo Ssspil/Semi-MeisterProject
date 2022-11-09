@@ -34,7 +34,7 @@ public class SellBoardController extends HttpServlet {
 		
 	   request.getRequestDispatcher("views/sell/sellboardForm.jsp").forward(request, response);
 		
-	   System.out.println("판매 게시판 게시글 조회 성공");
+	  // System.out.println("판매 게시판 메인홈");
 	
 	
 	}
