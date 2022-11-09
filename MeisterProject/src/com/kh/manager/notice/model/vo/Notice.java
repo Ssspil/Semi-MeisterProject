@@ -14,8 +14,7 @@ public class Notice {
         super();
     }
     
-    // 공지글 작성 생성자
-	public Notice(int noticeNo, String noticeTitle, String noticeContent, Date createDate, String status) {
+    public Notice(int noticeNo, String noticeTitle, String noticeContent, Date createDate, String status) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
@@ -23,21 +22,22 @@ public class Notice {
 		this.createDate = createDate;
 		this.status = status;
 	}
+
+	// 공지글 작성 생성자
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.createDate = createDate;
+	}
 	
-	// 공지글 목록 생성자
+	// 공지글 목록, 수정 생성자
 	public Notice(int noticeNo, String noticeTitle, Date createDate) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.createDate = createDate;
-	}
-
-	// 공지글 수정 생성자
-	public Notice(int noticeNo, String noticeTitle, String noticeContent) {
-		super();
-		this.noticeNo = noticeNo;
-		this.noticeTitle = noticeTitle;
-		this.noticeContent = noticeContent;
 	}
 
 	public int getNoticeNo() {
