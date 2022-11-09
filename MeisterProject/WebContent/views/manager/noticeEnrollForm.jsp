@@ -21,25 +21,8 @@
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.listbtn{
-	float:right;
-}
 
-table>thead>tr>th{
-	background-color : black;
-	color : white;
-	text-align : center;
-}
-table>tbody {
-	text-align : center;
-}
 
-table>tbody>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
-}
  	
 </style>
     
@@ -117,40 +100,34 @@ table>tbody>tr:hover{
         </div>
         <div id="layoutSidenav_content">
             <main>
-            
-                
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지 관리</h1>
+                    <h1 class="mt-4">공지 작성하기</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">공지목록</li>
+                        <li class="breadcrumb-item active">공지목목</li>
                     </ol>
-                    <div class="list-area">
-	                    <table border="1" align="center">
-	                    	<thead>
-	                    		<tr>
-	                    			<td colspan="4"><!--  버튼 추가할라면 여기서 작성 -->
-	                    				<div class="listbtn">
-											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.no">글작성</a>
-										</div>
-									</td>
-	                    		</tr>
-		                    	<tr>
-		                    		<th width="100">글번호</th>
-		                    		<th width="500">글제목</th>
-		                    		<th width="100">작성자</th>
-		                    		<th width="300">등록일</th>
-		                    	</tr>
-		                    </thead>
-		                    <tbody>
-		                    	<tr>
-		                    		<td>1</td>
-		                    		<td>회원목록</td>
-		                    		<td>관리자</td>
-		                    		<td>2022.11.11</td>
-		                    	</tr>
-		                    </tbody>
-	                    </table>
-                    </div>
+		           <form action="" method="post" name="noticeform">
+				       <table border="1">
+				            <tr>
+				                <th width="100" height="30">제목</th>
+				                <td width="500"><input type="text" name="title"></td>
+				            </tr>
+				            <tr>
+				                <th width="100" height="30">작성자</th>
+				                <td width="500"><input type="text" name="title"></td>
+				            </tr>
+				            <tr>
+				                <th width="100" height="30">작성일</th>
+				                <td width="500"><input type="text" name="title"></td>
+				            </tr>
+				            <tr>
+				                <th width="100" height="30">내용</th>
+				                <td width="500" height="400"><textarea></td>
+				            </tr>
+				      	</table>
+			
+			        	<button type="submit" class="btn btn-secondary">작성하기</button>
+			    	</form>
+
 
                 </div>
             </main> 
