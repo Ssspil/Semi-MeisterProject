@@ -69,15 +69,12 @@
 			AND STATUS = 'Y'
 	</entry>
 	
-<<<<<<< HEAD
 	<entry key="nicknameCheck">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE NICKNAME = ?
 	</entry>
-	
 
-=======
 	<entry key="expertSubmit">
 		UPDATE MEMBER
 		SET USER_NAME = ?,
@@ -88,5 +85,4 @@
 			EXP_SUBMIT = ?
 		WHERE USER_ID = ? AND STATUS = 'Y'
 	</entry>
->>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
 </properties>
