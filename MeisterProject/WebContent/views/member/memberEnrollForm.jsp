@@ -123,7 +123,7 @@
 	        <div class="field">
 	            <b>관심사 선택 *</b>
 	            <div>
-	                <select  required>
+	                <select name="interest" required>
 	                    <option style="text-align: center;" value="">관심사를 선택해 주세요.</option>
 	                    <option style="text-align: center;" value="sports">운동</option>
 	                    <option style="text-align: center;" value="move">영화</option>
@@ -223,10 +223,10 @@
 	    	let nickname = $("#nickname").val();
 	    	let test = $("#chkNick");
 	    
-// 	    	if(!regExp.test(nickname)){
-// 	    		$("#nickname").val($("#nickname").val().replace(regExp, ""));
-// 	    		//alert($("#nickname").val());
-// 	    	}
+	    	if(!regExp.test(nickname)){
+	    		$("#nickname").val($("#nickname").val().replace(regExp, ""));
+	    		
+	    	}
 			
 	    	$.ajax({
 	    		url : "checkName.me",
