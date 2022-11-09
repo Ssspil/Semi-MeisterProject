@@ -108,14 +108,14 @@
 	        <br>
 	        <div class="field">
 	            <b>비밀번호 *</b>
-	            <input type="password" id="userPwd" class="userPwd" name="userPwd" maxlength="20" placeholder="비밀번호를 입력해주세요. (6자리 이상)" required>
+	            <input type="password" id="userPwd" class="userPwd" name="userPwd" maxlength="20" placeholder="비밀번호를 입력해주세요. (8자리 이상)" required>
 	            <input type="password" id="userPwd2" class="userPwd" name="userPwd2" maxlength="20" required>
 				<font id="chkNotice" size="3"></font>
 	        </div>
 	        <br>
 	        <div class="field">
 	            <b>닉네임 *</b>
-	            <input type="text" id="nickname" name="nickName"maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
+	            <input type="text" id="nickname" name="nickName" maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
 	            <font id="chkNick" size="3"></font>
 	        </div>
 	        <br>
@@ -125,12 +125,12 @@
 	            <div>
 	                <select name="interest" required>
 	                    <option style="text-align: center;" value="">관심사를 선택해 주세요.</option>
-	                    <option style="text-align: center;" value="sports">운동</option>
-	                    <option style="text-align: center;" value="move">영화</option>
-	                    <option style="text-align: center;" value="video">영상</option>
-	                    <option style="text-align: center;" value="game">게임</option>
-	                    <option style="text-align: center;" value="it">IT</option>
-	                    <option style="text-align: center;" value="cook">요리</option>
+	                    <option style="text-align: center;" value="10">운동</option>
+	                    <option style="text-align: center;" value="20">영화</option>
+	                    <option style="text-align: center;" value="30">영상</option>
+	                    <option style="text-align: center;" value="40">게임</option>
+	                    <option style="text-align: center;" value="50">IT</option>
+	                    <option style="text-align: center;" value="60">요리</option>
 	                </select>
 	            </div>
 	        </div>
@@ -182,8 +182,9 @@
 		    $("#userPwd").keyup(function(){
 		      $("#chkNotice").html("");
 		    });
-
+			
     		$("#userPwd2").keyup(function(){
+    			let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 			        if($("#userPwd").val() != $("#userPwd2").val()){
 			          $("#chkNotice").html("비밀번호 일치하지 않음<br>");
 			          $("#chkNotice").attr("color", "crimson");
@@ -191,10 +192,10 @@
 			          $("#chkNotice").html("비밀번호 일치함<br>");
 			          $("#chkNotice").attr("color", "darkslateblue");
 			        }
-			        if($("#userPwd").val().length < 6 || $("#userPwd").val().length > 20) {
-			        	$("#chkNotice").html("비밀번호는 6 ~ 20자 이내로 입력하세요.<br>");
-			        	$("#chkNotice").attr("color", "green");
-			        }
+			        if(!regExp.test($("#userPwd").val()) || !regExp.test($("#userPwd2").val())) {
+    					$("#chkNotice").html("영문+숫자 조합 8자리 이상 입력해주세요.");
+    					$("#chkNotice").attr("color", "green");
+    				}
 		    })
     	
    	 // 체크박스 전체 선택
@@ -219,26 +220,34 @@
     </script>
     <script>
 	    function nicknameCheck() {
-	    	let regExp = /^[ㄱ-ㅎ가-힣]+$/g;
+	    	let regExp = /^[가-힣]+$/;
 	    	let nickname = $("#nickname").val();
-	    	let test = $("#chkNick");
+	    	let tet = $("#chkNick");
 	    
-	    	if(!regExp.test(nickname)){
-	    		$("#nickname").val($("#nickname").val().replace(regExp, ""));
-	    		
-	    	}
-			
+	    	if(!regExp.test(nickname)) {
+	    		$(tet).html("닉네임은 한글로 입력하세요");
+	    		$(tet).attr("color", "orange");
+	    		return false;
+	    	} 
+	    	
+    		if($("#nickname").val().length < 2 || $("#nickname").val().length > 6) {
+	        	$(tet).html("닉네임은 2 ~ 6자 이내로 입력하세요.");
+	        	$(tet).attr("color", "green");
+	        	return false;
+	        }
+	    	
 	    	$.ajax({
 	    		url : "checkName.me",
 	    		data : {nickname : nickname},
 	    		success : function(result) {
 	    			if(result == "NNNNN") {
+	    				$(tet).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
+	    				$(tet).attr("color", "red");
 	    				
-	    				$(test).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
-	    				$(test).attr("color", "red");
 	    			} else {
-	    				$(test).html("사용 가능한 닉네임 입니다.");
-	    				$(test).attr("color", "darkslateblue");
+	    				$(tet).html("사용 가능한 닉네임 입니다.");
+	    				$(tet).attr("color", "darkslateblue");
+	    				
 	    			}
 	    		},
 	    		error : function() {
