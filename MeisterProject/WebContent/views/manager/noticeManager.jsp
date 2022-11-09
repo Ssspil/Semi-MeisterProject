@@ -143,10 +143,16 @@ table>tbody>tr:hover{
 		                    </thead>
 		                    <tbody>
 		                    	<tr>
-		                    		<td>1</td>
+		                    		<td>2</td>
 		                    		<td>회원목록</td>
 		                    		<td>관리자</td>
 		                    		<td>2022.11.11</td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td>1</td>
+		                    		<td>관리자 명단</td>
+		                    		<td>관리자</td>
+		                    		<td>2022.11.12</td>
 		                    	</tr>
 		                    </tbody>
 	                    </table>
