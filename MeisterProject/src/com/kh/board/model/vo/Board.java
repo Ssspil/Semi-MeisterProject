@@ -11,7 +11,7 @@ public class Board {
 	private int boardRecommend;
 	private Date boardDate;
 	private String status;
-	private int userNO;
+	private int userNo;
 	private String titleImg;	// 커뮤니티 게시판에 썸네일 표시용
 	
 	
@@ -21,7 +21,7 @@ public class Board {
 	
 	// 기본생성자
 	public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
-			Date boardDate, String status, int userNO, String titleImg) {
+			Date boardDate, String status, int userNo, String titleImg) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -31,17 +31,16 @@ public class Board {
 		this.boardRecommend = boardRecommend;
 		this.boardDate = boardDate;
 		this.status = status;
-		this.userNO = userNO;
+		this.userNo = userNo;
 		this.titleImg = titleImg;
 	}
 	
 	// 게시글 등록 부분 생성자
-	public Board(String boardTitle,int boardType, String boardContent, int userNO) {
+	public Board(String boardTitle, String boardContent,int userNo) {
 		super();
 		this.boardTitle = boardTitle;
-		this.boardType = boardType;
 		this.boardContent = boardContent;
-		this.userNO = userNO;
+		this.userNo = userNo;
 	}
 	
 	// 게시글 수정 부분 생성자
@@ -51,7 +50,7 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardDate = boardDate;
-		this.userNO = userNO;
+		this.userNo = userNO;
 	}
 	
 	// 게시글 목록 불러오기 부분 생성자
@@ -132,12 +131,12 @@ public class Board {
 		this.status = status;
 	}
 
-	public int getUserNO() {
-		return userNO;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUserNO(int userNO) {
-		this.userNO = userNO;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public String getTitleImg() {
@@ -152,7 +151,7 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardType=" + boardType +", boardContent=" + boardContent
 				+ ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardDate=" + boardDate
-				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + "]";
+				+ ", status=" + status + ", userNo=" + userNo + ", titleImg=" + titleImg + "]";
 	}
 	
 	
