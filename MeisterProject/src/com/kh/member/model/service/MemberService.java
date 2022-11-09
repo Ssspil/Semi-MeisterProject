@@ -34,7 +34,7 @@ public class MemberService {
 	    * 
 	    */
 	   
-	   public int insertMember(Member m) {
+	public int insertMember(Member m) {
 	      Connection conn = JDBCTemplate.getConnection();
 	      
 	      int result = new MemberDao().insertMember(m, conn);
@@ -63,7 +63,38 @@ public class MemberService {
 		
 	}
 
-	   
+	// 아이디 중복체크
+	 public int idCheck(String checkId) {
+			
+			Connection conn = JDBCTemplate.getConnection();
+			
+			int count = new MemberDao().idCheck(conn, checkId);
+			
+			JDBCTemplate.close();
+			
+			return count;
+	}
+	 
+	 public Member updateMember(Member m) {
+		 Connection conn = JDBCTemplate.getConnection();
+		 
+		 int result = new MemberDao().updateMember(conn, m);
+		 
+		 Member updateMem = null;
+
+		 if (result > 0) {
+			JDBCTemplate.commit(conn);
+			updateMem = new MemberDao().selectMember(conn, m.getUserId());
+		 } else {
+			JDBCTemplate.rollback(conn);
+		 }
+		 
+		 JDBCTemplate.close();
+		 
+		 return updateMem;
+	 }
+	
+	
 	   
 	   
 	   

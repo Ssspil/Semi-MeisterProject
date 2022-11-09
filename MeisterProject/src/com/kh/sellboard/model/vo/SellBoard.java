@@ -16,6 +16,12 @@ public class SellBoard {
 	private int local;
 	private int interest;
 	
+	public SellBoard() {
+		
+	}
+	
+	
+	
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
 			Date sellDate, String status, int userNO, String titleImg, int local, int interest) {

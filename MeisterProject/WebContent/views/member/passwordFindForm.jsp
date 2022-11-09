@@ -31,14 +31,9 @@
 	     height : 100px;
 	     margin: auto;
     }
-	div input, label, .invalid-feedback{
+	div input, label {
 		margin-left: 20px;
 	}
-
-	.form-control input:focus {
-		border-color: orange;
-		border-width: 4px;      
-    }
 
 	#btn1{
 		display: block;
@@ -79,34 +74,33 @@
 					<label for="input1">아이디</label><br>				
 					<input id="input1" type="text" name="userId" class="text-input form-control" style= "width:90%; height: 40px; " style="text-align:center; display:block; " placeholder="아이디를 입력해주세요." autocomplete="off" required>
 					 <br>
-	   			</div>
-	   			
-	   			<label for="input2">이메일 주소</label><br>
-	   			<input id="input2" type="email" name="email" class="text-input form-control"  style= "width:90%; height: 45px; " placeholder="@를 포함한 이메일 주소를 입력해주세요." autocomplete="off" required>
+					 
+					 <label for="input2">이메일 주소</label><br>
+					 <input id="input2" type="email" name="email" class="text-input form-control"  style= "width:90%; height: 45px; " placeholder="@를 포함한 이메일 주소를 입력해주세요." autocomplete="off" required>
+				</div>
 	   			
 				<br>
 				
-	   			<button id="btn1" type="submit" class="btn btn-warning" onclick="sendEmail();" style="text-align:center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일로 전송하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	   			<button id="btn1" type="submit" class="btn btn-warning" onclick="sendEmail();" style="text-align:center; width:90%">이메일로 전송하기</button>
 	   			
 	   		</div>
 	   	</form>
 
 	</div>
 	
-<!-- 		<script>
-			<!--넣어야되는게 맞는지?
+		<!-- <script>
+			
 			function sendEmail(){
-				if($("input[name=userId]").val() != $("input[name=userId]").val()){
+				if($("input[name=userId]").val() == null){
 					alert("올바른 아이디를 입력해주세요.")
 
-					return false;
 				} else{
 					alert("임시 비밀번호 전송 완료! 메일함을 확인해주세요.")
 				}
 				return true;
 			}
 
-		</script> -->
+		</script>  -->
 				   
 	
     <%@ include file="../common/footer.jsp" %>

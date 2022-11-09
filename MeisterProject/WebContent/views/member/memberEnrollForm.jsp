@@ -30,12 +30,12 @@
         
     }
 
-    #field button {
+    #idchkBtn {
         position: absolute;
         width: 90px;
         height: 40px;
         top: 0;
-        bottom: -20px;
+        bottom: -28px;
         right: 5px;
         margin: auto 0;
         border-radius: 6px;
@@ -72,6 +72,11 @@
     .userPwd2 {
         background-size: 20px;
     }
+    
+    *:focus {
+     outline: none;
+     border: 1px solid orange;
+	}
 </style>
 
 
@@ -97,18 +102,21 @@
 	        <div id="field">
 	            <b>아이디 & 이메일 *</b>
 	            <input id="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
-	            <button type="button" onclick="idCheck();">중복확인</button>
+	            <div data-v-149435f8="" class="invalid-feedback">이메일을 입력해주세요.</div>
+	            <button id="idchkBtn" type="button" onclick="idCheck();">중복확인</button>
 	        </div>
 	        <br>
 	        <div class="field">
 	            <b>비밀번호 *</b>
 	            <input type="password" id="userPwd" class="userPwd" name="userPwd" maxlength="20" placeholder="비밀번호를 입력해주세요. (6자리 이상)" required>
-	            <input type="password" id="userPwd2" class="userPwd2" name="userPwd2" maxlength="20" required>
+	            <input type="password" id="userPwd2" class="userPwd" name="userPwd2" maxlength="20" required>
+				<font id="chkNotice" size="3"></font>
 	        </div>
 	        <br>
 	        <div class="field">
 	            <b>닉네임 *</b>
-	            <input type="text" class="test" maxlength="5" placeholder="닉네임을 입력해주세요." required>
+	            <input type="text" id="nickname" maxlength="5" placeholder="닉네임을 입력해주세요." required>
+	            <font id="chkNick" size="3"></font>
 	        </div>
 	        <br>
 	        <!-- 3. 필드(관심사 선택) -->
@@ -117,12 +125,12 @@
 	            <div>
 	                <select  required>
 	                    <option style="text-align: center;" value="">관심사를 선택해 주세요.</option>
-	                    <option style="text-align: center;" value="">운동</option>
-	                    <option style="text-align: center;" value="">영화</option>
-	                    <option style="text-align: center;" value="">영상</option>
-	                    <option style="text-align: center;" value="">게임</option>
-	                    <option style="text-align: center;" value="">IT</option>
-	                    <option style="text-align: center;" value="">요리</option>
+	                    <option style="text-align: center;" value="sports">운동</option>
+	                    <option style="text-align: center;" value="move">영화</option>
+	                    <option style="text-align: center;" value="video">영상</option>
+	                    <option style="text-align: center;" value="game">게임</option>
+	                    <option style="text-align: center;" value="it">IT</option>
+	                    <option style="text-align: center;" value="cook">요리</option>
 	                </select>
 	            </div>
 	        </div>
@@ -134,11 +142,11 @@
 	            <input type="checkbox" id="check_all" class="normal" value="동의">
 	            <label for="check_all">전체 동의</label>
 	            <br><br>
-	           	<input type="checkbox" id="check_1" class="normal" value="동의">
+	           	<input type="checkbox" id="check_1" class="normal" value="동의" required>
 	            <label for="check_1">개인정보 제3자 제공 (필수)</label><br>
 	            <textarea style="resize: none; width:100%; height: 60px;">위 개인정보는 수집⦁ 이용에 관한 동의일로부터 채용절차 종료 시까지 위 이용목적을 위하여 보유 및 이용하며 단 채용절차 종료 후에는 고용계약의 유지, 분쟁해결 및 법령상의무이행을 위하여 보유 이용한다.</textarea>
 	            <br><br>
-	            <input type="checkbox" id="check_2" class="normal" value="동의">
+	            <input type="checkbox" id="check_2" class="normal" value="동의" required>
 	            <label for="check_2">개인정보 처리방침 동의 (필수)</label><br>
 	            <textarea style="resize: none; width:100%; height: 60px;">개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다. 
 1. 수집하는 개인정보이용자는 회원가입을 하지 않아도 정보 검색, 뉴스 보기 등 대부분의 네이버 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 네이버는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.회원가입 시점에 네이버가 이용자로부터 수집하는 개인정보는 아래와 같습니다.
@@ -159,7 +167,7 @@
 	        </div>
 			<br>
         	<!-- 5. 가입하기 버튼 -->
-        	<button id="btn" type="submit" onclick="return validate();">가입하기</button>
+        	<button id="btn" type="submit" disabled onclick="return vlidate();">가입하기</button>
         </form>
     </div>
     
@@ -167,7 +175,48 @@
     
     <script>
     
-		 // 체크박스 전체 선택
+    </script>
+    
+    <script>
+    	$(function(){
+		    $('#userPwd').keyup(function(){
+		      $('#chkNotice').html('');
+		    });
+
+    		$('#userPwd2').keyup(function(){
+			        if($('#userPwd').val() != $('#userPwd2').val()){
+			          $('#chkNotice').html('비밀번호 일치하지 않음<br>');
+			          $('#chkNotice').attr('color', 'crimson');
+			        } else{
+			          $('#chkNotice').html('비밀번호 일치함<br>');
+			          $('#chkNotice').attr('color', 'darkslateblue');
+			        }
+			        if($("#userPwd").val().length < 6 || $("#userPwd").val().length > 20) {
+			        	$('#chkNotice').html('비밀번호는 6 ~ 20자 이내로 입력하세요.<br>');
+			        	$('#chkNotice').attr('color', 'green');
+			        }
+		    });
+    		
+    		$(function() {
+    	    	$("#nickname").keyup(function() {
+    	    		$('#chkNick').html('');
+    	    		let regExp = /^[가-힣]{2,6}$/;
+    	    		if(!regExp.test($("#nickname").val())) {
+    	    			$('#chkNick').html('한글로만 입력해주세요.');
+    	    			$('#chkNick').attr('color', 'crimson');
+    	    		} else {
+    	    			$('#chkNick').html('닉네임 입력 완료!!');
+    	    			$('#chkNick').attr('color', 'darkslateblue');
+    	    		} if($("#nickname").val().length < 2 || $("#nickname").val().length > 6) {
+    	    			$('#chkNick').html('닉네임은 2 ~ 6자 이내로 입력하세요.');
+    	    			$('#chkNick').attr('color', 'green');
+    	    		}
+    	    			
+    	    		
+    	    	});
+    	    })
+    	    
+    	 // 체크박스 전체 선택
 		    $("#checkbox_group").on("click", "#check_all", function () {
 		        $(this).parents("#checkbox_group").find('input').prop("checked", $(this).is(":checked"));
 		    });
@@ -182,58 +231,31 @@
 		
 		        $("#check_all").prop("checked", is_checked);
 		    });
-    </script>
-    
-    <script>
-    	function validate() {
-// 			let reg = Reg(/^[A-Za-z0-9]);
-// 			let reg2 = "";
-// 			let reg3 = "";
-// 			let reg4 = ""
-
-			let userId = document.querySelector("#userId");
-			let uerPwd1 = document.querySelector("#userPwd");
-            let uerPwd2 = document.querySelector("#userPwd2");
-	    	
-			let regExp = /^[a-z][a-z\d]{3,11}$/;
-            if(!regExp.test(userId.value)) {
-                alert("유효한 아이디를 입력해주세요.");
-                userId.innerhtml = "이미 존재하는 아이디입니다.";
-                userId.select();
-                return false;
-            } else {
-                userId.innerHTML = "사용가능한 아이디입니다.";
-            }
-	    	
-	    
-            let regEx = /^[a-z\d!@#$%^]{8,15}$/;
-	        if(!regEx.test(userPwd.value)) {
-	            alert("유효한 비밀번호를 입력해주세요.");
-	            userPwd1.value = "";
-	            userPwd1.focus();
-	            return false;
-	        }
-	
-	        // 3) 비밀번호 일치
-	        if(userPwd1.value != userPwd2.value) {
-	            alert("동일한 비밀번호로 입력해주세요.");
-	            userPwd2.value = "";
-	            userPwd2.focus();
-	            return false;
-	        }
-	        
-	        return true;
-    		
-    	}
+		});
+		 
     </script>
     
     <script>
 	    function idCheck() {
-	    	
 	    	// 아이디를 입력하는 input 요소 객체
-	        let $userId = $("#enroll-form input[name=userId]");
+	        let $userId = $("#userId");
+	        let regExp = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+	        
+	        if($userId.val() == ""){
+	        	alert("아이디를 입력하세요");
+	        	$userId.focus();
+	        	return false;
+	        }
+	        
+	        else {
+				if(!regExp.test($userId.val())) {
+					alert("이메일 형식이 아닌 아이디 입니다.");
+					$userId.focus();
+					return false;
+				}
+	        }
+	    
 	    	// name이 userId인 요소가 member.jsp에도 있어서 확실하게 어디에 속해있는 요소인지 잘 적어줘야함.
-	    	let ConText = "";
 	    	$.ajax({
 	    		url : "idCheck.me",
 	    		data : {checkId : $userId.val()},
@@ -241,10 +263,13 @@
 	    			if(result == "NNNNN") { // 아이디 사용불가 (이미 존재하거나 탈퇴한 회원만)
 	    				alert("이미 존재하거나 회원탈퇴한 아이디입니다.");
 	    				$userId.focus();
-	    			} else { // 아이디 사용 가능
+	    			}	else { // 아이디 사용 가능
 	    				if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")) {
+	    					$("#idchkBtn").text("확인완료");
+	    					$("#idchkBtn").css("opacity", "0.7");
+	    					$("#idchkBtn").attr("disabled",true);
 	    					
-	    					$("#enroll-form :submit").removeAttr("disabled"); // 회원가입버튼 활성화
+	    					$("#enroll-form :submit").removeAttr("disabled");
 	    		            $userId.attr("readonly", true); // 아이디값 확정
 	    				} else { // 사용안함
 	    					

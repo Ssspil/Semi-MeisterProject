@@ -17,7 +17,6 @@ public class Member {
 	private String balckList;
 	private String speciality;
 	private String expert;
-	private String profileImg;
 	
 	// 로그인 부분 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
@@ -51,25 +50,30 @@ public class Member {
 
 	// 전문가 인증 부분 생성자
 	// 아이디를 조건문으로 사용, UPDATE 문으로 나머지 값들 삽입
-	public Member(String userId, String userName, String gender, String email, String phone, String expert) {
+	
+	public Member(String userId, String userName, String gender, String email, String phone, String speciality,
+			String expert) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
+		this.speciality = speciality;
 		this.expert = expert;
 	}
-	
+
 	// 개인정보 수정 부분 생성자
-	public Member(String userId, String nickName, String interest, String email, String phone) {
+	public Member(String userId, String nickName, String interest, String userName, String email, String phone) {
 		super();
 		this.userId = userId;
 		this.nickName = nickName;
 		this.interest = interest;
+		this.userName = userName;
 		this.email = email;
 		this.phone = phone;
 	}
+
 	public Member() {
 		
 	}

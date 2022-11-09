@@ -4,6 +4,10 @@ public class Interest {
 	private int interestNo;
 	private String interestName;
 	
+	public Interest() {
+		
+	}
+	
 	public Interest(int interestNo, String interestName) {
 		super();
 		this.interestNo = interestNo;

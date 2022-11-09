@@ -38,6 +38,8 @@ public class IdCheckController extends HttpServlet {
 		} else { // 존재하는 아이디가 없을경우 => 사용가능.
 			response.getWriter().print("NNNNY");
 		}
+		
+		
 	
 	}
 
