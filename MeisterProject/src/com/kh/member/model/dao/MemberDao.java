@@ -167,9 +167,83 @@ public class MemberDao {
 			JDBCTemplate.close(psmt);
 		}
 		
-		return count;
-		
+		return count;		
 	}
 	
+	public int updateMember(Connection conn, Member m) {
+		PreparedStatement psmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, m.getNickName());
+			psmt.setString(2, m.getInterest());
+			psmt.setString(3, m.getUserName());
+			psmt.setString(4, m.getPhone());
+			psmt.setString(5, m.getEmail());
+			psmt.setString(6, m.getUserId());
+			
+			System.out.println("nickname : " +m.getNickName());
+			System.out.println("interest : " +m.getInterest());
+			System.out.println("name : " +m.getUserName());
+			System.out.println("phone : " +m.getPhone());
+			System.out.println("email : " +m.getEmail());
+			System.out.println("ID : " +m.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		System.out.println("DAO : "+ result);
+		return result;
+	}
+	
+	public Member selectMember(Connection conn, String userId) {
+		
+		Member m = null;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				m= new Member(rset.getInt("USER_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("USER_PWD"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTEREST"),
+						rset.getDate("ENROLL_DATE"),
+						rset.getString("USER_NAME"),
+						rset.getString("GENDER"),
+						rset.getString("EMAIL"),
+						rset.getString("PHONE"),
+						rset.getString("STATUS"),
+						rset.getString("BLACKLIST"),
+						rset.getString("SPECIALITY"),
+						rset.getString("EXPERT")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return m;
+	}
 	
 }

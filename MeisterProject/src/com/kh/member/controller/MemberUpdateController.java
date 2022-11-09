@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -33,14 +34,27 @@ public class MemberUpdateController extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String nickName = request.getParameter("nickName");
-		String interest = request.getParameter("interest");
+		String interest = request.getParameter("interests");
 		String userName = request.getParameter("userName");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
 		
-		Member m  = new Member(userId, nickName, interest, userName, phone, email);
+		String phone = ("010".concat(request.getParameter("phoneMid"))).concat(request.getParameter("phoneLast"));
+		System.out.println(phone.length());
+		String email = ((request.getParameter("emailFront")).concat("@")).concat(request.getParameter("emailBack"));
+		
+		Member m  = new Member(userId, nickName, interest, userName, email, phone);
 		
 		Member updateMem = new MemberService().updateMember(m);
+		
+		if(updateMem == null) {
+			request.setAttribute("errorMsg", "회원정보 수정에 실패했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("alertMsg", "회원정보를 수정 성공");
+
+			response.sendRedirect(request.getContextPath()+"/mypage.me");
+		}
 	}
 
 	/**

@@ -53,5 +53,20 @@
 		WHERE USER_ID = ?
 	</entry>
 	
+	<entry key="updateMember">
+		UPDATE MEMBER
+		SET NICKNAME = ?,
+			INTEREST = ?,
+			USER_NAME = ?,
+			PHONE = ?,
+			EMAIL = ?
+		WHERE USER_ID = ?
+	</entry>
 	
+	<entry key="selectMember">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = ?
+			AND STATUS = 'Y'
+	</entry>
 </properties>

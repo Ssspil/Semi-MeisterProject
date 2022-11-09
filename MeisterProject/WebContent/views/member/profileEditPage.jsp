@@ -38,8 +38,8 @@
 	<%@include file="../common/header.jsp" %>
 	
 	<%
+		String userId = loginUser.getUserId();
 		String userName = loginUser.getUserName();
-		String email = loginUser.getEmail() == null? "" : loginUser.getEmail();
 		String nickname = loginUser.getNickName();
 		String phone = loginUser.getPhone();
 		String phoneMid = "";
@@ -48,6 +48,16 @@
 			phoneMid = phone.substring(3,7);
 			phoneLast = phone.substring(7);
 		}
+		String email = loginUser.getEmail();
+		String emailFront = "";
+		String emailLast = "";
+		
+		if(phone != null){
+			int idx = email.indexOf("@");
+			emailFront = email.substring(0, idx);
+			emailLast = email.substring(idx+1);
+		}
+		
 		String interests = loginUser.getInterest() == null? "" : loginUser.getInterest();
 	%>
 	
@@ -70,6 +80,7 @@
 				<img src="<%=contextPath %>/resources/image/logo.png">
 			</div>
 			<br>
+			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
 			<input type="text" name="nickName" value="<%=nickname %>" size="80">
 			<br>
@@ -90,10 +101,16 @@
 			<input type="text" name="phoneLast" value="<%=phoneLast%>" size="4">
 			<br><br>
 			이메일 : &nbsp;
-			<input type="text" name="email" value="<%=email %>" size="50">
+			<input type="text" name="emailFront" value="<%=emailFront %>" size="15">
+			&nbsp; @ &nbsp;
+			<select name="emailBack">
+				<option selected>gmail.com</option>
+				<option>naver.com</option>
+				<option>daum.net</option>
+			</select>
 			<br><br>
 			관심분야 : &nbsp;
-			<select id="interest" name="interest">
+			<select id="interest" name="interests">
 				<option value="영상">영상</option>
 				<option value="영화">영화</option>
 				<option value="게임">게임</option>
