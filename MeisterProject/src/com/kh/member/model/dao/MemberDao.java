@@ -247,21 +247,21 @@ public class MemberDao {
 		return m;
 	}
 	
-<<<<<<< HEAD
+
 	public int nicknameCheck(Connection conn, String nickname) {
 		
 		// select -> ResultSET (숫자하나)
 		int count = 0;
 		
-=======
+
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
->>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
+
 		PreparedStatement psmt = null;
 		
 		ResultSet rset = null;
 		
-<<<<<<< HEAD
+
 		String sql = prop.getProperty("nicknameCheck");
 		
 		try {

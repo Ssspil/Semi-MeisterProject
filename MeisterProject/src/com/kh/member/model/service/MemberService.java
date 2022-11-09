@@ -94,7 +94,7 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
-<<<<<<< HEAD
+
 	 public int nicknameCheck(String nickname) {
 		 
 		 Connection conn = JDBCTemplate.getConnection();
@@ -105,7 +105,7 @@ public class MemberService {
 		
 		 return count;
 	 }
-=======
+
 	 public Member expertSubmit(Member m) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
@@ -124,7 +124,7 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
->>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
+
 	   
 	   
 	   
