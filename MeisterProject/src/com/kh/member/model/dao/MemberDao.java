@@ -64,6 +64,7 @@ public class MemberDao {
 						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
 						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
 						rset.getString("EXPERT")
 						);
 			}
@@ -199,7 +200,6 @@ public class MemberDao {
 		} finally {
 			JDBCTemplate.close(psmt);
 		}
-		System.out.println("DAO : "+ result);
 		return result;
 	}
 	
@@ -233,6 +233,7 @@ public class MemberDao {
 						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
 						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
 						rset.getString("EXPERT")
 						);
 			}
@@ -244,6 +245,36 @@ public class MemberDao {
 			JDBCTemplate.close(psmt);
 		}
 		return m;
+	}
+	
+	public int expertSubmit(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("expertSubmit");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, m.getUserName());
+			psmt.setString(2, m.getGender());
+			psmt.setString(3, m.getEmail());
+			psmt.setString(4, m.getPhone());
+			psmt.setString(5, m.getSpeciality());
+			psmt.setString(6, m.getExpSubmit());
+			psmt.setString(7, m.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
 	}
 	
 }
