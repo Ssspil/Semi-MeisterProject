@@ -101,7 +101,7 @@
 	        <!-- 2. 필드 -->
 	        <div id="field">
 	            <b>아이디 & 이메일 *</b>
-	            <input id="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
+	            <input id="userId" name="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
 	            <div data-v-149435f8="" class="invalid-feedback">이메일을 입력해주세요.</div>
 	            <button id="idchkBtn" type="button" onclick="idCheck();">중복확인</button>
 	        </div>
@@ -115,7 +115,7 @@
 	        <br>
 	        <div class="field">
 	            <b>닉네임 *</b>
-	            <input type="text" id="nickname" maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
+	            <input type="text" id="nickname" name="nickName"maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
 	            <font id="chkNick" size="3"></font>
 	        </div>
 	        <br>
@@ -196,13 +196,6 @@
 			        	$("#chkNotice").attr("color", "green");
 			        }
 		    })
-    	 
-		   
-    
-   	    	
-   		
-    	    	
-    	    
     	
    	 // 체크박스 전체 선택
 	    $("#checkbox_group").on("click", "#check_all", function () {
@@ -226,26 +219,26 @@
     </script>
     <script>
 	    function nicknameCheck() {
-	    	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	    	let regExp = /^[ㄱ-ㅎ가-힣]+$/g;
 	    	let nickname = $("#nickname").val();
-	    	let test = $("#chkNick").html("");
-	    	
-	    	if(!regExp.test(nickname)) {
-	    		$(test).html("닉네임을 문자1 + 숫자1 입력해주세요.");
-	    		$(test).css("color", "crimson");
-	    	} else {
-	    		
-	    	}
-	    	
-	    	
+	    	let test = $("#chkNick");
+	    
+// 	    	if(!regExp.test(nickname)){
+// 	    		$("#nickname").val($("#nickname").val().replace(regExp, ""));
+// 	    		//alert($("#nickname").val());
+// 	    	}
+			
 	    	$.ajax({
 	    		url : "checkName.me",
 	    		data : {nickname : nickname},
 	    		success : function(result) {
 	    			if(result == "NNNNN") {
+	    				
 	    				$(test).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
+	    				$(test).attr("color", "red");
 	    			} else {
 	    				$(test).html("사용 가능한 닉네임 입니다.");
+	    				$(test).attr("color", "darkslateblue");
 	    			}
 	    		},
 	    		error : function() {
