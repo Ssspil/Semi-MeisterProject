@@ -75,18 +75,14 @@
 				$('#profile').click();
 			});
 		});
-		
-        function changeValue(obj){
-	        alert(obj.value);
-        }
 	</script>
 	<script>
-		function imgPreview(){
-	        var preview = new FileReader();
-	        preview.onload = function (e) {
-	        	document.getElementById("profileImg").src = e.target.result;
-			};
-			preview.readAsDataURL(document.getElementById("profile").files[0]);
+		function loadImg(inputFile) {
+			let reader = new FileReader();
+			reader.readAsDataURL(inputFile.files[0]);
+			reader.onload = function(e){
+				$("#titleImage").attr("src", e.target.result);
+			}
 		}
 	</script>
 	<form action="<%=contextPath %>/update.me" method="post">	
@@ -98,8 +94,8 @@
 			<h5><b>&nbsp;프로필 변경</b></h5>
 			<hr>
 			<div id="profileImg">
-				<img id="profileImg" src="" alt="프로필">
-				<input type="file" id="profile" name="profileImg" style="display:none" onchange="imgPreview();" accept="img/jpeg, img/png">
+				<img id="titleImage" alt="프로필">
+				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
 				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
 			<br><br>
