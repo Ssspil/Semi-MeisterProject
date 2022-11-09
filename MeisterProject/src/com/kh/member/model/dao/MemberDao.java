@@ -253,15 +253,10 @@ public class MemberDao {
 		// select -> ResultSET (숫자하나)
 		int count = 0;
 		
-
-	public int expertSubmit(Connection conn, Member m) {
-		int result = 0;
-
 		PreparedStatement psmt = null;
 		
 		ResultSet rset = null;
 		
-
 		String sql = prop.getProperty("nicknameCheck");
 		
 		try {
@@ -273,7 +268,26 @@ public class MemberDao {
 			if(rset.next()) {
 				count = rset.getInt(1);
 			}
-=======
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return count;
+		
+	}
+		
+
+	public int expertSubmit(Connection conn, Member m) {
+		int result = 0;
+
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
 		String sql = prop.getProperty("expertSubmit");
 		
 		try {
@@ -287,25 +301,16 @@ public class MemberDao {
 			psmt.setString(6, m.getExpSubmit());
 			psmt.setString(7, m.getUserId());
 			
-			result = psmt.executeUpdate();
->>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
+			result = psmt.executeUpdate();	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-<<<<<<< HEAD
 			JDBCTemplate.close(rset);
-			JDBCTemplate.close(psmt);
-		}
-		
-		return count;		
-	}
-=======
 			JDBCTemplate.close(psmt);
 		}
 		
 		return result;
 	}
 	
->>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
 }
