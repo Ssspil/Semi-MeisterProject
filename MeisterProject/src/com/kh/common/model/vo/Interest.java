@@ -6,7 +6,7 @@ public class Interest {
     private String InterestName;
     
     public Interest () {
-    	
+    	super();
     }
 
 	public Interest(int interestNo, String interestName) {
