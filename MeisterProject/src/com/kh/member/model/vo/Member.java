@@ -14,14 +14,17 @@ public class Member {
 	private String email;
 	private String phone;
 	private String status;
-	private String balckList;
+	private String blackList;
 	private String speciality;
+	private String expSubmit;
 	private String expert;
-	
+	private String profileImg;
 	// 로그인 부분 생성자
+	
+
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
-			String userName, String gender, String email, String phone, String status, String balckList,
-			String speciality, String expert) {
+			String userName, String gender, String email, String phone, String status, String blackList,
+			String speciality, String expSubmit, String expert) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -34,11 +37,12 @@ public class Member {
 		this.email = email;
 		this.phone = phone;
 		this.status = status;
-		this.balckList = balckList;
+		this.blackList = blackList;
 		this.speciality = speciality;
+		this.expSubmit = expSubmit;
 		this.expert = expert;
 	}
-	
+
 	// 일반 유저 회원가입 부분 생성자
 	public Member(String userId, String userPwd, String nickName, String interest) {
 		super();
@@ -49,10 +53,9 @@ public class Member {
 	}
 
 	// 전문가 인증 부분 생성자
-	// 아이디를 조건문으로 사용, UPDATE 문으로 나머지 값들 삽입
-	
+	// 아이디를 조건문으로 사용, UPDATE 문으로 나머지 값들 삽입	
 	public Member(String userId, String userName, String gender, String email, String phone, String speciality,
-			String expert) {
+			String expSubmit) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -60,7 +63,7 @@ public class Member {
 		this.email = email;
 		this.phone = phone;
 		this.speciality = speciality;
-		this.expert = expert;
+		this.expSubmit = expSubmit;
 	}
 
 	// 개인정보 수정 부분 생성자
@@ -73,6 +76,7 @@ public class Member {
 		this.email = email;
 		this.phone = phone;
 	}
+
 
 	public Member() {
 		
@@ -166,14 +170,6 @@ public class Member {
 		this.status = status;
 	}
 
-	public String getBalckList() {
-		return balckList;
-	}
-
-	public void setBalckList(String balckList) {
-		this.balckList = balckList;
-	}
-
 	public String getSpeciality() {
 		return speciality;
 	}
@@ -197,14 +193,33 @@ public class Member {
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
 	}
+	
+	public String getBlackList() {
+		return blackList;
+	}
+
+	public void setBlackList(String blackList) {
+		this.blackList = blackList;
+	}
+
+	public String getExpSubmit() {
+		return expSubmit;
+	}
+
+	public void setExpSubmit(String expSubmit) {
+		this.expSubmit = expSubmit;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", nickName=" + nickName
 				+ ", interest=" + interest + ", enrollDate=" + enrollDate + ", userName=" + userName + ", gender="
-				+ gender + ", email=" + email + ", phone=" + phone + ", status=" + status + ", balckList=" + balckList
-				+ ", speciality=" + speciality + ", expert=" + expert + ", profileImg=" + profileImg + "]";
-	}	
+				+ gender + ", email=" + email + ", phone=" + phone + ", status=" + status + ", blackList=" + blackList
+				+ ", speciality=" + speciality + ", expSubmit=" + expSubmit + ", expert=" + expert+"]";
+	}
+	
+	
+
 	
 	
 

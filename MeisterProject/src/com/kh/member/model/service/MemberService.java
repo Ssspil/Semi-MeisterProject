@@ -94,6 +94,23 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
+	 public Member expertSubmit(Member m) {
+		 Connection conn = JDBCTemplate.getConnection();
+		 
+		 int result = new MemberDao().expertSubmit(conn, m);
+		 Member updateMem = null;
+		 
+		 if (result > 0) {
+			 JDBCTemplate.commit(conn);
+			 updateMem = new MemberDao().selectMember(conn, m.getUserId());
+		 } else {
+			 JDBCTemplate.rollback(conn);
+		 }
+			 
+		 JDBCTemplate.close();
+		 
+		 return updateMem;
+	 }
 	
 	   
 	   
