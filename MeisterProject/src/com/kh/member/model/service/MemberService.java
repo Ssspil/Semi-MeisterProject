@@ -94,7 +94,16 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
-	
+	 public int nicknameCheck(String nickname) {
+		 
+		 Connection conn = JDBCTemplate.getConnection();
+			
+		 int count = new MemberDao().nicknameCheck(conn, nickname);
+		 
+		 JDBCTemplate.close();
+		
+		 return count;
+	 }
 	   
 	   
 	   

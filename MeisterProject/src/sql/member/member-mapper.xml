@@ -45,8 +45,6 @@
 		WHERE USER_ID=?
 	</entry>
 	
-	
-	
 	<entry key="idCheck">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -69,4 +67,12 @@
 		WHERE USER_ID = ?
 			AND STATUS = 'Y'
 	</entry>
+	
+	<entry key="nicknameCheck">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE NICKNAME = ?
+	</entry>
+	
+
 </properties>
