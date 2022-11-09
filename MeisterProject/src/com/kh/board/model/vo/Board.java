@@ -5,6 +5,7 @@ import java.util.Date;
 public class Board {
 	private int boardNo;
 	private String boardTitle;
+	private int boardType;
 	private String boardContent;
 	private int boardCount;
 	private int boardRecommend;
@@ -19,11 +20,12 @@ public class Board {
 	}
 	
 	// 기본생성자
-	public Board(int boardNo, String boardTitle, String boardContent, int boardCount, int boardRecommend,
+	public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
 			Date boardDate, String status, int userNO, String titleImg) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
+		this.boardType = boardType;
 		this.boardContent = boardContent;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
@@ -34,9 +36,10 @@ public class Board {
 	}
 	
 	// 게시글 등록 부분 생성자
-	public Board(String boardTitle, String boardContent, int userNO) {
+	public Board(String boardTitle,int boardType, String boardContent, int userNO) {
 		super();
 		this.boardTitle = boardTitle;
+		this.boardType = boardType;
 		this.boardContent = boardContent;
 		this.userNO = userNO;
 	}
@@ -53,15 +56,16 @@ public class Board {
 	
 	// 게시글 목록 불러오기 부분 생성자
 	// title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
-	public Board(int boardNo, String boardTitle, int boardCount, int boardRecommend, Date boardDate, int userNO,
-			String titleImg) {
+	public Board(int boardNo, String boardTitle,int boardType, int boardCount, int boardRecommend, Date boardDate,
+			String status, String titleImg) {
 		super();
 		this.boardNo = boardNo;
+		this.boardType = boardType;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.boardDate = boardDate;
-		this.userNO = userNO;
+		this.status = status;
 		this.titleImg = titleImg;
 	}
 
@@ -79,6 +83,13 @@ public class Board {
 
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
+	}
+	public int getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(int boardType) {
+		this.boardType = boardType;
 	}
 
 	public String getBoardContent() {
@@ -139,7 +150,7 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardType=" + boardType +", boardContent=" + boardContent
 				+ ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardDate=" + boardDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + "]";
 	}

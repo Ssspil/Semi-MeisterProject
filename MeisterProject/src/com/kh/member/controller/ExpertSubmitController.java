@@ -12,16 +12,16 @@ import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class ExpertSubmitController
  */
-@WebServlet("/update.me")
-public class MemberUpdateController extends HttpServlet {
+@WebServlet("/expertSubmit.me")
+public class ExpertSubmitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public ExpertSubmitController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +33,23 @@ public class MemberUpdateController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId = request.getParameter("userId");
-		String nickName = request.getParameter("nickName");
-		String interest = request.getParameter("interests");
 		String userName = request.getParameter("userName");
-		
+		String gender = request.getParameter("gender");
 		String phone = ("010".concat(request.getParameter("phoneMid"))).concat(request.getParameter("phoneLast"));
 		String email = ((request.getParameter("emailFront")).concat("@")).concat(request.getParameter("emailBack"));
+		String speciality = request.getParameter("speciality");
+	
+		Member m = new Member(userId, userName, gender, email, phone, speciality, "Y");
+
+		Member result = new MemberService().expertSubmit(m);
 		
-		Member m  = new Member(userId, nickName, interest, userName, email, phone);
-		
-		Member updateMem = new MemberService().updateMember(m);
-		
-		if(updateMem == null) {
+		if(result == null) {
 			request.setAttribute("errorMsg", "회원정보 수정에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateMem);
-			session.setAttribute("alertMsg", "회원정보를 수정 성공");
+			session.setAttribute("loginUser", result);
+			session.setAttribute("alertMsg", "제출");
 
 			response.sendRedirect(request.getContextPath()+"/mypage.me");
 		}

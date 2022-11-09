@@ -26,6 +26,7 @@
     	height: 100%;
     	object-fit:cover;
     	border-radius:100px / 100px;
+    	margin-bottom: 10px;
     }
     input{
     	border: 1px solid gray;
@@ -64,9 +65,26 @@
 	<script>
 		$ (function selectInterest(){
 			$("#interest").val("<%=interests%>").prop("selected", true);
-		})
+		});
 	</script>
 	
+	<script>
+		$(function(){			
+			$('#fileUploadBtn').click(function(e){
+				e.preventDefault();
+				$('#profile').click();
+			});
+		});
+	</script>
+	<script>
+		function loadImg(inputFile) {
+			let reader = new FileReader();
+			reader.readAsDataURL(inputFile.files[0]);
+			reader.onload = function(e){
+				$("#titleImage").attr("src", e.target.result);
+			}
+		}
+	</script>
 	<form action="<%=contextPath %>/update.me" method="post">	
 		<div class="outer">
 			<br>
@@ -75,11 +93,12 @@
 			<hr>
 			<h5><b>&nbsp;프로필 변경</b></h5>
 			<hr>
-			<br>
 			<div id="profileImg">
-				<img src="<%=contextPath %>/resources/image/logo.png">
+				<img id="titleImage" alt="프로필">
+				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
+				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
-			<br>
+			<br><br>
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
 			<input type="text" name="nickName" value="<%=nickname %>" size="80">

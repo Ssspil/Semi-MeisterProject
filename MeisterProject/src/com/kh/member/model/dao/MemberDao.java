@@ -64,6 +64,7 @@ public class MemberDao {
 						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
 						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
 						rset.getString("EXPERT")
 						);
 			}
@@ -199,7 +200,6 @@ public class MemberDao {
 		} finally {
 			JDBCTemplate.close(psmt);
 		}
-		System.out.println("DAO : "+ result);
 		return result;
 	}
 	
@@ -233,6 +233,7 @@ public class MemberDao {
 						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
 						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
 						rset.getString("EXPERT")
 						);
 			}
@@ -246,15 +247,21 @@ public class MemberDao {
 		return m;
 	}
 	
+<<<<<<< HEAD
 	public int nicknameCheck(Connection conn, String nickname) {
 		
 		// select -> ResultSET (숫자하나)
 		int count = 0;
 		
+=======
+	public int expertSubmit(Connection conn, Member m) {
+		int result = 0;
+>>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
 		PreparedStatement psmt = null;
 		
 		ResultSet rset = null;
 		
+<<<<<<< HEAD
 		String sql = prop.getProperty("nicknameCheck");
 		
 		try {
@@ -266,14 +273,39 @@ public class MemberDao {
 			if(rset.next()) {
 				count = rset.getInt(1);
 			}
+=======
+		String sql = prop.getProperty("expertSubmit");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, m.getUserName());
+			psmt.setString(2, m.getGender());
+			psmt.setString(3, m.getEmail());
+			psmt.setString(4, m.getPhone());
+			psmt.setString(5, m.getSpeciality());
+			psmt.setString(6, m.getExpSubmit());
+			psmt.setString(7, m.getUserId());
+			
+			result = psmt.executeUpdate();
+>>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+<<<<<<< HEAD
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(psmt);
 		}
 		
 		return count;		
 	}
+=======
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+	
+>>>>>>> 44a1316817d5951bc37d1aacf46279f3168c9350
 }
