@@ -302,7 +302,7 @@ svg {
 
 table {
   caption-side: bottom;
-  border-collapse: collapse;
+  border-collapse: separate;
 }
 
 caption {
@@ -343,8 +343,7 @@ button:focus:not(:focus-visible) {
 input,
 button,
 select,
-optgroup,
-textarea {
+optgroup {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
@@ -390,7 +389,7 @@ button:not(:disabled),
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
 }
 
 fieldset {
@@ -2666,6 +2665,12 @@ textarea.form-control-lg {
   height: calc(3.5rem + 2px);
   line-height: 1.25;
 }
+.form-floating > .form-control1, .form-floating > .dataTable-input,
+.form-floating > .form-select,
+.form-floating > .dataTable-selector {
+  height: calc(3.5rem + 2px);
+  line-height: 1.25;
+}
 .form-floating > label {
   position: absolute;
   top: 0;
@@ -4558,7 +4563,7 @@ textarea.form-control-lg {
 
 .card-body {
   flex: 1 1 auto;
-  padding: 1rem 1rem;
+  padding: 1rem 14rem;
 }
 
 .card-title {

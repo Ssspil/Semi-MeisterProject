@@ -14,14 +14,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="JSP" />
-<title>관리자 페이지</title>
+<title>공지사항 작성하기</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
 <!-- css -->
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-
+.myBtnArea{
+	width:44rem; 
+	margin-top : 30px; 
+	margin-botton : 30px;
+}
+#inputTitle{
+	width:44rem;
+}
+#inputContent{
+	width:44rem;
+	height : 500px;
+}
 
  	
 </style>
@@ -103,30 +114,28 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">공지 작성하기</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">공지목목</li>
+                        <li class="breadcrumb-item active">공지사항</li>
                     </ol>
-		           <form action="" method="post" name="noticeform">
-				       <table border="1">
-				            <tr>
-				                <th width="100" height="30">제목</th>
-				                <td width="500"><input type="text" name="title"></td>
-				            </tr>
-				            <tr>
-				                <th width="100" height="30">작성자</th>
-				                <td width="500"><input type="text" name="title"></td>
-				            </tr>
-				            <tr>
-				                <th width="100" height="30">작성일</th>
-				                <td width="500"><input type="text" name="title"></td>
-				            </tr>
-				            <tr>
-				                <th width="100" height="30">내용</th>
-				                <td width="500" height="400"><textarea></td>
-				            </tr>
-				      	</table>
-			
-			        	<button type="submit" class="btn btn-secondary">작성하기</button>
-			    	</form>
+
+
+									<div class="card-body">
+                                        <form action="<%= contextPath %>/insert.no" method="post" name="noticeEnrollForm">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputTitle" type="text" name="noticeTitle">
+                                                <label for="inputTitle">제목</label>
+                                            </div>
+                                            
+                                            <div class="form-floating mb-6">
+                                            	<textarea id="inputContent" class="form-control" name="noticeContent"></textarea>
+                                                <label for="inputContent">글내용</label>
+                                            </div>
+
+                                        
+                                            
+                                            <div class="myBtnArea" align="center"><button type="submit" class="btn btn-primary btn-sm">작성하기</button></div>
+                                            
+                                        </form>
+                                    </div>
 
 
                 </div>
