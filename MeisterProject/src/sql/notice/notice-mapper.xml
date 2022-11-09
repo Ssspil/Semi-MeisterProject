@@ -16,4 +16,14 @@
 			?
 		)
 	</entry>
+	<entry key="selectNoticeList">
+		SELECT NOTICE_NO,
+			   NOTICE_TITLE,
+			   NOTICE_CONTENT,
+			   CREATE_DATE
+		FROM NOTICE N
+		WHERE N.STATUS = 'Y'
+		ORDER BY CREATE_DATE DESC
+	</entry>
+	
 </properties>

@@ -24,4 +24,16 @@ public class NoticeService {
         
         return result;
     }
+
+    public ArrayList<Notice> selectNoticeList(){
+        
+        Connection conn = JDBCTemplate.getConnection();
+        
+        ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
+        
+        JDBCTemplate.close();
+        
+        return list;
+     
+    }
 }

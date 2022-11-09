@@ -34,9 +34,7 @@ public class NoticeInsetController extends HttpServlet {
 
         String noticeTitle = request.getParameter("noticeTitle");
         String noticeContent = request.getParameter("noticeContent");
-        
-        System.out.println("noticeTitle : " + noticeTitle);
-        System.out.println("noticeContent : " + noticeContent);
+
         
         Notice n = new Notice();
         

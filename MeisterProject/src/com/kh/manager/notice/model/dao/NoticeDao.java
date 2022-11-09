@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
@@ -52,8 +54,6 @@ public class NoticeDao {
 	            
 	            result = psmt.executeUpdate();
 	            
-	            System.out.println("result : " +result);
-	            
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        } finally {
@@ -62,6 +62,41 @@ public class NoticeDao {
 	        
 	        return result;
 	    }
+
+
+
+	public ArrayList<Notice> selectNoticeList(Connection conn) {
+        // Select문 => ResultSet객체(여러행)
+        ArrayList<Notice> list = new ArrayList<>();
+        
+        PreparedStatement psmt = null;
+        
+        ResultSet rset = null;
+        
+        String sql = prop.getProperty("selectNoticeList");
+        
+        try {
+            psmt = conn.prepareStatement(sql);
+            
+            rset = psmt.executeQuery();
+            
+            while(rset.next()) {
+                list.add(new Notice(rset.getInt("NOTICE_NO"),
+                                    rset.getString("NOTICE_TITLE"),
+                                    rset.getString("NOTICE_CONTENT"),
+                                    rset.getDate("CREATE_DATE")));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	JDBCTemplate.close(rset);
+        	JDBCTemplate.close(psmt);
+        }
+        
+        return list;
+    }
+	
 		
 
 }
