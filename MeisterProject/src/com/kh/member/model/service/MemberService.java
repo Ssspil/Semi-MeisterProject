@@ -94,6 +94,18 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
+
+	 public int nicknameCheck(String nickname) {
+		 
+		 Connection conn = JDBCTemplate.getConnection();
+			
+		 int count = new MemberDao().nicknameCheck(conn, nickname);
+		 
+		 JDBCTemplate.close();
+		
+		 return count;
+	 }
+
 	 public Member expertSubmit(Member m) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
@@ -112,6 +124,7 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
+
 	   
 	   
 	   

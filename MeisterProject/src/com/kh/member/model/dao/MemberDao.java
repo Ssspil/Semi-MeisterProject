@@ -247,8 +247,43 @@ public class MemberDao {
 		return m;
 	}
 	
+
+	public int nicknameCheck(Connection conn, String nickname) {
+		
+		// select -> ResultSET (숫자하나)
+		int count = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("nicknameCheck");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, nickname);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return count;
+		
+	}
+		
+
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
+
 		PreparedStatement psmt = null;
 		
 		ResultSet rset = null;
@@ -266,11 +301,12 @@ public class MemberDao {
 			psmt.setString(6, m.getExpSubmit());
 			psmt.setString(7, m.getUserId());
 			
-			result = psmt.executeUpdate();
+			result = psmt.executeUpdate();	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(psmt);
 		}
 		

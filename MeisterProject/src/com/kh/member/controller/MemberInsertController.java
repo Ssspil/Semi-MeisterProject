@@ -37,7 +37,7 @@ public class MemberInsertController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String nickName = request.getParameter("nickName");
-		String[] interestsArr = request.getParameterValues("interest");
+		String interestsArr = request.getParameter("interest");
 		
 		
 		String interest = interestsArr != null ? String.join(", ", interestsArr) : "";

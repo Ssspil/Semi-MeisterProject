@@ -93,7 +93,7 @@
         <br>
         <h1 style="text-align: center">회원가입</h1>
         
-        <form id="enroll-form" action="<%=contextPath %>/insert.me" method="post">
+        <form id="enroll-form" name="form1" action="<%=contextPath %>/insert.me" method="post">
         
 	        <!-- 1. 로고 -->
 	        <img class="logo" src="<%= contextPath %>/resources/image/logo.png" />
@@ -101,7 +101,7 @@
 	        <!-- 2. 필드 -->
 	        <div id="field">
 	            <b>아이디 & 이메일 *</b>
-	            <input id="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
+	            <input id="userId" name="userId" class="userId" type="text" maxlength="30" placeholder="example@meister.com" required>
 	            <div data-v-149435f8="" class="invalid-feedback">이메일을 입력해주세요.</div>
 	            <button id="idchkBtn" type="button" onclick="idCheck();">중복확인</button>
 	        </div>
@@ -115,7 +115,7 @@
 	        <br>
 	        <div class="field">
 	            <b>닉네임 *</b>
-	            <input type="text" id="nickname" maxlength="5" placeholder="닉네임을 입력해주세요." required>
+	            <input type="text" id="nickname" name="nickName"maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
 	            <font id="chkNick" size="3"></font>
 	        </div>
 	        <br>
@@ -123,7 +123,7 @@
 	        <div class="field">
 	            <b>관심사 선택 *</b>
 	            <div>
-	                <select  required>
+	                <select name="interest" required>
 	                    <option style="text-align: center;" value="">관심사를 선택해 주세요.</option>
 	                    <option style="text-align: center;" value="sports">운동</option>
 	                    <option style="text-align: center;" value="move">영화</option>
@@ -179,62 +179,74 @@
     
     <script>
     	$(function(){
-		    $('#userPwd').keyup(function(){
-		      $('#chkNotice').html('');
+		    $("#userPwd").keyup(function(){
+		      $("#chkNotice").html("");
 		    });
 
-    		$('#userPwd2').keyup(function(){
-			        if($('#userPwd').val() != $('#userPwd2').val()){
-			          $('#chkNotice').html('비밀번호 일치하지 않음<br>');
-			          $('#chkNotice').attr('color', 'crimson');
+    		$("#userPwd2").keyup(function(){
+			        if($("#userPwd").val() != $("#userPwd2").val()){
+			          $("#chkNotice").html("비밀번호 일치하지 않음<br>");
+			          $("#chkNotice").attr("color", "crimson");
 			        } else{
-			          $('#chkNotice').html('비밀번호 일치함<br>');
-			          $('#chkNotice').attr('color', 'darkslateblue');
+			          $("#chkNotice").html("비밀번호 일치함<br>");
+			          $("#chkNotice").attr("color", "darkslateblue");
 			        }
 			        if($("#userPwd").val().length < 6 || $("#userPwd").val().length > 20) {
-			        	$('#chkNotice').html('비밀번호는 6 ~ 20자 이내로 입력하세요.<br>');
-			        	$('#chkNotice').attr('color', 'green');
+			        	$("#chkNotice").html("비밀번호는 6 ~ 20자 이내로 입력하세요.<br>");
+			        	$("#chkNotice").attr("color", "green");
 			        }
-		    });
-    		
-    		$(function() {
-    	    	$("#nickname").keyup(function() {
-    	    		$('#chkNick').html('');
-    	    		let regExp = /^[가-힣]{2,6}$/;
-    	    		if(!regExp.test($("#nickname").val())) {
-    	    			$('#chkNick').html('한글로만 입력해주세요.');
-    	    			$('#chkNick').attr('color', 'crimson');
-    	    		} else {
-    	    			$('#chkNick').html('닉네임 입력 완료!!');
-    	    			$('#chkNick').attr('color', 'darkslateblue');
-    	    		} if($("#nickname").val().length < 2 || $("#nickname").val().length > 6) {
-    	    			$('#chkNick').html('닉네임은 2 ~ 6자 이내로 입력하세요.');
-    	    			$('#chkNick').attr('color', 'green');
-    	    		}
-    	    			
-    	    		
-    	    	});
-    	    })
-    	    
-    	 // 체크박스 전체 선택
-		    $("#checkbox_group").on("click", "#check_all", function () {
-		        $(this).parents("#checkbox_group").find('input').prop("checked", $(this).is(":checked"));
-		    });
-		
-		    // 체크박스 개별 선택
-		    $("#checkbox_group").on("click", ".normal", function() {
-		        var is_checked = true;
-		
-		        $("#checkbox_group .normal").each(function(){
-		            is_checked = is_checked && $(this).is(":checked");
-		        });
-		
-		        $("#check_all").prop("checked", is_checked);
-		    });
-		});
-		 
+		    })
+    	
+   	 // 체크박스 전체 선택
+	    $("#checkbox_group").on("click", "#check_all", function () {
+	        $(this).parents("#checkbox_group").find('input').prop("checked", $(this).is(":checked"));
+	    });
+	
+	    // 체크박스 개별 선택
+	    $("#checkbox_group").on("click", ".normal", function() {
+	        let is_checked = true;
+	
+	        $("#checkbox_group .normal").each(function(){
+	            is_checked = is_checked && $(this).is(":checked");
+	        });
+	
+	        $("#check_all").prop("checked", is_checked);
+	    	});
+
+	    
+	});
+   
     </script>
-    
+    <script>
+	    function nicknameCheck() {
+	    	let regExp = /^[ㄱ-ㅎ가-힣]+$/g;
+	    	let nickname = $("#nickname").val();
+	    	let test = $("#chkNick");
+	    
+	    	if(!regExp.test(nickname)){
+	    		$("#nickname").val($("#nickname").val().replace(regExp, ""));
+	    		
+	    	}
+			
+	    	$.ajax({
+	    		url : "checkName.me",
+	    		data : {nickname : nickname},
+	    		success : function(result) {
+	    			if(result == "NNNNN") {
+	    				
+	    				$(test).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
+	    				$(test).attr("color", "red");
+	    			} else {
+	    				$(test).html("사용 가능한 닉네임 입니다.");
+	    				$(test).attr("color", "darkslateblue");
+	    			}
+	    		},
+	    		error : function() {
+	    			console.log("닉네임 중복체크용 ajax통신 실패");
+	    		}
+	    	})
+	    }
+    </script>
     <script>
 	    function idCheck() {
 	    	// 아이디를 입력하는 input 요소 객체
@@ -280,7 +292,7 @@
 	    		error : function() {
 	    			console.log("아이디 중복체크용 ajax통신 실패");
 	    		}
-	    	})
+	    	});
 	    }
 	</script>
 </body>

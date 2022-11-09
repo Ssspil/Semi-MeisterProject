@@ -69,6 +69,12 @@
 			AND STATUS = 'Y'
 	</entry>
 	
+	<entry key="nicknameCheck">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE NICKNAME = ?
+	</entry>
+
 	<entry key="expertSubmit">
 		UPDATE MEMBER
 		SET USER_NAME = ?,
