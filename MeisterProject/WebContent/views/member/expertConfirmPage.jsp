@@ -34,15 +34,20 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp" %>
-	<form action="<%=contextPath %>/update.me" method="post">
+	<%
+		String userId = loginUser.getUserId();
+	%>
+	
+	<form action="<%=contextPath %>/expertSubmit.me" method="post">
 		<div class="outer">
 			<br>
-			<div id="profileImg">
+			<div id="titleImg">
 					<img src="<%=contextPath %>/resources/image/logo.png">
 			</div>
 			<br><br>
 			<h4><b>&nbsp;&nbsp;전문가 인증</b></h4> 
 			<br><br>
+			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>&nbsp;&nbsp;* 이름</b></h6> 
 			&nbsp;&nbsp;<input type="text" name="userName" size="30" placeholder="이름을 입력해 주세요" maxlength="4" required>
 			<br><br>
@@ -68,7 +73,8 @@
 			&nbsp; - &nbsp;
 			<input type="text" name="phoneMid" size="4" required>
 			&nbsp; - &nbsp;
-			<input type="text" name="phonelast" size="4" required>
+			<input type="text" name="phoneast" size="4" required>
+			
 			<br><br>
 			<h6><b>* 전문분야 : &nbsp;</b></h6> 
 			&nbsp;&nbsp;

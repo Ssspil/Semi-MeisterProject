@@ -26,6 +26,7 @@
     	height: 100%;
     	object-fit:cover;
     	border-radius:100px / 100px;
+    	margin-bottom: 10px;
     }
     input{
     	border: 1px solid gray;
@@ -38,8 +39,8 @@
 	<%@include file="../common/header.jsp" %>
 	
 	<%
+		String userId = loginUser.getUserId();
 		String userName = loginUser.getUserName();
-		String email = loginUser.getEmail() == null? "" : loginUser.getEmail();
 		String nickname = loginUser.getNickName();
 		String phone = loginUser.getPhone();
 		String phoneMid = "";
@@ -48,15 +49,42 @@
 			phoneMid = phone.substring(3,7);
 			phoneLast = phone.substring(7);
 		}
+		String email = loginUser.getEmail();
+		String emailFront = "";
+		String emailLast = "";
+		
+		if(phone != null){
+			int idx = email.indexOf("@");
+			emailFront = email.substring(0, idx);
+			emailLast = email.substring(idx+1);
+		}
+		
 		String interests = loginUser.getInterest() == null? "" : loginUser.getInterest();
 	%>
 	
 	<script>
 		$ (function selectInterest(){
 			$("#interest").val("<%=interests%>").prop("selected", true);
-		})
+		});
 	</script>
 	
+	<script>
+		$(function(){			
+			$('#fileUploadBtn').click(function(e){
+				e.preventDefault();
+				$('#profile').click();
+			});
+		});
+	</script>
+	<script>
+		function loadImg(inputFile) {
+			let reader = new FileReader();
+			reader.readAsDataURL(inputFile.files[0]);
+			reader.onload = function(e){
+				$("#titleImage").attr("src", e.target.result);
+			}
+		}
+	</script>
 	<form action="<%=contextPath %>/update.me" method="post">	
 		<div class="outer">
 			<br>
@@ -65,11 +93,13 @@
 			<hr>
 			<h5><b>&nbsp;프로필 변경</b></h5>
 			<hr>
-			<br>
 			<div id="profileImg">
-				<img src="<%=contextPath %>/resources/image/logo.png">
+				<img id="titleImage" alt="프로필">
+				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
+				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
-			<br>
+			<br><br>
+			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
 			<input type="text" name="nickName" value="<%=nickname %>" size="80">
 			<br>
@@ -90,10 +120,16 @@
 			<input type="text" name="phoneLast" value="<%=phoneLast%>" size="4">
 			<br><br>
 			이메일 : &nbsp;
-			<input type="text" name="email" value="<%=email %>" size="50">
+			<input type="text" name="emailFront" value="<%=emailFront %>" size="15">
+			&nbsp; @ &nbsp;
+			<select name="emailBack">
+				<option selected>gmail.com</option>
+				<option>naver.com</option>
+				<option>daum.net</option>
+			</select>
 			<br><br>
 			관심분야 : &nbsp;
-			<select id="interest" name="interest">
+			<select id="interest" name="interests">
 				<option value="영상">영상</option>
 				<option value="영화">영화</option>
 				<option value="게임">게임</option>

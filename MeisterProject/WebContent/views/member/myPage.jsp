@@ -23,6 +23,7 @@
 		String email = loginUser.getEmail() == null? "NONE" : loginUser.getEmail();
 		String nickname = loginUser.getNickName();
 		String expert = loginUser.getExpert();
+		String exp = loginUser.getExpSubmit();
 	%>
 	
 	<div class="outer">
@@ -54,7 +55,7 @@
 		<h4><b>&nbsp;전문가 인증하기</b></h4>
 		<br>
 		<%if(expert.equals("N")){ %>
-			<h6><b><a href="<%=contextPath %>/expert.me">&nbsp;&nbsp;&nbsp;&nbsp;인증하기</a></b></h6>
+			<h6><b><a href="#" onclick="submitCheck();">&nbsp;&nbsp;&nbsp;&nbsp;인증하기</a></b></h6>
 		<%} else{%>
 			<h6><b>인증이 완료된 계정입니다</b></h6>
 		<%} %>
@@ -82,6 +83,16 @@
 		<h6><b><a href="<%=contextPath %>/noticeList.no">&nbsp;&nbsp;&nbsp;&nbsp;공지사항</a></b></h6>
 		<br>
 	</div>
+	<script>
+		function submitCheck(){
+			if("<%=exp%>"== "Y"){
+				location.href="<%=contextPath %>/mypage.me"
+			}
+			else{
+				location.href="<%=contextPath %>/expert.me";
+			}
+		}
+	</script>
 	<br><br><br><br><br><br><br><br><br><br>
 	<hr>
 	<%@include file="../common/footer.jsp" %>

@@ -14,32 +14,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="JSP" />
-<title>관리자 페이지</title>
+<title>공지사항 작성하기</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
 <!-- css -->
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.listbtn{
-	float:right;
+.myBtnArea{
+	width:44rem; 
+	margin-top : 30px; 
+	margin-botton : 30px;
+}
+#inputTitle{
+	width:44rem;
+}
+#inputContent{
+	width:44rem;
+	height : 500px;
 }
 
-table>thead>tr>th{
-	background-color : black;
-	color : white;
-	text-align : center;
-}
-table>tbody {
-	text-align : center;
-}
-
-table>tbody>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
-}
  	
 </style>
     
@@ -117,46 +111,32 @@ table>tbody>tr:hover{
         </div>
         <div id="layoutSidenav_content">
             <main>
-            
-                
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지 관리</h1>
+                    <h1 class="mt-4">공지 작성하기</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">공지목록</li>
+                        <li class="breadcrumb-item active">공지사항</li>
                     </ol>
-                    <div class="list-area">
-	                    <table border="1" align="center">
-	                    	<thead>
-	                    		<tr>
-	                    			<td colspan="4"><!--  버튼 추가할라면 여기서 작성 -->
-	                    				<div class="listbtn">
-											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.no">글작성</a>
-										</div>
-									</td>
-	                    		</tr>
-		                    	<tr>
-		                    		<th width="100">글번호</th>
-		                    		<th width="500">글제목</th>
-		                    		<th width="100">작성자</th>
-		                    		<th width="300">등록일</th>
-		                    	</tr>
-		                    </thead>
-		                    <tbody>
-		                    	<tr>
-		                    		<td>2</td>
-		                    		<td>회원목록</td>
-		                    		<td>관리자</td>
-		                    		<td>2022.11.11</td>
-		                    	</tr>
-		                    	<tr>
-		                    		<td>1</td>
-		                    		<td>관리자 명단</td>
-		                    		<td>관리자</td>
-		                    		<td>2022.11.12</td>
-		                    	</tr>
-		                    </tbody>
-	                    </table>
-                    </div>
+
+
+									<div class="card-body">
+                                        <form action="<%= contextPath %>/insert.no" method="post" name="noticeEnrollForm">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputTitle" type="text" name="noticeTitle">
+                                                <label for="inputTitle">제목</label>
+                                            </div>
+                                            
+                                            <div class="form-floating mb-6">
+                                            	<textarea id="inputContent" class="form-control" name="noticeContent"></textarea>
+                                                <label for="inputContent">글내용</label>
+                                            </div>
+
+                                        
+                                            
+                                            <div class="myBtnArea" align="center"><button type="submit" class="btn btn-primary btn-sm">작성하기</button></div>
+                                            
+                                        </form>
+                                    </div>
+
 
                 </div>
             </main> 

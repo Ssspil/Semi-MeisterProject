@@ -17,6 +17,7 @@
 			   STATUS,
 			   BLACKLIST,
 			   SPECIALITY,
+			   EXP_SUBMIT,
 			   EXPERT
 		FROM MEMBER
 		WHERE USER_ID = ?
@@ -45,13 +46,37 @@
 		WHERE USER_ID=?
 	</entry>
 	
-	
-	
 	<entry key="idCheck">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE USER_ID = ?
 	</entry>
 	
+	<entry key="updateMember">
+		UPDATE MEMBER
+		SET NICKNAME = ?,
+			INTEREST = ?,
+			USER_NAME = ?,
+			PHONE = ?,
+			EMAIL = ?
+		WHERE USER_ID = ?
+	</entry>
 	
+	<entry key="selectMember">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = ?
+			AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="expertSubmit">
+		UPDATE MEMBER
+		SET USER_NAME = ?,
+			GENDER = ?,
+			EMAIL = ?,
+			PHONE = ?,
+			SPECIALITY = ?,
+			EXP_SUBMIT = ?
+		WHERE USER_ID = ? AND STATUS = 'Y'
+	</entry>
 </properties>

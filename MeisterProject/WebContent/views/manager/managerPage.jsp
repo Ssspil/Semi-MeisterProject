@@ -3,8 +3,8 @@
 <%
     String contextPath = request.getContextPath();
 
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	// 로그인 이전 or 로그인 실패 : null
+   Member loginUser = (Member)session.getAttribute("loginUser");
+   // 로그인 이전 or 로그인 실패 : null
 
 %>
 <!DOCTYPE html>
@@ -94,9 +94,9 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                	<div id="managerMain">
-                		<img id="managerMainimg" src="<%= contextPath %>/resources/image/logo.png"/>
-                	</div>
+                   <div id="managerMain">
+                      <img id="managerMainimg" src="<%= contextPath %>/resources/image/logo.png"/>
+                   </div>
                 </main> 
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
