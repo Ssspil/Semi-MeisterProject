@@ -1,27 +1,27 @@
-package com.kh.board.model.vo;
+package com.kh.common.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Attachment {
-	private int fileNo;
-	private int refNo;
-	private String originName;
-	private String changeName;
-	private String filePath;
-	private Date uploadDate;
-	private int fileLevel;
-	private String status;
-	
-	public Attachment() {
-		
-	}
-	
-	// 기본생성자
-	public Attachment(int fileNo, int refNo, String originName, String changeName, String filePath, Date uploadDate,
+
+    private int fileNo;		// 파일 번호
+    private int refBNo;		// 게시글 번호
+    private String originName;	// 원래 파일이름
+    private String changeName;	// 수정된 파일 이름
+    private String filePath;	// 파일경로
+    private Date uploadDate;	// 생성된 날짜
+    private int fileLevel;		// 파일 분류
+    private String status;		// 상태
+    
+    public Attachment() {
+    	super();
+    }
+
+	public Attachment(int fileNo, int refBNo, String originName, String changeName, String filePath, Date uploadDate,
 			int fileLevel, String status) {
 		super();
 		this.fileNo = fileNo;
-		this.refNo = refNo;
+		this.refBNo = refBNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
@@ -38,12 +38,12 @@ public class Attachment {
 		this.fileNo = fileNo;
 	}
 
-	public int getRefNo() {
-		return refNo;
+	public int getRefBNo() {
+		return refBNo;
 	}
 
-	public void setRefNo(int refNo) {
-		this.refNo = refNo;
+	public void setRefBNo(int refBNo) {
+		this.refBNo = refBNo;
 	}
 
 	public String getOriginName() {
@@ -96,10 +96,11 @@ public class Attachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [fileNo=" + fileNo + ", refNo=" + refNo + ", originName=" + originName + ", changeName="
+		return "Attachment [fileNo=" + fileNo + ", refBNo=" + refBNo + ", originName=" + originName + ", changeName="
 				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel
 				+ ", status=" + status + "]";
 	}
+    
 	
-	
+    
 }

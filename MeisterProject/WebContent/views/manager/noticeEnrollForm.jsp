@@ -17,6 +17,8 @@
 <title>공지사항 작성하기</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
+<!--  jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- css -->
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
@@ -126,18 +128,28 @@
                                             </div>
                                             
                                             <div class="form-floating mb-6">
-                                            	<textarea id="inputContent" class="form-control" name="noticeContent"></textarea>
-                                                <label for="inputContent">글내용</label>
+                                            	<textarea id="inputContent" class="form-control" name="noticeContent" maxlength="1100"></textarea>
+                                                <label for="inputContent">글내용 &nbsp;&nbsp;&nbsp;&nbsp;<span id="count">0</span>   / 1100</label>
                                             </div>
-
+												                                      
                                         
                                             
                                             <div class="myBtnArea" align="center"><button type="submit" class="btn btn-primary btn-sm">작성하기</button></div>
                                             
                                         </form>
+
                                     </div>
-
-
+                                    <!-- 글자 수 나타내기 위한 스크립트 -->
+                                      <script>
+										    $(function(){
+										        $("#inputContent").keyup(function(){
+										            if ($("#inputContent").val().length <= 1100){
+										                $("#count").text($("#inputContent").val().length);      // "#content" = "this"
+										            } 
+										
+										        });
+										    })
+										</script>
                 </div>
             </main> 
             <footer class="py-4 bg-light mt-auto">
