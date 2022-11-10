@@ -19,13 +19,26 @@
 	
 	
 	<entry key="selectNoticeList">
-		SELECT NOTICE_NO,
-			   NOTICE_TITLE,
-			   NOTICE_CONTENT,
-			   CREATE_DATE
-		FROM NOTICE N
-		WHERE N.STATUS = 'Y'
-		ORDER BY CREATE_DATE DESC
+	SELECT *
+	FROM (SELECT ROWNUM RNUM,
+		  A.* 
+		  FROM (SELECT NOTICE_NO,
+					   NOTICE_TITLE,
+					   NOTICE_CONTENT,
+					   CREATE_DATE
+				FROM NOTICE N
+				WHERE N.STATUS = 'Y'
+				ORDER BY CREATE_DATE DESC) A
+		  )
+	WHERE RNUM BETWEEN ? AND ?
+	<!-- where문을 실행해야 하기 때문에 인라인뷰로 뺌 -->		
+	</entry>
+	
+	
+	<entry key="selectNoticeListCount">
+		SELECT COUNT(*) AS COUNT
+		FROM NOTICE
+		WHERE STATUS = 'Y'
 	</entry>
 	
 	
