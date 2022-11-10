@@ -8,37 +8,98 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
+	#header {
+		padding:110px 0 0 0;
+		margin: 0 auto;
+	}
+	
+	#header2 {
+		width: 100%;
+   		padding-right: 10px;
+    	padding-left: 10px;
+    	margin-right: auto;
+    	margin-left: auto;
+	}
+	
+	#title {
+		height: 5rem;
+		padding: 16px 16px;
+	
+	}
+	
+	.title {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
+	    height: 100%;
+	    margin: auto;
+	}
+	
+	.qwe {
+		height: 5rem;
+		padding: 16px 16px;
+		justify-content: space-between;
+/* 		display: flex; */
+/* 		align-items: center; */
+/* 		justify-content: center; */
+/* 	    height: 4rem; */
+/* 	    padding: 1rem 1.25rem; */
+/* 	    background-color: #fafafa; */
+/* 	    margin: 0 -1rem; */
+/* 	    border-top: 1px solid #f4f4f4; */
+/* 	    border-bottom: 1px solid #f4f4f4; */
+	}
+	
+	.qwr {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
+	    height: 100%;
+	    
+/* 		display: flex; */
+/*     	margin: auto; */
+/*     	width: 900px; */
+/*     	justify-content: space-between; */
+	}
+	
+	
 	.logo {
-		width: 10px;
+		width: 2rem;
+    	height: 2rem;
+    	
+    	
+    	
 	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
 	
-	<div style="padding-top: 120px">
-		<div>
-			<form action="">
-				<div style="display: flex;">
-					<h1>게시글 글작성</h1>
-					<input type="submit" value="글등록" style="margin-left:850px;">
-				</div>
-				<div style="background-color: orange; padding: 20px;  display: flex; ">
-					<div style="box-sizing: border-box;">
-						<img style="margin: 0 auto;" class="logo" src="<%= contextPath %>/resources/image/camera.svg" />
-					</div>
-				</div>
-				<div style="display: flex;">
-					<div style="display: flex; ">
-						<input type="text" name="title" maxlength="30" placeholder="제목을 입력해주세요.">
-					</div>
-					<div></div>
-					<div>
-						<textarea>asd</textarea>
-					</div>
+	<div id="header">
+		<div id="header2">
+			<div id="title">
+				<div class="title">
+					<span>게시글 글작성</span>
+					<input type="submit" value="글등록">
 				</div>
 				
-			</form>
+			</div>
+			<div class="qwe">
+				<div class="qwr">
+					<img class="logo" src="<%= contextPath %>/resources/image/camera.svg" />
+				</div>
+			</div>
+			<div style="display: flex;">
+				<div style="display: flex; ">
+					<input type="text" name="title" maxlength="30" placeholder="제목을 입력해주세요.">
+				</div>
+				<div></div>
+				<div>
+					<textarea>asd</textarea>
+				</div>
+			</div>
 		</div>
 	</div>
     
