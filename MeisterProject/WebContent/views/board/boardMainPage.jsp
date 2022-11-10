@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
-        .body{
+      .body{
             box-sizing: border-box;
             height: 100%;
             margin: auto;
@@ -22,7 +22,7 @@
             }
         #body-1{
             box-sizing: border-box;
-            height: 60px;
+            height: 58px;
         }
         #body2-1{
             box-sizing: border-box; 
@@ -45,78 +45,48 @@
         #body2-3-1{
             box-sizing: border-box;
             height: 100%;
-            width: 33%;
+            width: 33.3%;
             float: left;
         }
-        #body2-3-2{
-        box-sizing: border-box;
-        height: 100%;
-        width: 33%;
-        margin:auto;
-        float: left;
-        }
-        #body2-3-3{
-        box-sizing: border-box; 
-        height: 100%;
-        width: 34%;
-        
-        float: left;
-        }
-        #hot1{
+         #hot1{
             box-sizing: border-box;
-             
+             border: 2px solid black;
              background-color:  #f4f4f4;
-            height: 78%;
-            width: 82%;
+            height: 200px;
+            width: 225px;
             margin: auto;
             border-style: groove;
             border-radius: 18px;
-            box-shadow: 5px 5px 5px 5px gray;
         }
-           #hottext{
-            width: 220px;
-            height: 217px;
-            padding: 8px;
-        } 
+        #hot2{
+           position: relative;
+          top:28px;
+           
+        }
+        #hotfooter{
+            position: relative;
+            left: 15px;
+        }
         #body2-4{
             box-sizing: border-box;
             height: 19%;
             width: 100%;
             padding: 20px;
         }
-        #body2-4-1{
-          position: relative;
-          float:right;
-          top:-28%;
-        }
         #date{
             color: grey;
             font-size: 14px;
-            position: relative;
-            top:58%;
-            left: 78%;
-        }
-        #body2-5{
-            box-sizing: border-box;
-            height: 19%;
-            padding: 20px
-        }
-        #body2-6{
-            box-sizing: border-box;
-            height: 19%;
-            padding: 20px
-        }
-        .spantext{
-            box-sizing: border-box;
+            float: right;
         }
         #mainid{
             text-align: center;
             font-weight:bold;
             font-size: 50px;
-            padding:120px
+            padding:120px;
         }
         #ge{
             box-sizing: border-box;
+            border: 1px solid black;
             font-size: 27px;
             background-color: orange;
             padding:8px 16px;
@@ -128,6 +98,7 @@
             background-color: orange;
         }
         #gung{
+            border: 1px solid black;
             box-sizing: border-box;
             font-size:27px;
             padding:8px 12px;
@@ -145,9 +116,11 @@
         }
      
         #img1{
-          width: 11rem;
-          height: 11rem;
-            vertical-align: middle;
+            position: relative;
+            top: -30px;
+            float: right;
+            width: 10rem;
+            height: 10rem;
         }
         #icon1,#ask{
             float: left;
@@ -158,19 +131,30 @@
             padding-top: 30px;
         }
         #text{
-            width: 450px;
-            position: relative;
-            top: 15%;
+            width:500px;
+            height: 45px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display: -webkit-inline-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;  
         }
-        #titlefooter{
+        #hottext{
+            width:170px;
+            height: 65px;
+            display: -webkit-inline-box;
+            overflow:hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
             position: relative;
-            top:50%;
+            top:-14%;
+            left: 15px;
         }
         .font{
             font-weight:bold;
             font-size: 20px;
         }
-     #hotfont{
+        #hotfont{
             font-weight:bold;
             font-size: 20px;
             position: relative;
@@ -229,6 +213,8 @@
 
 
 
+   <body>
+  
     <div class="body" >
         <h1 id="mainid">커뮤니티</h1>
         <div id="body-1" >
@@ -237,76 +223,82 @@
         </div>
     </div>
     <div id="line"></div>
-            
+            <div class="body-2">
+                
+            </div>
         <div class="body2">
             <div id="body2-1"> 
 
+                
                 <div id="body2-2" align="right">
                 <a href="<%=contextPath %>/insert.bo" class="btn btn-secondary" style="background-color:orange;"><i class="bi bi-pencil-square "> 글작성
                 </i></a></div><hr>
-                <div id="body2-3">
+              <div id="body2-3">
                     <div id="body2-3-1"><br>
                          <a id="hotfont">어제 핫한글<i class="bi bi-fire" style="color:red;"></i></a><br>
                             <div id="hot1">
-                                <div id="hottext">
-                                <p class="font">글 제목</p>
-                                <p>글 내용글 내용글 내용글 내용내용글 내용</p><br>
-                                <p id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</p>
-                               </div>
+                                <div id="hot2">
+                                <p id="hotfont">글 제목</p>
+                                <p id="hottext">글내용입니다</p>
+                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
+                                </div>
                             </div>
                     </div>
-                    <div id="body2-3-2"><br><br>
-                        <div id="hot1">
-                            <div id="hottext">
-                            <p class="font">글 제목</p>
-                            <p>글 내용글 내용글 내용글 내용내용글 내용</p><br>
-                            <p id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</p>
+                    <div id="body2-3-1"><br><br>
+                           <div id="hot1">
+                              <div id="hot2">
+                               <p id="hotfont">글 제목</p>
+                               <p id="hottext">글내용입니다</p>
+                               <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
+                               </div>
                            </div>
+                   </div>
+                    <div id="body2-3-1"><br><br>
+                            <div id="hot1">
+                                <div id="hot2">
+                                <p id="hotfont">글 제목</p>
+                                <p id="hottext">글내용입니다</p>
+                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div id="body2-3-3" ><br><br>
-                        <div id="hot1">
-                            <div id="hottext">
-                            <p class="font">글 제목</p>
-                            <p>글 내용글 내용글 내용글 내용내용글 내용</p><br>
-                            <p id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</p>
-                           </div>
-                        </div>
-                    </div>
+                <div id="body2-4"><hr>
+                    <a class="font">글제목</a>
+                    <div>
+                        <br>
+                  <p id="text">글내용입니다</p>
+                  <img src="resources/image/peng.jpg" id="img1">
+                </div><br><br><br>
+                <div id="titlefooter">
+                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <span id="date">2시간전</span>
+                 </div>
                 </div>
                 <div id="body2-4"><hr>
-                  
                     <a class="font">글제목</a>
-                  <p id="text">ㅇㅇ
-                 </p>
-                   <span id="titlefooter"><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</span>
-                   <span id="date">2시간전</span>
-                <div id="body2-4-1">
-                        <img src="resources/image/peng.jpg" id="img1">
-                        
-                    </div>
+                    <div>
+                        <br>
+                  <p id="text">글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다</p>
+                  <img src="resources/image/peng.jpg" id="img1">
+                </div><br><br><br>
+                <div id="titlefooter">
+                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <span id="date">2시간전</span>
+                 </div>
                 </div>
-                <div id="body2-5"><hr>
-                     <a class="font">글제목</a>
-                  <p id="text">글내용글내용글내용</p>
-                   <span id="titlefooter"><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</span>
-                   <span id="date">2시간전</span>
-               
-                <div id="body2-4-1">
-                        <img src="resources/image/peng.jpg" id="img1">
-                </div>
-                </div>
-                <div id="body2-6"><hr>
+                <div id="body2-4"><hr>
                     <a class="font">글제목</a>
-                  <p id="text">글내용</p>
-                   <span id="titlefooter"><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</span>
-                   <span id="date">2시간전</span>
-               
-                <div id="body2-4-1">
-                        <img src="resources/image/peng.jpg" id="img1">
-                	</div>
-                </div>
+                    <div>
+                        <br>
+                  <p id="text">글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다</p>
+                  <img src="resources/image/peng.jpg" id="img1">
+                </div><br><br><br>
+                <div id="titlefooter">
+                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <span id="date">2시간전</span>
+                 </div>
+                </div><br>
                 <hr>
             </div>
              <div class="search_main">
@@ -316,7 +308,7 @@
                             <input type="text" name="keyword">
                         </div>
                         <div id="search_btn">
-                           <button type="button"  class="btn btn-secondary" style="background-color: orange;"><i class="bi bi-search"></i>검색</button>
+                            <input type="button" value="검색" style="background-color: orange;">
                     </div>
                     </form>
                 
@@ -331,7 +323,7 @@
                 <input type="button">
                 <input type="button">
                 <input type="button">
-           	<i class="bi bi-caret-right-square"></i>
+                <i class="bi bi-caret-right-square"></i>
 
                 </div>
             
@@ -339,15 +331,10 @@
             
         </div>
         
-        
   
-        
-   
-  
-   
-
-
-
+           
+            
+       
 
 
 
