@@ -137,7 +137,7 @@
      
         #img1{
             position: relative;
-            top: -30px;
+            top: -35px;
             float: right;
             width: 10rem;
             height: 10rem;
@@ -266,7 +266,7 @@
                                 <div id="hot2">
                                 <p id="hotfont"><%=list.get(0).getBoardTitle() %></p>
                                 <p id="hottext"><%=list.get(0).getBoardContent() %></p>
-                                <div id="hotfooter"><i class="bi bi-chat-dots"></i><%=list.get(0).getBoardCount() %>
+                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(0).getBoardCount() %>
                                 <i class="bi bi-hand-thumbs-up"></i> <%=list.get(0).getBoardRecommend() %></div>
                                 </div>
                             </div>
@@ -276,8 +276,8 @@
                               <div id="hot2">
                                <p id="hotfont"><%=list.get(1).getBoardTitle() %></p>
                                <p id="hottext"><%=list.get(1).getBoardContent() %></p>
-                               <div id="hotfooter"><i class="bi bi-chat-dots"></i><%=list.get(1).getBoardCount() %>
-                               <i class="bi bi-hand-thumbs-up"></i> <%=list.get(1).getBoardRecommend() %></div>
+                               <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(1).getBoardCount() %>
+                               <i class="bi bi-hand-thumbs-up"></i> <%=list.get(2).getBoardRecommend() %></div>
                                </div>
                            </div>
                    </div>
@@ -286,14 +286,14 @@
                                 <div id="hot2">
                                 <p id="hotfont"><%=list.get(2).getBoardTitle() %></p>
                                 <p id="hottext"><%=list.get(2).getBoardContent() %></p>
-                                <div id="hotfooter"><i class="bi bi-chat-dots"></i><%=list.get(2).getBoardCount() %>
+                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(2).getBoardCount() %>
                                 <i class="bi bi-hand-thumbs-up"></i> <%=list.get(2).getBoardRecommend() %></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -305,7 +305,7 @@
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -317,7 +317,7 @@
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -329,7 +329,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -341,7 +341,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -353,7 +353,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글작성</a>
+                    <a class="font">글제목</a>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -367,25 +367,12 @@
                 <br>
                 <hr>
             </div>
-             <div class="search_main">
-                    <div class="header2">
-                        <form action="test.do" id="search_form">
-                            <div id="search_text">
-                            <input type="text" name="keyword">
-                        </div>
-                        <div id="search_btn">
-                            <input type="button" value="검색" style="background-color: orange;">
-                    </div>
-                    </form>
-                
-                </div>
-                   <div align="center" class="paging-area">
-      
-        
-                </div>
+             
         
         </div>
-	</div>
+
+	
+	
 	<%@ include file="../board/pageMove.jsp" %>
 	<%@ include file="../common/footer.jsp" %>
 	
