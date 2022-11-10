@@ -6,106 +6,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
 <style>
-	#header {
-		padding:110px 0 0 0;
-		margin: 0 auto;
-	}
-	
-	#header2 {
-		width: 100%;
-   		padding-right: 10px;
-    	padding-left: 10px;
-    	margin-right: auto;
-    	margin-left: auto;
-	}
-	
-	#title {
-		height: 5rem;
-		padding: 16px 16px;
-	
-	}
-	
-	.title {
-		display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    width: 60.625rem;
-	    height: 100%;
-	    margin: auto;
-	}
-	
-	.qwe {
-		height: 5rem;
-		padding: 16px 16px;
-		justify-content: space-between;
-/* 		display: flex; */
-/* 		align-items: center; */
-/* 		justify-content: center; */
-/* 	    height: 4rem; */
-/* 	    padding: 1rem 1.25rem; */
-/* 	    background-color: #fafafa; */
-/* 	    margin: 0 -1rem; */
-/* 	    border-top: 1px solid #f4f4f4; */
-/* 	    border-bottom: 1px solid #f4f4f4; */
-	}
-	
-	.qwr {
-		display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    width: 60.625rem;
-	    height: 100%;
-	    
-/* 		display: flex; */
-/*     	margin: auto; */
-/*     	width: 900px; */
-/*     	justify-content: space-between; */
-	}
-	
-	
-	.logo {
-		width: 2rem;
-    	height: 2rem;
-    	
-    	
-    	
-	}
+
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	
-	<div id="header">
-		<div id="header2">
-			<div id="title">
-				<div class="title">
-					<span>게시글 글작성</span>
-					<input type="submit" value="글등록">
-				</div>
-				
-			</div>
-			<div class="qwe">
-				<div class="qwr">
-					<img class="logo" src="<%= contextPath %>/resources/image/camera.svg" />
-				</div>
-			</div>
-			<div style="display: flex;">
-				<div style="display: flex; ">
-					<input type="text" name="title" maxlength="30" placeholder="제목을 입력해주세요.">
-				</div>
-				<div></div>
-				<div>
-					<textarea>asd</textarea>
-				</div>
-			</div>
-		</div>
-	</div>
-    
 
-
-
+		<form action="<%=contextPath %>/insert.bo" id="enroll-form" method="post" enctype="multipart/form-data">
+			<div id="header">
+		       <div id="header2"></div>
+		        <h1>게시글 작성</h1>
+		        <button type="button" id="made">등록</button>
+		        <div id="line"></div>
+		        <div id="file">
+		            <p id="icon"><i class="bi bi-camera">+ <span id="font">게시글수정.jsp</span></i></p>
+		        </div>
+		        <br>
+		        <input type="text" placeholder="게시글 제목을 입력해주세요" size="60">
+		        <br><br><hr>
+		
+		        <textarea  cols="94"rows="17" placeholder="게시글 내용을 입력해주세요" style="resize:none;">
+		        </textarea>
+    			</div>
+			
+		</form>
+		
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
