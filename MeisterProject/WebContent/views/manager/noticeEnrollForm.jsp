@@ -3,8 +3,9 @@
 <%
     String contextPath = request.getContextPath();
 
-	Member loginUser = (Member)session.getAttribute("loginUser");
-	// 로그인 이전 or 로그인 실패 : null
+    
+
+
 
 %>
 <!DOCTYPE html>
@@ -114,14 +115,14 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지 작성하기</h1>
+                    <h1 class="mt-4">공지사항 글 확인</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">공지사항</li>
                     </ol>
 
 
 									<div class="card-body">
-                                        <form action="<%= contextPath %>/insert.no" method="post" name="noticeEnrollForm">
+                                        <form action="<%= contextPath %>/insert.ad" method="post" name="noticeEnrollForm">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputTitle" type="text" name="noticeTitle">
                                                 <label for="inputTitle">제목</label>

@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
-    							  java.util.ArrayList, 
-    							  com.kh.manager.notice.model.vo.Notice,
-    							  com.kh.common.model.vo.PageInfo" 
-%>
-    
-    
+    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, com.kh.manager.notice.model.vo.Notice" %>
 <%
     String contextPath = request.getContextPath();
 
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	
-	
+    Notice n = (Notice)request.getAttribute("n");
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -20,7 +13,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="JSP" />
-<title>관리자 페이지</title>
+<title>공지사항 상세 보기</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
 <!--  jQuery -->
@@ -29,25 +22,22 @@
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.listbtn{
-	float:right;
+.myBtnArea{
+	width:44rem; 
+	margin-top : 30px; 
+	margin-botton : 30px;
+}
+#inputTitle{
+	width:44rem;
+}
+#inputContent{
+	width:44rem;
+	height : 500px;
+}
+.card-body{
+	font-family: 'Nanum Gothic';
 }
 
-table>thead>tr>th{
-	background-color : black;
-	color : white;
-	text-align : center;
-}
-table>tbody {
-	text-align : center;
-}
-
-table>tbody>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
-}
  	
 </style>
     
@@ -125,53 +115,53 @@ table>tbody>tr:hover{
         </div>
         <div id="layoutSidenav_content">
             <main>
-            
-                
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지 관리</h1>
+                    <h1 class="mt-4">공지사항 상세보기</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">공지목록</li>
+                        <li class="breadcrumb-item active">공지사항</li>
                     </ol>
-                    <div class="list-area">
-	                    <table border="1" align="center">
-	                    	<thead>
-	                    		<tr>
-	                    			<td colspan="4"><!--  버튼 추가할라면 여기서 작성 -->
-	                    				<div class="listbtn">
-											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.ad">글작성</a> 
-										</div>
-									</td>
-	                    		</tr>
-		                    	<tr>
-		                    		<th width="100">글번호</th>
-		                    		<th width="500">글제목</th>
-		                    		<th width="100">작성자</th>
-		                    		<th width="300">등록일</th>
-		                    	</tr>
-		                    </thead>
-							<tbody>
-								<% if(list.isEmpty()) { %>
-									<!--  리스트가 비어있는 경우. -->
-									<tr>
-										<td colspan="5">존재하는 공지사항이 없습니다.</td>
-									</tr>
-								
-								<% }  else {%>
-									<% for(Notice n : list) { %>
-										<tr>
-											<td><%= n.getNoticeNo() %></td>
-											<td><%= n.getNoticeTitle() %></td>
-											<td>관리자</td>
-											<td><%= n.getCreateDate() %></td>
-										</tr>
-								
-									<% } %>
-								<% } %>
-							</tbody>
-	                    </table>
-                    </div>
 
-					
+
+									<div class="card-body">
+							              <table class="detail-area" style="text-align: center; border: 1px solid rgb(207, 224, 241)">
+											<thead>
+												<tr>
+													<th colspan="20" style="font-size: 13px; background-color: rgb(207, 224, 241);  text-align: center;">공지사항 상세보기</th>						
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="font-size: 13px;">게시글 번호</td>
+													<td colspan="20" style="width: 700px;"><%= n.getNoticeNo() %></td>
+												</tr>
+												<tr>
+													<td style="width: 100px; font-size: 13px; background-color:rgb(207, 224, 241);">제목</td>
+													<td style="background-color: rgb(207, 224, 241); " ><%= n.getNoticeTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+												</tr>
+												<tr>
+													<td style="font-size: 13px;"">내용</td>
+													<td style="height: 500px; text-align: left;"><%=n.getNoticeContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+												</tr>
+											</tbody>
+										</table>
+							                 
+							                 
+                                            <br><br>
+                                            
+                                            <div align="center">
+                                                <a href="<%=contextPath %>/notice.ad" class="btn btn-secondary btn-sm">목록으로 돌아가기</a>
+                                                   
+                                                    <a href="<%=contextPath %>/updateForm.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-warning btn-sm">수정하기</a>
+                                                    <a href="<%=contextPath %>/delete.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+                                               
+                                            </div>
+
+
+
+
+                                    </div>
+                                   
+                </div>
             </main> 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -182,23 +172,6 @@ table>tbody>tr:hover{
             </footer>
         </div>
     </div>
-    <script>
-        $(function(){
-			$("table>tbody>tr").click(function(){
-				// 클릭시 해당 공지사항의 번호를 넘겨야한다.
-				// 해당 tr요소의 자손 중에서 첫번째 td태그의 영역의 내용 필요
-				
-				let nno = $(this).children().eq(0).text(); //글번호 1, 2 가져옴
-				//현재 내가 클릭한 tr의 자손들 중 0번째에 위치한 자식의 textnode내용을 가져온다.
-				
-				//요청할 url?키=밸류&키=밸류&키=밸류
-				//물음표 뒤에 내용을 쿼리스트링이라고 부름 => 값들은 직접 만들엉서 넘겨야함.
-						
-				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
-			});
-		})
-    </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

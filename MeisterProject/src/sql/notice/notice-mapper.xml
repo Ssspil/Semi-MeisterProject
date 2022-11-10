@@ -16,6 +16,8 @@
 			?
 		)
 	</entry>
+	
+	
 	<entry key="selectNoticeList">
 		SELECT NOTICE_NO,
 			   NOTICE_TITLE,
@@ -25,5 +27,19 @@
 		WHERE N.STATUS = 'Y'
 		ORDER BY CREATE_DATE DESC
 	</entry>
+	
+	
+	<entry key="selectNotice">
+		
+		SELECT NOTICE_NO,
+			   NOTICE_TITLE,
+			   NOTICE_CONTENT	
+	    FROM NOTICE
+	    WHERE NOTICE_NO = ?
+	      AND STATUS = 'Y'
+	</entry>
+	
+	
+	
 	
 </properties>
