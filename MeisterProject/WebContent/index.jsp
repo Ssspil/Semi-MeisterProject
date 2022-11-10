@@ -9,10 +9,12 @@
 .spspspsp{
 	width : 100%;
 	height : 800px;
-	background-color:pink;
+	background-color:pink;	
+	}
 	
-}
 </style>
+
+
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
@@ -21,13 +23,26 @@
 		2<br>
 		3<br>
 		4<br>
+
 		5<br>
 		6<br>
 		7<br>
 		8<br>
 		9<br>
-		승필승필승필
+		승필승필승필 <br>
+		
 	</div>
+
+	
+
+	
+		
+	
+
+	
+
+
+
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
