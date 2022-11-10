@@ -29,6 +29,16 @@ public class BoardService {
 			
 			return list;
 		}
+		
+		public ArrayList<Board> getHotBoard(){
+			Connection conn = getConnection();
+			
+			ArrayList<Board> list = new BoardDao().getHotBoard(conn);
+			
+			close();
+			
+			return list;
+		}
 	
 		public int increaseCount(int boardNo) {
 			

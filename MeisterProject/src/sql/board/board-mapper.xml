@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-<entry key="selectList">
+<!-- <entry key="selectList">
 SELECT *
 	FROM (	
 		SELECT ROWNUM RNUM, A.*
@@ -28,6 +28,20 @@ SELECT *
 		FROM BOARD
 		WHERE STATUS = 'Y'
 		  AND BOARD_TYPE = 1
+	</entry>  -->
+	
+	<entry key="getHotBoard">
+		<![CDATA[
+		SELECT  BOARD_NO,
+                BOARD_TITLE,
+                BOARD_CONTENT,
+                BOARD_COUNT,
+                BOARD_RECOMMEND,
+                USER_NO,
+                BOARD_DATE 
+       	from board 
+		where ROWNUM <= 3 and TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE -1,'YYYYMMDDHH') and status = 'Y'
+		order by BOARD_COUNT, board_recommend desc]]>
 	</entry>
 
 	<entry key ="insertBoard">

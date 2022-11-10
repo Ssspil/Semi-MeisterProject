@@ -35,7 +35,7 @@ public class BoardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//페이징처리 시작
-		int listCount; //현재 총게시글 갯수
+		/*int listCount; //현재 총게시글 갯수
 		int currentPage; //현재 페이지
 		int pageLimit; //페이지 하단에 보여질 페이징바의 페이지 최대갯수
 		int boardLimit; //페이지에 보여질 게시글의 최대갯수
@@ -70,11 +70,14 @@ public class BoardController extends HttpServlet {
 		
 		
 		
-	ArrayList<Board> list = new BoardService().selectList(pi);
+		ArrayList<Board> list = new BoardService().selectList(pi);
 		
 		
 		request.setAttribute("list",list);
-		request.setAttribute("pi", pi);
+		request.setAttribute("pi", pi);*/
+		
+		ArrayList<Board> hotList = new BoardService().getHotBoard();
+		request.setAttribute("hotList",hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);
 		
 	

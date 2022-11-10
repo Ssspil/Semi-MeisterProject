@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 
 import com.kh.common.model.vo.Attachment;
@@ -55,6 +56,52 @@ private Properties prop = new Properties();
 		
 		return listCount;
 	}
+	
+	public ArrayList<Board> getHotBoard(Connection conn){
+		ArrayList<Board> board = new ArrayList<Board>();
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getHotBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				Board b = new Board(
+						rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getString("BOARD_TITLE"),
+						rset.getInt("BOARD_COUNT"),
+						rset.getInt("BOARD_RECOMMEND"),
+						rset.getInt("USER_NO"),
+						rset.getDate("BOARD_DATE")
+					);
+				
+				board.add(b);
+			}	
+			
+			int cnt = board.size();
+			
+			if(board.size() < 3) {
+				
+				for(int i=0; i < 3-cnt; i++){
+					Board b = new Board(0,"작성된 게시글이 없습니다.","없음",0,0,0,new Date());
+					board.add(b);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return board;
+	}
+	
 public Board selectBoard(Connection conn , int boardNo) {
 		
 		// select= > ResultSet
