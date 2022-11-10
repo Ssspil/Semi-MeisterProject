@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.common.MyFileRenamePolicy;
+import com.kh.common.model.vo.Attachment;
 import com.oreilly.servlet.MultipartRequest;
 
 /**

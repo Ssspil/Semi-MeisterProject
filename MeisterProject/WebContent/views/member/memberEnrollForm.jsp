@@ -220,7 +220,7 @@
     </script>
     <script>
 	    function nicknameCheck() {
-	    	let regExp = /^[가-힣]+$/;
+	    	let regExp = /^[가-힣]+$/gmi;
 	    	let nickname = $("#nickname").val();
 	    	let tet = $("#chkNick");
 	    
