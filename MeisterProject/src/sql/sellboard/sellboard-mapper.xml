@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="selecInterestCategory">
+		SELECT INTEREST_NO,
+			   INTEREST_NAME
+		FROM INTEREST
+	</entry>
+	
+	<entry key="selecLocalCategory">
+		SELECT LOCAL_NO,
+			   LOCAL_NAME
+		FROM LOCAL
+	</entry>
+	
+	
+</properties>
