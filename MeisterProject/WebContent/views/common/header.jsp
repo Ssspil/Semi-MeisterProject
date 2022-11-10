@@ -24,7 +24,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- header.css 경로 -->
-<!--  <link href="<%= contextPath %>/resources/css/header.css" rel="stylesheet" type="text/css"  />  -->
+<!--  <link href="<%-- <%= contextPath %> --%>/resources/css/header.css" rel="stylesheet" type="text/css"  />  -->
 <style>
 @charset "UTF-8";
 a {
@@ -239,5 +239,6 @@ header .main-menu ul.item li a:hover {
 
         </div>
     </header>
+    	
 </body>
 </html>
