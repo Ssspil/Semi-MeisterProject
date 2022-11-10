@@ -12,6 +12,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.manager.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -65,7 +66,7 @@ public class NoticeDao {
 
 
 
-	public ArrayList<Notice> selectNoticeList(Connection conn) {
+	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi) {
         // Select문 => ResultSet객체(여러행)
         ArrayList<Notice> list = new ArrayList<>();
         
@@ -78,6 +79,12 @@ public class NoticeDao {
         try {
             psmt = conn.prepareStatement(sql);
             
+            int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			psmt.setInt(1, startRow);
+			psmt.setInt(2, endRow);
+			
             rset = psmt.executeQuery();
             
             while(rset.next()) {
@@ -96,6 +103,70 @@ public class NoticeDao {
         
         return list;
     }
+
+
+
+	public Notice selectNotice(int noticeNo, Connection conn) {
+		//select문은 반환형이 ResultSet
+		ResultSet rset = null;
+		
+		Notice n = null;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, noticeNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Notice (rset.getInt("NOTICE_NO"),
+								rset.getString("NOTICE_TITLE"),
+								rset.getString("NOTICE_CONTENT"));
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return n;
+	}
+
+
+
+	public int selectNoticeListCount(Connection conn) {
+		//select문 -> ResultSet객체
+		int listCount = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return listCount;
+	}
+	
 	
 		
 

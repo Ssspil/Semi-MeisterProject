@@ -177,7 +177,7 @@ div.main{
 			진호형 보여?
 			
 		</div>
-	</div><!-- outer 끝 -->
+	</div><!— outer 끝 —>
 	
 
 

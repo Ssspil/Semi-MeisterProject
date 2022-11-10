@@ -13,7 +13,7 @@ import com.kh.manager.notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeInsetController
  */
-@WebServlet("/insert.no")
+@WebServlet("/insert.ad")
 public class NoticeInsetController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class NoticeInsetController extends HttpServlet {
         int result = new NoticeService().insertNotice(n);
         
         if (result > 0) {   // 성공시 => list.no리스트페이지로 리 다이렉트.
-            request.getSession().setAttribute("alertMsg", "성공적을 공지사항이 등록되었습니다.");
+            request.getSession().setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
             response.sendRedirect(request.getContextPath()+"/notice.ad"); // jsp/list.no에 보낸거
         } else {    // 실패시 -> 에러페이지 보여지도록
             request.setAttribute("errorMsg", "공지사항 등록 실패");

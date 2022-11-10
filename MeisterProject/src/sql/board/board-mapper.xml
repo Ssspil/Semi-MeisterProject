@@ -2,6 +2,48 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+<!-- <entry key="selectList">
+SELECT *
+	FROM (	
+		SELECT ROWNUM RNUM, A.*
+		FROM (
+			SELECT  BOARD_NO,
+                    BOARD_TITLE,
+                    BOARD_CONTENT,
+                    BOARD_COUNT,
+                    BOARD_RECOMMEND,
+                    USER_NO,
+                    BOARD_DATE
+			FROM BOARD B
+			JOIN MEMBER USING (USER_NO)
+			WHERE BOARD_TYPE = 1
+			  AND B.STATUS = 'Y'
+			ORDER BY BOARD_DATE DESC 
+			) A
+	    )
+	 WHERE RNUM BETWEEN ? AND ?
+</entry>
+	<entry key="selectListCount">
+		SELECT COUNT(*) BOARD_COUNT
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		  AND BOARD_TYPE = 1
+	</entry>  -->
+	
+	<entry key="getHotBoard">
+		<![CDATA[
+		SELECT  BOARD_NO,
+                BOARD_TITLE,
+                BOARD_CONTENT,
+                BOARD_COUNT,
+                BOARD_RECOMMEND,
+                USER_NO,
+                BOARD_DATE 
+       	from board 
+		where ROWNUM <= 3 and TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE -1,'YYYYMMDDHH') and status = 'Y'
+		order by BOARD_COUNT, board_recommend desc]]>
+	</entry>
+
 	<entry key ="insertBoard">
 		INSERT INTO BOARD(BOARD_NO, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT)
 		VALUES (SEQ_BNO.NEXTVAL , 1 , ? , ? )
@@ -9,5 +51,29 @@
 	<entry key ="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO , REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
 		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ? )
+		
+	</entry>
+	<entry key="selectBoard">
+		SELECT BOARD_NO,
+                    BOARD_TITLE,
+                    BOARD_CONTENT,
+                    BOARD_COUNT,
+                    BOARD_RECOMMEND,
+                    USER_NO,
+                    BOARD_DATE
+		 FROM BOARD 
+		 WHERE BOARD_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT FILE_NO,
+		       ORIGIN_NAME,
+		       CHANGE_NAME,
+		       FILE_PATH,
+		       FILE_LEVEL
+		 FROM ATTACHMENT
+		 WHERE REF_BNO = ?
+		 ORDER BY FILE_LEVEL
 	</entry>
 </properties>

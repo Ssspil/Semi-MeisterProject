@@ -1,9 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, java.util.ArrayList, com.kh.manager.notice.model.vo.Notice" %>
+    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
+    							  java.util.ArrayList, 
+    							  com.kh.manager.notice.model.vo.Notice,
+    							  com.kh.common.model.vo.PageInfo" 
+%>
+    
+    
 <%
     String contextPath = request.getContextPath();
 
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+ 	
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+ 	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,6 +29,8 @@
 <title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
+<!--  jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- css -->
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
@@ -128,7 +144,7 @@ table>tbody>tr:hover{
 	                    		<tr>
 	                    			<td colspan="4"><!--  버튼 추가할라면 여기서 작성 -->
 	                    				<div class="listbtn">
-											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.no">글작성</a>
+											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.ad">글작성</a> 
 										</div>
 									</td>
 	                    		</tr>
@@ -160,8 +176,33 @@ table>tbody>tr:hover{
 							</tbody>
 	                    </table>
                     </div>
-
-                </div>
+				</div>
+                    
+		     <!-- 페이징처리 -->           
+		     <div align="center" class="paging-area">
+				<% if(currentPage != 1) {%>
+					<button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button>
+				<%} %>
+				
+				<%for(int i = startPage; i<=endPage; i++){ %>
+					<% if(i != currentPage) {%>
+						<button onclick="doPageClick(<%=i%>)"><%= i%></button>
+					<% } else { %>
+						<button disabled><%=i %></button>
+					<%} %>
+				<%} %>
+				
+				<%if(currentPage != maxPage) {%>
+					<button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button>
+				<%} %>
+			</div>
+			<script>
+				function doPageClick(currentPage){
+					location.href= "<%=contextPath%>/notice.ad?currentPage="+currentPage;
+				}
+			</script>
+                    
+                    		
             </main> 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -172,6 +213,23 @@ table>tbody>tr:hover{
             </footer>
         </div>
     </div>
+    <script>
+        $(function(){
+			$("table>tbody>tr").click(function(){
+				// 클릭시 해당 공지사항의 번호를 넘겨야한다.
+				// 해당 tr요소의 자손 중에서 첫번째 td태그의 영역의 내용 필요
+				
+				let nno = $(this).children().eq(0).text(); //글번호 1, 2 가져옴
+				//현재 내가 클릭한 tr의 자손들 중 0번째에 위치한 자식의 textnode내용을 가져온다.
+				
+				//요청할 url?키=밸류&키=밸류&키=밸류
+				//물음표 뒤에 내용을 쿼리스트링이라고 부름 => 값들은 직접 만들엉서 넘겨야함.
+						
+				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
+			});
+		})
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

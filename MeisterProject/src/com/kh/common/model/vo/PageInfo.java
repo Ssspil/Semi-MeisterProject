@@ -88,4 +88,5 @@ public class PageInfo {
 		this.startPage = startPage;
 		this.endPage = endPage;
 	}
+
 }
