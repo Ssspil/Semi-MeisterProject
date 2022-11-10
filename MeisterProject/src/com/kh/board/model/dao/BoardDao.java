@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Attachment;
+import com.kh.common.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 
 public class BoardDao {

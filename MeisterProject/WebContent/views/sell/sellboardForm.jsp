@@ -234,7 +234,13 @@
 			</ul>
 		</div>
 	<br>
-		<div><button type="submit" id="enroll">글 등록</button></div>
+	
+		<%-- <%if(loginUser !=null) {%> --%>
+		<div>
+			<a href="<%=contextPath%>/sellEnrollForm.se" id="enroll" class="btn btn-secondary">글 등록</a>
+		</div>
+	<%-- <%} %> --%>
+		
 	<br>
 		<div class="thumbnail">
 			<div div id="box1">
