@@ -7,10 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class AjaxBoardPageMove
  */
-@WebServlet("/boardlist2.bo")
+@WebServlet("/pageMove.bo")
 public class AjaxBoardPageMove extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +31,22 @@ public class AjaxBoardPageMove extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String gung = request.getParameter("gung");
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		Board b = new Board();
+		
+		b.setGung(gung);
+		b.setRefBoardNo(boardNo);
+		b.setBoardWriter(userNo+"");
+		
+		int result = new BoardService().insertReply(b);
+		
+		response.getWriter().print(result);
+		
+		
+	}
 	}
 
 	/**
