@@ -96,6 +96,40 @@ public class NoticeDao {
         
         return list;
     }
+
+
+
+	public Notice selectNotice(int noticeNo, Connection conn) {
+		//select문은 반환형이 ResultSet
+		ResultSet rset = null;
+		
+		Notice n = null;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, noticeNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Notice (rset.getInt("NOTICE_NO"),
+								rset.getString("NOTICE_TITLE"),
+								rset.getString("NOTICE_CONTENT"));
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return n;
+	}
 	
 		
 

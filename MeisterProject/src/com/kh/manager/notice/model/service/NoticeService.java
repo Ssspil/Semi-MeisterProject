@@ -9,6 +9,7 @@ import com.kh.manager.notice.model.vo.Notice;
 
 public class NoticeService {
     
+	
     public int insertNotice(Notice n) {
         Connection conn = JDBCTemplate.getConnection();
         
@@ -25,6 +26,7 @@ public class NoticeService {
         return result;
     }
 
+    
     public ArrayList<Notice> selectNoticeList(){
         
         Connection conn = JDBCTemplate.getConnection();
@@ -36,4 +38,21 @@ public class NoticeService {
         return list;
      
     }
+
+	public Notice selectNotice(int noticeNo) {
+
+			
+			Connection conn = JDBCTemplate.getConnection();
+			
+			Notice n = new NoticeDao().selectNotice(noticeNo, conn);
+			
+			JDBCTemplate.close();
+			
+			return n;		
+		}
+		
+		
+		
+		
+	
 }
