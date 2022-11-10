@@ -174,9 +174,10 @@ div.main{
             
 		</div> 
 		<div class="main">
-			zz
+			진호형 보여?
+			
 		</div>
-	</div><!-- outer 끝 -->
+	</div><!— outer 끝 —>
 	
 
 
