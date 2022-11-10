@@ -89,13 +89,4 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 
-	
-	//관리자페이지 공지사항 리스트 페이징
-	public PageInfo(int currentPage, int maxPage, int startPage, int endPage) {
-		super();
-		this.currentPage = currentPage;
-		this.maxPage = maxPage;
-		this.startPage = startPage;
-		this.endPage = endPage;
-	}
 }

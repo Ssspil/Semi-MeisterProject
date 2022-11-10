@@ -11,7 +11,13 @@
 
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 	
-	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+ 	
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+ 	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -170,8 +176,33 @@ table>tbody>tr:hover{
 							</tbody>
 	                    </table>
                     </div>
-
-					
+				</div>
+                    
+		     <!-- 페이징처리 -->           
+		     <div align="center" class="paging-area">
+				<% if(currentPage != 1) {%>
+					<button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button>
+				<%} %>
+				
+				<%for(int i = startPage; i<=endPage; i++){ %>
+					<% if(i != currentPage) {%>
+						<button onclick="doPageClick(<%=i%>)"><%= i%></button>
+					<% } else { %>
+						<button disabled><%=i %></button>
+					<%} %>
+				<%} %>
+				
+				<%if(currentPage != maxPage) {%>
+					<button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button>
+				<%} %>
+			</div>
+			<script>
+				function doPageClick(currentPage){
+					location.href= "<%=contextPath%>/notice.ad?currentPage="+currentPage;
+				}
+			</script>
+                    
+                    		
             </main> 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
