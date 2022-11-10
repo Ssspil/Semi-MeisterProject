@@ -15,9 +15,7 @@ public class Board {
 	private String titleImg;	// 커뮤니티 게시판에 썸네일 표시용
 	
 	
-	public Board() {
-		
-	}
+
 	
 	// 기본생성자
 	public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
@@ -36,11 +34,16 @@ public class Board {
 	}
 	
 	// 게시글 등록 부분 생성자
-	public Board(String boardTitle, String boardContent,int userNo) {
+	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,Date boardDate) {
 		super();
+		this.boardNo =boardNo;
+		this.boardContent=boardContent;
 		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
+		this.boardCount = boardCount;
+		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
+		this.boardDate = boardDate;
+		
 	}
 	
 	// 게시글 수정 부분 생성자
@@ -55,18 +58,32 @@ public class Board {
 	
 	// 게시글 목록 불러오기 부분 생성자
 	// title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
-	public Board(int boardNo, String boardTitle,int boardType, int boardCount, int boardRecommend, Date boardDate,
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,Date boardDate,
 			String status, String titleImg) {
 		super();
 		this.boardNo = boardNo;
-		this.boardType = boardType;
+		this. boardContent =  boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
+		this.userNo = userNo;
 		this.boardDate = boardDate;
 		this.status = status;
 		this.titleImg = titleImg;
 	}
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,Date boardDate
+			) {
+		super();
+		this.boardNo = boardNo;
+		this. boardContent =  boardContent;
+		this.boardTitle = boardTitle;
+		this.boardCount = boardCount;
+		this.boardRecommend = boardRecommend;
+		this.userNo = userNo;
+		this.boardDate = boardDate;
+
+	}
+
 
 	public int getBoardNo() {
 		return boardNo;

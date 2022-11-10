@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.board.model.vo.*" %>
-    
-  <% 
-  Board b = (Board) request.getAttribute("b"); %>
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo" %>
+<%
+   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+   PageInfo pi = (PageInfo) request.getAttribute("pi");
+   Board b = (Board) request.getAttribute("b");
+   
+   int currentPage = pi.getCurrentPage();
+   int startPage = pi.getStartPage();
+   int endPage = pi.getEndPage();
+   int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +31,15 @@
         #body-1{
             box-sizing: border-box;
             height: 58px;
+        }
+        .bodyClick{
+        	background-color:orange;
+        }
+        .bodyWrite_wrap{
+        	box-sizing: border-box; 
+        	margin: auto;
+        	width: 800px;
+        	
         }
         #body2-1{
             box-sizing: border-box; 
@@ -88,7 +105,6 @@
             box-sizing: border-box;
             border: 1px solid black;
             font-size: 27px;
-            background-color: orange;
             padding:8px 16px;
             float: left;
             border-style: groove;
@@ -215,31 +231,29 @@
 
    <body>
   
-    <div class="body" >
+    <div class="body">
         <h1 id="mainid">커뮤니티</h1>
         <div id="body-1" >
-            <button id="ge"><i class="bi bi-chat-square-text"></i> 게시판</button>
-            <button id="gung"><i class="bi bi-wechat" style="color:deepskyblue"></i> 궁금해요</button>
+            <button id="ge" class="bodyClick" onclick="menuClick('ge')"><i class="bi bi-chat-square-text"></i> 게시판</button>
+            <button id="gung" onclick="menuClick('gung')"><i class="bi bi-wechat" style="color:deepskyblue"></i> 궁금해요</button>
         </div>
     </div>
     <div id="line"></div>
-            <div class="body-2">
-                
-            </div>
-        <div class="body2">
+       
+       <div class="bodyWrite_wrap">     
+       <div id="body2-2" align="right">
+          <a href="<%=contextPath %>/insert.bo" class="btn btn-secondary" style="background-color:orange;"><i class="bi bi-pencil-square "> 글작성
+          </i></a></div><hr>
+        </div>
+        <div class="body2" id="geBody">
             <div id="body2-1"> 
-
-                
-                <div id="body2-2" align="right">
-                <a href="<%=contextPath %>/insert.bo" class="btn btn-secondary" style="background-color:orange;"><i class="bi bi-pencil-square "> 글작성
-                </i></a></div><hr>
               <div id="body2-3">
                     <div id="body2-3-1"><br>
                          <a id="hotfont">어제 핫한글<i class="bi bi-fire" style="color:red;"></i></a><br>
                             <div id="hot1">
                                 <div id="hot2">
-                                <p id="hotfont">글 제목</p>
-                                <p id="hottext">글내용입니다</p>
+                                <p id="hotfont">글작성</p>
+                                <p id="hottext">글작성</p>
                                 <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
                                 </div>
                             </div>
@@ -247,8 +261,8 @@
                     <div id="body2-3-1"><br><br>
                            <div id="hot1">
                               <div id="hot2">
-                               <p id="hotfont">글 제목</p>
-                               <p id="hottext">글내용입니다</p>
+                               <p id="hotfont">글작성</p>
+                               <p id="hottext">글작성</p>
                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
                                </div>
                            </div>
@@ -256,18 +270,18 @@
                     <div id="body2-3-1"><br><br>
                             <div id="hot1">
                                 <div id="hot2">
-                                <p id="hotfont">글 제목</p>
-                                <p id="hottext">글내용입니다</p>
+                                <p id="hotfont">글작성</p>
+                                <p id="hottext">글작성</p>
                                 <div id="hotfooter"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <a class="font">글작성</a>
                     <div>
                         <br>
-                  <p id="text">글내용입니다</p>
+                  <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
@@ -276,10 +290,10 @@
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <a class="font">글작성</a>
                     <div>
                         <br>
-                  <p id="text">글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다</p>
+                  <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
@@ -288,10 +302,10 @@
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <a class="font">글작성</a>
                     <div>
                         <br>
-                  <p id="text">글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다글내용입니다</p>
+                  <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
@@ -313,42 +327,32 @@
                     </form>
                 
                 </div>
-                <div class="page" align="center" ><i class="bi bi-caret-left-square"></i>
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <input type="button">
-                <i class="bi bi-caret-right-square"></i>
-
-                </div>
-            
-           
-            
-        </div>
+                   <div align="center" class="paging-area">
+      
         
-  
-           
-            
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
+                </div>
+        
+        </div>
+	</div>
+	<%@ include file="../board/pageMove.jsp" %>
 	<%@ include file="../common/footer.jsp" %>
 	
 </body>
 </html>
+
+<script>
+function menuClick(type){
+	/* body2 : 게시판 , */
+	if(type == "ge"){
+		$("#geBody").show();
+		$("#gungBody").hide();
+		$("#ge").addClass("bodyClick");
+		$("#gung").removeClass("bodyClick");
+	}else if(type == "gung"){
+		$("#geBody").hide();
+		$("#gungBody").show();
+		$("#gung").addClass("bodyClick");
+		$("#ge").removeClass("bodyClick");
+	}
+}
+</script>
