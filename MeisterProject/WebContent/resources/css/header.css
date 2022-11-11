@@ -19,6 +19,7 @@ header {
     background-color: white;
     border-bottom: 1px solid #c8c8c8;
     font-size: 16px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 /*Header-INNER*/
 .header-inner {
@@ -40,6 +41,11 @@ header {
     margin-left: 3px;
     margin-right: 3px;
 }
+header .main-menu li a{
+    font-weight: 700;
+
+}
+
 header .main-menu li a,.search {
     padding: 11px 16px;
     display: block;
@@ -103,6 +109,8 @@ header .sub-menu ul.menu li::before {
     margin: auto;
 
 }
+
 header .main-menu ul li a:hover, header .sub-menu ul li a:hover {
     color:  orange;
+
 }
