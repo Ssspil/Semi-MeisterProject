@@ -1,20 +1,15 @@
 @charset "UTF-8";
+/* 기본 설정*/
 a {
     text-decoration: none;
 }
-img {
-    display: block;
-    width: 100px;
-    padding-top: initial;
+img{
+    width: 140px;
+    height: 40px;
 }
-  
-/*Header-INNER*/
-.header-inner {
-    width: 1100px;
-    margin: 0 auto;
-    position: relative;
+li{
+    list-style: none;
 }
-
 /*HEADER*/
 header {
     width: 100%;
@@ -23,93 +18,91 @@ header {
     z-index: 10;
     background-color: white;
     border-bottom: 1px solid #c8c8c8;
+    font-size: 16px;
 }
-header > .header-inner {
+/*Header-INNER*/
+.header-inner {
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
     height: 100px;
 }
-header .logo {
-    height: 75px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-}
 
-
-header .sub-menu {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    display: flex;
+/* header - MainMenu*/
+.header-inner .main-menu{
+    width: 66%;
+    float: left;
+    height: 100%;
+    line-height: 50px;
 }
-header .sub-menu ul.menu {
-    font-family: Arial, sans-serif;
-    display: flex;
+.header-inner .main-menu ul li {
+    float: left;
+    margin-left: 3px;
+    margin-right: 3px;
 }
-header .sub-menu ul.menu li {
-    position: relative;
-    list-style : none;
-}
-header .sub-menu ul.menu li::before {
-    content: "";
-    width: 1px;
-    height: 12px;
-    background-color: #e5e5e5;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-header .sub-menu ul.menu li:first-child::before {
-    display: none;
-}
-header .sub-menu ul.menu li a {
+header .main-menu li a,.search {
     padding: 11px 16px;
     display: block;
-    font-size: 13px;
-    color: #656565;
+    color: #727272;
 }
-header .sub-menu ul.menu li a:hover {
-    color: black;
-}
+/* header - MainMenu 의 검색기능*/
 header .main-menu .search {
     position: relative;
     height: 34px;
 }
 header .main-menu .search input {
     width: 100px;
-    height: inherit;
-    padding: 4px 10px;
+    height: 40px;
+    padding: 6px 12px;
     border: 1px solid white;
     box-sizing: border-box;
     border-radius: 5px;
     outline: none;
-    background-color: rgba(205, 203, 203, 0.988);
-    color: #777;
+    background-color: rgba(184, 184, 184, 0.988);
+    color: rgb(0, 0, 0);
     font-size: 12px;
     transition: width .4s;
 }
 header .main-menu .search input:focus {
-    width: 290px;
-    border-color: #669900;
-}
-
-header .main-menu {
-    font-family: Arial, sans-serif;
-    display: flex;    
-    justify-content: center;
-    padding: 10px 500px 30px 0;
-    list-style : none;
-}
-
-
-header .main-menu li a {
-    padding: 11px 16px;
-    display: block;
-    font-size: 13px;
-    color: #656565;
-}
-header .main-menu ul.item li a:hover {
+    width: 260px;
+    border-color: #eeab00;
+    background-color: rgba(255, 255, 255, 0.988);
     color: black;
+    height: 40px;
+}
+
+/* header - SubMenu*/
+.header-inner .sub-menu{
+    width: 33%;
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+header .sub-menu li a {
+    display: block;
+    color: #727272;
+    padding-left: 10px;
+    
+}
+.header-inner .sub-menu ul li {
+    float: left;
+    line-height: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+header .sub-menu ul.menu li::before {
+    content: " ";
+    width: 1.5px;
+    height: 14px;
+    background-color: #d8d8d8;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+}
+header .main-menu ul li a:hover, header .sub-menu ul li a:hover {
+    color:  orange;
 }

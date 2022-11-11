@@ -66,7 +66,7 @@ public class NoticeDao {
 
 
 
-	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi) {
+	public ArrayList<Notice> selectNoticeList(PageInfo pi ,Connection conn) {
         // Select문 => ResultSet객체(여러행)
         ArrayList<Notice> list = new ArrayList<>();
         
@@ -148,7 +148,7 @@ public class NoticeDao {
 		
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectListCount");
+		String sql = prop.getProperty("selectNoticeListCount");
 		
 		try {
 			psmt = conn.prepareStatement(sql);

@@ -112,20 +112,10 @@
             </form>
         
         </div>
-        <div class="page" align="center" ><i class="bi bi-caret-left-square"></i>
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <input type="button">
-        <i class="bi bi-caret-right-square"></i>
+      
 
         </div>
-  </div>
+  
 
 </body>
 </html>

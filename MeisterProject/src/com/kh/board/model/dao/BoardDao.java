@@ -186,16 +186,6 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			/*
-			 * boardLimit 이 10이라고 가정.
-			 * 
-			 * currentPage = 1 => 시작값 1 , 끝값 10
-			 * currentPage = 2 => 시작값 11, 끝값 20
-			 * currentPage = 3 => 시작값 21, 끝값 30
-			 * 
-			 * 시작값 = (currentPage -1) * boardLimit +1;
-			 * 끝값 = 시작값 + boardLimt -1;
-			 */
 			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
@@ -211,7 +201,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 						  rset.getInt("BOARD_COUNT"),
 						  rset.getInt("BOARD_RECOMMEND"),
 						  rset.getInt("USER_NO"),
-						  endRow, rset.getDate("BOARD_DATE")
+						  rset.getDate("BOARD_DATE")
 						  ));
 			}
 		
