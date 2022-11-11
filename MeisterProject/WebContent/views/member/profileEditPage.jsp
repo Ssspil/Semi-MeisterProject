@@ -40,7 +40,10 @@
 	
 	<%
 		String userId = loginUser.getUserId();
-		String userName = loginUser.getUserName();
+		String userName = " ";
+		if(userName != null){
+			userName = loginUser.getUserName();
+		}
 		String nickname = loginUser.getNickName();
 		String phone = loginUser.getPhone();
 		String phoneMid = "";
@@ -52,7 +55,7 @@
 		String email = loginUser.getEmail();
 		String emailFront = "";
 		String emailLast = "";
-		
+		String expert = loginUser.getExpert();
 		if(phone != null){
 			int idx = email.indexOf("@");
 			emailFront = email.substring(0, idx);
@@ -65,18 +68,47 @@
 	<script>
 		$ (function selectInterest(){
 			$("#interest").val("<%=interests%>").prop("selected", true);
+			$('#textInterest').val($('#interest').val());
 		});
-	</script>
-	
-	<script>
+		
+		$(function phoneSelect(){
+			let value = "<%=phoneMid%>";
+			if(value == ""){
+				$("#phoneFront").val('').prop("selected", true);
+			}
+			else{
+				$("#phoneFront").val('010').prop("selected", true);
+			}
+			$('#phoneFront').attr("disabled", true);
+		});
+		
+		$ (function selectEmailLast(){
+			let value = "<%=emailLast%>";
+			
+ 			if (value == 'google.com' || value == 'naver.com' || value == 'daum.net'){
+ 				$('#emailSelect').val(value).prop("selected", true);
+				$('#textEmail').val($('#emailSelect').val());
+ 			}
+ 			else{
+ 				if(value == ""){
+ 					$("#emailSelect").val('').prop("selected", true);
+ 					$('#textEmail').attr("disabled", true);
+ 				}
+ 				else{
+	 				$("#emailSelect").val('other').prop("selected", true);
+	 				$('#textEmail').val("<%=emailLast%>").val();
+	 				$('#textEmail').attr("disabled", false);	
+ 				}
+ 			}
+		});
+		
 		$(function(){			
 			$('#fileUploadBtn').click(function(e){
 				e.preventDefault();
 				$('#profile').click();
 			});
 		});
-	</script>
-	<script>
+		
 		function loadImg(inputFile) {
 			let reader = new FileReader();
 			reader.readAsDataURL(inputFile.files[0]);
@@ -84,8 +116,70 @@
 				$("#titleImage").attr("src", e.target.result);
 			}
 		}
+		
+		$(function(){
+			$('#emailSelect').change(function(){
+				if ($('#emailSelect').val() == 'other') {
+	                $('#textEmail').attr("disabled", false);
+	                $('#textEmail').val("");
+	                $('#textEmail').focus();
+	            } else {
+	                $('#textEmail').val($('#emailSelect').val());
+	            }
+			})
+		});
+		
+		$(function(){
+			$('#interest').change(function(){
+				$('#textInterest').val($('#interest').val());
+			})
+		});
+		
+		$(function(){
+			if("<%=expert%>" == 'N'){
+				$('#emailFront').attr("disabled", true);
+				$('#userName').attr("disabled", true);
+				$('#phoneMid').attr("disabled", true);
+				$('#phoneLast').attr("disabled", true);
+				$('#emailSelect').attr("disabled", true);
+			}
+		});
+		
+		function submitCheck(e) {
+       		if($('#emailSelect').is(":disabled") == true){
+       			return true;
+       		}
+       		
+       		if($('#textEmail').val() == ""){
+       			event.preventDefault();
+       			alert("이메일을 끝까지 입력해주세요");
+       			$('#textEmail').focus();
+       			
+       			return false;
+       		}
+       		if($('#phoneMid').val() == ""){
+       			event.preventDefault();
+       			alert("전화번호를 끝까지 입력해주세요");
+       			$('#phoneMid').focus();
+       			
+       			return false;
+       		}
+       		
+       		if($('#phoneLast').val() == ""){
+       			event.preventDefault();
+       			alert("전화번호를 끝까지 입력해주세요");
+       			$('#phoneLast').focus();
+       			
+       			return false;
+       		}
+       		
+       		
+       		else{
+       			return true;
+       		}
+    	}
 	</script>
-	<form action="<%=contextPath %>/update.me" method="post">	
+	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();">	
 		<div class="outer">
 			<br>
 			<h2><b>&nbsp;개인정보 변경</b></h2>
@@ -108,27 +202,32 @@
 			<hr>
 			<br>
 			이름 : &nbsp;&nbsp;&nbsp;
-			<input type="text" name="userName" value="<%=userName %>" size="50">
+			<input type="text" name="userName" id="userName" value="<%=userName %>" size="50">
 			<br><br>
 			휴대폰 번호 : &nbsp;
-			<select>
-				<option value="010" selected disabled>010</option>
+			<select id="phoneFront">
+				<option value=""></option>
+				<option value="010">010</option>
 			</select>
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneMid" value="<%=phoneMid%>" size="4">
+			<input type="text" name="phoneMid" id="phoneMid" value="<%=phoneMid%>" size="4">
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneLast" value="<%=phoneLast%>" size="4">
+			<input type="text" name="phoneLast" id="phoneLast" value="<%=phoneLast%>" size="4">
 			<br><br>
 			이메일 : &nbsp;
-			<input type="text" name="emailFront" value="<%=emailFront %>" size="15">
+			<input type="text" name="emailFront" id="emailFront" value="<%=emailFront %>" size="15">
 			&nbsp; @ &nbsp;
-			<select name="emailBack">
-				<option selected>gmail.com</option>
-				<option>naver.com</option>
-				<option>daum.net</option>
+			<input id="textEmail" name="emailBackOther" placeholder="이메일을 선택하세요." disabled> 
+			<select id="emailSelect" name="emailBack">
+				<option value="" selected>선택</option>
+				<option value="google.com">gmail.com</option>
+				<option value="naver.com">naver.com</option>
+				<option value="daum.net">daum.net</option>
+				<option value="other">직접 입력하기</option>
 			</select>
 			<br><br>
 			관심분야 : &nbsp;
+			<input id="textInterest" disabled>
 			<select id="interest" name="interests">
 				<option value="영상">영상</option>
 				<option value="영화">영화</option>
