@@ -2,11 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-<!-- <entry key="selectList">
-SELECT *
-	FROM (	
-		SELECT ROWNUM RNUM, A.*
-		FROM (
+	<entry key="selectList">
 			SELECT  BOARD_NO,
                     BOARD_TITLE,
                     BOARD_CONTENT,
@@ -14,21 +10,18 @@ SELECT *
                     BOARD_RECOMMEND,
                     USER_NO,
                     BOARD_DATE
-			FROM BOARD B
-			JOIN MEMBER USING (USER_NO)
+			FROM BOARD 
 			WHERE BOARD_TYPE = 1
-			  AND B.STATUS = 'Y'
+			  AND STATUS = 'Y'
 			ORDER BY BOARD_DATE DESC 
-			) A
-	    )
-	 WHERE RNUM BETWEEN ? AND ?
-</entry>
+	</entry>
+	
 	<entry key="selectListCount">
 		SELECT COUNT(*) BOARD_COUNT
 		FROM BOARD
 		WHERE STATUS = 'Y'
 		  AND BOARD_TYPE = 1
-	</entry>  -->
+	</entry>  
 	
 	<entry key="getHotBoard">
 		<![CDATA[
@@ -39,9 +32,9 @@ SELECT *
                 BOARD_RECOMMEND,
                 USER_NO,
                 BOARD_DATE 
-       	from board 
-		where ROWNUM <= 3 and TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE -1,'YYYYMMDDHH') and status = 'Y'
-		order by BOARD_COUNT, board_recommend desc]]>
+       	FROM BOARD 
+		WHERE ROWNUM <= 3 AND TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE -1,'YYYYMMDDHH') AND STATUS = 'Y'
+		ORDER BY BOARD_COUNT, BOARD_RECOMMEND DESC]]>
 	</entry>
 
 	<entry key ="insertBoard">
