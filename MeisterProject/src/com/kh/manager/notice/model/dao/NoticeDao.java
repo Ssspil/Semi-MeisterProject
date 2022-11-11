@@ -166,6 +166,56 @@ public class NoticeDao {
 		}
 		return listCount;
 	}
+
+
+
+	public int deleteNoticeBoard(int noticeNo, Connection conn) {
+
+		int result = 0; //update를 처리할 행의 갯수를 받음
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("deleteNoticeBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+		
+			psmt.setInt(1, noticeNo);
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
+
+
+
+	public int updateNoticeBoard(Notice n, Connection conn) {
+
+		int result = 0;
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("updateNoticeBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, n.getNoticeTitle());
+			psmt.setString(2, n.getNoticeContent());
+			psmt.setInt(3, n.getNoticeNo());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+		
+	}
 	
 	
 		
