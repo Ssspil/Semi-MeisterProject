@@ -1,3 +1,5 @@
+@charset "UTF-8";
+/* 기본 설정*/
 a {
     text-decoration: none;
 }
@@ -35,8 +37,8 @@ header {
 }
 .header-inner .main-menu ul li {
     float: left;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 header .main-menu li a,.search {
     padding: 11px 16px;
@@ -62,7 +64,7 @@ header .main-menu .search input {
     transition: width .4s;
 }
 header .main-menu .search input:focus {
-    width: 290px;
+    width: 260px;
     border-color: #eeab00;
     background-color: rgba(255, 255, 255, 0.988);
     color: black;
