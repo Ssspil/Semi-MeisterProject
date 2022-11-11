@@ -32,7 +32,7 @@ public class NoticeService {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn, pi);
+        ArrayList<Notice> list = new NoticeDao().selectNoticeList(pi ,conn);
         
         JDBCTemplate.close();
         

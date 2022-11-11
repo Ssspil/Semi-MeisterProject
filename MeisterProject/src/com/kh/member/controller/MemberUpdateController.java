@@ -36,9 +36,21 @@ public class MemberUpdateController extends HttpServlet {
 		String nickName = request.getParameter("nickName");
 		String interest = request.getParameter("interests");
 		String userName = request.getParameter("userName");
+		String phone = null;
+		String email = null;
+		String emailBack = request.getParameter("emailBack");;
 		
-		String phone = ("010".concat(request.getParameter("phoneMid"))).concat(request.getParameter("phoneLast"));
-		String email = ((request.getParameter("emailFront")).concat("@")).concat(request.getParameter("emailBack"));
+		if(request.getParameter("phoneMid") != null || request.getParameter("phoneLast") != null) {			
+			phone = ("010".concat(request.getParameter("phoneMid"))).concat(request.getParameter("phoneLast"));
+		}
+		
+		if(request.getParameter("emailFront") != null || (request.getParameter("emailBack") != null)){
+			if(emailBack.equals("other")) {
+				emailBack = request.getParameter("emailBackOther");
+			}
+			System.out.println(emailBack);
+			email = ((request.getParameter("emailFront")).concat("@")).concat(emailBack);
+		}
 		
 		Member m  = new Member(userId, nickName, interest, userName, email, phone);
 		

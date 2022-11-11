@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo" %>
 <%
-   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("hotList");
+   ArrayList<Board> hotList = (ArrayList<Board>)request.getAttribute("hotList"); //핫 게시글 순위용
+   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
    /*PageInfo pi = (PageInfo) request.getAttribute("pi");
-   Board b = (Board) request.getAttribute("b");
    
    int currentPage = pi.getCurrentPage();
    int startPage = pi.getStartPage();
@@ -27,7 +27,7 @@
         }
         .body2{
          box-sizing: border-box;
-            height: 2200px;
+            height: 2000px;
         }
         #line{
             border: 4px solid rgb(255, 212, 0);
@@ -230,9 +230,9 @@
         }
            .page{
             box-sizing: border-box;
-            margin: auto;
+            
             position: relative;
-            top:650px;
+            
             
         }
 </style>
@@ -264,115 +264,142 @@
                          <a id="hotfont">어제 핫한글<i class="bi bi-fire" style="color:red;"></i></a><br>
                             <div id="hot1">
                                 <div id="hot2">
-                                <p id="hotfont"><%=list.get(0).getBoardTitle() %></p>
-                                <p id="hottext"><%=list.get(0).getBoardContent() %></p>
-                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(0).getBoardCount() %>
-                                <i class="bi bi-hand-thumbs-up"></i> <%=list.get(0).getBoardRecommend() %></div>
+                                <p id="hotfont"><%=hotList.get(0).getBoardTitle() %></p>
+                                <p id="hottext"><%=hotList.get(0).getBoardContent() %></p>
+                                <div id="hotfooter"><i class="bi bi-eye"></i> <%=hotList.get(0).getBoardCount() %>
+                                <i class="bi bi-hand-thumbs-up"></i> <%=hotList.get(0).getBoardRecommend() %></div>
                                 </div>
                             </div>
                     </div>
                     <div id="body2-3-1"><br><br>
                            <div id="hot1">
                               <div id="hot2">
-                               <p id="hotfont"><%=list.get(1).getBoardTitle() %></p>
-                               <p id="hottext"><%=list.get(1).getBoardContent() %></p>
-                               <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(1).getBoardCount() %>
-                               <i class="bi bi-hand-thumbs-up"></i> <%=list.get(2).getBoardRecommend() %></div>
+                               <p id="hotfont"><%=hotList.get(1).getBoardTitle() %></p>
+                               <p id="hottext"><%=hotList.get(1).getBoardContent() %></p>
+                               <div id="hotfooter"><i class="bi bi-eye"></i> <%=hotList.get(1).getBoardCount() %>
+                               <i class="bi bi-hand-thumbs-up"></i> <%=hotList.get(1).getBoardRecommend() %></div>
                                </div>
                            </div>
                    </div>
                     <div id="body2-3-1"><br><br>
                             <div id="hot1">
                                 <div id="hot2">
-                                <p id="hotfont"><%=list.get(2).getBoardTitle() %></p>
-                                <p id="hottext"><%=list.get(2).getBoardContent() %></p>
-                                <div id="hotfooter"><i class="bi bi-chat-dots"></i> <%=list.get(2).getBoardCount() %>
-                                <i class="bi bi-hand-thumbs-up"></i> <%=list.get(2).getBoardRecommend() %></div>
+                                <p id="hotfont"><%=hotList.get(2).getBoardTitle() %></p>
+                                <p id="hottext"><%=hotList.get(2).getBoardContent() %></p>
+                                <div id="hotfooter"><i class="bi bi-eye"></i> <%=hotList.get(2).getBoardCount() %>
+                                <i class="bi bi-hand-thumbs-up"></i> <%=hotList.get(2).getBoardRecommend() %></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+           
                 <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                     <span class="font"><%=hotList.get(0).getBoardTitle() %> </span>
                     <div>
                         <br>
-                  <p id="text">글작성</p>
+                  <p id="text"><%=hotList.get(0).getBoardContent() %></p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
-                    <span id="date">2시간전</span>
-                 </div>
-                </div>
-                <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
-                    <div>
-                        <br>
-                  <p id="text">글작성</p>
-                  <img src="resources/image/peng.jpg" id="img1">
-                </div><br><br><br>
-                <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <div><i class="bi bi-eye"></i><%=hotList.get(0).getBoardCount() %>
+                    <i class="bi bi-hand-thumbs-up"></i><%=hotList.get(0).getBoardRecommend() %></div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                     <span class="font">글제목</span>
+                    <div>
+                        <br>
+                  <p id="text">글내용입니다</p>
+                  <img src="resources/image/peng.jpg" id="img1">
+                </div><br><br><br>
+                <div id="titlefooter">
+                    <div><i class="bi bi-eye"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <span id="date">2시간전</span>
+                 </div>
+                </div>
+                <div id="body2-4"><hr>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <div><i class="bi bi-eye"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <div><i class="bi bi-eye"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <div><i class="bi bi-eye"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <a class="font">글제목</a>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-chat-dots"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
+                    <div><i class="bi bi-eye"></i> 6 <i class="bi bi-hand-thumbs-up"></i> 6</div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
+           
                 <br>
                 <hr>
             </div>
-             
+         
+<!--       <div align="center" class="page"> -->
+      
+<%--          <% if(currentPage != 1) {%> --%>
+<%--          <button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button> --%>
+<%--          <%} %> --%>
+         
+<%--          <% for(int i = startPage; i <= endPage; i++) { %> --%>
+<%--          	<% if(i != currentPage) { %> --%>
+<%--          	<button onclick="doPageClick(<%=i%>)"><%=i %></button> --%>
+<%--          <% } else{%> --%>
+<%--          <button disabled><%=i %></button> --%>
+<%--          <%} %> --%>
+<%--         <%} %> --%>
+        
+<%--         <% if(currentPage != maxPage) { %> --%>
+<%--         <button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button> --%>
+<%--         <%} %> --%>
+         
+<!--      	 </div> -->
+      
+<!--       	<script> -->
+<!--     	function doPageClick(currentPage) { -->
+    	  
+<%--     	  location.href = "<%=contextPath%>/list.bo?currentPage="+currentPage; --%>
+<!--       }
+<!--       </script> -->
+
         
         </div>
-
-	
-	
 	<%@ include file="../board/pageMove.jsp" %>
 	<%@ include file="../common/footer.jsp" %>
 	

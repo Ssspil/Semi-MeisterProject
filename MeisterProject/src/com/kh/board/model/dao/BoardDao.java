@@ -172,7 +172,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 	
 	return at;
 }
-	public ArrayList<Board> selectList(Connection conn , PageInfo pi){
+	public ArrayList<Board> selectList(Connection conn){
 		
 		// select 문 => ResultSet
 		ArrayList<Board> list = new ArrayList<>();
@@ -186,22 +186,6 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			/*
-			 * boardLimit 이 10이라고 가정.
-			 * 
-			 * currentPage = 1 => 시작값 1 , 끝값 10
-			 * currentPage = 2 => 시작값 11, 끝값 20
-			 * currentPage = 3 => 시작값 21, 끝값 30
-			 * 
-			 * 시작값 = (currentPage -1) * boardLimit +1;
-			 * 끝값 = 시작값 + boardLimt -1;
-			 */
-			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
-			psmt.setInt(1, startRow);
-			psmt.setInt(2, endRow);
-			
 			rset = psmt.executeQuery();
 			
 			while(rset.next()) {
@@ -211,7 +195,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 						  rset.getInt("BOARD_COUNT"),
 						  rset.getInt("BOARD_RECOMMEND"),
 						  rset.getInt("USER_NO"),
-						  endRow, rset.getDate("BOARD_DATE")
+						  rset.getDate("BOARD_DATE")
 						  ));
 			}
 		
@@ -225,7 +209,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		
 		return list;
 	}
-public int increaseCount(Connection conn, int boardNo) {
+public int increaseCount( int boardNo,Connection conn) {
 		
 		int result = 0;
 		
