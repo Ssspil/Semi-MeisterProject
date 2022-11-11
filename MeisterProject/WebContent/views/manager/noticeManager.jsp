@@ -177,7 +177,9 @@ table>tbody>tr:hover{
 	                    </table>
                     </div>
 				</div>
-                    
+                
+                <br>
+                
 		     <!-- 페이징처리 -->           
 		     <div align="center" class="paging-area">
 				<% if(currentPage != 1) {%>
