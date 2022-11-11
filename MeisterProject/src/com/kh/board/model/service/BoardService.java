@@ -20,10 +20,10 @@ public class BoardService {
 			return listCount;
 		}
 		
-		public ArrayList<Board> selectList(PageInfo pi){
+		public ArrayList<Board> selectList(){
 			Connection conn = getConnection();
 			
-			ArrayList<Board> list = new BoardDao().selectList(conn, pi);
+			ArrayList<Board> list = new BoardDao().selectList(conn);
 			
 			close();
 			
@@ -44,7 +44,7 @@ public class BoardService {
 			
 			Connection conn = getConnection();
 			
-			int result = new BoardDao().increaseCount(conn, boardNo);
+			int result = new BoardDao().increaseCount(boardNo,conn);
 			
 			commitAndRollback(conn, result);
 			

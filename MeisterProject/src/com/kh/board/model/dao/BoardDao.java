@@ -172,7 +172,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 	
 	return at;
 }
-	public ArrayList<Board> selectList(Connection conn , PageInfo pi){
+	public ArrayList<Board> selectList(Connection conn){
 		
 		// select 문 => ResultSet
 		ArrayList<Board> list = new ArrayList<>();
@@ -185,12 +185,6 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			
-			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
-			psmt.setInt(1, startRow);
-			psmt.setInt(2, endRow);
 			
 			rset = psmt.executeQuery();
 			
@@ -215,7 +209,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		
 		return list;
 	}
-public int increaseCount(Connection conn, int boardNo) {
+public int increaseCount( int boardNo,Connection conn) {
 		
 		int result = 0;
 		
