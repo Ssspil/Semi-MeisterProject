@@ -14,7 +14,7 @@
 	<!-- <h1 style="color:red; text-align:center;"><%= errorMsg %></h1> -->
 	
 	<script>
-		alert("아이디나 비밀번호를 잘못 입력하셨습니다.");
+		alert("에러 났어유 ^_^ ㅋ");
 		location.href = 'loginForm.me';
 	</script>
 
