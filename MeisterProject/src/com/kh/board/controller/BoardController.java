@@ -3,6 +3,7 @@ package com.kh.board.controller;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,6 +78,8 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
 		*/
+	
+
 		ArrayList<Board> list = new BoardService().selectList();
 		request.setAttribute("list",list);
 		ArrayList<Board> hotList = new BoardService().getHotBoard();

@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo" %>
 <%
    ArrayList<Board> hotList = (ArrayList<Board>)request.getAttribute("hotList"); //핫 게시글 순위용
-   ArrayList<Board> list= (ArrayList<Board>)request.getAttribute("list"); //일반 게시글용
+   ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
    /*PageInfo pi = (PageInfo) request.getAttribute("pi");
    
    int currentPage = pi.getCurrentPage();
@@ -292,8 +292,9 @@
                             </div>
                         </div>
                     </div>
+           
                 <div id="body2-4"><hr>
-                     <span class="font"><%=list.get(0).getBoardTitle() %></span>
+                     <span class="font"><%=hotList.get(0).getBoardTitle() %> </span>
                     <div>
                         <br>
                   <p id="text"><%=hotList.get(0).getBoardContent() %></p>
@@ -301,15 +302,15 @@
                 </div><br><br><br>
                 <div id="titlefooter">
                     <div><i class="bi bi-eye"></i><%=hotList.get(0).getBoardCount() %>
-                    <i class="bi bi-hand-thumbs-up"></i> <%=hotList.get(0).getBoardRecommend() %></div>
+                    <i class="bi bi-hand-thumbs-up"></i><%=hotList.get(0).getBoardRecommend() %></div>
                     <span id="date">2시간전</span>
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                     <span class="font"><%=hotList.get(0).getBoardTitle() %></span>
+                     <span class="font">글제목</span>
                     <div>
                         <br>
-                  <p id="text"><%=hotList.get(0).getBoardContent() %></p>
+                  <p id="text">글내용입니다</p>
                   <img src="resources/image/peng.jpg" id="img1">
                 </div><br><br><br>
                 <div id="titlefooter">
@@ -318,7 +319,7 @@
                  </div>
                 </div>
                 <div id="body2-4"><hr>
-                    <span class="font"><%=hotList.get(0).getBoardTitle() %></span>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -330,7 +331,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <span class="font"><%=hotList.get(0).getBoardTitle() %></span>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -342,7 +343,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <span class="font"><%=hotList.get(0).getBoardTitle() %></span>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -354,7 +355,7 @@
                  </div>
                 </div>
                    <div id="body2-4"><hr>
-                    <span class="font"><%=hotList.get(0).getBoardTitle() %></span>
+                    <span class="font"></span>
                     <div>
                         <br>
                   <p id="text">글작성</p>
@@ -365,6 +366,7 @@
                     <span id="date">2시간전</span>
                  </div>
                 </div>
+           
                 <br>
                 <hr>
             </div>
