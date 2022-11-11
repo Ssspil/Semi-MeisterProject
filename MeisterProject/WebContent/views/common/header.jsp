@@ -24,125 +24,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- header.css 경로 -->
-<!--  <link href="<%-- <%= contextPath %> --%>/resources/css/header.css" rel="stylesheet" type="text/css"  />  -->
-<style>
-@charset "UTF-8";
-a {
-    text-decoration: none;
-}
-img {
-    display: block;
-    width: 100px;
-    padding-top: initial;
-}
-  
-/*Header-INNER*/
-.header-inner {
-    width: 1100px;
-    margin: 0 auto;
-    position: relative;
-}
+<link href=" <%= contextPath %>/resources/css/header.css" rel="stylesheet" type="text/css"  />
 
-/*HEADER*/
-header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-    background-color: white;
-    border-bottom: 1px solid #c8c8c8;
-}
-header > .header-inner {
-    height: 100px;
-}
-header .logo {
-    height: 75px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-}
+<!--  google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
-
-header .sub-menu {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    display: flex;
-}
-header .sub-menu ul.menu {
-    font-family: Arial, sans-serif;
-    display: flex;
-}
-header .sub-menu ul.menu li {
-    position: relative;
-    list-style : none;
-}
-header .sub-menu ul.menu li::before {
-    content: "";
-    width: 1px;
-    height: 12px;
-    background-color: #e5e5e5;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-header .sub-menu ul.menu li:first-child::before {
-    display: none;
-}
-header .sub-menu ul.menu li a {
-    padding: 11px 16px;
-    display: block;
-    font-size: 13px;
-    color: #656565;
-}
-header .sub-menu ul.menu li a:hover {
-    color: black;
-}
-header .main-menu .search {
-    position: relative;
-    height: 34px;
-}
-header .main-menu .search input {
-    width: 100px;
-    height: inherit;
-    padding: 4px 10px;
-    border: 1px solid white;
-    box-sizing: border-box;
-    border-radius: 5px;
-    outline: none;
-    background-color: rgba(205, 203, 203, 0.988);
-    color: #777;
-    font-size: 12px;
-    transition: width .4s;
-}
-header .main-menu .search input:focus {
-    width: 290px;
-    border-color: #669900;
-}
-
-header .main-menu {
-    font-family: Arial, sans-serif;
-    display: flex;    
-    justify-content: center;
-    padding: 10px 500px 30px 0;
-    list-style : none;
-}
-
-
-header .main-menu li a {
-    padding: 11px 16px;
-    display: block;
-    font-size: 13px;
-    color: #656565;
-}
-header .main-menu ul.item li a:hover {
-    color: black;
-}
-
-</style>
 </head>
 <body>
     <header>
@@ -160,25 +48,31 @@ header .main-menu ul.item li a:hover {
 	</script>
         <div class="header-inner">
 
-            <div>
-            <a href="<%= contextPath %>" class="logo">
-                <img src="<%= contextPath %>/resources/image/logo.png" />
-            </a>
-        
-            <ul class="main-menu">
-                <li>
-                    <a href="<%= contextPath %>/market.se">마켓</a>
-                </li>
-                <li>
-                    <a href="<%= contextPath %>/boardlist.bo">커뮤니티</a>
-                </li>
-                <li>
-		        	<div class="search">
-		            	<input type="text" placeholder="원하는 영상을 검색해 보세요.">
-		            </div>
-	            </li>
-            </ul>
-            </div>
+            <div class="main-menu">
+                <div class="main-navigator">
+                    <ul >
+                        <li>
+                            <div class="logo-area">
+                                <a href="<%= contextPath %>" class="logo">
+                                    <img src="<%= contextPath %>/resources/image/logo.png" />
+                                </a>
+                            </div> <!-- 메인 메뉴 로고 끝-->
+                        </li>
+
+                        <li>
+                            <a href="<%= contextPath %>/market.se">마켓</a>
+                        </li>
+                        <li>
+                            <a href="<%= contextPath %>/boardlist.bo">커뮤니티</a>
+                        </li>
+                        <li>
+                            <div class="search">
+                                <i class="fas fa-search"></i><input type="text" placeholder="원하는 영상을 검색해 보세요.">
+                            </div>
+                        </li>
+                    </ul>
+                </div> <!-- 메인메뉴 네비게이션 바 끝-->
+            </div> <!-- 메인 메뉴 끝-->
 
 			<!-- 로그인 안되어 있을 시 -->
 			<% if  (loginUser == null ) {%>
