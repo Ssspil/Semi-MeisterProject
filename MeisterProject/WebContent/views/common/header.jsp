@@ -54,7 +54,7 @@
                         <li>
                             <div class="logo-area">
                                 <a href="<%= contextPath %>" class="logo">
-                                    <img src="<%= contextPath %>/resources/image/logo.png" />
+                                    <img src="<%= contextPath %>/resources/image/logo.png"    style="width: 140px; height: 40px;"/>
                                 </a>
                             </div> <!-- 메인 메뉴 로고 끝-->
                         </li>

@@ -6,30 +6,31 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
-.spspspsp{
+.outer{
+	margin-top : 100px;
 	width : 100%;
 	height : 800px;
 	background-color:pink;	
-	}
+}
+.outer .slider-area{
+	margin-left : auto;
+	margin-right : auto;
+	width : 80%;
+	height : 500px;
+	background-color:grey;
 	
+}
 </style>
 
 
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
-	<div class="spspspsp">
-		1<br>
-		2<br>
-		3<br>
-		4<br>
-
-		5<br>
-		6<br>
-		7<br>
-		8<br>
-		9<br>
-		승필승필승필 <br>
+	<div class="outer">
+		<br>
+		<div class="slider-area">
+			슬라이드 공간
+		</div>
 		
 	</div>
 
