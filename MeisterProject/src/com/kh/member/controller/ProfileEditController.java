@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.common.model.vo.Attachment;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class ProfileEditController
  */
@@ -29,11 +33,25 @@ public class ProfileEditController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
-			response.sendRedirect(request.getContextPath());
-		} else { // 로그인 한 상태
+		int userNo = Integer.parseInt(request.getParameter("userNum"));
+		
+		
+		MemberService mService = new MemberService();
+		
+		Member m = mService.selectMember(userNo);
+		Attachment at = mService.selectAttachment(userNo);
+		
+		if(m != null) {			
+			
+			request.setAttribute("b", m);
+			request.setAttribute("at", at);
+			
 			request.getRequestDispatcher("views/member/profileEditPage.jsp").forward(request, response);
+			
+		} else { // 에러페이지
+			request.setAttribute("errorMsg", "게시글 상세조회 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
 		}
 	}
 

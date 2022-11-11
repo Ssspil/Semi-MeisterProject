@@ -46,6 +46,10 @@
 	div input[type=text]:focus {
 		border:2px  solid orange;
 	}
+	#logo{
+		display: block;
+		margin : auto;
+	}
 
 
 	

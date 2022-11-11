@@ -198,7 +198,6 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 				
 				String file = "";
 				file = file_name +"/"+change_name;
-				
 				Board b;
 				b = new Board(rset.getInt("BOARD_NO"),
 						 rset.getString("BOARD_CONTENT"),

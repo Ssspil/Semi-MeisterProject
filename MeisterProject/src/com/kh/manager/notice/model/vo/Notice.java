@@ -48,6 +48,9 @@ public class Notice {
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 	}
+	
+	
+	
 
 	public int getNoticeNo() {
 		return noticeNo;

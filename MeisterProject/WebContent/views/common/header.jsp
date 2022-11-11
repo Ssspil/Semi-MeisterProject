@@ -46,6 +46,11 @@
 		} 
 		
 	</script>
+	<script>		
+		$('#atag').click(function () {
+			$("#frm").submit();
+		});
+	</script>
         <div class="header-inner">
 
             <div class="main-menu">
@@ -67,7 +72,7 @@
                         </li>
                         <li>
                             <div class="search">
-                                <input type="text" id="header-search" placeholder="마이스터 검색">
+                                <i class="fas fa-search"></i><input type="text" placeholder="원하는 영상을 검색해 보세요.">
                             </div>
                         </li>
                     </ul>
@@ -93,12 +98,14 @@
 				
             	<div class="sub-menu">
 	                <ul class="menu">
-
 	                    <li>
-	                        <a href="<%= contextPath %>/alert.me">알림</a>
+	                        <a id="myPage" href="<%= contextPath %>/alert.me">알림</a>
 	                    </li>
 	                    <li>
-	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
+	                    	<form id="frm" action="<%=contextPath %>/mypage.me" method="post">
+								<input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">		
+	                        	<a href="#" type="submit" id="atag">마이페이지</a>
+							</form>
 	                    </li>
 	                    <li>
 	                        <a href="<%= contextPath %>/manager.ad">관리자 페이지</a>
@@ -133,17 +140,6 @@
 
         </div>
     </header>
-        <script>
-        $(function(){
-            $("#header-search").on({'focus' : function(){
-                $(this).attr("placeholder","원하는 마이스터와 재능을 검색하세요")
-            }, 'blur' : function(){
-                $(this).attr("placeholder","마이스터 검색")
-            }});
-
-        });
-
-    </script>
     	
 </body>
 </html>

@@ -50,6 +50,10 @@
 		display: block;
 		margin-left: 10%;
 	}
+	#logo{
+		display: block;
+		margin : auto;
+	}
 	
     
     

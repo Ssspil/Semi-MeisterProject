@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, com.kh.manager.notice.model.vo.Notice, com.kh.common.model.vo.PageInfo" %>
+    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, com.kh.manager.notice.model.vo.Notice"%>
 <%
     String contextPath = request.getContextPath();
 
-    Notice n = (Notice)request.getAttribute("n");
-    
-    PageInfo pi =(PageInfo)request.getAttribute("pi");
+	Notice n = (Notice)request.getAttribute("n");
+	
+
 
 %>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="JSP" />
-<title>공지사항 상세 보기</title>
+<title>공지사항 수정하기</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
 <!--  jQuery -->
@@ -35,9 +35,6 @@
 #inputContent{
 	width:44rem;
 	height : 500px;
-}
-.card-body{
-	font-family: 'Nanum Gothic';
 }
 
  	
@@ -118,47 +115,44 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지사항 상세보기</h1>
+                    <h1 class="mt-4">공지사항 글 수정하기</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">공지사항</li>
                     </ol>
 
 
-							<div class="card-body">
-					              <table class="detail-area" style="text-align: center; border: 1px solid rgb(207, 224, 241)">
-									<thead>
-										<tr>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td style="font-size: 13px; border-right: 1px solid rgb(207, 224, 241); ">게시글 번호</td>
-											<td colspan="20" style="width: 700px;"><%= n.getNoticeNo() %></td>
-										</tr>
-										<tr>
-											<td style="width: 100px; height: 80px; font-size: 13px; background-color:rgb(207, 224, 241);  padding:0px;">제목</td>
-											<td style="background-color: rgb(207, 224, 241); " ><%= n.getNoticeTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
-										</tr>
-										<tr>
-											<td style="font-size: 13px; border-right: 1px solid rgb(207, 224, 241);  padding:0px;" >내용</td>
-											<td style="height: 500px; text-align: left; padding:20px;"><%=n.getNoticeContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
-										</tr>
-									</tbody>
-								</table>
-					                 
-					                 
-	                                         <br><br>
-	                                         
-	                                         <div align="center">
-	                                             <a href="<%=contextPath %>/notice.ad" class="btn btn-secondary btn-sm">목록으로 돌아가기</a>
-	                                                
-                                                 <a href="<%=contextPath %>/updateForm.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-warning btn-sm">수정하기</a>
-                                                 <a href="<%=contextPath %>/delete.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-	                                            
-	                                         </div>
-	
-	                                 </div>
-                                   
+									<div class="card-body">
+                                        <form action="<%= contextPath %>/update.no" method="post" name="noticeUpdateForm">
+                                            <div class="form-floating mb-3">
+                                            	<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
+                                                <textarea class="form-control" id="inputTitle" type="text" name="noticeTitle" required ><%= n.getNoticeTitle()%></textarea>
+                                               
+                                                <label for="inputTitle" name ="title" >제목  </label>
+                                            </div>
+                                            
+                                            <div class="form-floating mb-6">
+                                            	<textarea id="inputContent" class="form-control" name="noticeContent"  maxlength="1100"> <%=n.getNoticeContent() %></textarea>
+                                                <label for="inputContent" name="content">글내용 &nbsp;&nbsp;&nbsp;&nbsp;<span id="count">0</span>   / 1100 <br></label>
+                                            </div>
+												                                      
+                                        
+                                            
+                                            <div class="myBtnArea" align="center"><button type="submit" class="btn btn-primary btn-sm">수정하기</button></div>
+                                            
+                                        </form>
+
+                                    </div>
+                                    <!-- 글자 수 나타내기 위한 스크립트 -->
+                                      <script>
+										    $(function(){
+										        $("#inputContent").keyup(function(){
+										            if ($("#inputContent").val().length <= 1100){
+										                $("#count").text($("#inputContent").val().length);      // "#content" = "this"
+										            } 
+										
+										        });
+										    })
+										</script>
                 </div>
             </main> 
             <footer class="py-4 bg-light mt-auto">
