@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.Attachment"%>
+<%
+	Member m = (Member) request.getAttribute("b");
+
+	Attachment at = (Attachment) request.getAttribute("at");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +44,7 @@
 	<%@include file="../common/header.jsp" %>
 	
 	<%
+		int userNo = loginUser.getUserNo();
 		String userId = loginUser.getUserId();
 		String userName = " ";
 		if(userName != null){
@@ -179,7 +185,7 @@
        		}
     	}
 	</script>
-	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();">	
+	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();" enctype="multipart/form-data">	
 		<div class="outer">
 			<br>
 			<h2><b>&nbsp;개인정보 변경</b></h2>
@@ -188,11 +194,12 @@
 			<h5><b>&nbsp;프로필 변경</b></h5>
 			<hr>
 			<div id="profileImg">
-				<img id="titleImage" alt="프로필">
+				<img id="titleImage" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>" alt="프로필">
 				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
 				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
 			<br><br>
+			<input type="hidden" name="userNo" value="<%=userNo %>">
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
 			<input type="text" name="nickName" value="<%=nickname %>" size="80">

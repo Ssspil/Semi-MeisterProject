@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.Attachment"%>
 <%
     String cssPath = request.getContextPath();
+	Attachment at = (Attachment) request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,7 @@
 	<%@include file="../common/header.jsp" %>
 	
 	<%
+		int userNo = loginUser.getUserNo();
 		String userName = loginUser.getUserName();
 		String email = loginUser.getEmail() == null? "NONE" : loginUser.getEmail();
 		String nickname = loginUser.getNickName();
@@ -33,7 +35,7 @@
 		<div class="profile">
 			<table>
 				<tr>
-					<td rowspan="3" width="30"><img src="<%=contextPath %>/resources/image/logo.png"></td>
+					<td rowspan="3" width="30"><img src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>"></td>
 					<td>
 						<input type="text" value="<%=userName %>" readonly>
 					</td>
@@ -43,7 +45,10 @@
 						<input type="text" value="<%=nickname %>" readonly>
 					</td>
 					<td width="500px" align="right">
-						<a id="editProfile" href="<%= contextPath %>/profile.me">정보 수정</a>
+						<form action="<%=contextPath %>/profile.me" method="post">
+							<input type="hidden" name="userNum" value="<%=userNo %>">
+							<button type="submit" id="editProfile">정보 수정</button>						
+						</form>
 					</td>
 				</tr>
 				<tr>

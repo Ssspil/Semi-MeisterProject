@@ -3,6 +3,7 @@ package com.kh.member.model.service;
 import java.sql.Connection;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
@@ -75,17 +76,24 @@ public class MemberService {
 			return count;
 	}
 	 
-	 public Member updateMember(Member m) {
+	 public Member updateMember(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
 		 int result = new MemberDao().updateMember(conn, m);
 		 
 		 Member updateMem = null;
-
-		 if (result > 0) {
+		 
+		 int result2 = 1;
+		 
+		 if(at != null) {
+			 result2 = new MemberDao().insertAttachment(conn, at);
+		 }
+		 
+		 if (result > 0 && result2 > 0) {
 			JDBCTemplate.commit(conn);
 			updateMem = new MemberDao().selectMember(conn, m.getUserId());
 		 } else {
+			System.out.println("result2 : "+ result2);
 			JDBCTemplate.rollback(conn);
 		 }
 		 
@@ -124,8 +132,29 @@ public class MemberService {
 		 return updateMem;
 	 }
 	
-
-	   
+	 public Member selectMember(int userNo) {
+			
+			Connection conn = JDBCTemplate.getConnection();
+			
+			Member m = new MemberDao().selectMemberByNo(conn, userNo);
+			
+			JDBCTemplate.close();
+			
+			return m; 
+			
+	}
+	
+	 public Attachment selectAttachment(int userNo) {
+			
+			Connection conn = JDBCTemplate.getConnection();
+			
+			Attachment at = new MemberDao().selectAttachment(conn, userNo);
+			
+			JDBCTemplate.close();
+			
+			return at; 
+			
+	}
 	   
 	   
 	   

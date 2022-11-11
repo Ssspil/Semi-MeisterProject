@@ -69,6 +69,13 @@
 			AND STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectMemberByNo">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_NO = ?
+			AND STATUS = 'Y'
+	</entry>
+	
 	<entry key="nicknameCheck">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -84,5 +91,19 @@
 			SPECIALITY = ?,
 			EXP_SUBMIT = ?
 		WHERE USER_ID = ? AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES (SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 5)
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT FILE_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
 	</entry>
 </properties>
