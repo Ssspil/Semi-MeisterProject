@@ -9,7 +9,7 @@
 .outer{
 	margin-top : 100px;
 	width : 100%;
-	height : 800px;
+	height : 600px;
 	background-color:pink;	
 }
 .outer .slider-area{
@@ -20,6 +20,12 @@
 	background-color:grey;
 	
 }
+.icon-area{
+	height : 300px;
+	background-color:green;
+	
+}
+
 </style>
 
 
@@ -33,8 +39,9 @@
 		</div>
 		
 	</div>
-
-	
+	<div class="icon-area">
+		여긴 아이콘?
+	</div>
 
 	
 		
@@ -43,7 +50,8 @@
 	
 
 
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js'></script>
+  <script  src="/resources/js/mainsearch.js"></script>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

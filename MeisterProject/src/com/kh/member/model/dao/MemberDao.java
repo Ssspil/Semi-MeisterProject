@@ -11,6 +11,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -247,7 +248,50 @@ public class MemberDao {
 		return m;
 	}
 	
-
+	public Member selectMemberByNo(Connection conn, int userNo) {
+		
+		Member m = null;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberByNo");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				m= new Member(rset.getInt("USER_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("USER_PWD"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTEREST"),
+						rset.getDate("ENROLL_DATE"),
+						rset.getString("USER_NAME"),
+						rset.getString("GENDER"),
+						rset.getString("EMAIL"),
+						rset.getString("PHONE"),
+						rset.getString("STATUS"),
+						rset.getString("BLACKLIST"),
+						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
+						rset.getString("EXPERT")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return m;
+	}
+	
 	public int nicknameCheck(Connection conn, String nickname) {
 		
 		// select -> ResultSET (숫자하나)
@@ -311,6 +355,63 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+	
+	public int insertAttachment(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("insertAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, at.getRefBNo());
+			psmt.setString(2, at.getOriginName());
+			psmt.setString(3, at.getChangeName());
+			psmt.setString(4, at.getFilePath());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
+	
+	public Attachment selectAttachment(Connection conn, int userNo) {
+		
+		Attachment at = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment();
+				
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getNString("CHANGE_NAME"));
+				at.setFilePath(rset.getNString("FILE_PATH"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return at;
 	}
 	
 }

@@ -57,50 +57,50 @@ private Properties prop = new Properties();
 		return listCount;
 	}
 	
-	public ArrayList<Board> getHotBoard(Connection conn){
-		ArrayList<Board> board = new ArrayList<Board>();
-		PreparedStatement psmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("getHotBoard");
-		
-		try {
-			psmt = conn.prepareStatement(sql);
-			
-			rset = psmt.executeQuery();
-			
-			if(rset.next()) {
-				Board b = new Board(
-						rset.getInt("BOARD_NO"),
-						rset.getString("BOARD_CONTENT"),
-						rset.getString("BOARD_TITLE"),
-						rset.getInt("BOARD_COUNT"),
-						rset.getInt("BOARD_RECOMMEND"),
-						rset.getInt("USER_NO"),
-						rset.getDate("BOARD_DATE")
-					);
-				
-				board.add(b);
-			}	
-			
-			int cnt = board.size();
-			
-			if(board.size() < 3) {
-				
-				for(int i=0; i < 3-cnt; i++){
-					Board b = new Board(0,"작성된 게시글이 없습니다.","없음",0,0,0,new Date());
-					board.add(b);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(psmt);
-		}
-		
-		return board;
-	}
+	   public ArrayList<Board> getHotBoard(Connection conn){
+		      ArrayList<Board> board = new ArrayList<Board>();
+		      PreparedStatement psmt = null;
+		      ResultSet rset = null;
+		      
+		      String sql = prop.getProperty("getHotBoard");
+		      
+		      try {
+		         psmt = conn.prepareStatement(sql);
+		         
+		         rset = psmt.executeQuery();
+		         
+		         if(rset.next()) {
+		            Board b = new Board(
+		                  rset.getInt("BOARD_NO"),
+		                  rset.getString("BOARD_CONTENT"),
+		                  rset.getString("BOARD_TITLE"),
+		                  rset.getInt("BOARD_COUNT"),
+		                  rset.getInt("BOARD_RECOMMEND"),
+		                  rset.getInt("USER_NO"),
+		                  rset.getDate("BOARD_DATE")
+		               );
+		            
+		            board.add(b);
+		         }   
+		         
+		         int cnt = board.size();
+		         
+		         if(board.size() < 3) {
+		            
+		            for(int i=0; i < 3-cnt; i++){
+		               Board b = new Board(0,"작성된 게시글이 없습니다.","없음",0,0,0,new Date());
+		               board.add(b);
+		            }
+		         }
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(rset);
+		         close(psmt);
+		      }
+		      
+		      return board;
+		   }
 	
 public Board selectBoard(Connection conn , int boardNo) {
 		
@@ -233,46 +233,48 @@ public int increaseCount( int boardNo,Connection conn) {
 	}
 	
 
-	public int insertBoard(Board b , Connection conn) {
-		
-		int result = 0; 
-		
+	public int insertBoard(Board b, Connection conn) {
+
+		int result = 0;
 		PreparedStatement psmt = null;
-		
+
 		String sql = prop.getProperty("insertBoard");
-		
+
 		try {
 			psmt = conn.prepareStatement(sql);
-			
-			psmt.setString(1, b.getBoardTitle());
-			psmt.setString(2, b.getBoardContent());
+
+			psmt.setInt(1, (b.getBoardNo()));
+			psmt.setInt(2, (b.getBoardType()));
+			psmt.setString(3, b.getBoardTitle());
+			psmt.setString(4, b.getBoardContent());
+
 			result = psmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(psmt);
 		}
-		
+
 		return result;
 	}
 	
-public int insertAttachment(Attachment at, Connection conn) {
-		
+	public int insertAttachment(Attachment at, Connection conn) {
+
 		int result = 0;
 		PreparedStatement psmt = null;
-		
+
 		String sql = prop.getProperty("insertAttachment");
-		
+
 		try {
 			psmt = conn.prepareStatement(sql);
-			
+
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
-			
+
 			result = psmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

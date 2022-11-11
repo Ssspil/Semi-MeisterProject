@@ -46,6 +46,11 @@
 		} 
 		
 	</script>
+	<script>		
+		$('#atag').click(function () {
+			$("form").submit();
+		});
+	</script>
         <div class="header-inner">
 
             <div class="main-menu">
@@ -93,18 +98,20 @@
 				
             	<div class="sub-menu">
 	                <ul class="menu">
-
 	                    <li>
-	                        <a href="<%= contextPath %>/alert.me">알림</a>
+	                        <a id="myPage" href="<%= contextPath %>/alert.me">알림</a>
 	                    </li>
 	                    <li>
-	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
+	                    	<form id="frm" action="<%=contextPath %>/mypage.me" method="post">
+								<input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>">		
+	                        	<a href="#" type="submit" id="atag">마이페이지</a>
+							</form>
 	                    </li>
 	                    <li>
 	                        <a href="<%= contextPath %>/manager.ad">관리자 페이지</a>
 	                    </li>
 	                    <li>
-	                    	<a href="<%=contextPath %>/logout.me">로그아웃</a>
+	                    	<a href="<%=contextPath %>/logout.me">aaaaa</a>
 	                    </li>
 	
 	                </ul>
