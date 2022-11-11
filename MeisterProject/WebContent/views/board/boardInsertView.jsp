@@ -7,133 +7,136 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <style>
-	div {
-		display: bloack;
-	}
-	#border{
-        width: 1000px;
-        height: auto;
+	#wrap {
+/* 		background: black; */
+        color: orange;
+        width: 1100px;
+        height: 800px;
         margin: auto;
-        padding-top: 100px;
+       	padding-top: 105px;
 	}
-	#made{
-	    position: relative;
-	    top: -40px;
-	    left: 90%;
+	#wrap2 {
+		poisiton: 
+	}
+	#wrap .btn {
+		display:block;
+		color: orange;
+	}
+	#enroll-form input {
+		display: block;
+		width: 100%;
 	}
 	
-	#file{
-		box-sizing: border-box;
-	    display: block;
-	    justify-content: center;
-	    height: 3.5rem;
-	    padding: 1rem 1.25rem;
-	    background-color: lightorange;
-	    margin: 0 -16px;
-	    border-top: 0.0625rem solid #f4f4f4;
-	    border-bottom: 0.0625rem solid #f4f4f4;
+	#wrap-title {
+		height: 100px;
+    	padding: 15px;
+    	display: block;
+	}
+	#wrap-title2 {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
+	    height: 100%;
+	    margin: auto;
+	}
+	#file {
+		height: 100px;
+    	padding: 15px;
+    	display: block;
 	}
 	
 	#file2 {
-		box-sizing: border-box;
-	}
-	.icon {
-	    width: 100px;
-	    height: 100px;
-	    margin-right: 0.4375rem;
-	    cursor: pointer;
-	}
-	.test {
-		width: 100%;
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
 	    height: 100%;
-	    resize: none;
-    	border: 0;
-    	resize:none;
-    	margin-bottom: 2rem;
+	    margin: auto;
+	    border-top: 1px solid orange;
+		border-bottom: 1px solid orange;
 	}
-	.test2 {
-		width: 100%;
+	
+	#title {
+		height: 100px;
+    	padding: 15px;
+    	display: block;
+	}
+	#title1 {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
 	    height: 100%;
-	    resize: none;
-	    padding: 1.25rem 0;
-    	border: 0;
-    	resize:none;
-    	margin-bottom: 2rem;
+	    margin: auto;
+	    border-top: 1px solid orange;
+		border-bottom: 1px solid orange;
 	}
-	.test3 {
+	.title {
 		width: 100%;
-		margin-bottom: 6rem;
+		height: 100%;
+		position: relative;
+		border: 0;
+		outline: none;
+	}
+	
+	#content {
+		height: 350px;
+    	padding: 15px;
+    	display: block;
+	}
+	
+	#content2 {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 60.625rem;
+	    height: 100%;
+	    margin: auto;
+	    border-top: 1px solid orange;
+		border-bottom: 1px solid orange;
+	}
+	#content3 {
+		width: 100%;
+		height: 100%;
+		resize: none;
+		border: 0;
+		outline: none;
 		
 	}
-	.test4 {
-		width: 60.625rem;
-    	margin: auto;
-	}
-	
-	.test5 {
-		width: 100%;
-	    padding: 1.25rem 0;
-	    margin: 0;
-	}
-	.text1 {
-		position: absolute;
-	    top: 1.25rem;
-	    left: 0;
-	    white-space: pre-line;
-	    margin: 0;
-	    z-index: -1;
-	}
-	
-	.btn btn-secondary {
-		font-weight: 500;
-    	text-align: center;
-    	user-select: none;
-	    color: #c5c5c5;
-	    background: #fff;
-	    border: 0;
-	    padding: 0 1rem 0 0;
-	    cursor: default;
-	}
-	
-	
-	
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	
-	<div id="border">
-    	<br>
-        <h1>게시글 작성</h1>
-        <button id="made" type="button" disabled="disabled" class="btn btn-secondary">등록</button>
-        <form>
-	        <div id="file">
-	        	<div id="file2">
-		            <img class="icon" src="<%= contextPath %>/resources/image/camera.svg" />	        	
-	        	</div>
-	        </div>
-	        <br>
-	        <div class="test3">
-	        	<div class="test4">
-	        		<label class="test5">
-	        			<input class="test2" type="text" placeholder="게시글 제목을 입력해주세요" size="60">		
-	        		</label>
-	        	</div>
-	        	<div>
-	        		<span>
-		        		<textarea class="test" cols="94"rows="17" >
-	            		</textarea>
-	        		</span>
-	        		
-	        	</div>
-	        </div>
-	        
-	        <br><br><hr>
-	
-	        
-        </form>
-    </div>
-	
+	<div id="wrap">
+		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px;">
+		<div id="wrap2">
+			<div id="wrap-title">
+					<div id="wrap-title2" style="font-size:1">
+						<font style="font-size: 30px; font-weight: bold;">게시글 글작성</font>
+						<button	type="button" class="btn" disabled="disabled" style="font-size: 20px; font-weight: bold;">등록</button>	
+					</div>
+					<div id="file">
+						<div id="file2">
+							<input type=file class=file>
+						</div>
+					</div>
+		<br>
+					<div id="title">
+						<div id="title1">
+							<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
+						</div>
+					</div>
+					<br>
+					<div id="content">
+						<div id="content2">
+							<textarea id="content3" row="10" placeholder="게시글 내용을 입력해주세요."></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 		
 	<%@ include file="../common/footer.jsp" %>
 </body>
