@@ -61,6 +61,44 @@ public class NoticeService {
 		
 		return listCount;
 	}
+
+
+	public int deleteNoticeBoard(int noticeNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new NoticeDao().deleteNoticeBoard(noticeNo, conn);
+				
+		if(result > 0 ) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close();
+		
+		return result;
+	}
+
+
+	public int updateNoticeBoard(Notice n) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+        
+        int result = new NoticeDao().updateNoticeBoard(n, conn);
+        
+        if (result > 0) {
+        	JDBCTemplate.commit(conn);
+        } else {
+        	JDBCTemplate.rollback(conn);
+        }
+        
+        JDBCTemplate.close();
+        
+        return result;
+	}
+
+
+	
 		
 		
 		

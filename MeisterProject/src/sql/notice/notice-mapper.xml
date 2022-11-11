@@ -52,6 +52,19 @@
 	      AND STATUS = 'Y'
 	</entry>
 	
+	<entry key="deleteNoticeBoard">
+		UPDATE NOTICE
+		SET STATUS = 'N'
+		WHERE NOTICE_NO = ?	
+	</entry>
+	
+	<entry key="updateNoticeBoard">
+		UPDATE NOTICE
+		SET NOTICE_TITLE = ?,
+			NOTICE_CONTENT = ?
+		WHERE NOTICE_NO = ?
+	</entry>
+	
 	
 	
 	
