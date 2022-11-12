@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -69,7 +71,7 @@ private Properties prop = new Properties();
 			
 			rset = psmt.executeQuery();
 			
-			if(rset.next()) {
+			while(rset.next()) {
 				Board b = new Board(
 						rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_CONTENT"),
@@ -77,7 +79,8 @@ private Properties prop = new Properties();
 						rset.getInt("BOARD_COUNT"),
 						rset.getInt("BOARD_RECOMMEND"),
 						rset.getInt("USER_NO"),
-						rset.getDate("BOARD_DATE")
+						rset.getString("BOARD_DATE"),
+						""
 					);
 				
 				board.add(b);
@@ -85,10 +88,10 @@ private Properties prop = new Properties();
 			
 			int cnt = board.size();
 			
-			if(board.size() < 3) {
+			if(cnt < 3) {
 				
 				for(int i=0; i < 3-cnt; i++){
-					Board b = new Board(0,"작성된 게시글이 없습니다.","없음",0,0,0,new Date());
+					Board b = new Board(0,"작성된 게시글이 없습니다.","없음",0,0,0,"","");
 					board.add(b);
 				}
 			}
@@ -127,7 +130,8 @@ public Board selectBoard(Connection conn , int boardNo) {
 						rset.getInt("BOARD_COUNT"),
 						rset.getInt("BOARD_RECOMMEND"),
 						rset.getInt("USER_NO"),
-						rset.getDate("BOARD_DATE")
+						rset.getString("BOARD_DATE"),
+						""
 						);
 
 			}
@@ -189,16 +193,24 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 			rset = psmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Board(rset.getInt("BOARD_NO"),
+				String file_name = rset.getString("FILE_PATH") == null ? "" : rset.getString("FILE_PATH");
+				String change_name = rset.getString("change_name") == null ? "" : rset.getString("change_name");
+				
+				String file = "";
+				file = file_name +"/"+change_name;
+				Board b;
+				b = new Board(rset.getInt("BOARD_NO"),
 						 rset.getString("BOARD_CONTENT"),
 						  rset.getString("BOARD_TITLE"),
 						  rset.getInt("BOARD_COUNT"),
 						  rset.getInt("BOARD_RECOMMEND"),
 						  rset.getInt("USER_NO"),
-						  rset.getDate("BOARD_DATE")
-						  ));
+						  rset.getString("BOARD_DATE"),
+						  file
+						 );
+				list.add(b);
+			
 			}
-		
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

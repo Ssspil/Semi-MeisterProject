@@ -9,18 +9,16 @@
 <style>
 	#wrap {
 /* 		background: black; */
-        color: orange;
-        width: 1100px;
+        
+        width: 1500px;
         height: 800px;
         margin: auto;
        	padding-top: 105px;
 	}
-	#wrap2 {
-		poisiton: 
-	}
+
 	#wrap .btn {
 		display:block;
-		color: orange;
+		color: black;
 	}
 	#enroll-form input {
 		display: block;
@@ -40,6 +38,14 @@
 	    height: 100%;
 	    margin: auto;
 	}
+	   .file{
+        box-sizing: border-box;
+        margin: auto;
+        position: relative;
+        left:240px;
+        top:20px;
+
+    }
 	#file {
 		height: 100px;
     	padding: 15px;
@@ -47,14 +53,14 @@
 	}
 	
 	#file2 {
+		back
 		display: flex;
 	    align-items: center;
-	    justify-content: space-between;
-	    width: 60.625rem;
+	    width: 1500px;
 	    height: 100%;
-	    margin: auto;
 	    border-top: 1px solid orange;
 		border-bottom: 1px solid orange;
+		background-color: aliceblue;
 	}
 	
 	#title {
@@ -104,6 +110,18 @@
 		outline: none;
 		
 	}
+.input-file-button{
+  padding: 6px 25px;
+  background-color:#FF6600;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+#camera{
+width: 30px;
+height:30px;
+}
+
 </style>
 </head>
 <body>
@@ -118,19 +136,24 @@
 					</div>
 					<div id="file">
 						<div id="file2">
-							<input type=file class=file>
+							<div class=file>
+								<label className="input-file-button" for="input-file">
+  											<i id="camera" class="bi bi-camera-fill"></i>
+									</label>
+							<input type="file" id="input-file" style=display:none>
+
 						</div>
 					</div>
 		<br>
 					<div id="title">
 						<div id="title1">
-							<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
+					<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
 						</div>
 					</div>
 					<br>
 					<div id="content">
 						<div id="content2">
-							<textarea id="content3" row="10" placeholder="게시글 내용을 입력해주세요."></textarea>
+							<textarea id="content3" rows="10" placeholder="게시글 내용을 입력해주세요."></textarea>
 						</div>
 					</div>
 				</div>
