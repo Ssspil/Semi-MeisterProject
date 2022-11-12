@@ -34,8 +34,8 @@ public class Board {
 	// 게시글 등록 부분 생성자
 	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardString,String titleImg) {
 		super();
-		this.boardNo =boardNo;
-		this.boardContent=boardContent;
+		this.boardNo = boardNo;
+		this.boardContent = boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
@@ -90,7 +90,6 @@ public class Board {
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
-
 	}
 
 

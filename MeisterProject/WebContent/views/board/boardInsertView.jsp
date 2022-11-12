@@ -110,17 +110,17 @@
 		outline: none;
 		
 	}
-.input-file-button{
-  padding: 6px 25px;
-  background-color:#FF6600;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-}
-#camera{
-width: 30px;
-height:30px;
-}
+	.input-file-button{
+		  padding: 6px 25px;
+		  background-color:#FF6600;
+		  border-radius: 4px;
+		  color: white;
+		  cursor: pointer;
+	}
+	#camera{
+		width: 30px;
+		height:30px;
+	}
 
 </style>
 </head>
