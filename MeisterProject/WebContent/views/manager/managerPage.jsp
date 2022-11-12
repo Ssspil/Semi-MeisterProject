@@ -6,22 +6,24 @@
    Member loginUser = (Member)session.getAttribute("loginUser");
    // 로그인 이전 or 로그인 실패 : null
 
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="author" content="JSP" />
-        <title>관리자 페이지</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        
-        <!-- css -->
-        <link href="<%= contextPath %>/resources/css/manager.css?000002" rel="stylesheet" type="text/css"  />
-        
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="author" content="JSP" />
+    <title>관리자 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    
+    <!-- css -->
+    <link href="<%= contextPath %>/resources/css/manager.css?000002" rel="stylesheet" type="text/css"  />
+    
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
