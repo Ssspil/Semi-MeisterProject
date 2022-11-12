@@ -130,12 +130,12 @@
 	<div id="web-body">
 		
 		<div class="container">
-			<h1>제목</h1>
+			<%= b.getBoardTitle() %>
 			<br>
 			<br>
 			<div id="title">
 			<img src="" id="img"> 
-			<span  id="nickname">sssssssssssssssssss</span>
+			<span  id="nickname"><%=b.getNi %></span>
 			<span id="date">20132399</span>
 			<button class="btn">수정</button>
 			<button class="btn">삭제</button>

@@ -128,6 +128,7 @@
 	<%@ include file="../common/header.jsp" %>
 	<div id="wrap">
 		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px;">
+		<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
 		<div id="wrap2">
 			<div id="wrap-title">
 					<div id="wrap-title2" style="font-size:1">
@@ -147,7 +148,7 @@
 		<br>
 					<div id="title">
 						<div id="title1">
-					<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요."> <%= b.getBoardTitle %>
+					<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
 						</div>
 					</div>
 					<br>
