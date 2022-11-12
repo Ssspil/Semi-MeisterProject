@@ -1,7 +1,5 @@
 package com.kh.board.model.vo;
 
-import java.util.Date;
-
 public class Board {
 	private int boardNo;
 	private String boardTitle;
@@ -9,7 +7,7 @@ public class Board {
 	private String boardContent;
 	private int boardCount;
 	private int boardRecommend;
-	private Date boardDate;
+	private String boardString;
 	private String status;
 	private int userNo;
 	private String titleImg;	// 커뮤니티 게시판에 썸네일 표시용
@@ -19,7 +17,7 @@ public class Board {
 	
 	// 기본생성자
 	public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
-			Date boardDate, String status, int userNo, String titleImg) {
+			String boardString, String status, int userNo, String titleImg) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -27,14 +25,14 @@ public class Board {
 		this.boardContent = boardContent;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
-		this.boardDate = boardDate;
+		this.boardString = boardString;
 		this.status = status;
 		this.userNo = userNo;
 		this.titleImg = titleImg;
 	}
 	
 	// 게시글 등록 부분 생성자
-	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,Date boardDate) {
+	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardString,String titleImg) {
 		super();
 		this.boardNo =boardNo;
 		this.boardContent=boardContent;
@@ -42,23 +40,24 @@ public class Board {
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
-		this.boardDate = boardDate;
+		this.boardString = boardString;
+		this.titleImg = titleImg;
 		
 	}
 	
 	// 게시글 수정 부분 생성자
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardDate, int userNO) {
+	public Board(int boardNo, String boardTitle, String boardContent, String boardString, int userNO) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
-		this.boardDate = boardDate;
+		this.boardString = boardString;
 		this.userNo = userNO;
 	}
 	
 	// 게시글 목록 불러오기 부분 생성자
 	// title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
-	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,Date boardDate,
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardString,
 			String status, String titleImg) {
 		super();
 		this.boardNo = boardNo;
@@ -67,12 +66,11 @@ public class Board {
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
-		this.boardDate = boardDate;
+		this.boardString = boardString;
 		this.status = status;
 		this.titleImg = titleImg;
 	}
-	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,Date boardDate
-			) {
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardString) {
 		super();
 		this.boardNo = boardNo;
 		this. boardContent =  boardContent;
@@ -80,7 +78,7 @@ public class Board {
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
-		this.boardDate = boardDate;
+		this.boardString = boardString;
 
 	}
 	public Board(int boardNo,String boardContent, String boardTitle, int boardCount, int boardRecommend, int userNo
@@ -143,12 +141,12 @@ public class Board {
 		this.boardRecommend = boardRecommend;
 	}
 
-	public Date getBoardDate() {
-		return boardDate;
+	public String getBoardString() {
+		return boardString;
 	}
 
-	public void setBoardDate(Date boardDate) {
-		this.boardDate = boardDate;
+	public void setBoardString(String boardString) {
+		this.boardString = boardString;
 	}
 
 	public String getStatus() {
@@ -178,7 +176,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardType=" + boardType +", boardContent=" + boardContent
-				+ ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardDate=" + boardDate
+				+ ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardString=" + boardString
 				+ ", status=" + status + ", userNo=" + userNo + ", titleImg=" + titleImg + "]";
 	}
 	

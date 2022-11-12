@@ -32,8 +32,9 @@ public class MyPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int userNo = loginUser.getUserNo();
 		
 		MemberService mService = new MemberService();
 		
