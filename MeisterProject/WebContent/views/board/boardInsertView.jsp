@@ -147,7 +147,7 @@
 		<br>
 					<div id="title">
 						<div id="title1">
-					<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
+					<input type="text" class="title" size="30" placeholder="게시글 제목을 입력헤주세요."> <%= b.getBoardTitle %>
 						</div>
 					</div>
 					<br>
