@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
+<%
+	Board b = (Board) request.getAttribute("b");
+
+	Attachment at = (Attachment) request.getAttribute("at");
+%>
 <!DOCTYPE html>
 <html>
 <head>
