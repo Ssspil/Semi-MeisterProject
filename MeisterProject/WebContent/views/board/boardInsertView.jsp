@@ -153,7 +153,7 @@ height:30px;
 					<br>
 					<div id="content">
 						<div id="content2">
-							<textarea id="content3" row="10" placeholder="게시글 내용을 입력해주세요."></textarea>
+							<textarea id="content3" rows="10" placeholder="게시글 내용을 입력해주세요."></textarea>
 						</div>
 					</div>
 				</div>

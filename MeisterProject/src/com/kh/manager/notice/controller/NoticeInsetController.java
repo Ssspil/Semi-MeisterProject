@@ -47,7 +47,6 @@ public class NoticeInsetController extends HttpServlet {
             request.getSession().setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
             response.sendRedirect(request.getContextPath()+"/notice.ad"); 
         } else {    // 실패시 -> 에러페이지 보여지도록
-            request.setAttribute("errorMsg", "공지사항 등록 실패");
             request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
         }
         

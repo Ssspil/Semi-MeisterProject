@@ -25,12 +25,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- header.css 경로 -->
 <link href=" <%= contextPath %>/resources/css/header.css" rel="stylesheet" type="text/css"  />
-
 <!--  google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <header>
@@ -59,7 +57,7 @@
                         <li>
                             <div class="logo-area">
                                 <a href="<%= contextPath %>" class="logo">
-                                    <img src="<%= contextPath %>/resources/image/logo.png" />
+                                    <img src="<%= contextPath %>/resources/image/logo.png" width="140" height="40"/>
                                 </a>
                             </div> <!-- 메인 메뉴 로고 끝-->
                         </li>
@@ -72,7 +70,7 @@
                         </li>
                         <li>
                             <div class="search">
-                                <i class="fas fa-search"></i><input type="text" placeholder="원하는 영상을 검색해 보세요.">
+                                <input type="text" id="header-search" placeholder="마이스터 검색">
                             </div>
                         </li>
                     </ul>
@@ -136,10 +134,19 @@
             
             
             <% } %>
-            
 
         </div>
     </header>
-    	
+    <script>
+        $(function(){
+            $("#header-search").on({'focus' : function(){
+                $(this).attr("placeholder","원하는 마이스터와 재능을 검색하세요")
+            }, 'blur' : function(){
+                $(this).attr("placeholder","마이스터 검색")
+            }});
+
+        });
+
+    </script>
 </body>
 </html>
