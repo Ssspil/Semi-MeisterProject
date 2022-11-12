@@ -25,12 +25,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- header.css 경로 -->
 <link href=" <%= contextPath %>/resources/css/header.css" rel="stylesheet" type="text/css"  />
-
 <!--  google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <header>
@@ -59,7 +57,7 @@
                         <li>
                             <div class="logo-area">
                                 <a href="<%= contextPath %>" class="logo">
-                                    <img src="<%= contextPath %>/resources/image/logo.png" />
+                                    <img src="<%= contextPath %>/resources/image/logo.png" width="140" height="40"/>
                                 </a>
                             </div> <!-- 메인 메뉴 로고 끝-->
                         </li>
