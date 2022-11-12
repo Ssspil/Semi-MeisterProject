@@ -11,22 +11,14 @@
   box-sizing: border-box;
             height: 1750px;
 }
-
+#text,#titlefooter{
+ position: relative;
+           
+}
 .search_main{
 position: relative;
 
 height:100px;
-}
-#textLine{
-            width:500px;
-            height: 45px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            display: -webkit-inline-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;  
-position: relative;
-top:40px;
 }
 
 </style>
@@ -37,7 +29,7 @@ top:40px;
          <div id="body2-3">
             <a class="font">글제목</a>
             <div>
-          <p id="textLine">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
+          <p id="text">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
           <img src="resources/image/peng.jpg" id="img1">
         </div><br><br><br><br>
           <div>
@@ -48,7 +40,7 @@ top:40px;
       <div id="body2-3"><hr>
             <a class="font">글제목</a>
             <div>
-          <p id="textLine">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
+          <p id="text">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
           <img src="resources/image/peng.jpg" id="img1">
         </div><br><br><br><br>
           <div>
@@ -59,7 +51,7 @@ top:40px;
         <div id="body2-3"><hr>
             <a class="font">글제목</a>
             <div>
-          <p id="textLine">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
+          <p id="text">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
           <img src="resources/image/peng.jpg" id="img1">
         </div><br><br><br><br>
           <div>
@@ -70,7 +62,7 @@ top:40px;
        <div id="body2-3"><hr>
             <a class="font">글제목</a>
             <div>
-          <p id="textLine">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
+          <p id="text">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
           <img src="resources/image/peng.jpg" id="img1">
         </div><br><br><br><br>
           <div>
@@ -92,7 +84,7 @@ top:40px;
         <div id="body2-3"><hr>
             <a class="font">글제목</a>
             <div>
-          <p id="textLine">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
+          <p id="text">내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용용글내용용글내용글내용용글내용글내용용글내용글내용글내용용글내용글내용글내용</p>
           <img src="resources/image/peng.jpg" id="img1">
         </div><br><br><br><br>
           <div>

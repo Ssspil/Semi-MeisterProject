@@ -124,40 +124,41 @@
                     </ol>
 
 
-							<div class="card-body">
-					              <table class="detail-area" style="text-align: center; border: 1px solid rgb(207, 224, 241)">
-									<thead>
-										<tr>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td style="font-size: 13px; border-right: 1px solid rgb(207, 224, 241); ">게시글 번호</td>
-											<td colspan="20" style="width: 700px;"><%= n.getNoticeNo() %></td>
-										</tr>
-										<tr>
-											<td style="width: 100px; height: 80px; font-size: 13px; background-color:rgb(207, 224, 241);  padding:0px;">제목</td>
-											<td style="background-color: rgb(207, 224, 241); " ><%= n.getNoticeTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
-										</tr>
-										<tr>
-											<td style="font-size: 13px; border-right: 1px solid rgb(207, 224, 241);  padding:0px;" >내용</td>
-											<td style="height: 500px; text-align: left; padding:20px;"><%=n.getNoticeContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
-										</tr>
-									</tbody>
-								</table>
-					                 
-					                 
-	                                         <br><br>
-	                                         
-	                                         <div align="center">
-	                                             <a href="<%=contextPath %>/notice.ad" class="btn btn-secondary btn-sm">목록으로 돌아가기</a>
-	                                                
-                                                 <a href="<%=contextPath %>/updateForm.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-warning btn-sm">수정하기</a>
-                                                 <a href="<%=contextPath %>/delete.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-	                                            
-	                                         </div>
-	
-	                                 </div>
+									<div class="card-body">
+							              <table class="detail-area" style="text-align: center; border: 1px solid rgb(207, 224, 241)">
+											<thead>
+												<tr>
+													<th colspan="20" style="font-size: 13px; background-color: rgb(207, 224, 241);  text-align: center;">공지사항 상세보기</th>						
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="font-size: 13px;">게시글 번호</td>
+													<td colspan="20" style="width: 700px;"><%= n.getNoticeNo() %></td>
+												</tr>
+												<tr>
+													<td style="width: 100px; font-size: 13px; background-color:rgb(207, 224, 241);">제목</td>
+													<td style="background-color: rgb(207, 224, 241); " ><%= n.getNoticeTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+												</tr>
+												<tr>
+													<td style="font-size: 13px;"">내용</td>
+													<td style="height: 500px; text-align: left;"><%=n.getNoticeContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+												</tr>
+											</tbody>
+										</table>
+							                 
+							                 
+                                            <br><br>
+                                            
+                                            <div align="center">
+                                                <a href="<%=contextPath %>/notice.ad" class="btn btn-secondary btn-sm">목록으로 돌아가기</a>
+                                                   
+                                                    <a href="<%=contextPath %>/updateForm.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-warning btn-sm">수정하기</a>
+                                                    <a href="<%=contextPath %>/delete.ad?nno=<%=n.getNoticeNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+                                               
+                                            </div>
+
+                                    </div>
                                    
                 </div>
             </main> 
