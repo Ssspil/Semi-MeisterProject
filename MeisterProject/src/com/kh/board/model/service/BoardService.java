@@ -10,23 +10,22 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardService {
-	public int selectListCount() {
+	public int selectListCount(int type) {
 		Connection conn = getConnection();
 
-		int listCount = new BoardDao().selectListCount(conn);
+		int listCount = new BoardDao().selectListCount(conn, type);
 
 		close();
 
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList() {
+	public ArrayList<Board> selectList(int type) {
 		Connection conn = getConnection();
 
-		ArrayList<Board> list = new BoardDao().selectList(conn);
+		ArrayList<Board> list = new BoardDao().selectList(conn, type);
 
 		close();
-
 		return list;
 	}
 

@@ -70,7 +70,7 @@
                         </li>
                         <li>
                             <div class="search">
-                                <i class="fas fa-search"></i><input type="text" placeholder="원하는 영상을 검색해 보세요.">
+                                <input type="text" id="header-search" placeholder="마이스터 검색">
                             </div>
                         </li>
                     </ul>
@@ -134,10 +134,19 @@
             
             
             <% } %>
-            
 
         </div>
     </header>
-    	
+    <script>
+        $(function(){
+            $("#header-search").on({'focus' : function(){
+                $(this).attr("placeholder","원하는 마이스터와 재능을 검색하세요")
+            }, 'blur' : function(){
+                $(this).attr("placeholder","마이스터 검색")
+            }});
+
+        });
+
+    </script>
 </body>
 </html>
