@@ -36,7 +36,7 @@ public class BoardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*//페이징처리 시작
+		//페이징처리 시작
 		int listCount; //현재 총게시글 갯수
 		int currentPage; //현재 페이지
 		int pageLimit; //페이지 하단에 보여질 페이징바의 페이지 최대갯수
@@ -46,13 +46,13 @@ public class BoardController extends HttpServlet {
 		int endPage;//페이지 하단에 보여질 페이징바의 끝수
 		
 		
-		listCount = new BoardService().selectListCount();
+		listCount = new BoardService().selectListCount(1);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 	
 		pageLimit = 10;
 		
-		boardLimit = 6;
+		boardLimit = 5;
 	
 		maxPage = 11;
 
@@ -69,19 +69,38 @@ public class BoardController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
+		listCount = new BoardService().selectListCount(2);
 		
+		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
+	
+		pageLimit = 10;
 		
+		boardLimit = 5;
+	
+		maxPage = 11;
+
+		maxPage = (int)Math.ceil((double)listCount/ boardLimit);
 		
-		ArrayList<Board> list = new BoardService().selectList(pi);
+		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
 		
+		endPage = startPage + pageLimit - 1;
 		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi2 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Board> list = new BoardService().selectList(1);//new BoardService().selectList("1");
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
-		*/
-	
-
-		ArrayList<Board> list = new BoardService().selectList();
-		request.setAttribute("list",list);
+		
+		ArrayList<Board> list2 = new BoardService().selectList(2); //ArrayList<Board> list2 = new BoardService().selectList(2);
+		System.out.println(list2);
+		request.setAttribute("list2",list2);
+		request.setAttribute("pi2", pi2);
+		
+		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
 		request.setAttribute("hotList",hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);

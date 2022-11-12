@@ -29,7 +29,7 @@ private Properties prop = new Properties();
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int type) {
 		// select문 -> Result객체
 		int listCount = 0;
 		
@@ -41,7 +41,7 @@ private Properties prop = new Properties();
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			
+			psmt.setInt(1, type);
 			rset = psmt.executeQuery();
 			
 			if(rset.next()) {
@@ -140,7 +140,7 @@ public Board selectBoard(Connection conn , int boardNo) {
 		} finally {
 			close(rset);
 			close(psmt);
-		}
+		} 
 		return b;
 	}
 
@@ -176,7 +176,7 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 	
 	return at;
 }
-	public ArrayList<Board> selectList(Connection conn){
+	public ArrayList<Board> selectList(Connection conn, int type){
 		
 		// select 문 => ResultSet
 		ArrayList<Board> list = new ArrayList<>();
@@ -189,6 +189,16 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
+			
+			//int startPage = pi.getStartPage();
+			//int boardLimit = pi.getStartPage() * pi.getBoardLimit();
+			psmt.setInt(1, type);
+		
+		  
+		
+			System.out.println("type:"+type);
+			//psmt.setInt(2, boardLimit);
+			
 			
 			rset = psmt.executeQuery();
 			
@@ -208,8 +218,8 @@ public Attachment selectAttachment(Connection conn, int boardNo) {
 						  rset.getString("BOARD_DATE"),
 						  file
 						 );
+				
 				list.add(b);
-			
 			}
 			
 		} catch (SQLException e) {
