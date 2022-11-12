@@ -31,12 +31,17 @@ public class Board {
 		this.titleImg = titleImg;
 	}
 	
-	// 게시글 등록 부분 생성자
-	public Board(String boardContent,String boardTitle, int userNo) {
+	// 이이수
+	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardString,String titleImg) {
 		super();
-		this.boardContent = boardContent;
+		this.boardNo =boardNo;
+		this.boardContent=boardContent;
 		this.boardTitle = boardTitle;
+		this.boardCount = boardCount;
+		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
+		this.boardString = boardString;
+		this.titleImg = titleImg;
 		
 	}
 	
@@ -76,7 +81,6 @@ public class Board {
 		this.boardString = boardString;
 
 	}
-	
 	public Board(int boardNo,String boardContent, String boardTitle, int boardCount, int boardRecommend, int userNo
 			) {
 		super();
@@ -86,6 +90,7 @@ public class Board {
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
+
 	}
 
 

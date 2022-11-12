@@ -47,7 +47,7 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			String boardTitle = multiRequest.getParameter("boardtitle");
+			String boardTitle = multiRequest.getParameter("boardTitle");
 			String boardContent = multiRequest.getParameter("boardContent");
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
 			
