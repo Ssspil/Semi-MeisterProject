@@ -106,4 +106,16 @@
 	   	FROM ATTACHMENT
 	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
 	</entry>
+	
+	<entry key="selectSameAttachment">
+		SELECT FILE_NO
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
+	</entry>
+	
+	<entry key="deleteAttachment">
+		DELETE
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
+	</entry>
 </properties>

@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.Attachment"%>
+    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.*"%>
 <%
     String cssPath = request.getContextPath();
 	Attachment at = (Attachment) request.getAttribute("at");
+	if(at == null){
+		at = new Attachment();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +29,14 @@
 		String nickname = loginUser.getNickName();
 		String expert = loginUser.getExpert();
 		String exp = loginUser.getExpSubmit();
+		String path = "";
+		if(at.getFilePath() != null){
+			path = at.getFilePath();
+		}
+		String changeName = "";
+		if(at.getChangeName() != null){
+			changeName = at.getChangeName();
+		}
 	%>
 	
 	<div class="outer">
@@ -35,7 +46,10 @@
 		<div class="profile">
 			<table>
 				<tr>
-					<td rowspan="3" width="30"><img src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>"></td>
+					<td rowspan="3" width="30" >
+						<img id="titleImage" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>" 
+						width= 150; height= 100; alt="프로필">
+					</td>
 					<td>
 						<input type="text" value="<%=userName %>" readonly>
 					</td>

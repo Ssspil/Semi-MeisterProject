@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.Attachment"%>
+    pageEncoding="UTF-8" import ="com.kh.member.model.vo.Member, com.kh.common.model.vo.*"%>
 <%
 	Member m = (Member) request.getAttribute("b");
 
 	Attachment at = (Attachment) request.getAttribute("at");
+	
+	if(at == null){
+		at = new Attachment();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -156,6 +160,12 @@
        			return true;
        		}
        		
+       		if($("#chkNick").attr("color") != "darkslateblue"){
+       			event.preventDefault();
+       			alert("닉네임을 올바르게 입력해주세요");
+       			$('#chkNick').focus();
+       		}
+       		
        		if($('#textEmail').val() == ""){
        			event.preventDefault();
        			alert("이메일을 끝까지 입력해주세요");
@@ -184,6 +194,42 @@
        			return true;
        		}
     	}
+	    function nicknameCheck() {
+	    	let regExp = /^[가-힣]+$/gmi;
+	    	let nickname = $("#nickname").val();
+	    	let tet = $("#chkNick");
+	    
+	    	if(!regExp.test(nickname)) {
+	    		$(tet).html("닉네임은 한글로 입력하세요");
+	    		$(tet).attr("color", "orange");
+	    		return false;
+	    	} 
+	    	
+    		if($("#nickname").val().length < 2 || $("#nickname").val().length > 6) {
+	        	$(tet).html("닉네임은 2 ~ 6자 이내로 입력하세요.");
+	        	$(tet).attr("color", "green");
+	        	return false;
+	        }
+	    	
+	    	$.ajax({
+	    		url : "checkName.me",
+	    		data : {nickname : nickname},
+	    		success : function(result) {
+	    			if(result == "NNNNN") {
+	    				$(tet).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
+	    				$(tet).attr("color", "red");
+	    				
+	    			} else {
+	    				$(tet).html("사용 가능한 닉네임 입니다.");
+	    				$(tet).attr("color", "darkslateblue");
+	    				
+	    			}
+	    		},
+	    		error : function() {
+	    			console.log("닉네임 중복체크용 ajax통신 실패");
+	    		}
+	    	})
+	    }		
 	</script>
 	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();" enctype="multipart/form-data">	
 		<div class="outer">
@@ -196,13 +242,15 @@
 			<div id="profileImg">
 				<img id="titleImage" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>" alt="프로필">
 				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
+				<br><br>
 				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
 			<br><br>
 			<input type="hidden" name="userNo" value="<%=userNo %>">
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
-			<input type="text" name="nickName" value="<%=nickname %>" size="80">
+			<input type="text" id="nickname" name="nickName" maxlength="5" value="<%=nickname %>" size="80" onkeyup="nicknameCheck();">
+			<font id="chkNick" size="3"></font>
 			<br>
 			<hr>
 			<h5><b>&nbsp;개인정보 변경</b></h5>
