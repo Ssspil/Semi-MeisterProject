@@ -13,7 +13,10 @@ public class Board {
 	private String titleImg;	// 커뮤니티 게시판에 썸네일 표시용
 	
 	
-
+	
+	public Board() {
+		
+	}
 	
 	// 기본생성자
 	public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
@@ -37,7 +40,9 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.userNo = userNo;
+		
 	}
+	
 	
 	// 이이수
 	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardString,String titleImg) {
@@ -69,7 +74,7 @@ public class Board {
 			String status, String titleImg) {
 		super();
 		this.boardNo = boardNo;
-		this. boardContent =  boardContent;
+		this.boardContent =  boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
@@ -81,7 +86,7 @@ public class Board {
 	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardString) {
 		super();
 		this.boardNo = boardNo;
-		this. boardContent =  boardContent;
+		this.boardContent =  boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;
@@ -93,7 +98,7 @@ public class Board {
 			) {
 		super();
 		this.boardNo = boardNo;
-		this. boardContent =  boardContent;
+		this.boardContent =  boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.boardRecommend = boardRecommend;

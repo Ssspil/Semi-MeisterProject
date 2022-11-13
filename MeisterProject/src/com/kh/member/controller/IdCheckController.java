@@ -12,7 +12,7 @@ import com.kh.member.model.service.MemberService;
 /**
  * Servlet implementation class IdCheckController
  */
-@WebServlet("/idCheck.me")
+@WebServlet("/check.me")
 public class IdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,19 +29,27 @@ public class IdCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String checkId = request.getParameter("checkId");
-
-		int count = new MemberService().idCheck(checkId);
-
+		String checkData = request.getParameter("checkData"); 
+		String type = request.getParameter("type"); // "nickname", "id"
+		 
+		
+		int count = 0;
+		
+		// if문 실행 아이디 체크
+		if("id".equals(type)) { count = new MemberService().idCheck(checkData); }
+		// if문 닉네임 같을때 실행
+		else if("nickname".equals(type)){ count = new MemberService().nicknameCheck(checkData);}
+		 
+		
+		
 		if (count > 0) { // 중복된 아이디가 존재한다. => 사용불가.
 			response.getWriter().print("NNNNN");
 		} else { // 존재하는 아이디가 없을경우 => 사용가능.
 			response.getWriter().print("NNNNY");
 		}
-		
-		
 	
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

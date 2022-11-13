@@ -295,7 +295,7 @@ public class MemberDao {
 	public int nicknameCheck(Connection conn, String nickname) {
 		
 		// select -> ResultSET (숫자하나)
-		int count = 0;
+		int result = 0;
 		
 		PreparedStatement psmt = null;
 		
@@ -310,7 +310,7 @@ public class MemberDao {
 			rset = psmt.executeQuery();
 			
 			if(rset.next()) {
-				count = rset.getInt(1);
+				result = rset.getInt(1);
 			}
 			
 		} catch (SQLException e) {
@@ -320,8 +320,7 @@ public class MemberDao {
 			JDBCTemplate.close(psmt);
 		}
 		
-		return count;
-		
+		return result;
 	}
 		
 

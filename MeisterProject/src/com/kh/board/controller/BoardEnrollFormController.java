@@ -1,4 +1,4 @@
-package com.kh.member.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
-
 /**
- * Servlet implementation class NicknameCheckController
+ * Servlet implementation class BoardEnrollFormController
  */
-@WebServlet("/checkName.me")
-public class NicknameCheckController extends HttpServlet {
+@WebServlet("/enrollForm.bo")
+public class BoardEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NicknameCheckController() {
+    public BoardEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +27,8 @@ public class NicknameCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String nickname = request.getParameter("nickname");
-		
-		int count = new MemberService().nicknameCheck(nickname);
-		
-		if(count > 0) { // 중복된 아이디가 존재한다. => 사용불가.
-			response.getWriter().print("NNNNN");
-		} else { // 존재하는 아이디가 없을경우 => 사용가능.
-			response.getWriter().print("NNNNY");
-		}	
-		
+		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
+	
 	}
 
 	/**

@@ -312,7 +312,7 @@ position: relative;
 
 	<div class="bodyWrite_wrap">
 		<div id="body2-2" align="right">
-			<a href="<%=contextPath%>/insert.bo" class="btn btn-secondary"
+			<a href="<%=contextPath%>/enrollForm.bo" class="btn btn-secondary"
 				style="background-color: orange;"><i
 				class="bi bi-pencil-square "> 글작성 </i></a>
 		</div>

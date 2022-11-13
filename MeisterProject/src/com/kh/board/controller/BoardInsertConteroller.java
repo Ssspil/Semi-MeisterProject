@@ -47,15 +47,17 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			String boardTitle = multiRequest.getParameter("boardTitle");
-			String boardContent = multiRequest.getParameter("boardContent");
+			String boardTitle = multiRequest.getParameter("title");
+			String boardContent = multiRequest.getParameter("content");
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
 			
 			
 			Board b = new Board();
-			b.setBoardTitle(boardTitle);
-			b.setBoardContent(boardContent);
-			b.setUserNo(userNo);
+			
+		    b.setBoardTitle(boardTitle);
+		    b.setBoardContent(boardContent);
+		    b.setUserNo(userNo);
+		 
 			
 			Attachment at = null;
 			
@@ -72,7 +74,7 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			if(result > 0) { // 성공 => list.bo?currentPage=1
 				request.getSession().setAttribute("alertMsg", "게시글 작성 성공!");
-				response.sendRedirect(request.getContextPath() + "/list.bo?currentPage=1");
+				response.sendRedirect(request.getContextPath() + "/boardlist.bo?currentPage=1");
 			} else { // 실패시 => 첨부파일 있었을경우 이미 업로드된 첨부파일을 서버에 보관할 이유가 없다(용량만차지)
 				if(at != null) {
 					// 삭제시키고자 하는 파일객체 생성 -> delete메소드 호출

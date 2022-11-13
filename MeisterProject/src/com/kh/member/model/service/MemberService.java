@@ -107,11 +107,11 @@ public class MemberService {
 		 
 		 Connection conn = JDBCTemplate.getConnection();
 			
-		 int count = new MemberDao().nicknameCheck(conn, nickname);
+		 int result = new MemberDao().nicknameCheck(conn, nickname);
 		 
 		 JDBCTemplate.close();
 		
-		 return count;
+		 return result;
 	 }
 
 	 public Member expertSubmit(Member m) {

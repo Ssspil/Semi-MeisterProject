@@ -237,8 +237,9 @@
 	        }
 	    	
 	    	$.ajax({
-	    		url : "checkName.me",
-	    		data : {nickname : nickname},
+	    		url : "check.me",
+	    		method : "post",
+	    		data : {checkData : nickname, type : "nickname"},
 	    		success : function(result) {
 	    			if(result == "NNNNN") {
 	    				$(tet).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
@@ -257,7 +258,7 @@
 	    }
     </script>
     <script>
-	    function idCheck() {
+	    function idCheck(){
 	    	// 아이디를 입력하는 input 요소 객체
 	        let $userId = $("#userId");
 	        let regExp = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -278,8 +279,9 @@
 	    
 	    	// name이 userId인 요소가 member.jsp에도 있어서 확실하게 어디에 속해있는 요소인지 잘 적어줘야함.
 	    	$.ajax({
-	    		url : "idCheck.me",
-	    		data : {checkId : $userId.val()},
+	    		url : "check.me",
+	    		method : "post", // 디폴트 post
+	    		data : {checkData : $userId.val(), type : "id"},
 	    		success : function(result) {
 	    			if(result == "NNNNN") { // 아이디 사용불가 (이미 존재하거나 탈퇴한 회원만)
 	    				alert("이미 존재하거나 회원탈퇴한 아이디입니다.");
