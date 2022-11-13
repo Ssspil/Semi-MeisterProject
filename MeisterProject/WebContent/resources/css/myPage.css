@@ -10,7 +10,9 @@
     }
     .profile{
     	width: 80%;
+    	height: 200px;
     	margin: auto;
+    	border: 1px #CCCACA solid;
     }
     input{
     	 background-color:inherit; 
