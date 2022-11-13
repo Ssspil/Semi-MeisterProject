@@ -3,28 +3,30 @@
 
 <properties>
 	<entry key="selectList">
-		SELECT b.BOARD_NO as BOARD_NO,
-        b.BOARD_TITLE as BOARD_TITLE,
-        b.BOARD_CONTENT as BOARD_CONTENT,
-        b.BOARD_COUNT as BOARD_COUNT,
-        b.BOARD_RECOMMEND as BOARD_RECOMMEND,
-        b.USER_NO as USER_NO,
-        TO_CHAR(B.BOARD_DATE,'MMDDHH24mi') BOARD_DATE,
-        a.change_name as change_name,
-        a.FILE_PATH as FILE_PATH
-		FROM BOARD b
-		LEFT OUTER JOIN ATTACHMENT a
-		on a.REF_BNO = b.board_no
-		WHERE b.BOARD_TYPE = 1
-		  AND b.STATUS = 'Y'
-		ORDER BY BOARD_DATE DESC 
+		<![CDATA[
+			SELECT b.BOARD_NO as BOARD_NO,
+	        b.BOARD_TITLE as BOARD_TITLE,
+	        b.BOARD_CONTENT as BOARD_CONTENT,
+	        b.BOARD_COUNT as BOARD_COUNT,
+	        b.BOARD_RECOMMEND as BOARD_RECOMMEND,
+	        b.USER_NO as USER_NO,
+	        TO_CHAR(B.BOARD_DATE,'MMDDHH24mi') BOARD_DATE,
+	        a.change_name as change_name,
+	        a.FILE_PATH as FILE_PATH
+			FROM BOARD b
+			LEFT OUTER JOIN ATTACHMENT a
+			on a.REF_BNO = b.board_no
+			WHERE b.BOARD_TYPE = ?
+			AND b.STATUS = 'Y' 
+			ORDER BY BOARD_DATE DESC
+		]]>
 	</entry>
 	
 	<entry key="selectListCount">
 		SELECT COUNT(*) BOARD_COUNT
 		FROM BOARD
 		WHERE STATUS = 'Y'
-		  AND BOARD_TYPE = 1
+		  AND BOARD_TYPE = ?
 	</entry>  
 	
 	<entry key="getHotBoard">
@@ -48,8 +50,8 @@
 
 
 	<entry key ="insertBoard">
-		INSERT INTO BOARD(BOARD_NO, BOARD_TYPE, BOARD_TITLE, BOARD_CONTENT)
-		VALUES (SEQ_BNO.NEXTVAL , 1 , ? , ? )
+		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT, USER_NO)
+		VALUES (SEQ_BNO.NEXTVAL, ?, ?, ?)	
 	</entry>
 	<entry key ="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO , REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)

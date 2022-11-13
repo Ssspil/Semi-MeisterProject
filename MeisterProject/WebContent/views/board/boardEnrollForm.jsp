@@ -110,17 +110,17 @@
 		outline: none;
 		
 	}
-.input-file-button{
-  padding: 6px 25px;
-  background-color:#FF6600;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-}
-#camera{
-width: 30px;
-height:30px;
-}
+	.input-file-button{
+		  padding: 6px 25px;
+		  background-color:#FF6600;
+		  border-radius: 4px;
+		  color: white;
+		  cursor: pointer;
+	}
+	#camera{
+		width: 30px;
+		height:30px;
+	}
 
 </style>
 </head>
@@ -128,6 +128,7 @@ height:30px;
 	<%@ include file="../common/header.jsp" %>
 	<div id="wrap">
 		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px;">
+		<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
 		<div id="wrap2">
 			<div id="wrap-title">
 					<div id="wrap-title2" style="font-size:1">

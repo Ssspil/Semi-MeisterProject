@@ -51,6 +51,7 @@
       </div>
 
     </div>
+    	<br>
       <!-- 메인 검색창 -->
       <div class="search-area">
         <svg class="close-search" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
@@ -94,8 +95,48 @@
       </div>
       <!-- 메인 검색창  끝-->
       
+      
+      
       <div class="icon-area">
-      	아이콘 영역?
+      	<div class="icon-container">
+	      	<ul class="icon-list">
+	      		<li>
+	      			<div>
+	      				<img alt="zz" src="./resources/image/test4.jpeg" width="20" height="20"><a href="#">전체</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">영상</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">영화</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">게임</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">IT</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">운동</a>
+	      			</div>
+	      		</li>
+	      		<li>
+	      			<div>
+	      				<div class="icon">?</div><a href="#">요리</a>
+	      			</div>
+	      		</li>
+	      	</ul>
+	      </div>
       </div>
       
       <div class="interest-area">
