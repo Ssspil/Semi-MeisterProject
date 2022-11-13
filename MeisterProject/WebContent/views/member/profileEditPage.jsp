@@ -242,6 +242,7 @@
 			<div id="profileImg">
 				<img id="titleImage" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>" alt="프로필">
 				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
+				<br><br>
 				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
 			<br><br>

@@ -68,8 +68,6 @@ public class MemberUpdateController extends HttpServlet {
 			Member m  = new Member(userId, nickName, interest, userName, email, phone);
 			
 			Attachment at = null;
-			System.out.println(userId);
-			System.out.println(multiRequest.getOriginalFileName("profileImg"));
 			
 			if(multiRequest.getOriginalFileName("profileImg") != null) {	
 				at = new Attachment();

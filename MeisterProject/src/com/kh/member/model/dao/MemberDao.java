@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
+import java.util.Date;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
@@ -359,11 +360,29 @@ public class MemberDao {
 	
 	public int insertAttachment(Connection conn, Attachment at) {
 		int result = 0;
+		int same = 0;
+		int delete = 0;
+		
 		PreparedStatement psmt = null;
 		
 		String sql = prop.getProperty("insertAttachment");
+		String selectSql = prop.getProperty("selectSameAttachment");
+		String deleteSql = prop.getProperty("deleteAttachment");
 		
 		try {
+			psmt = conn.prepareStatement(selectSql);
+			psmt.setInt(1, at.getRefBNo());
+			same = psmt.executeUpdate();
+			
+			if(same > 0) {
+				psmt = null;
+				psmt = conn.prepareStatement(deleteSql);
+				psmt.setInt(1, at.getRefBNo());
+				
+				delete = psmt.executeUpdate();
+			}
+			
+			psmt = null;
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setInt(1, at.getRefBNo());
