@@ -231,7 +231,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public int insertBoard(Board b, Connection conn) {
+	public int insertBoard(Board b, Connection conn, int type) {
 
 		int result = 0;
 
@@ -245,6 +245,8 @@ public class BoardDao {
 			psmt.setString(1, b.getBoardTitle());
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getUserNo());
+			psmt.setInt(4, type);
+			System.out.println(type);
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {

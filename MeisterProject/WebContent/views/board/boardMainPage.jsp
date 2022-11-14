@@ -472,9 +472,15 @@ position: relative;
       if (type == "ge") {
          $("#geBody").show();
          $("#gungBody").hide();
+
          $("#ge").addClass("bodyClick");   
          $("#gung").removeClass("bodyClick");
        $("#type").val('1');
+
+         $("#ge").addClass("bodyClick");	
+         $("#gung").removeClass("bodyClick");
+		 $("#type").val('1');
+
          $("#boardType").val("ge");
 
       } else if (type == "gung") {
@@ -482,7 +488,11 @@ position: relative;
          $("#gungBody").show();
          $("#gung").addClass("bodyClick");
          $("#ge").removeClass("bodyClick");
+
        $("#type").val('2');
+
+		 $("#type").val('2');
+
 
          $("#boardType").val("gung");
 
@@ -507,4 +517,8 @@ position: relative;
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
    }
+
 </script>
+
+
+

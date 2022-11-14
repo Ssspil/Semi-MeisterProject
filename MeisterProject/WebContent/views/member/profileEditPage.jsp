@@ -212,9 +212,11 @@
 	        }
 	    	
 	    	$.ajax({
-	    		url : "checkName.me",
-	    		data : {nickname : nickname},
+	    		url : "check.me",
+	    		method : "post",
+	    		data : {checkData : nickname, type : "nickname"},
 	    		success : function(result) {
+	    			console.log(result);
 	    			if(result == "NNNNN") {
 	    				$(tet).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
 	    				$(tet).attr("color", "red");
@@ -250,8 +252,9 @@
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
 			<input type="text" id="nickname" name="nickName" maxlength="5" value="<%=nickname %>" size="80" onkeyup="nicknameCheck();">
-			<font id="chkNick" size="3"></font>
 			<br>
+			<font id="chkNick" size="3"></font>
+			<br><br>
 			<hr>
 			<h5><b>&nbsp;개인정보 변경</b></h5>
 			<hr>
