@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
 <%
 	Board b = (Board) request.getAttribute("b");
+	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
 
 	Attachment at = (Attachment) request.getAttribute("at");
 %>
@@ -59,12 +60,12 @@
 		float: right;
 	}
 	#nickname{
-		
+		left: 10%;
 	
 		
 	}
 	#date {
-		
+		right: 100px;
 	}
 	#title{
 		box-sizing: border-box;
@@ -91,15 +92,15 @@
 	}
 	#footer1 {
 		text-align: center;
-		margin-bottom: 10rem;
+		
 		position: relative;
     	width: 100%;
 	}
 	#area {
-		display: flex;
+		
 		align-items: flex-start;
 		position: relative;
-		margin: 1.25rem 0;
+		margin: 20px 0;
 		padding: 1.0625rem 0.875rem;
 		border-radius: 8px;
 		border: 0.0625rem solid white;
@@ -113,14 +114,38 @@
 	}
 	.area {
 		resize:none;
-		width: 100%;
-		height: 50px;
-		padding: 0;
+		width: 640px;
+		height: 40px;
+		padding: 10px;
 		border: 0;
 		outline: none;
 		font-size: 1rem;
 		color: black;
+		font-weight: bold;
+
 	}
+
+	<!---->
+	#reply {
+		display: block;
+		list-style-type: disc;
+		margin-block-start: 1em;
+		margin-block-end: 1em;
+		margin-inline-start: 0px;
+		margin-inline-end: 0px;
+		padding-inline-start: 40px;
+		width: 100%;
+		margin-bottom: 0;
+		padding: 0;
+		margin-top: 0;
+	}
+	#pointer {
+		cursor: pointer;
+		float: right;
+		position: relative;
+		top: -30px;
+	}
+	
 </style>
 </head>
 <body>
@@ -135,7 +160,8 @@
 			<br>
 			<div id="title">
 			<img src="" id="img"> 
-			<span  id="nickname"><%=b.getNi %></span>
+			<span  id="nickname"><%=b.getNICKNAME %></span>
+			<br><br><br>
 			<span id="date">20132399</span>
 			<button class="btn">수정</button>
 			<button class="btn">삭제</button>
@@ -144,18 +170,33 @@
 		<hr class="sen">
 		<div class="outer3">	
 			<div id="content">
-				<textarea name="" id="" cols="30" rows="10" style="resize: none; width: 100%; height: 100%;"></textarea>
+				<textarea name="" id="" cols="30" rows="10" style="resize: none; width: 100%; height: 100%;"><%= b.getBoardContent() %>
+					<% if(at == null) { %>
+						<!-- 첨부파일이 없는경우 -->
+						첨부파일이 없습니다.
+					<% } else { %>
+						<!-- 첨부파일이 있는경우 -->
+						<!-- 브라우저에서 http://localhost:8001/jsp/resources/board_upfiles/xxx.jpg -->
+						<a href="<%=contextPath %>/<%= at.getFilePath() + at.getChangeName() %>" 
+						download="<%= at.getOriginName() %>">
+							<%= at.getOriginName() %>
+						</a> 
+					<% } %>
+				</textarea>
+				
 			</div>
-			<p>d 4 a 7</p>
+			<p>이 부분은 좋아</p>
 		</div>	
 		<div id="footer1">
 			<div id="area">
 				<div id="area1">
-					<textarea class="area">assssss</textarea>
+					<textarea class="area"></textarea>
 				</div>
-				<div></div>
+				
+				<div id="pointer">등록</div>
+				
 			</div>
-			<ul>
+			<ul id="reply">
 				<li></li>
 			</ul>
 		</div>
