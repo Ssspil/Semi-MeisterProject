@@ -36,7 +36,6 @@
 	width:44rem;
 	height : 500px;
 }
-
  	
 </style>
     
@@ -121,7 +120,7 @@
                     </ol>
 
 
-									<div class="card-body">
+									<div class="card-body" id="card-body">
                                         <form action="<%= contextPath %>/insert.ad" method="post" name="noticeEnrollForm">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputTitle" type="text" name="noticeTitle" maxlength="18">
