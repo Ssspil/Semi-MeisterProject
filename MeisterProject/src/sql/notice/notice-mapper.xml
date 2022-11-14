@@ -35,6 +35,7 @@
 	</entry>
 	
 	
+	
 	<entry key="selectNoticeListCount">
 		SELECT COUNT(*) AS COUNT
 		FROM NOTICE
@@ -64,6 +65,44 @@
 			NOTICE_CONTENT = ?
 		WHERE NOTICE_NO = ?
 	</entry>
+	
+	
+	<entry key="searchNotice">
+	
+	SELECT NOTICE_TITLE	
+	FROM NOTICE
+	WHERE NOTICE_TITLE = ?
+	  AND STATUS = 'Y'
+	
+	
+	
+	<!--  SELECT *
+	FROM (SELECT ROWNUM RNUM,
+		  A.* 
+		  FROM (SELECT NOTICE_TITLE
+				FROM NOTICE N
+				WHERE N.STATUS = 'Y'
+				AND NOTICE_TITLE LIKE ? 
+				ORDER BY CREATE_DATE DESC) A
+		  )
+	WHERE RNUM BETWEEN ? AND ? -->
+	</entry>
+	
+ 	<!--	
+	<entry key="selectNoticeListCount">
+		SELECT COUNT(*) AS COUNT
+		FROM NOTICE
+		WHERE STATUS = 'Y'
+		AND NOTICE_TITLE LIKE ?
+	</entry> 
+
+	검색용 카운트
+	
+	-->
+	
+	
+	
+	
 	
 	
 	

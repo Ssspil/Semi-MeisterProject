@@ -49,9 +49,13 @@ public class Notice {
 		this.noticeContent = noticeContent;
 	}
 	
+	// 공지사항 글 제목 검색창
+	public Notice(String noticeTitle) {
+		super();
+		this.noticeTitle = noticeTitle;
+		}
 	
 	
-
 	public int getNoticeNo() {
 		return noticeNo;
 	}

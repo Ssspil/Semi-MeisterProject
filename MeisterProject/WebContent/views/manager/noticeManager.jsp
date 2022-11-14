@@ -159,9 +159,9 @@ table>tbody>tr:hover{
                     </ol>
                     
                     <!-- 검색창 -->
-                    <form action="">
+                    <form action="<%=contextPath%>/search.no">
                     <div class="search">
-                    	<input type="text" name="search_text" id="search_text" size="50px;" placeholder="검색할 제목을 입력하세요.">
+                    	<input type="text" name="search" id="search_text" size="50px;" placeholder="검색할 제목을 입력하세요.">
                     	<input type="submit" value="검색" >
                     </div>
                     </form>
