@@ -2,6 +2,27 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+
+	<entry key="selectList">
+		<![CDATA[
+			SELECT s.SELL_NO as SELL_NO,
+	        s.SELL_TITLE as SELL_TITLE,
+	        s.SELL_CONTENT as SELL_CONTENT,
+	        s.SELL_COUNT as SELL_COUNT,
+	        s.SELL_RECOMMEND as SELL_RECOMMEND,
+	        s.SELL_NO as SELL_NO,
+	        TO_CHAR(S.SELL_DATE,'MMDDHH24mi') SELL_DATE,
+	        a.change_name as change_name,
+	        a.FILE_PATH as FILE_PATH
+			FROM SELL s
+			LEFT OUTER JOIN ATTACHMENT a
+			on a.REF_NO = s.SELL_NO
+			WHERE s.SELL_TYPE = ?
+			AND s.STATUS = 'Y' 
+			ORDER BY SELL_DATE DESC
+		]]>
+	</entry>
+	
 	<entry key="selecInterestCategory">
 		SELECT INTEREST_NO,
 			   INTEREST_NAME
@@ -13,6 +34,49 @@
 			   LOCAL_NAME
 		FROM LOCAL
 	</entry>
+	
+<!-- 	<entry key ="selectSellBoard">
+		SELECT BOARD_NO,
+				CATEGORY_NAME,
+				BOARD_TITLE,
+				BOARD_CONTENT,
+				USER_ID,
+				CREATE_DATE
+		FROM BOARD B
+		LEFT JOIN CATEGORY USING (CATEGORY_NO)
+		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
+		WHERE BOARD_NO = ?
+			AND B.STATUS = 'Y'
+	</entry> -->
+	
+	<entry key ="selectAttachment">
+		SELECT FILE_NO,
+				ORIGIN_NAME,
+				CHANGE_NAME,
+				FILE_PATH,
+				FILE_LEVEL
+		FROM ATTACHMENT
+		WHERE REF_NO = ?
+		ORDER BY FILE_LEVEL
+	</entry>
+	
+	<entry key="insertSellBoard">
+		INSERT INTO SELL(SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NO, LOCAL_NO, USER_NO)
+		VALUES(SEQ_SNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES(SEQ_FNO.NEXTVAL, SEQ_SNO.CURRVAL, ?, ?, ?, 2)
+	</entry>
+	
+	<entry key="insertNewAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, ? )
+	</entry>
+	
+	
+	
 	
 	
 </properties>

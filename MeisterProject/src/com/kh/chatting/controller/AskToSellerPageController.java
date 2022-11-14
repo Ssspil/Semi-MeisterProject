@@ -1,29 +1,28 @@
-package com.kh.sellboard.controller;
+package com.kh.chatting.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.common.model.vo.Interest;
-import com.kh.common.model.vo.Local;
-import com.kh.sellboard.model.service.SellBoardService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class SellEnrollFormController
+ * Servlet implementation class AskToSellerPageController
  */
-@WebServlet("/sellEnrollForm.se")
-public class SellEnrollFormController extends HttpServlet {
+@WebServlet("/askToSeller.se")
+public class AskToSellerPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**2
+       
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellEnrollFormController() {
+    public AskToSellerPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +31,16 @@ public class SellEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
+		String nickName = loginUser.getNickName();
+		int userNo = loginUser.getUserNo();
+		request.setAttribute("nickname", nickName);
+		request.setAttribute("sender", userNo);
 		
-		request.setAttribute("interest", interest);
-		
-		
-		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
-		
-		request.setAttribute("local", local);
-		
-		request.getRequestDispatcher("views/sell/sellEnrollForm.jsp").forward(request, response);
-		
-		
-	
-	
-		
-		// setAttribute
+		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
+		view.forward(request, response);
 	}
 
 	/**

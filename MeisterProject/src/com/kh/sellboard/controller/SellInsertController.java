@@ -38,35 +38,72 @@ public class SellInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF8");
 		
-//		if(ServletFileUpload.isMultipartContent(request)) {
-//			System.out.println("글등록");
-//			
-//			int maxSize = 1024 * 1024 * 10;
-//			
-//			String savePath = request.getSession().getServletContext().getRealPath("");
-//			
-//			
-//			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-//		
-//		
-//		}
-		
-		SellBoard s = new SellBoard();
-		Attachment at = null;
-		
-		int result = new SellBoardService().insertSellBoard(s, at);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("alrtMsg", "글 등록 성공!");
-			response.sendRedirect(request.getContextPath()+"/market.se");
-		} else {
-			/*
-			 * if(at != null) { new File(savePath+at.getChangeName()).delete(); }
-			 */
+		if(ServletFileUpload.isMultipartContent(request)) {
+			System.out.println("글등록");
 			
-			request.setAttribute("errorMsg", "글 등록 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			int maxSize = 1024 * 1024 * 10;
+			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/sellBoard_upfiles/");
+			
+			
+			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+				
+			
+		    String sellTitle = multiRequest.getParameter("sellTitle");
+		    String sellContent = multiRequest.getParameter("sellContent");
+		    int price = Integer.parseInt (multiRequest.getParameter("price"));
+		    
+		    int local = Integer.parseInt (multiRequest.getParameter("local"));
+		    int interest  = Integer.parseInt (multiRequest.getParameter("interest"));
+		    int userNO = Integer.parseInt(multiRequest.getParameter("userNO"));
+		    
+		    
+			SellBoard s = new SellBoard();
+				
+			s.setSellTitle(sellTitle);
+			s.setSellContent(sellContent);
+			s.setPrice(price);
+			
+			s.setLocal(local);
+			s.setInterest(interest);
+			s.setUserNO(userNO);
+			
+			
+			
+			Attachment at = null;
+			
+			if(multiRequest.getOriginalFileName("upfile") != null) {
+		           
+		           at = new Attachment();
+		           at.setOriginName(multiRequest.getOriginalFileName("upfile")); // 원본파일명
+		           at.setChangeName(multiRequest.getFilesystemName("upfile")); // 수정명(실제 서버에 업로드 되어있는 파일명)
+		           at.setFilePath("resources/sellBoard_upfiles/");
+		           
+		       }
+			// 서비스 요청
+			int result = new SellBoardService().insertSellBoard(s, at);
+			
+			if(result > 0) {
+				request.getSession().setAttribute("alrtMsg", "글 등록 성공!");
+				response.sendRedirect(request.getContextPath()+"/market.se?currentPage=1");
+				
+			} else {
+				
+				 if(at != null) { 
+					 
+					 new File(savePath+at.getChangeName()).delete(); 
+				}
+				 			
+				request.setAttribute("errorMsg", "글 등록 실패!");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
+		
 		}
+		
+		
+		
+		
+		
 		
 	}
 

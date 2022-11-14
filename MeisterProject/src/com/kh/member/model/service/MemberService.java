@@ -1,6 +1,7 @@
 package com.kh.member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
@@ -154,6 +155,17 @@ public class MemberService {
 			
 			return at; 
 			
+	}
+
+	public ArrayList<Member> selectAllMember() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> memList = new MemberDao().selectAllMember(conn);
+		
+		JDBCTemplate.close();
+		
+		return memList;
 	}
 	   
 	   

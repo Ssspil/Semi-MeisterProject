@@ -216,6 +216,39 @@ public class NoticeDao {
 		return result;
 		
 	}
+
+
+
+	public Notice searchNotice(String search, Connection conn) {
+		//select문은 반환형이 ResultSet
+		ResultSet rset = null;
+		
+		Notice n = null;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("searchNotice");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, "%" + n.getNoticeTitle() + "%" );
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Notice (rset.getString("NOTICE_TITLE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(psmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return n;
+	}
 	
 	
 		

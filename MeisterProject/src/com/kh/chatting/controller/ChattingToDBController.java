@@ -1,29 +1,28 @@
-package com.kh.sellboard.controller;
+package com.kh.chatting.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.common.model.vo.Interest;
-import com.kh.common.model.vo.Local;
-import com.kh.sellboard.model.service.SellBoardService;
+import com.kh.chatting.model.service.ChattingService;
 
 /**
- * Servlet implementation class SellEnrollFormController
+ * Servlet implementation class ChattingToDBController
  */
-@WebServlet("/sellEnrollForm.se")
-public class SellEnrollFormController extends HttpServlet {
+@WebServlet("/chatting.me")
+public class ChattingToDBController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**2
+       
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellEnrollFormController() {
+    public ChattingToDBController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +31,21 @@ public class SellEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String chatData = request.getParameter("chatData");
 		
-		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
+		int result = new ChattingService().insertChatting(chatData);
+		System.out.println(result);
 		
-		request.setAttribute("interest", interest);
-		
-		
-		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
-		
-		request.setAttribute("local", local);
-		
-		request.getRequestDispatcher("views/sell/sellEnrollForm.jsp").forward(request, response);
-		
-		
-	
-	
-		
-		// setAttribute
+		if(result == 0) {
+			request.setAttribute("errorMsg", "채팅 입력 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "채팅 저장 성공");
+
+			response.sendRedirect(request.getContextPath()+"/mypage.me");
+		}
 	}
 
 	/**

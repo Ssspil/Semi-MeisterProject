@@ -37,7 +37,7 @@ h2{
 /*글등록 버튼*/
 #sellEnrollBtn{
 	width: 100px;
-	height: 45px;
+	height: 40px;
 	font-size: 15px;
 	font-weight: 900;
 	background-color: white;
@@ -66,7 +66,8 @@ h2{
     margin: 0;
     padding: 0;
     height: 100%;
-    z-index : 10;
+    position: relative; /*z-index를 위한 기준 위치 */
+    
 }
 #navi > li {
     width: 10%;
@@ -84,7 +85,6 @@ h2{
     height: 100%;
     display: block;
     line-height: 34px;
-    z-index : 50;
 }
 /* 현재 보이는 목록의 글자들 (전체-마우스를 올렸을 때)*/
 #navi a:hover {
@@ -106,12 +106,13 @@ h2{
     font-weight: 350;
     height: 50px;
     line-height: 50px;
-    
+   
 }
 #navi > li > ul a:hover {
     font-size: 18px;
     background-color: orange;
     color: white;
+    
 }
 #navi > li > a:hover+ul {
     display: block;
@@ -122,8 +123,8 @@ h2{
 
 div.main{
 	background-color :red;
-	margin-left:20rem;
-
+	margin-left:10rem;
+	z-index : 200;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -167,15 +168,16 @@ div.main{
        				<% } %>
 				</ul>
 			</li>
-       	<% } %>
-        </ul>
-
-
-            
+       		<% } %>
+        </ul> 
+        
 		</div> 
+		
 		<div class="main">
-			진호형 보여?
-			
+			<div>썸네일1</div>
+			<div>썸네일2</div>
+			<div>썸네일3</div>
+			<div>썸네일4</div>
 		</div>
 	</div><!— outer 끝 —>
 	

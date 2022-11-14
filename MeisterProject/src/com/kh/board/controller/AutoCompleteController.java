@@ -1,4 +1,4 @@
-package com.kh.sellboard.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.model.vo.Interest;
-import com.kh.common.model.vo.Local;
-import com.kh.sellboard.model.service.SellBoardService;
+import com.google.gson.Gson;
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
 
 /**
- * Servlet implementation class SellEnrollFormController
+ * Servlet implementation class AutoCompleteController
  */
-@WebServlet("/sellEnrollForm.se")
-public class SellEnrollFormController extends HttpServlet {
+@WebServlet("/jqAutoSearch.do")
+public class AutoCompleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**2
+       
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellEnrollFormController() {
+    public AutoCompleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +33,17 @@ public class SellEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
+		String keyword = request.getParameter("keyword");
 		
-		request.setAttribute("interest", interest);
+		// board 테이블에서 검색용 목적으로 BOARD_TITLE 칼럼을 사용하고 , 값으로 keyword를 사용할 예정
+		ArrayList<Board> list = new BoardService().searchList("BOARD_TITLE",keyword);
 		
-		
-		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
-		
-		request.setAttribute("local", local);
-		
-		request.getRequestDispatcher("views/sell/sellEnrollForm.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 		
 		
-	
-	
 		
-		// setAttribute
+		
 	}
 
 	/**

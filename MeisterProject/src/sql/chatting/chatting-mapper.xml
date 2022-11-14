@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="insertChat">
+		INSERT INTO CHATTING(CHAT_NO, CHAT_CONTENT, SENDER, RECEIVER, SELL_NO)
+		VALUES(SEQ_CNO.NEXTVAL, ?, ?, ?, ?)
+	</entry>
+</properties>

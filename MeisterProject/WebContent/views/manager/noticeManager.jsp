@@ -58,6 +58,9 @@ table>tbody>tr:hover{
 	color : darkblue;
 	
 }
+.search{
+	text-align : center;
+}
  	
 </style>
     
@@ -154,6 +157,16 @@ table>tbody>tr:hover{
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">공지목록</li>
                     </ol>
+                    
+                    <!-- 검색창 -->
+                    <form action="<%=contextPath%>/search.no">
+                    <div class="search">
+                    	<input type="text" name="search" id="search_text" size="50px;" placeholder="검색할 제목을 입력하세요.">
+                    	<input type="submit" value="검색" >
+                    </div>
+                    </form>
+                    
+                    <br>
                     <div class="list-area">
 	                    <table border="1" align="center">
 	                    	<thead>
@@ -246,6 +259,8 @@ table>tbody>tr:hover{
 				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
 			});
 		})
+		
+		
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

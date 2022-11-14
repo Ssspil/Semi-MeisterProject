@@ -124,7 +124,7 @@
 									<div class="card-body">
                                         <form action="<%= contextPath %>/insert.ad" method="post" name="noticeEnrollForm">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputTitle" type="text" name="noticeTitle">
+                                                <input class="form-control" id="inputTitle" type="text" name="noticeTitle" maxlength="18">
                                                 <label for="inputTitle">제목</label>
                                             </div>
                                             
