@@ -1,13 +1,17 @@
 package com.kh.sellboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.common.model.vo.Interest;
+import com.kh.common.model.vo.Local;
+import com.kh.sellboard.model.service.SellBoardService;
 
 /**
  * Servlet implementation class SellEnrollFormController
@@ -15,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/sellEnrollForm.se")
 public class SellEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
+	
+    /**2
      * @see HttpServlet#HttpServlet()
      */
     public SellEnrollFormController() {
@@ -29,8 +33,22 @@ public class SellEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/sell/sellEnrollForm.jsp");
-		view.forward(request, response);
+		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
+		
+		request.setAttribute("interest", interest);
+		
+		
+		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
+		
+		request.setAttribute("local", local);
+		
+		request.getRequestDispatcher("views/sell/sellEnrollForm.jsp").forward(request, response);
+		
+		
+	
+	
+		
+		// setAttribute
 	}
 
 	/**

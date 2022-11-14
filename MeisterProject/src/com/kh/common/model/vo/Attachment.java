@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Attachment {
 
     private int fileNo;		// 파일 번호
-    private int refBNo;		// 게시글 번호
+    private int refNo;		// 게시글 번호
     private String originName;	// 원래 파일이름
     private String changeName;	// 수정된 파일 이름
     private String filePath;	// 파일경로
@@ -17,11 +17,11 @@ public class Attachment {
     	super();
     }
 
-	public Attachment(int fileNo, int refBNo, String originName, String changeName, String filePath, Date uploadDate,
+	public Attachment(int fileNo, int refNo, String originName, String changeName, String filePath, Date uploadDate,
 			int fileLevel, String status) {
 		super();
 		this.fileNo = fileNo;
-		this.refBNo = refBNo;
+		this.refNo = refNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
@@ -38,12 +38,12 @@ public class Attachment {
 		this.fileNo = fileNo;
 	}
 
-	public int getRefBNo() {
-		return refBNo;
+	public int getRefNo() {
+		return refNo;
 	}
 
-	public void setRefBNo(int refBNo) {
-		this.refBNo = refBNo;
+	public void setRefBNo(int refNo) {
+		this.refNo = refNo;
 	}
 
 	public String getOriginName() {
@@ -96,7 +96,7 @@ public class Attachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [fileNo=" + fileNo + ", refBNo=" + refBNo + ", originName=" + originName + ", changeName="
+		return "Attachment [fileNo=" + fileNo + ", refNo=" + refNo + ", originName=" + originName + ", changeName="
 				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel
 				+ ", status=" + status + "]";
 	}
