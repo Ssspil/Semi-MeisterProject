@@ -54,6 +54,7 @@ top:40px;
              
                <%for(int i=0; i< list2.size(); i++){ %>
                    <div class="body2-3 <%=i%> <%=i > 4 ? "hide" : ""%>">
+                  
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
                         <br>
@@ -113,56 +114,29 @@ top:40px;
         </div>
         
         	<div class="page_wrap">
-				<%
-					if (currentPage2 != 1) {
-				%>
+				<% if (currentPage2 != 1) { %>
 				<span>&lt&lt</span>
-				<%
-					}
-				%>
-				<%
-					if (startPage2 != 1) {
-				%>
+				<% }%>
+				<% if (startPage2 != 1) { %>
 				<span onclick="pageMove2('pre')">&lt</span>
-				<%
-					}
-				%>
-
-				<%
-					for (int i = startPage2; i <= endPage2; i++) {
-
-					if (i == currentPage2) {
-				%>
+				<% }%>
+				<% for (int i = startPage2; i <= endPage2; i++) {
+					if (i == currentPage2) { %>
 				<span class="page<%=i%> sel" onclick="pageMove2('<%=i%>')">[<%=i%>]
 				</span>
-				<%
-					} else {
-				%>
-
+				<%} else { %>
 				<span class="page<%=i%>" onclick="pageMove2('<%=i%>')">[<%=i%>]
 				</span>
-				<%
-					}
-				%>
-				<%
-					}
-				%>
+				<% } %>
+				<% } %>
 
-				<%
-					if (currentPage2 != endPage2) {
-				%>
+				<% if (currentPage2 != endPage2) { %>
 				<span onclick="pageMove2('next')">&gt</span>
-				<%
-					}
-				%>
-
-				<%
-					if (currentPage2 != maxPage2) {
-				%>
+				<% }%>
+				<% if (currentPage2 != maxPage2) { %>
 				<span>&gt&gt</span>
-				<%
-					}
-				%>
+				<% }%>
+				
 			</div>
     </div>
   
@@ -188,5 +162,7 @@ function pageMove2(currentPage) {
 	$(".page" + currentPage).addClass("sel");
 	
 }
+
+
 </script>
 

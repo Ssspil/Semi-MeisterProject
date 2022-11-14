@@ -35,13 +35,6 @@ public class Board {
 	}
 	
 	// 유홍상
-	public Board(String boardTitle, String boardContent, int userNo) {
-		super();
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.userNo = userNo;
-		
-	}
 	
 	
 	// 이이수

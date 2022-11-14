@@ -47,6 +47,7 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
+			int type = Integer.parseInt(multiRequest.getParameter("type"));
 			String boardTitle = multiRequest.getParameter("title");
 			String boardContent = multiRequest.getParameter("content");
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
@@ -70,7 +71,7 @@ public class BoardInsertConteroller extends HttpServlet {
 			}
 			
 			// 4. 서비스 요청
-			int result = new BoardService().insertBoard(b, at);
+			int result = new BoardService().insertBoard(b, at, type);
 			
 			if(result > 0) { // 성공 => list.bo?currentPage=1
 				request.getSession().setAttribute("alertMsg", "게시글 작성 성공!");

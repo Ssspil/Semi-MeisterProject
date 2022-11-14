@@ -51,10 +51,10 @@ public class BoardService {
 		return result;
 	}
 
-	public int insertBoard(Board b, Attachment at) {
+	public int insertBoard(Board b, Attachment at, int type) {
 		Connection conn = getConnection();
 
-		int result1 = new BoardDao().insertBoard(b, conn);
+		int result1 = new BoardDao().insertBoard(b, conn, type);
 
 		int result2 = 1;
 
