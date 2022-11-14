@@ -3,6 +3,7 @@
     							  com.kh.manager.notice.model.vo.Notice,
     							  com.kh.common.model.vo.PageInfo"%>
 <%
+	
 	ArrayList<Notice> list = (ArrayList<Notice>) request.getAttribute("list");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	
@@ -22,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
 
 <style>
 #noticelist-area{

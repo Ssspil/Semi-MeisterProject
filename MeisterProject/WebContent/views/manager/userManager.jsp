@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member"%>
+    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member,
+    							  java.util.ArrayList"%>
 <%
     String contextPath = request.getContextPath();
+
+	ArrayList<Member> memList = (ArrayList<Member>) request.getAttribute("memList");
 
 %>
 <!DOCTYPE html>
@@ -110,104 +113,67 @@
                                     <thead>
                                         <tr>
                                             <th>회원번호</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>아이디</th>
+                                            <th>이름</th>
+                                            <th>닉네임</th>
+                                            <th>성별</th>
+                                            <th>가입일</th>
+                                            <th>상태</th>
+                                            <th>전문가</th>
+                                            <th>전문분야</th>
+                                            <th>핸드폰번호</th>
+                                            <th>관리</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>$372,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>San Francisco</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>$137,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>Tokyo</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>$327,900</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>$205,500</td>
-                                        </tr>
+										<% if(memList.isEmpty()) { %>
+											<!--  리스트가 비어있는 경우. -->
+											<tr>
+												<td colspan="11">존재하는 유저가 없습니다.</td>
+											</tr>
+										
+										<% }  else {%>
+											<% for(Member m : memList) { %>
+												<tr> 
+													<td><%= m.getUserNo() %></td>
+													<td><%= m.getUserId() %></td>
+													<td>
+														<% if (m.getUserName() == null) { %>
+															 <!--  만약 값이 null 값일경우 안보이게 설정 -->
+														<% } else { %>
+															<%= m.getUserName() %>				
+														<% } %>
+													</td>
+													<td><%= m.getNickName() %></td>
+													<td>
+														<% if (m.getGender() == null) { %>
+															 <!--  만약 값이 null 값일경우 안보이게 설정 -->
+														<% } else { %>
+															<%= m.getGender() %>				
+														<% } %>													
+													</td>
+													<td><%= m.getEnrollDate() %></td>
+													<td><%= m.getStatus() %></td>
+													<td><%= m.getExpert() %></td>
+													<td>
+														<% if (m.getSpeciality() == null) { %>
+															 <!--  만약 값이 null 값일경우 안보이게 설정 -->
+														<% } else { %>
+															<%= m.getSpeciality() %>				
+														<% } %>	
+													</td>
+													<td>
+														<% if (m.getPhone() == null) { %>
+															 <!--  만약 값이 null 값일경우 안보이게 설정 -->
+														<% } else { %>
+															<%= m.getPhone() %>				
+														<% } %>	
+													</td>
+													<td><button class="btn btn-secondary stn-sm" type="button">관리</button></td>
+												</tr>
+										
+											<% } %>
+										<% } %>
                                     </tbody>
                                 </table>
                             </div>

@@ -1,12 +1,15 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -37,7 +40,10 @@ public class UserManagerController extends HttpServlet {
 	        return;
 	    }
 	    
-
+	    ArrayList<Member> memList = new MemberService().selectAllMember();
+	    
+	    request.setAttribute("memList", memList);
+	    
 	    
 	    if(request.getSession().getAttribute("loginUser") != null && 
 	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com")) {   
@@ -45,7 +51,6 @@ public class UserManagerController extends HttpServlet {
 	    	request.getRequestDispatcher("views/manager/userManager.jsp").forward(request, response);
 	    	
 	    } else {   
-	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
 	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 
 	    }
