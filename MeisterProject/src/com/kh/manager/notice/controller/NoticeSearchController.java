@@ -1,4 +1,4 @@
-package com.kh.manager.controller;
+package com.kh.manager.notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.service.MemberService;
+import com.kh.manager.notice.model.service.NoticeService;
+import com.kh.manager.notice.model.vo.Notice;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class UserManagerController
+ * Servlet implementation class NoticeSearchController
  */
-@WebServlet("/users.ad")
-public class UserManagerController extends HttpServlet {
+@WebServlet("/search.no")
+public class NoticeSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserManagerController() {
+    public NoticeSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +32,11 @@ public class UserManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    // 관리자가 아니면 실행 안되게 하는 것.
+
+	
+		System.out.println("공지사항 검색");
+	
+		// 관리자가 아니면 실행 안되게 하는 것.
 	    if( !(request.getSession().getAttribute("loginUser") != null && 
 	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
 	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
@@ -40,22 +45,20 @@ public class UserManagerController extends HttpServlet {
 	        return;
 	    }
 	    
-	    ArrayList<Member> memList = new MemberService().selectAllMember();
+	    request.setCharacterEncoding("UTF-8");
 	    
-	    request.setAttribute("memList", memList);
+	    String search = request.getParameter("search");
+	    
+	    Notice n = new NoticeService().searchNotice(search);
+		
+		request.setAttribute("search", search);
+	    request.getRequestDispatcher("views/manager/noticeManager.jsp").forward(request, response);
 	    
 	    
-	    if(request.getSession().getAttribute("loginUser") != null && 
-	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com")) {   
-	    	
-	    	request.getRequestDispatcher("views/manager/userManager.jsp").forward(request, response);
-	    	
-	    } else {   
-	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-
-	    }
 	    
-	    System.out.println("유저관리 페이지로 이동");
+	    
+	    
+	
 	
 	}
 

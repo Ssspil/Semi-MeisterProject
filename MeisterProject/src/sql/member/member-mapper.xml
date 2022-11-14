@@ -113,4 +113,25 @@
 	   	FROM ATTACHMENT
 	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
 	</entry>
+	
+	<!-- 멤버 전체 조회하는 쿼리문 -->
+	<entry key="selectAllMember">
+		SELECT USER_NO,
+			   USER_ID,
+			   USER_PWD,
+			   NICKNAME,
+			   INTEREST,
+			   ENROLL_DATE,
+			   USER_NAME,
+			   GENDER,
+			   EMAIL,
+			   PHONE,
+			   STATUS,
+			   BLACKLIST,
+			   SPECIALITY,
+			   EXP_SUBMIT,
+			   EXPERT
+		FROM MEMBER	
+	</entry>
+	
 </properties>
