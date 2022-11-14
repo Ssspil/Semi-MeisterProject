@@ -48,9 +48,9 @@ public class NoticeListController extends HttpServlet {
 		
 		listCount = new NoticeService().selectNoticeListCount();
 		
-		currentPage = Integer.parseInt(request.getParameter("currnetPage") == null ? "1" : request.getParameter("currentPage")); 
+		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")); 
 		
-		pageLimit = 10;
+		pageLimit = 6;
 		
 		boardLimit = 6;
 		
