@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+    
+    <%
+    int type = Integer.parseInt(request.getParameter("type"));
+   %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,12 +149,14 @@
 	<%@ include file="../common/header.jsp" %>
 	<div id="wrap">
 		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
- 			<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+			
+			<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"> 
 		<div id="wrap2">
 			<div id="wrap-title">
 					<div id="wrap-title2" style="font-size:1">
 						<font style="font-size: 30px; font-weight: bold;">게시글 글작성</font>
-						<button	type="submit" class="btn" style="font-size: 20px; font-weight: bold;">등록</button>	
+						<button	type="submit" class="btn" style="font-size: 20px; font-weight: bold;">등록</button>
+						<input type="hidden" name="type" value="<%=type %>">	
 					</div>
 					<div id="file">
 						<div id="file2">

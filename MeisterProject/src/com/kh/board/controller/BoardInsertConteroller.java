@@ -55,6 +55,7 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			Board b = new Board();
 			
+			b.setBoardType(type);
 		    b.setBoardTitle(boardTitle);
 		    b.setBoardContent(boardContent);
 		    b.setUserNo(userNo);

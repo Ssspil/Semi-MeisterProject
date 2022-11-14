@@ -1,11 +1,17 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
 
 /**
  * Servlet implementation class BoardEnrollFormController
@@ -21,16 +27,18 @@ public class BoardEnrollFormController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
+		
 	
+		int type = Integer.parseInt(request.getParameter("type"));
+		request.setAttribute("type", type);
+		
+		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
