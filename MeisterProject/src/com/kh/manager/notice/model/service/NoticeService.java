@@ -98,6 +98,21 @@ public class NoticeService {
 	}
 
 
+	public Notice searchNotice(String search) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Notice n = new NoticeDao().searchNotice(search, conn);
+		
+		JDBCTemplate.close();
+		
+		return n;		
+	}
+
+
+	
+
+
 	
 		
 		

@@ -20,8 +20,6 @@ public class SellBoard {
 		
 	}
 	
-	
-	
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
 			Date sellDate, String status, int userNO, String titleImg, int local, int interest) {
@@ -41,13 +39,14 @@ public class SellBoard {
 	}
 
 	// 판매 게시판 등록 부분 생성자
-	public SellBoard(String sellTitle, String sellContent, int price, int local, int interest) {
+	public SellBoard(String sellTitle, String sellContent, int price, int local, int interest, int userNO) {
 		super();
 		this.sellTitle = sellTitle;
 		this.sellContent = sellContent;
 		this.price = price;
 		this.local = local;
 		this.interest = interest;
+		this.userNO = userNO;
 	}
 
 	// 판매 게시판 수정 부분 생성자

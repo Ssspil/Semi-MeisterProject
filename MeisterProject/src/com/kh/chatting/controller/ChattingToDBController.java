@@ -1,44 +1,53 @@
-package com.kh.board.controller;
+package com.kh.chatting.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
+import com.kh.chatting.model.service.ChattingService;
 
 /**
- * Servlet implementation class BoardEnrollFormController
+ * Servlet implementation class ChattingToDBController
  */
-@WebServlet("/enrollForm.bo")
-public class BoardEnrollFormController extends HttpServlet {
+@WebServlet("/chatting.me")
+public class ChattingToDBController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollFormController() {
+    public ChattingToDBController() {
         super();
         // TODO Auto-generated constructor stub
     }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	
-		int type = Integer.parseInt(request.getParameter("type"));
-		request.setAttribute("type", type);
+		request.setCharacterEncoding("UTF-8");
+		String chatData = request.getParameter("chatData");
 		
-		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
+		int result = new ChattingService().insertChatting(chatData);
+		System.out.println(result);
+		
+		if(result == 0) {
+			request.setAttribute("errorMsg", "채팅 입력 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "채팅 저장 성공");
+
+			response.sendRedirect(request.getContextPath()+"/mypage.me");
+		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

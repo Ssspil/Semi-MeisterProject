@@ -8,11 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
+import com.kh.manager.notice.model.vo.Notice;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -370,13 +372,13 @@ public class MemberDao {
 		
 		try {
 			psmt = conn.prepareStatement(selectSql);
-			psmt.setInt(1, at.getRefBNo());
+			psmt.setInt(1, at.getRefNo());
 			same = psmt.executeUpdate();
 			
 			if(same > 0) {
 				psmt = null;
 				psmt = conn.prepareStatement(deleteSql);
-				psmt.setInt(1, at.getRefBNo());
+				psmt.setInt(1, at.getRefNo());
 				
 				delete = psmt.executeUpdate();
 			}
@@ -384,7 +386,7 @@ public class MemberDao {
 			psmt = null;
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setInt(1, at.getRefBNo());
+			psmt.setInt(1, at.getRefNo());
 			psmt.setString(2, at.getOriginName());
 			psmt.setString(3, at.getChangeName());
 			psmt.setString(4, at.getFilePath());
@@ -430,6 +432,48 @@ public class MemberDao {
 		}
 		
 		return at;
+	}
+
+	public ArrayList<Member> selectAllMember(Connection conn) {
+		
+		ArrayList<Member> memList = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllMember");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+            while(rset.next()) {
+                memList.add(new  Member(rset.getInt("USER_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("USER_PWD"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTEREST"),
+						rset.getDate("ENROLL_DATE"),
+						rset.getString("USER_NAME"),
+						rset.getString("GENDER"),
+						rset.getString("EMAIL"),
+						rset.getString("PHONE"),
+						rset.getString("STATUS"),
+						rset.getString("BLACKLIST"),
+						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
+						rset.getString("EXPERT")
+						));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return memList;
 	}
 	
 }
