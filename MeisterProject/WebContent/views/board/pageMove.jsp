@@ -54,6 +54,7 @@ top:40px;
              
                <%for(int i=0; i< list2.size(); i++){ %>
                    <div class="body2-3 <%=i%> <%=i > 4 ? "hide" : ""%>">
+                  
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
                         <br>
