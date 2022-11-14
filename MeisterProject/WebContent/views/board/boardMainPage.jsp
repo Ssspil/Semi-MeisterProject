@@ -314,7 +314,7 @@ position: relative;
 			   <form action="<%=contextPath%>/enrollForm.bo">
             <button type="submit" value="" class="btn btn-secondary"
             style="background-color: orange;"><i class="bi bi-pencil-square "> 글작성 </i></button> 
-            <input type="hidden" id="type" name="type" value="">
+            <input type="hidden" id="type" name="type" value="1">
             </form>
 
 				

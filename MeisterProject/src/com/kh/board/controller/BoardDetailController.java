@@ -31,29 +31,7 @@ public class BoardDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int boardNo = Integer.parseInt(request.getParameter("bno"));
-		
-		BoardService bService = new BoardService();
-		
-		// 조회수 증가 / 게시글 조회 (Board) / 첨부파일 조회(Attachment)
-		
-		int result = bService.increaseCount(boardNo);
-		
-		if(result > 0) { // 유효한 게시글일때 => 게시글, 첨부파일 조회 => 상세조회 페이지
-			
-			Board b = bService.selectBoard(boardNo);
-			Attachment at = bService.selectAttachment(boardNo);
-			
-			request.setAttribute("b", b);
-			request.setAttribute("at", at);
-			
-			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
-			
-		} else { // 에러페이지
-			request.setAttribute("errorMsg", "게시글 상세조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
-		}
+		request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 	
 	}
 
