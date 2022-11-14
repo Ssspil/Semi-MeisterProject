@@ -15,7 +15,7 @@
 	        a.FILE_PATH as FILE_PATH
 			FROM BOARD b
 			LEFT OUTER JOIN ATTACHMENT a
-			on a.REF_BNO = b.board_no
+			on a.REF_NO = b.board_no
 			WHERE b.BOARD_TYPE = ?
 			AND b.STATUS = 'Y' 
 			ORDER BY BOARD_DATE DESC
@@ -45,8 +45,8 @@
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 
-		ORDER BY BOARD_COUNT, BOARD_RECOMMEND DESC]]>
-	</entry> 
+<!-- 		ORDER BY BOARD_COUNT, BOARD_RECOMMEND DESC]]> -->
+<!-- 	</entry>  -->
 
 
 	<entry key ="insertBoard">
