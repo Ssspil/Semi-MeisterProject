@@ -127,19 +127,30 @@
 		font-size: 17px;
     	font-weight: bold;
 	}
+	.btn {
+		background-color: white;
+		color: orange;
+		border-radius: 6px;
+		width: 100px;
+		height: 45px;
+	}
+	.btn:hover {
+		background-color: orange;
+		color: white;
+	}
 
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
 	<div id="wrap">
-		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px;">
-<%-- 		<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"> --%>
+		<form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
+ 			<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
 		<div id="wrap2">
 			<div id="wrap-title">
 					<div id="wrap-title2" style="font-size:1">
 						<font style="font-size: 30px; font-weight: bold;">게시글 글작성</font>
-						<button	type="submit" value="등록" class="btn" disabled="disabled" style="font-size: 20px; font-weight: bold;">등록</button>	
+						<button	type="submit" class="btn" style="font-size: 20px; font-weight: bold;">등록</button>	
 					</div>
 					<div id="file">
 						<div id="file2">
@@ -155,13 +166,13 @@
 		<br>
 					<div id="title">
 						<div id="title1">
-					<input type="text" name="title" class="title" size="30" placeholder="게시글 제목을 입력헤주세요.">
+					<input type="text" name="title" maxlength="30" class="title" size="100" placeholder="게시글 제목을 입력헤주세요." required>
 						</div>
 					</div>
 					<br>
 					<div id="content">
 						<div id="content2">
-							<textarea id="content3" name="content" rows="10" placeholder="게시글 내용을 입력해주세요."></textarea>
+							<textarea id="content3" maxlength="500" name="content" rows="10" placeholder="게시글 내용을 입력해주세요." required></textarea>
 						</div>
 					</div>
 				</div>
@@ -169,12 +180,12 @@
 		</form>
 	</div>
 		
+	<script>
+		function fileChange(){
+			$("#fileName").text($("#input-file")[0].files[0].name);
+		}
+	</script>
+	
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
-
-<script>
-function fileChange(){
-	$("#fileName").text($("#input-file")[0].files[0].name);
-}
-</script>

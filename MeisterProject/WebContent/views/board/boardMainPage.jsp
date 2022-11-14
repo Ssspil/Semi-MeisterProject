@@ -312,9 +312,16 @@ position: relative;
 
 	<div class="bodyWrite_wrap">
 		<div id="body2-2" align="right">
-			<a href="<%=contextPath%>/enrollForm.bo" class="btn btn-secondary"
-				style="background-color: orange;"><i
-				class="bi bi-pencil-square "> 글작성 </i></a>
+		<% if(loginUser != null) { %>
+			<div align="right" style="width:850px;">
+				<a href="<%=contextPath %>/enrollForm.bo" class="btn btn-secondary">글작성</a>
+				<br>
+				<br>
+			</div>
+		<% } %>
+<%-- 			<a href="<%=contextPath%>/enrollForm.bo" class="btn btn-secondary" --%>
+<!-- 				style="background-color: orange;"><i -->
+<!-- 				class="bi bi-pencil-square "> 글작성 </i></a> -->
 		</div>
 		<hr>
 	</div>
