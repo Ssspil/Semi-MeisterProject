@@ -1,13 +1,16 @@
 package com.kh.chatting.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
+import com.kh.chatting.model.service.ChattingService;
 
 /**
  * Servlet implementation class ChattingToDBController
@@ -31,8 +34,18 @@ public class ChattingToDBController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String chatData = request.getParameter("chatData");
 		
-		//int result = new MemberService().insertChatData(m);
-		System.out.println(chatData);
+		int result = new ChattingService().insertChatting(chatData);
+		System.out.println(result);
+		
+		if(result == 0) {
+			request.setAttribute("errorMsg", "채팅 입력 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "채팅 저장 성공");
+
+			response.sendRedirect(request.getContextPath()+"/mypage.me");
+		}
 	}
 
 	/**
