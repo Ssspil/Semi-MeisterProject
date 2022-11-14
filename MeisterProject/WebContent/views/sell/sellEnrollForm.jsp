@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local"%>
+<%
+	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");
+
+	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +87,7 @@
 	  display: flex;
 	  align-items: center;
 	  justify-content: center;
-	  margin-left: 10px;
+	  margin-left : 10px;
 	 
 	 }.btn-upload:hover {
 		border: 2px;
@@ -103,6 +109,9 @@
 		 outline: none;
      border: 3px solid rgb(255, 212, 0);
 	}
+	.cate{
+		text-align: center;
+	}
 	
 	
 </style>
@@ -119,7 +128,9 @@
 	<div class="outer">
 		<h2>마켓 글 등록</h2>
 		
-		<form id="enroll-form" action="<%=contextPath %>/insert.se" method="post">
+		<form id="enroll-form" action="<%=contextPath %>/insert.se" method="post" enctype="multipart/form-data">
+		
+		<input type="hidden" name="userNO" value="<%= loginUser.getUserNo() %>">
 		<table class="tb1">
 			<tr>
 				<td>
@@ -135,30 +146,38 @@
 				<b>카테고리 :</b>
 				</td>
 				<td>
-				<select name="category" id="interest_select" class="cate" required>
+				<select name="interest" id="interest_select" class="cate" required>
 					<option style="text-align: center;" value="">관심분야 선택</option>
-					<option style="text-align: center;" value="video">영상</option>
-					<option style="text-align: center;" value="move">영화</option>
-					<option style="text-align: center;" value="game">게임</option>
-					<option style="text-align: center;" value="it">IT</option>
-					<option style="text-align: center;" value="sports">운동</option>
-					<option style="text-align: center;" value="cook">요리</option>
+					<!-- <option value="10">영상</option>
+					<option style="text-align: center;" value="20">영화</option>
+					<option style="text-align: center;" value="30">게임</option>
+					<option style="text-align: center;" value="40">IT</option>
+					<option style="text-align: center;" value="50">운동</option>
+					<option style="text-align: center;" value="60">요리</option> -->
+					<% for(Interest i : interest) { %>
+								<option value="<%= i.getInterestNo() %>"><%= i.getInterestName() %></option>
+								
+							<%} %>
 				</select>
 				<br>
 				<br>
-				<select name="categoty" id="local_select" class="cate" >
+				<select name="local" id="local_select" class="cate" >
 					<option style="text-align: center;" value="">지역 선택</option>
-					<option style="text-align: center;" value="seoul">서울</option>
-					<option style="text-align: center;" value="inchun">인천</option>
-					<option style="text-align: center;" value="busan">부산</option>
-					<option style="text-align: center;" value="ulsan">울산</option>
-					<option style="text-align: center;" value="daejun">대전</option>
-					<option style="text-align: center;" value="gwangju">광주</option>
-					<option style="text-align: center;" value="gyeonggi">경기</option>
-					<option style="text-align: center;" value="chungcheong">충북/충남</option>
-					<option style="text-align: center;" value="jeolla">전북/전남</option>
-					<option style="text-align: center;" value="gyeongsang">경북/경남</option>
-					<option style="text-align: center;" value="jeju">제주</option>
+					<!-- <option style="text-align: center;" value="5">서울</option>
+					<option style="text-align: center;" value="15">인천</option>
+					<option style="text-align: center;" value="25">부산</option>
+					<option style="text-align: center;" value="35">울산</option>
+					<option style="text-align: center;" value="45">대전</option>
+					<option style="text-align: center;" value="55">광주</option>
+					<option style="text-align: center;" value="65">경기</option>
+					<option style="text-align: center;" value="75">충북/충남</option>
+					<option style="text-align: center;" value="85">전북/전남</option>
+					<option style="text-align: center;" value="95">경북/경남</option>
+					<option style="text-align: center;" value="105">제주</option> -->
+					<% for(Local l : local) { %>
+								<option value="<%= l.getLocalNo() %>"><%= l.getLocalName() %></option>
+								
+							<%} %>
 				</select>
 				</td>
 			</tr>
@@ -171,7 +190,7 @@
 				<b>마켓 글 제목 :</b>
 				</td>
 				<td>
-				<input type="text" id="input1" class="inpu" placeholder="등록할 제목을 입력해주세요" required>
+				<input name="sellTitle" type="text" id="input1" class="inpu" placeholder="등록할 제목을 입력해주세요" required>
 				</td>
 			</tr>
 			<tr>
@@ -183,7 +202,7 @@
 				<b>간단한 설명 작성 : </b>
 				</td>
 				<td>
-				<input type="text" id="input2" class="inpu" placeholder="작성할 내용을 입력해주세요" required>
+				<input name="sellContent" type="text" id="input2" class="inpu" placeholder="작성할 내용을 입력해주세요" required>
 				</td>			
 			</tr>
 			<tr>
@@ -199,7 +218,7 @@
 				<label for="file">
 					<b>첨부파일</b>
 				</label>
-				<input type="file" name="file" id="file" class="inpu">
+				<input type="file" name="upfile" id="file" class="inpu">
 				</td>
 			</tr>
 			<tr>
@@ -223,7 +242,7 @@
 				<b>가격 정보 :</b> 
 				</td>
 				<td>
-					<textarea id="textarea1" style="resize: none;" class="inpu" placeholder="가격 정보를 입력해주세요." required></textarea>
+					<textarea name="price" id="textarea1" style="resize: none;" class="inpu" placeholder="가격 정보를 입력해주세요." required></textarea>
 				</td>
 			</tr>
 			<tr>
