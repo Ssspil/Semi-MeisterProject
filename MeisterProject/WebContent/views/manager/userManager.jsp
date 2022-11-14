@@ -169,7 +169,9 @@
 															<%= m.getPhone() %>				
 														<% } %>	
 													</td>
-													<td><button class="btn btn-secondary stn-sm" type="button">관리</button></td>
+													<td>
+														<button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#아이디">관리</button>
+													</td>
 												</tr>
 										
 											<% } %>
