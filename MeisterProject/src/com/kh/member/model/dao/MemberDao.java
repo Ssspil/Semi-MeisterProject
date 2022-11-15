@@ -475,5 +475,40 @@ public class MemberDao {
 		
 		return memList;
 	}
-	
+
+	public int userExUpdateByManager(Member m, Connection conn) {
+		
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String sql = prop.getProperty("userExUpdateByManager");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, m.getUserId());
+			psmt.setString(2, m.getUserPwd());
+			psmt.setString(3, m.getNickName());
+			psmt.setString(4, m.getInterest());
+			psmt.setString(5, m.getUserName());
+			psmt.setString(6, m.getGender());
+			psmt.setString(7, m.getEmail());
+			psmt.setString(8, m.getPhone());
+			psmt.setString(9, m.getSpeciality());
+			psmt.setString(10, m.getExpert());
+			psmt.setInt(11, m.getUserNo());
+					
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+
+
 }

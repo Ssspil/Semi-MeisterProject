@@ -168,7 +168,29 @@ public class MemberService {
 		
 		return memList;
 	}
-	   
+
+	public Member userExUpdateByManager(Member m) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().userExUpdateByManager(m, conn);
+		
+		Member newMem = null;
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			
+			newMem = new MemberDao().selectMember(conn, m.getUserId());
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		JDBCTemplate.close();
+		
+		return newMem;
+	}
+
 	   
 	   
 	   
