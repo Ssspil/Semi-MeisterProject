@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
 <%
 	Board b = (Board) request.getAttribute("b");
+	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
 
 	Attachment at = (Attachment) request.getAttribute("at");
 %>
@@ -14,34 +15,27 @@
 	body {
 		margin: auto;
 	}
-	#web-header {
-		box-sizing: border-box;
-		width: 1000px;
-	    height: 20%;
-		margin: auto;
-		position: relative;
-		border: 1px solid red;
-		
-	}
+	
 	#web-body {
 		box-sizing: border-box;
-		
+		padding-top: 100px;
 		width: 750px;
 		margin: 0 auto;
 		border: 1px solid green;
     }
 	.container {
-		width: 100%;
-		height: 30%;
-		box-sizing: border-box;
-		display: block;
-		margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        margin-top: 2rem
 		
 	}
 	.outer3 {
 		box-sizing: border-box;
-		border: 1px solid darkblue;
-		height: 50%;
+		border: 1px solid blue;
+		height: auto;
+		display: flex;
+   	 	flex-direction: column;
 	}
 	.outer4 {
 		margin: 0 auto;
@@ -55,28 +49,26 @@
 		width: 150px;
 		height: 100px;
 	}
-	#btn{
-		float: right;
-	}
 	#nickname{
-		
+		left: 10%;
 	
 		
 	}
 	#date {
-		
+		right: 100px;
 	}
 	#title{
-		box-sizing: border-box;
-		height: 20%;
+		display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
 		
 	}
 	#content{
 		box-sizing: border-box;
-		border: 1px solid black;
+		border: 1px solid yellow;
 		width: 100%;
-		height: 60%;
-		margin: auto;
+		height: 250px;
 		
 
 	}
@@ -87,19 +79,20 @@
 		height: 50%;
 	}
 	.btn {
-		float: right;
+		margin-right: 10px;
+		margin-top: 15px;
 	}
 	#footer1 {
 		text-align: center;
-		margin-bottom: 10rem;
+		
 		position: relative;
     	width: 100%;
 	}
 	#area {
-		display: flex;
+		
 		align-items: flex-start;
 		position: relative;
-		margin: 1.25rem 0;
+		margin: 20px 0;
 		padding: 1.0625rem 0.875rem;
 		border-radius: 8px;
 		border: 0.0625rem solid white;
@@ -113,55 +106,86 @@
 	}
 	.area {
 		resize:none;
-		width: 100%;
-		height: 50px;
-		padding: 0;
+		width: 640px;
+		height: 40px;
+		padding: 10px;
 		border: 0;
 		outline: none;
 		font-size: 1rem;
 		color: black;
+		font-weight: bold;
+
 	}
+
+	#reply {
+		display: block;
+		list-style-type: disc;
+		margin-block-start: 1em;
+		margin-block-end: 1em;
+		margin-inline-start: 0px;
+		margin-inline-end: 0px;
+		padding-inline-start: 40px;
+		width: 100%;
+		margin-bottom: 0;
+		padding: 0;
+		margin-top: 0;
+	}
+	#pointer {
+		cursor: pointer;
+		float: right;
+		position: relative;
+		top: -30px;
+	}
+	
 </style>
 </head>
 <body>
-	
+	<%@ include file="../common/header.jsp" %>
 
-	<div id="web-header"></div>
 	<div id="web-body">
-		
 		<div class="container">
-			<%= b.getBoardTitle() %>
-			<br>
-			<br>
-			<div id="title">
-			<img src="" id="img"> 
-			<span  id="nickname"><%=b.getNi %></span>
-			<span id="date">20132399</span>
-			<button class="btn">수정</button>
-			<button class="btn">삭제</button>
-			</div>
+			<div><p><h1>asdasdasdasda</h1></p></div>
+			<div>
+                <div class="title">
+                    <a href="resources/resources/image/animal2.gif"></a>
+                    <div>
+                        <button>수정</button>
+                    </div>
+                </div>
+            </div>
+			
 		</div>
-		<hr class="sen">
+        <br>
+		<hr>
+
 		<div class="outer3">	
 			<div id="content">
-				<textarea name="" id="" cols="30" rows="10" style="resize: none; width: 100%; height: 100%;"></textarea>
+				<p>
+					<span>aaaaaaaaaaaaaaaaaaa</span>
+				</p>
 			</div>
-			<p>d 4 a 7</p>
+			<div>여긴 썸네일</div> <!--썸네일-->
+			<div>
+				<p>이 부분은 좋아요 댓글</p>
+			</div>	
 		</div>	
+		<hr>
 		<div id="footer1">
 			<div id="area">
 				<div id="area1">
-					<textarea class="area">assssss</textarea>
+					<textarea class="area"></textarea>
 				</div>
-				<div></div>
+				
+				<div id="pointer">등록</div>
+				
 			</div>
-			<ul>
+			<ul id="reply">
 				<li></li>
 			</ul>
 		</div>
 	</div>
 			
-	
+	<%@ include file="../common/footer.jsp" %>
 	
 	
 </body>
