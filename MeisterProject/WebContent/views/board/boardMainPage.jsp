@@ -290,6 +290,14 @@ int maxPage = pi.getMaxPage();
 position: relative;
  TOP:-30px;
 }
+#madebutton{
+background-color: orange;
+}
+#madebutton:hover{
+background-color:rgba(255, 106, 0, 0.87);
+}
+       
+
 </style>
 </head>
 <body>
@@ -313,8 +321,8 @@ position: relative;
    <div class="bodyWrite_wrap">
       <div id="body2-2" align="right">
             <form action="<%=contextPath%>/enrollForm.bo">
-            <button type="submit" value="" class="btn btn-secondary"
-            style="background-color: orange;"><i class="bi bi-pencil-square "> 글작성 </i></button> 
+            <button type="submit" id="madebutton" value="" class="btn btn-secondary">
+            <i class="bi bi-pencil-square "> 글작성 </i></button> 
             <input type="hidden" id="type" name="type" value="1">
             </form>
 
@@ -353,7 +361,7 @@ position: relative;
          <%
             for (int i = 0; i < list.size(); i++) {
          %>
-         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?type=1';" >
+         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
             <hr>
             <span class="font"><%=list.get(i).getBoardTitle()%></span>
             <div>
@@ -374,7 +382,15 @@ position: relative;
                <!--                  <span>사진이 없습니다.</span> -->
                <%--                   <%} %>  --%>
 
-            </div>
+			<script>
+			 $(function() {
+		         $("#body2-4").click(function() {
+		            let bno = $(this).children().eq(0).text(); 
+		            location.href= '<%=contextPath %>/detail.bo?bno='+ bno;     
+		         });
+		      })
+			</script>
+	  </div>
             <br>
             <br>
             <br>
@@ -384,7 +400,7 @@ position: relative;
                   <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%>
 
                   <%
-                     String boardDate = list.get(i).getBoardString();
+                     String boardDate = list.get(i).getBoardDate();
                      int now = Integer.parseInt(nowDate);
                      int insertDate = Integer.parseInt(boardDate);
                      
@@ -423,6 +439,8 @@ position: relative;
          <% } %>
          <br>
          <hr>
+         
+       
          <div class="page_wrap">
             <% if (currentPage != 1) {%>
             <span>&lt&lt</span>
@@ -487,12 +505,12 @@ position: relative;
         				}
         			});
         		});
-        	})
-            
+        	}) 
             </script>
+            </div>
          </div>
          </div>
-     </div>
+    
      </div>
      
         
@@ -545,7 +563,4 @@ position: relative;
    }
    
 
-	
-	
-	
 </script>

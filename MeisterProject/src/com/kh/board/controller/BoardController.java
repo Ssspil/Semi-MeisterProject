@@ -52,7 +52,7 @@ public class BoardController extends HttpServlet {
 	
 		pageLimit = 10;
 		
-		boardLimit = 5;
+		boardLimit = 6;
 	
 		maxPage = 11;
 
@@ -75,7 +75,7 @@ public class BoardController extends HttpServlet {
 	
 		pageLimit = 10;
 		
-		boardLimit = 5;
+		boardLimit = 6;
 	
 		maxPage = 11;
 

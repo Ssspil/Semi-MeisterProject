@@ -57,7 +57,7 @@ top:12%;
     <div id="body2-1">
              
                <%for(int i=0; i< list2.size(); i++){ %>
-                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>"  onclick="location.href='<%=contextPath2%>/detail.bo?type=2';">
+                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>">
                   
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
@@ -68,10 +68,15 @@ top:12%;
                   <img src="<%=contextPath2 %><%=list2.get(i).getTitleImg()%>" id="img1">
                   
                   <%} %>
-                  <!-- 사진이 없을떄 글자뛰우기 -->
-<!--           } else {%> --> 	  
-<!--   					<span>사진이 없습니다.</span> -->
-<%--                   <%} %>  --%>
+					<script>
+			 $(function() {
+		         $(".body2-3").click(function() {
+		            let bno = $(this).children().eq(0).text(); 
+		            location.href= '<%=contextPath2 %>/detail.bo?bno='+ bno;     
+		         });
+		      })
+			</script>
+					
                   
                 </div><br><br><br>
                 <div id="titlefooter">
@@ -79,7 +84,7 @@ top:12%;
                     <i class="bi bi-hand-thumbs-up"></i><%= list2.get(i).getBoardRecommend() %>
                     
                     <%
-                    String boardDate2 = list2.get(i).getBoardString();
+                    String boardDate2 = list2.get(i).getBoardDate();
 					int now = Integer.parseInt(nowDate2);
 					int insertDate = Integer.parseInt(boardDate2);
 					

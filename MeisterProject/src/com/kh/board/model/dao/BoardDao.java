@@ -71,9 +71,14 @@ public class BoardDao {
 			rset = psmt.executeQuery();
 
 			while (rset.next()) {
-				Board b = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_CONTENT"),
-						rset.getString("BOARD_TITLE"), rset.getInt("BOARD_COUNT"), rset.getInt("BOARD_RECOMMEND"),
-						rset.getInt("USER_NO"), rset.getString("BOARD_DATE"), "");
+				Board b = new Board(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getString("BOARD_TITLE"),
+						rset.getInt("BOARD_COUNT"),
+						rset.getInt("BOARD_RECOMMEND"),
+						rset.getInt("USER_NO"),
+						rset.getInt("REPLY_COUNT"),
+						rset.getString("BOARD_DATE"));
 
 				board.add(b);
 			}
@@ -99,9 +104,8 @@ public class BoardDao {
 
 	public Board selectBoard(Connection conn, int boardNo) {
 
-		// select= > ResultSet
-
 		Board b = null;
+		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 
@@ -115,9 +119,15 @@ public class BoardDao {
 			rset = psmt.executeQuery();
 
 			if (rset.next()) {
-				b = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_CONTENT"), rset.getString("BOARD_TITLE"),
-						rset.getInt("BOARD_COUNT"), rset.getInt("BOARD_RECOMMEND"), rset.getInt("USER_NO"),
-						rset.getString("BOARD_DATE"), "");
+				b = new Board(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getString("BOARD_TITLE"),
+						rset.getInt("BOARD_COUNT"),
+						rset.getInt("BOARD_RECOMMEND"),
+						rset.getInt("USER_NO"),
+						rset.getInt("REPLY_COUNT"),
+						rset.getString("BOARD_DATE")
+						);
 
 			}
 		} catch (SQLException e) {
