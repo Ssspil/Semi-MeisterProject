@@ -157,6 +157,7 @@ public class MemberService {
 			
 	}
 
+	 
 	public ArrayList<Member> selectAllMember() {
 		
 		Connection conn = JDBCTemplate.getConnection();

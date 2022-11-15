@@ -3,8 +3,9 @@
     import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local"%>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
-	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");	
+	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,7 +139,11 @@ div.main{
 		
 		<br>
 		<div>
+		<%if(loginUser !=null && loginUser.getExpert().equals("Y")) { %>					
 			<a href="<%=contextPath%>/sellEnrollForm.se" id="sellEnrollBtn" class="btn btn-secondary">글 등록</a>
+			<%} else{%>
+			<a href="<%=contextPath%>/sellEnrollForm.se" id="sellEnrollBtn" class="btn btn-secondary" style="display:none">글 등록</a>
+		<%} %>
 		</div>
 		
 		<div class="navigator">
@@ -179,7 +184,7 @@ div.main{
 			<div>썸네일3</div>
 			<div>썸네일4</div>
 		</div>
-	</div><!— outer 끝 —>
+	</div><!-- outer 끝 -->
 	
 
 

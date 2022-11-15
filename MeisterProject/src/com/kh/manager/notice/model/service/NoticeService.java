@@ -98,25 +98,31 @@ public class NoticeService {
 	}
 
 
-	public Notice searchNotice(String search) {
+	public ArrayList<Notice> searchNotice(String search, PageInfo pi) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+        
+        ArrayList<Notice> list = new NoticeDao().searchNotice(search, pi, conn);
+        
+        JDBCTemplate.close();
+        
+        return list;
+		
+	}
+	
+
+	public int searchNoticeCount(String search) {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		Notice n = new NoticeDao().searchNotice(search, conn);
+		int listCount = new NoticeDao().searchNoticeCount(search, conn);
 		
 		JDBCTemplate.close();
 		
-		return n;		
+		return listCount;
 	}
 
 
-	
-
-
-	
-		
-		
-		
 		
 	
-}
+	}

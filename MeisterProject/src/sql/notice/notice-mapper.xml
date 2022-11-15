@@ -68,11 +68,13 @@
 	
 	
 	<entry key="searchNotice">
-	
-	SELECT NOTICE_TITLE	
-	FROM NOTICE
-	WHERE NOTICE_TITLE = ?
-	  AND STATUS = 'Y'
+		SELECT NOTICE_NO,
+			   NOTICE_TITLE,
+			   CREATE_DATE
+		FROM NOTICE
+		WHERE NOTICE_TITLE LIKE ?
+		  AND STATUS = 'Y'
+		ORDER BY NOTICE_NO DESC
 	
 	
 	
@@ -88,17 +90,13 @@
 	WHERE RNUM BETWEEN ? AND ? -->
 	</entry>
 	
- 	<!--	
-	<entry key="selectNoticeListCount">
+ 		
+	<entry key="searchNoticeCount">
 		SELECT COUNT(*) AS COUNT
 		FROM NOTICE
 		WHERE STATUS = 'Y'
-		AND NOTICE_TITLE LIKE ?
+		  AND NOTICE_TITLE LIKE ?
 	</entry> 
-
-	검색용 카운트
-	
-	-->
 	
 	
 	

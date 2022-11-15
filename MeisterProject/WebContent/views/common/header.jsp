@@ -85,7 +85,7 @@
 	
 	                </ul>
 	            </div>
-	        <!-- 로그인 했을 시 -->
+	        <!-- 로그인 했을 시 관리자 -->
             <% } else if ((loginUser != null) && (loginUser.getUserId().equals("admin@admin.com")) ){ %> 
 
 				
@@ -106,6 +106,8 @@
 	
 	                </ul>
 	            </div>
+	            
+	         <!-- 로그인 했을 시 일반유저 -->
             <% } else { %>
             	<div class="sub-menu">
 	                <ul class="menu">
@@ -118,6 +120,9 @@
 	                    </li>
 	                    <li>
 	                    	<a href="<%=contextPath %>/logout.me">로그아웃</a>
+	                    </li>
+	                    <li style="color : #727272;">
+	                    	<b style="color: orange;">&nbsp;&nbsp;<%= loginUser.getNickName() %></b>님 환영합니다
 	                    </li>
 	
 	                </ul>

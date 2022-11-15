@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.manager.notice.model.service.NoticeService;
 import com.kh.manager.notice.model.vo.Notice;
 import com.kh.member.model.vo.Member;
+import com.kh.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class NoticeSearchController
@@ -34,7 +35,6 @@ public class NoticeSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	
-		System.out.println("공지사항 검색");
 	
 		// 관리자가 아니면 실행 안되게 하는 것.
 	    if( !(request.getSession().getAttribute("loginUser") != null && 
@@ -49,16 +49,32 @@ public class NoticeSearchController extends HttpServlet {
 	    
 	    String search = request.getParameter("search");
 	    
-	    Notice n = new NoticeService().searchNotice(search);
+	    //페이지 번호
+	    int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")); 
 		
-		request.setAttribute("search", search);
+	    //한 페이지에 나타낼 리스트 변수 선언
+	    int boardLimit = 10;
+	    
+	    //검색 전체  list count
+	    int listCount = new NoticeService().searchNoticeCount(search);
+	    
+	    //page count
+	    int pageCount = (int)Math.ceil((double)listCount / boardLimit); //ceil은 올림함수
+	    
+	  
+	    PageInfo pi = new PageInfo(currentPage, boardLimit, boardLimit);
+	    
+	    //글 목록 전체 가져오기
+	    ArrayList<Notice> list = new NoticeService().searchNotice(search, pi);
+
+	    System.out.println("공지사항 검색");
+
+	    request.setAttribute("list", list);
+	    request.setAttribute("search", search);
+	    request.setAttribute("pi", pi);
 	    request.getRequestDispatcher("views/manager/noticeManager.jsp").forward(request, response);
 	    
-	    
-	    
-	    
-	    
-	
+
 	
 	}
 

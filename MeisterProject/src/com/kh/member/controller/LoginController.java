@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
 			// 로그인한 회원의 정보를 로그아웃 하기전까지 계속 가져다 쓸것이기 때문에 session에 담기
 			
 			// Servlet에서 JSP 내장객체 중 Session에 접근하고자 한다면 우선 session 객체를 얻어와야함
-			HttpSession session=request.getSession();
+			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			
 			session.setAttribute("alertMsg", "성공적으로 로그인이 되었습니다.");
