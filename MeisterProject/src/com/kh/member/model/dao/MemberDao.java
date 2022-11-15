@@ -476,6 +476,12 @@ public class MemberDao {
 		return memList;
 	}
 
+	/**
+	 * 관리자가 전문가인 회원 정보변경하게하는 메소드
+	 * @param m
+	 * @param conn
+	 * @return
+	 */
 	public int userExUpdateByManager(Member m, Connection conn) {
 		
 		PreparedStatement psmt = null;
@@ -498,6 +504,40 @@ public class MemberDao {
 			psmt.setString(9, m.getSpeciality());
 			psmt.setString(10, m.getExpert());
 			psmt.setInt(11, m.getUserNo());
+					
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 관리자가 일반회원 정보변경하게 하는 메소드
+	 * @param m
+	 * @param conn
+	 * @return
+	 */
+	public int userUpdateByManager(Member m, Connection conn) {
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String sql = prop.getProperty("userUpdateByManager");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, m.getUserId());
+			psmt.setString(2, m.getUserPwd());
+			psmt.setString(3, m.getNickName());
+			psmt.setString(4, m.getInterest());
+			psmt.setString(5, m.getExpert());
+			psmt.setInt(6, m.getUserNo());
 					
 			result = psmt.executeUpdate();
 			

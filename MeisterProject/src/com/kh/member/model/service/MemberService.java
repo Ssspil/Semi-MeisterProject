@@ -169,11 +169,44 @@ public class MemberService {
 		return memList;
 	}
 
+	/**
+	 * 관리자가 전문가인 회원 정보변경하게하는 메소드
+	 * @param m
+	 * @return
+	 */
 	public Member userExUpdateByManager(Member m) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new MemberDao().userExUpdateByManager(m, conn);
+		
+		Member newMem = null;
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			
+			newMem = new MemberDao().selectMember(conn, m.getUserId());
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		JDBCTemplate.close();
+		
+		return newMem;
+	}
+
+	/**
+	 * 관리자가 일반회원 정보변경하게하는 메소드
+	 * @param m
+	 * @return
+	 */
+	public Member userUpdateByManager(Member m) {
+		
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().userUpdateByManager(m, conn);
 		
 		Member newMem = null;
 		

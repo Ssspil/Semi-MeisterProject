@@ -66,13 +66,12 @@ public class UserUpdateManagerController extends HttpServlet {
 			m = new Member(userNo, userId, userPwd, nickName, interest, userName, gender, email, phone, speciality, expert);
 			
 			newMem = new MemberService().userExUpdateByManager(m);
+			
 		} else {
 			m = new Member(userNo, userId, userPwd, nickName, interest, expert);
 			
-//			Member newMem = new MemberService().userUpdateByManager(m);
+			newMem = new MemberService().userUpdateByManager(m);
 		}
-		
-		System.out.println(newMem);
 		
 		if(newMem == null) {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
