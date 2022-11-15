@@ -108,6 +108,26 @@
             border-radius: 10px;
             border: 0.0625rem solid #f2f2f2;
         }
+        .user-profile .profile-area .profile-info[data-d-1] {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-profile .profile-area .profile-info .profile-name[data-d-1] {
+            margin: 0 0 0.125rem;
+            font-weight: 500;
+            color: #2d2d2d;
+            font-size: 14px;
+            line-height: 1.57142857;
+            letter-spacing: -.3px
+        }
+        .user-profile .profile-area .profile-info .profile-date[data-d-1] {
+            margin: 0.125rem 0 0;
+            color: #888;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.5;
+            letter-spacing: -.2px;
+        }
         .btn {
             position: relative;
             display: inline-flex;
@@ -344,16 +364,22 @@
                     <section data-s-1 data-a-1 class="detail-container">
                         <div data-d-1 data-s-1 class="detail-header">
                             <div data-d-1 class="detail-title">
-                                <h1 data-d-1 class="header-text">안녕하세요</h1>
+                                <h1 data-d-1 class="header-text"><%= b.getBoardTitle() %></h1>
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
-                                    <img data-d-1 class="profile-image" src="resources/resources/image/cat.jpg" alt="">
-                                    <p><span></span></p>
+                                    <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;"><img data-d-1 class="profile-image" src="resources/resources/image/cat.jpg" alt="">
+                                        <div data-d-1 class="profile-info">
+                                            <span data-d-1 class="profile-name"><%=b.getUserNo() %></span>
+                                            <span data-d-1 class="profile-date"><%=b.getBoardDate() %></span>
+                                        </div>
+                                    </a>
                                     <div data-f-1 data-d-1>
                                         <div data-d-1 data-f-1 class="btn">
-                                            <button class="btn-toggle">수정</button>
-                                            <button class="btn-toggle">삭제</button>
+	                                        <% if(loginUser != null && loginUser.getUserId().equals(b.getUserNo())) { %>
+	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
+												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
+											<% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -364,13 +390,20 @@
                         <div data-g-1 data-s-1 class="body-container">
                             <div data-g-1 class="body-contents">
                                 <p data-g-1 class="body-text">
-                                    <span data-g-1></span>
+                                    <span data-g-1><%=b.getBoardContent() %></span>
                                 </p>
                             </div>
                             <div data-h-1 data-g-1 class="body-image">
                                 <ul data-h-1 class="image-wrapper">
                                     <li data-h-1 class="image-list">
-                                        <img data-h-1 class="image" src="resources/resources/image/animal2.gif" alt="">
+                      					<% if(at == null) { %>
+											첨부파일이 없습니다.
+										<% } else { %>
+												<a href="<%=contextPath %>/<%= at.getFilePath() + at.getChangeName() %>" 
+												download="<%= at.getOriginName() %>">
+										<%= at.getOriginName() %>
+											</a> 
+										<% } %>
                                     </li>
                                 </ul>
                             </div>
@@ -388,7 +421,7 @@
                         <div data-k-1 data-s-1 class="comments-container">
                             <div data-l-1 data-k-1 class="input-box">
                                 <div data-k-1 class="comments-body">
-                                    <textarea data-k-1 class="comment-input .form-control" name="comment-input" placeholder="댓글을 남겨보세요" rows="1" maxlength="500" style="height:22px; overflow:hidden; resize: none;"></textarea>
+                                    <textarea data-k-1 onkeyup="replyCheck();" class="comment-input .form-control" id="comment-input" placeholder="댓글을 남겨보세요" rows="1" maxlength="500" style="height:22px; overflow:hidden; resize: none;"></textarea>
                                 </div>
                                 <div data-k-1 class="submit-line">등록</div>
                             </div>
@@ -400,7 +433,7 @@
                                         </div>
                                         <div data-c-1 class="comment-information">
                                             <div data-c-1 class="user-info">
-                                                <span data-c-1 class="user-name">asdasd</span>
+                                                <span data-c-1 class="user-name"><%=b.getUserNo() %></span>
                                             </div>
                                             <div data-c-1 class="content">
                                                 <p data-c-1 class="text comment-input">
@@ -409,10 +442,10 @@
                                             </div>
                                             <div data-c-1 class="comment-action">
                                                 <div data-c-1 class="comment-react">
-                                                    <span data-c-1 class="text">29분 전</span>
+                                                    <span data-c-1 class="text"><%=b.getBoardDate() %></span>
                                                     <span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>
                                                     <div data-c-1 class="like-area">
-                                                        <span data-c-1 class="text">좋아요 0</span>
+                                                        <span data-c-1 class="text"><%=b.getBoardRecommend() %></span>
                                                     </div>
                                                 </div>
                                                 <div data-c-1 class="more-action">
@@ -432,6 +465,13 @@
         </div>
     </form>        
 </div>
-<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
+	
+	<script>
+		function replyCheck() {
+			
+		}
+	</script>
+
 </body>
 </html>

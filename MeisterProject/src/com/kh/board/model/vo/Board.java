@@ -36,9 +36,6 @@ public class Board {
 		this.titleImg = titleImg;
 	}
 	
-	// 유홍상
-	
-	
 	// 이이수
 	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg) {
 		super();

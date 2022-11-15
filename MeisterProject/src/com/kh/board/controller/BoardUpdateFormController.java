@@ -12,16 +12,16 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Attachment;
 
 /**
- * Servlet implementation class BoardDetailController
+ * Servlet implementation class BoardUpdateFormController
  */
-@WebServlet("/detail.bo")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/updateForm.bo")
+public class BoardUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailController() {
+    public BoardUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,30 +30,20 @@ public class BoardDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		BoardService bService = new BoardService();
 		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
-		BoardService bService = new BoardService();
 		
-		// 좋아요 증가 / 게시글 조회(Board) / 첨부파일 조회(Attachment)
+		Board b = bService.selectBoard(boardNo);
 		
-		int result = bService.increaseCount(boardNo);
+		Attachment at = bService.selectAttachment(boardNo);
 		
-		if(result > 0) {
-			
-			Board b = bService.selectBoard(boardNo);
-			Attachment at = bService.selectAttachment(boardNo);
-			
-			request.setAttribute("b", b);
-			request.setAttribute("at", at);
-			
-			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
-		} else { // 에러페이지
-			request.setAttribute("errorMsg", "게시글 상세조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		request.setAttribute("b", b);
+		request.setAttribute("at", at);
 		
-		
+		request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
 	
 	}
 
