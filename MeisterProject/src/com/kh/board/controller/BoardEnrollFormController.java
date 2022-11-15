@@ -32,7 +32,6 @@ public class BoardEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
 		int type = Integer.parseInt(request.getParameter("type"));
 		request.setAttribute("type", type);
 		
