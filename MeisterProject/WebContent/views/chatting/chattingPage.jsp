@@ -28,10 +28,11 @@
 			<input id="textMessage" type="text"> 
 			<input id="opponent" type="text" value="admin" readonly>
 			<input id="receiver" type="hidden" value="2" readonly> 
-			<input type="submit" onclick="sendMessage()" value="Send" type="button"> 
+			<input onclick="sendMessage()" value="Send" type="button"> 
 			<input onclick="disconnect()" value="Disconnect" type="button"> 
 			<br>
 			<input id="chatData" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+			<button type="submit">저장하기</button>
 		</form>
 		<br>
 		<textarea id="messageTextArea" rows="10" cols="50"></textarea>

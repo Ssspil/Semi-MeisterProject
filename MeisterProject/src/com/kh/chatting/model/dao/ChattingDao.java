@@ -41,19 +41,22 @@ public class ChattingDao {
 		String sql = prop.getProperty("insertChat");
 		
 		try {
-			psmt = conn.prepareStatement(sql);
-			
-			content = data[2];
-			sender = Integer.parseInt(data[0]);
-			receiver = Integer.parseInt(data[1]);
-			System.out.println("content : "+content+" sender : "+sender+" receiver : "+receiver);
-			
-			psmt.setString(1, content);
-			psmt.setInt(2, sender);
-			psmt.setInt(3, receiver);
-			psmt.setInt(4, 1);
+			for(int i = 0; i < data.length; i += 3) {
+				psmt = conn.prepareStatement(sql);
+				content = data[i+2];
+				sender = Integer.parseInt(data[i]);
+				receiver = Integer.parseInt(data[i+1]);
+				System.out.println("content : "+content+" sender : "+sender+" receiver : "+receiver);
 				
-			result = psmt.executeUpdate();
+				psmt.setString(1, content);
+				psmt.setInt(2, sender);
+				psmt.setInt(3, receiver);
+				psmt.setInt(4, 1);
+				
+				result = psmt.executeUpdate();
+				psmt = null;
+			}
+				
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
