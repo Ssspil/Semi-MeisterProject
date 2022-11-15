@@ -7,7 +7,6 @@
    ArrayList<Board> hotList = (ArrayList<Board>) request.getAttribute("hotList"); //핫 게시글 순위용
    ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
    String nowDate = new SimpleDateFormat("MMddHHmm").format(new Date());
-   
 
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
@@ -34,7 +33,7 @@ int maxPage = pi.getMaxPage();
 
 .body2 {
    box-sizing: border-box;
-   height: 1750PX;
+   height: 1970px;
 }
 
 #line {
@@ -79,6 +78,7 @@ int maxPage = pi.getMaxPage();
    height: 100%;
    width: 33.3%;
    float: left;
+   cursor: pointer;
 }
 
 #hot1 {
@@ -106,7 +106,8 @@ int maxPage = pi.getMaxPage();
    box-sizing: border-box;
    height: 18%;
    width: 100%;
-   padding: 20px;   
+   padding: 20px; 
+   cursor: pointer;  
 }
 
 #date {
@@ -285,10 +286,18 @@ int maxPage = pi.getMaxPage();
    display: none;
 }
 
-.search_main{
+#search_main{
 position: relative;
  TOP:-30px;
 }
+#madebutton{
+background-color: orange;
+}
+#madebutton:hover{
+background-color:rgba(255, 106, 0, 0.87);
+}
+       
+
 </style>
 </head>
 <body>
@@ -312,8 +321,8 @@ position: relative;
    <div class="bodyWrite_wrap">
       <div id="body2-2" align="right">
             <form action="<%=contextPath%>/enrollForm.bo">
-            <button type="submit" value="" class="btn btn-secondary"
-            style="background-color: orange;"><i class="bi bi-pencil-square "> 글작성 </i></button> 
+            <button type="submit" id="madebutton" value="" class="btn btn-secondary">
+            <i class="bi bi-pencil-square "> 글작성 </i></button> 
             <input type="hidden" id="type" name="type" value="1">
             </form>
 
@@ -330,7 +339,7 @@ position: relative;
             <%
                for (int i = 0; i < hotList.size(); i++) {
             %>
-            <div id="body2-3-1">
+            <div id="body2-3-1" onclick="location.href='<%=contextPath%>/detail.bo?type=1';" >
                <br>
                <div id="hot1">
                   <div id="hot2">
@@ -352,7 +361,7 @@ position: relative;
          <%
             for (int i = 0; i < list.size(); i++) {
          %>
-         <div id="body2-4" class="board board<%=i%> <%=i > 4 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo';" >
+         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
             <hr>
             <span class="font"><%=list.get(i).getBoardTitle()%></span>
             <div>
@@ -373,17 +382,25 @@ position: relative;
                <!--                  <span>사진이 없습니다.</span> -->
                <%--                   <%} %>  --%>
 
-            </div>
+			<script>
+			 $(function() {
+		         $("#body2-4").click(function() {
+		            let bno = $(this).children().eq(0).text(); 
+		            location.href= '<%=contextPath %>/detail.bo?bno='+ bno;     
+		         });
+		      })
+			</script>
+	  </div>
             <br>
             <br>
             <br>
             <div id="titlefooter">
                <div>
-                  <i class="bi bi-eye"></i><%=list.get(i).getBoardCount()%>
-                  <i class="bi bi-hand-thumbs-up"></i><%=list.get(i).getBoardRecommend()%>
+                  <i class="bi bi-eye"></i> <%=list.get(i).getBoardCount()%>
+                  <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%>
 
                   <%
-                     String boardDate = list.get(i).getBoardString();
+                     String boardDate = list.get(i).getBoardDate();
                      int now = Integer.parseInt(nowDate);
                      int insertDate = Integer.parseInt(boardDate);
                      
@@ -422,6 +439,8 @@ position: relative;
          <% } %>
          <br>
          <hr>
+         
+       
          <div class="page_wrap">
             <% if (currentPage != 1) {%>
             <span>&lt&lt</span>
@@ -450,19 +469,50 @@ position: relative;
 
    <%@ include file="../board/pageMove.jsp"%>
    
-    <div class="search_main" align="center">
+  
+    <div id="search_main" align="center">
          <div class="header2">
-             <form action="test.do" id="search_form">
+             <div id="search_form">
                  <div id="search_text">
-                 <input type="text" name="keyword" style="height:35px;">
+              <input id="keyword" list="list" type="text" style="height:35px;">
+
+	
              </div>
              <div id="search_btn">
-                   <button type="button" class="btn btn-secondary" style="background-color: orange; height:35px;">
+                   <button type="button" class="btn btn-secondary"  list="list" style="background-color: orange; height:35px;">
+                   <datalist id="list">
+	
+	</datalist>
             <i class="bi bi-search"></i> 검색 </button>
+            
+            <script>
+            $(function() {
+        		$("#keyword").keyup(function(e){
+        			$.ajax({
+        				url : "AutoSearch.do",
+        				data : {keyword : $("#keyword").val()},
+        				success:function(data) {
+        					
+        					$("#list").html("");
+        					console.log(data);
+        					let str = "";
+        					for(let i = 0 ; i<data.length; i++){
+        						str += "<option>"	
+        							+  data[i].boardTitle
+        							+  "</option>"
+        					}
+        					$("#list").html(str);
+        				}
+        			});
+        		});
+        	}) 
+            </script>
+            </div>
          </div>
-         </form>
+         </div>
+    
      </div>
-     </div>
+     
         
    <%@ include file="../common/footer.jsp"%>
 
@@ -477,7 +527,8 @@ position: relative;
          $("#gungBody").hide();
          $("#ge").addClass("bodyClick");
          $("#gung").removeClass("bodyClick");
-          $("#type").val("1");
+         $("#type").val("1");
+         $("#search_main").val("1");
          $("#boardType").val("ge");
 
       } else if (type == "gung") {
@@ -486,6 +537,7 @@ position: relative;
          $("#gung").addClass("bodyClick");
          $("#ge").removeClass("bodyClick");
          $("#type").val("2");
+         $("#search_main").val("2");
          $("#boardType").val("gung");
 
       }
@@ -500,13 +552,15 @@ position: relative;
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
       }
 
-      var cnt = (currentPage - 1) * 5;
+      var cnt = (currentPage - 1) * 6;
       $(".board").hide();
-      for (var i = cnt; i < cnt + 5; i++) {
+      for (var i = cnt; i < cnt + 6; i++) {
          $(".board" + (i)).show();
       }
 
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
    }
+   
+
 </script>

@@ -96,6 +96,17 @@ public class BoardService {
 
 		return at;
 	}
+	
+	public ArrayList<Board> searchList(String searchType, String keyword){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().searchList(conn , searchType , keyword);
+		
+		close();
+		
+		return list;
+		
+	}
 
 	public void commitAndRollback(Connection conn, int result) {
 		if (result > 0) {
