@@ -23,6 +23,24 @@
     #card-body{
     padding: 1rem 1rem;
 	}
+	.modal-content table{
+		text-align : center;
+		border-collapse : collapse;
+		
+	}
+	.modal-content table th{
+		text-align : center;
+		background-color : black;
+		color : white;
+	}
+	.modal-content table td{
+		border-width : 1px;
+	}
+	.adUser-Input{
+		width: 300px;
+		text-align : center;
+		border : 0px;
+	}
     </style>
     
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -182,9 +200,10 @@
 									</td>
 									<td>
 										<button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#userInfo<%= m.getUserNo()%>">관리</button>
+						                
 						                <!-- 모달 테스트 -->
 						                <div id="userInfo<%= m.getUserNo()%>" class="modal" tabindex="-1">
-						                	<div clss="modal-dialog">
+						                	<div class="modal-dialog">
 						                		<div class="modal-content">
 						                			
 						                			<div class="modal-header">
@@ -194,28 +213,31 @@
 						                				</button>
 						                			</div>
 						                			
-						                			<div clas="modal-body" align="center">
-						                				<form action="<%= contextPath %>/????" method="post">
-						                					<table>
+						                			<br>
+						                			<div class="modal-body" align="center">
+						                				<form action="<%= contextPath %>/userupdate.ad" method="post">
+						                					<table border ="1">
 						                						<tr>
-						                							<th>상세</th>
-						                							<th>정보</th>
+						                							<th width="100">상세</th>
+						                							<th width="300">정보</th>
 						                						</tr>
 						                						<tr>
 						                							<td>회원번호</td>
-						                							<td><%= m.getUserNo() %></td>
+						                							<td><%= m.getUserNo() %>
+						                								<input type="hidden" name="userNo" value="<%= m.getUserNo() %>"/>
+						                							</td>
 						                						</tr>
 						                						<tr>
 						                							<td>아이디</td>
-						                							<td><%= m.getUserId() %></td>
+						                							<td><input id="userId" class="adUser-Input" name="userId" type="text" maxlength="30" value="<%= m.getUserId() %>"/></td>
 						                						</tr>
 						                						<tr>
 						                							<td>패스워드</td>
-						                							<td><%= m.getUserPwd() %></td>
+						                							<td><input type="text" class="adUser-Input" id="userPwd"  name="userPwd" maxlength="20" value="<%= m.getUserPwd() %>" /></td>
 						                						</tr>
 						                						<tr>
 						                							<td>닉네임</td>
-						                							<td><%= m.getNickName() %></td>
+						                							<td><input type="text" class="adUser-Input" id="userNickName" name="userNickName" value="<%= m.getNickName() %>" /></td>
 						                						</tr>
 						                						<tr>
 						                							<td>관심사</td>
@@ -223,7 +245,7 @@
 						                								<% if (m.getInterest() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getInterest() %>
+						                									<input type="text" class="adUser-Input" id="userInterest" name="userInterest" value="<%= m.getInterest() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
@@ -233,7 +255,7 @@
 						                								<% if (m.getUserName() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getUserName() %>
+						                									<input type="text" class="adUser-Input" id="userName" name="userName" value="<%= m.getUserName() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
@@ -243,7 +265,7 @@
 						                								<% if (m.getGender() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getGender() %>
+						                									<input type="text" class="adUser-Input" id="userGender" name="userGender" value="<%= m.getGender() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
@@ -253,7 +275,7 @@
 						                								<% if (m.getEmail() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getEmail() %>
+						                									<input type="text" class="adUser-Input" id="userEmail" name="userEmail" value="<%= m.getEmail() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
@@ -263,7 +285,7 @@
 						                								<% if (m.getPhone() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getPhone() %>
+						                									<input type="text" class="adUser-Input" id="userPhone" name="userPhone" value="<%= m.getPhone() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
@@ -273,13 +295,15 @@
 						                								<% if (m.getSpeciality() == null) { %>
 						                								
 						                								<% } else { %>
-						                									<%= m.getSpeciality() %>
+						                									<input type="text" class="adUser-Input" id="userSpeciality" name="userSpeciality" value="<%= m.getSpeciality() %>"/>
 						                								<% } %>
 						                							</td>
 						                						</tr>
 						                						<tr>
 						                							<td>전문가여부</td>
-						                							<td><%= m.getExpert() %></td>
+						                							<td>
+						                								<input type="text" class="adUser-Input" id="userExpert" name="userExpert" value="<%= m.getExpert() %>"/>
+						                							</td>
 						                						</tr>
 						                						<tr>
 						                							<td>블랙리스트</td>
@@ -289,8 +313,8 @@
 						                						</tr>
 						                					</table>
 						                					<br><hr>
-						                					<button type="button" class="btn btn-secondary btn-sm">회원정보 수정</button>
-						                					<br><hr><br>
+						                					<button type="submit" class="btn btn-secondary btn-sm">회원정보 수정</button>
+						                					<br><hr>
 						                				</form>
 						                			</div>
 						                		</div>
@@ -309,6 +333,8 @@
                     </div>
                 </div>
             </main> 
+            
+            
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
