@@ -219,11 +219,12 @@ public class NoticeDao {
 
 
 
-	public Notice searchNotice(String search, Connection conn) {
+	public ArrayList<Notice> searchNotice(String search, PageInfo pi, Connection conn) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		
 		//select문은 반환형이 ResultSet
 		ResultSet rset = null;
-		
-		Notice n = null;
 		
 		PreparedStatement psmt = null;
 		
@@ -232,12 +233,19 @@ public class NoticeDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(1, "%" + n.getNoticeTitle() + "%" );
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			psmt.setString(1, "%"+ search + "%" );
+			psmt.setInt(2, startRow);
+			psmt.setInt(3, endRow);
 			
 			rset = psmt.executeQuery();
 			
-			if(rset.next()) {
-				n = new Notice (rset.getString("NOTICE_TITLE"));
+			while(rset.next()) {
+				list.add(new Notice (rset.getInt("NOTICE_NO"),
+									 rset.getString("NOTICE_TITLE"),
+									 rset.getDate("CREATE_DATE")));
 			}
 			
 		} catch (SQLException e) {
@@ -247,10 +255,51 @@ public class NoticeDao {
 			JDBCTemplate.close(rset);
 		}
 		
-		return n;
+		return list;
 	}
+
+
+
+	public int searchNoticeCount(String search, Connection conn) {
+
+		int listCount = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchNoticeCount");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, "%"+ search + "%" );
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return listCount;
+	}
+		
+	
+
+
+	
 	
 	
 		
+	
+	
+	
+	
+	
 
 }

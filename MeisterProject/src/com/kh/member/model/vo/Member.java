@@ -19,9 +19,13 @@ public class Member {
 	private String expSubmit;
 	private String expert;
 	private String profileImg;
-	// 로그인 부분 생성자
 	
+	// 기본 생성자
+	public Member() {
+		
+	}
 
+	// 로그인 부분 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
 			String userName, String gender, String email, String phone, String status, String blackList,
 			String speciality, String expSubmit, String expert) {
@@ -76,12 +80,33 @@ public class Member {
 		this.email = email;
 		this.phone = phone;
 	}
-
-
-	public Member() {
-		
+	// 관리자가 회원정보 수정부분 생성자1
+	public Member(int userNo, String userId, String userPwd, String nickName, String interest, String userName,
+			String gender, String email, String phone, String speciality, String expert) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.nickName = nickName;
+		this.interest = interest;
+		this.userName = userName;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.speciality = speciality;
+		this.expert = expert;
 	}
-	
+	// 관리자가 회원정보 수정부분 생성자2
+	public Member(int userNo, String userId, String userPwd, String nickName, String interest, String expert) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.nickName = nickName;
+		this.interest = interest;
+		this.expert = expert;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}

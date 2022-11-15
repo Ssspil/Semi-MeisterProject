@@ -1,6 +1,8 @@
 package com.kh.sellboard.controller;
 
+
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -33,6 +35,7 @@ public class SellEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
 		
 		request.setAttribute("interest", interest);
@@ -41,6 +44,8 @@ public class SellEnrollFormController extends HttpServlet {
 		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
 		
 		request.setAttribute("local", local);
+		
+		
 		
 		request.getRequestDispatcher("views/sell/sellEnrollForm.jsp").forward(request, response);
 		

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local"%>
+    
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");
-
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 %>
 
@@ -22,7 +22,7 @@
 		
 	}
 	.outer{
-	       height: 1400px;
+	       height: 1500px;
 	       /* 상 , 우 , 하, 좌  띄우기 */
 		margin: 150px 200px 20px 200px;
 	}
@@ -239,7 +239,7 @@
 				
 				</td>
 				<td>
-				<img id="titleImg" width="100" height="100">
+				<img id="titleImg" width="200" height="150">
 				</td>
 			</tr>
 			<tr>

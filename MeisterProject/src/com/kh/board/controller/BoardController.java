@@ -52,7 +52,7 @@ public class BoardController extends HttpServlet {
 	
 		pageLimit = 10;
 		
-		boardLimit = 5;
+		boardLimit = 6;
 	
 		maxPage = 11;
 
@@ -75,7 +75,7 @@ public class BoardController extends HttpServlet {
 	
 		pageLimit = 10;
 		
-		boardLimit = 5;
+		boardLimit = 6;
 	
 		maxPage = 11;
 
@@ -98,8 +98,6 @@ public class BoardController extends HttpServlet {
 		ArrayList<Board> list2 = new BoardService().selectList(2); //ArrayList<Board> list2 = new BoardService().selectList(2);
 		request.setAttribute("list2",list2);
 		request.setAttribute("pi2", pi2);
-		
-		
 		
 		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
