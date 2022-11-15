@@ -58,6 +58,7 @@ public class SellInsertController extends HttpServlet {
 		    int userNO = Integer.parseInt(multiRequest.getParameter("userNO"));
 		    
 		    
+		    
 			SellBoard s = new SellBoard();
 				
 			s.setSellTitle(sellTitle);

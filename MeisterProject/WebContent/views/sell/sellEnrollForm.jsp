@@ -147,7 +147,7 @@
 				</td>
 				<td>
 				<select name="interest" id="interest_select" class="cate" required>
-					<option style="text-align: center;" value="">관심분야 선택</option>
+					<option style="text-align: center;" value="0">관심분야 선택</option>
 					<!-- <option value="10">영상</option>
 					<option style="text-align: center;" value="20">영화</option>
 					<option style="text-align: center;" value="30">게임</option>
@@ -159,10 +159,11 @@
 								
 							<%} %>
 				</select>
+					<!-- 선택하게 alert로 알려줘야함 막아야 -->
 				<br>
 				<br>
 				<select name="local" id="local_select" class="cate" >
-					<option style="text-align: center;" value="">지역 선택</option>
+					<option style="text-align: center;" value="115">지역 선택</option>
 					<!-- <option style="text-align: center;" value="5">서울</option>
 					<option style="text-align: center;" value="15">인천</option>
 					<option style="text-align: center;" value="25">부산</option>
@@ -179,6 +180,18 @@
 								
 							<%} %>
 				</select>
+				    <script>
+					    $(function () {
+					        $("#enroll-form").submit(function() {
+					            if($("#interest_select").val() == 0) {
+					                alert('관심분야를 선택해주세요.')    
+					                
+					                return false
+					            }
+					        });     
+					    });
+					    
+					</script>
 				</td>
 			</tr>
 			<tr>
@@ -226,7 +239,7 @@
 				
 				</td>
 				<td>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;썸네일 들어갈 곳
+				<img id="titleImg" width="100" height="100">
 				</td>
 			</tr>
 			<tr>
@@ -270,12 +283,48 @@
 				</td>
 			</tr>
 		</table>
-
+			
 			
 		<br><br>
+		 <div id="file-area">
+		<input type="file" id="file1" name="file1" onchange="loadImg(this, 1);">
+		</div>
+	
+		<script>
+		$(function(){
+			$("#file-area").hide();
+			
+			$("#titleImg").click(function(){
+				$("#file1").click();
+			});
+		});
+		
+		function loadImg(inputFile){
+			
+			if(inputFile.files.length != 0){
+				
+				let reader = new FileReader();
+				
+				reader.readAsDataURL(inputFile.files[0]);
+				
+				reader.onload = function(e){
+					
+					 $("#titleImg").attr("src",e.target.result);
+				}
+				
+			}else{
+						
+				 	$("#titleImg").attr("src",null);
+				}
+			}
+				
+		</script>
+		
 		<button id="btn1" type="submit" class="btn btn-warning" onclick="submitLogin();" style="text-align:center">등록하기</button>
 		</form>
 	</div>
+	
+	
 
 	<script>
         let radios = document.querySelectorAll("[name=onoff]");
@@ -293,6 +342,10 @@
             });
         }
     </script>
+    
+   
+	
+	
 	
 	<%@ include file="../common/footer.jsp" %>
 </body>
