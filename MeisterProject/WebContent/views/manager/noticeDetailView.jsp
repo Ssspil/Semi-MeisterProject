@@ -3,6 +3,8 @@
 <%
     String contextPath = request.getContextPath();
 
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
     Notice n = (Notice)request.getAttribute("n");
     
     PageInfo pi =(PageInfo)request.getAttribute("pi");
@@ -45,6 +47,18 @@
     
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+    <script>
+		let msg = "<%= alertMsg %>";	// let msg = 성공적으로 공지사항이 등록되었습니다.
+		
+		// 알람을 띄워준후 session에 담긴 해당메세지는 지워줘야한다.
+		// 안그러면 menuber.jsp가 로딩될때마다 계속 알림창잉 뜬다.
+		if(msg != "null"){
+			alert(msg);
+			
+			<% session.removeAttribute("alertMsg"); %>
+		} 
+		
+	</script>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->

@@ -15,34 +15,27 @@
 	body {
 		margin: auto;
 	}
-	#web-header {
-		box-sizing: border-box;
-		width: 1000px;
-	    height: 20%;
-		margin: auto;
-		position: relative;
-		border: 1px solid red;
-		
-	}
+	
 	#web-body {
 		box-sizing: border-box;
-		
+		padding-top: 100px;
 		width: 750px;
 		margin: 0 auto;
 		border: 1px solid green;
     }
 	.container {
-		width: 100%;
-		height: 30%;
-		box-sizing: border-box;
-		display: block;
-		margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        margin-top: 2rem
 		
 	}
 	.outer3 {
 		box-sizing: border-box;
-		border: 1px solid darkblue;
-		height: 50%;
+		border: 1px solid blue;
+		height: auto;
+		display: flex;
+   	 	flex-direction: column;
 	}
 	.outer4 {
 		margin: 0 auto;
@@ -56,9 +49,6 @@
 		width: 150px;
 		height: 100px;
 	}
-	#btn{
-		float: right;
-	}
 	#nickname{
 		left: 10%;
 	
@@ -68,16 +58,17 @@
 		right: 100px;
 	}
 	#title{
-		box-sizing: border-box;
-		height: 20%;
+		display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
 		
 	}
 	#content{
 		box-sizing: border-box;
-		border: 1px solid black;
+		border: 1px solid yellow;
 		width: 100%;
-		height: 60%;
-		margin: auto;
+		height: 250px;
 		
 
 	}
@@ -88,7 +79,8 @@
 		height: 50%;
 	}
 	.btn {
-		float: right;
+		margin-right: 10px;
+		margin-top: 15px;
 	}
 	#footer1 {
 		text-align: center;
@@ -125,7 +117,6 @@
 
 	}
 
-	<!---->
 	#reply {
 		display: block;
 		list-style-type: disc;
@@ -149,44 +140,36 @@
 </style>
 </head>
 <body>
-	
+	<%@ include file="../common/header.jsp" %>
 
-	<div id="web-header"></div>
 	<div id="web-body">
-		
 		<div class="container">
-			<%= b.getBoardTitle() %>
-			<br>
-			<br>
-			<div id="title">
-			<img src="" id="img"> 
-			<span  id="nickname"><%=b.getNICKNAME %></span>
-			<br><br><br>
-			<span id="date">20132399</span>
-			<button class="btn">수정</button>
-			<button class="btn">삭제</button>
-			</div>
+			<div><p><h1>asdasdasdasda</h1></p></div>
+			<div>
+                <div class="title">
+                    <a href="resources/resources/image/animal2.gif"></a>
+                    <div>
+                        <button>수정</button>
+                    </div>
+                </div>
+            </div>
+			
 		</div>
-		<hr class="sen">
+        <br>
+		<hr>
+
 		<div class="outer3">	
 			<div id="content">
-				<textarea name="" id="" cols="30" rows="10" style="resize: none; width: 100%; height: 100%;"><%= b.getBoardContent() %>
-					<% if(at == null) { %>
-						<!-- 첨부파일이 없는경우 -->
-						첨부파일이 없습니다.
-					<% } else { %>
-						<!-- 첨부파일이 있는경우 -->
-						<!-- 브라우저에서 http://localhost:8001/jsp/resources/board_upfiles/xxx.jpg -->
-						<a href="<%=contextPath %>/<%= at.getFilePath() + at.getChangeName() %>" 
-						download="<%= at.getOriginName() %>">
-							<%= at.getOriginName() %>
-						</a> 
-					<% } %>
-				</textarea>
-				
+				<p>
+					<span>aaaaaaaaaaaaaaaaaaa</span>
+				</p>
 			</div>
-			<p>이 부분은 좋아</p>
+			<div>여긴 썸네일</div> <!--썸네일-->
+			<div>
+				<p>이 부분은 좋아요 댓글</p>
+			</div>	
 		</div>	
+		<hr>
 		<div id="footer1">
 			<div id="area">
 				<div id="area1">
@@ -202,7 +185,7 @@
 		</div>
 	</div>
 			
-	
+	<%@ include file="../common/footer.jsp" %>
 	
 	
 </body>
