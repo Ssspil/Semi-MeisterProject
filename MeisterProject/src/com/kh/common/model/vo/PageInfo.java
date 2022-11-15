@@ -89,4 +89,15 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 
+	//공지사항 글 제목 검색 페이징
+	public PageInfo( int currentPage, int pageLimit, int boardLimit) {
+		super();
+		this.currentPage = currentPage;
+		this.pageLimit = pageLimit;
+		this.boardLimit = boardLimit;
+	}
+	
+	
+	
+
 }
