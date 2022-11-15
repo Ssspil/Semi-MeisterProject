@@ -53,10 +53,11 @@
 
     }
    #file {
-      display: flex;
+     box-sizing: border-box;
       justify-content: center;
-      height: 3.5rem;
-      padding: 1rem 1.25rem;
+      height: 70px;
+      width:1200px;
+      padding: 15px;
       background-color: orange;
       margin: 0 -1rem;
       border-top: 0.0625rem solid #f4f4f4;
@@ -64,8 +65,9 @@
    }
    
    #file2 {
-      display: flex;
-       align-items: center;
+  box-sizing: border-box;
+        margin: auto;
+       
    }
 
    .file2Wrap{
@@ -135,7 +137,8 @@
       border-radius: 4px;
       color: white;
       cursor: pointer;
-      margin: auto;
+      position: relative;
+	  left: 18%;
    }
    #camera{
       width: 30px;
@@ -143,13 +146,15 @@
    }
    
    #fileName{
-      padding-left:10px;
+    margin:auto;
       font-size: 17px;
        font-weight: bold;
+     position: relative;
       top: 50%;
-      transform: translateY(-50%);
+      right:-20%;
+      
       color: #000;
-      display: block;
+      
    }
    #btn {
       background-color: white;
@@ -200,7 +205,7 @@
                <input type="text" name="title" maxlength="30" class="title" size="100" placeholder="게시글 제목을 입력헤주세요." required>
                   </div>
                </div>
-               <div><hr></div>
+               <div></div>
                <div id="img">
 
                </div>
