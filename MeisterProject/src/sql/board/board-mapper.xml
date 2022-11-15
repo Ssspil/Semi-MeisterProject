@@ -81,4 +81,13 @@
 		 WHERE REF_BNO = ?
 		 ORDER BY FILE_LEVEL
 	</entry>
+	
+	<entry key="searchList">
+	SELECT BOARD_TITLE
+	FROM BOARD 
+	WHERE BOARD_TYPE = 1
+		AND STATUS = 'Y'
+		AND @ LIKE ? 
+	ORDER BY BOARD_DATE DESC
+	</entry>
 </properties>

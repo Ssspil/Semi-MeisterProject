@@ -56,10 +56,10 @@
      box-sizing: border-box;
       justify-content: center;
       height: 70px;
-      width:1200px;
+      width:1800px;
       padding: 15px;
       background-color: orange;
-      margin: 0 -1rem;
+      margin: auto;
       border-top: 0.0625rem solid #f4f4f4;
       border-bottom: 0.0625rem solid #f4f4f4;
    }
@@ -138,8 +138,9 @@
       color: white;
       cursor: pointer;
       position: relative;
-	  left: 18%;
+	  left: 14%;
    }
+   
    #camera{
       width: 30px;
       height:30px;
@@ -151,7 +152,7 @@
        font-weight: bold;
      position: relative;
       top: 50%;
-      right:-20%;
+      right:-15%;
       
       color: #000;
       

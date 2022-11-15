@@ -246,7 +246,6 @@ public class BoardDao {
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getUserNo());
 			psmt.setInt(4, type);
-			System.out.println(type);
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -281,5 +280,37 @@ public class BoardDao {
 		}
 		return result;
 	}
+	public ArrayList<Board> searchList(Connection conn, String searchType, String keyword){
+		   ArrayList<Board> list = new ArrayList<>();
+		   
+		   PreparedStatement psmt = null;
+		   
+		   ResultSet rset = null;
+		   
+		   String sql=prop.getProperty("searchList");
+
+		   sql = sql.replace("@", searchType); 
+		   
+		   try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, "%"+keyword+"%"); //
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);
+		}
+		   return list;
+	   }
 
 }

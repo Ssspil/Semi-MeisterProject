@@ -100,8 +100,6 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("pi2", pi2);
 		
 		
-		
-		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
 		request.setAttribute("hotList",hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);

@@ -26,7 +26,7 @@ int maxPage2 = pi2.getMaxPage();
 <style>
 .body2-1{
   box-sizing: border-box;
-            height: 1600px;
+            height: 1750px;
 }
 #textLine{
             width:500px;
@@ -45,6 +45,10 @@ top:40px;
 	margin: auto;
 	height: 19%;
 }
+#page_wrap2{
+position: relative;
+text-align:center;
+top:12%;
 
 </style>
 </head>
@@ -53,7 +57,7 @@ top:40px;
     <div id="body2-1">
              
                <%for(int i=0; i< list2.size(); i++){ %>
-                   <div class="body2-3 <%=i%> <%=i > 4 ? "hide" : ""%>">
+                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>"  onclick="location.href='<%=contextPath2%>/detail.bo?type=2';">
                   
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
@@ -113,7 +117,7 @@ top:40px;
      
         </div>
         
-        	<div class="page_wrap">
+        	<div class="page_wrap" id="page_wrap2">
 				<% if (currentPage2 != 1) { %>
 				<span>&lt&lt</span>
 				<% }%>
@@ -153,9 +157,9 @@ function pageMove2(currentPage) {
 		currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 	}
 
-	var cnt = (currentPage - 1) * 5;
+	var cnt = (currentPage - 1) * 6;
 	$(".board").hide();
-	for (var i = cnt; i < cnt + 5; i++) {
+	for (var i = cnt; i < cnt + 6; i++) {
 		$(".board" + (i)).show();
 	}
 	$(".page_wrap span").removeClass("sel");
