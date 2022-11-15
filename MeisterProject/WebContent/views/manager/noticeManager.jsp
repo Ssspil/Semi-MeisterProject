@@ -202,6 +202,7 @@ table>tbody>tr:hover{
 								
 									<% } %>
 								<% } %>
+								
 							</tbody>
 	                    </table>
                     </div>
@@ -230,6 +231,7 @@ table>tbody>tr:hover{
 			<script>
 				function doPageClick(currentPage){
 					location.href= "<%=contextPath%>/notice.ad?currentPage="+currentPage;
+					
 				}
 			</script>
                     

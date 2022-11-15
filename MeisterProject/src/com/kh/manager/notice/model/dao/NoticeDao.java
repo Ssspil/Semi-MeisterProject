@@ -233,7 +233,12 @@ public class NoticeDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
 			psmt.setString(1, "%"+ search + "%" );
+			psmt.setInt(2, startRow);
+			psmt.setInt(3, endRow);
 			
 			rset = psmt.executeQuery();
 			
