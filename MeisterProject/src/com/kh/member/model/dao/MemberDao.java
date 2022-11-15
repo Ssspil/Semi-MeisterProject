@@ -454,7 +454,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_PWD"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTEREST"),
+						rset.getString("INTEREST_NAME"),
 						rset.getDate("ENROLL_DATE"),
 						rset.getString("USER_NAME"),
 						rset.getString("GENDER"),

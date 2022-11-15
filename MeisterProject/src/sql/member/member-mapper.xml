@@ -120,7 +120,7 @@
 			   USER_ID,
 			   USER_PWD,
 			   NICKNAME,
-			   INTEREST,
+			   INTEREST_NAME,
 			   ENROLL_DATE,
 			   USER_NAME,
 			   GENDER,
@@ -128,10 +128,11 @@
 			   PHONE,
 			   STATUS,
 			   BLACKLIST,
-			   SPECIALITY,
+               SPECIALITY,
 			   EXP_SUBMIT,
 			   EXPERT
-		FROM MEMBER	
+		FROM MEMBER M
+		LEFT JOIN INTEREST I ON (M.INTEREST = I.INTEREST_NO)
 	</entry>
 	
 </properties>
