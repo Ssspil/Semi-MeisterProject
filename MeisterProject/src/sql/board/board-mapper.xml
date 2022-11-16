@@ -85,16 +85,19 @@
 	</entry>
 	
 	<entry key="selectBoard">
-		SELECT BOARD_NO,
-                    BOARD_TITLE,
-                    BOARD_CONTENT,
-                    BOARD_COUNT,
-                    BOARD_RECOMMEND,
-                    USER_NO,
-                    BOARD_DATE
-		 FROM BOARD 
-		 WHERE BOARD_NO = ?
-		   AND STATUS = 'Y'
+		SELECT
+		BOARD_NO,
+		BOARD_TITLE ,
+		BOARD_CONTENT,
+		BOARD_COUNT,
+		BOARD_RECOMMEND,
+		USER_NO,
+		m.NICKNAME,
+		BOARD_DATE
+		FROM BOARD b
+		JOIN MEMBER m using(user_no)
+		WHERE BOARD_NO = ?
+		AND b.STATUS = 'Y';
 	</entry>
 	
 	<entry key="selectAttachment">
@@ -104,7 +107,7 @@
 		       FILE_PATH,
 		       FILE_LEVEL
 		 FROM ATTACHMENT
-		 WHERE REF_BNO = ?
+		 WHERE REF_NO = ?
 		 ORDER BY FILE_LEVEL
 	</entry>
 	
@@ -119,7 +122,7 @@
 	
 	<entry key="increaseCount">
 		UPDATE BOARD
-		SET COUNT = COUNT + 1
+		SET BOARD_COUNT = BOARD_COUNT + 1
 		WHERE BOARD_NO = ?
 		AND STATUS = 'Y'
 	</entry>

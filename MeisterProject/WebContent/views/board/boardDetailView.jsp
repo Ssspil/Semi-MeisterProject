@@ -3,7 +3,6 @@
 <%
 	Board b = (Board) request.getAttribute("b");
 	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
-
 	Attachment at = (Attachment) request.getAttribute("at");
 %>
 
@@ -370,7 +369,7 @@
                                 <div data-d-1 data-f-1 class="user-profile">
                                     <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;"><img data-d-1 class="profile-image" src="resources/resources/image/cat.jpg" alt="">
                                         <div data-d-1 class="profile-info">
-                                            <span data-d-1 class="profile-name"><%=b.getUserNo() %></span>
+                                            <span data-d-1 class="profile-name"><%= %></span>
                                             <span data-d-1 class="profile-date"><%=b.getBoardDate() %></span>
                                         </div>
                                     </a>

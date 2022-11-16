@@ -68,6 +68,14 @@ top:12%;
                   <img src="<%=contextPath2 %><%=list2.get(i).getTitleImg()%>" id="img1">
                   
                   <%} %>
+         	<script>
+				 $(function() {
+			         $(".body2-3").click(function() {
+			            let bno = $(this).children().eq(0).text(); 
+			            location.href= '<%=contextPath2 %>/detail.bo?bno='+ bno;     
+			         });
+			      })
+			</script>
 
                   
                 </div><br><br><br>
