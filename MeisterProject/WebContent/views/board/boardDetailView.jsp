@@ -3,7 +3,6 @@
 <%
 	Board b = (Board) request.getAttribute("b");
 	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
-
 	Attachment at = (Attachment) request.getAttribute("at");
 %>
 

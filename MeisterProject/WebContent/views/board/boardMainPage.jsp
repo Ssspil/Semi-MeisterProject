@@ -339,7 +339,7 @@ background-color:rgba(255, 106, 0, 0.87);
             <%
                for (int i = 0; i < hotList.size(); i++) {
             %>
-            <div id="body2-3-1" onclick="location.href='<%=contextPath%>/detail.bo?type=1';" >
+            <div id="body2-3-1" onclick="location.href='<%=contextPath%>/detail.bo?type=1&bno=<%=hotList.get(i).getBoardNo() %>';" >
                <br>
                <div id="hot1">
                   <div id="hot2">
@@ -362,6 +362,7 @@ background-color:rgba(255, 106, 0, 0.87);
             for (int i = 0; i < list.size(); i++) {
          %>
          <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
+         	<input type='hidden' name='bno' value='<%=list.get(i).getBoardNo() %>'/>
             <hr>
             <span class="font"><%=list.get(i).getBoardTitle()%></span>
             <div>
@@ -512,6 +513,22 @@ background-color:rgba(255, 106, 0, 0.87);
 
 </body>
 </html>
+
+<script>
+	$(function() {
+		$("#body2-4").click(function() {
+			// 클릭시 해당 공지사항의 번호를 넘겨야함.
+			// 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
+			
+			let bno = $(this).children().filter('[name=bno]').val(); // 1, 2
+			// 현재내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
+			
+			// 요청할 url?키=밸류&키=밸류&키=밸류
+			// 물음표 뒤의 내용을 쿼리스트링이라고 부른다. => 직접 만들어서 넘겨야함.
+			location.href= "<%=contextPath %>/detail.bo?bno="+ bno;
+		});
+	})
+</script>
 
 <script>
    function menuClick(type) {

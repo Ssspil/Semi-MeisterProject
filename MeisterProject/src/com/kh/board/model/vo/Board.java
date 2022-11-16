@@ -75,6 +75,8 @@ public class Board {
 		this.status = status;
 		this.titleImg = titleImg;
 	}
+	
+	// 유홍상
 	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardString) {
 		super();
 		this.boardNo = boardNo;
@@ -84,6 +86,15 @@ public class Board {
 		this.boardRecommend = boardRecommend;
 		this.userNo = userNo;
 		this.boardDate = boardDate;
+	}
+	
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo,String boardString) {
+		super();
+		this.boardNo = boardNo;
+		this.boardContent =  boardContent;
+		this.boardTitle = boardTitle;
+		this.boardCount = boardCount;
+		this.userNo = userNo;
 
 	}
 	public Board(int boardNo,String boardContent, String boardTitle, int boardCount, int boardRecommend, int userNo

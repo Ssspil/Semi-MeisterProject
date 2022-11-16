@@ -125,7 +125,7 @@ public class BoardDao {
 						rset.getInt("BOARD_COUNT"),
 						rset.getInt("BOARD_RECOMMEND"),
 						rset.getInt("USER_NO"),
-						rset.getInt("REPLY_COUNT"),
+						rset.getString("NICKNAME"),
 						rset.getString("BOARD_DATE")
 						);
 
