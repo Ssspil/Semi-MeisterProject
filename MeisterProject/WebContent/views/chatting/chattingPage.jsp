@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
 	int sender = (Integer) request.getAttribute("sender");
+	ArrayList<Chatting> note = (ArrayList<Chatting>) request.getAttribute("note");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +38,18 @@
 			<button type="submit">저장하기</button>
 		</form>
 		<br>
-		<textarea id="messageTextArea" rows="10" cols="50"></textarea>
+		<textarea id="messageTextArea" rows="10" cols="50">
+			<% if(note.isEmpty()){ %>
+				조회된 문의가 없습니다
+			<%} else{ %>
+				<%for(Chatting c : note){ %>
+					<%=c.getSender() %>
+					<%=c.getChatContent() %>
+					<%=c.getReceiver() %>
+					<%=c.getSellNo() %>
+				<%} %>
+			<%} %>
+		</textarea>
 	</div>
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
