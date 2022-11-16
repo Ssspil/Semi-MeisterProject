@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
 	int sender = (Integer) request.getAttribute("sender");
+	ArrayList<Chatting> note = (ArrayList<Chatting>) request.getAttribute("note");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,15 +30,26 @@
 			<input id="sender" type="hidden" value="<%=sender%>" readonly> 
 			<input id="textMessage" type="text"> 
 			<input id="opponent" type="text" value="admin" readonly>
-			<input id="receiver" type="hidden" value="2" readonly> 
-			<input onclick="sendMessage()" value="Send" type="button"> 
+			<input id="receiver" type="hidden" value="2" readonly>  
 			<input onclick="disconnect()" value="Disconnect" type="button"> 
 			<br>
 			<input id="chatData" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+			<input onclick="sendMessage()" value="Send" type="button">
 			<button type="submit">저장하기</button>
 		</form>
 		<br>
-		<textarea id="messageTextArea" rows="10" cols="50"></textarea>
+		<textarea id="messageTextArea" rows="10" cols="50">
+			<% if(note.isEmpty()){ %>
+				조회된 문의가 없습니다
+			<%} else{ %>
+				<%for(Chatting c : note){ %>
+					<%=c.getSender() %>
+					<%=c.getChatContent() %>
+					<%=c.getReceiver() %>
+					<%=c.getSellNo() %>
+				<%} %>
+			<%} %>
+		</textarea>
 	</div>
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");

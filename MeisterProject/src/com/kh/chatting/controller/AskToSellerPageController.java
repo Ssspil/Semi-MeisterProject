@@ -49,9 +49,10 @@ public class AskToSellerPageController extends HttpServlet {
 			}
 		}		
 		
-		
 		request.setAttribute("note", list);
-		RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
+		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
+
+		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
 		view.forward(request, response);
 	}
 
