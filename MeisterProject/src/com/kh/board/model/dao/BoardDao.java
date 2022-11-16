@@ -120,7 +120,6 @@ public class BoardDao {
 
 			if (rset.next()) {
 				 no = rset.getInt("USER_NO");
-				 System.out.println(no);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -151,7 +150,6 @@ public class BoardDao {
 				b = new Board(rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_CONTENT"),
 						rset.getString("BOARD_TITLE"),
-						rset.getInt("BOARD_COUNT"),
 						rset.getInt("BOARD_RECOMMEND"),
 						rset.getInt("USER_NO"),
 						rset.getString("BOARD_DATE"),
@@ -391,6 +389,47 @@ public class BoardDao {
 		}
 
 		return result;
+	}
+	
+	public int deleteBoard(int boardNo, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteBoard");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+
+	public void deleteAttachment(int boardNo, Connection conn) {
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteAttachment");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
 	}
 	
 	public ArrayList<Board> searchList(Connection conn, String searchType, String keyword){

@@ -186,7 +186,7 @@
    <%@ include file="../common/header.jsp" %>
    <div id="wrap">
    		<form action="<%= contextPath %>/update.bo" id="update-form" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
-         <input type="hidden" name="bno" value="<%= b.getBoardNo() %>"> 
+         <input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
@@ -205,7 +205,7 @@
       <br>
                <div id="title">
                   <div id="title1">
-               <input type="text" name="title" maxlength="30" class="title" size="100" <%=b.getBoardTitle() %> required>
+               <input type="text" name="title" maxlength="30" class="title" size="100" value="<%=b.getBoardTitle() %>" required>
                   </div>
                </div>
                <div></div>
@@ -214,7 +214,7 @@
                </div>
                <div id="content">
                   <div id="content2">
-                     <textarea id="content3" maxlength="500" name="content" rows="10" <%=b.getBoardContent() %> required></textarea>
+                     <textarea id="content3" maxlength="500" name="content" rows="10"  required><%=b.getBoardContent() %></textarea>
                   </div>
                </div>
             </div>

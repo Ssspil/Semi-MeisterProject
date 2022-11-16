@@ -84,16 +84,27 @@
 		WHERE FILE_NO = ?
 	</entry>
 	
+	<entry key="deleteBoard">
+		UPDATE BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="deleteAttachment">
+		UPDATE ATTACHMENT
+		SET STATUS = 'N'
+		WHERE REF_NO = ?
+	</entry>
+	
 	<entry key="selectBoard">
 		SELECT
 		BOARD_NO,
 		BOARD_TITLE ,
 		BOARD_CONTENT,
-		BOARD_COUNT,
 		BOARD_RECOMMEND,
 		USER_NO,
-		m.NICKNAME,
-		BOARD_DATE
+		BOARD_DATE,
+		m.NICKNAME
 		FROM BOARD b
 		JOIN MEMBER m using(user_no)
 		WHERE BOARD_NO = ?

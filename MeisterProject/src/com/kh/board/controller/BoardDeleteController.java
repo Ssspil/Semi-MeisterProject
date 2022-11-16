@@ -32,10 +32,10 @@ public class BoardDeleteController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 
 		int result = new BoardService().deleteBoard(boardNo);
-
+		
 		if (result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 삭제했습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.bo");
+			response.sendRedirect(request.getContextPath()+"/boardlist.bo");
 		} else {
 			request.setAttribute("errorMsg", "게시글 삭제 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

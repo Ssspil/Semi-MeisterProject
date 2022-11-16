@@ -101,6 +101,23 @@ public class BoardService {
 		
 		return result * result2;
 	}
+	
+	public int deleteBoard(int boardNo) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(boardNo, conn);
+		
+		new BoardDao().deleteAttachment(boardNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
+	}
 
 	public Board selectBoard(int boardNo) {
 

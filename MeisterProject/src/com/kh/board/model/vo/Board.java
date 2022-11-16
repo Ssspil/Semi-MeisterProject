@@ -51,30 +51,27 @@ public class Board {
    }
    
    // 유홍상
-   public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg , String memberNic) {
+   // 게시글 상세보기
+   public Board(int boardNo, String boardContent, String boardTitle, int boardRecommend, int userNo,String boardDate, String memberNic) {
       super();
       this.boardNo = boardNo;
       this.boardContent = boardContent;
       this.boardTitle = boardTitle;
-      this.boardCount = boardCount;
       this.boardRecommend = boardRecommend;
       this.userNo = userNo;
       this.boardDate = boardDate;
-      this.titleImg = titleImg;
       this.memberNic = memberNic;
-      
    }
    
    // 게시글 수정 부분 생성자
-   public Board(int boardNo, String boardTitle, String boardContent, String boardDate, int userNO) {
+   public Board(int boardNo, String boardTitle, String boardContent) {
       super();
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
-      this.boardDate = boardDate;
-      this.userNo = userNO;
    }
    
+   // 이수꺼 맞나요?!
    // 게시글 목록 불러오기 부분 생성자
    // title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
    public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardDate,
@@ -103,7 +100,7 @@ public class Board {
       this.boardDate = boardDate;
    }
    
-   
+   // 홍상이꺼 같은디?
    public Board(int boardNo, String boardTitle, String boardContent, int userNo) {
       super();
       this.boardNo = boardNo;
