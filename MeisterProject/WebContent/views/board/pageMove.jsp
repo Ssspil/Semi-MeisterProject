@@ -45,7 +45,7 @@ top:40px;
 	margin: auto;
 	height: 19%;
 }
-#page_wrap2{
+#page_wrap2{ 
 position: relative;
 text-align:center;
 top:12%;
