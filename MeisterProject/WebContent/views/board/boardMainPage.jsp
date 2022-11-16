@@ -382,14 +382,7 @@ background-color:rgba(255, 106, 0, 0.87);
                <!--                  <span>사진이 없습니다.</span> -->
                <%--                   <%} %>  --%>
 
-			<script>
-			 $(function() {
-		         $("#body2-4").click(function() {
-		            let bno = $(this).children().eq(0).text(); 
-		            location.href= "<%=contextPath %>/detail.bo?bno="+ bno;   
-		         });
-		      })
-			</script>
+		
 	  </div>
             <br>
             <br>
