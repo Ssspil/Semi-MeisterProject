@@ -71,7 +71,7 @@ public class MemberUpdateController extends HttpServlet {
 			
 			if(multiRequest.getOriginalFileName("profileImg") != null) {	
 				at = new Attachment();
-				at.setRefBNo(userNo);
+				at.setRefNo(userNo);
 				at.setOriginName(multiRequest.getOriginalFileName("profileImg"));
 				at.setChangeName(multiRequest.getFilesystemName("profileImg"));
 				at.setFilePath("resources/profile_upfiles/");

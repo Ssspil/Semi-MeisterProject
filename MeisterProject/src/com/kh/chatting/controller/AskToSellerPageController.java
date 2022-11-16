@@ -41,7 +41,7 @@ public class AskToSellerPageController extends HttpServlet {
 		int userNo = loginUser.getUserNo();
 		request.setAttribute("nickname", nickName);
 		request.setAttribute("sender", userNo);
-		/*
+		
 		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
 		for(int i=0; i < list.size()-1; i++) {	
 			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
@@ -50,8 +50,8 @@ public class AskToSellerPageController extends HttpServlet {
 		}		
 		
 		request.setAttribute("note", list);
-		RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
-		*/
+		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
+
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
 		view.forward(request, response);
 	}
