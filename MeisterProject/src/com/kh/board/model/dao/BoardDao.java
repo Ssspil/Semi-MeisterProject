@@ -101,6 +101,35 @@ public class BoardDao {
 
 		return board;
 	}
+	
+	public int selectBoardWriter(Connection conn, int boardNo) {
+
+		int no = 0;
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectBoardWriter");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, boardNo);
+
+			rset = psmt.executeQuery();
+
+			if (rset.next()) {
+				 no = rset.getInt("USER_NO");
+				 System.out.println(no);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		return no;
+	}
 
 	public Board selectBoard(Connection conn, int boardNo) {
 

@@ -103,6 +103,15 @@ public class Board {
 		this.boardDate = boardDate;
 	}
 	
+	
+	public Board(int boardNo, String boardTitle, String boardContent, int userNo) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.userNo = userNo;
+	}
+
 	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo, String boardDate) {
 		super();
 		this.boardNo = boardNo;

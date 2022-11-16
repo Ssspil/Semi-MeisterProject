@@ -98,7 +98,12 @@
 		JOIN MEMBER m using(user_no)
 		WHERE BOARD_NO = ?
 		AND b.STATUS = 'Y'
-		AND REF_NO = ? AND FILE_LEVEL = 5
+	</entry>
+	
+	<entry key="selectBoardWriter">
+		SELECT USER_NO
+		FROM BOARD
+		WHERE BOARD_NO = ?
 	</entry>
 	
 	<entry key="selectAttachment">
