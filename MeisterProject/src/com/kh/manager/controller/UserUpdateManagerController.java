@@ -77,7 +77,8 @@ public class UserUpdateManagerController extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		} else {
 		
-			System.out.println("관리자가 회원을 수정했습니다.");
+			
+			System.out.printf("관리자가 %s 의 회원정보 수정했습니다. \n", newMem.getUserId());
 			
 			response.sendRedirect(request.getContextPath()+"/users.ad");
 		}
