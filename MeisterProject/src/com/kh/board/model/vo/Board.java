@@ -11,7 +11,7 @@ public class Board {
 	private String status;
 	private int userNo;
 	private String titleImg;
-	private int replyCount;	// 커뮤니티 게시판에 썸네일 표시용
+	private int replyCount;	// 커뮤니티 게시판에 댓글 갯수확인용
 	
 	
 	

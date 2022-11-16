@@ -80,8 +80,8 @@ top:12%;
                   
                 </div><br><br><br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-eye"></i><%=list2.get(i).getBoardCount()  %> 
-                    <i class="bi bi-hand-thumbs-up"></i><%= list2.get(i).getBoardRecommend() %>
+                    <div><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
+                    <i class="bi bi-hand-thumbs-up"></i> <%= list2.get(i).getBoardRecommend() %>
                     
                     <%
                     String boardDate2 = list2.get(i).getBoardDate();

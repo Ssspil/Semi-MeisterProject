@@ -347,7 +347,7 @@ background-color:rgba(255, 106, 0, 0.87);
                      <p id="hottext"><%=hotList.get(i).getBoardContent()%></p>
                      <div id="hotfooter">
                         <i class="bi bi-eye"></i>
-                        <%=hotList.get(i).getBoardCount()%>
+                        <%=hotList.get(i).getReplyCount()%>
                         <i class="bi bi-hand-thumbs-up"></i>
                         <%=hotList.get(i).getBoardRecommend()%></div>
                   </div>
