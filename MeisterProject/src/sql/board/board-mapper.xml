@@ -97,7 +97,8 @@
 		FROM BOARD b
 		JOIN MEMBER m using(user_no)
 		WHERE BOARD_NO = ?
-		AND b.STATUS = 'Y';
+		AND b.STATUS = 'Y'
+		AND REF_NO = ? AND FILE_LEVEL = 5
 	</entry>
 	
 	<entry key="selectAttachment">
@@ -107,7 +108,7 @@
 		       FILE_PATH,
 		       FILE_LEVEL
 		 FROM ATTACHMENT
-		 WHERE REF_NO = ?
+		 WHERE REF_NO = ? AND FILE_LEVEL = 5
 		 ORDER BY FILE_LEVEL
 	</entry>
 	

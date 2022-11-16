@@ -367,9 +367,11 @@
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
-                                    <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;"><img data-d-1 class="profile-image" src="resources/resources/image/cat.jpg" alt="">
+                                    <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;"><img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>"  alt="">
                                         <div data-d-1 class="profile-info">
-                                            <span data-d-1 class="profile-name"><%= %></span>
+                                            <span data-d-1 class="profile-name">
+                                            	<%= b.getMemberNic() %>
+                                            </span>
                                             <span data-d-1 class="profile-date"><%=b.getBoardDate() %></span>
                                         </div>
                                     </a>
@@ -428,7 +430,7 @@
                                 <li data-x-1  data-z-1 class="comments-list-item">
                                     <div data-c-1 data-x-1 class="comment-wrapper">
                                         <div data-c-1 class="profile-image">
-                                            <img data-c-1 class="image" src="resources/resources/image/animal2.gif">
+                                            <%=b.getMemberNic() %>
                                         </div>
                                         <div data-c-1 class="comment-information">
                                             <div data-c-1 class="user-info">

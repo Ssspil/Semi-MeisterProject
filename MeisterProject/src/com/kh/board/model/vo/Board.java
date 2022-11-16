@@ -12,7 +12,7 @@ public class Board {
 	private int userNo;
 	private String titleImg;
 	private int replyCount;	// 커뮤니티 게시판에 썸네일 표시용
-	
+	private String memberNic;
 	
 	
 	public Board() {
@@ -37,7 +37,7 @@ public class Board {
 	}
 	
 	// 이이수
-	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg) {
+	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg ) {
 		super();
 		this.boardNo = boardNo;
 		this.boardContent = boardContent;
@@ -47,6 +47,21 @@ public class Board {
 		this.userNo = userNo;
 		this.boardDate = boardDate;
 		this.titleImg = titleImg;
+		
+	}
+	
+	// 유홍상
+	public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg , String memberNic) {
+		super();
+		this.boardNo = boardNo;
+		this.boardContent = boardContent;
+		this.boardTitle = boardTitle;
+		this.boardCount = boardCount;
+		this.boardRecommend = boardRecommend;
+		this.userNo = userNo;
+		this.boardDate = boardDate;
+		this.titleImg = titleImg;
+		this.memberNic = memberNic;
 		
 	}
 	
@@ -77,7 +92,7 @@ public class Board {
 	}
 	
 	// 유홍상
-	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardString) {
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo, String boardDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardContent =  boardContent;
@@ -88,14 +103,14 @@ public class Board {
 		this.boardDate = boardDate;
 	}
 	
-	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo,String boardString) {
+	public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo, String boardDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardContent =  boardContent;
 		this.boardTitle = boardTitle;
 		this.boardCount = boardCount;
 		this.userNo = userNo;
-
+		this.boardDate = boardDate;
 	}
 	public Board(int boardNo,String boardContent, String boardTitle, int boardCount, int boardRecommend, int userNo
 			) {
@@ -202,6 +217,14 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardType=" + boardType +", boardContent=" + boardContent
 				+ ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardDate=" + boardDate
 				+ ", status=" + status + ", userNo=" + userNo + ", titleImg=" + titleImg + ", replyCount=" + replyCount + "]";
+	}
+
+	public String getMemberNic() {
+		return memberNic;
+	}
+
+	public void setMemberNic(String memberNic) {
+		this.memberNic = memberNic;
 	}
 	
 	
