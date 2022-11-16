@@ -431,6 +431,7 @@ background-color:rgba(255, 106, 0, 0.87);
                         result = (year - year2)+ "년전";
                      }
                      
+                     
                      %>
                   <span id="date"><%=result%> </span>
                </div>
