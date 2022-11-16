@@ -25,10 +25,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-ul, li{
-  list-style: none;
-  padding: 0;
-}
+
 [name="slide"] {
   display: none;
 }
@@ -53,7 +50,7 @@ ul, li{
 .container .slideitem label{
   position: absolute;
   z-index: 1;
-  transform: translate(-50%);
+  transform: translateX(-100vw);
   padding: 20px;
   border-radius: 0;
   cursor: pointer;
