@@ -4,6 +4,9 @@
 	Board b = (Board) request.getAttribute("b");
 	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
 	Attachment at = (Attachment) request.getAttribute("at");
+	if(at == null){
+		at = new Attachment();
+	}
 %>
 
 
@@ -367,15 +370,17 @@
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
-                                    <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;"><img data-d-1 class="profile-image" src="resources/resources/image/cat.jpg" alt="">
+ <%--                                     <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;">--%><img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
                                         <div data-d-1 class="profile-info">
-                                            <span data-d-1 class="profile-name"><%= %></span>
+                                            <span data-d-1 class="profile-name">
+                                            	<%= b.getMemberNic() %>
+                                            </span>
                                             <span data-d-1 class="profile-date"><%=b.getBoardDate() %></span>
                                         </div>
                                     </a>
                                     <div data-f-1 data-d-1>
                                         <div data-d-1 data-f-1 class="btn">
-	                                        <% if(loginUser != null && loginUser.getUserId().equals(b.getUserNo())) { %>
+	                                        <% if(loginUser != null && loginUser.getUserId().equals(b.getMemberNic())) { %>
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
 											<% } %>
@@ -428,7 +433,7 @@
                                 <li data-x-1  data-z-1 class="comments-list-item">
                                     <div data-c-1 data-x-1 class="comment-wrapper">
                                         <div data-c-1 class="profile-image">
-                                            <img data-c-1 class="image" src="resources/resources/image/animal2.gif">
+                                            <%=b.getMemberNic() %>
                                         </div>
                                         <div data-c-1 class="comment-information">
                                             <div data-c-1 class="user-info">

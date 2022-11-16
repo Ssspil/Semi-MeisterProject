@@ -6,10 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Attachment;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardDetailController
@@ -30,23 +32,26 @@ public class BoardDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		
 		
 		BoardService bService = new BoardService();
 		
 		// 좋아요 증가 / 게시글 조회(Board) / 첨부파일 조회(Attachment)
-		
 		int result = bService.increaseCount(boardNo);
 		
 		if(result > 0) {
-			
+			int no = bService.selectBoardWriter(boardNo);
+			System.out.println(boardNo);
+			System.out.println(no);
 			Board b = bService.selectBoard(boardNo);
-			Attachment at = bService.selectAttachment(boardNo);
+			
+			Attachment at = bService.selectAttachment(no);
+			
 			
 			request.setAttribute("b", b);
 			request.setAttribute("at", at);
-			
+			System.out.println(at);
 			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 		} else { // 에러페이지
 			request.setAttribute("errorMsg", "게시글 상세조회 실패");

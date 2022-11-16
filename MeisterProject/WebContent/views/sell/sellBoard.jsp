@@ -179,7 +179,7 @@ div.main{
 		</div> 
 		
 		<div class="main">
-			<div>썸네일1</div>
+			<div><a href="">썸네일1</a></div>
 			<div>썸네일2</div>
 			<div>썸네일3</div>
 			<div>썸네일4</div>

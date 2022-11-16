@@ -42,7 +42,10 @@ header .main-menu li a{
     font-weight: 700;
 
 }
-
+header ul, li{
+  list-style: none;
+  padding: 0;
+}
 header .main-menu li a,.search {
     padding: 11px 16px;
     display: block;
@@ -93,11 +96,10 @@ header .sub-menu li a {
     float: left;
     line-height: 100px;
     margin-left: 5px;
-    margin-right: 5px;
 }
 header .sub-menu ul.menu li::before {
     content: " ";
-    width: 1.5px;
+    width: 2px;
     height: 14px;
     background-color: #d8d8d8;
     position: absolute;

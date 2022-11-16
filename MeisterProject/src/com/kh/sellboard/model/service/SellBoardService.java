@@ -36,8 +36,19 @@ public class SellBoardService {
 		return local;
 	}
 	
+	public int increaseCount(int sellNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().increaseCount(conn, sellNo);
+		
+		commitAndRollback(conn, result);
+		
+		return result;
+	}
 	
-//	// 게시판 선택?
+	
+	// 게시판 선택?
 //	public SellBoard selectSellBoard(int sellNo) {
 //        Connection conn = getConnection();
 //        
