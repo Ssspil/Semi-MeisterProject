@@ -104,7 +104,27 @@ public class SellBoardDao {
 		return local;
 	}
 	
-//	public SellBoard selectSellBoard(Connection conn, int boardNo) {
+	public int increaseCount(Connection conn, int sellNo) {
+		
+		int result = 0;
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sellNo);
+			
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+//	public SellBoard selectSellBoard(Connection conn, int sellNo) {
 //        
 //        // select => ResultSet
 //        
@@ -117,18 +137,21 @@ public class SellBoardDao {
 //        try {
 //            psmt = conn.prepareStatement(sql);
 //            
-//            psmt.setInt(1, boardNo);
+//            psmt.setInt(1, sellNo);
 //            
 //            rset = psmt.executeQuery();
 //            
 //            if(rset.next()) {
 //                s = new SellBoard(
 //                        rset.getInt("SELL_NO"),
-//                        rset.getString("CATEGORY_NAME"),
-//                        rset.getString("BOARD_TITLE"),
-//                        rset.getString("BOARD_CONTENT"),
-//                        rset.getString("USER_ID"),
-//                        rset.getDate("CREATE_DATE")
+//                        rset.getString("SELL_TITLE"),
+//                        rset.getString("SELL_CONTENT"),
+//                        rset.getInt("PRICE"),
+//                        rset.getDate("SELL_DATE"),
+//                        rset.getInt("INTEREST_NO"),
+//                        rset.getInt("LOCAL_NO"),
+//                        // 닉네임?
+//                        rset.getString("NICKNAME")
 //                        ); 
 //            }
 //        } catch (SQLException e) {
@@ -138,10 +161,8 @@ public class SellBoardDao {
 //            close(psmt);
 //        }
 //        return s;
-        
-       
-        
-//    }
+//        
+//     }
 	
 	public int insertSellBoard(SellBoard s, Connection conn) {
 		

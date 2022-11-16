@@ -19,6 +19,9 @@
         margin-bottom: 150px;
         height: 1000px;
     }
+    #myDiv{
+    	text-align: right;
+    }
 </style>
 <title>Web Socket Example</title>
 </head>
@@ -28,7 +31,7 @@
 		<form action="<%=contextPath%>/chatting.me" method="post">
 			<input id="user" type="text" value="<%=nickName%>" readonly> 
 			<input id="sender" type="hidden" value="<%=sender%>" readonly> 
-			<input id="textMessage" type="text"> 
+			<input id="textMessage" type="text" value=""> 
 			<input id="opponent" type="text" value="admin" readonly>
 			<input id="receiver" type="hidden" value="2" readonly>  
 			<input onclick="disconnect()" value="Disconnect" type="button"> 
@@ -38,34 +41,29 @@
 			<button type="submit">저장하기</button>
 		</form>
 		<br>
-		<textarea id="messageTextArea" rows="10" cols="50">
-			<% if(note.isEmpty()){ %>
-				조회된 문의가 없습니다
-			<%} else{ %>
-				<%for(Chatting c : note){ %>
-					<%=c.getSender() %>
-					<%=c.getChatContent() %>
-					<%=c.getReceiver() %>
-					<%=c.getSellNo() %>
-				<%} %>
-			<%} %>
-		</textarea>
+
 	</div>
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
-		var messageTextArea = document.getElementById("messageTextArea");
-		let msgArr = [];
+		
 		webSocket.onopen = function(message) {
-			messageTextArea.value += "연결되었습니다...\n";
+			console.log("onopen");
 		};
 		webSocket.onclose = function(message) {
-			messageTextArea.value += "Server Disconnect...\n";
+			console.log("onclose");
 		};
 		webSocket.onerror = function(message) {
-			messageTextArea.value += "error...\n";
-		};
-		webSocket.onmessage = function(message) {
-			messageTextArea.value += message.data + "\n";
+			console.log("onerror");
+		};	
+		webSocket.onmessage = function(message) {			
+			$(document).ready(function() {
+			    $('.outer').append(
+			        $('<div>').prop({
+			            id: 'opponetDiv',
+			            innerHTML: "(상대방)" +message.data,
+			        })
+			    );
+			});
 		};
 		function sendMessage() {
 			var user = document.getElementById("user");
@@ -74,10 +72,7 @@
 			var receiver = document.getElementById("receiver");
 			var message = document.getElementById("textMessage");
 			var data = document.getElementById("chatData");
-
-			messageTextArea.value += user.value + "(나) => " + message.value
-					+ "\n";
-
+			
 			if (data.value != "") {
 				data.value += ",";
 			}
@@ -87,8 +82,19 @@
 			data.value += receiver.value;
 			data.value += ",";
 			data.value += message.value;
-
 			webSocket.send("{{" + user.value + "}}" + message.value);
+			
+			let msgVal = message.value;
+			
+			$(document).ready(function() {
+			    $('.outer').append(
+			        $('<div>').prop({
+			            id: 'myDiv',
+			            innerHTML: user.value+ "(나) : " +msgVal,
+			        })
+			    );
+			});
+			
 			message.value = "";
 		}
 		function disconnect() {
