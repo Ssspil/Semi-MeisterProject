@@ -49,8 +49,6 @@
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 
-<!-- 		ORDER BY BOARD_COUNT, BOARD_RECOMMEND DESC]]> -->
-<!-- 	</entry>  -->
 
 
 	<entry key ="insertBoard">

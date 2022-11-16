@@ -86,7 +86,6 @@ public class BoardDao {
 			int cnt = board.size();
 
 			if (cnt < 3) {
-
 				for (int i = 0; i < 3 - cnt; i++) {
 					Board b = new Board(0, "작성된 게시글이 없습니다.", "없음", 0, 0, 0, "", "");
 					board.add(b);
@@ -230,9 +229,13 @@ public class BoardDao {
 				String file = "";
 				file = file_name + "/" + change_name;
 				Board b;
-				b = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_CONTENT"), rset.getString("BOARD_TITLE"),
-						rset.getInt("BOARD_COUNT"), rset.getInt("BOARD_RECOMMEND"), rset.getInt("USER_NO"),
-						rset.getString("BOARD_DATE"), file);
+				b = new Board(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_TITLE"),				
+						rset.getString("BOARD_CONTENT"),
+						rset.getInt("BOARD_COUNT"), 
+						rset.getInt("BOARD_RECOMMEND"),
+						rset.getInt("USER_NO"),
+					    rset.getString("BOARD_DATE"));
 
 				list.add(b);
 			}
