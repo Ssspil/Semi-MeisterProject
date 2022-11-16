@@ -42,7 +42,7 @@ public class Attachment {
 		return refNo;
 	}
 
-	public void setRefBNo(int refNo) {
+	public void setRefNo(int refNo) {
 		this.refNo = refNo;
 	}
 
