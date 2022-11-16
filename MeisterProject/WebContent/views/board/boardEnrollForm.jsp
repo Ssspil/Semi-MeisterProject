@@ -139,7 +139,7 @@
       color: white;
       cursor: pointer;
       position: relative;
-	  left: 14%;
+     left: 15%;
    }
    
    #camera{
@@ -153,7 +153,7 @@
        font-weight: bold;
      position: relative;
       top: 50%;
-      right:-15%;
+      right:-16%;
       
       color: #000;
       

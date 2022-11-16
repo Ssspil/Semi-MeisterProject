@@ -49,20 +49,33 @@ public class NoticeSearchController extends HttpServlet {
 	    
 	    String search = request.getParameter("search");
 	    
+	    
+	    
 	    //페이지 번호
 	    int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")); 
 		
 	    //한 페이지에 나타낼 리스트 변수 선언
-	    int boardLimit = 10;
+	    int boardLimit = 5;
+	    
+	   //페이지 하단에 보여질 페이징바의 페이지 최대 갯수
+	    int pageLimit = 5;
 	    
 	    //검색 전체  list count
 	    int listCount = new NoticeService().searchNoticeCount(search);
 	    
 	    //page count
-	    int pageCount = (int)Math.ceil((double)listCount / boardLimit); //ceil은 올림함수
+	    int maxPage = (int)Math.ceil((double)listCount / boardLimit); //ceil은 올림함수
 	    
-	  
-	    PageInfo pi = new PageInfo(currentPage, boardLimit, boardLimit);
+	    int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		int endPage = startPage + pageLimit -1;
+		
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+	
+		
+	    PageInfo pi = new PageInfo( listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 	    
 	    //글 목록 전체 가져오기
 	    ArrayList<Notice> list = new NoticeService().searchNotice(search, pi);

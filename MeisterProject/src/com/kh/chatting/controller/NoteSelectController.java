@@ -16,16 +16,16 @@ import com.kh.chatting.model.vo.Chatting;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class AskToSellerPageController
+ * Servlet implementation class NoteSelectController
  */
-@WebServlet("/askToSeller.se")
-public class AskToSellerPageController extends HttpServlet {
+@WebServlet("/selectNote.ch")
+public class NoteSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AskToSellerPageController() {
+    public NoteSelectController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,23 +35,16 @@ public class AskToSellerPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		int sender = Integer.parseInt(request.getParameter("sender"));
+		int receiver = Integer.parseInt(request.getParameter("receiver"));
+		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
+		
+		ArrayList<Chatting> list = new ChattingService().selectNote(sender, receiver, sellNo);
 
-		String nickName = loginUser.getNickName();
-		int userNo = loginUser.getUserNo();
-		request.setAttribute("nickname", nickName);
-		request.setAttribute("sender", userNo);
-		
-		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
-		for(int i=0; i < list.size()-1; i++) {	
-			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
-				list.remove(i);
-			}
-		}		
-		
-		
 		request.setAttribute("note", list);
-		RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNotePage.jsp");
 		view.forward(request, response);
 	}
 

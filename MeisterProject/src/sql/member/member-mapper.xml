@@ -135,6 +135,7 @@
 		LEFT JOIN INTEREST I ON (M.INTEREST = I.INTEREST_NO)
 	</entry>
 	
+	<!-- 관리자가 전문가인 회원 정보변경 -->
 	<entry key="userExUpdateByManager">
 		UPDATE MEMBER
 		SET USER_ID = ?,
@@ -146,6 +147,17 @@
 			EMAIL = ?,
 			PHONE = ?,
 			SPECIALITY = ?,
+			EXPERT = ?
+		WHERE USER_NO = ?
+	</entry>
+	
+	<!-- 관리자가 일반 회원 정보변경 -->
+	<entry key="userUpdateByManager">
+		UPDATE MEMBER
+		SET USER_ID = ?,
+			USER_PWD = ?,
+			NICKNAME = ?,
+			INTEREST = ?,
 			EXPERT = ?
 		WHERE USER_NO = ?
 	</entry>

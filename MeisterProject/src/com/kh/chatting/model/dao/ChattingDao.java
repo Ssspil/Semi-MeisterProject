@@ -7,9 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.kh.chatting.model.vo.Chatting;
 import com.kh.common.JDBCTemplate;
 import com.kh.member.model.dao.MemberDao;
 
@@ -65,5 +67,75 @@ public class ChattingDao {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<Chatting> selectNoteList(Connection conn, int userNo){
+		ArrayList<Chatting> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNoteList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+
+			while(rset.next()) {
+				list.add(new Chatting(rset.getInt("CHAT_NO"),
+									rset.getString("CHAT_CONTENT"),
+									rset.getDate("CHAT_DATE"),
+									rset.getInt("SENDER"),
+									rset.getInt("RECEIVER"),
+									rset.getInt("SELL_NO")
+				));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Chatting> selectNote(Connection conn, int sender, int receiver, int sellNo){
+		ArrayList<Chatting> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNote");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sender);
+			psmt.setInt(2, receiver);
+			psmt.setInt(3, sellNo);
+			
+			rset = psmt.executeQuery();
+
+			while(rset.next()) {
+				list.add(new Chatting(rset.getInt("CHAT_NO"),
+									rset.getString("CHAT_CONTENT"),
+									rset.getDate("CHAT_DATE"),
+									rset.getInt("SENDER"),
+									rset.getInt("RECEIVER"),
+									rset.getInt("SELL_NO")
+				));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
 	}
 }

@@ -1,7 +1,6 @@
 package com.kh.board.model.service;
 
 import java.sql.Connection;
-
 import java.util.ArrayList;
 import static com.kh.common.JDBCTemplate.*;
 
@@ -73,6 +72,34 @@ public class BoardService {
 
 		return result1 * result2;
 
+	}
+	
+	public int updateBoard(Board b, Attachment at) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().updateBoard(conn, b);
+		
+		int result2 = 1;
+		
+		if(at != null) {
+			
+			if(at.getFileNo() != 0) {
+				
+				result2 = new BoardDao().updateAttachment(at, conn);
+			} else { // 기존에 첨부파일이 없었을경우 => insert문 실행
+				result2 = new BoardDao().insertNewAttachment(at, conn);
+			}
+		}
+		
+		if(result > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close();
+		
+		return result * result2;
 	}
 
 	public Board selectBoard(int boardNo) {

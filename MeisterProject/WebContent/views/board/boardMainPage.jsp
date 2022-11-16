@@ -386,7 +386,7 @@ background-color:rgba(255, 106, 0, 0.87);
 			 $(function() {
 		         $("#body2-4").click(function() {
 		            let bno = $(this).children().eq(0).text(); 
-		            location.href= '<%=contextPath %>/detail.bo?bno='+ bno;     
+		            location.href= "<%=contextPath %>/detail.bo?bno="+ bno;   
 		         });
 		      })
 			</script>

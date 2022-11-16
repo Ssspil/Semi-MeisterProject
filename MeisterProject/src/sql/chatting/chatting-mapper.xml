@@ -7,4 +7,16 @@
 		INSERT INTO CHATTING(CHAT_NO, CHAT_CONTENT, SENDER, RECEIVER, SELL_NO)
 		VALUES(SEQ_CNO.NEXTVAL, ?, ?, ?, ?)
 	</entry>
+	
+	<entry key="selectNoteList">
+		SELECT *
+		FROM CHATTING
+		WHERE SENDER = ?
+	</entry>
+	
+	<entry key="selectNote">
+		SELECT *
+		FROM CHATTING
+		WHERE SENDER = ? AND RECEIVER = ? AND SELL_NO = ?
+	</entry>
 </properties>
