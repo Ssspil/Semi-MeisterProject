@@ -282,6 +282,7 @@
             font-size: 14px;
             line-height: 1.14285714;
             font-weight: 500;
+            cursor: pointer;
         }
         .input-box .submit-line1[data-k-1] {
             margin-bottom: auto;
@@ -414,14 +415,7 @@
                             <div data-h-1 data-g-1 class="body-image">
                                 <ul data-h-1 class="image-wrapper">
                                     <li data-h-1 class="image-list">
-                      					<% if(at == null) { %>
-											첨부파일이 없습니다.
-										<% } else { %>
-												<a href="<%=contextPath %>/<%= at.getFilePath() + at.getChangeName() %>" 
-												download="<%= at.getOriginName() %>">
-										<%= at.getOriginName() %>
-											</a> 
-										<% } %>
+  										<img data-h-1 class="image" src="./resources/image/logo.png"> <!-- 이미지 임시용 -->
                                     </li>
                                 </ul>
                             </div>
@@ -440,12 +434,12 @@
                             <div data-l-1 data-k-1 class="input-box">
                             	<% if(loginUser != null) { %>
                                 <div data-k-1 class="comments-body">
-                                    <textarea data-k-1 onkeyup="replyCheck();" class="comment-input .form-control" id="comment-input" placeholder="댓글을 남겨보세요" rows="1" maxlength="500" style="height:22px; overflow:hidden; resize: none;"></textarea>
+                                    <textarea data-k-1  class="comment-input .form-control" id="replyContent" placeholder="댓글을 남겨보세요" rows="1" maxlength="50" style="height:22px; overflow:hidden; resize: none;"></textarea>
                                 </div>
-                                <div data-k-1 class="submit-line">등록</div>
+                                <div data-k-1 class="submit-line" id="submit" onclick= "insertReply();">등록</div>
                                 <% } else { %>
                                 <div data-k-1 class="comments-body">
-                                    <textarea data-k-1 class="comment-input .form-control" id="comment-input" rows="1" maxlength="500" style="height:25px; resize: none;" readonly>로그인 후 이용가능한 서비스</textarea>
+                                    <textarea data-k-1 class="comment-input .form-control" rows="1" maxlength="50" style="height:25px; resize: none;" readonly>로그인 후 이용가능한 서비스</textarea>
                                 </div>
                                 <div data-k-1 class="submit-line1">등록</div>
                                 <% } %>
@@ -454,7 +448,7 @@
                                 <li data-x-1  data-z-1 class="comments-list-item">
                                     <div data-c-1 data-x-1 class="comment-wrapper">
                                         <div data-c-1 class="profile-image">
-                                            <img data-c-1 class="image" src=src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+                                            <img data-c-1 class="image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
                                         </div>
                                         <div data-c-1 class="comment-information">
                                             <div data-c-1 class="user-info">
@@ -462,7 +456,7 @@
                                             </div>
                                             <div data-c-1 class="content">
                                                 <p data-c-1 class="text comment-input">
-                                                    <span data-c-1 style="font-weight: 400px;">안녕하세요.</span>
+                                                    <span data-c-1 id="replycontent" style="font-weight: 400px;">content</span>
                                                 </p>
                                             </div>
                                             <div data-c-1 class="comment-action">
@@ -491,11 +485,73 @@
     </form>        
 </div>
 	<%@ include file="../common/footer.jsp" %>
+
+	<script>
+		$(function () {
+	        $('#replyContent').keydown(function () {
+	            if ($("#replyContent") != null) {
+		            if($("#submit").css("display") == "none") {
+		            	$("#submit").show();
+		            } else {
+		            	$("#submit").hide();
+		            }
+	            }
+	            
+	        });
+        });
+	</script>
 	
 	<script>
-		function replyCheck() {
+		$(function() {
+			selectReplyList();
 			
-		}
+			setInterval(selectReplyList, 1000);
+		})
+		
+		
+		function insertReply() {
+			$.ajax({
+				url : "rinsert.bo",
+				data : {
+					content : $("#replyContent").val(),
+					bno     : ${b.boardNo}
+				},
+				type : "post",
+				success : function(result) {
+					if(result > 0) { // 댓글등록 성공 => 갱신된 댓글리스트 조회
+						selectReplyList();
+						$("#replyContent").val("");
+					}
+				},
+				error : function() {
+					console.log("댓글작성용 ajax 통신 실패");
+				}
+			});
+		};
+		
+		function selectReplyList() {
+			$.ajax({
+				url : "rlist.bo",
+				data : {bno : ${b.boardNo}},
+				success : (list) => {
+					
+					let result = "";
+					for(let i of list) {
+						result += "<ul>"
+										+ "<li>" + i.boardWriter + "</li>"
+										+ "<li>" + i.replyContent + "</li>"
+										+ "<li>" + i.createDate + "</li>"
+							   +  "</ul>"
+					};
+					$(".comments-list .comments-list-item").html(result);
+					
+				},
+				error : function() {
+					console.log("댓글리스트조회용 ajax통신 실패~");
+				}
+			});
+		};
+		
 	</script>
 
 </body>

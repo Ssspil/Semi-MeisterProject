@@ -17,6 +17,7 @@ import java.util.Properties;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 
 public class BoardDao {
 	private Properties prop = new Properties();
@@ -467,5 +468,65 @@ public class BoardDao {
 		}
 		   return list;
 	   }
+	
+		// 댓글
+		public int insertReply(Connection conn, Reply r) {
+
+			int result = 0;
+
+			PreparedStatement psmt = null;
+
+			String sql = prop.getProperty("insertReply");
+
+			try {
+				psmt = conn.prepareStatement(sql);
+
+				psmt.setString(1, r.getReplyContent());
+				psmt.setInt(2, r.getBoardNo());
+				psmt.setInt(3, r.getUserNo());
+
+				result = psmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(psmt);
+			}
+
+			return result;
+		}
+		
+		public ArrayList<Reply> selectReplyList(Connection conn, int boardNo) {
+			
+			ArrayList<Reply> list = new ArrayList<>();
+			
+			PreparedStatement psmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectReplyList");
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, boardNo);
+				
+				rset = psmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Reply(
+							rset.getInt(1),
+							rset.getString(2),
+							rset.getInt(3),
+							rset.getString(4)
+							));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(psmt);
+			}
+			
+			return list;
+		}
 
 }

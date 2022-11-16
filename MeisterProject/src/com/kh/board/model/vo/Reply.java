@@ -24,6 +24,13 @@ public class Reply {
 		this.boardNo = boardNo;
 		this.userNo = userNo;
 	}
+	
+	public Reply(int replyNo, String replyContent, int userNo, String replyDate) {
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.userNo = userNo;
+		this.replyDate = replyDate;
+	}
 
 
 	public int getReplyNo() {
