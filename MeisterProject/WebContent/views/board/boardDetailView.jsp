@@ -80,7 +80,7 @@
             display: flex;
             flex-direction: column;
             background-color: #fff;
-            margin-top: 2rem;
+            margin-top: 90px;
         }
         .detail-header .detail-title[data-d-1] {
             margin-top: 1rem;
@@ -240,8 +240,11 @@
             margin: 1.25rem 0;
             padding: 1.0625rem 0.875rem;
             border-radius: 8px;
-            border: 0.0625rem solid #f2f2f2;
+            border: 0;
             background-color: #fff;
+        }
+        .input-box:foucs {
+        	border: orange;
         }
         .input-box .comments-body[data-k-1] {
             width: 100%;
@@ -366,24 +369,25 @@
                     <section data-s-1 data-a-1 class="detail-container">
                         <div data-d-1 data-s-1 class="detail-header">
                             <div data-d-1 class="detail-title">
-                                <h1 data-d-1 class="header-text"><%= b.getBoardTitle() %></h1>
+                                <h1 data-d-1 class="header-text"><%=b.getBoardTitle() %></h1>
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
- <%--                                     <a data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;">--%><img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+                                    <div data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;">
+                                     	<img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
                                         <div data-d-1 class="profile-info">
                                             <span data-d-1 class="profile-name">
                                             	<%= b.getMemberNic() %>
                                             </span>
                                             <span data-d-1 class="profile-date"><%=b.getBoardDate() %></span>
                                         </div>
-                                    </a>
+                                    </div>
                                     <div data-f-1 data-d-1>
                                         <div data-d-1 data-f-1 class="btn">
-	                                        <% if(loginUser != null && loginUser.getUserId().equals(b.getMemberNic())) { %>
+ 	                                        <% if(loginUser != null && loginUser.getUserNo() == b.getUserNo()) { %> 
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
-											<% } %>
+ 											<% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -433,11 +437,11 @@
                                 <li data-x-1  data-z-1 class="comments-list-item">
                                     <div data-c-1 data-x-1 class="comment-wrapper">
                                         <div data-c-1 class="profile-image">
-                                            <%=b.getMemberNic() %>
+                                            <img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
                                         </div>
                                         <div data-c-1 class="comment-information">
                                             <div data-c-1 class="user-info">
-                                                <span data-c-1 class="user-name"><%=b.getUserNo() %></span>
+                                                <span data-c-1 class="user-name"><%=b.getMemberNic() %></span>
                                             </div>
                                             <div data-c-1 class="content">
                                                 <p data-c-1 class="text comment-input">

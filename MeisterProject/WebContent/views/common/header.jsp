@@ -24,7 +24,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- header.css 경로 -->
-<link href=" <%= contextPath %>/resources/css/header.css" rel="stylesheet" type="text/css"  />
+<link href=" <%= contextPath %>/resources/css/header.css?ver=1" rel="stylesheet" type="text/css"  />
 <!--  google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

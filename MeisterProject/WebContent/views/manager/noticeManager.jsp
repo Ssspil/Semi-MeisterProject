@@ -11,6 +11,8 @@
 
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 	
+	
+	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
  	
  	int currentPage = pi.getCurrentPage();
@@ -230,7 +232,7 @@ table>tbody>tr:hover{
 			</div>
 			<script>
 				function doPageClick(currentPage){
-					location.href= "<%=contextPath%>/notice.ad?currentPage="+currentPage;
+					location.href= "<%=contextPath%>/search.no?currentPage="+currentPage+"&search=${search}";
 					
 				}
 			</script>

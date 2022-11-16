@@ -35,19 +35,28 @@
 		FROM LOCAL
 	</entry>
 	
-<!-- 	<entry key ="selectSellBoard">
-		SELECT BOARD_NO,
-				CATEGORY_NAME,
-				BOARD_TITLE,
-				BOARD_CONTENT,
-				USER_ID,
-				CREATE_DATE
-		FROM BOARD B
-		LEFT JOIN CATEGORY USING (CATEGORY_NO)
-		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
-		WHERE BOARD_NO = ?
-			AND B.STATUS = 'Y'
-	</entry> -->
+	<entry key="increaseCount">
+		UPDATE SELL
+		SET SELL_COUNT = SELL_COUNT + 1
+		WHERE SELL_NO = ?
+			AND STATUS = 'Y'
+	</entry>
+	
+ 	<entry key ="selectSellBoard"> <!-- 게시물 선택 조회 -->
+		SELECT 	SELL_NO,
+				SELL_TITLE,
+				SELL_CONTENT,
+				PRICE,
+				SELL_DATE,
+				INTEREST_NO,
+				LOCAL_NO,
+				NICKNAME
+				<!-- 닉네임? -->
+		FROM SELL S
+		JOIN MEMBER M USING (USER_NO)
+		WHERE SELL_NO = ?
+			AND S.STATUS = 'Y'
+	</entry>
 	
 	<entry key ="selectAttachment">
 		SELECT FILE_NO,

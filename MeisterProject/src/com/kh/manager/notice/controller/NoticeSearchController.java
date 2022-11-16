@@ -55,7 +55,7 @@ public class NoticeSearchController extends HttpServlet {
 	    int currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage")); 
 		
 	    //한 페이지에 나타낼 리스트 변수 선언
-	    int boardLimit = 5;
+	    int boardLimit = 10;
 	    
 	   //페이지 하단에 보여질 페이징바의 페이지 최대 갯수
 	    int pageLimit = 5;

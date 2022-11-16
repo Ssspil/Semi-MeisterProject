@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
     
-<%@
-	int type = Integer.parseInt(request.getParameter("type"));
-	
+<%
    	Board b = (Board) request.getAttribute("b");
    	
 	Attachment at = (Attachment) request.getAttribute("at");
- %>
+%>
     
 <!DOCTYPE html>
 <html>
@@ -194,7 +192,6 @@
                <div id="wrap-title2" style="font-size:1">
                   <font style="font-size: 30px; font-weight: bold;">게시글 수정</font>
                   <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">수정</button>
-                  <input type="hidden" name="type" value="<%=type %>">   
                </div>
                <div id="file">
                   <div id="file2">
@@ -217,7 +214,7 @@
                </div>
                <div id="content">
                   <div id="content2">
-                     <textarea id="content3" maxlength="500" name="content" rows="10" placeholder="게시글 내용을 입력해주세요." required></textarea>
+                     <textarea id="content3" maxlength="500" name="content" rows="10" <%=b.getBoardContent() %> required></textarea>
                   </div>
                </div>
             </div>
