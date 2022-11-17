@@ -30,7 +30,7 @@ public class BoardDao {
 		}
 	}
 
-	public int selectListCount(Connection conn, int type) {
+	public int selectListCount(Connection conn, int type, String keyword) {
 		// select문 -> Result객체
 		int listCount = 0;
 
@@ -39,10 +39,22 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		String sql = prop.getProperty("selectListCount");
+		
+		if("".equals(keyword)) {
+			sql = prop.getProperty("selectListCount");
+		} else {
+			sql = prop.getProperty("selectListSearchCount");
+			keyword="%"+keyword+"%";
+		}
 
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, type);
+			
+			if(!"".equals(keyword)) {
+				psmt.setString(2, "%"+keyword+"%");
+			}
+			
 			rset = psmt.executeQuery();
 
 			if (rset.next()) {
@@ -198,7 +210,7 @@ public class BoardDao {
 		return at;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, int type) {
+	public ArrayList<Board> selectList(Connection conn, int type, String keyword) {
 
 		// select 문 => ResultSet
 		ArrayList<Board> list = new ArrayList<>();
@@ -208,13 +220,22 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		String sql = prop.getProperty("selectList");
+		
+		if("".equals(keyword)) {
+			sql = prop.getProperty("selectList");
+		} else {
+			sql = prop.getProperty("selectListSearch");
+			keyword="%"+keyword+"%";
+		}
 
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setInt(1, type);
-
-			System.out.println("type:" + type);
+			
+			if(!"".equals(keyword)) {
+				psmt.setString(2, keyword);
+			}
 			
 			rset = psmt.executeQuery();
 
@@ -233,6 +254,8 @@ public class BoardDao {
 						rset.getInt("USER_NO"),
 						rset.getInt("REPLY_COUNT"),
 					    rset.getString("BOARD_DATE"));
+				
+				b.setTitleImg(file);
 						
 				list.add(b);
 			}
@@ -281,17 +304,18 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-//			psmt.setInt(1, b.getBoardNo());
-			
+
 			psmt.setString(1, b.getBoardTitle());
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getUserNo());
 			psmt.setInt(4, type);
 			
 			result = psmt.executeUpdate();
+			System.out.println("result:"+result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			close(psmt);
 		}

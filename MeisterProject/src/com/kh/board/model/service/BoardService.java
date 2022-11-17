@@ -11,20 +11,20 @@ import com.kh.board.model.vo.Reply;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardService {
-	public int selectListCount(int type) {
+	public int selectListCount(int type, String keyword) {
 		Connection conn = getConnection();
 
-		int listCount = new BoardDao().selectListCount(conn, type);
+		int listCount = new BoardDao().selectListCount(conn, type, keyword);
 
 		close();
 
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList(int type) {
+	public ArrayList<Board> selectList(int type, String keyword) {
 		Connection conn = getConnection();
 
-		ArrayList<Board> list = new BoardDao().selectList(conn, type);
+		ArrayList<Board> list = new BoardDao().selectList(conn, type, keyword);
 
 		close();
 		return list;
@@ -58,9 +58,9 @@ public class BoardService {
 
 		int result2 = 1;
 
-		if (at != null) {
-			result2 = new BoardDao().insertAttachment(at, conn);
-		}
+		/*
+		 * if (at != null) { result2 = new BoardDao().insertAttachment(at, conn); }
+		 */
 
 		if (result1 > 0 && result2 > 0) {
 

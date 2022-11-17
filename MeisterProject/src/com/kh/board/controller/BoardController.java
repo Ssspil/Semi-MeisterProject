@@ -30,12 +30,12 @@ public class BoardController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
 		//페이징처리 시작
 		int listCount; 
 		int currentPage; 
@@ -45,8 +45,20 @@ public class BoardController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
+		String keyword1 = request.getParameter("searchKeyword") == null ? "" : request.getParameter("searchKeyword");
+		String keyword2 = request.getParameter("searchKeyword") == null ? "" : request.getParameter("searchKeyword");
+		String type =  request.getParameter("searchType") ==  null ? "" : request.getParameter("searchType");
 		
-		listCount = new BoardService().selectListCount(1);
+		if("1".equals(type)) keyword2 ="";
+		else if("2".equals(type)) keyword1 ="";
+		else {
+			keyword1 = "";
+			keyword2 = "";
+		}
+		
+		System.out.println(request.getParameter("searchKeyword"));
+		
+		listCount = new BoardService().selectListCount(1, keyword1);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 	
@@ -69,7 +81,7 @@ public class BoardController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		listCount = new BoardService().selectListCount(2);
+		listCount = new BoardService().selectListCount(2, keyword2);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 	
@@ -91,14 +103,17 @@ public class BoardController extends HttpServlet {
 		
 		PageInfo pi2 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Board> list = new BoardService().selectList(1);//new BoardService().selectList("1");
+		ArrayList<Board> list = new BoardService().selectList(1, keyword1);//new BoardService().selectList("1");
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
-		
-		ArrayList<Board> list2 = new BoardService().selectList(2); //ArrayList<Board> list2 = new BoardService().selectList(2);
+		ArrayList<Board> list2 = new BoardService().selectList(2, keyword2); //ArrayList<Board> list2 = new BoardService().selectList(2);
 		request.setAttribute("list2",list2);
-		System.out.println(list2);
+		
 		request.setAttribute("pi2", pi2);
+		
+		if(!"".equals(type)) {
+			request.setAttribute("searchType",type);
+		}
 		
 		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
