@@ -15,6 +15,7 @@ public class SellBoard {
 	private String titleImg;	// 판매 게시판에 썸네일 표시용
 	private int local;
 	private int interest;
+	private String nickname;
 	
 	public SellBoard() {
 		
@@ -22,7 +23,7 @@ public class SellBoard {
 	
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
-			Date sellDate, String status, int userNO, String titleImg, int local, int interest) {
+			Date sellDate, String status, int userNO, String titleImg, int local, int interest, String nickname) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -36,8 +37,10 @@ public class SellBoard {
 		this.titleImg = titleImg;
 		this.local = local;
 		this.interest = interest;
+		this.nickname = nickname;
 	}
-
+	
+	// 양진호
 	// 판매 게시판 등록 부분 생성자
 	public SellBoard(String sellTitle, String sellContent, int price, int local, int interest, int userNO) {
 		super();
@@ -61,19 +64,35 @@ public class SellBoard {
 		this.local = local;
 		this.interest = interest;
 	}
-
-	// 판매 게시판 조회 부분 생성자
-	public SellBoard(int sellNo, String sellTitle, int price, int sellCount, int sellRecommend, Date sellDate,
-			int local, int interest) {
+	
+	// 양진호 수정
+	// 판매 게시판 리스트 부분 생성자
+	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
+			int local, int interest, String nickname) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.price = price;
-		this.sellCount = sellCount;
 		this.sellRecommend = sellRecommend;
 		this.sellDate = sellDate;
 		this.local = local;
 		this.interest = interest;
+		this.nickname = nickname;
+	}
+	
+	// 판매 게시판 조회 부분 생성자
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellRecommend, Date sellDate,
+			int local, int interest, String nickname) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellContent = sellContent;
+		this.price = price;
+		this.sellRecommend = sellRecommend;
+		this.sellDate = sellDate;
+		this.local = local;
+		this.interest = interest;
+		this.nickname = nickname;
 	}
 
 	public int getSellNo() {
@@ -171,13 +190,21 @@ public class SellBoard {
 	public void setInterest(int interest) {
 		this.interest = interest;
 	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	@Override
 	public String toString() {
 		return "SellBoard [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellContent=" + sellContent + ", price="
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", local=" + local
-				+ ", interest=" + interest + "]";
+				+ ", interest=" + interest + ", nickname=" + nickname + "]";
 	}
 	
 	

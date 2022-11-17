@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.sellboard.model.vo.SellBoard;
 
 import static com.kh.common.JDBCTemplate.*;
@@ -41,7 +42,96 @@ public class SellBoardDao {
         }
                
     }
-
+    
+    // 조회수
+    public int selectListCount(Connection conn) {
+    	int listCount = 0;
+    	
+    	PreparedStatement psmt = null;
+    	ResultSet rset = null;
+    	String sql = prop.getProperty("selectListCount");
+    	
+    	try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("SELL_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);
+		}
+    	return listCount;
+    }
+    
+    // 조회수 증가
+ 	public int increaseCount(Connection conn, int sellNo) {
+ 		
+ 		int result = 0;
+ 		PreparedStatement psmt = null;
+ 		String sql = prop.getProperty("increaseCount");
+ 		
+ 		try {
+ 			psmt = conn.prepareStatement(sql);
+ 			
+ 			psmt.setInt(1, sellNo);
+ 			
+ 			result = psmt.executeUpdate();
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		}finally {
+ 			close(psmt);
+ 		}
+ 		return result;
+ 	}
+    
+    
+    // 판매게시판 메인 리스트와 페이징처리
+    public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi){
+    	
+    	ArrayList<SellBoard> list = new ArrayList<>();
+    	
+    	PreparedStatement psmt = null;
+    	ResultSet rset = null;
+    	String sql = prop.getProperty("selectSellBoardList");
+    	
+    	try {
+			psmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			psmt.setInt(1, startRow);
+			psmt.setInt(2, endRow);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new SellBoard(rset.getInt("SELL_NO"),
+										rset.getString("SELL_TITLE"),
+										rset.getInt("PRICE"),
+										rset.getInt("SELL_RECOMMEND"),
+										rset.getDate("SELL_DATE"),
+										rset.getInt("INTERSET_NO"),
+										rset.getInt("LOCAL_NO"),
+										rset.getString("NICKNAME")
+						));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);
+		}
+    	return list;
+    	
+    }
+    
+    // 카테고리 관심사
 	public ArrayList<Interest> selecInterestCategory(Connection conn) {
 		
 		ArrayList<Interest> interest = new ArrayList<>();
@@ -72,7 +162,8 @@ public class SellBoardDao {
 		
 		return interest;
 	}
-
+	
+	// 카테고리 지역
 	public ArrayList<Local> selecLocalCategory(Connection conn) {
 		
 		ArrayList<Local> local = new ArrayList<>();
@@ -104,66 +195,49 @@ public class SellBoardDao {
 		return local;
 	}
 	
-	public int increaseCount(Connection conn, int sellNo) {
-		
-		int result = 0;
-		PreparedStatement psmt = null;
-		String sql = prop.getProperty("increaseCount");
-		
-		try {
-			psmt = conn.prepareStatement(sql);
-			
-			psmt.setInt(1, sellNo);
-			
-			result = psmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(psmt);
-		}
-		return result;
-	}
+	// 판매게시글 선택 조회
+	public SellBoard selectSellBoard(Connection conn, int sellNo) {
+        
+        // select => ResultSet
+        
+        SellBoard s = null;
+        PreparedStatement psmt = null;
+        ResultSet rset = null;
+        
+        String sql = prop.getProperty("selectSellBoard");
+        
+        try {
+            psmt = conn.prepareStatement(sql);
+            
+            psmt.setInt(1, sellNo);
+            
+            rset = psmt.executeQuery();
+            
+            if(rset.next()) {
+                s = new SellBoard(
+                        rset.getInt("SELL_NO"),
+                        rset.getString("SELL_TITLE"),
+                        rset.getString("SELL_CONTENT"),
+                        rset.getInt("PRICE"),
+                        rset.getInt("SELL_RECOMMEND"),
+                        rset.getDate("SELL_DATE"),
+                        rset.getInt("INTEREST_NO"),
+                        rset.getInt("LOCAL_NO"),
+                        rset.getString("NICKNAME")
+                        ); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(rset);
+            close(psmt);
+        }
+        return s;
+        
+     }
 	
-//	public SellBoard selectSellBoard(Connection conn, int sellNo) {
-//        
-//        // select => ResultSet
-//        
-//        SellBoard s = null;
-//        PreparedStatement psmt = null;
-//        ResultSet rset = null;
-//        
-//        String sql = prop.getProperty("selectSellBoard");
-//        
-//        try {
-//            psmt = conn.prepareStatement(sql);
-//            
-//            psmt.setInt(1, sellNo);
-//            
-//            rset = psmt.executeQuery();
-//            
-//            if(rset.next()) {
-//                s = new SellBoard(
-//                        rset.getInt("SELL_NO"),
-//                        rset.getString("SELL_TITLE"),
-//                        rset.getString("SELL_CONTENT"),
-//                        rset.getInt("PRICE"),
-//                        rset.getDate("SELL_DATE"),
-//                        rset.getInt("INTEREST_NO"),
-//                        rset.getInt("LOCAL_NO"),
-//                        // 닉네임?
-//                        rset.getString("NICKNAME")
-//                        ); 
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }finally {
-//            close(rset);
-//            close(psmt);
-//        }
-//        return s;
-//        
-//     }
 	
+	// 판매게시글 등록
 	public int insertSellBoard(SellBoard s, Connection conn) {
 		
 		int result = 0;
@@ -191,6 +265,7 @@ public class SellBoardDao {
 		return result;
 	}
 	
+	// 파일 첨부
 	public Attachment selectAttachment(Connection conn, int sellNo) {
         
         Attachment at = null;
@@ -250,7 +325,7 @@ public class SellBoardDao {
         return result;
 	}
 	
-public int insertNewAttachment(Attachment at, Connection conn) {
+	public int insertNewAttachment(Attachment at, Connection conn) {
         
         int result = 0;
         PreparedStatement psmt = null;
