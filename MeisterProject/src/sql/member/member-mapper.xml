@@ -192,5 +192,10 @@
 			AND BLACKLIST = 'Y'
 	</entry>
 	
-	
+	<entry key="selectNickName">
+		SELECT NICKNAME
+		FROM MEMBER
+		WHERE USER_NO = ?
+			AND STATUS = 'Y'
+	</entry>
 </properties>

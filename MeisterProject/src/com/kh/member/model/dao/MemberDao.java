@@ -685,5 +685,33 @@ public class MemberDao {
 	}
 
 
-	
+	public String selectNickName(Connection conn, int receiver) {
+		String nickName = "";
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNickName");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, receiver);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+	        	nickName = rset.getString("NICKNAME");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return nickName;
+	}
 }

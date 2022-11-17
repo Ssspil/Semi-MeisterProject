@@ -13,19 +13,20 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.chatting.model.service.ChattingService;
 import com.kh.chatting.model.vo.Chatting;
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class AskToSellerPageController
+ * Servlet implementation class ChattingListPageController
  */
-@WebServlet("/askToSeller.ch")
-public class AskToSellerPageController extends HttpServlet {
+@WebServlet("/chatList.ch")
+public class ChattingListPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AskToSellerPageController() {
+    public ChattingListPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,17 +44,26 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("sender", userNo);
 		
 		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
+		String[] nickNameList = null;
+		String receiverName = "";
 		
-//		for(int i=0; i < list.size()-1; i++) {	
-//			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
-//				list.remove(i);
-//			}
-//		}		
+		for(int i=0; i < list.size()-1; i++) {	
+			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
+				list.remove(i);
+			}
+		}	
+		System.out.println(list);
+		nickNameList = new String[list.size()];
+		for(int i=0; i < list.size(); i++) {
+			receiverName = new MemberService().selectNickName(list.get(i).getReceiver());
+			nickNameList[i] = receiverName;
+		}
 		
 		request.setAttribute("list", list);
+		request.setAttribute("nickNameList", nickNameList);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
-		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingListPage.jsp");
 		view.forward(request, response);
 	}
 

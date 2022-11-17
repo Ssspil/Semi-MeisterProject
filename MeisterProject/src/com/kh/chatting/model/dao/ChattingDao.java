@@ -81,6 +81,7 @@ public class ChattingDao {
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setInt(1, userNo);
+			psmt.setInt(2, userNo);
 			
 			rset = psmt.executeQuery();
 

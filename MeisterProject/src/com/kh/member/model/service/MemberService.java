@@ -268,7 +268,15 @@ public class MemberService {
 		return blacklist;
 	}
 
-	   
+	public String selectNickName(int receiver) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String nickName = new MemberDao().selectNickName(conn, receiver);
+		
+		JDBCTemplate.close();
+		
+		return nickName;
+	}
 	   
 	   
 	   
