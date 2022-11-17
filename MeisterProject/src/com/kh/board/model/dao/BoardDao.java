@@ -73,14 +73,13 @@ public class BoardDao {
 
 			while (rset.next()) {
 				Board b = new Board(rset.getInt("BOARD_NO"),
-						rset.getString("BOARD_CONTENT"),
 						rset.getString("BOARD_TITLE"),
+						0, rset.getString("BOARD_CONTENT"),
 						rset.getInt("BOARD_COUNT"),
 						rset.getInt("BOARD_RECOMMEND"),
-						rset.getInt("USER_NO"),
-						rset.getInt("REPLY_COUNT"),
-						rset.getString("BOARD_DATE"));
-
+						rset.getString("BOARD_DATE"),
+						rset.getInt("USER_NO"),		
+						rset.getInt("REPLY_COUNT"));
 				board.add(b);
 			}
 
@@ -88,7 +87,7 @@ public class BoardDao {
 
 			if (cnt < 3) {
 				for (int i = 0; i < 3 - cnt; i++) {
-					Board b = new Board(0, "작성된 게시글이 없습니다.", "없음", 0, 0, 0, "", "");
+					Board b = new Board(0, "게시글 없음.", i, "없음", 0, 0, 0 , 0 ,"");
 					board.add(b);
 				}
 			}
@@ -211,14 +210,11 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
-			// int startPage = pi.getStartPage();
-			// int boardLimit = pi.getStartPage() * pi.getBoardLimit();
+			
 			psmt.setInt(1, type);
 
 			System.out.println("type:" + type);
-			// psmt.setInt(2, boardLimit);
-
+			
 			rset = psmt.executeQuery();
 
 			while (rset.next()) {
@@ -229,13 +225,14 @@ public class BoardDao {
 				file = file_name + "/" + change_name;
 				Board b;
 				b = new Board(rset.getInt("BOARD_NO"),
-						rset.getString("BOARD_TITLE"),				
-						rset.getString("BOARD_CONTENT"),
+						rset.getString("BOARD_TITLE"),
+						type, rset.getString("BOARD_CONTENT"),
 						rset.getInt("BOARD_COUNT"), 
 						rset.getInt("BOARD_RECOMMEND"),
 						rset.getInt("USER_NO"),
+						rset.getInt("REPLY_COUNT"),
 					    rset.getString("BOARD_DATE"));
-
+						
 				list.add(b);
 			}
 
