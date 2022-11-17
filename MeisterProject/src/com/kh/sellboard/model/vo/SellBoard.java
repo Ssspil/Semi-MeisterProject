@@ -16,6 +16,8 @@ public class SellBoard {
 	private int local;
 	private int interest;
 	private String nickname;
+	private String changeName;
+	private String filePath;
 	
 	public SellBoard() {
 		
@@ -23,7 +25,8 @@ public class SellBoard {
 	
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
-			Date sellDate, String status, int userNO, String titleImg, int local, int interest, String nickname) {
+			Date sellDate, String status, int userNO, String titleImg, int local, int interest, String nickname,
+			String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -38,6 +41,8 @@ public class SellBoard {
 		this.local = local;
 		this.interest = interest;
 		this.nickname = nickname;
+		this.changeName = changeName;
+		this.filePath = filePath;
 	}
 	
 	// 양진호
@@ -68,16 +73,18 @@ public class SellBoard {
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int local, int interest, String nickname) {
+			int local, int interest, String nickname, String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.price = price;
 		this.sellRecommend = sellRecommend;
 		this.sellDate = sellDate;
-		this.local = local;
 		this.interest = interest;
+		this.local = local;
 		this.nickname = nickname;
+		this.changeName = changeName;
+		this.filePath = filePath;
 	}
 	
 	// 판매 게시판 조회 부분 생성자
@@ -198,6 +205,27 @@ public class SellBoard {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
+	/* 판매게시판 조회를 위한 생성자추가*/
+	public String getChangeName() {
+		return changeName;
+	}
+	
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
@@ -206,8 +234,7 @@ public class SellBoard {
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", local=" + local
 				+ ", interest=" + interest + ", nickname=" + nickname + "]";
 	}
-	
-	
+
 	
 	
 }
