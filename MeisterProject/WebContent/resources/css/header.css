@@ -28,7 +28,7 @@ header {
 
 /* header - MainMenu*/
 .header-inner .main-menu{
-    width: 66%;
+    width: 64%;
     float: left;
     height: 100%;
     line-height: 50px;
@@ -79,7 +79,7 @@ header .main-menu .search input:focus {
 
 /* header - SubMenu*/
 .header-inner .sub-menu{
-    width: 33%;
+    width: 35%;
     height: 100%;
     display: flex;
     margin: 0;
