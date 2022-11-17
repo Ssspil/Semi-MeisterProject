@@ -3,6 +3,9 @@
     
     <%
        int type = Integer.parseInt(request.getParameter("type"));
+    	Attachment at = (Attachment) request.getAttribute("at");
+		if(at == null){
+		at = new Attachment();
       %>
 <!DOCTYPE html>
 <html>
@@ -177,6 +180,26 @@
       width: 100%;
       margin: 0.75rem;
    }
+   
+   .editor-image[data-a-2] {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0.75rem;
+        }
+   .editor-image .editor-image-list[data-a-2] {
+       display: inline-flex;
+       flex-flow: row wrap;
+       width: 60.625rem;
+       padding-top: 0.75rem;
+       align-items: center;
+        }
+   .editor-image .editor-image-list .image-preview[data-a-2] {
+          display: inline-block;
+          position: relative;
+          margin-right: 0.75rem;
+          margin-bottom: 0.75rem;
+        }
 
 </style>
 </head>
@@ -208,10 +231,16 @@
                   </div>
                </div>
                <div></div>
-               <div id="img">
 
-               </div>
-               <div id="content">
+				<div data-a-2 data-v-6 class="editor-image">
+					<div data-a-2 class="editor-image-list">
+						<div data-a-2 class="image-preview">
+							<img data-a-2 class="image-preview" src="">
+						</div>
+					</div>
+				</div>
+
+					<div id="content">
                   <div id="content2">
                      <textarea id="content3" maxlength="500" name="content" rows="10" placeholder="게시글 내용을 입력해주세요." required></textarea>
                   </div>
