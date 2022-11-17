@@ -94,7 +94,7 @@ public class BoardController extends HttpServlet {
 		ArrayList<Board> list = new BoardService().selectList(1);//new BoardService().selectList("1");
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
-		
+		System.out.println(list);
 		ArrayList<Board> list2 = new BoardService().selectList(2); //ArrayList<Board> list2 = new BoardService().selectList(2);
 		request.setAttribute("list2",list2);
 		request.setAttribute("pi2", pi2);
@@ -102,6 +102,7 @@ public class BoardController extends HttpServlet {
 		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
 		request.setAttribute("hotList",hotList);
+		System.out.println(hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);
 		
 	

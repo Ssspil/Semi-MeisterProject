@@ -1,5 +1,4 @@
 package com.kh.board.model.vo;
-
 public class Board {
    private int boardNo;
    private String boardTitle;
@@ -237,9 +236,6 @@ public class Board {
    }
    
    
-   
-   
-   
-   
+
    
 }
