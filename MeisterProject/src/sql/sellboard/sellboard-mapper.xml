@@ -2,27 +2,45 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-
-	<entry key="selectList">
+	
+	<!-- 판매게시판 메인 리스트와 페이징처리 -->
+	<entry key="selectSellBoardList">
 		<![CDATA[
 			SELECT s.SELL_NO as SELL_NO,
 	        s.SELL_TITLE as SELL_TITLE,
-	        s.SELL_CONTENT as SELL_CONTENT,
-	        s.SELL_COUNT as SELL_COUNT,
+            s.PRICE as PRICE,
 	        s.SELL_RECOMMEND as SELL_RECOMMEND,
-	        s.SELL_NO as SELL_NO,
 	        TO_CHAR(S.SELL_DATE,'MMDDHH24mi') SELL_DATE,
-	        a.change_name as change_name,
-	        a.FILE_PATH as FILE_PATH
+            INTEREST_NO,
+            LOCAL_NO,
+            NICKNAME,
+            a.CHANGE_NAME as CHANGE_NAME,
+            a.FILE_PATH as FILE_PATH
 			FROM SELL s
-			LEFT OUTER JOIN ATTACHMENT a
-			on a.REF_NO = s.SELL_NO
-			WHERE s.SELL_TYPE = ?
-			AND s.STATUS = 'Y' 
+            JOIN MEMBER USING (USER_NO)
+            JOIN ATTACHMENT a ON (REF_NO = SELL_NO)
+			WHERE  s.STATUS = 'Y' 
 			ORDER BY SELL_DATE DESC
 		]]>
 	</entry>
 	
+	<!-- 조회수 -->
+	<entry key="selectListCount">
+		SELECT COUNT(*) SELL_COUNT
+		FROM SELL
+		WHERE STATUS = 'Y'
+	</entry>
+	
+	<!-- 조회수 증가-->
+	<entry key="increaseCount">
+		UPDATE SELL
+		SET SELL_COUNT = SELL_COUNT + 1
+		WHERE SELL_NO = ?
+			AND STATUS = 'Y'
+	</entry>
+
+
+	<!-- 카테고리 -->
 	<entry key="selecInterestCategory">
 		SELECT INTEREST_NO,
 			   INTEREST_NAME
@@ -35,29 +53,31 @@
 		FROM LOCAL
 	</entry>
 	
-	<entry key="increaseCount">
-		UPDATE SELL
-		SET SELL_COUNT = SELL_COUNT + 1
-		WHERE SELL_NO = ?
-			AND STATUS = 'Y'
-	</entry>
-	
- 	<entry key ="selectSellBoard"> <!-- 게시물 선택 조회 -->
+	<!-- 판매글 선택 조회 -->
+ 	<entry key ="selectSellBoard"> 
 		SELECT 	SELL_NO,
 				SELL_TITLE,
 				SELL_CONTENT,
 				PRICE,
+				SELL_RECOMMEND,
 				SELL_DATE,
 				INTEREST_NO,
 				LOCAL_NO,
 				NICKNAME
-				<!-- 닉네임? -->
 		FROM SELL S
 		JOIN MEMBER M USING (USER_NO)
 		WHERE SELL_NO = ?
 			AND S.STATUS = 'Y'
 	</entry>
 	
+	<!-- 판매게시글 등록 -->
+	<entry key="insertSellBoard">
+		INSERT INTO SELL(SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NO, LOCAL_NO, USER_NO)
+		VALUES(SEQ_SNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
+	</entry>
+	
+	
+	<!-- 파일 첨부 -->
 	<entry key ="selectAttachment">
 		SELECT FILE_NO,
 				ORIGIN_NAME,
@@ -68,12 +88,8 @@
 		WHERE REF_NO = ?
 		ORDER BY FILE_LEVEL
 	</entry>
-	
-	<entry key="insertSellBoard">
-		INSERT INTO SELL(SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NO, LOCAL_NO, USER_NO)
-		VALUES(SEQ_SNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
-	</entry>
-	
+		
+	<!-- 파일 첨부 -->
 	<entry key="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
 		VALUES(SEQ_FNO.NEXTVAL, SEQ_SNO.CURRVAL, ?, ?, ?, 2)

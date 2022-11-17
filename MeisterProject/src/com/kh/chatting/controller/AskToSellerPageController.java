@@ -18,7 +18,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class AskToSellerPageController
  */
-@WebServlet("/askToSeller.se")
+@WebServlet("/askToSeller.ch")
 public class AskToSellerPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,13 +43,14 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("sender", userNo);
 		
 		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
-		for(int i=0; i < list.size()-1; i++) {	
-			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
-				list.remove(i);
-			}
-		}		
 		
-		request.setAttribute("note", list);
+//		for(int i=0; i < list.size()-1; i++) {	
+//			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
+//				list.remove(i);
+//			}
+//		}		
+		
+		request.setAttribute("list", list);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
