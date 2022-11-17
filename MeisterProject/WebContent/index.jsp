@@ -90,7 +90,7 @@
               <use class="close" xlink:href="#close" x="511" y="300"/>
           </g>
         </svg>
-        <input id="search" autocomplete="off" maxlength="32"></input>
+        <input id="search" name="mainSearch" autocomplete="off" maxlength="32"></input>
         <!-- partial -->
       </div>
       <!-- 메인 검색창  끝-->
