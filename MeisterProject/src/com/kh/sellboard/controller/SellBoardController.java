@@ -71,14 +71,15 @@ public class SellBoardController extends HttpServlet {
 		
 	    // 판매게시판 전체 리스트 조회 한 후 조회결과를 담아서 응답페이지로 포워딩.
 	    ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi);
-	    ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
-	    ArrayList<Local> local = new SellBoardService().selecLocalCategory();
+	    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
+	    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
 	    
 	    
 	    
 	    request.setAttribute("list", list);
 	    request.setAttribute("interest", interest);
 	    request.setAttribute("local", local);
+	    request.setAttribute("pi", pi);
 		
 	    request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
 		

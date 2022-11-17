@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.chatting.model.service.ChattingService;
 import com.kh.chatting.model.vo.Chatting;
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -44,6 +45,19 @@ public class AskToSellerPageController extends HttpServlet {
 		
 		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
 		
+		String[] nickNameList = new String[list.size()];
+		String receiverName = "";
+		
+		for(int i=0; i < list.size(); i++) {
+			receiverName = new MemberService().selectNickName(list.get(i).getReceiver());
+			if(nickName.equals(receiverName)) {
+				receiverName = new MemberService().selectNickName(list.get(i).getSender());
+				nickNameList[i] = receiverName;
+			}
+			else {
+				nickNameList[i] = receiverName;
+			}
+		}
 //		for(int i=0; i < list.size()-1; i++) {	
 //			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
 //				list.remove(i);
