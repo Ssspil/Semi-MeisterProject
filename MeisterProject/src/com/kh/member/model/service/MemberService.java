@@ -268,6 +268,8 @@ public class MemberService {
 		return blacklist;
 	}
 
+	
+	
 	public String selectNickName(int receiver) {
 		Connection conn = JDBCTemplate.getConnection();
 		

@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" 
-    import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local, com.kh.sellboard.model.vo.SellBoard"%>
+    import="java.util.ArrayList, com.kh.common.model.vo.Interest, 
+    		com.kh.common.model.vo.Local, com.kh.sellboard.model.vo.SellBoard,
+    		com.kh.common.model.vo.PageInfo"%>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 	
 
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+ 	
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+	
 %>
 
 <!DOCTYPE html>
@@ -178,10 +187,10 @@ div.main #price{
 		
 		<div class="navigator">
 		
-        <ul id="navi">
-        	<li class="list">
-                <a href="">전체</a>
-                <ul>
+	        <ul id="navi">
+	        	<li class="list">
+	                <a href="<%= contextPath %>/market.se" name="marketAll">전체</a>
+	                <ul>
                     <li class="list-in-list"><a href="">서울</a></li>
                     <li class="list-in-list"><a href="">인천</a></li>
                     <li class="list-in-list"><a href="">울산</a></li>
@@ -193,20 +202,21 @@ div.main #price{
                     <li class="list-in-list"><a href="">경북 / 경남</a></li>
                     <li class="list-in-list"><a href="">제주</a></li>
                 </ul>
-            </li>
-        	<% for (Interest i : interest) { %>
-        	<li class="list">		
-       			<a href=""><%= i.getInterestName() %></a>
-       			<ul>
-       				<% for (Local l : local) { %>
-       					<li class="list-in-list"><a href=""><%= l.getLocalName() %></a></li>
-       				<% } %>
-				</ul>
-			</li>
-       		<% } %>
-        </ul> 
+	                
+	            </li>
+	        	<% for (Interest i : interest) { %>
+	        	<li class="list">		
+	       			<a href=""><%= i.getInterestName() %></a>
+	       			<ul>
+	       				<% for (Local l : local) { %>
+	       					<li class="list-in-list"><a href=""><%= l.getLocalName() %></a></li>
+	       				<% } %>
+					</ul>
+				</li>
+	       		<% } %>
+	        </ul> 
         
-		</div> 
+	    </div> 
 		
 		<div class="main">
 			<div><a href="" class="thumb" id="thumb1">썸네일1</a>
@@ -237,9 +247,50 @@ div.main #price{
             </div>
 
 		</div>
+		
+		<!-- 페이징처리 -->           
+	     <div align="center" class="paging-area">
+			<% if(currentPage != 1) {%>
+				<button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button>
+			<%} %>
+			
+			<%for(int i = startPage; i<=endPage; i++){ %>
+				<% if(i != currentPage) {%>
+					<button onclick="doPageClick(<%=i%>)"><%= i%></button>
+				<% } else { %>
+					<button disabled><%=i %></button>
+				<%} %>
+			<%} %>
+			
+			<%if(currentPage != maxPage) {%>
+				<button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button>
+			<%} %>
+		</div>
+		<script>
+			function doPageClick(currentPage){
+				location.href= "<%=contextPath%>/market.se?currentPage="+currentPage;
+				
+			}
+		</script>
+		
 	</div><!-- outer 끝 -->
 	
-
+	<script>
+		$(function(){
+			$(".navigator>#navi>list").click(function(){
+				
+				let sno = $(this).children().eq(0).text();
+				
+				location.href = "<%= contextPath%>/detail.se?sno="+sno;
+			})	
+		});
+		
+	</script>
+	
+	
+	
+	
+	
 
 	<%@ include file="../common/footer.jsp" %>
 

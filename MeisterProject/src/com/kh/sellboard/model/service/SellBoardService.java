@@ -16,10 +16,13 @@ import static com.kh.common.JDBCTemplate.*;
 public class SellBoardService {
 	
 	public int selectSellBoardListCount() {
+		
 		Connection conn = getConnection();
+		
 		int listCount = new SellBoardDao().selectListCount(conn);
 		
 		close();
+		
 		return listCount;
 	}
 	
@@ -29,7 +32,7 @@ public class SellBoardService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<SellBoard> list = new SellBoardDao().selectSellBoardList(conn,pi);
+		ArrayList<SellBoard> list = new SellBoardDao().selectSellBoardList(conn, pi);
 		
 		close();
 		
@@ -38,11 +41,11 @@ public class SellBoardService {
 	}
 
 	// 카테고리 관심사
-	public ArrayList<Interest> selecInterestCategory() {
+	public ArrayList<Interest> selectInterestCategory() {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Interest> Interest = new SellBoardDao().selecInterestCategory(conn);
+		ArrayList<Interest> Interest = new SellBoardDao().selectInterestCategory(conn);
 		
 		close();
 		
@@ -50,11 +53,11 @@ public class SellBoardService {
 	}
 	
 	// 카테고리 지역
-	public ArrayList<Local> selecLocalCategory() {
+	public ArrayList<Local> selectLocalCategory() {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Local> local = new SellBoardDao().selecLocalCategory(conn);
+		ArrayList<Local> local = new SellBoardDao().selectLocalCategory(conn);
 		
 		close();
 		
