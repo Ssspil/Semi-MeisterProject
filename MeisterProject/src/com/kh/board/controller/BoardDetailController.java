@@ -46,9 +46,11 @@ public class BoardDetailController extends HttpServlet {
 			Board b = bService.selectBoard(boardNo); // 게시판 번호
 			
 			Attachment at = bService.selectAttachment(no);
+//			Attachment at1 = bService.selectAttachment(bo);
 			
 			request.setAttribute("b", b);
 			request.setAttribute("at", at);
+//			request.setAttribute("at", at1);
 			
 			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 		} else { // 에러페이지
