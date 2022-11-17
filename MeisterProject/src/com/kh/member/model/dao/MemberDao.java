@@ -268,7 +268,7 @@ public class MemberDao {
 			rset = psmt.executeQuery();
 			
 			if(rset.next()) {
-				m= new Member(rset.getInt("USER_NO"),
+				m = new Member(rset.getInt("USER_NO"),
 						rset.getString("USER_ID"),
 						rset.getString("USER_PWD"),
 						rset.getString("NICKNAME"),
@@ -434,6 +434,11 @@ public class MemberDao {
 		return at;
 	}
 
+	/**
+	 * 관리자가 회원정보 다 보는 메소드
+	 * @param conn
+	 * @return
+	 */
 	public ArrayList<Member> selectAllMember(Connection conn) {
 		
 		ArrayList<Member> memList = new ArrayList<>();
@@ -471,6 +476,9 @@ public class MemberDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
 		}
 		
 		return memList;
@@ -550,5 +558,132 @@ public class MemberDao {
 		return result;
 	}
 
+	/**
+	 * 관리자가 유저를 블랙리스트로 넣어서 블래리스트 여부와 상태를 바꾸어주는 메소드
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
+	public int insertBlackUser(Connection conn, int userNo) {
+		
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertBlackUser");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			
+			result = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
 
+	public Member selectBlackUserByNo(Connection conn, int userNo) {
+		
+		Member m = null;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectBlackUserByNo");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+
+			
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("USER_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("USER_PWD"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTEREST"),
+						rset.getDate("ENROLL_DATE"),
+						rset.getString("USER_NAME"),
+						rset.getString("GENDER"),
+						rset.getString("EMAIL"),
+						rset.getString("PHONE"),
+						rset.getString("STATUS"),
+						rset.getString("BLACKLIST"),
+						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
+						rset.getString("EXPERT")
+						);
+			}
+			
+			System.out.println("m :" + m);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		return m;
+	}
+
+	/**
+	 * 관리자페이지에서 블랙리스트를 한번에 보게하는 메소드
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Member> selectAllBlacklist(Connection conn) {
+		ArrayList<Member> blacklist = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllBlacklist");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+	        	blacklist.add(new  Member(rset.getInt("USER_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("USER_PWD"),
+						rset.getString("NICKNAME"),
+						rset.getString("INTEREST_NAME"),
+						rset.getDate("ENROLL_DATE"),
+						rset.getString("USER_NAME"),
+						rset.getString("GENDER"),
+						rset.getString("EMAIL"),
+						rset.getString("PHONE"),
+						rset.getString("STATUS"),
+						rset.getString("BLACKLIST"),
+						rset.getString("SPECIALITY"),
+						rset.getString("EXP_SUBMIT"),
+						rset.getString("EXPERT")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return blacklist;
+	}
+
+
+	
 }
