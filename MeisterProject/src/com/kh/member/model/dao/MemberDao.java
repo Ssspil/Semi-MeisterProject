@@ -588,6 +588,12 @@ public class MemberDao {
 		return result;
 	}
 
+	/**
+	 * 유저번호로 블랙리스트를 검색하는 메소드 
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
 	public Member selectBlackUserByNo(Connection conn, int userNo) {
 		
 		Member m = null;
@@ -624,8 +630,7 @@ public class MemberDao {
 						rset.getString("EXPERT")
 						);
 			}
-			
-			System.out.println("m :" + m);
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -660,7 +665,7 @@ public class MemberDao {
 						rset.getString("USER_ID"),
 						rset.getString("USER_PWD"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTEREST_NAME"),
+						rset.getString("INTEREST"),
 						rset.getDate("ENROLL_DATE"),
 						rset.getString("USER_NAME"),
 						rset.getString("GENDER"),
