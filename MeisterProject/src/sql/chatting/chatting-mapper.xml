@@ -11,7 +11,7 @@
 	<entry key="selectNoteList">
 		SELECT *
 		FROM CHATTING
-		WHERE SENDER = ?
+		WHERE SENDER = ? OR RECEIVER = ?
 	</entry>
 	
 	<entry key="selectNote">

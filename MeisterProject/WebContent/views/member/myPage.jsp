@@ -89,7 +89,7 @@
 		<h6><b><a href="<%=contextPath %>/myTransaction.me">&nbsp;&nbsp;&nbsp;&nbsp;나의 거래 내역</a></b></h6>
 		<h6><b><a href="<%=contextPath %>/wishList.se">&nbsp;&nbsp;&nbsp;&nbsp;내가 찜한 글</a></b></h6>
 		<h6><b><a href="<%=contextPath %>/myReview.se">&nbsp;&nbsp;&nbsp;&nbsp;내가 쓴 리뷰</a></b></h6>
-		<h6><b><a href="<%=contextPath %>/askToSeller.se">&nbsp;&nbsp;&nbsp;&nbsp;문의 내역 확인</a></b></h6>
+		<h6><b><a href="<%=contextPath %>/chatList.ch">&nbsp;&nbsp;&nbsp;&nbsp;문의 내역 확인</a></b></h6>
 		<hr>
 		<h4><b>&nbsp;내 커뮤니티</b></h4>
 		<br>

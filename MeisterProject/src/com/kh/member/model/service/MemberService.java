@@ -157,7 +157,10 @@ public class MemberService {
 			
 	}
 
-	 
+	/**
+	 * 관리자가 전체회원 조회하는 메소드
+	 * @return
+	 */
 	public ArrayList<Member> selectAllMember() {
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -223,8 +226,57 @@ public class MemberService {
 		
 		return newMem;
 	}
+	
+	/**
+	 * 관리자가 블랙리스트를 넣어주는 메소드
+	 * @param userNo
+	 * @return
+	 */
+	public Member insertBlackUser(int userNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().insertBlackUser(conn, userNo);
+		
+		Member blackUser = null;
+		
+		if(result > 0) {
+			
+			blackUser = new MemberDao().selectBlackUserByNo(conn, userNo);
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
 
-	   
+		return blackUser;
+	}
+	
+	/**
+	 * 관리자페이지에서 블랙리스트를 한번에 보게하는 메소드
+	 * @return
+	 */
+	public ArrayList<Member> selectAllBlacklist() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> blacklist = new MemberDao().selectAllBlacklist(conn);
+		
+		JDBCTemplate.close();
+		
+		return blacklist;
+	}
+
+	public String selectNickName(int receiver) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String nickName = new MemberDao().selectNickName(conn, receiver);
+		
+		JDBCTemplate.close();
+		
+		return nickName;
+	}
 	   
 	   
 	   
