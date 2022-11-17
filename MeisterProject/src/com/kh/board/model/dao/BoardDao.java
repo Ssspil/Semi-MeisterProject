@@ -44,6 +44,7 @@ public class BoardDao {
 			sql = prop.getProperty("selectListCount");
 		} else {
 			sql = prop.getProperty("selectListSearchCount");
+			keyword="%"+keyword+"%";
 		}
 
 		try {
@@ -224,6 +225,7 @@ public class BoardDao {
 			sql = prop.getProperty("selectList");
 		} else {
 			sql = prop.getProperty("selectListSearch");
+			keyword="%"+keyword+"%";
 		}
 
 		try {
@@ -232,7 +234,7 @@ public class BoardDao {
 			psmt.setInt(1, type);
 			
 			if(!"".equals(keyword)) {
-				psmt.setString(2, "%"+keyword+"%");
+				psmt.setString(2, keyword);
 			}
 			
 			rset = psmt.executeQuery();
