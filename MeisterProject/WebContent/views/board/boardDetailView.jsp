@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.l"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
 <%
@@ -456,12 +457,12 @@
                                             </div>
                                             <div data-c-1 class="content">
                                                 <p data-c-1 class="text comment-input">
-                                                    <span data-c-1 id="replycontent" style="font-weight: 400px;">content</span>
+                                                    <span data-c-1 id="replycontent" style="font-weight: 400px;"><%=b.getBoardContent() %></span>
                                                 </p>
                                             </div>
                                             <div data-c-1 class="comment-action">
                                                 <div data-c-1 class="comment-react">
-                                                    <span data-c-1 class="text"><%=b.getBoardDate() %></span>
+                                                    <span data-c-1 class="text"><%=r.getreplyDate() %></span>
                                                     <span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>
                                                     <div data-c-1 class="like-area">
                                                         <span data-c-1 class="text"><%=b.getBoardRecommend() %></span>
@@ -488,13 +489,11 @@
 
 	<script>
 		$(function () {
-	        $('#replyContent').keydown(function () {
-	            if ($("#replyContent") != null) {
-		            if($("#submit").css("display") == "none") {
-		            	$("#submit").show();
-		            } else {
-		            	$("#submit").hide();
-		            }
+	        $('#replyContent').keyup(function () {
+	            if ($("#replyContent").val() != "") {
+	            	$("#submit").show();
+	            }else{
+	            	$("#submit").hide();
 	            }
 	            
 	        });
@@ -507,7 +506,6 @@
 			
 			setInterval(selectReplyList, 1000);
 		})
-		
 		
 		function insertReply() {
 			$.ajax({
@@ -529,30 +527,63 @@
 			});
 		};
 		
-		function selectReplyList() {
-			$.ajax({
-				url : "rlist.bo",
-				data : {bno : ${b.boardNo}},
-				success : (list) => {
-					
-					let result = "";
-					for(let i of list) {
-						result += "<ul>"
-										+ "<li>" + i.boardWriter + "</li>"
-										+ "<li>" + i.replyContent + "</li>"
-										+ "<li>" + i.createDate + "</li>"
-							   +  "</ul>"
-					};
-					$(".comments-list .comments-list-item").html(result);
-					
-				},
-				error : function() {
-					console.log("댓글리스트조회용 ajax통신 실패~");
-				}
-			});
-		};
-		
-	</script>
+		function selectReplyList(){
+				let html = '<li data-x-1  data-z-1 class="comments-list-item">'
+                += '<div data-c-1 data-x-1 class="comment-wrapper">'
+                += '<div data-c-1 class="profile-image">'
+                +=    '<img data-c-1 class="image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">'
+                += '</div>'
+                += '<div data-c-1 class="comment-information">'
+                +=    '<div data-c-1 class="user-info">'
+                +=        '<span data-c-1 class="user-name">+<%=b.getMemberNic()%>+</span>'
+                +=    '</div>'
+                +=    '<div data-c-1 class="content">'
+                +=        '<p data-c-1 class="text comment-input">'
+                +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">content</span>'
+                +=        '</p>'
+                +=    '</div>'
+                +=    '<div data-c-1 class="comment-action">'
+                +=        '<div data-c-1 class="comment-react">'
+                +=            '<span data-c-1 class="text">+<%=list.%>+</span>'
+                +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>'
+                +=            '<div data-c-1 class="like-area">'
+                +=                '<span data-c-1 class="text">+<%=b.getBoardRecommend()%>+</span>' /**/
+                +=            '</div>'
+                +=        '</div>'
+                +=        '<div data-c-1 class="more-action">'
+                +=            '<div data-c-1 class="btn-group">'
+                +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>'
+                +=            '</div>'
+                +=        '</div>'
+                +=    '</div>'
+                += '</div>'
+            += '</div>'
+        += '</li>'
+        
+    		function selectReplyList() {
+					$.ajax({
+						url : "rlist.bo",
+						data : {bno : ${b.boardNo}},
+						success : (list) => {
+							
+							let result = "";
+							for(let i of list) {
+								result += "<ul>"
+												+ "<li>" + i.userNo + "</li>"
+												+ "<li>" + i.replyContent + "</li>"
+												+ "<li>" + i.replyDate + "</li>"
+									   +  "</ul>"
+							};
+							$(".comments-list .comments-list-item").html(result);
+							
+						},
+						error : function() {
+							console.log("댓글리스트조회용 ajax통신 실패~");
+						}
+					});
+				};
+		}
+ 	</script>
 
 </body>
 </html>
