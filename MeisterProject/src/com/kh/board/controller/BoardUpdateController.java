@@ -56,6 +56,7 @@ public class BoardUpdateController extends HttpServlet {
 		b.setBoardNo(boardNo);
 		b.setBoardTitle(boardTitle);
 		b.setBoardContent(boardContent);
+		
 		Attachment at = null;
 		
 		if(multiRequest.getOriginalFileName("upfile") != null) {

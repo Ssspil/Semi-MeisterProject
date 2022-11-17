@@ -1,25 +1,30 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Reply;
+
 
 /**
- * Servlet implementation class BoardDlelteController
+ * Servlet implementation class ReplyListController
  */
-@WebServlet("/delete.bo")
-public class BoardDeleteController extends HttpServlet {
+@WebServlet("/rlist.bo")
+public class ReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDeleteController() {
+    public ReplyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +35,14 @@ public class BoardDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
-
-		int result = new BoardService().deleteBoard(boardNo);
 		
-		if (result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 삭제했습니다.");
-			response.sendRedirect(request.getContextPath()+"/boardlist.bo");
-		} else {
-			request.setAttribute("errorMsg", "게시글 삭제 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
+		
+		//Gson을 이용해서 응답 => ArrayList -> JSONObject 배열형태로 변환
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
+		
+	
 	}
 
 	/**

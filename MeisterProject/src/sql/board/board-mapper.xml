@@ -49,8 +49,6 @@
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 
-
-
 	<entry key ="insertBoard">
 		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_TYPE)
 		VALUES (SEQ_BNO.NEXTVAL, ?, ?, ?, ?)	
@@ -82,16 +80,27 @@
 		WHERE FILE_NO = ?
 	</entry>
 	
+	<entry key="deleteBoard">
+		UPDATE BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="deleteAttachment">
+		UPDATE ATTACHMENT
+		SET STATUS = 'N'
+		WHERE REF_NO = ?
+	</entry>
+	
 	<entry key="selectBoard">
 		SELECT
 		BOARD_NO,
 		BOARD_TITLE ,
 		BOARD_CONTENT,
-		BOARD_COUNT,
 		BOARD_RECOMMEND,
 		USER_NO,
-		m.NICKNAME,
-		BOARD_DATE
+		BOARD_DATE,
+		m.NICKNAME
 		FROM BOARD b
 		JOIN MEMBER m using(user_no)
 		WHERE BOARD_NO = ?
@@ -129,5 +138,19 @@
 		SET BOARD_COUNT = BOARD_COUNT + 1
 		WHERE BOARD_NO = ?
 		AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="insertReply">
+		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, BOARD_NO, USER_NO)
+		VALUES(SEQ_RYNO.NEXTVAL, ?, ?, ?)
+	</entry>
+	
+	<entry key="selectReplyList">
+		SELECT REPLY_NO, REPLY_CONTENT, USER_NO, TO_CHAR(REPLY_DATE, 'YY/MM/DD HH:MI:SS') REPLY_DATE
+		FROM REPLY R
+		JOIN MEMBER m using(user_no)
+		WHERE m.STATUS = 'Y'
+			AND BOARD_NO = ?
+		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
 	</entry>
 </properties>

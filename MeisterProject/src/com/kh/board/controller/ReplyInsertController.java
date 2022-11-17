@@ -8,18 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Reply;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardDlelteController
+ * Servlet implementation class ReplyInsertController
  */
-@WebServlet("/delete.bo")
-public class BoardDeleteController extends HttpServlet {
+@WebServlet("/rinsert.bo")
+public class ReplyInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDeleteController() {
+    public ReplyInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +31,20 @@ public class BoardDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String replyContent = request.getParameter("content");
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
-
-		int result = new BoardService().deleteBoard(boardNo);
+		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		if (result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 삭제했습니다.");
-			response.sendRedirect(request.getContextPath()+"/boardlist.bo");
-		} else {
-			request.setAttribute("errorMsg", "게시글 삭제 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		Reply r = new Reply();
+		r.setReplyContent(replyContent);
+		r.setBoardNo(boardNo);
+		r.setUserNo(userNo);
+		
+		int result = new BoardService().insertReply(r);
+		
+		System.out.println(result);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

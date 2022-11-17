@@ -7,6 +7,7 @@ import static com.kh.common.JDBCTemplate.*;
 import com.kh.board.model.dao.BoardDao;
 import com.kh.common.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardService {
@@ -101,6 +102,23 @@ public class BoardService {
 		
 		return result * result2;
 	}
+	
+	public int deleteBoard(int boardNo) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(boardNo, conn);
+		
+		new BoardDao().deleteAttachment(boardNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
+	}
 
 	public Board selectBoard(int boardNo) {
 
@@ -152,6 +170,33 @@ public class BoardService {
 			rollback(conn);
 		}
 		close();
+	}
+	
+	// 댓글
+	public int insertReply(Reply r) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<Reply> selectReplyList(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new BoardDao().selectReplyList(conn, boardNo);
+		
+		close();
+		
+		return list;
 	}
 
 }
