@@ -13,42 +13,24 @@
   <div class="outer">
     <br>
     <div class="slider-area">
-      <div class="container"><!-- slidebox-->
-        <input type="radio" name="slide" id="slide01" checked>
-        <input type="radio" name="slide" id="slide02">
-        <input type="radio" name="slide" id="slide03">
-        <input type="radio" name="slide" id="slide04">
-        <ul class="slidelist">
-          <li class="slideitem">
-            <div>
-              <label for="slide04" class="left">&lt;</label>
-              <label for="slide02" class="right">&gt;</label>
-              <a><img src="./resources/image/test1.jpeg" width="100vw"/></a>
-            </div>
+      <div class="imgContainer">
+      <div id="slider">
+        <ul class="slides">
+          <li class="slide">
+            <img src="./resources/image/test1.jpeg" alt="" />
           </li>
-          <li class="slideitem">
-            <div>
-              <label for="slide01" class="left">&lt;</label>
-              <label for="slide03" class="right">&gt;</label>
-              <a><img src="./resources/image/test2.jpeg" width="100vw"/></a>
-            </div>
+          <li class="slide">
+            <img src="./resources/image/test2.jpeg" alt="" />
           </li>
-          <li class="slideitem">
-            <div>
-              <label for="slide02" class="left">&lt;</label>
-              <label for="slide04" class="right">&gt;</label>
-              <a><img src="./resources/image/test3.jpeg" width="100vw"/></a>
-            </div>
+          <li class="slide">
+            <img src="./resources/image/test3.jpeg" alt="" />
           </li>
-          <li class="slideitem">
-            <div>
-              <label for="slide03" class="left">&lt;</label>
-              <label for="slide01" class="right">&gt;</label>
-              <a><img src="./resources/image/test4.jpeg" width="100vw"/></a>
-            </div>
+          <li class="slide">
+           <img src="./resources/image/test4.jpeg" alt="" />
           </li>
         </ul>
       </div>
+    </div>
 
     </div>
     	<br>
@@ -156,7 +138,36 @@
 
 	
 		
-	
+	<script>
+// 2) Image Slider
+
+var slider = document.querySelector("#slider");
+var slides = slider.querySelector(".slides");
+var slide = slides.querySelectorAll(".slide");
+
+var currentSlide = 0;
+
+setInterval(function () {
+    var from = -(1100 * currentSlide);
+    var to = from - 1100;
+    slides.animate(
+        {
+            marginLeft: [from + "px", to + "px"],
+        },
+        {
+            duration: 700,
+            easing: "ease",
+            iterations: 1,
+            fill: "both",
+        }
+    );
+    currentSlide++;
+    if (currentSlide === slide.length - 1) {
+        currentSlide = 0;
+    }
+}, 3500);
+
+</script>
 
 	
 

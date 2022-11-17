@@ -57,7 +57,10 @@ public class Board {
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
       this.userNo = userNo;
+
       this.boardType=boardType;
+
+
    }
    
    // 게시글 수정 부분 생성자

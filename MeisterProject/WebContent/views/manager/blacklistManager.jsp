@@ -167,24 +167,26 @@ table>tfoot>tr:hover{
 					    	</tr>
 					    	<% } else { %>
 						    <tr>
-						      <td><input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>"></td>
-						      <td><%= m.getUserNo() %></td>
-						      <td><%= m.getUserId() %></td>
-						      <td>
-						      <% if (m.getUserName() == null ) { %>
-						      	x
-						      <% }  else { %>
-						      	<%= m.getUserName() %>
-						      <% } %>
-						      </td>
-						      <td><%= m.getNickName() %></td>
-						      <td>관리자에 의하여 처리</td>
-						      <td><%= m.getEnrollDate() %></td>
-						      <td class="status">
-						      <% if ((m.getBlackList()).equals("Y"))  { %>
-						      	제적
-						      <% } %>
-						      </td>
+							      <td>
+							      	<input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>">\
+							      </td>
+							      <td><%= m.getUserNo() %></td>
+							      <td><%= m.getUserId() %></td>
+							      <td>
+							      <% if (m.getUserName() == null ) { %>
+							      	x
+							      <% }  else { %>
+							      	<%= m.getUserName() %>
+							      <% } %>
+							      </td>
+							      <td><%= m.getNickName() %></td>
+							      <td>관리자에 의하여 처리</td>
+							      <td><%= m.getEnrollDate() %></td>
+							      <td class="status">
+							      <% if ((m.getBlackList()).equals("Y"))  { %>
+							      	제적
+							      <% } %>
+							      </td>
 						    </tr>
 
 					  		<% } %>

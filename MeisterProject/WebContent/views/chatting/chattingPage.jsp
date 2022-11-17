@@ -5,6 +5,7 @@
 	String nickName = (String) request.getAttribute("nickname");
 	int sender = (Integer) request.getAttribute("sender");
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
+	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
 %>
 
 <!DOCTYPE html>

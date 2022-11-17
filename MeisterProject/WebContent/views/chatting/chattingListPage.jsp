@@ -49,19 +49,21 @@
 	<% if(list.isEmpty()){ %>
 		<div>조회된 문의가 없습니다</div>
 	<%} else{ %>
+		<%int i = 0; %>
 		<%for(Chatting c : list){ %>
 			<form method="post" action="<%=contextPath %>/askToSeller.ch" id="selectForm">
 				<div id="list">
 					<div>
 						&nbsp;&nbsp;
 						<input type="hidden" name="sender" value="<%=c.getSender() %>">
-						&nbsp;판매자 : <input type="text" name="receiverNick" value="" size="2" readonly><br>
+						&nbsp;판매자 : <input type="text" name="receiverNick" value="<%=nickNameList[i] %>" size="10" readonly><br>
 						<input type="hidden" name="receiver" value="<%=c.getReceiver() %>" size="2" readonly>
 						&nbsp;&nbsp;&nbsp;<input type="text" name="content" value="<%=c.getChatContent() %>" readonly><br>
 						&nbsp;&nbsp;&nbsp;판매글 번호 : <input type="text" name="sellNo" value="<%=c.getSellNo() %>" size="2" readonly>
 					</div>
 				</div>
 			</form>
+			<%i++; %>
 		<%} %>
 	<%} %>
 	</div>
@@ -70,13 +72,6 @@
 			$('#selectForm').submit();
 			console.log("div clicked");
 		
-		});
-		
-		$(document).ready(function({
-			<%for(int i =0; i < nickNameList.length; i++){%>
-			
-				$('#receiverNick').attr('value', '<%=nickNameList[i] %>');
-			<%} %>
 		});
 	</script>
 </body>

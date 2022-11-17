@@ -116,10 +116,11 @@ public class SellBoardDao {
 										rset.getInt("PRICE"),
 										rset.getInt("SELL_RECOMMEND"),
 										rset.getDate("SELL_DATE"),
-										rset.getInt("INTERSET_NO"),
+										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
-										rset.getString("NICKNAME")
-						));	
+										rset.getString("NICKNAME"),
+										rset.getString("CHANGE_NAME"),
+										rset.getString("FILE_PATH")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,14 +133,14 @@ public class SellBoardDao {
     }
     
     // 카테고리 관심사
-	public ArrayList<Interest> selecInterestCategory(Connection conn) {
+	public ArrayList<Interest> selectInterestCategory(Connection conn) {
 		
 		ArrayList<Interest> interest = new ArrayList<>();
 		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selecInterestCategory");
+		String sql = prop.getProperty("selectInterestCategory");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -164,14 +165,14 @@ public class SellBoardDao {
 	}
 	
 	// 카테고리 지역
-	public ArrayList<Local> selecLocalCategory(Connection conn) {
+	public ArrayList<Local> selectLocalCategory(Connection conn) {
 		
 		ArrayList<Local> local = new ArrayList<>();
 		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 		 
-		String sql = prop.getProperty("selecLocalCategory");
+		String sql = prop.getProperty("selectLocalCategory");
 		
 		try {
 			psmt = conn.prepareStatement(sql);

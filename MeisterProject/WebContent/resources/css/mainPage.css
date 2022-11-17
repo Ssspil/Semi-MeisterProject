@@ -19,116 +19,34 @@
 	height:500px;
 	border-radius : 20px;
 }
-/* 슬라이더 공간 */
-.slider-area .container {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+.imgContainer ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-[name="slide"] {
-  display: none;
-}
-.container{
-  margin: 0 auto;
+
+/************************
+*** Auto Image Slider ***
+************************/
+#slider {
+    width: 1100px;
+    height: 500px;
+    overflow: hidden;
 }
 
-.container .slidelist{
-  white-space: nowrap;
-  font-size: 0;
-  overflow: hidden;
-  
-}
-.container .slideitem{
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-  transition: all .5s;
-
-}
-.container .slideitem label{
-  position: absolute;
-  z-index: 1;
-  transform: translateX(-100vw);
-  padding: 20px;
-  border-radius: 0;
-  cursor: pointer;
-}
-label.left{
-  left: 3%;
-  background-position: center center;
-  height: 100%;
-  background-repeat: no-repeat;
-}
-label.right{
-  right: 0;
-  background-position: center center;
-  height: 100%;
-  background-repeat: no-repeat;
-}
-[id="slide01"]:checked ~ .slidelist .slideitem {
-  transform: translateX(0);
-  animation: slide01 20s infinite;
-}
-[id="slide02"]:checked ~ .slidelist .slideitem {
-  transform: translateX(-100%);
-  animation: slide02 20s infinite;
-}
-[id="slide03"]:checked ~ .slidelist .slideitem {
-  transform: translateX(-200%);
-  animation: slide03 20s infinite;
-}
-[id="slide04"]:checked ~ .slidelist .slideitem {
-  transform: translateX(-300%);
-  animation: slide04 20s infinite;
-}
-@keyframes slide01 {
-  0% {left: 0%;}
-  23% {left: 0%;}
-  25% {left: -100%;}
-  48% {left: -100%;}
-  50% {left: -200%;}
-  73% {left: -200%;}
-  75% {left: -300%;}
-  98% {left: -300%;}
-  100% {left: 0;}
-  
-}
-@keyframes slide02 {
-  0% {left: 0%;}
-  23% {left: 0%;}
-  25% {left: -100%;}
-  48% {left: -100%;}
-  50% {left: -200%;}
-  73% {left: -200%;}
-  75% {left: 100%;}
-  98% {left: 100%;}
-  100% {left: 0;}
-}
-@keyframes slide03 {
-  0% {left: 0%;}
-  23% {left: 0%;}
-  25% {left: -100%;}
-  48% {left: -100%;}
-  50% {left: 200%;}
-  73% {left: 200%;}
-  75% {left: 100%;}
-  98% {left: 100%;}
-  100% {left: 0;}
-}
-@keyframes slide04 {
-  0% {left: 0%;}
-  23% {left: 0%;}
-  25% {left: 300%;}
-  48% {left: 300%;}
-  50% {left: 200%;}
-  73% {left: 200%;}
-  75% {left: 100%;}
-  98% {left: 100%;}
-  100% {left: 0;}
+#slider .slides {
+    display: block;
+    width: 8000px;
+    height: 100%;
 }
 
+#slider .slide {
+    float: left;
+    width: 1100px;
+    height: 500px;
+}
 
 
 
