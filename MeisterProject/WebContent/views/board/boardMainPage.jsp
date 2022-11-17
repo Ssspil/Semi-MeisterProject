@@ -30,12 +30,10 @@ int maxPage = pi.getMaxPage();
    margin: auto;
    width: 800px;
 }
-
 .body2 {
    box-sizing: border-box;
    height: 1970px;
 }
-
 #line {
    border: 4px solid rgb(255, 212, 0);
 }
@@ -46,33 +44,31 @@ int maxPage = pi.getMaxPage();
 .bodyClick {
    background-color: orange;
 }
-
 .bodyWrite_wrap {
    box-sizing: border-box;
    margin: auto;
    width: 800px;
 }
-
 #body2-1 {
    box-sizing: border-box;
    margin: auto;
    height: 1400PX;
    width: 800px;
 }
-
 #body2-2 {
    box-sizing: border-box;
    margin: auto;
-   height: 8%;
-   padding: 5%;
+   height: 130px;
+   padding: 3%;
 }
-
 #body2-3 {
    box-sizing: border-box;
    margin: auto;
    height: 19%;
 }
-
+hr{
+background-color : orange;
+}
 #body2-3-1 {
    box-sizing: border-box;
    height: 100%;
@@ -80,7 +76,6 @@ int maxPage = pi.getMaxPage();
    float: left;
    cursor: pointer;
 }
-
 #hot1 {
    box-sizing: border-box;
    border: 2px solid black;
@@ -90,18 +85,16 @@ int maxPage = pi.getMaxPage();
    margin: auto;
    border-style: groove;
    border-radius: 18px;
+   box-shadow: 6px 6px 6px 6px gray;
 }
-
 #hot2 {
    position: relative;
    top: 28px;   
 }
-
 #hotfooter {
    position: relative;
    left: 15px;
 }
-
 #body2-4 {
    box-sizing: border-box;
    height: 18%;
@@ -109,7 +102,6 @@ int maxPage = pi.getMaxPage();
    padding: 20px; 
    cursor: pointer;  
 }
-
 #date {
    color: lightgrey;
    font-size: 14px;
@@ -117,30 +109,26 @@ int maxPage = pi.getMaxPage();
        position: relative;
     left: 160px;
 }
-
 #mainid {
    text-align: center;
    font-weight: bold;
    font-size: 50px;
    padding: 120px;
 }
-
 #ge {
    box-sizing: border-box;
-   border: 1px solid black;
+   border: 1px solid orange;
    font-size: 27px;
    padding: 8px 16px;
    float: left;
    border-style: groove;
    border-radius: 10px;
 }
-
 #ge:hover {
    background-color: orange;
 }
-
 #gung {
-   border: 1px solid black;
+   border: 1px solid orange;
    box-sizing: border-box;
    font-size: 27px;
    padding: 8px 12px;
@@ -148,17 +136,14 @@ int maxPage = pi.getMaxPage();
    border-style: groove;
    border-radius: 10px;
 }
-
 #gung:hover {
    background-color: orange;
 }
-
 #textmade {
    float: right;
    margin: auto;
    padding: 15px;
 }
-
 #img1 {
    position: relative;
    top: -45px;
@@ -166,22 +151,17 @@ int maxPage = pi.getMaxPage();
    width: 10rem;
    height: 10rem;
 }
-
 #icon1, #ask {
    float: left;
 }
-
 #hottitle {
    margin: auto;
    text-align: center;
    padding-top: 30px;
 }
-
 #titlefooter {
-    margin:auto;
-   
+    margin:auto; 
 }
-
 #text {
    width: 500px;
    height: 45px;
@@ -191,7 +171,6 @@ int maxPage = pi.getMaxPage();
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 2;
 }
-
 #hottext {
    width: 170px;
    height: 77px;
@@ -205,7 +184,6 @@ int maxPage = pi.getMaxPage();
    word-break: break-word;
    margin: auto;
 }
-
 .font {
    width: 400px;
    display: -webkit-inline-box;
@@ -215,7 +193,6 @@ int maxPage = pi.getMaxPage();
    font-weight: bold;
    font-size: 20px;
 }
-
 #hotfont {
    width: 150px;
    display: -webkit-inline-box;
@@ -228,77 +205,65 @@ int maxPage = pi.getMaxPage();
    top: -20px;
    left: 18px;
 }
-
-.header2 {
-   position: relative;
-   width: 500px;
-   
-}
-#search_form {
-   width: 80%;
-   height: 25%;
-   margin: auto;
-   position: relative;
-   top: 150%;
-}
-
-#search_form>div {
-   height: 100%;
-   float: left;
-}
-
-#search_text {
-   width: 80%;
-   
-}
-
-#search_btn {
-   box-sizing: border-box;
-   width: 20%;
-   height:15%;
-}
-
-#search_form input {
-   box-sizing: border-box;
-   width: 100%;
-   height: 100%;
-}
-
 .page_wrap {
    text-align: center;
+       position: relative;
+    top: 25px;
 }
-
 .page_wrap span {
    padding: 5px;
    cursor: pointer;
 }
-
 .page_wrap .sel {
    color: orange;
    border-bottom: 1px solid orange;
 }
-
 .page_wrap span:hover {
    color: orange;
    cursor: pointer;
    border-bottom: 1px solid orange;
 }
-
 .hide {
    display: none;
 }
-
-#search_main{
-position: relative;
- TOP:-30px;
+#search_form {
+   width: 80%;
+   height: 25%;
+   margin: auto;
+}
+#search_form>div {
+  height: 100%;
+    float: left;
+    position: relative;
+    right: 90px;
+    top: 33px;
+}
+#search_text {
+   width: 80%;
+}
+#search_form input {
+   box-sizing: border-box;
+   width: 400px;
+   float:left;
 }
 #madebutton{
 background-color: orange;
+float:right;
 }
 #madebutton:hover{
 background-color:rgba(255, 106, 0, 0.87);
 }
-  
+#chat{
+float: right;
+ position: relative;
+  right:29px;
+}
+#chat2{
+color:black;
+position: relative;
+right: 70px;
+}
+
 
 </style>
 </head>
@@ -321,7 +286,45 @@ background-color:rgba(255, 106, 0, 0.87);
    <div id="line"></div>
 
    <div class="bodyWrite_wrap">
-      <div id="body2-2" align="right">
+      <div id="body2-2">
+        <div id="search_main" align="center">
+         <div class="header2">
+             <div id="search_form">
+                 <div id="search_text">
+              <input id="keyword" list="list" type="text" placeholder="게시글 제목을 입력해주세요." style="height:35px;">
+             
+             <div id="search_btn">
+                   <button type="button" class="btn btn-secondary"  list="list" style="background-color: orange; height:35px; float:left;">
+                   <datalist id="list">
+   </datalist>
+            <i class="bi bi-search"></i> 검색 </button>
+            </div>
+            <script>
+            $(function() {
+              $("#keyword").keyup(function(e){
+                 $.ajax({
+                    url : "AutoSearch.do",
+                    data : {keyword : $("#keyword").val()},
+                    success:function(data) {
+                       
+                       $("#list").html("");
+                       console.log(data);
+                       let str = "";
+                       for(let i = 0 ; i<data.length; i++){
+                          str += "<option>"   
+                             +  data[i].boardTitle
+                             +  "</option>"
+                       }
+                       $("#list").html(str);
+                    }
+                 });
+              });
+           }) 
+            </script>
+            </div>
+         </div>
+         </div>
+     </div>
             <form action="<%=contextPath%>/enrollForm.bo">
             <button type="submit" id="madebutton" value="" class="btn btn-secondary">
             <i class="bi bi-pencil-square "> 글작성 </i></button> 
@@ -350,12 +353,13 @@ background-color:rgba(255, 106, 0, 0.87);
                      <div id="hotfooter">
                         <i class="bi bi-eye"></i>
                         <%=hotList.get(i).getBoardCount()%>
+                      <i class="bi bi-chat-dots"></i> 
+                        <%=hotList.get(i).getReplyCount()%>
+                        <div id="chat">
                         <i class="bi bi-hand-thumbs-up"></i>
                         <%=hotList.get(i).getBoardRecommend()%>
-                        <i class="bi bi-chat-dots"></i> 
-                        <%=hotList.get(i).getReplyCount()%>
                         </div>
-                        
+                        </div>       
                   </div>
                </div>
             </div>
@@ -363,24 +367,21 @@ background-color:rgba(255, 106, 0, 0.87);
                }
             %>
          </div>
-
          <%
             for (int i = 0; i < list.size(); i++) {
          %>
-         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
+         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"onclick="location.href='<%=contextPath%>/detail.bo?type=1&bno=<%=list.get(i).getBoardNo() %>';">
             <input type='hidden' name='bno' value='<%=list.get(i).getBoardNo() %>'/>
             <hr>
             <span class="font"><%=list.get(i).getBoardTitle()%></span>
             <div>
                <br>
                <p id="text"><%=list.get(i).getBoardContent()%></p>
-
                <%
                   if (!"/".equals(list.get(i).getTitleImg())) {
                %>
                <img src="<%=contextPath%><%=list.get(i).getTitleImg()%>"
                   id="img1">
-
                <%
                   }
                %>
@@ -388,8 +389,6 @@ background-color:rgba(255, 106, 0, 0.87);
                <!--           } else {%> -->
                <!--                  <span>사진이 없습니다.</span> -->
                <%--                   <%} %>  --%>
-
-      
      </div>
             <br>
             <br>
@@ -398,7 +397,7 @@ background-color:rgba(255, 106, 0, 0.87);
                <div>
                   <i class="bi bi-eye"></i> <%=list.get(i).getBoardCount()%>
                   <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%>
-                  <i class="bi bi-chat-dots"></i>  <%=list.get(i).getReplyCount()%>
+                  
 
                   <%
                      String boardDate = list.get(i).getBoardDate();
@@ -434,15 +433,13 @@ background-color:rgba(255, 106, 0, 0.87);
                      
                      
                      %>
-                  <span id="date"><%=result%> </span>
+                  <span id="date"><span id="chat2"><i class="bi bi-chat-dots"></i>  <%=list.get(i).getReplyCount()%></span> <%=result%> </span>
                </div>
             </div>
          </div>
          <% } %>
          <br>
          <hr>
-         
-       
          <div class="page_wrap">
             <% if (currentPage != 1) {%>
             <span>&lt&lt</span>
@@ -470,54 +467,7 @@ background-color:rgba(255, 106, 0, 0.87);
    </div>
 
    <%@ include file="../board/pageMove.jsp"%>
-   
-  
-    <div id="search_main" align="center">
-         <div class="header2">
-             <div id="search_form">
-                 <div id="search_text">
-              <input id="keyword" list="list" type="text" style="height:35px;">
-
-   
-             </div>
-             <div id="search_btn">
-                   <button type="button" class="btn btn-secondary"  list="list" style="background-color: orange; height:35px;">
-                   <datalist id="list">
-   
-   </datalist>
-            <i class="bi bi-search"></i> 검색 </button>
-            
-            <script>
-            $(function() {
-              $("#keyword").keyup(function(e){
-                 $.ajax({
-                    url : "AutoSearch.do",
-                    data : {keyword : $("#keyword").val()},
-                    success:function(data) {
-                       
-                       $("#list").html("");
-                       console.log(data);
-                       let str = "";
-                       for(let i = 0 ; i<data.length; i++){
-                          str += "<option>"   
-                             +  data[i].boardTitle
-                             +  "</option>"
-                       }
-                       $("#list").html(str);
-                    }
-                 });
-              });
-           }) 
-            </script>
-            </div>
-         </div>
-         </div>
-    
-     </div>
-     
-        
    <%@ include file="../common/footer.jsp"%>
-
 </body>
 </html>
 
@@ -579,6 +529,7 @@ background-color:rgba(255, 106, 0, 0.87);
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
    }
+   
    
 
 </script>
