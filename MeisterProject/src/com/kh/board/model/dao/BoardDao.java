@@ -281,12 +281,12 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, b.getBoardNo());
+//			psmt.setInt(1, b.getBoardNo());
 			
-			psmt.setString(2, b.getBoardTitle());
-			psmt.setString(3, b.getBoardContent());
-			psmt.setInt(4, b.getUserNo());
-			psmt.setInt(5, type);
+			psmt.setString(1, b.getBoardTitle());
+			psmt.setString(2, b.getBoardContent());
+			psmt.setInt(3, b.getUserNo());
+			psmt.setInt(4, type);
 			
 			result = psmt.executeUpdate();
 

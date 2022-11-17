@@ -51,12 +51,13 @@ public class Board {
    
    // 유홍상
    // 게시글 등록
-   public Board(int boardNo, String boardTitle, String boardContent, int userNo, int type) {
+   public Board(int boardNo, String boardTitle, String boardContent, int userNo, int boardType) {
       super();
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
       this.userNo = userNo;
+      this.boardType = boardType;
    }
    
    // 게시글 수정 부분 생성자
