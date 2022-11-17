@@ -53,8 +53,8 @@
                             <div class="collapse" id="user" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%= contextPath %>/users.ad">이용자</a>
-                                    <a class="nav-link" href="#">블랙리스트</a>
-                                    <a class="nav-link" href="#">전문가 승인</a>
+                                    <a class="nav-link" href="<%= contextPath %>/blacklist.ad">블랙리스트</a>
+                                    <a class="nav-link" href="<%= contextPath %>/expert.ad">전문가 승인</a>
                                 </nav>
                             </div>
 
@@ -66,10 +66,9 @@
                             </a>
                             <div class="collapse" id="board" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">커뮤니티</a>
-                                    <a class="nav-link" href="#">댓글</a>
-                                    <a class="nav-link" href="#">판매게시판</a>
-                                    <a class="nav-link" href="#">리뷰</a>
+                                    <a class="nav-link" href="<%= contextPath %>/board.ad">커뮤니티</a>
+                                    <a class="nav-link" href="<%= contextPath %>/sellboard.ad">판매게시판</a>
+                                    <a class="nav-link" href="<%= contextPath %>/review.ad">리뷰</a>
                                 </nav>
                             </div>
                             
@@ -81,8 +80,8 @@
                             </a>
                             <div class="collapse" id="manager" aria-labelledby="heading" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">신고접수</a>
-                                    <a class="nav-link" href="#">문의접수</a>
+                                    <a class="nav-link" href="<%= contextPath %>/report.ad">신고접수</a>
+                                    <a class="nav-link" href="<%= contextPath %>/ask.ad">문의접수</a>
                                     <a class="nav-link" href="<%= contextPath %>/notice.ad">공지사항</a>
                                 </nav>
                             </div>

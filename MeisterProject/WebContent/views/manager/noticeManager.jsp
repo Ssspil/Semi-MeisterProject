@@ -101,49 +101,48 @@ table>tbody>tr:hover{
                 
                         <div class="sb-sidenav-menu-heading">관리자 목록</div>
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#user" aria-expanded="false">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            사용자 관리
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="user" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<%= contextPath %>/users.ad">이용자</a>
-                                <a class="nav-link" href="#">블랙리스트</a>
-                                <a class="nav-link" href="#">전문가 승인</a>
-                            </nav>
-                        </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#user" aria-expanded="false">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                사용자 관리
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="user" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<%= contextPath %>/users.ad">이용자</a>
+                                    <a class="nav-link" href="<%= contextPath %>/blacklist.ad">블랙리스트</a>
+                                    <a class="nav-link" href="<%= contextPath %>/expert.ad">전문가 승인</a>
+                                </nav>
+                            </div>
 
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#board" aria-expanded="false" >
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            게시글 관리
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>  
-                        </a>
-                        <div class="collapse" id="board" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">커뮤니티</a>
-                                <a class="nav-link" href="#">댓글</a>
-                                <a class="nav-link" href="#">판매게시판</a>
-                                <a class="nav-link" href="#">리뷰</a>
-                            </nav>
-                        </div>
-                        
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#board" aria-expanded="false" >
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                게시글 관리
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>  
+                            </a>
+                            <div class="collapse" id="board" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<%= contextPath %>/board.ad">커뮤니티</a>
+                                    <a class="nav-link" href="<%= contextPath %>/sellboard.ad">판매게시판</a>
+                                    <a class="nav-link" href="<%= contextPath %>/review.ad">리뷰</a>
+                                </nav>
+                            </div>
+                            
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#manager" aria-expanded="false">
-                            <div class="sb-nav-link-icon"><i class="fas fa-key"></i></div>
-                            관리자 페이지
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="manager" aria-labelledby="heading" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">신고접수</a>
-                                <a class="nav-link" href="#">문의접수</a>
-                                <a class="nav-link" href="<%= contextPath %>/notice.ad">공지사항</a>
-                            </nav>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#manager" aria-expanded="false">
+                                <div class="sb-nav-link-icon"><i class="fas fa-key"></i></div>
+                                관리자 페이지
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="manager" aria-labelledby="heading" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="<%= contextPath %>/report.ad">신고접수</a>
+                                    <a class="nav-link" href="<%= contextPath %>/ask.ad">문의접수</a>
+                                    <a class="nav-link" href="<%= contextPath %>/notice.ad">공지사항</a>
+                                </nav>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">팀명 :</div>
                     팀 "JSP"
