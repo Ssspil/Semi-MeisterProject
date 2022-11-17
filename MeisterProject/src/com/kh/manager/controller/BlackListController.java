@@ -36,6 +36,8 @@ public class BlackListController extends HttpServlet {
 		
 		request.setAttribute("blacklist", blacklist);
 		
+		System.out.println("블랙리스트 관리 페이지로 이동");
+		
 		request.getRequestDispatcher("views/manager/blacklistManager.jsp").forward(request, response);
 		
 	}

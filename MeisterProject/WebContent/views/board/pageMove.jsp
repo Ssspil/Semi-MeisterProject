@@ -26,7 +26,7 @@ int maxPage2 = pi2.getMaxPage();
 <style>
 .body2-1{
   box-sizing: border-box;
-            height: 1750px;
+            height: 1700px;
 }
 #textLine{
             width:500px;
@@ -49,6 +49,7 @@ top:40px;
 position: relative;
 text-align:center;
 top:12%;
+left: 18.5%;
 
 </style>
 </head>
@@ -57,7 +58,7 @@ top:12%;
     <div id="body2-1">
              
                <%for(int i=0; i< list2.size(); i++){ %>
-                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>">
+                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
                   
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
@@ -68,14 +69,7 @@ top:12%;
                   <img src="<%=contextPath2 %><%=list2.get(i).getTitleImg()%>" id="img1">
                   
                   <%} %>
-         	<script>
-				 $(function() {
-			         $(".body2-3").click(function() {
-			            let bno = $(this).children().eq(0).text(); 
-			            location.href= '<%=contextPath2 %>/detail.bo?bno='+ bno;     
-			         });
-			      })
-			</script>
+         
 
                   
                 </div><br><br><br>
@@ -145,6 +139,7 @@ top:12%;
 				<% if (currentPage2 != maxPage2) { %>
 				<span>&gt&gt</span>
 				<% }%>
+				
 				
 			</div>
     </div>

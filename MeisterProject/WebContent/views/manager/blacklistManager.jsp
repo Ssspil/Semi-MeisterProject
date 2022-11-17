@@ -28,27 +28,24 @@
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.listbtn{
-	float:right;
+.status{
+    color:red;
 }
 
-table>thead>tr>th{
+table>tbody>tr>th{
 	background-color : black;
 	color : white;
 	text-align : center;
 }
-table>tbody {
+table>tfoot {
 	text-align : center;
 }
 
-table>tbody>tr:hover{
+table>tfoot>tr:hover{
 	background-color : orange;
 	cursor : pointer;
 	color : darkblue;
 	
-}
-.search{
-	text-align : center;
 }
  	
 </style>
@@ -136,20 +133,71 @@ table>tbody>tr:hover{
 				
 				
 				<div class="myOuter">
+				<form action="<%= contextPath %>/blackremove.ad" method="post">
+					
 					<table align="center" border="1">
-						<tr>
-							<th><input type="checkbox" name="allChoice" /></th>
-						</tr>
-					
-					
-					</table>
-				
+						<thead>
+							<tr>
+								<td colspan="8">
+								<div style="float : right;">
+									<button type="submit" class="btn btn-danger">삭제하기</button>
+								</div>
+								</td>
+							</tr>
+						</thead>
+							
+						
+						<tbody>
+						    <tr>
+						      <th><label><input type="checkbox" name="userAllSelect" id="userAllSelect" value="userAllSelect"></label></th>
+						      <th width="100">회원번호</th>
+						      <th width="150">아이디</th>
+						      <th width="100">이름</th>
+						      <th width="150">닉네임</th>
+						      <th width="150">제적사유</th>
+						      <th width="150">제적일자</th>
+						      <th width="100">상태</th>
+						    </tr>
+						</tbody>
+						<tfoot>
+					    <% for(Member m : blacklist) { %>
+					    	<% if( blacklist.isEmpty() ) { %>
+					    	<tr>
+					    		<td colspan="8">블랙 컨슈머가 없습니다.</td>
+					    	</tr>
+					    	<% } else { %>
+						    <tr>
+						      <td><input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>"></td>
+						      <td><%= m.getUserNo() %></td>
+						      <td><%= m.getUserId() %></td>
+						      <td>
+						      <% if (m.getUserName() == null ) { %>
+						      	x
+						      <% }  else { %>
+						      	<%= m.getUserName() %>
+						      <% } %>
+						      </td>
+						      <td><%= m.getNickName() %></td>
+						      <td>관리자에 의하여 처리</td>
+						      <td><%= m.getEnrollDate() %></td>
+						      <td class="status">
+						      <% if ((m.getBlackList()).equals("Y"))  { %>
+						      	제적
+						      <% } %>
+						      </td>
+						    </tr>
+
+					  		<% } %>
+					  <% } %>
+					  </tfoot>
+					  </table>
+					</form>
 				</div>
 				<!--  myOuter끝 -->
 				
-                
-                    
-                </div>    			
+                </div>    	
+
+                		
             </main> 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -160,25 +208,7 @@ table>tbody>tr:hover{
             </footer>
         </div>
     </div>
-    <script>
-        $(function(){
-			$("table>tbody>tr").click(function(){
-				// 클릭시 해당 공지사항의 번호를 넘겨야한다.
-				// 해당 tr요소의 자손 중에서 첫번째 td태그의 영역의 내용 필요
-				
-				let nno = $(this).children().eq(0).text(); //글번호 1, 2 가져옴
-				//현재 내가 클릭한 tr의 자손들 중 0번째에 위치한 자식의 textnode내용을 가져온다.
-				
-				//요청할 url?키=밸류&키=밸류&키=밸류
-				//물음표 뒤에 내용을 쿼리스트링이라고 부름 => 값들은 직접 만들엉서 넘겨야함.
-						
-				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
-			});
-		})
-		
-		
-    </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
