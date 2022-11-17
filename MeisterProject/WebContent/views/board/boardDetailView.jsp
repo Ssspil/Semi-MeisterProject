@@ -462,7 +462,7 @@
                                             </div>
                                             <div data-c-1 class="comment-action">
                                                 <div data-c-1 class="comment-react">
-                                                    <span data-c-1 class="text"><%=r.getreplyDate() %></span>
+                                                    <span data-c-1 class="text"><%=b.getBoardDate() %></span>
                                                     <span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>
                                                     <div data-c-1 class="like-area">
                                                         <span data-c-1 class="text"><%=b.getBoardRecommend() %></span>
@@ -504,7 +504,7 @@
 		$(function() {
 			selectReplyList();
 			
-			setInterval(selectReplyList, 1000);
+			setInterval(selectReplyList, 2000);
 		})
 		
 		function insertReply() {
@@ -528,6 +528,7 @@
 		};
 		
 		function selectReplyList(){
+			
 				let html = '<li data-x-1  data-z-1 class="comments-list-item">'
                 += '<div data-c-1 data-x-1 class="comment-wrapper">'
                 += '<div data-c-1 class="profile-image">'
@@ -535,16 +536,16 @@
                 += '</div>'
                 += '<div data-c-1 class="comment-information">'
                 +=    '<div data-c-1 class="user-info">'
-                +=        '<span data-c-1 class="user-name">+<%=b.getMemberNic()%>+</span>'
+                +=        '<span data-c-1 class="user-name">+<%=list.getMemberNic()%>+</span>'
                 +=    '</div>'
                 +=    '<div data-c-1 class="content">'
                 +=        '<p data-c-1 class="text comment-input">'
-                +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">content</span>'
+                +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">+<%=b.getBoardContent()%>+</span>'
                 +=        '</p>'
                 +=    '</div>'
                 +=    '<div data-c-1 class="comment-action">'
                 +=        '<div data-c-1 class="comment-react">'
-                +=            '<span data-c-1 class="text">+<%=list.%>+</span>'
+                +=            '<span data-c-1 class="text">+<%=b.%>+</span>'
                 +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>'
                 +=            '<div data-c-1 class="like-area">'
                 +=                '<span data-c-1 class="text">+<%=b.getBoardRecommend()%>+</span>' /**/
@@ -559,30 +560,30 @@
                 += '</div>'
             += '</div>'
         += '</li>'
-        
-    		function selectReplyList() {
-					$.ajax({
-						url : "rlist.bo",
-						data : {bno : ${b.boardNo}},
-						success : (list) => {
-							
-							let result = "";
-							for(let i of list) {
-								result += "<ul>"
-												+ "<li>" + i.userNo + "</li>"
-												+ "<li>" + i.replyContent + "</li>"
-												+ "<li>" + i.replyDate + "</li>"
-									   +  "</ul>"
-							};
-							$(".comments-list .comments-list-item").html(result);
-							
-						},
-						error : function() {
-							console.log("댓글리스트조회용 ajax통신 실패~");
-						}
-					});
-				};
-		}
+		
+			$.ajax({
+				url : "rlist.bo",
+				data : {bno : ${b.boardNo}},
+				success : (list) => {
+					
+					let result = "";
+					for(let i of list) {
+						result += "<ul>"
+										+ "<li>" + i. + "</li>"
+										+ "<li>" + i.userNo + "</li>"
+										+ "<li>" + i.replyContent + "</li>"
+										+ "<li>" + i.replyDate + "</li>"
+							   +  "</ul>"
+					};
+					$(".comments-list .comments-list-item").html(result);
+					
+				},
+				error : function() {
+					console.log("댓글리스트조회용 ajax통신 실패~");
+				}
+			});
+		};
+	}	
  	</script>
 
 </body>
