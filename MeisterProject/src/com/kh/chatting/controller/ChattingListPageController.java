@@ -46,17 +46,38 @@ public class ChattingListPageController extends HttpServlet {
 		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
 		String[] nickNameList = null;
 		String receiverName = "";
+		int[] removeList = new int [list.size()];
 		
-		for(int i=0; i < list.size()-1; i++) {	
-			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
-				list.remove(i);
+		for(int i=1; i < list.size(); i++) {
+			System.out.println(list.get(i-1));
+			if(list.get(i-1).getReceiver() == list.get(i).getReceiver()
+					|| list.get(i-1).getSender() == list.get(i).getReceiver()) {
+				removeList[i-1] = 1;
 			}
-		}	
-		System.out.println(list);
+		}
+		int size = list.size();
+		for(int i=0; i < removeList.length; i++) {
+			if(removeList[i] == 1) {
+				System.out.println(size - list.size());
+				if(list.size() == size) {
+					list.remove(i);
+				}
+				else {
+					list.remove(i - (size - list.size()));
+				}
+			}
+		}
+		
 		nickNameList = new String[list.size()];
 		for(int i=0; i < list.size(); i++) {
 			receiverName = new MemberService().selectNickName(list.get(i).getReceiver());
-			nickNameList[i] = receiverName;
+			if(nickName.equals(receiverName)) {
+				receiverName = new MemberService().selectNickName(list.get(i).getSender());
+				nickNameList[i] = receiverName;
+			}
+			else {
+				nickNameList[i] = receiverName;
+			}
 		}
 		
 		request.setAttribute("list", list);
