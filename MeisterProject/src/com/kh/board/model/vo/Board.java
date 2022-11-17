@@ -50,16 +50,13 @@ public class Board {
 	   }
    
    // 유홍상
-   // 게시글 상세보기
-   public Board(int boardNo, String boardContent, String boardTitle, int boardRecommend, int userNo,String boardDate, String memberNic) {
+   // 게시글 등록
+   public Board(int boardNo, String boardTitle, String boardContent, int userNo, int type) {
       super();
       this.boardNo = boardNo;
-      this.boardContent = boardContent;
       this.boardTitle = boardTitle;
-      this.boardRecommend = boardRecommend;
+      this.boardContent = boardContent;
       this.userNo = userNo;
-      this.boardDate = boardDate;
-      this.memberNic = memberNic;
    }
    
    // 게시글 수정 부분 생성자
@@ -70,25 +67,29 @@ public class Board {
       this.boardContent = boardContent;
    }
    
-
-   // 홍상이꺼 같은디?
-   public Board(int boardNo, String boardTitle, String boardContent, int userNo) {
-      super();
+   // 게시글 상세보기
+   public Board(int boardNo, String boardTitle, String boardContent, int boardRecommend, int userNo, String boardDate, String memberNic) {
+	   super();
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
-      this.userNo = userNo;
-   }
-
-   public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo, String boardDate) {
-      super();
-      this.boardNo = boardNo;
-      this.boardContent =  boardContent;
-      this.boardTitle = boardTitle;
-      this.boardCount = boardCount;
+      this.boardRecommend = boardRecommend; 
       this.userNo = userNo;
       this.boardDate = boardDate;
+      this.memberNic = memberNic;
    }
+   
+   public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo, String boardDate) {
+	      super();
+	      this.boardNo = boardNo;
+	      this.boardContent =  boardContent;
+	      this.boardTitle = boardTitle;
+	      this.boardCount = boardCount;
+	      this.userNo = userNo;
+	      this.boardDate = boardDate;
+	   }
+
+   
    public Board(int boardNo,String boardContent, String boardTitle, int boardCount, int boardRecommend, int userNo
          ) {
       super();

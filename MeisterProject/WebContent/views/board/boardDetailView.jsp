@@ -446,44 +446,13 @@
                                 <% } %>
                             </div>
                             <ul data-z-1 data-k-1 class="comments-list">
-                                <li data-x-1  data-z-1 class="comments-list-item">
-                                    <div data-c-1 data-x-1 class="comment-wrapper">
-                                        <div data-c-1 class="profile-image">
-                                            <img data-c-1 class="image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
-                                        </div>
-                                        <div data-c-1 class="comment-information">
-                                            <div data-c-1 class="user-info">
-                                                <span data-c-1 class="user-name"><%=b.getMemberNic() %></span>
-                                            </div>
-                                            <div data-c-1 class="content">
-                                                <p data-c-1 class="text comment-input">
-                                                    <span data-c-1 id="replycontent" style="font-weight: 400px;"><%=b.getBoardContent() %></span>
-                                                </p>
-                                            </div>
-                                            <div data-c-1 class="comment-action">
-                                                <div data-c-1 class="comment-react">
-                                                    <span data-c-1 class="text"><%=b.getBoardDate() %></span>
-                                                    <span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>
-                                                    <div data-c-1 class="like-area">
-                                                        <span data-c-1 class="text"><%=b.getBoardRecommend() %></span>
-                                                    </div>
-                                                </div>
-                                                <div data-c-1 class="more-action">
-                                                    <div data-c-1 class="btn-group">
-                                                        <button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
-    </form>        
 </div>
 	<%@ include file="../common/footer.jsp" %>
 
@@ -504,7 +473,7 @@
 		$(function() {
 			selectReplyList();
 			
-			setInterval(selectReplyList, 2000);
+			//setInterval(selectReplyList, 2000);
 		})
 		
 		function insertReply() {
@@ -528,62 +497,55 @@
 		};
 		
 		function selectReplyList(){
-			
-				let html = '<li data-x-1  data-z-1 class="comments-list-item">'
-                += '<div data-c-1 data-x-1 class="comment-wrapper">'
-                += '<div data-c-1 class="profile-image">'
-                +=    '<img data-c-1 class="image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">'
-                += '</div>'
-                += '<div data-c-1 class="comment-information">'
-                +=    '<div data-c-1 class="user-info">'
-                +=        '<span data-c-1 class="user-name">+<%=list.getMemberNic()%>+</span>'
-                +=    '</div>'
-                +=    '<div data-c-1 class="content">'
-                +=        '<p data-c-1 class="text comment-input">'
-                +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">+<%=b.getBoardContent()%>+</span>'
-                +=        '</p>'
-                +=    '</div>'
-                +=    '<div data-c-1 class="comment-action">'
-                +=        '<div data-c-1 class="comment-react">'
-                +=            '<span data-c-1 class="text">+<%=b.%>+</span>'
-                +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>'
-                +=            '<div data-c-1 class="like-area">'
-                +=                '<span data-c-1 class="text">+<%=b.getBoardRecommend()%>+</span>' /**/
-                +=            '</div>'
-                +=        '</div>'
-                +=        '<div data-c-1 class="more-action">'
-                +=            '<div data-c-1 class="btn-group">'
-                +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>'
-                +=            '</div>'
-                +=        '</div>'
-                +=    '</div>'
-                += '</div>'
-            += '</div>'
-        += '</li>'
+				
 		
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
-					
-					let result = "";
+					console.log(list)
+					let reply ="";
 					for(let i of list) {
-						result += "<ul>"
-										+ "<li>" + i. + "</li>"
-										+ "<li>" + i.userNo + "</li>"
-										+ "<li>" + i.replyContent + "</li>"
-										+ "<li>" + i.replyDate + "</li>"
-							   +  "</ul>"
-					};
-					$(".comments-list .comments-list-item").html(result);
-					
+
+							reply += '<li data-x-1  data-z-1 class="comments-list-item">';
+							reply += '<div data-c-1 data-x-1 class="comment-wrapper">';
+							reply += '<div data-c-1 class="profile-image">';
+							reply +=    '<img data-c-1 class="image" src="">';
+							reply += '</div>';
+							reply  += '<div data-c-1 class="comment-information">';
+							reply  +=    '<div data-c-1 class="user-info">';
+							reply    +=        '<span data-c-1 class="user-name">'+i.mbNic+'</span>';
+							reply     +=    '</div>';
+							reply    +=    '<div data-c-1 class="content">';
+							reply     +=        '<p data-c-1 class="text comment-input">';
+							reply     +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">'+i.replyContent+'</span>';
+							reply       +=        '</p>';
+							reply       +=    '</div>';
+							reply       +=    '<div data-c-1 class="comment-action">';
+							reply      +=        '<div data-c-1 class="comment-react">';
+				                reply    +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
+				                reply   +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+				                reply   +=            '<div data-c-1 class="like-area">';
+				                reply   +=                '<span data-c-1 class="text"></span>' ;
+				                reply   +=            '</div>';
+				                reply     +=        '</div>';
+				                reply    +=        '<div data-c-1 class="more-action">';
+				                reply    +=            '<div data-c-1 class="btn-group">';
+				                reply    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
+				                reply    +=            '</div>';
+				                reply    +=        '</div>';
+				                reply    +=    '</div>';
+				                reply    += '</div>';
+				                reply     += '</div>';
+				                reply+= '</li>';
+					}
+					$(".comments-list").html(reply);
 				},
 				error : function() {
 					console.log("댓글리스트조회용 ajax통신 실패~");
 				}
 			});
 		};
-	}	
  	</script>
 
 </body>
