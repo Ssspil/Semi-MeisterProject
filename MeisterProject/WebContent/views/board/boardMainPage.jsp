@@ -114,6 +114,8 @@ int maxPage = pi.getMaxPage();
    color: lightgrey;
    font-size: 14px;
    float: right;
+       position: relative;
+    left: 160px;
 }
 
 #mainid {
@@ -296,7 +298,7 @@ background-color: orange;
 #madebutton:hover{
 background-color:rgba(255, 106, 0, 0.87);
 }
-       
+  
 
 </style>
 </head>
@@ -347,9 +349,13 @@ background-color:rgba(255, 106, 0, 0.87);
                      <p id="hottext"><%=hotList.get(i).getBoardContent()%></p>
                      <div id="hotfooter">
                         <i class="bi bi-eye"></i>
-                        <%=hotList.get(i).getReplyCount()%>
+                        <%=hotList.get(i).getBoardCount()%>
                         <i class="bi bi-hand-thumbs-up"></i>
-                        <%=hotList.get(i).getBoardRecommend()%></div>
+                        <%=hotList.get(i).getBoardRecommend()%>
+                        <i class="bi bi-chat-dots"></i> 
+                        <%=hotList.get(i).getReplyCount()%>
+                        </div>
+                        
                   </div>
                </div>
             </div>
@@ -392,6 +398,7 @@ background-color:rgba(255, 106, 0, 0.87);
                <div>
                   <i class="bi bi-eye"></i> <%=list.get(i).getBoardCount()%>
                   <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%>
+                  <i class="bi bi-chat-dots"></i>  <%=list.get(i).getReplyCount()%>
 
                   <%
                      String boardDate = list.get(i).getBoardDate();

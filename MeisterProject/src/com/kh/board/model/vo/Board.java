@@ -15,12 +15,11 @@ public class Board {
    
    
    public Board() {
-      
+	   
    }
-   
-   // 기본생성자
+   // 이이수 hot list
    public Board(int boardNo, String boardTitle,int boardType, String boardContent, int boardCount, int boardRecommend,
-         String boardDate, String status, int userNo, String titleImg , int replyCount) {
+         String boardDate, int userNo, int replyCount) {
       super();
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
@@ -29,25 +28,26 @@ public class Board {
       this.boardCount = boardCount;
       this.boardRecommend = boardRecommend;
       this.boardDate = boardDate;
-      this.status = status;
       this.userNo = userNo;
       this.replyCount = replyCount;
-      this.titleImg = titleImg;
+      
+     
    }
    
-   // 이이수
-   public Board(int boardNo, String boardContent,String boardTitle,int boardCount,int boardRecommend , int userNo,String boardDate,String titleImg ) {
-      super();
-      this.boardNo = boardNo;
-      this.boardContent = boardContent;
-      this.boardTitle = boardTitle;
-      this.boardCount = boardCount;
-      this.boardRecommend = boardRecommend;
-      this.userNo = userNo;
-      this.boardDate = boardDate;
-      this.titleImg = titleImg;
-      
-   }
+   //  이이수 LIST
+   public Board(int boardNo,String boardTitle,int boardType,String boardContent, int boardCount, int boardRecommend, int userNo,int replyCount, String boardDate) {
+	      super();
+	      this.boardNo = boardNo;
+	      this.boardTitle = boardTitle;
+	      this.boardType = boardType;
+	      this.boardContent =  boardContent;
+	      this.boardCount = boardCount;
+	      this.boardRecommend = boardRecommend;
+	      this.userNo = userNo;
+	      this.replyCount = replyCount;
+	      this.boardDate = boardDate;
+	 
+	   }
    
    // 유홍상
    // 게시글 상세보기
@@ -70,35 +70,7 @@ public class Board {
       this.boardContent = boardContent;
    }
    
-   // 이수꺼 맞나요?!
-   // 게시글 목록 불러오기 부분 생성자
-   // title Img는 sql문에서 Attachment 테이블과 조인해서 FILE_PATH || CHANGE_NAME을 가져옵니다
-   public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo,String boardDate,
-         String status, String titleImg) {
-      super();
-      this.boardNo = boardNo;
-      this.boardContent =  boardContent;
-      this.boardTitle = boardTitle;
-      this.boardCount = boardCount;
-      this.boardRecommend = boardRecommend;
-      this.userNo = userNo;
-      this.boardDate = boardDate;
-      this.status = status;
-      this.titleImg = titleImg;
-   }
-   
-   // 유홍상
-   public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int boardRecommend, int userNo, String boardDate) {
-      super();
-      this.boardNo = boardNo;
-      this.boardContent =  boardContent;
-      this.boardTitle = boardTitle;
-      this.boardCount = boardCount;
-      this.boardRecommend = boardRecommend;
-      this.userNo = userNo;
-      this.boardDate = boardDate;
-   }
-   
+
    // 홍상이꺼 같은디?
    public Board(int boardNo, String boardTitle, String boardContent, int userNo) {
       super();

@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" 
-    import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local"%>
+    import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local, com.kh.sellboard.model.vo.SellBoard"%>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
+	
+
 %>
 
 <!DOCTYPE html>
@@ -123,10 +125,38 @@ h2{
 }
 
 div.main{
-	background-color :red;
-	margin-left:10rem;
+    margin-left:10rem;
 	z-index : 200;
+    display: inline-block;
 }
+div.main div{
+    border : 1px solid red;
+    height: 250px;
+    width : 250px;
+    margin : 10px;
+    float : left;
+    flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
+
+}
+div.main > #thumb1{
+	 position : relative;
+}
+
+/*예시 위치*/
+div.main #title{
+	position : absolute;
+	display: inline;
+	bottom : 80px;
+	margin : 0 0 0 100px;
+}
+div.main #price{
+	position : absolute;
+	display: inline;
+	bottom : 50px;
+	margin : 0 0 0 100px;
+}
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
@@ -179,10 +209,33 @@ div.main{
 		</div> 
 		
 		<div class="main">
-			<div><a href="">썸네일1</a></div>
-			<div>썸네일2</div>
-			<div>썸네일3</div>
-			<div>썸네일4</div>
+			<div><a href="" class="thumb" id="thumb1">썸네일1</a>
+				<img src="" class="" >
+				<h6 class="content" id="title"> <%-- ${ s.getSellTitle } --%> 타이틀 제목</h6>
+				<h6 class="content" id="price"> ${ s.getPrice } 가격 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 원 </h6>
+				
+			</div>
+            
+			<div><a href="#" class="thumb">썸네일2</a>
+			
+			</div>
+			
+            <div><a href="#" class="thumb">썸네일3</a>
+            
+            </div>
+			
+            <div><a href="#" class="thumb">썸네일4</a>
+            
+            </div>
+
+            <div><a href="#" class="thumb">썸네일5</a>
+            
+            </div>
+			
+            <div><a href="#" class="thumb">썸네일6</a>
+            
+            </div>
+
 		</div>
 	</div><!-- outer 끝 -->
 	

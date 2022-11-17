@@ -82,7 +82,7 @@ top:12%;
                 <div id="titlefooter">
                     <div><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
                     <i class="bi bi-hand-thumbs-up"></i> <%= list2.get(i).getBoardRecommend() %>
-                    
+                    <i class="bi bi-chat-dots"></i> <%=list2.get(i).getReplyCount()%>
                     <%
                     String boardDate2 = list2.get(i).getBoardDate();
 					int now = Integer.parseInt(nowDate2);
