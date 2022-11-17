@@ -32,6 +32,38 @@
 		  AND BOARD_TYPE = ?
 	</entry>  
 	
+	<entry key="selectListSearch">
+		<![CDATA[
+		SELECT B.BOARD_NO AS BOARD_NO,
+	        B.BOARD_TITLE AS BOARD_TITLE,
+	        B.BOARD_CONTENT AS BOARD_CONTENT,
+	        B.BOARD_COUNT AS BOARD_COUNT,
+	        B.BOARD_RECOMMEND AS BOARD_RECOMMEND,
+	        B.USER_NO AS USER_NO,
+            R.REPLY_COUNT AS REPLY_COUNT,
+	        TO_CHAR(B.BOARD_DATE,'MMDDHH24MI') BOARD_DATE,
+	        A.CHANGE_NAME AS CHANGE_NAME,
+	        A.FILE_PATH AS FILE_PATH
+			FROM BOARD B
+			LEFT OUTER JOIN ATTACHMENT A	
+			ON A.REF_NO = B.BOARD_NO
+            LEFT OUTER JOIN REPLY R 
+            ON B.USER_NO = R.REPLY_NO
+			WHERE B.BOARD_TYPE = ?
+			AND B.STATUS = 'Y' 
+			AND B.BOARD_TITLE like ? 
+			ORDER BY BOARD_DATE DESC
+		]]>
+	</entry>
+	
+	<entry key="selectListSearchCount">
+		SELECT COUNT(*) BOARD_COUNT
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		  AND BOARD_TYPE = ?
+		  AND B.BOARD_TITLE like ? 
+	</entry>  
+	
 	<entry key="getHotBoard">
 		<![CDATA[
 		SELECT  BOARD_NO,

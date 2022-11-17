@@ -3,9 +3,9 @@
     
     <%
        int type = Integer.parseInt(request.getParameter("type"));
-    	Attachment at = (Attachment) request.getAttribute("at");
-		if(at == null){
-		at = new Attachment();
+//     	Attachment at = (Attachment) request.getAttribute("at");
+// 		if(at == null){
+// 		at = new Attachment();
       %>
 <!DOCTYPE html>
 <html>

@@ -14,6 +14,8 @@ int currentPage = pi.getCurrentPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 int maxPage = pi.getMaxPage();
+
+String searchType = request.getAttribute("searchType") == null ? "" : request.getAttribute("searchType").toString() ;
 %>
 <!DOCTYPE html>
 <html>
@@ -161,6 +163,7 @@ background-color : orange;
 }
 #titlefooter {
     margin:auto; 
+    display:inline-block;
 }
 #text {
    width: 500px;
@@ -264,6 +267,13 @@ position: relative;
 right: 70px;
 }
 
+.foot_wrap{
+	float: right;
+    position: relative;
+    left: 465px;
+    
+}
+
 
 </style>
 </head>
@@ -294,32 +304,56 @@ right: 70px;
               <input id="keyword" list="list" type="text" placeholder="게시글 제목을 입력해주세요." style="height:35px;">
              
              <div id="search_btn">
-                   <button type="button" class="btn btn-secondary"  list="list" style="background-color: orange; height:35px; float:left;">
+                   <button type="button" class="btn btn-secondary" onclick="searchResult()" list="list" style="background-color: orange; height:35px; float:left;">
                    <datalist id="list">
    </datalist>
             <i class="bi bi-search"></i> 검색 </button>
             </div>
+            
+            <input type="hidden" id="type" name="type" value="1">
+            <form id="formSearch" action="<%=contextPath%>/boardlist.bo" method="post">
+	            <input type="hidden" id="searchType" name="searchType" value="1">
+	            <input type="hidden" id="searchKeyword" name="searchKeyword" value="">
+            </form>
+            
             <script>
             $(function() {
               $("#keyword").keyup(function(e){
-                 $.ajax({
-                    url : "AutoSearch.do",
-                    data : {keyword : $("#keyword").val()},
-                    success:function(data) {
-                       
-                       $("#list").html("");
-                       console.log(data);
-                       let str = "";
-                       for(let i = 0 ; i<data.length; i++){
-                          str += "<option>"   
-                             +  data[i].boardTitle
-                             +  "</option>"
-                       }
-                       $("#list").html(str);
-                    }
-                 });
-              });
-           }) 
+            	  
+            	 if(window.event.keyCode == 13){
+            		 searchResult();
+            	 }
+            	 else {
+	                 $.ajax({
+	                    url : "AutoSearch.do",
+	                    data : {keyword : $("#keyword").val()},
+	                    success:function(data) {
+	                       
+	                       $("#list").html("");
+	                       console.log(data);
+	                       let str = "";
+	                       for(let i = 0 ; i<data.length; i++){
+	                          str += "<option>"   
+	                             +  data[i].boardTitle
+	                             +  "</option>"
+	                       }
+	                       $("#list").html(str);
+	                    }
+	                 });
+            	 }
+	              });
+	           }) 
+           
+            function searchResult(){
+            	if($("#keyword").val() == ""){
+            		alert("검색어를 입력해주세요");
+            		return false;
+            	}
+            	else {
+            		$("#searchKeyword").val($("#keyword").val());
+            		$("#formSearch").submit();
+            	}
+            }
             </script>
             </div>
          </div>
@@ -344,7 +378,7 @@ right: 70px;
             <%
                for (int i = 0; i < hotList.size(); i++) {
             %>
-            <div id="body2-3-1" onclick="location.href='<%=contextPath%>/detail.bo?type=1&bno=<%=hotList.get(i).getBoardNo() %>';" >
+            <div id="body2-3-1" onclick="detail('<%=hotList.get(i).getBoardNo() %>')" >
                <br>
                <div id="hot1">
                   <div id="hot2">
@@ -370,7 +404,7 @@ right: 70px;
          <%
             for (int i = 0; i < list.size(); i++) {
          %>
-         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"onclick="location.href='<%=contextPath%>/detail.bo?type=1&bno=<%=list.get(i).getBoardNo() %>';">
+         <div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"onclick="detail('<%=list.get(i).getBoardNo() %>')">
             <input type='hidden' name='bno' value='<%=list.get(i).getBoardNo() %>'/>
             <hr>
             <span class="font"><%=list.get(i).getBoardTitle()%></span>
@@ -425,15 +459,15 @@ right: 70px;
                         result = (calTime / 60) + "시간전";
                      } else if (calTime > 1440) {
                         result = (calTime / 1440) + "일전";
-                     } 
-                     
+                     }  
                      if(year > year2){
                         result = (year - year2)+ "년전";
-                     }
-                     
+                     } 
                      
                      %>
+                  <div class="foot_wrap" style="float:right">
                   <span id="date"><span id="chat2"><i class="bi bi-chat-dots"></i>  <%=list.get(i).getReplyCount()%></span> <%=result%> </span>
+                  </div>
                </div>
             </div>
          </div>
@@ -473,17 +507,13 @@ right: 70px;
 
 <script>
    $(function() {
-      $("#body2-4").click(function() {
-         // 클릭시 해당 공지사항의 번호를 넘겨야함.
-         // 해당 tr요소의 자손중에서 첫번째 td의 영역의 내용이 필요.
-         
-         let bno = $(this).children().filter('[name=bno]').val(); // 1, 2
-         // 현재내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
-         
-         // 요청할 url?키=밸류&키=밸류&키=밸류
-         // 물음표 뒤의 내용을 쿼리스트링이라고 부른다. => 직접 만들어서 넘겨야함.
-         location.href= "<%=contextPath %>/detail.bo?bno="+ bno;
-      });
+	   var type = "${searchType}";
+	   
+	   if(type != ""){
+		   if(type == "1") menuClick('ge');
+		   else if(type == "2") menuClick('gung');
+	   }
+	  
    })
 </script>
 
@@ -496,6 +526,7 @@ right: 70px;
          $("#ge").addClass("bodyClick");
          $("#gung").removeClass("bodyClick");
          $("#type").val("1");
+         $("#searchType").val("1");
          $("#search_main").val("1");
          $("#boardType").val("ge");
 
@@ -505,6 +536,7 @@ right: 70px;
          $("#gung").addClass("bodyClick");
          $("#ge").removeClass("bodyClick");
          $("#type").val("2");
+         $("#searchType").val("2");
          $("#search_main").val("2");
          $("#boardType").val("gung");
 
@@ -528,6 +560,15 @@ right: 70px;
 
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
+   }
+   
+   function searchEnter(){
+	   if(window.event.keycode == 13) search();
+   }
+ 
+   function detail(no){
+	   if(no != 0) location.href="<%=contextPath%>"+"/detail.bo?type=1&bno="+no;
+	 
    }
    
    

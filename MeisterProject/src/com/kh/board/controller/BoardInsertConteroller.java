@@ -59,21 +59,22 @@ public class BoardInsertConteroller extends HttpServlet {
 		    b.setBoardTitle(boardTitle);
 		    b.setBoardContent(boardContent);
 		    b.setUserNo(userNo);
+		    System.out.println("bTest:"+b);
 		 
 			
 			Attachment at = null;
 			
-			if(multiRequest.getOriginalFileName("upfile") != null) {
+			/*if(multiRequest.getOriginalFileName("upfile") != null) {
 				
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("upfile")); // 원본명
 				at.setChangeName(multiRequest.getFilesystemName("upfile")); // 수정명(실제 서버에 업로드 되어있는 파일명)
 				at.setFilePath("resources/board_upfiles/");
-			}
+			}*/
 			
 			// 4. 서비스 요청
 			int result = new BoardService().insertBoard(b, at, type);
-			
+			System.out.println("result:"+result);
 			if(result > 0) { // 성공 => list.bo?currentPage=1
 				request.getSession().setAttribute("alertMsg", "게시글 작성 성공!");
 				response.sendRedirect(request.getContextPath() + "/boardlist.bo?currentPage=1");
