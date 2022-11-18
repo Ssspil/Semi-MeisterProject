@@ -191,7 +191,7 @@ public class BoardDao {
 			psmt.setInt(1, boardNo);
 
 			rset = psmt.executeQuery();
-
+			//글내용 이미지
 			if (rset.next()) {
 				at = new Attachment();
 
@@ -200,6 +200,25 @@ public class BoardDao {
 				at.setChangeName(rset.getString("CHANGE_NAME"));
 				at.setFilePath(rset.getString("FILE_PATH"));
 			}
+			
+			close(rset);
+			close(psmt);
+			//프로필이미지
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, 5);
+
+			rset = psmt.executeQuery();
+			//글내용 이미지
+			if (rset.next()) {
+				at = new Attachment();
+
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

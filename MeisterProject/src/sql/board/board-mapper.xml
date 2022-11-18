@@ -152,7 +152,7 @@
 		       FILE_PATH,
 		       FILE_LEVEL
 		 FROM ATTACHMENT
-		 WHERE REF_NO = ? AND FILE_LEVEL = 5
+		 WHERE REF_NO = ? AND FILE_LEVEL = ?
 		 ORDER BY FILE_LEVEL
 	</entry>
 	
