@@ -69,8 +69,8 @@ public class ChattingDao {
 		return result;
 	}
 	
-	public ArrayList<Chatting> selectNoteList(Connection conn, int userNo){
-		ArrayList<Chatting> list = new ArrayList<>();
+	public Chatting selectNoteList(Connection conn, int receiver, int sender){
+		Chatting list = null;
 		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
@@ -80,19 +80,21 @@ public class ChattingDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setInt(1, userNo);
-			psmt.setInt(2, userNo);
+			psmt.setInt(1, sender);
+			psmt.setInt(2, receiver);
+			psmt.setInt(3, receiver);
+			psmt.setInt(4, sender);
 			
 			rset = psmt.executeQuery();
 
 			while(rset.next()) {
-				list.add(new Chatting(rset.getInt("CHAT_NO"),
+				list = new Chatting(rset.getInt("CHAT_NO"),
 									rset.getString("CHAT_CONTENT"),
 									rset.getDate("CHAT_DATE"),
 									rset.getInt("SENDER"),
 									rset.getInt("RECEIVER"),
 									rset.getInt("SELL_NO")
-				));
+				);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,6 +120,97 @@ public class ChattingDao {
 			psmt.setInt(1, sender);
 			psmt.setInt(2, receiver);
 			psmt.setInt(3, sellNo);
+			
+			rset = psmt.executeQuery();
+
+			while(rset.next()) {
+				list.add(new Chatting(rset.getInt("CHAT_NO"),
+									rset.getString("CHAT_CONTENT"),
+									rset.getDate("CHAT_DATE"),
+									rset.getInt("SENDER"),
+									rset.getInt("RECEIVER"),
+									rset.getInt("SELL_NO")
+				));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Integer> selectAllReceiver(Connection conn){
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllReceiver");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			while(rset.next()) {
+				list.add(rset.getInt("RECEIVER"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Integer> selectAllSender(Connection conn){
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllSender");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			while(rset.next()) {
+				list.add(rset.getInt("SENDER"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Chatting> selectChatDetail(Connection conn, int receiver, int sender, int sellNo){
+		ArrayList<Chatting> list = new ArrayList<Chatting>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectChatDetail");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sender);
+			psmt.setInt(2, receiver);
+			psmt.setInt(3, sellNo);
+			psmt.setInt(4, receiver);
+			psmt.setInt(5, sender);
+			psmt.setInt(6, sellNo);
 			
 			rset = psmt.executeQuery();
 

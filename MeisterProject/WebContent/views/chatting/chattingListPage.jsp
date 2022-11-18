@@ -4,6 +4,8 @@
 <%
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
+	int count = 0;
+	int last = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -42,37 +44,88 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<div class="outer">
-	<br>
-	<h2><b>&nbsp;판매자 문의하기</b></h2>
-	<br><hr><br>
-	<% if(list.isEmpty()){ %>
-		<div>조회된 문의가 없습니다</div>
-	<%} else{ %>
-		<%int i = 0; %>
-		<%for(Chatting c : list){ %>
-			<form method="post" action="<%=contextPath %>/askToSeller.ch" id="selectForm">
-				<div id="list">
-					<div>
-						&nbsp;&nbsp;
-						<input type="hidden" name="sender" value="<%=c.getSender() %>">
-						&nbsp;판매자 : <input type="text" name="receiverNick" value="<%=nickNameList[i] %>" size="10" readonly><br>
-						<input type="hidden" name="receiver" value="<%=c.getReceiver() %>" size="2" readonly>
-						&nbsp;&nbsp;&nbsp;<input type="text" name="content" value="<%=c.getChatContent() %>" readonly><br>
-						&nbsp;&nbsp;&nbsp;판매글 번호 : <input type="text" name="sellNo" value="<%=c.getSellNo() %>" size="2" readonly>
-					</div>
-				</div>
-			</form>
-			<%i++; %>
+	<script>
+		<% if(!list.isEmpty()){ %>
+			<%for(Chatting c : list){ %>
+				$(document).ready(function() {
+					$('.outer').append(
+						$('<div>').prop({
+							id: 'divList<%=count%>'
+						})
+					);
+					$('#divList<%=count%>').append(
+						$('<form>').prop({
+							method: 'post',
+							action: '<%=contextPath %>/askToSeller.ch', 
+							id: 'selectForm<%=count%>'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'input',
+							type: 'hidden',
+							value: "<%=c.getSender() %>",
+							name: 'sender'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'input',
+							type: 'text',
+							value: "<%=nickNameList[count] %>",
+							name: 'receiverNick'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'input',
+							type: 'hidden',
+							value: "<%=c.getReceiver() %>",
+							name: 'receiver'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'input',
+							type: 'text',
+							value: "<%=c.getChatContent() %>",
+							name: 'content'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'input',
+							type: 'text',
+							value: "<%=c.getSellNo() %>",
+							name: 'sellNo'
+						})
+					);
+
+					$('#divList<%=count%>').css({'width': '300px', 'height': '100px', 'border': '1px solid black', 'margin' :'auto'});
+					$('#selectForm<%=count%>>input').css({'border': 'none'});
+					$('#selectForm<%=count%>>input').attr({'readonly': 'true'});
+				});
+				
+				
+				<%count += 1;%>
+			<%}%>
 		<%} %>
-	<%} %>
+		
+
+	</script>
+	<div class="outer">
+		<br>
+		<h2><b>&nbsp;판매자 문의하기</b></h2>
+		<br><hr><br>
+
 	</div>
 	<script>
-		$('#list').click(function(){
-			$('#selectForm').submit();
-			console.log("div clicked");
-		
-		});
+		$(function(){
+			$('[id^=divList]').click(function(){
+				 $(this).find('form').submit();
+				 console.log("div clicked");
+			});
+		})
 	</script>
 </body>
 </html>

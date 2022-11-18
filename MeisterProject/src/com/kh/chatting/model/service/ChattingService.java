@@ -25,9 +25,9 @@ public class ChattingService {
 	      return result;
 	}
 	
-	public ArrayList<Chatting> selectNoteList(int userNo){
+	public Chatting selectNoteList(int receiver, int sender){
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Chatting> list = new ChattingDao().selectNoteList(conn, userNo);
+		Chatting list = new ChattingDao().selectNoteList(conn, receiver, sender);
 		
 		JDBCTemplate.close();
 		return list;
@@ -36,6 +36,30 @@ public class ChattingService {
 	public ArrayList<Chatting> selectNote(int sender, int receiver, int sellNo){
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Chatting> list = new ChattingDao().selectNote(conn, sender, receiver, sellNo);
+		
+		JDBCTemplate.close();
+		return list;
+	}
+	
+	public ArrayList<Integer> selectAllReceiver() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Integer> list = new ChattingDao().selectAllReceiver(conn);
+		
+		JDBCTemplate.close();
+		return list;
+	}
+	
+	public ArrayList<Integer> selectAllSender() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Integer> list = new ChattingDao().selectAllSender(conn);
+		
+		JDBCTemplate.close();
+		return list;
+	}
+	
+	public ArrayList<Chatting> selectChatDetail(int receiver, int sender, int sellNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Chatting> list = new ChattingDao().selectChatDetail(conn, receiver, sender, sellNo);
 		
 		JDBCTemplate.close();
 		return list;

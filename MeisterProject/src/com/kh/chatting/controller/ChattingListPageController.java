@@ -42,32 +42,30 @@ public class ChattingListPageController extends HttpServlet {
 		int userNo = loginUser.getUserNo();
 		request.setAttribute("nickname", nickName);
 		request.setAttribute("sender", userNo);
+		ArrayList<Chatting> list = new ArrayList<Chatting>();
+		ArrayList<Chatting> resultList = new ArrayList<Chatting>();
 		
-		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
+		ArrayList<Integer> receiverList = new ChattingService().selectAllReceiver();
+		ArrayList<Integer> senderList = new ChattingService().selectAllSender();
+		
+		for(int i = 0; i < senderList.size(); i++) {
+			list.add(new ChattingService().selectNoteList(receiverList.get(i), senderList.get(i)));			
+		}
+		
+		 for (int i = 0; i < list.size(); i++) {
+             for (int j = 0; j < list.size(); j++) {
+                 if (i == j) {
+                 } else if (list.get(j).getChatContent().equals(list.get(i).getChatContent())) {
+                     list.remove(j);
+                 }
+             }
+         }
+		
+		System.out.println(list);
+
 		String[] nickNameList = null;
 		String receiverName = "";
-		int[] removeList = new int [list.size()];
-		
-		for(int i=1; i < list.size(); i++) {
-			System.out.println(list.get(i-1));
-			if(list.get(i-1).getReceiver() == list.get(i).getReceiver()
-					|| list.get(i-1).getSender() == list.get(i).getReceiver()) {
-				removeList[i-1] = 1;
-			}
-		}
-		int size = list.size();
-		for(int i=0; i < removeList.length; i++) {
-			if(removeList[i] == 1) {
-				System.out.println(size - list.size());
-				if(list.size() == size) {
-					list.remove(i);
-				}
-				else {
-					list.remove(i - (size - list.size()));
-				}
-			}
-		}
-		
+
 		nickNameList = new String[list.size()];
 		for(int i=0; i < list.size(); i++) {
 			receiverName = new MemberService().selectNickName(list.get(i).getReceiver());
@@ -79,7 +77,7 @@ public class ChattingListPageController extends HttpServlet {
 				nickNameList[i] = receiverName;
 			}
 		}
-		
+
 		request.setAttribute("list", list);
 		request.setAttribute("nickNameList", nickNameList);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");

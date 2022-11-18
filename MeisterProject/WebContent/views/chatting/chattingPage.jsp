@@ -3,9 +3,11 @@
 <%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
-	int sender = (Integer) request.getAttribute("sender");
+	int userNo = (Integer) request.getAttribute("userNo");
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
+	int count = 0;
+	int	myCnt = 0;
 %>
 
 <!DOCTYPE html>
@@ -74,7 +76,7 @@
 		
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
-				<%if(c.getSender() == sender){%>
+				<%if(c.getSender() == userNo){%>
 					$(document).ready(function() {	
 						$('.outer').append(
 							$('<div>').prop({
@@ -107,7 +109,7 @@
 						$('.outer').append(
 							$('<div>').prop({
 								id: 'nickName',
-								innerHTML: '<%=c.getSender()%>'
+								innerHTML: '<%=nickNameList[count]%>'
 							})
 						);
 					});
@@ -144,21 +146,22 @@
 						$('.outer').append(
 							$('<div>').prop({
 								id: 'oppNickName',
-								innerHTML: '<%=c.getSender()%>'
+								innerHTML: '&nbsp;&nbsp;<%=nickNameList[count]%>'
 						})
 					);
 				});
 				<%} %>
+				<% count += 1;%>
 			<%}%>
 		<%} %>
 	</script>
 	<div class="outer">
 		<form action="<%=contextPath%>/chatting.me" method="post">
 			<input id="user" type="text" value="<%=nickName%>" readonly> 
-			<input id="sender" type="hidden" value="<%=sender%>" readonly> 
+			<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
 			<input id="textMessage" type="text" value=""> 
 			<input id="opponent" type="text" value="admin" readonly>
-			<input id="receiver" type="hidden" value="2" readonly>  
+			<input id="receiver" type="hidden" value="1" readonly>  
 			<input onclick="disconnect()" value="Disconnect" type="button"> 
 			<br>
 			<input id="chatData" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
@@ -170,9 +173,13 @@
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
 		let count = 0;
+		var data = document.getElementById("chatData");
+		let cnt = 0;
+		let oppCnt = 0;
 		if(<%=!list.isEmpty()%>){
 			count = <%=list.get(list.size()-1).getChatNo()%>+1;
 		}
+		console.log(count);
 		
 		webSocket.onopen = function(message) {
 			console.log("onopen");
@@ -183,15 +190,58 @@
 		webSocket.onerror = function(message) {
 			console.log("onerror");
 		};	
-		webSocket.onmessage = function(message) {			
-			$(document).ready(function() {
-			    $('.outer').append(
-			        $('<div>').prop({
-			            id: 'opponetDiv',
-			            innerHTML: "(상대방)" +message.data,
-			        })
-			    );
+		webSocket.onmessage = function(message) {
+			var msg = message.data.indexOf('>');
+			let text = message.data.substr(msg+2);
+			let name = message.data.substr(0, msg-2);
+			var data = document.getElementById("chatData");
+			
+			$(document).ready(function() {	
+				$('.outer').append(
+					$('<div>').prop({
+						id: 'divOpp'+oppCnt
+					})
+				);
+				
+				$('#divOpp'+oppCnt).append(
+					$('<div>').prop({
+						id: 'profile'
+					})
+				);
+				
+				$('#divOpp'+oppCnt).append(
+					$('<div>').prop({
+						id: 'triangleLeft'
+					})
+				);
+				
+				$('#divOpp'+oppCnt).append(
+					$('<div>').prop({
+						id: 'myDiv',
+						innerHTML: text
+					})
+				);    
+				
+				$('#divOpp'+oppCnt+'>div').css({'float': 'left'});	
+				$('#divOpp'+oppCnt).css({'width': '700px', 'height': '50px'});
+				
+				$('.outer').append(
+					$('<div>').prop({
+						id: 'oppNickName',
+						innerHTML: name
+					})
+				);
+				oppCnt += 1;
 			});
+			
+			if (data.value != "") {
+				data.value += ",";
+			}
+			data.value += receiver.value;
+			data.value += ",";
+			data.value += sender.value;
+			data.value += ",";
+			data.value += text;
 		};
 		
 		function sendMessage() {
@@ -201,7 +251,6 @@
 			var receiver = document.getElementById("receiver");
 			var message = document.getElementById("textMessage");
 			var data = document.getElementById("chatData");
-			
 			if (data.value != "") {
 				data.value += ",";
 			}
@@ -215,35 +264,35 @@
 			
 			let msgVal = message.value;
 			
-			$(document).ready(function() {
-				
+			console.log(cnt);
+			$(document).ready(function() {			
 				$('.outer').append(
 				    $('<div>').prop({
-				        id: 'divEntry'+count
+				        id: 'divMe'+cnt
 				    })
 				);
-				
-			    $('#divEntry'+count).append(
+			    
+			    $('#divMe'+cnt).append(
 			    	$('<div>').prop({
 			    		id: 'profile'
 			    	})
 			    );
 			    
-			    $('#divEntry'+count).append(
+			    $('#divMe'+cnt).append(
 				    $('<div>').prop({
 				        id: 'triangle'
 				    })
 				);
 			    
-			    $('#divEntry'+count).append(
+			    $('#divMe'+cnt).append(
 			        $('<div>').prop({
 			            id: 'myDiv',
 			            innerHTML: msgVal
 			        })
 			    );
-			    
-			    $('#divEntry'+count+'>div').css({'float': 'right'});	
-			    $('#divEntry'+count).css({'width': '700px', 'height': '50px', 'border': '1px solid black'});
+			   
+			    $('#divMe'+cnt+'>div').css({'float': 'right'});	
+			    $('#divMe'+cnt).css({'width': '700px', 'height': '50px'});
 			    
 			    $('.outer').append(
 				    $('<div>').prop({
@@ -251,11 +300,9 @@
 				    	innerHTML: user.value
 				    })
 				);
-			   	count += 1;
-			   	console.log(count);
+			    cnt += 1;
+			    console.log(cnt);
 			});
-			
-			//$('#divEntry>div').css({'float': 'none'});
 			message.value = "";
 		}
 		function disconnect() {

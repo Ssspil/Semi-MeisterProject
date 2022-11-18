@@ -40,24 +40,24 @@ public class AskToSellerPageController extends HttpServlet {
 
 		String nickName = loginUser.getNickName();
 		int userNo = loginUser.getUserNo();
-		request.setAttribute("nickname", nickName);
-		request.setAttribute("sender", userNo);
 		
-		ArrayList<Chatting> list = new ChattingService().selectNoteList(userNo);
+		request.setAttribute("userNo", userNo);
+		request.setAttribute("nickname", nickName);
+		
+		int sender = Integer.parseInt(request.getParameter("sender"));
+		int receiver = Integer.parseInt(request.getParameter("receiver"));
+		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
+		
+		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
 		
 		String[] nickNameList = new String[list.size()];
-		String receiverName = "";
+		String senderName = "";
 		
 		for(int i=0; i < list.size(); i++) {
-			receiverName = new MemberService().selectNickName(list.get(i).getReceiver());
-			if(nickName.equals(receiverName)) {
-				receiverName = new MemberService().selectNickName(list.get(i).getSender());
-				nickNameList[i] = receiverName;
-			}
-			else {
-				nickNameList[i] = receiverName;
-			}
+			senderName = new MemberService().selectNickName(list.get(i).getSender());
+			nickNameList[i] = senderName;
 		}
+
 //		for(int i=0; i < list.size()-1; i++) {	
 //			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
 //				list.remove(i);
@@ -65,6 +65,7 @@ public class AskToSellerPageController extends HttpServlet {
 //		}		
 		
 		request.setAttribute("list", list);
+		request.setAttribute("nickNameList", nickNameList);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");

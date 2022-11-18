@@ -10,13 +10,33 @@
 	
 	<entry key="selectNoteList">
 		SELECT *
-		FROM CHATTING
-		WHERE SENDER = ? OR RECEIVER = ?
+		FROM (SELECT *
+		        FROM CHATTING
+		        WHERE (SENDER = ? AND RECEIVER = ?) OR (SENDER = ? AND RECEIVER = ?)
+		        ORDER BY CHAT_NO DESC
+		    )
+		<![CDATA[WHERE ROWNUM <= 1]]>
 	</entry>
 	
 	<entry key="selectNote">
 		SELECT *
 		FROM CHATTING
 		WHERE SENDER = ? AND RECEIVER = ? AND SELL_NO = ?
+	</entry>
+	
+	<entry key="selectAllReceiver">
+		SELECT RECEIVER
+		FROM CHATTING
+	</entry>
+	
+	<entry key="selectAllSender">
+		SELECT SENDER
+		FROM CHATTING
+	</entry>
+	
+	<entry key="selectChatDetail">
+		SELECT *
+		FROM CHATTING
+		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
 	</entry>
 </properties>
