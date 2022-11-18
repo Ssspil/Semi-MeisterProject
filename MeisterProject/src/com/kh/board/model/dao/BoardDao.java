@@ -402,6 +402,7 @@ public class BoardDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, b.getBoardTitle());
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getBoardNo());
@@ -420,16 +421,19 @@ public class BoardDao {
 	public int updateAttachment(Attachment at, Connection conn) {
 
 		int result = 0;
+		
 		PreparedStatement psmt = null;
+		
 		String sql = prop.getProperty("updateAttachment");
 
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
 			psmt.setInt(4, at.getFileNo());
-
+			
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {

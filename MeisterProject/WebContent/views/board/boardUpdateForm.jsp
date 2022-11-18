@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
     
-    <%
-       int type = Integer.parseInt(request.getParameter("type"));
+<%
+   	Board b = (Board) request.getAttribute("b");
+   	
+	Attachment at = (Attachment) request.getAttribute("at");
+%>
     
-//      	Attachment at = (Attachment) request.getAttribute("at");
-      %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -201,24 +202,29 @@
         }
 
 </style>
+</style>
 </head>
 <body>
    <%@ include file="../common/header.jsp" %>
    <div id="wrap">
-      <form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
-         <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"> 
+   		<form action="<%= contextPath %>/update.bo" id="update-form" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
+         <input type="hidden" name="bno" value="<%=b.getBoardNo()%>">
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
-                  <font style="font-size: 30px; font-weight: bold;">게시글 글작성</font>
-                  <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">등록</button>
-                  <input type="hidden" name="type" value="<%=type %>">   
+                  <font style="font-size: 30px; font-weight: bold;">게시글 수정</font>
+                  <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">수정</button>
                </div>
                <div id="file">
                   <div id="file2">
-                     <label class="input-file-button" id="file-btn" for="input-file">
+                     <label class="input-file-button" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i>
                      </label>
+                     <% if(at != null) { %>
+						<!-- 원본파일의 파일번호, 수정명을 hidden으로 넘길것. -->
+						<input type="hidden" name="originFileNo" value="<%= at.getFileNo() %>">
+						<input type="hidden" name="originFileName" value="<%= at.getChangeName() %>">
+					<% } %>	
                      <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
                      <label id="fileName"><%=at.getOriginName()%></label>
                   </div>
@@ -226,21 +232,21 @@
       <br>
                <div id="title">
                   <div id="title1">
-               <input type="text" name="title" maxlength="30" class="title" size="100" required><%=b.getBoardTitle() %>
+               <input type="text" name="title" maxlength="30" class="title" size="100" value="<%=b.getBoardTitle() %>" required>
                   </div>
                </div>
                <div></div>
-				<!-- 이미지 미리보기 -->
-				<div data-a-2 data-v-6 class="editor-image">
+               <div data-a-2 data-v-6 class="editor-image">
 					<div data-a-2 class="editor-image-list">
 						<div data-a-2 class="image-preview">
-							<img id="titleImg" onchange="readImage()" width="250" height="170"><%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+							<img data-h-1 class="image" onchange="readImage()" width="250" height="170"src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
 						</div>
 					</div>
 				</div>
-					<div id="content">
+               
+               <div id="content">
                   <div id="content2">
-                     <textarea id="content3" maxlength="500" name="content" rows="10" required><%=b.getBoardContent() %></textarea>
+                     <textarea id="content3" maxlength="500" name="content" rows="10"  required><%=b.getBoardContent() %></textarea>
                   </div>
                </div>
             </div>
@@ -250,15 +256,32 @@
    
    <%@ include file="../common/footer.jsp" %>
    
+   
+      
    <script>
-	 
-   </script>
-     
-    <script>
-       function fileChange(){
+      function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
-       }
-    </script>
+         $(".img").src = null;
+      }
+      
+      function readImage(input) {
+  	    if (input.files && input.files[0]) {
+  	        const reader = new FileReader();
+  	        
+  	        reader.onload = (e) => {
+  	            const titleImg = document.getElementById('titleImg');
+  	            titleImg.src = e.target.result;
+  	        }
+  	        reader.readAsDataURL(input.files[0]);
+  	    }
+  	}
+   	// 이벤트 리스너
+   	document.getElementById('input-file').addEventListener('change', (e) => {
+  	    readImage(e.target);
+   	})
+  </script>
+      
+   </script>
    
 </body>
 </html>

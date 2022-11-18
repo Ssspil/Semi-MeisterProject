@@ -112,6 +112,18 @@
 		WHERE FILE_NO = ?
 	</entry>
 	
+	<entry key="selectSameAttachment">
+		SELECT FILE_NO
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
+	</entry>
+	
+	<entry key="deleteAttachment">
+		DELETE
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
+	</entry>
+	
 	<entry key="deleteBoard">
 		UPDATE BOARD
 		SET STATUS = 'N'
