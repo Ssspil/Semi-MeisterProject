@@ -113,33 +113,33 @@ public class BoardDao {
 		return board;
 	}
 	
-	public int selectBoardWriter(Connection conn, int boardNo) {
-
-		int no = 0;
-		
-		PreparedStatement psmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectBoardWriter");
-
-		try {
-			psmt = conn.prepareStatement(sql);
-
-			psmt.setInt(1, boardNo);
-
-			rset = psmt.executeQuery();
-
-			if (rset.next()) {
-				 no = rset.getInt("USER_NO");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(psmt);
-		}
-		return no;
-	}
+//	public int selectBoardWriter(Connection conn, int boardNo) {
+//
+//		int no = 0;
+//		
+//		PreparedStatement psmt = null;
+//		ResultSet rset = null;
+//
+//		String sql = prop.getProperty("selectBoardWriter");
+//
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//
+//			psmt.setInt(1, boardNo);
+//
+//			rset = psmt.executeQuery();
+//
+//			if (rset.next()) {
+//				 no = rset.getInt("USER_NO");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(psmt);
+//		}
+//		return no;
+//	}
 
 	// 게시글 상세보기
 	public Board selectBoard(Connection conn, int boardNo) {
@@ -351,7 +351,8 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
+			
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());

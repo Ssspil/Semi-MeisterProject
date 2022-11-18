@@ -63,8 +63,8 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			Attachment at = null;
 			
+			System.out.println(multiRequest.getOriginalFileName("upfile"));
 			if(multiRequest.getOriginalFileName("upfile") != null) {
-				
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("upfile")); 
 				at.setChangeName(multiRequest.getFilesystemName("upfile")); 
@@ -72,10 +72,6 @@ public class BoardInsertConteroller extends HttpServlet {
 			}
 			
 			int result = new BoardService().insertBoard(b, at, type);
-
-			System.out.println("result:"+result);
-			if(result > 0) { 
-
 			
 			if(result > 0) { 
 
@@ -89,9 +85,7 @@ public class BoardInsertConteroller extends HttpServlet {
 				request.setAttribute("errorMsg", "게시글 작성 실패");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response); 
 			}
-			}
 		}
-	
 	}
 	
 

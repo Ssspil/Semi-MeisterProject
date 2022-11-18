@@ -199,7 +199,7 @@
                         <i id="camera" class="bi bi-camera-fill"></i>
                      </label>
                      <input type="file" id="input-file" onchange="fileChange()"style=display:none>
-                     <label id="fileName"></label>
+                     <label id="fileName"><%=at.getOriginName()%></label>
                   </div>
                </div>
       <br>
@@ -210,7 +210,7 @@
                </div>
                <div></div>
                <div id="img">
-
+					<img data-h-1 class="image" onchange="readImage()"src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
                </div>
                <div id="content">
                   <div id="content2">
@@ -229,7 +229,9 @@
    <script>
       function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
+         $(".img").src = null;
       }
+      
    </script>
    
 </body>

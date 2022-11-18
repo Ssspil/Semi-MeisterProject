@@ -386,7 +386,7 @@
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
                                     <div data-d-1 class="profile-area" style="display:flex; text-decoration: none; background-color: transparent;">
-                                     	<img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+<%--                                      	<img data-d-1 class="profile-image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>"> --%>
                                         <div data-d-1 class="profile-info">
                                             <span data-d-1 class="profile-name">
                                             	<%= b.getMemberNic() %>
@@ -416,7 +416,7 @@
                             <div data-h-1 data-g-1 class="body-image">
                                 <ul data-h-1 class="image-wrapper">
                                     <li data-h-1 class="image-list">
-  										<img data-h-1 class="image" src="./resources/image/logo.png"> <!-- 이미지 임시용 -->
+  										<img data-h-1 class="image" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>"> <!-- 이미지 임시용 -->
                                     </li>
                                 </ul>
                             </div>
