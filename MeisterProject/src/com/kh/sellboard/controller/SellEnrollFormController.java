@@ -36,12 +36,12 @@ public class SellEnrollFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		ArrayList<Interest> interest = new SellBoardService().selecInterestCategory();
+		ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
 		
 		request.setAttribute("interest", interest);
 		
 		
-		ArrayList<Local> local = new SellBoardService().selecLocalCategory();
+		ArrayList<Local> local = new SellBoardService().selectLocalCategory();
 		
 		request.setAttribute("local", local);
 		
