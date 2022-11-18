@@ -567,7 +567,7 @@ public class MemberDao {
 	public int insertBlackUser(Connection conn, int userNo) {
 		
 		PreparedStatement psmt = null;
-		int result = 0;
+		int result1 = 0;
 		
 		String sql = prop.getProperty("insertBlackUser");
 		
@@ -576,7 +576,7 @@ public class MemberDao {
 			
 			psmt.setInt(1, userNo);
 			
-			result = psmt.executeUpdate();
+			result1 = psmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -585,7 +585,38 @@ public class MemberDao {
 			JDBCTemplate.close(psmt);
 		}
 		
-		return result;
+		return result1;
+	}
+	
+	/**
+	 * 관리자가 BLACKLIST테이블에 이유를 넣어주는 메소드
+	 * @param conn
+	 * @param userNo
+	 * @param reason
+	 * @return
+	 */
+	public int insertBlacklist(Connection conn, int userNo, String reason) {
+		PreparedStatement psmt = null;
+		int result2 = 0;
+		
+		String sql = prop.getProperty("insertBlacklist");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			psmt.setString(2, reason);
+			
+			result2 = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result2;
 	}
 
 	/**
@@ -663,19 +694,11 @@ public class MemberDao {
 			while(rset.next()) {
 	        	blacklist.add(new  Member(rset.getInt("USER_NO"),
 						rset.getString("USER_ID"),
-						rset.getString("USER_PWD"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTEREST"),
-						rset.getDate("ENROLL_DATE"),
 						rset.getString("USER_NAME"),
-						rset.getString("GENDER"),
-						rset.getString("EMAIL"),
-						rset.getString("PHONE"),
-						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
-						rset.getString("SPECIALITY"),
-						rset.getString("EXP_SUBMIT"),
-						rset.getString("EXPERT")
+						rset.getDate("BLACK_DATE"),
+						rset.getString("REASON")
 						));
 			}
 			
