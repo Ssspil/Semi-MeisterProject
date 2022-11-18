@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
+    pageEncoding="UTF-8" %>
     
-<%
-   	Board b = (Board) request.getAttribute("b");
-   	
-	Attachment at = (Attachment) request.getAttribute("at");
-%>
+    <%
+       int type = Integer.parseInt(request.getParameter("type"));
     
+//      	Attachment at = (Attachment) request.getAttribute("at");
+      %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +20,7 @@
    }
    #wrap {
 /*       background: black; */
+
         
 
         height: 800px;
@@ -179,42 +179,68 @@
       width: 100%;
       margin: 0.75rem;
    }
+   
+   .editor-image[data-a-2] {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0.75rem;
+        }
+   .editor-image .editor-image-list[data-a-2] {
+       display: inline-flex;
+       flex-flow: row wrap;
+       width: 60.625rem;
+       padding-top: 0.75rem;
+       align-items: center;
+        }
+   .editor-image .editor-image-list .image-preview[data-a-2] {
+          display: inline-block;
+          position: relative;
+          margin-right: 0.75rem;
+          margin-bottom: 0.75rem;
+        }
 
 </style>
 </head>
 <body>
    <%@ include file="../common/header.jsp" %>
    <div id="wrap">
-   		<form action="<%= contextPath %>/update.bo" id="update-form" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
-         <input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+      <form id="enroll-form" action="<%=contextPath %>/insert.bo" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
+         <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>"> 
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
-                  <font style="font-size: 30px; font-weight: bold;">게시글 수정</font>
-                  <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">수정</button>
+                  <font style="font-size: 30px; font-weight: bold;">게시글 글작성</font>
+                  <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">등록</button>
+                  <input type="hidden" name="type" value="<%=type %>">   
                </div>
                <div id="file">
                   <div id="file2">
-                     <label class="input-file-button" for="input-file">
+                     <label class="input-file-button" id="file-btn" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i>
                      </label>
-                     <input type="file" id="input-file" onchange="fileChange()"style=display:none>
+                     <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
                      <label id="fileName"><%=at.getOriginName()%></label>
                   </div>
                </div>
       <br>
                <div id="title">
                   <div id="title1">
-               <input type="text" name="title" maxlength="30" class="title" size="100" value="<%=b.getBoardTitle() %>" required>
+               <input type="text" name="title" maxlength="30" class="title" size="100" required><%=b.getBoardTitle() %>
                   </div>
                </div>
                <div></div>
-               <div id="img">
-					<img data-h-1 class="image" onchange="readImage()"src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
-               </div>
-               <div id="content">
+				<!-- 이미지 미리보기 -->
+				<div data-a-2 data-v-6 class="editor-image">
+					<div data-a-2 class="editor-image-list">
+						<div data-a-2 class="image-preview">
+							<img id="titleImg" onchange="readImage()" width="250" height="170"><%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+						</div>
+					</div>
+				</div>
+					<div id="content">
                   <div id="content2">
-                     <textarea id="content3" maxlength="500" name="content" rows="10"  required><%=b.getBoardContent() %></textarea>
+                     <textarea id="content3" maxlength="500" name="content" rows="10" required><%=b.getBoardContent() %></textarea>
                   </div>
                </div>
             </div>
@@ -224,15 +250,15 @@
    
    <%@ include file="../common/footer.jsp" %>
    
-   
-      
    <script>
-      function fileChange(){
-         $("#fileName").text($("#input-file")[0].files[0].name);
-         $(".img").src = null;
-      }
-      
+	 
    </script>
+     
+    <script>
+       function fileChange(){
+         $("#fileName").text($("#input-file")[0].files[0].name);
+       }
+    </script>
    
 </body>
 </html>
