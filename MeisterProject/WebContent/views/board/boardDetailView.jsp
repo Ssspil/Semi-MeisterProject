@@ -18,6 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Document</title>
     <style>
         * {
@@ -423,7 +424,7 @@
                             <ul data-s-1 class="body-list"></ul>
                             <div data-j-1 data-s-1 class="greate">
                                 <div data-j-1 class="like">
-                                    <span data-j-1 class="text2">좋아요</span>
+                                    <i class="bi bi-hand-thumbs-up"></i> <span data-j-1 class="text2">좋아요</span>
                                 </div>
                                 <div data-j-1 class="item">
                                     <span data-j-1 class="text2">댓글</span>
@@ -529,11 +530,15 @@
 				                reply   +=                '<span data-c-1 class="text"></span>' ;
 				                reply   +=            '</div>';
 				                reply     +=        '</div>';
+				 
 				                reply    +=        '<div data-c-1 class="more-action">';
-				                reply    +=            '<div data-c-1 class="btn-group">';
-				                reply    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
+				                reply    +=            '<div data-c-1 class="btn-sgroup">';
+				                reply	+=					'<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>';
+								reply	+=						'<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>';
+// 				                reply    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
 				                reply    +=            '</div>';
 				                reply    +=        '</div>';
+
 				                reply    +=    '</div>';
 				                reply    += '</div>';
 				                reply     += '</div>';

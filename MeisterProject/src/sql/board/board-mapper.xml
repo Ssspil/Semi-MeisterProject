@@ -81,11 +81,13 @@
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 
+	<!-- 게시글 글작성 -->
 	<entry key ="insertBoard">
 		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_TYPE)
 		VALUES (SEQ_BNO.NEXTVAL, ?, ?, ?, ?)	
 	</entry>
 	
+	<!-- 게시글 글작성 -->
 	<entry key ="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO , REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
 		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ?, 1)
@@ -112,17 +114,17 @@
 		WHERE FILE_NO = ?
 	</entry>
 	
-	<entry key="selectSameAttachment">
-		SELECT FILE_NO
-	   	FROM ATTACHMENT
-	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
-	</entry>
+<!-- 	<entry key="selectSameAttachment"> -->
+<!-- 		SELECT FILE_NO -->
+<!-- 	   	FROM ATTACHMENT -->
+<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
+<!-- 	</entry> -->
 	
-	<entry key="deleteAttachment">
-		DELETE
-	   	FROM ATTACHMENT
-	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
-	</entry>
+<!-- 	<entry key="deleteAttachment"> -->
+<!-- 		DELETE -->
+<!-- 	   	FROM ATTACHMENT -->
+<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
+<!-- 	</entry> -->
 	
 	<entry key="deleteBoard">
 		UPDATE BOARD
@@ -197,4 +199,5 @@
 			AND BOARD_NO = ?
 		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
 	</entry>
+
 </properties>

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.board.model.dao.BoardDao;
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
+import com.kh.chatting.model.dao.ChattingDao;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardService {

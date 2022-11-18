@@ -36,16 +36,13 @@ public class ReplyInsertController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		
 		Reply r = new Reply();
 		r.setReplyContent(replyContent);
 		r.setBoardNo(boardNo);
 		r.setUserNo(userNo);
 		
 		int result = new BoardService().insertReply(r);
-		
-		Attachment at = new Attachment();
-		
-		System.out.println(result);
 		
 		response.getWriter().print(result);
 	}

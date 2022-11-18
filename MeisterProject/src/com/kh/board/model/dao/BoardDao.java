@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.board.model.vo.Board;
@@ -330,7 +331,6 @@ public class BoardDao {
 			psmt.setInt(4, type);
 			
 			result = psmt.executeUpdate();
-			System.out.println("result:"+result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -565,11 +565,11 @@ public class BoardDao {
 			
 			while(rset.next()) {
 				list.add(new Reply(
-						rset.getInt(1),
-						rset.getString(2),
-						rset.getInt(3),
-						rset.getString(4),
-						rset.getString(5)
+						rset.getInt("REPLY_NO"),
+						rset.getString("REPLY_CONTENT"),
+						rset.getInt("USER_NO"),
+						rset.getString("NICKNAME"),
+						rset.getString("REPLY_DATE")
 						));
 			}
 		} catch (SQLException e) {
@@ -581,5 +581,6 @@ public class BoardDao {
 		
 		return list;
 	}
+	
 
 }
