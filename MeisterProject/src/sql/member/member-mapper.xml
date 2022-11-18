@@ -193,8 +193,15 @@
 	
 	<!-- 블랙리스트 유저 전체 조회 -->
 	<entry key="selectAllBlacklist">
-		SELECT *
-		FROM MEMBER
+		SELECT M.USER_NO,
+			   USER_ID,
+			   USER_NAME,
+			   NICKNAME,
+			   REASON,
+			   BLACK_DATE,
+			   BLACKLIST
+		FROM MEMBER M
+		LEFT JOIN BLACKLIST B ON (M.USER_NO = B.USER_NO)
 		WHERE STATUS = 'N'
 			AND BLACKLIST = 'Y'
 	</entry>

@@ -137,12 +137,18 @@ public class Member {
 	}
 	
 	// 블랙리스트 생성자
-	public Member(int userNo, Date blackenrollDate, String reason) {
+	public Member(int userNo, String userId, String nickName, String userName, String blackList, Date blackenrollDate,
+			String reason) {
 		super();
 		this.userNo = userNo;
+		this.userId = userId;
+		this.nickName = nickName;
+		this.userName = userName;
+		this.blackList = blackList;
 		this.blackenrollDate = blackenrollDate;
 		this.reason = reason;
 	}
+	
 
 	public int getUserNo() {
 		return userNo;

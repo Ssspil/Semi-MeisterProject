@@ -694,19 +694,11 @@ public class MemberDao {
 			while(rset.next()) {
 	        	blacklist.add(new  Member(rset.getInt("USER_NO"),
 						rset.getString("USER_ID"),
-						rset.getString("USER_PWD"),
 						rset.getString("NICKNAME"),
-						rset.getString("INTEREST"),
-						rset.getDate("ENROLL_DATE"),
 						rset.getString("USER_NAME"),
-						rset.getString("GENDER"),
-						rset.getString("EMAIL"),
-						rset.getString("PHONE"),
-						rset.getString("STATUS"),
 						rset.getString("BLACKLIST"),
-						rset.getString("SPECIALITY"),
-						rset.getString("EXP_SUBMIT"),
-						rset.getString("EXPERT")
+						rset.getDate("BLACK_DATE"),
+						rset.getString("REASON")
 						));
 			}
 			

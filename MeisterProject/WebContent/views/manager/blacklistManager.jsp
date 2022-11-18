@@ -168,7 +168,7 @@ table>tfoot>tr:hover{
 					    	<% } else { %>
 						    <tr>
 							      <td>
-							      	<input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>">\
+							      	<input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>">
 							      </td>
 							      <td><%= m.getUserNo() %></td>
 							      <td><%= m.getUserId() %></td>
@@ -180,8 +180,8 @@ table>tfoot>tr:hover{
 							      <% } %>
 							      </td>
 							      <td><%= m.getNickName() %></td>
-							      <td>관리자에 의하여 처리</td>
-							      <td><%= m.getEnrollDate() %></td>
+							      <td><%= m.getReason() %></td>
+							      <td><%= m.getBlackenrollDate() %></td>
 							      <td class="status">
 							      <% if ((m.getBlackList()).equals("Y"))  { %>
 							      	제적
