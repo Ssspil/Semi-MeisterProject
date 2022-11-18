@@ -113,33 +113,33 @@ public class BoardDao {
 		return board;
 	}
 	
-	public int selectBoardWriter(Connection conn, int boardNo) {
-
-		int no = 0;
-		
-		PreparedStatement psmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectBoardWriter");
-
-		try {
-			psmt = conn.prepareStatement(sql);
-
-			psmt.setInt(1, boardNo);
-
-			rset = psmt.executeQuery();
-
-			if (rset.next()) {
-				 no = rset.getInt("USER_NO");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(psmt);
-		}
-		return no;
-	}
+//	public int selectBoardWriter(Connection conn, int boardNo) {
+//
+//		int no = 0;
+//		
+//		PreparedStatement psmt = null;
+//		ResultSet rset = null;
+//
+//		String sql = prop.getProperty("selectBoardWriter");
+//
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//
+//			psmt.setInt(1, boardNo);
+//
+//			rset = psmt.executeQuery();
+//
+//			if (rset.next()) {
+//				 no = rset.getInt("USER_NO");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(psmt);
+//		}
+//		return no;
+//	}
 
 	// 게시글 상세보기
 	public Board selectBoard(Connection conn, int boardNo) {
@@ -191,7 +191,7 @@ public class BoardDao {
 			psmt.setInt(1, boardNo);
 
 			rset = psmt.executeQuery();
-
+			//글내용 이미지
 			if (rset.next()) {
 				at = new Attachment();
 
@@ -200,6 +200,25 @@ public class BoardDao {
 				at.setChangeName(rset.getString("CHANGE_NAME"));
 				at.setFilePath(rset.getString("FILE_PATH"));
 			}
+			
+			close(rset);
+			close(psmt);
+			//프로필이미지
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, 5);
+
+			rset = psmt.executeQuery();
+			//글내용 이미지
+			if (rset.next()) {
+				at = new Attachment();
+
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -332,7 +351,8 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
+			
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
@@ -382,6 +402,7 @@ public class BoardDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, b.getBoardTitle());
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getBoardNo());
@@ -400,16 +421,19 @@ public class BoardDao {
 	public int updateAttachment(Attachment at, Connection conn) {
 
 		int result = 0;
+		
 		PreparedStatement psmt = null;
+		
 		String sql = prop.getProperty("updateAttachment");
 
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
 			psmt.setInt(4, at.getFileNo());
-
+			
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {

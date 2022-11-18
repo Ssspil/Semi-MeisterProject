@@ -87,8 +87,8 @@
 	</entry>
 	
 	<entry key ="insertAttachment">
-		INSERT INTO ATTACHMENT(FILE_NO , REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ? )
+		INSERT INTO ATTACHMENT(FILE_NO , REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ?, 1)
 	</entry>
 	
 	<entry key="insertNewAttachment">
@@ -110,6 +110,18 @@
 			FILE_PATH = ?,
 			UPLOAD_DATE = SYSDATE
 		WHERE FILE_NO = ?
+	</entry>
+	
+	<entry key="selectSameAttachment">
+		SELECT FILE_NO
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
+	</entry>
+	
+	<entry key="deleteAttachment">
+		DELETE
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 1
 	</entry>
 	
 	<entry key="deleteBoard">
@@ -139,11 +151,11 @@
 		AND b.STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectBoardWriter">
-		SELECT USER_NO
-		FROM BOARD
-		WHERE BOARD_NO = ?
-	</entry>
+<!-- 	<entry key="selectBoardWriter"> -->
+<!-- 		SELECT USER_NO -->
+<!-- 		FROM BOARD -->
+<!-- 		WHERE BOARD_NO = ? -->
+<!-- 	</entry> -->
 	
 	<entry key="selectAttachment">
 		SELECT FILE_NO,
@@ -152,7 +164,7 @@
 		       FILE_PATH,
 		       FILE_LEVEL
 		 FROM ATTACHMENT
-		 WHERE REF_NO = ? AND FILE_LEVEL = 5
+		 WHERE REF_NO = ? AND FILE_LEVEL = 1
 		 ORDER BY FILE_LEVEL
 	</entry>
 	

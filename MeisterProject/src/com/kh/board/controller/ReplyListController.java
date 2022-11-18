@@ -38,6 +38,8 @@ public class ReplyListController extends HttpServlet {
 		
 		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
 		
+		
+		
 		//Gson을 이용해서 응답 => ArrayList -> JSONObject 배열형태로 변환
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());

@@ -59,24 +59,19 @@ public class BoardInsertConteroller extends HttpServlet {
 		    b.setBoardTitle(boardTitle);
 		    b.setBoardContent(boardContent);
 		    b.setUserNo(userNo);
-		    System.out.println("bTest:"+b);
 		 
 			
 			Attachment at = null;
 			
-			/*if(multiRequest.getOriginalFileName("upfile") != null) {
-				
+			System.out.println(multiRequest.getOriginalFileName("upfile"));
+			if(multiRequest.getOriginalFileName("upfile") != null) {
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("upfile")); 
 				at.setChangeName(multiRequest.getFilesystemName("upfile")); 
 				at.setFilePath("resources/board_upfiles/");
-			}*/
+			}
 			
 			int result = new BoardService().insertBoard(b, at, type);
-
-			System.out.println("result:"+result);
-			if(result > 0) { // 성공 => list.bo?currentPage=1
-
 			
 			if(result > 0) { 
 
@@ -90,9 +85,7 @@ public class BoardInsertConteroller extends HttpServlet {
 				request.setAttribute("errorMsg", "게시글 작성 실패");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response); 
 			}
-			}
 		}
-	
 	}
 	
 

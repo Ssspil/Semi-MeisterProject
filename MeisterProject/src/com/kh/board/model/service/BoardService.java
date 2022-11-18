@@ -58,9 +58,9 @@ public class BoardService {
 
 		int result2 = 1;
 
-		/*
-		 * if (at != null) { result2 = new BoardDao().insertAttachment(at, conn); }
-		 */
+		
+		 if (at != null) { result2 = new BoardDao().insertAttachment(at, conn); }
+		
 
 		if (result1 > 0 && result2 > 0) {
 
@@ -132,15 +132,15 @@ public class BoardService {
 
 	}
 	
-	public int selectBoardWriter(int boardNo) {
-		Connection conn = getConnection();
-
-		int no = new BoardDao().selectBoardWriter(conn, boardNo);
-
-		close();
-
-		return no;
-	}
+//	public int selectBoardWriter(int boardNo) {
+//		Connection conn = getConnection();
+//
+//		int no = new BoardDao().selectBoardWriter(conn, boardNo);
+//
+//		close();
+//
+//		return no;
+//	}
 
 	public Attachment selectAttachment(int boardNo) {
 		Connection conn = getConnection();
