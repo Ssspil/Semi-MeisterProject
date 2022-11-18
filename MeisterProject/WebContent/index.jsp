@@ -16,17 +16,24 @@
       <div class="imgContainer">
       <div id="slider">
         <ul class="slides">
-          <li class="slide">
-            <img src="./resources/image/test1.jpeg" alt="" />
+          <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
+            <img src="./resources/image/main1.jpeg" alt="" />
           </li>
           <li class="slide">
-            <img src="./resources/image/test2.jpeg" alt="" />
+            <img src="./resources/image/main2.jpeg" alt="" />
           </li>
           <li class="slide">
-            <img src="./resources/image/test3.jpeg" alt="" />
+            <img src="./resources/image/main3.jpeg" alt="" />
           </li>
           <li class="slide">
-           <img src="./resources/image/test4.jpeg" alt="" />
+          	<img src="./resources/image/main4.jpeg" alt="" />
+          </li>
+          <li class="slide">
+          	<img src="./resources/image/main5.jpeg" alt="" />
+          </li>
+          
+          <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
+            <img src="./resources/image/main1.jpeg" alt="" />
           </li>
         </ul>
       </div>
@@ -145,27 +152,30 @@ var slider = document.querySelector("#slider");
 var slides = slider.querySelector(".slides");
 var slide = slides.querySelectorAll(".slide");
 
-var currentSlide = 0;
 
+var currentSlide = 0;
 setInterval(function () {
-    var from = -(1100 * currentSlide);
-    var to = from - 1100;
-    slides.animate(
-        {
-            marginLeft: [from + "px", to + "px"],
-        },
-        {
-            duration: 700,
-            easing: "ease",
-            iterations: 1,
-            fill: "both",
-        }
-    );
-    currentSlide++;
-    if (currentSlide === slide.length - 1) {
-        currentSlide = 0;
-    }
-}, 3500);
+		
+	    var from = -(1100 * currentSlide);
+	    var to = from - 1100;
+	    slides.animate(
+	        {
+	            marginLeft: [from + "px", to + "px"],
+	        },
+	        {
+	            duration: 1000,
+	            easing: "ease",
+	            iterations: 1,
+	            fill: "both",
+	        }
+	    );
+	    ++currentSlide;
+	    if (currentSlide === slide.length - 1) {
+	        currentSlide = 0;
+	        
+	    }
+	    
+	}, 3500);
 
 </script>
 
