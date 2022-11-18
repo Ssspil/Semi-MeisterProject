@@ -19,11 +19,40 @@ public class Member {
 	private String expSubmit;
 	private String expert;
 	private String profileImg;
+	// 	블랙리스트 필드
+	private Date blackenrollDate;
+	private String reason;
 	
 	// 기본 생성자
 	public Member() {
 		
 	}
+	// 전체 매개변수 생성자
+	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
+			String userName, String gender, String email, String phone, String status, String blackList,
+			String speciality, String expSubmit, String expert, String profileImg, Date blackenrollDate,
+			String reason) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.nickName = nickName;
+		this.interest = interest;
+		this.enrollDate = enrollDate;
+		this.userName = userName;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.status = status;
+		this.blackList = blackList;
+		this.speciality = speciality;
+		this.expSubmit = expSubmit;
+		this.expert = expert;
+		this.profileImg = profileImg;
+		this.blackenrollDate = blackenrollDate;
+		this.reason = reason;
+	}
+
 
 	// 로그인 부분 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
@@ -105,6 +134,14 @@ public class Member {
 		this.nickName = nickName;
 		this.interest = interest;
 		this.expert = expert;
+	}
+	
+	// 블랙리스트 생성자
+	public Member(int userNo, Date blackenrollDate, String reason) {
+		super();
+		this.userNo = userNo;
+		this.blackenrollDate = blackenrollDate;
+		this.reason = reason;
 	}
 
 	public int getUserNo() {
@@ -234,14 +271,28 @@ public class Member {
 	public void setExpSubmit(String expSubmit) {
 		this.expSubmit = expSubmit;
 	}
-
+	public Date getBlackenrollDate() {
+		return blackenrollDate;
+	}
+	public void setBlackenrollDate(Date blackenrollDate) {
+		this.blackenrollDate = blackenrollDate;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", nickName=" + nickName
 				+ ", interest=" + interest + ", enrollDate=" + enrollDate + ", userName=" + userName + ", gender="
 				+ gender + ", email=" + email + ", phone=" + phone + ", status=" + status + ", blackList=" + blackList
-				+ ", speciality=" + speciality + ", expSubmit=" + expSubmit + ", expert=" + expert+"]";
+				+ ", speciality=" + speciality + ", expSubmit=" + expSubmit + ", expert=" + expert + ", profileImg="
+				+ profileImg + ", blackenrollDate=" + blackenrollDate + ", reason=" + reason + "]";
 	}
+
 	
 	
 

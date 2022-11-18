@@ -175,6 +175,13 @@
 		WHERE USER_NO = ?
 	</entry>
 	
+	<!-- 블랙리스트테이블에 블랙유저 추가하기 -->
+	<entry key="insertBlacklist">
+		INSERT INTO BLACKLIST(USER_NO, REASON) 
+		VALUES(?, ?)
+	</entry>
+	
+	
 	<!-- 블랙리스트된 유저 조회 -->
 	<entry key="selectBlackUserByNo">
 		SELECT *
@@ -198,4 +205,6 @@
 		WHERE USER_NO = ?
 			AND STATUS = 'Y'
 	</entry>
+	
+
 </properties>

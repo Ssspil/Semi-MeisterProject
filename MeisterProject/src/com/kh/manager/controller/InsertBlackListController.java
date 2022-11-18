@@ -42,8 +42,9 @@ public class InsertBlackListController extends HttpServlet {
 	    }
 		
 		int userNo = Integer.parseInt(request.getParameter("uno"));
+		String reason = request.getParameter("reason");
 		
-		Member blackUser = new MemberService().insertBlackUser(userNo);
+		Member blackUser = new MemberService().insertBlackUser(userNo, reason);
 		
 		if(blackUser == null) {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
