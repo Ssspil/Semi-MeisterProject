@@ -742,4 +742,62 @@ public class MemberDao {
 		
 		return nickName;
 	}
+
+	/**
+	 * 블랙유저를 블랙리스트에서 삭제하는 메소드
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
+	public int deleteBlacklist(Connection conn, int userNo) {
+		PreparedStatement psmt = null;
+		int result1 = 0;
+		
+		String sql = prop.getProperty("deleteBlacklist");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			
+			result1 = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result1;
+	}
+
+	/**
+	 * 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 N로 바꿔주는 것
+	 * @param conn
+	 * @param userNo
+	 * @return
+	 */
+	public int deleteBlackUser(Connection conn, int userNo) {
+		PreparedStatement psmt = null;
+		int result2 = 0;
+		
+		String sql = prop.getProperty("deleteBlackUser");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			
+			result2 = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result2;
+	}
 }
