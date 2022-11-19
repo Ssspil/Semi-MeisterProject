@@ -54,7 +54,7 @@ public class SellBoardController extends HttpServlet {
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null? "1" : request.getParameter("currentPage"));
 		pageLimit = 10;
-		boardLimit = 10;
+		boardLimit = 6;
 		maxPage = (int) Math.ceil((double)(listCount/boardLimit));
 		startPage = (currentPage-1) / pageLimit * pageLimit +1;
 		endPage = startPage + pageLimit -1;

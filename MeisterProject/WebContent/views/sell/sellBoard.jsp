@@ -144,7 +144,7 @@ div.main div{
     border : 1px solid red;
     height: 250px;
     width : 250px;
-    margin : 10px;
+    margin : 15px 15px 100px 15px;
     float : left;
     flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
 
@@ -217,9 +217,11 @@ div.main #price{
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
-					<%-- <img src="<%=contextPath %>/<%=s.getTitleImg()%>"width="200px" height="150px">
-					<p> --%>
-					글 제목 : <%=sb.getSellTitle() %> <br>
+					<img src="../resources/sellBoard_upfiles/<%=sb.getTitleImg()%>"width="230px" height="210px">
+					<p>
+					판매글 제목 : <%=sb.getSellTitle() %> <br>
+					
+					<!-- 판매글 no는 임시로 넣어둠(확인을 위해) -->
 					No. <%=sb.getSellNo() %> <br>
 					<%=sb.getPrice() %> 원
 					</p>
@@ -227,7 +229,7 @@ div.main #price{
 			<% } %>
 		<% } %>
 		
-		
+		<br>
 		
 		
 		
@@ -275,6 +277,9 @@ div.main #price{
 			
 		</script>
 		
+		
+	</div><!-- outer 끝 -->
+	
 		<!-- 페이징처리 -->           
 	     <div align="center" class="paging-area">
 			<% if(currentPage != 1) {%>
@@ -299,9 +304,6 @@ div.main #price{
 				
 			}
 		</script>
-		
-	</div><!-- outer 끝 -->
-	
 	
 	
 	
