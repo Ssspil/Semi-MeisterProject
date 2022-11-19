@@ -282,6 +282,32 @@ public class MemberService {
 		
 		return nickName;
 	}
+
+	/**
+	 * 블랙리스트테이블에서 정보를 삭제하는 메소드
+	 * @param userNo
+	 * @return
+	 */
+	public Member deleteblacklist(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// 블랙유저를 블랙리스트에서 삭제하는 메소드
+		int result1 = new MemberDao().deleteBlacklist(conn, userNo);
+		// 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 N로 바꿔주는 것
+		int result2 = new MemberDao().deleteBlackUser(conn, userNo);
+		
+		Member delMem = null;
+
+		if(result1 > 0 && result2 > 0) {
+			delMem = new MemberDao().selectMemberByNo(conn, userNo);
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return delMem;
+	}
 	   
 	   
 	   

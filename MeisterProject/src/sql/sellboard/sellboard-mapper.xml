@@ -12,7 +12,7 @@
 					        S.SELL_TITLE as SELL_TITLE,
 					        S.PRICE as PRICE,
 					        S.SELL_RECOMMEND as SELL_RECOMMEND,
-					        TO_CHAR(S.SELL_DATE,'MMDDHH24mi') SELL_DATE,
+					        S.SELL_DATE as SELL_DATE,
 					        S.INTEREST_NO AS INTEREST,
 					        S.LOCAL_NO AS LOCAL,
 					        M.NICKNAME AS NICKNAME,
@@ -46,13 +46,13 @@
 	<entry key="selectInterestCategory">
 		SELECT INTEREST_NO,
 			   INTEREST_NAME
-		FROM INTEREST
+		  FROM INTEREST
 	</entry>
 	
 	<entry key="selectLocalCategory">
 		SELECT LOCAL_NO,
 			   LOCAL_NAME
-		FROM LOCAL
+		  FROM LOCAL
 	</entry>
 	
 	<!-- 판매글 선택 조회 -->

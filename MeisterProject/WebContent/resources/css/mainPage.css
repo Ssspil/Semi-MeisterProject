@@ -63,7 +63,7 @@
    width: 62%;
    margin: auto;
    border-radius: 40px;
-   box-shadow: 0px -1px 12px #0000ffcf;
+   box-shadow: 0px 1px 5px #0000ffcf;
 
 }
 svg {
@@ -102,23 +102,33 @@ svg {
 .icon-area{
 	height : 150px;
 	width: 70%;
-    margin: auto;
-    background-color : pink;
+    margin: 15px auto auto auto;
 }
 .outer .icon-area .icon-container{
-	margin : auto;
+	position : relative;
+	top : 10%;
+	left : 10%;
 	width : 80%;
-	background-color : green;
-	height : 100px;
+	height : 120px;
 	
 }
-
-.outer .icon-area .icon-list div{
-	display : inline-block;
-	background-color : red;
-	float : left;
-	margin : 20px;
+.icon{
+	float :left;
+	margin-left: 25px;
+	font-weight : 600;
 }
+
+.icon img:hover, .icon a:hover{
+	width:100px;
+	height:110px;
+	text-decoration : none;
+	color : orange;
+}
+.icon a{
+	color : black;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 
 
 /* 관심분야 공간 */
@@ -132,9 +142,21 @@ svg {
 /* 커뮤니티 공간 */
 .community-area{
 	height : 300px;
-	background-color : lightgreen;
 	width: 70%;
     margin: auto;
 }
-
+.area1{
+	width:40%;
+	height : 80%;
+	float : left;
+	margin-left : 4rem;
+	background-color :red;
+}
+.area2 {
+	width:40%;
+	height : 80%;
+	float : right;
+	margin-right : 4rem;
+	background-color : pink;
+}
 

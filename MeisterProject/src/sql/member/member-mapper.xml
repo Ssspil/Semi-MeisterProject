@@ -213,5 +213,15 @@
 			AND STATUS = 'Y'
 	</entry>
 	
+	<!-- 블랙유저를 블랙리스트에서 삭제하는 메소드 -->
+	<entry key="deleteBlacklist">
+		DELETE
+		FROM BLACKLIST
+		WHERE USER_NO = ?
+	</entry>
 
+	<!-- 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 N로 바꿔주는 것 -->
+	<entry key="deleteBlackUser">
+		
+	</entry>
 </properties>

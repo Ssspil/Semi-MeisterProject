@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.common.model.vo.Attachment;
@@ -106,6 +107,9 @@ public class BoardController extends HttpServlet {
 		ArrayList<Board> list = new BoardService().selectList(1, keyword1);//new BoardService().selectList("1");
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
+		
+
+		
 		ArrayList<Board> list2 = new BoardService().selectList(2, keyword2); //ArrayList<Board> list2 = new BoardService().selectList(2);
 		request.setAttribute("list2",list2);
 		
@@ -117,6 +121,11 @@ public class BoardController extends HttpServlet {
 		
 		
 		ArrayList<Board> hotList = new BoardService().getHotBoard();
+		
+		// 메인 페이지에도 작성글 보이게 하기위한것.
+		HttpSession session = request.getSession();
+		session.setAttribute("mainList", hotList);
+		
 		request.setAttribute("hotList",hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);
 		

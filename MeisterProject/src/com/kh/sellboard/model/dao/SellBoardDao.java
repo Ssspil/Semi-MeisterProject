@@ -116,8 +116,8 @@ public class SellBoardDao {
 										rset.getInt("PRICE"),
 										rset.getInt("SELL_RECOMMEND"),
 										rset.getDate("SELL_DATE"),
-										rset.getInt("INTEREST_NO"),
-										rset.getInt("LOCAL_NO"),
+										rset.getInt("INTEREST"),
+										rset.getInt("LOCAL"),
 										rset.getString("NICKNAME"),
 										rset.getString("CHANGE_NAME"),
 										rset.getString("FILE_PATH")));	
@@ -252,8 +252,8 @@ public class SellBoardDao {
             psmt.setString(1, s.getSellTitle());
             psmt.setString(2, s.getSellContent());
             psmt.setInt(3, s.getPrice());
-            psmt.setInt(4, s.getInterest());
-            psmt.setInt(5, s.getLocal());
+            psmt.setInt(4, s.getInterestNo());
+            psmt.setInt(5, s.getLocalNo());
             psmt.setInt(6, s.getUserNO());
 			
 			result = psmt.executeUpdate();
