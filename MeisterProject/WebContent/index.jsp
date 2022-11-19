@@ -1,12 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,
+    							com.kh.board.model.vo.*"%>
+<%
+	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("mainList");	
+
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <link href="./resources/css/mainPage.css" rel="stylesheet" type="text/css"  />
-
+<style>
+.area1{
+	width:40%;
+	height : 80%;
+	float : left;
+	margin-left : 4rem;
+	background-color :red;
+}
+.area2 {
+	width:40%;
+	height : 80%;
+	float : right;
+	margin-right : 4rem;
+	background-color : pink;
+}
+</style>
 </head>
 <body>
   <%@ include file="/views/common/header.jsp" %>
@@ -133,7 +154,16 @@
       </div>
       
       <div class="community-area">
-      		커뮤니티 영역?
+      		<div class="area1">
+      			<div class="community-main">
+      				<% for(int i = 0; i < 1; i++) { %>
+      					 <%= list %>
+      				<% } %>
+      			</div>
+      		</div>
+      		<div class="area2">
+      			이게뭐
+      		</div>
       </div>
     </div><!-- outer 끝 -->
 	

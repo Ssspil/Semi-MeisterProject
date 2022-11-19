@@ -132,7 +132,6 @@ svg {
 /* 커뮤니티 공간 */
 .community-area{
 	height : 300px;
-	background-color : lightgreen;
 	width: 70%;
     margin: auto;
 }
