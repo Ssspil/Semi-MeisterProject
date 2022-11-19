@@ -582,5 +582,27 @@ public class BoardDao {
 		return list;
 	}
 	
+	public int deleteReply(int userNo, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteBoard");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
 
 }

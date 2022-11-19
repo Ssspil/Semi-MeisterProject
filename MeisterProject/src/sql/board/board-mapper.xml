@@ -199,5 +199,10 @@
 			AND BOARD_NO = ?
 		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
 	</entry>
-
+	
+	<entry key="deleteReply">
+		UPDATE REPLY
+		SET STATUS = 'N'
+		WHERE USER_NO = ?
+	</entry>
 </properties>

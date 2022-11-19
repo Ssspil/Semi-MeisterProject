@@ -38,6 +38,7 @@ public class ReplyInsertController extends HttpServlet {
 		
 		
 		Reply r = new Reply();
+		
 		r.setReplyContent(replyContent);
 		r.setBoardNo(boardNo);
 		r.setUserNo(userNo);

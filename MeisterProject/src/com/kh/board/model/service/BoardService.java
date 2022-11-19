@@ -200,5 +200,23 @@ public class BoardService {
 		
 		return list;
 	}
+	
+	public int deleteReply(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteReply(userNo, conn);
+		
+		new BoardDao().deleteAttachment(userNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
+	}
 
 }

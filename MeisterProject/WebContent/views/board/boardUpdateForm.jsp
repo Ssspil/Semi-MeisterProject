@@ -280,8 +280,6 @@
   	    readImage(e.target);
    	})
   </script>
-      
-   </script>
    
 </body>
 </html>
