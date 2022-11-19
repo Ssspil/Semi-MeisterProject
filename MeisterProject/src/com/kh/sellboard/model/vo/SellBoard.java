@@ -13,8 +13,8 @@ public class SellBoard {
 	private String status;
 	private int userNO;
 	private String titleImg;	// 판매 게시판에 썸네일 표시용
-	private int local;
-	private int interest;
+	private int localNo;
+	private int interestNo;
 	private String nickname;
 	private String changeName;
 	private String filePath;
@@ -25,7 +25,7 @@ public class SellBoard {
 	
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
-			Date sellDate, String status, int userNO, String titleImg, int local, int interest, String nickname,
+			Date sellDate, String status, int userNO, String titleImg, int localNo, int interestNo, String nickname,
 			String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
@@ -38,8 +38,8 @@ public class SellBoard {
 		this.status = status;
 		this.userNO = userNO;
 		this.titleImg = titleImg;
-		this.local = local;
-		this.interest = interest;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
 		this.nickname = nickname;
 		this.changeName = changeName;
 		this.filePath = filePath;
@@ -47,41 +47,41 @@ public class SellBoard {
 	
 	// 양진호
 	// 판매 게시판 등록 부분 생성자
-	public SellBoard(String sellTitle, String sellContent, int price, int local, int interest, int userNO) {
+	public SellBoard(String sellTitle, String sellContent, int price, int localNo, int interestNo, int userNO) {
 		super();
 		this.sellTitle = sellTitle;
 		this.sellContent = sellContent;
 		this.price = price;
-		this.local = local;
-		this.interest = interest;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
 		this.userNO = userNO;
 	}
 
 	// 판매 게시판 수정 부분 생성자
-	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, Date sellDate, int local,
-			int interest) {
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, Date sellDate, int localNo,
+			int interestNo) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.sellContent = sellContent;
 		this.price = price;
 		this.sellDate = sellDate;
-		this.local = local;
-		this.interest = interest;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
 	}
 	
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int local, int interest, String nickname, String changeName, String filePath) {
+			int interest, int local, String nickname, String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.price = price;
 		this.sellRecommend = sellRecommend;
 		this.sellDate = sellDate;
-		this.interest = interest;
-		this.local = local;
+		this.interestNo = interestNo;
+		this.localNo = localNo;
 		this.nickname = nickname;
 		this.changeName = changeName;
 		this.filePath = filePath;
@@ -89,7 +89,7 @@ public class SellBoard {
 	
 	// 판매 게시판 조회 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellRecommend, Date sellDate,
-			int local, int interest, String nickname) {
+			int interestNo, int localNo, String nickname) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -97,8 +97,8 @@ public class SellBoard {
 		this.price = price;
 		this.sellRecommend = sellRecommend;
 		this.sellDate = sellDate;
-		this.local = local;
-		this.interest = interest;
+		this.interestNo = interestNo;
+		this.localNo = localNo;
 		this.nickname = nickname;
 	}
 
@@ -182,20 +182,20 @@ public class SellBoard {
 		this.titleImg = titleImg;
 	}
 
-	public int getLocal() {
-		return local;
+	public int getLocalNo() {
+		return localNo;
 	}
 
-	public void setLocal(int local) {
-		this.local = local;
+	public void setLocalNo(int localNo) {
+		this.localNo = localNo;
 	}
 
-	public int getInterest() {
-		return interest;
+	public int getInterestNo() {
+		return interestNo;
 	}
 
-	public void setInterest(int interest) {
-		this.interest = interest;
+	public void setInterestNo(int interestNo) {
+		this.interestNo = interestNo;
 	}
 	
 	public String getNickname() {
@@ -231,8 +231,8 @@ public class SellBoard {
 	public String toString() {
 		return "SellBoard [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellContent=" + sellContent + ", price="
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
-				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", local=" + local
-				+ ", interest=" + interest + ", nickname=" + nickname + "]";
+				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", localNo=" + localNo
+				+ ", interestNo=" + interestNo + ", nickname=" + nickname + "]";
 	}
 
 	

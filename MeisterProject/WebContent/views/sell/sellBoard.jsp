@@ -6,8 +6,10 @@
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
+	ArrayList<SellBoard> list = (ArrayList<SellBoard>) request.getAttribute("list");
 	
-
+	SellBoard s = (SellBoard) request.getAttribute("s");
+	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
  	
  	int currentPage = pi.getCurrentPage();
@@ -184,32 +186,21 @@ div.main #price{
 			<a href="<%=contextPath%>/sellEnrollForm.se" id="sellEnrollBtn" class="btn btn-secondary" style="display:none">글 등록</a>
 		<%} %>
 		</div>
+		<br>
+		<br>
 		
 		<div class="navigator">
 		
 	        <ul id="navi">
 	        	<li class="list">
 	                <a href="<%= contextPath %>/market.se" name="marketAll">전체</a>
-	                <ul>
-                    <li class="list-in-list"><a href="">서울</a></li>
-                    <li class="list-in-list"><a href="">인천</a></li>
-                    <li class="list-in-list"><a href="">울산</a></li>
-                    <li class="list-in-list"><a href="">대전</a></li>
-                    <li class="list-in-list"><a href="">광주</a></li>
-                    <li class="list-in-list"><a href="">경기</a></li>
-                    <li class="list-in-list"><a href="">충북 / 충남</a></li>
-                    <li class="list-in-list"><a href="">전북 / 전남</a></li>
-                    <li class="list-in-list"><a href="">경북 / 경남</a></li>
-                    <li class="list-in-list"><a href="">제주</a></li>
-                </ul>
-	                
 	            </li>
 	        	<% for (Interest i : interest) { %>
 	        	<li class="list">		
-	       			<a href=""><%= i.getInterestName() %></a>
+	       			<a href="<%= contextPath %>/ ##"><%= i.getInterestName() %></a>
 	       			<ul>
 	       				<% for (Local l : local) { %>
-	       					<li class="list-in-list"><a href=""><%= l.getLocalName() %></a></li>
+	       					<li class="list-in-list"><a href="<%= contextPath %>/ ##"><%= l.getLocalName() %></a></li>
 	       				<% } %>
 					</ul>
 				</li>
@@ -219,34 +210,70 @@ div.main #price{
 	    </div> 
 		
 		<div class="main">
-			<div><a href="" class="thumb" id="thumb1">썸네일1</a>
+		<% if(list.isEmpty()){ %>
+			<!-- 리스트가 비어있는 경우 -->
+			등록된 게시글이 없습니다.
+		<% } else{ %>
+			<%for(SellBoard sb : list ) {%>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="<%=sb.getSellNo() %>">
+					<%-- <img src="<%=contextPath %>/<%=s.getTitleImg()%>"width="200px" height="150px">
+					<p> --%>
+					글 제목 : <%=sb.getSellTitle() %> <br>
+					No. <%=sb.getSellNo() %> <br>
+					<%=sb.getPrice() %> 원
+					</p>
+				</div>
+			<% } %>
+		<% } %>
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- 잠시 주석 -->
+			<%-- <div>
+				<a href="<%= contextPath %>/detail.se" class="thumb" id="thumb1">썸네일1</a>
 				<img src="" class="" >
-				<h6 class="content" id="title"> <%-- ${ s.getSellTitle } --%> 타이틀 제목</h6>
-				<h6 class="content" id="price"> ${ s.getPrice } 가격 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 원 </h6>
-				
+				<h6 class="content" id="title"> <%= s.getSellTitle() %> 타이틀 제목</h6>
+				<h6 class="content" id="price"> 가격 :  <%= s.getPrice() %>  원 </h6>
 			</div>
             
-			<div><a href="#" class="thumb">썸네일2</a>
+			<div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일2</a>
 			
 			</div>
 			
-            <div><a href="#" class="thumb">썸네일3</a>
+            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일3</a>
             
             </div>
 			
-            <div><a href="#" class="thumb">썸네일4</a>
+            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일4</a>
             
             </div>
 
-            <div><a href="#" class="thumb">썸네일5</a>
+            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일5</a>
             
             </div>
 			
-            <div><a href="#" class="thumb">썸네일6</a>
+            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일6</a>
             
-            </div>
+            </div> --%>
+
 
 		</div>
+		<script>
+			$(function(){
+				$(".thumbnail").click(function(){
+					
+					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();
+					
+				})	
+			});
+			
+		</script>
 		
 		<!-- 페이징처리 -->           
 	     <div align="center" class="paging-area">
@@ -275,17 +302,6 @@ div.main #price{
 		
 	</div><!-- outer 끝 -->
 	
-	<script>
-		$(function(){
-			$(".navigator>#navi>list").click(function(){
-				
-				let sno = $(this).children().eq(0).text();
-				
-				location.href = "<%= contextPath%>/detail.se?sno="+sno;
-			})	
-		});
-		
-	</script>
 	
 	
 	

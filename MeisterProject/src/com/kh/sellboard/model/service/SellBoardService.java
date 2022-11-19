@@ -45,11 +45,11 @@ public class SellBoardService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Interest> Interest = new SellBoardDao().selectInterestCategory(conn);
+		ArrayList<Interest> interest = new SellBoardDao().selectInterestCategory(conn);
 		
 		close();
 		
-		return Interest;
+		return interest;
 	}
 	
 	// 카테고리 지역
