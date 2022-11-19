@@ -3,8 +3,6 @@
     							com.kh.board.model.vo.*"%>
 <%
 	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("mainList");	
-
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,22 +10,10 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <link href="./resources/css/mainPage.css" rel="stylesheet" type="text/css"  />
-<style>
-.area1{
-	width:40%;
-	height : 80%;
-	float : left;
-	margin-left : 4rem;
-	background-color :red;
-}
-.area2 {
-	width:40%;
-	height : 80%;
-	float : right;
-	margin-right : 4rem;
-	background-color : pink;
-}
-</style>
+<!--  google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <%@ include file="/views/common/header.jsp" %>
@@ -108,49 +94,54 @@
       
       
       <div class="icon-area">
-      	<div class="icon-container">
-	      	<ul class="icon-list">
-	      		<li>
-	      			<div>
-	      				<img alt="zz" src="./resources/image/test4.jpeg" width="20" height="20"><a href="#">전체</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">영상</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">영화</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">게임</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">IT</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">운동</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">요리</a>
-	      			</div>
-	      		</li>
-	      	</ul>
-	      </div>
+      	<div class="icon-container" align="center">
+			<div class="icon" >
+				<a href="#">
+					<img src="./resources/image/icon1.gif" width="90" height="100"/>
+					<br><b>전체</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon2.gif" width="90" height="100"/>
+					<br><b>영상</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon3.gif" width="90" height="100"/>
+					<br><b>영화</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon4.gif" width="90" height="100"/>
+					<br><b>게임</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon5.gif" width="90" height="100"/>
+					<br><b>IT</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon6.gif" width="90" height="100"/>
+					<br><b>운동</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon7.gif" width="90" height="100"/>
+					<br><b>요리</b>
+				</a>
+			</div>
+	    </div>
       </div>
       
       <div class="interest-area">
-      	관심분야 영ㅇ역?
+      	모두모두화이팅 입니다  마무리 잘되었으면 좋겠습니다..
       </div>
       
       <div class="community-area">
@@ -162,7 +153,7 @@
       			</div>
       		</div>
       		<div class="area2">
-      			이게뭐
+      			에효..
       		</div>
       </div>
     </div><!-- outer 끝 -->
