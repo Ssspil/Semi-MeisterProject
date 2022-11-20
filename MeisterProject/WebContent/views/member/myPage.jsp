@@ -93,7 +93,7 @@
 		<hr>
 		<h4><b>&nbsp;내 커뮤니티</b></h4>
 		<br>
-		<h6><b><a href="<%=contextPath %>/boardList.bo">&nbsp;&nbsp;&nbsp;&nbsp;내가 작성한 글</a></b></h6>
+		<h6><b><a href="<%=contextPath %>/Mycommunity.bo">&nbsp;&nbsp;&nbsp;&nbsp;내가 작성한 글</a></b></h6>
 		<hr>
 		<h4><b>&nbsp;고객센터</b></h4>
 		<br>

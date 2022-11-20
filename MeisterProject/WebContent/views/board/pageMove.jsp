@@ -49,7 +49,21 @@ top:40px;
 position: relative;
 text-align:center;
 top:12%;
-left: 18.5%;
+
+}
+#chat3{
+float:right;
+position: relative;
+    right: 120px;
+}
+#date1{
+  color: lightgrey;
+   font-size: 14px;
+position: relative;
+    left: 90px;
+
+}
+
 
 </style>
 </head>
@@ -76,7 +90,8 @@ left: 18.5%;
                 <div id="titlefooter">
                     <div><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
                     <i class="bi bi-hand-thumbs-up"></i> <%= list2.get(i).getBoardRecommend() %>
-                    <i class="bi bi-chat-dots"></i> <%=list2.get(i).getReplyCount()%>
+                </div>
+                </div>
                     <%
                     String boardDate2 = list2.get(i).getBoardDate();
 					int now = Integer.parseInt(nowDate2);
@@ -109,8 +124,13 @@ left: 18.5%;
 						result2 = (year1_2 - year2_2)+ "년전";
 					}
                     %>
-                    <span id="date"><%=result2 %> </span><hr></div>
-                 </div>
+                    
+                    <div id="chat3">
+                    <i class="bi bi-chat-dots"></i> <%=list2.get(i).getReplyCount()%>
+                    <span id="date1"><%=result2 %> </span>
+                    </div>
+                    <hr>
+               
                 </div>
                <%} %>
      
