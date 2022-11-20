@@ -73,7 +73,7 @@ public class NoticeListController extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		
-		request.getRequestDispatcher("views/notice/myPageInNoticeList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/mypagein/myPageInNoticeList.jsp").forward(request, response);
 		
 		
 		
