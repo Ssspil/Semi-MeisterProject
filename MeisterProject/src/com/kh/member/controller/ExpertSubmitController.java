@@ -35,6 +35,8 @@ public class ExpertSubmitController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
 		String gender = request.getParameter("gender");
+		System.out.println(request.getParameter("phoneMid"));
+		System.out.println(request.getParameter("phoneLast"));
 		String phone = ("010".concat(request.getParameter("phoneMid"))).concat(request.getParameter("phoneLast"));
 		String email = ((request.getParameter("emailFront")).concat("@")).concat(request.getParameter("emailBack"));
 		String speciality = request.getParameter("speciality");

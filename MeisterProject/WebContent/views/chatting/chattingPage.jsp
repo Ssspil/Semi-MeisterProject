@@ -328,12 +328,7 @@
 			  history.back();
 			  console.log('뒤로가기 체크'); 
 		};
-// 	    window.onpageshow = function(event) {
-// 	        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-// 	            alret("대화 내용이 저장되지 않을수 있습니다");
-// 	            history(-1);
-// 	        }
-// 	    }
+
 	</script>
 </body>
 </html>
