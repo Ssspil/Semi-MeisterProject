@@ -118,8 +118,8 @@ svg {
 }
 
 .icon img:hover, .icon a:hover{
-	width:100px;
-	height:110px;
+	width:90px;
+	height:100px;
 	text-decoration : none;
 	color : orange;
 }
