@@ -434,44 +434,18 @@ body {
 	margin: 0 0 0 1.25rem;
 }
 
-button {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 120px;
-	height: 30px;
-	margin-top: -15px;
-	margin-left: -60px;
-	line-height: 15px;
-	cursor: pointer;
-}
+/* button { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	width: 120px; */
+/* 	height: 30px; */
+/* 	margin-top: -15px; */
+/* 	margin-left: -60px; */
+/* 	line-height: 15px; */
+/* 	cursor: pointer; */
+/* } */
 
-.modal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-	top: 0;
-	left: 0;
-	display: none;
-}
-
-.modal_content {
-	width: 400px;
-	height: 200px;
-	background: #fff;
-	border-radius: 10px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
-	text-align: center;
-	box-sizing: border-box;
-	padding: 74px 0;
-	line-height: 23px;
-	cursor: pointer;
-}
 </style>
 </head>
 <body class="bdy">
@@ -501,7 +475,9 @@ button {
  	                                        <% if(loginUser != null && loginUser.getUserNo() == b.getUserNo()) { %> 
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
- 											<% } %>
+ 											<% } else { %>
+ 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">신고하기</a>
+											<% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -557,7 +533,23 @@ button {
         </div>
 </div>
 
-
+		<div class="modal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Modal title</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p>Modal body text goes here.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	
 	
 
@@ -646,7 +638,7 @@ button {
                 			htmls	 +=					'<button type="button" class="btn btn-secondary .btn-danger" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
 			                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
 						} else { 
-				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
+				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown" onclick="report('+i.replyNo+', '+bno+')">신고하기</button>';
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
 						 } 
@@ -683,7 +675,19 @@ button {
 		function replyDelete(rno, bno){
 			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
+		
+		// 게시글 신고
+		function report(rno, bno) {
+			location.href="<%=contextPath%>" + "/"
+		}
+		
 
+		// 댓글 신고
+		
+		// 좋아요 기능
+		
+		// 댓글 수 기능
+		
  	</script>
 
 	
