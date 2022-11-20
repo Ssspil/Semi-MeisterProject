@@ -6,24 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
-import com.kh.common.model.vo.Attachment;
-import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardDetailController
+ * Servlet implementation class ReplyDeleteController
  */
-@WebServlet("/detail.bo")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/delete.ro")
+public class ReplyDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailController() {
+    public ReplyDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,33 +28,19 @@ public class BoardDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int replyNo = Integer.parseInt(request.getParameter("rno"));
 		
+		int result = new BoardService().deleteReply(replyNo);
 		
-		BoardService bService = new BoardService();
-		
-		// 좋아요 증가 / 게시글 조회(Board) / 첨부파일 조회(Attachment)
-		int result = bService.increaseCount(boardNo);
-		
-		if(result > 0) {
-			
-			
-//			int no = bService.selectBoardWriter(boardNo); // 유저번호
-			
-			Board b = bService.selectBoard(boardNo); // 게시판 번호
-			
-			Attachment at = bService.selectAttachment(boardNo);
-			
-			request.setAttribute("b", b);
-			request.setAttribute("at", at);
-			
-			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
-		} else { // 에러페이지
-			request.setAttribute("errorMsg", "게시글 상세조회 실패");
+		if (result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 댓글을 삭제했습니다.");
+			response.sendRedirect(request.getContextPath()+"/detail.bo?bno="+boardNo);
+		} else {
+			request.setAttribute("errorMsg","댓글 삭제 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		
 	
 	}
 

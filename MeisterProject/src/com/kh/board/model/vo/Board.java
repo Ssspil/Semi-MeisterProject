@@ -57,7 +57,6 @@ public class Board {
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
       this.userNo = userNo;
-
       this.boardType=boardType;
 
 

@@ -201,14 +201,28 @@ public class BoardService {
 		return list;
 	}
 	
-	public int deleteReply(int userNo) {
+	public int updateReply(Reply r) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().updateReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close();
+		
+		return result;
+	}
+	
+	public int deleteReply(int replyNo) {
 		
 		Connection conn = getConnection();
 		
-		int result = new BoardDao().deleteReply(userNo, conn);
-		
-		new BoardDao().deleteAttachment(userNo, conn);
-		
+		int result = new BoardDao().deleteReply(replyNo, conn);
+
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -218,5 +232,27 @@ public class BoardService {
 		
 		return result;
 	}
+	
+	public ArrayList<Board> myCommunity(){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().myCommunity(conn);
+		
+		close();
+		
+		return list;
+	}
+	
+	public int selectListCount2(int type) {
+		Connection conn = getConnection();
+
+		int listCount = new BoardDao().selectListCount2(conn,type);
+
+		close();
+
+		return listCount;
+	}
+	
+	
 
 }
