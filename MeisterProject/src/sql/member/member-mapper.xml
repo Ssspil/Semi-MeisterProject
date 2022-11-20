@@ -222,6 +222,8 @@
 
 	<!-- 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 N로 바꿔주는 것 -->
 	<entry key="deleteBlackUser">
-		
+		UPDATE MEMBER
+		SET BLACKLIST = 'N'
+		WHERE USER_NO = ?
 	</entry>
 </properties>
