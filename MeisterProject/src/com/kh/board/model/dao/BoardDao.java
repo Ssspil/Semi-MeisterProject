@@ -604,6 +604,75 @@ public class BoardDao {
 		}
 		return result;
 	}
+public ArrayList<Board> myCommunity(Connection conn){
 	
+		ArrayList<Board> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myCommunity");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+	
+			while(rset.next()) {
+				Board b;
+				b = new Board(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getInt("BOARD_RECOMMEND"),
+						rset.getInt("USER_NO"),
+						rset.getInt("REPLY_COUNT"),
+					    rset.getString("BOARD_DATE"));
+	System.out.println(b);
+				list.add(b);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return list;
+	}
+public int selectListCount2(Connection conn,int type) {
+	// select문 -> Result객체
+	int listCount = 0;
+	
+	PreparedStatement psmt = null;
+	
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectListCount2");
+	
+	try {
+		psmt = conn.prepareStatement(sql);
+		
+		psmt.setInt(1, type);
+		
+		rset = psmt.executeQuery();
+		
+		if(rset.next()) {
+			listCount = rset.getInt("COUNT");
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(psmt);
+	}
+	
+	return listCount;
+}
+
 
 }

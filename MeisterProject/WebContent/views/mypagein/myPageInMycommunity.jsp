@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo"%>
+    <%  ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+    
+    PageInfo pi = (PageInfo) request.getAttribute("pi");
+     int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage(); 
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,20 +156,22 @@ height: 50px;
         <div id="contenthead"></div>
         <div class="content" id="name1Body" >
             <div id="title"> 
-                <div id="titlepost">커뮤니티 게시글 제목</div>
-                <div id="titlepost1">게시글 제목d게시글 제목d게시글 제목d게시글 제목d게시글 제목d게시글 제목d게시글 제목d게시글 제목d게시글 제목d</div>
+           
+                <div id="titlepost">커뮤니티 게시글 제목</div> 
+                <div id="titlepost1"><%=list.get(0).getBoardTitle() %></div>
             </div>
             <br><br>
             <div id="body">
                 <div id="bodypost">커뮤니티 게시글 내용</div>
-                <div id="bodypost1">게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용게시글 내용</div>
+                <div id="bodypost1"><%=list.get(0).getBoardContent() %></div>
             </div>
             <br><br><br><br><br>
             <div id="footer">
                 <div id="footerpost">커뮤니티 작성 날짜</div>
-                <div id="footerpost1">2022/11/18</div>
-                <div id="footerpost2"><i class="bi bi-chat-dots"></i> 5 <i class="bi bi-hand-thumbs-up"></i> 5 </div>
+                <div id="footerpost1"><%=list.get(0).getBoardDate() %></div>
+                <div id="footerpost2"><i class="bi bi-chat-dots"></i> <%=list.get(0).getReplyCount() %> <i class="bi bi-hand-thumbs-up"></i> <%=list.get(0).getBoardRecommend()%> </div>
             </div>
+        
         </div>
         <%@ include file="../mypagein/myPageInMyReply.jsp"%>
 <!--        여기부턴 댓글 -->
