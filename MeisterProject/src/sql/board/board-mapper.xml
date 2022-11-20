@@ -75,9 +75,11 @@
                 REPLY_COUNT,
                 BOARD_DATE 
        	FROM BOARD B
-        JOIN REPLY R USING(BOARD_NO)
-		WHERE ROWNUM <= 3 AND TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE -1,'YYYYMMDDHH') AND B.STATUS = 'Y'
-		AND BOARD_TYPE = 1 
+        LEFT OUTER JOIN REPLY R USING(BOARD_NO)
+		WHERE ROWNUM <= 3 
+        AND TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE-1,'YYYYMMDDHH')
+        AND B.STATUS = 'Y'
+		AND BOARD_TYPE = 1                                
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 

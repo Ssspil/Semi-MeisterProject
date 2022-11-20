@@ -93,6 +93,7 @@ public class BoardDao {
 						rset.getInt("USER_NO"),		
 						rset.getInt("REPLY_COUNT"));
 				board.add(b);
+				
 			}
 
 			int cnt = board.size();
