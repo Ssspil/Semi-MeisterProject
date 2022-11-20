@@ -654,8 +654,7 @@ function searchEnter(){
 };
 
 function detail(no){
-	   if(no != 0) location.href="<%=contextPath%>
-	" + "/detail.bo?type=1&bno=" + no;
+	   if(no != 0) location.href="<%=contextPath%>" + "/detail.bo?type=1&bno=" + no;
 
 	}
    

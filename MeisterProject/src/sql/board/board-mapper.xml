@@ -202,9 +202,16 @@
 		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
 	</entry>
 	
+	<entry key="updateReply">
+		UPDATE REPLY 
+		SET REPLY_CONTENT = ?
+		WHERE REPLY_NO = ?
+	</entry>
+	
 	<entry key="deleteReply">
 		UPDATE REPLY
 		SET STATUS = 'N'
-		WHERE USER_NO = ?
+		WHERE REPLY_NO = ?
 	</entry>
+	
 </properties>

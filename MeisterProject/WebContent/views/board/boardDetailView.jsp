@@ -607,14 +607,17 @@ button {
 		function selectReplyList(){
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
+		 	var bno = "<%=b.getBoardNo()%>";
+		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
-					console.log(list)
+
 					let htmls="";
 					for(let i of list) {
-
+						index += 1;
+						
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
@@ -626,7 +629,7 @@ button {
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="content">';
 						htmls +=        '<p data-c-1 class="text comment-input">';
-						htmls +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">'+i.replyContent+'</span>';
+						htmls +=            '<span data-c-1 id="replycontent'+index+'" style="font-weight: 400px;width:100%; display:block" contenteditable=false>'+i.replyContent+'</span>';
 						htmls +=        '</p>';
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="comment-action">';
@@ -640,8 +643,8 @@ button {
 						if(loginNo == i.userNo){
 			                htmls    +=        '<div data-c-1 class="more-action">';
 			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
-                			htmls	 +=					'<button type="button" onclick = "udatebtn();" class="btn btn-secondary .btn-dropdown">수정하기</button>';
-			                htmls    +=                '<button type="button" id="delete-btn" class="btn btn-secondary .btn-dropdown">삭제하기</button>';			
+                			htmls	 +=					'<button type="button" class="btn btn-secondary .btn-danger" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
+			                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
 						} else { 
 				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
 				               htmls    +=            '</div>';
@@ -660,9 +663,27 @@ button {
 			});
 		};
 		
-		function updatebtn() {
+		// 댓글 수정
+		function replyUpdate(index, rno, bno){
+			var isUpdate = $("#replycontent"+index).attr("contenteditable");
+			
+			if(isUpdate == "false"){
+				$("#replycontent"+index).attr("contenteditable", true);
+				$("#replycontent"+index).focus();
+				return false;
+			}
+			else {
+				var content = $("#replycontent"+index).text();
+				location.href="<%=contextPath%>" + "/update.ro?rno="+rno+"&bno="+bno+"&content="+content;
+			}
 			
 		}
+		
+		// 댓글 삭제
+		function replyDelete(rno, bno){
+			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
+		}
+
  	</script>
 
 	
