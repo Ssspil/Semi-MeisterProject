@@ -73,7 +73,7 @@
 			&nbsp; - &nbsp;
 			<input type="text" name="phoneMid" size="4" required>
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneast" size="4" required>
+			<input type="text" name="phoneLast" size="4" required>
 			
 			<br><br>
 			<h6><b>* 전문분야 : &nbsp;</b></h6> 

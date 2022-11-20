@@ -46,7 +46,7 @@ public class BlackListRemoveController extends HttpServlet {
 		// input 벨뷰로 해서값을 가져오고 키값은 name이라고 보면 된다.
 		String[] userArr = request.getParameterValues("user");
 		
-		ArrayList<Member> blacklist = null;
+		ArrayList<Member> blacklist = new ArrayList<>();
 		
 		for(String s : userArr) {
 			int userNo  = Integer.parseInt(s);
@@ -56,12 +56,12 @@ public class BlackListRemoveController extends HttpServlet {
 			blacklist.add(delMem);
 		}
 		
-		if(blacklist != null) {
+		if(blacklist == null) {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		} else {
 			System.out.printf("관리자가 블랙회원을 삭제하였습니다. \n");
 			
-			response.sendRedirect(request.getContextPath()+"/lacklist.ad");
+			response.sendRedirect(request.getContextPath()+"/blacklist.ad");
 		}
 		
 	}

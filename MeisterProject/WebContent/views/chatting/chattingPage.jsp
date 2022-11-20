@@ -20,7 +20,20 @@
         margin: auto;
         margin-top: 100px;
         margin-bottom: 150px;
-        height: 1000px;
+        height: 500px;
+        background: "aliceblue";
+        border: "1px solid black";
+    }
+    .chat-format {
+        color: black;
+        width: 700px;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 150px;
+        height: 100px;
+    }
+    #textMessage{
+    	width: 500px;
     }
     #profile{
     	width: 50px;
@@ -70,6 +83,7 @@
 </style>
 <title>Web Socket Example</title>
 </head>
+
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
@@ -157,18 +171,20 @@
 	</script>
 	<div class="outer">
 		<form action="<%=contextPath%>/chatting.me" method="post">
-			<input id="user" type="text" value="<%=nickName%>" readonly> 
+<%-- 			<input id="user" type="text" value="<%=nickName%>" readonly>  --%>
 			<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
-			<input id="textMessage" type="text" value=""> 
 			<input id="opponent" type="text" value="admin" readonly>
 			<input id="receiver" type="hidden" value="1" readonly>  
-			<input onclick="disconnect()" value="Disconnect" type="button"> 
+<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 			<br>
-			<input id="chatData" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
-			<input onclick="sendMessage()" value="Send" type="button">
-			<button type="submit">저장하기</button>
+			<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
 		</form>
 		<br>
+	</div>
+	<div class="chat-format">
+		<input id="textMessage" type="text" value=""> 
+		<input onclick="sendMessage()" value="Send" type="button">
+		<button type="submit">저장하기</button>	
 	</div>
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
@@ -308,6 +324,11 @@
 		function disconnect() {
 			webSocket.close();
 		}
+		 window.onpopstate = function(event) {
+			  history.back();
+			  console.log('뒤로가기 체크'); 
+		};
+
 	</script>
 </body>
 </html>
