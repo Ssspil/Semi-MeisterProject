@@ -149,7 +149,7 @@ table>tfoot>tr:hover{
 						
 						<tbody>
 						    <tr>
-						      <th><label><input type="checkbox" name="userAllSelect" id="userAllSelect" value="userAllSelect"></label></th>
+						      <th><input type="checkbox" name="userAll" id="userAll" onclick="selectAll();"></th>
 						      <th width="100">회원번호</th>
 						      <th width="150">아이디</th>
 						      <th width="100">이름</th>
@@ -159,6 +159,7 @@ table>tfoot>tr:hover{
 						      <th width="100">상태</th>
 						    </tr>
 						</tbody>
+
 						<tfoot>
 					    <% for(Member m : blacklist) { %>
 					    	<% if( blacklist.isEmpty() ) { %>
@@ -166,10 +167,14 @@ table>tfoot>tr:hover{
 					    		<td colspan="8">블랙 컨슈머가 없습니다.</td>
 					    	</tr>
 					    	<% } else { %>
-						    <tr>
+
+					    	
+						    <tr class="user<%=m.getUserNo() %>">
+						
 							      <td>
-							      	<input type="checkbox" class="userSelect" id="user<%= m.getUserNo() %>" name="user<%= m.getUserNo() %>">\
+							           <input type="checkbox" name="user" id="<%=m.getUserNo() %>" value="<%=m.getUserNo() %>" onclick="singleCheck();">
 							      </td>
+							      
 							      <td><%= m.getUserNo() %></td>
 							      <td><%= m.getUserId() %></td>
 							      <td>
@@ -180,14 +185,29 @@ table>tfoot>tr:hover{
 							      <% } %>
 							      </td>
 							      <td><%= m.getNickName() %></td>
-							      <td>관리자에 의하여 처리</td>
-							      <td><%= m.getEnrollDate() %></td>
+							      <td><%= m.getReason() %></td>
+							      <td><%= m.getBlackenrollDate() %></td>
 							      <td class="status">
 							      <% if ((m.getBlackList()).equals("Y"))  { %>
 							      	제적
 							      <% } %>
-							      </td>
+							      </td> 
+					
 						    </tr>
+						    
+						  	<script>
+						      $(function(){
+						    	  $('.user<%=m.getUserNo() %>').click(function(){
+						    		  if($(this).children().children('[type="checkbox"]:checked') == true){
+						    			  $(this).children().children('[name="user"]').attr("checked", false);
+						    		  } else {
+						    			  $(this).children().children('[name="user"]').attr("checked", true);
+						    		  }
+									
+						    	  });
+						      })
+						      
+						  	</script>
 
 					  		<% } %>
 					  <% } %>
@@ -210,11 +230,37 @@ table>tfoot>tr:hover{
             </footer>
         </div>
     </div>
+    <script>
+      const USERALL = document.querySelector('#userAll');
+      const users = document.querySelectorAll('[name="user"]');
+
+      function selectAll(){
+        for(let i = 0; i < users.length; i++){
+          users[i].checked = USERALL.checked;
+        }
+      }
+
+      function singleCheck(){
+        let total = users.length;
+        let checkedUsers = document.querySelectorAll('[name="user"]:checked').length;
+
+        if(total == checkedUsers){
+          USERALL.checked = true;
+        } else {
+          USERALL.checked = false;
+        }
+      }
+      
+
+      
+
+      
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="<%= contextPath %>/resources/js/datatables-manager.js"></script>
+
 </body>
 </html>

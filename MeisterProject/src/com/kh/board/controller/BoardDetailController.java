@@ -41,16 +41,17 @@ public class BoardDetailController extends HttpServlet {
 		int result = bService.increaseCount(boardNo);
 		
 		if(result > 0) {
-			int no = bService.selectBoardWriter(boardNo); // 유저번호
+			
+			
+//			int no = bService.selectBoardWriter(boardNo); // 유저번호
 			
 			Board b = bService.selectBoard(boardNo); // 게시판 번호
 			
-			Attachment at = bService.selectAttachment(no);
-//			Attachment at1 = bService.selectAttachment(bo);
+			Attachment at = bService.selectAttachment(boardNo);
+			
 			
 			request.setAttribute("b", b);
 			request.setAttribute("at", at);
-//			request.setAttribute("at", at1);
 			
 			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 		} else { // 에러페이지

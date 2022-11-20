@@ -36,7 +36,7 @@ public class SellInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF8");
+		request.setCharacterEncoding("UTF-8");
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("글등록");
@@ -65,8 +65,8 @@ public class SellInsertController extends HttpServlet {
 			s.setSellContent(sellContent);
 			s.setPrice(price);
 			
-			s.setLocal(local);
-			s.setInterest(interest);
+			s.setLocalNo(local);
+			s.setInterestNo(interest);
 			s.setUserNO(userNO);
 			
 			

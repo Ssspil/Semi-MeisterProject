@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.board.model.vo.Board;
@@ -114,33 +115,33 @@ public class BoardDao {
 		return board;
 	}
 	
-	public int selectBoardWriter(Connection conn, int boardNo) {
-
-		int no = 0;
-		
-		PreparedStatement psmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectBoardWriter");
-
-		try {
-			psmt = conn.prepareStatement(sql);
-
-			psmt.setInt(1, boardNo);
-
-			rset = psmt.executeQuery();
-
-			if (rset.next()) {
-				 no = rset.getInt("USER_NO");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(psmt);
-		}
-		return no;
-	}
+//	public int selectBoardWriter(Connection conn, int boardNo) {
+//
+//		int no = 0;
+//		
+//		PreparedStatement psmt = null;
+//		ResultSet rset = null;
+//
+//		String sql = prop.getProperty("selectBoardWriter");
+//
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//
+//			psmt.setInt(1, boardNo);
+//
+//			rset = psmt.executeQuery();
+//
+//			if (rset.next()) {
+//				 no = rset.getInt("USER_NO");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(psmt);
+//		}
+//		return no;
+//	}
 
 	// 게시글 상세보기
 	public Board selectBoard(Connection conn, int boardNo) {
@@ -192,7 +193,7 @@ public class BoardDao {
 			psmt.setInt(1, boardNo);
 
 			rset = psmt.executeQuery();
-
+			//글내용 이미지
 			if (rset.next()) {
 				at = new Attachment();
 
@@ -201,6 +202,25 @@ public class BoardDao {
 				at.setChangeName(rset.getString("CHANGE_NAME"));
 				at.setFilePath(rset.getString("FILE_PATH"));
 			}
+			
+			close(rset);
+			close(psmt);
+			//프로필이미지
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, 5);
+
+			rset = psmt.executeQuery();
+			//글내용 이미지
+			if (rset.next()) {
+				at = new Attachment();
+
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -312,7 +332,6 @@ public class BoardDao {
 			psmt.setInt(4, type);
 			
 			result = psmt.executeUpdate();
-			System.out.println("result:"+result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -333,7 +352,8 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
+			
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
@@ -383,6 +403,7 @@ public class BoardDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, b.getBoardTitle());
 			psmt.setString(2, b.getBoardContent());
 			psmt.setInt(3, b.getBoardNo());
@@ -401,16 +422,19 @@ public class BoardDao {
 	public int updateAttachment(Attachment at, Connection conn) {
 
 		int result = 0;
+		
 		PreparedStatement psmt = null;
+		
 		String sql = prop.getProperty("updateAttachment");
 
 		try {
 			psmt = conn.prepareStatement(sql);
+			
 			psmt.setString(1, at.getOriginName());
 			psmt.setString(2, at.getChangeName());
 			psmt.setString(3, at.getFilePath());
 			psmt.setInt(4, at.getFileNo());
-
+			
 			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -542,11 +566,11 @@ public class BoardDao {
 			
 			while(rset.next()) {
 				list.add(new Reply(
-						rset.getInt(1),
-						rset.getString(2),
-						rset.getInt(3),
-						rset.getString(4),
-						rset.getString(5)
+						rset.getInt("REPLY_NO"),
+						rset.getString("REPLY_CONTENT"),
+						rset.getInt("USER_NO"),
+						rset.getString("NICKNAME"),
+						rset.getString("REPLY_DATE")
 						));
 			}
 		} catch (SQLException e) {
@@ -558,5 +582,28 @@ public class BoardDao {
 		
 		return list;
 	}
+	
+	public int deleteReply(int userNo, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteBoard");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
 
 }

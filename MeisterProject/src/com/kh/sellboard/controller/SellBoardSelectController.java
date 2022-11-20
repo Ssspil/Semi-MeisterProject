@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.sellboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReplyDeleteController
+ * Servlet implementation class SellBoardSelectController
  */
-@WebServlet("/ReplyDeleteController")
-public class ReplyDeleteController extends HttpServlet {
+@WebServlet("/SellBoardSelectController")
+public class SellBoardSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyDeleteController() {
+    public SellBoardSelectController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.board.model.dao.BoardDao;
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
+import com.kh.chatting.model.dao.ChattingDao;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardService {
@@ -58,9 +60,9 @@ public class BoardService {
 
 		int result2 = 1;
 
-		/*
-		 * if (at != null) { result2 = new BoardDao().insertAttachment(at, conn); }
-		 */
+		
+		 if (at != null) { result2 = new BoardDao().insertAttachment(at, conn); }
+		
 
 		if (result1 > 0 && result2 > 0) {
 
@@ -132,15 +134,15 @@ public class BoardService {
 
 	}
 	
-	public int selectBoardWriter(int boardNo) {
-		Connection conn = getConnection();
-
-		int no = new BoardDao().selectBoardWriter(conn, boardNo);
-
-		close();
-
-		return no;
-	}
+//	public int selectBoardWriter(int boardNo) {
+//		Connection conn = getConnection();
+//
+//		int no = new BoardDao().selectBoardWriter(conn, boardNo);
+//
+//		close();
+//
+//		return no;
+//	}
 
 	public Attachment selectAttachment(int boardNo) {
 		Connection conn = getConnection();
@@ -197,6 +199,24 @@ public class BoardService {
 		close();
 		
 		return list;
+	}
+	
+	public int deleteReply(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteReply(userNo, conn);
+		
+		new BoardDao().deleteAttachment(userNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
 	}
 
 }

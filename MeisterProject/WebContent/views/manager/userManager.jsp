@@ -334,7 +334,13 @@
                                             <script>
                                                 $(function() {
                                                     $('#blacklist-btn<%= m.getUserNo()%>').click(function() {
-														location.href='<%= contextPath %>/insertbl.ad?uno=' + <%= m.getUserNo() %>
+                                                    	var reason = prompt("제적이유가 무엇입니까??");
+                                                    	if(reason == null){
+                                                    		return;
+                                                    	}
+														location.href='<%= contextPath %>/insertbl.ad?uno=' + <%= m.getUserNo() %>+'&reason='+reason;
+														
+													
                                                     })
                                                 })
                                             </script>

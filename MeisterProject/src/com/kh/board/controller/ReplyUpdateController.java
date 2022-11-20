@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class ReplyUpdateController
  */
-@WebServlet("/ReplyUpdateController")
+@WebServlet("/udateForm.ro")
 public class ReplyUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +28,6 @@ public class ReplyUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 	
 	}

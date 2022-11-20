@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,
+    							com.kh.board.model.vo.*"%>
+<%
+	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("mainList");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <link href="./resources/css/mainPage.css" rel="stylesheet" type="text/css"  />
-
+<!--  google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <%@ include file="/views/common/header.jsp" %>
@@ -16,17 +23,24 @@
       <div class="imgContainer">
       <div id="slider">
         <ul class="slides">
-          <li class="slide">
-            <img src="./resources/image/test1.jpeg" alt="" />
+          <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
+            <img src="./resources/image/main1.jpeg" alt="" />
           </li>
           <li class="slide">
-            <img src="./resources/image/test2.jpeg" alt="" />
+            <img src="./resources/image/main2.jpeg" alt="" />
           </li>
           <li class="slide">
-            <img src="./resources/image/test3.jpeg" alt="" />
+            <img src="./resources/image/main3.jpeg" alt="" />
           </li>
           <li class="slide">
-           <img src="./resources/image/test4.jpeg" alt="" />
+          	<img src="./resources/image/main4.jpeg" alt="" />
+          </li>
+          <li class="slide">
+          	<img src="./resources/image/main5.jpeg" alt="" />
+          </li>
+          
+          <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
+            <img src="./resources/image/main1.jpeg" alt="" />
           </li>
         </ul>
       </div>
@@ -80,53 +94,67 @@
       
       
       <div class="icon-area">
-      	<div class="icon-container">
-	      	<ul class="icon-list">
-	      		<li>
-	      			<div>
-	      				<img alt="zz" src="./resources/image/test4.jpeg" width="20" height="20"><a href="#">전체</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">영상</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">영화</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">게임</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">IT</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">운동</a>
-	      			</div>
-	      		</li>
-	      		<li>
-	      			<div>
-	      				<div class="icon">?</div><a href="#">요리</a>
-	      			</div>
-	      		</li>
-	      	</ul>
-	      </div>
+      	<div class="icon-container" align="center">
+			<div class="icon" >
+				<a href="#">
+					<img src="./resources/image/icon1.gif" width="90" height="100"/>
+					<br><b>전체</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon2.gif" width="90" height="100"/>
+					<br><b>영상</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon3.gif" width="90" height="100"/>
+					<br><b>영화</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon4.gif" width="90" height="100"/>
+					<br><b>게임</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon5.gif" width="90" height="100"/>
+					<br><b>IT</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon6.gif" width="90" height="100"/>
+					<br><b>운동</b>
+				</a>
+			</div>
+			<div class="icon">
+				<a href="#">
+					<img src="./resources/image/icon7.gif" width="90" height="100"/>
+					<br><b>요리</b>
+				</a>
+			</div>
+	    </div>
       </div>
       
       <div class="interest-area">
-      	관심분야 영ㅇ역?
+      	모두모두화이팅 입니다  마무리 잘되었으면 좋겠습니다..
       </div>
       
       <div class="community-area">
-      		커뮤니티 영역?
+      		<div class="area1">
+      			<div class="community-main">
+      				<% for(int i = 0; i < 1; i++) { %>
+      					 <%= list %>
+      				<% } %>
+      			</div>
+      		</div>
+      		<div class="area2">
+      			에효..
+      		</div>
       </div>
     </div><!-- outer 끝 -->
 	
@@ -145,27 +173,30 @@ var slider = document.querySelector("#slider");
 var slides = slider.querySelector(".slides");
 var slide = slides.querySelectorAll(".slide");
 
-var currentSlide = 0;
 
+var currentSlide = 0;
 setInterval(function () {
-    var from = -(1100 * currentSlide);
-    var to = from - 1100;
-    slides.animate(
-        {
-            marginLeft: [from + "px", to + "px"],
-        },
-        {
-            duration: 700,
-            easing: "ease",
-            iterations: 1,
-            fill: "both",
-        }
-    );
-    currentSlide++;
-    if (currentSlide === slide.length - 1) {
-        currentSlide = 0;
-    }
-}, 3500);
+		
+	    var from = -(1100 * currentSlide);
+	    var to = from - 1100;
+	    slides.animate(
+	        {
+	            marginLeft: [from + "px", to + "px"],
+	        },
+	        {
+	            duration: 1000,
+	            easing: "ease",
+	            iterations: 1,
+	            fill: "both",
+	        }
+	    );
+	    ++currentSlide;
+	    if (currentSlide === slide.length - 1) {
+	        currentSlide = 0;
+	        
+	    }
+	    
+	}, 3500);
 
 </script>
 

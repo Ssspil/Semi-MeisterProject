@@ -232,15 +232,18 @@ public class MemberService {
 	 * @param userNo
 	 * @return
 	 */
-	public Member insertBlackUser(int userNo) {
+	public Member insertBlackUser(int userNo, String reason) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().insertBlackUser(conn, userNo);
+		// 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 Y로 바꿔주는 것
+		int result1 = new MemberDao().insertBlackUser(conn, userNo);
+		// 어떤 이유로 블랙리스트 넣었는지 BLACKLIST테이블에 이유를 넣어주는 것
+		int result2 = new MemberDao().insertBlacklist(conn, userNo, reason);
 		
 		Member blackUser = null;
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			
 			blackUser = new MemberDao().selectBlackUserByNo(conn, userNo);
 			
@@ -278,6 +281,32 @@ public class MemberService {
 		JDBCTemplate.close();
 		
 		return nickName;
+	}
+
+	/**
+	 * 블랙리스트테이블에서 정보를 삭제하는 메소드
+	 * @param userNo
+	 * @return
+	 */
+	public Member deleteblacklist(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// 블랙유저를 블랙리스트에서 삭제하는 메소드
+		int result1 = new MemberDao().deleteBlacklist(conn, userNo);
+		// 유저번호로인해 MEMBER테이블에 블랙리스트칼럼에 여부를 N로 바꿔주는 것
+		int result2 = new MemberDao().deleteBlackUser(conn, userNo);
+		
+		Member delMem = null;
+
+		if(result1 > 0 && result2 > 0) {
+			delMem = new MemberDao().selectMemberByNo(conn, userNo);
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return delMem;
 	}
 	   
 	   

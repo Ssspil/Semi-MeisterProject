@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Reply;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -35,14 +36,14 @@ public class ReplyInsertController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		
 		Reply r = new Reply();
+		
 		r.setReplyContent(replyContent);
 		r.setBoardNo(boardNo);
 		r.setUserNo(userNo);
 		
 		int result = new BoardService().insertReply(r);
-		
-		System.out.println(result);
 		
 		response.getWriter().print(result);
 	}

@@ -3,9 +3,8 @@
     
     <%
        int type = Integer.parseInt(request.getParameter("type"));
-//     	Attachment at = (Attachment) request.getAttribute("at");
-// 		if(at == null){
-// 		at = new Attachment();
+    
+//      	Attachment at = (Attachment) request.getAttribute("at");
       %>
 <!DOCTYPE html>
 <html>
@@ -217,10 +216,10 @@
                </div>
                <div id="file">
                   <div id="file2">
-                     <label class="input-file-button" for="input-file">
+                     <label class="input-file-button" id="file-btn" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i>
                      </label>
-                     <input type="file" id="input-file" onchange="fileChange()"style=display:none>
+                     <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
                      <label id="fileName"></label>
                   </div>
                </div>
@@ -231,15 +230,14 @@
                   </div>
                </div>
                <div></div>
-
+				<!-- 이미지 미리보기 -->
 				<div data-a-2 data-v-6 class="editor-image">
 					<div data-a-2 class="editor-image-list">
 						<div data-a-2 class="image-preview">
-							<img id="titleImg" width="250" height="170">
+							<img id="titleImg" onchange="readImage()" width="250" height="170">
 						</div>
 					</div>
 				</div>
-
 					<div id="content">
                   <div id="content2">
                      <textarea id="content3" maxlength="500" name="content" rows="10" placeholder="게시글 내용을 입력해주세요." required></textarea>
@@ -252,13 +250,31 @@
    
    <%@ include file="../common/footer.jsp" %>
    
-   
-      
    <script>
-      function fileChange(){
-         $("#fileName").text($("#input-file")[0].files[0].name);
-      }
+	 
    </script>
+     
+    <script>
+       function fileChange(){
+         $("#fileName").text($("#input-file")[0].files[0].name);
+       }
+       
+       function readImage(input) {
+    	    if (input.files && input.files[0]) {
+    	        const reader = new FileReader();
+    	        
+    	        reader.onload = (e) => {
+    	            const titleImg = document.getElementById('titleImg');
+    	            titleImg.src = e.target.result;
+    	        }
+    	        reader.readAsDataURL(input.files[0]);
+    	    }
+    	}
+     	// 이벤트 리스너
+     	document.getElementById('input-file').addEventListener('change', (e) => {
+    	    readImage(e.target);
+     	})
+    </script>
    
 </body>
 </html>

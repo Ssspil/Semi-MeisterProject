@@ -21,6 +21,7 @@
    }
    #wrap {
 /*       background: black; */
+
         
 
         height: 800px;
@@ -179,14 +180,35 @@
       width: 100%;
       margin: 0.75rem;
    }
+   
+   .editor-image[data-a-2] {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 0.75rem;
+        }
+   .editor-image .editor-image-list[data-a-2] {
+       display: inline-flex;
+       flex-flow: row wrap;
+       width: 60.625rem;
+       padding-top: 0.75rem;
+       align-items: center;
+        }
+   .editor-image .editor-image-list .image-preview[data-a-2] {
+          display: inline-block;
+          position: relative;
+          margin-right: 0.75rem;
+          margin-bottom: 0.75rem;
+        }
 
+</style>
 </style>
 </head>
 <body>
    <%@ include file="../common/header.jsp" %>
    <div id="wrap">
    		<form action="<%= contextPath %>/update.bo" id="update-form" method="post" enctype="multipart/form-data" style="height: 700px; font-weight: bold;">
-         <input type="hidden" name="bno" value="<%= b.getBoardNo() %>">
+         <input type="hidden" name="bno" value="<%=b.getBoardNo()%>">
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
@@ -198,8 +220,13 @@
                      <label class="input-file-button" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i>
                      </label>
-                     <input type="file" id="input-file" onchange="fileChange()"style=display:none>
-                     <label id="fileName"></label>
+                     <% if(at != null) { %>
+						<!-- 원본파일의 파일번호, 수정명을 hidden으로 넘길것. -->
+						<input type="hidden" name="originFileNo" value="<%= at.getFileNo() %>">
+						<input type="hidden" name="originFileName" value="<%= at.getChangeName() %>">
+					<% } %>	
+                     <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
+                     <label id="fileName"><%=at.getOriginName()%></label>
                   </div>
                </div>
       <br>
@@ -209,9 +236,14 @@
                   </div>
                </div>
                <div></div>
-               <div id="img">
-
-               </div>
+               <div data-a-2 data-v-6 class="editor-image">
+					<div data-a-2 class="editor-image-list">
+						<div data-a-2 class="image-preview">
+							<img data-h-1 class="image" onchange="readImage()" width="250" height="170"src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>">
+						</div>
+					</div>
+				</div>
+               
                <div id="content">
                   <div id="content2">
                      <textarea id="content3" maxlength="500" name="content" rows="10"  required><%=b.getBoardContent() %></textarea>
@@ -229,8 +261,25 @@
    <script>
       function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
+         $(".img").src = null;
       }
-   </script>
+      
+      function readImage(input) {
+  	    if (input.files && input.files[0]) {
+  	        const reader = new FileReader();
+  	        
+  	        reader.onload = (e) => {
+  	            const titleImg = document.getElementById('titleImg');
+  	            titleImg.src = e.target.result;
+  	        }
+  	        reader.readAsDataURL(input.files[0]);
+  	    }
+  	}
+   	// 이벤트 리스너
+   	document.getElementById('input-file').addEventListener('change', (e) => {
+  	    readImage(e.target);
+   	})
+  </script>
    
 </body>
 </html>

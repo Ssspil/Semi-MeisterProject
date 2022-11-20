@@ -12,7 +12,7 @@ import com.kh.board.model.service.BoardService;
 /**
  * Servlet implementation class BoardDlelteController
  */
-@WebServlet("/delete.bo")
+@WebServlet("/delete.ro")
 public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

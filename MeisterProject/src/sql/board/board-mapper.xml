@@ -83,14 +83,16 @@
 		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
 	</entry>
 
+	<!-- 게시글 글작성 -->
 	<entry key ="insertBoard">
 		INSERT INTO BOARD(BOARD_NO, BOARD_TITLE, BOARD_CONTENT, USER_NO, BOARD_TYPE)
 		VALUES (SEQ_BNO.NEXTVAL, ?, ?, ?, ?)	
 	</entry>
 	
+	<!-- 게시글 글작성 -->
 	<entry key ="insertAttachment">
-		INSERT INTO ATTACHMENT(FILE_NO , REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
-		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ? )
+		INSERT INTO ATTACHMENT(FILE_NO , REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ?, 1)
 	</entry>
 	
 	<entry key="insertNewAttachment">
@@ -113,6 +115,18 @@
 			UPLOAD_DATE = SYSDATE
 		WHERE FILE_NO = ?
 	</entry>
+	
+<!-- 	<entry key="selectSameAttachment"> -->
+<!-- 		SELECT FILE_NO -->
+<!-- 	   	FROM ATTACHMENT -->
+<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
+<!-- 	</entry> -->
+	
+<!-- 	<entry key="deleteAttachment"> -->
+<!-- 		DELETE -->
+<!-- 	   	FROM ATTACHMENT -->
+<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
+<!-- 	</entry> -->
 	
 	<entry key="deleteBoard">
 		UPDATE BOARD
@@ -141,11 +155,11 @@
 		AND b.STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectBoardWriter">
-		SELECT USER_NO
-		FROM BOARD
-		WHERE BOARD_NO = ?
-	</entry>
+<!-- 	<entry key="selectBoardWriter"> -->
+<!-- 		SELECT USER_NO -->
+<!-- 		FROM BOARD -->
+<!-- 		WHERE BOARD_NO = ? -->
+<!-- 	</entry> -->
 	
 	<entry key="selectAttachment">
 		SELECT FILE_NO,
@@ -154,7 +168,7 @@
 		       FILE_PATH,
 		       FILE_LEVEL
 		 FROM ATTACHMENT
-		 WHERE REF_NO = ? AND FILE_LEVEL = 5
+		 WHERE REF_NO = ? AND FILE_LEVEL = 1
 		 ORDER BY FILE_LEVEL
 	</entry>
 	
@@ -186,5 +200,11 @@
 		WHERE R.STATUS = 'Y'
 			AND BOARD_NO = ?
 		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
+	</entry>
+	
+	<entry key="deleteReply">
+		UPDATE REPLY
+		SET STATUS = 'N'
+		WHERE USER_NO = ?
 	</entry>
 </properties>
