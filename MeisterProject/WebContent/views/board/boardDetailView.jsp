@@ -9,6 +9,8 @@
 	if(at == null){
 		at = new Attachment();
 	}
+	
+	Reply r = (Reply) request.getAttribute("r");
 %>
 
 
@@ -554,6 +556,8 @@ button {
             </div>
         </div>
 </div>
+
+
 	
 	
 
@@ -601,50 +605,52 @@ button {
 		};
 		
 		function selectReplyList(){
-		
+			
+		 	var loginNo = "<%=loginUser.getUserNo()%>";
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
 					console.log(list)
-					let reply ="";
+					let htmls="";
 					for(let i of list) {
 
-							htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
-							htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
-							htmls += '<div data-c-1 class="profile-image">';
-							htmls +=    '<img data-c-1 class="image" src="">';
-							htmls += '</div>';
-							htmls  += '<div data-c-1 class="comment-information">';
-							htmls  +=    '<div data-c-1 class="user-info">';
-							htmls    +=        '<span data-c-1 class="user-name">'+i.mbNic+'</span>';
-							htmls     +=    '</div>';
-							htmls    +=    '<div data-c-1 class="content">';
-							htmls     +=        '<p data-c-1 class="text comment-input">';
-							htmls     +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">'+i.replyContent+'</span>';
-							htmls       +=        '</p>';
-							htmls       +=    '</div>';
-							htmls       +=    '<div data-c-1 class="comment-action">';
-							htmls      +=        '<div data-c-1 class="comment-react">';
-							htmls    +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-							htmls   +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
-							htmls   +=            '<div data-c-1 class="like-area">';
-							htmls   +=                '<span data-c-1 class="text"></span>' ;
-							htmls   +=            '</div>';
-							htmls     +=        '</div>';
-// 				                			'if(loginUser != null && loginUser.getUserNo() == (list.getUserNo())) {';
-				                htmls    +=        '<div data-c-1 class="more-action">';
-				                htmls    +=            '<div data-c-1 class="btn-sgroup">';
-				                htmls    +=                '<button type="button" id="delete-btn" class="btn btn-secondary .btn-dropdown">삭제하기</button>';			
-// 				                			'	} else {'; 
- 				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
- 				               htmls    +=            '</div>';
-				                htmls    +=        '</div>';
-//  				                				'}'; 
-				                htmls    +=    '</div>';
-				                htmls    += '</div>';
-				                htmls     += '</div>';
-				                htmls	+= '</li>';
+						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
+						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
+						htmls += '<div data-c-1 class="profile-image">';
+						htmls +=    '<img data-c-1 class="image" src="">';
+						htmls += '</div>';
+						htmls += '<div data-c-1 class="comment-information">';
+						htmls +=    '<div data-c-1 class="user-info">';
+						htmls +=        '<span data-c-1 class="user-name">'+i.mbNic+'</span>';
+						htmls +=    '</div>';
+						htmls +=    '<div data-c-1 class="content">';
+						htmls +=        '<p data-c-1 class="text comment-input">';
+						htmls +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">'+i.replyContent+'</span>';
+						htmls +=        '</p>';
+						htmls +=    '</div>';
+						htmls +=    '<div data-c-1 class="comment-action">';
+						htmls +=        '<div data-c-1 class="comment-react">';
+						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
+						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+						htmls +=            '<div data-c-1 class="like-area">';
+						htmls +=                '<span data-c-1 class="text"></span>' ;
+						htmls +=            '</div>';
+						htmls +=        '</div>';
+						if(loginNo == i.userNo){
+			                htmls    +=        '<div data-c-1 class="more-action">';
+			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
+                			htmls	 +=					'<button type="button" onclick = "udatebtn();" class="btn btn-secondary .btn-dropdown">수정하기</button>';
+			                htmls    +=                '<button type="button" id="delete-btn" class="btn btn-secondary .btn-dropdown">삭제하기</button>';			
+						} else { 
+				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
+				               htmls    +=            '</div>';
+			                htmls    +=        '</div>';
+						 } 
+		                htmls    +=    '</div>';
+		                htmls    += '</div>';
+		                htmls     += '</div>';
+		                htmls	+= '</li>';
 					}
 					$(".comments-list").html(htmls);
 				},
@@ -653,6 +659,10 @@ button {
 				}
 			});
 		};
+		
+		function updatebtn() {
+			
+		}
  	</script>
 
 	

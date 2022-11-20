@@ -15,6 +15,22 @@ public class Reply {
 		
 	}
 
+	
+	public Reply(int replyNo, int replyCount, String replyContent, String replyDate, int boardNo, int userNo,
+			String mbNic) {
+		super();
+		this.replyNo = replyNo;
+		this.replyCount = replyCount;
+		this.replyContent = replyContent;
+		this.replyDate = replyDate;
+		this.boardNo = boardNo;
+		this.userNo = userNo;
+		this.mbNic = mbNic;
+	}
+
+
+
+
 	// 댓글 리스트
 	public Reply(int replyNo, String replyContent, int userNo, String mbNic, String replyDate) {
 		super();
