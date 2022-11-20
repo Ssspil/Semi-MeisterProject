@@ -115,7 +115,6 @@ svg {
 .icon{
 	float :left;
 	margin-left: 25px;
-	font-weight : 600;
 }
 
 .icon img:hover, .icon a:hover{
