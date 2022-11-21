@@ -53,7 +53,7 @@ public class SellDetailController extends HttpServlet {
 		
 		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
