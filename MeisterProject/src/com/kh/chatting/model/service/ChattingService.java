@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kh.chatting.model.dao.ChattingDao;
 import com.kh.chatting.model.vo.Chatting;
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Attachment;
 
 public class ChattingService {
 	
@@ -63,5 +64,13 @@ public class ChattingService {
 		
 		JDBCTemplate.close();
 		return list;
+	}
+	
+	public Attachment getProfile(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Attachment at = new ChattingDao().getProfile(conn, userNo);
+		
+		JDBCTemplate.close();
+		return at;
 	}
 }

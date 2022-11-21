@@ -15,18 +15,17 @@
 <style>
 	.outer {
         color: black;
-        width: 700px;
+        width: 500px;
         margin: auto;
         margin-top: 100px;
         margin-bottom: 150px;
         height: 1000px;
     }
     #list{
-    	border: 1px solid black;
     	width: 500px;
     	height: 150px;
     	margin: auto;
-    	margin-top: 15px;
+    	margin-top: 5px;
     	border-radius:30px / 100px;
     }
     #list>div{
@@ -40,6 +39,11 @@
     	border: none;
     	background-color: white;
     }
+    #inputNick{
+    	width: 200px;
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    }
 </style>
 </head>
 <body>
@@ -47,12 +51,13 @@
 	<script>
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
-				$(document).ready(function() {
+				$(document).ready(function() {				
 					$('.outer').append(
 						$('<div>').prop({
 							id: 'divList<%=count%>'
 						})
 					);
+					
 					$('#divList<%=count%>').append(
 						$('<form>').prop({
 							method: 'post',
@@ -70,9 +75,9 @@
 					);
 					$('#selectForm<%=count%>').append(
 						$('<input>').prop({
-							id: 'input',
+							id: 'inputNick',
 							type: 'text',
-							value: "<%=nickNameList[count] %>",
+							value: '            <%=nickNameList[count] %>',
 							name: 'receiverNick'
 						})
 					);
@@ -95,15 +100,20 @@
 					$('#selectForm<%=count%>').append(
 						$('<input>').prop({
 							id: 'input',
-							type: 'text',
+							type: 'hidden',
 							value: "<%=c.getSellNo() %>",
 							name: 'sellNo'
 						})
 					);
-
-					$('#divList<%=count%>').css({'width': '300px', 'height': '100px', 'border': '1px solid black', 'margin' :'auto'});
-					$('#selectForm<%=count%>>input').css({'border': 'none'});
+					$('#divList<%=count%>').css({'width': '500px', 'height': '50px', 'background-color': 'aliceblue', 'margin' :'auto', 'margin-bottom' : '5px'});
+					$('#selectForm<%=count%>>input').css({'border': 'none', 'background-color': 'aliceblue'});
 					$('#selectForm<%=count%>>input').attr({'readonly': 'true'});
+					
+					$('.outer').append(
+						$('<hr>').prop({
+							id: 'hr'
+						})
+					);
 				});
 				
 				
