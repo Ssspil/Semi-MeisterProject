@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting" %>
+<%@ page import="java.util.ArrayList, java.util.Date, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
 	int userNo = (Integer) request.getAttribute("userNo");
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
+	String oppNick = "";
+	Date recentDay = list.get(0).getChatDate();
+	
+	for(int i = 0; i < nickNameList.length; i++){
+		if(!nickName.equals(nickNameList[i])){
+			oppNick = nickNameList[i];
+			break;			
+		}
+	}
+	Attachment user = (Attachment) request.getAttribute("profileUser");
+	if(user == null){
+		user = new Attachment();
+	}
+	Attachment opp = (Attachment) request.getAttribute("profileOpp");
+	if(opp == null){
+		opp = new Attachment();
+	}
 	int count = 0;
 	int	myCnt = 0;
 %>
@@ -16,19 +33,25 @@
 <style>
 	.outer {
         color: black;
-        width: 700px;
+        width: 800px;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        height: 700px;
+        overflow: scroll;
+ 		overflow-x: hidden;
+    }
+    .upside {
+        color: black;
+        width: 800px;
         margin: auto;
         margin-top: 100px;
-        margin-bottom: 150px;
-        height: 500px;
-        background: "aliceblue";
-        border: "1px solid black";
+        height: 100px;
     }
     .chat-format {
         color: black;
         width: 700px;
         margin: auto;
-        margin-top: 50px;
         margin-bottom: 150px;
         height: 100px;
     }
@@ -69,6 +92,7 @@
     	margin: auto;
     	border: 1px solid black;
     	position: static;
+    	border-radius:30px / 100px;
     }
     #nickName{
     	width: 700px;
@@ -80,6 +104,29 @@
     	height: 30px;
     	text-align: left;
     }
+    #profileImg{
+    	margin-top: 50px;
+    	width: 100px;
+    	height: 100px;
+    	margin: auto;
+    	border: 1px gray solid; 
+    	border-radius:100px / 100px;
+    }
+    #profileImg>img{
+    	width: 100%;
+    	height: 100%;
+    	object-fit:cover;
+    	border-radius:100px / 100px;
+    	margin-bottom: 10px;
+    }
+    #opponent{
+    	margin-top: 10px;
+    	margin: auto;
+    	width: 780px;
+    	height: 30px;
+    	text-align: center;
+		border: none;
+    }
 </style>
 <title>Web Socket Example</title>
 </head>
@@ -87,7 +134,7 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		
+		console.log("<%=recentDay%>");
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
@@ -98,12 +145,17 @@
 							})
 						);
 							
-						$('#divEntry<%=c.getChatNo()%>').append(
-							$('<div>').prop({
-								id: 'profile'
-							})
-						);
-						    
+<%-- 						$('#divEntry<%=c.getChatNo()%>').append( --%>
+// 							$('<div>').prop({
+// 								id: 'profile'
+// 							})
+// 						);
+						
+						$('#profile').append(
+							$('<img>').prop({
+								id: 'imgUser'
+							})		
+						)
 						$('#divEntry<%=c.getChatNo()%>').append(
 							$('<div>').prop({
 								id: 'triangle'
@@ -113,13 +165,11 @@
 						$('#divEntry<%=c.getChatNo()%>').append(
 							$('<div>').prop({
 								id: 'myDiv',
-								innerHTML: '<%=c.getChatContent()%>'
+								innerHTML: '&nbsp;&nbsp;&nbsp;<%=c.getChatContent()%>'
 							})
 						);
-						    
 						$('#divEntry<%=c.getChatNo()%> >div').css({'float': 'right'});	
 						$('#divEntry<%=c.getChatNo()%>').css({'width': '700px', 'height': '50px'});
-						
 						$('.outer').append(
 							$('<div>').prop({
 								id: 'nickName',
@@ -135,11 +185,11 @@
 							})
 						);
 							
-						$('#divEntry<%=c.getChatNo()%>').append(
-							$('<div>').prop({
-								id: 'profile'
-							})
-						);
+<%-- 						$('#divEntry<%=c.getChatNo()%>').append( --%>
+// 							$('<div>').prop({
+// 								id: 'profile'
+// 							})
+// 						);
 						
 						$('#divEntry<%=c.getChatNo()%>').append(
 							$('<div>').prop({
@@ -150,13 +200,11 @@
 						$('#divEntry<%=c.getChatNo()%>').append(
 							$('<div>').prop({
 								id: 'myDiv',
-								innerHTML: '<%=c.getChatContent()%>'
+								innerHTML: '&nbsp;&nbsp;&nbsp;<%=c.getChatContent()%>'
 							})
 						);    
-						    
-						$('#divEntry<%=c.getChatNo()%> >div').css({'float': 'left'});	
+						$('#divEntry<%=c.getChatNo()%> >div').css({'float': 'left'});
 						$('#divEntry<%=c.getChatNo()%>').css({'width': '700px', 'height': '50px'});
-						
 						$('.outer').append(
 							$('<div>').prop({
 								id: 'oppNickName',
@@ -169,23 +217,32 @@
 			<%}%>
 		<%} %>
 	</script>
-	<div class="outer">
-		<form action="<%=contextPath%>/chatting.me" method="post">
-<%-- 			<input id="user" type="text" value="<%=nickName%>" readonly>  --%>
-			<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
-			<input id="opponent" type="text" value="admin" readonly>
-			<input id="receiver" type="hidden" value="1" readonly>  
-<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
-			<br>
-			<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
-		</form>
+	<div class="upside">
 		<br>
+		<div id="profileImg">
+			<img id="titleImage" src="<%=contextPath %>/<%=opp.getFilePath() %>/<%=opp.getChangeName() %>" alt="프로필">
+		</div>
+		<input id="user" type="hidden" value="<%=nickName%>" readonly> 
+		<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
+		<input id="opponent" type="text" value="<%=oppNick %>" readonly>
 	</div>
-	<div class="chat-format">
-		<input id="textMessage" type="text" value=""> 
-		<input onclick="sendMessage()" value="Send" type="button">
-		<button type="submit">저장하기</button>	
-	</div>
+	<form action="<%=contextPath%>/chatting.me" method="post">
+		<div class="outer">
+				<input id="user" type="hidden" value="<%=nickName%>" readonly> 
+				<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
+				<input id="opponent" type="hidden" value=<%=nickName %> readonly>
+				<input id="receiver" type="hidden" value="1" readonly>  
+	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
+				<br>
+				<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+			<br>
+		</div>
+		<div class="chat-format">
+			<input id="textMessage" type="text" value=""> 
+			<input onclick="sendMessage()" value="Send" type="button">
+			<button type="submit">저장하기</button>	
+		</div>
+	</form>
 	<script type="text/javascript">
 		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
 		let count = 0;
@@ -321,14 +378,15 @@
 			});
 			message.value = "";
 		}
+		
 		function disconnect() {
 			webSocket.close();
 		}
-		 window.onpopstate = function(event) {
-			  history.back();
-			  console.log('뒤로가기 체크'); 
+		const beforeUnloadListener = (event) => {
+		  event.preventDefault();
+		  return event.returnValue = "Are you sure you want to exit?";
 		};
-
+		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
 	</script>
 </body>
 </html>
