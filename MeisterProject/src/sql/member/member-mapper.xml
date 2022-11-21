@@ -119,6 +119,11 @@
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 5)
 	</entry>
 	
+	<entry key="insertExpertAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 4)
+	</entry>
+	
 	<!-- 멤버 전체 조회하는 쿼리문 -->
 	<entry key="selectAllMember">
 		SELECT USER_NO,
