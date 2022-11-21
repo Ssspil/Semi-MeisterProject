@@ -47,17 +47,6 @@ String searchType = request.getAttribute("searchType") == null ? "" : request.ge
 	height: 58px;
 }
 
-.bodyClick {
-	background-color: white;
-	border: 5px solid orange;
-	
-}
-
-.bodyClick1 {
-	background-color: orange;
-	border: 5px solid yelloew;
-
-}
 
 .bodyWrite_wrap {
 	box-sizing: border-box;
@@ -143,33 +132,45 @@ hr {
 }
 
 #ge {
-	border: 2px solid orange;
+	border: 5px solid orange;
+	background-color:white;
 	font-size: 27px;
 	height:58px;
 	width:160px;
 	float: left;
 	border-style: groove;
-	border-radius: 10px;
+	border-radius: 15px;
+	cursor: pointer;
 }
 
 #ge:hover {
-	background-color: orange;
-	border: 3px solid yellow;
+	background-color: wihte;
+	border: 5px solid yellow;
 }
 
 #gung {
-	border: 2px solid orange;
-	
+	border: 5px solid orange;
+	background-color:white;
 	font-size: 27px;
 	height:58px;
 	float: left;
 	border-style: groove;
-	border-radius: 10px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+#bodyClick1 {
+	
+	background-color:black;
+}
+#bodyClick2 {
+	background-color:blue;
+
+
 }
 
 #gung:hover {
-	background-color: orange;
-	border: 3px solid yellow;
+	background-color: white;
+	border: 5px solid yellow;
 }
 
 #textmade {
@@ -332,17 +333,17 @@ hr {
 	<%@ include file="../common/header.jsp"%>
 <body>
 	<input id="boardType" type="hidden" value="ge" />
-	<div class="body">
-		<h1 id="mainid">커뮤니티</h1>
-		 <div id="body-1">
+   <div class="body">
+      <h1 id="mainid">커뮤니티</h1>
+      <div id="body-1">
          <button id="ge" class="bodyClick" onclick="menuClick('ge')">
             <i class="bi bi-chat-square-text"></i> 게시판
          </button>
          <button id="gung" onclick="menuClick('gung')">
             <i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요
          </button>
-		</div>
-	</div>
+      </div>
+   </div>
 	<div id="line"></div>
 
 	<div class="bodyWrite_wrap">
@@ -610,24 +611,25 @@ hr {
       if (type == "ge") {
          $("#geBody").show();
          $("#gungBody").hide();
-         $("#ge").addClass("bodyClick1");
-         $("#gung").removeClass("bodyClick");
+         $("#ge").addClass("bodyClick1"); 
+         $("#gung").removeClass("bodyClick2"); 
          $("#type").val("1");
-         $("#search_main").val("1");
+         $("#search_main").val("1");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
          $("#boardType").val("ge");
 
       } else if (type == "gung") {
          $("#geBody").hide();
          $("#gungBody").show();
          $("#gung").addClass("bodyClick1");
-         $("#ge").removeClass("bodyClick1");
+         $("#ge").removeClass("bodyClick2");
          $("#type").val("2");
          $("#search_main").val("2");
          $("#boardType").val("gung");
 
       }
    }
-
+   </script>
+   <script>
    function pageMove(currentPage) {
       if (currentPage == "next") {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
@@ -637,6 +639,7 @@ hr {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
       }
 
+      
       var cnt = (currentPage - 1) * 6;
       $(".board").hide();
       for (var i = cnt; i < cnt + 6; i++) {

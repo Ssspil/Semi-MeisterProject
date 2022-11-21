@@ -401,6 +401,30 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int insertExpertAttachment(Connection conn, Attachment at) {
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("insertExpertAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, at.getRefNo());
+			psmt.setString(2, at.getOriginName());
+			psmt.setString(3, at.getChangeName());
+			psmt.setString(4, at.getFilePath());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		return result;
+	}
 	public Attachment selectAttachment(Connection conn, int userNo) {
 		
 		Attachment at = null;
