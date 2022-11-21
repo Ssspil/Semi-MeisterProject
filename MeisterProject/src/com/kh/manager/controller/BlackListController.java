@@ -32,6 +32,17 @@ public class BlackListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		
+	    // 관리자가 아니면 실행 안되게 하는 것.
+	    if( !(request.getSession().getAttribute("loginUser") != null && 
+	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
+	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
+	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+	        
+	        return;
+	    }
+		
 		ArrayList<Member> blacklist = new MemberService().selectAllBlacklist();
 		
 		request.setAttribute("blacklist", blacklist);
