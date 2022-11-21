@@ -116,7 +116,6 @@
                             <div class="collapse" id="manager" aria-labelledby="heading" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%= contextPath %>/report.ad">신고접수</a>
-                                    <a class="nav-link" href="<%= contextPath %>/ask.ad">문의접수</a>
                                     <a class="nav-link" href="<%= contextPath %>/notice.ad">공지사항</a>
                                 </nav>
                             </div>
