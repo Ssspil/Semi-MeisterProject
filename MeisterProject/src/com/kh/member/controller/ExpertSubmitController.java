@@ -50,8 +50,7 @@ public class ExpertSubmitController extends HttpServlet {
 			String phone = ("010".concat(multiRequest.getParameter("phoneMid"))).concat(multiRequest.getParameter("phoneLast"));
 			String email = ((multiRequest.getParameter("emailFront")).concat("@")).concat(multiRequest.getParameter("emailBack"));
 			String speciality = multiRequest.getParameter("speciality");
-			System.out.println(userNo);
-			System.out.println(multiRequest.getOriginalFileName("expertFile"));
+			
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("expertFile") != null) {	
