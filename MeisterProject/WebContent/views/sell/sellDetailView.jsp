@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local,
-    com.kh.sellboard.model.vo.SellBoard"%>
+    com.kh.sellboard.model.vo.SellBoard, com.kh.common.model.vo.Attachment"%>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 	
+	ArrayList<Attachment> list = (ArrayList<Attachment>) request.getAttribute("list"); 
 	SellBoard s = (SellBoard) request.getAttribute("s");
+	
+	Attachment at = (Attachment) request.getAttribute("at");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +29,7 @@
 		
 	}
 	.outer{
-	       height: 600px;
+	       height: 750px;
 	       /* 상 , 우 , 하, 좌  띄우기 */
 			margin: 150px 200px 20px 200px;
 			border: 1px solid;
@@ -92,13 +96,24 @@
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
 				</span>
 				<span id="interest">		
-					<a color="textSecondary" href="/category/20312" class="css-1arz1ip e1lsgt8r0">음악</a>
+					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterest() %></a>
 				</span>
 			</div>
 			
 			
 				<section>
+					<div>
+					첨부파일이 들어갈 섹션<br>
 					<img id="titleImg" width="500" height="200">
+					<br>
+					<%if(at == null)  {%>
+						첨부파일이 없습니다.
+					<%}else %>
+						<a href="<%= contextPath %>/<%= at.getFilePath()+at.getChangeName() %>"
+						download="<%= at.getOriginName() %>">
+							<%= at.getOriginName() %>
+						</a>
+					</div>
 				</section>
 
 				<div class="container">
@@ -106,38 +121,45 @@
 					<ul class="tabs">
 						<li class="tab-link current" data-tab="tab-1">서비스 설명</li>
 						<li class="tab-link" data-tab="tab-2">가격 정보</li>
-						<li class="tab-link" data-tab="tab-3">리뷰</li>
+						<li class="tab-link" data-tab="tab-3" style="width: 70px; text-align: center;">리뷰</li>
 						<li class="tab-link" data-tab="tab-4">취소/환불</li>
 					</ul>
 		
 					<div id="tab-1" class="tab-content current">
-						히히
+						서비스 설명 부분
 					</div>
 					<div id="tab-2" class="tab-content">
-						하하
+						가격 정보 부분
 					</div>
 					<div id="tab-3" class="tab-content">
-						호호
+						리뷰가 나오게 값을 가져와야 하는데
+						이 탭을 누르면 리뷰가
 					</div>
 					<div id="tab-4" class="tab-content">
-						키키!
+						취소/환불 규정
 					</div>
 		
 				</div>
 		</div>
 
 		<div class="right">
-			<div class="sell-info">
+			<div class="sell-info" style="border: 1px solid;">
 				<section>
 						<section>
 						좋아요 넣을 섹션
 						</section>
+
 						<section>
 						<h1>제목 넣을 섹션
 							<%= s.getSellTitle() %></h1>
 						</section>
+
 						<section>
 							<div>
+								<div>
+								작성일
+								<%= s.getSellDate() %>
+								</div>
 								<div>
 								가격 넣을 섹션
 								<%= s.getPrice() %>
@@ -147,13 +169,13 @@
 								<%= s.getSellContent() %>
 								</div>
 							</div>
-							<div>
+							<div style="border: 1px solid;">
 								<button>문의하기</button>
-								<button>구매하기</button>
+								<a href="<%=contextPath%>/payment.se" id="paymentBtn" class="btn btn-secondary">구매하기</a>
 							</div>
 						</section>
 				</section>
-				<section>
+				<section style="border: 1px solid;">
 					<h5>서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.</h5>
 				</section>
 			</div>

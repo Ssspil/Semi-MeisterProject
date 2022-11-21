@@ -434,44 +434,18 @@ body {
 	margin: 0 0 0 1.25rem;
 }
 
-button {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 120px;
-	height: 30px;
-	margin-top: -15px;
-	margin-left: -60px;
-	line-height: 15px;
-	cursor: pointer;
-}
+/* button { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	width: 120px; */
+/* 	height: 30px; */
+/* 	margin-top: -15px; */
+/* 	margin-left: -60px; */
+/* 	line-height: 15px; */
+/* 	cursor: pointer; */
+/* } */
 
-.modal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-	top: 0;
-	left: 0;
-	display: none;
-}
-
-.modal_content {
-	width: 400px;
-	height: 200px;
-	background: #fff;
-	border-radius: 10px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
-	text-align: center;
-	box-sizing: border-box;
-	padding: 74px 0;
-	line-height: 23px;
-	cursor: pointer;
-}
 </style>
 </head>
 <body class="bdy">
@@ -501,7 +475,9 @@ button {
  	                                        <% if(loginUser != null && loginUser.getUserNo() == b.getUserNo()) { %> 
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
- 											<% } %>
+ 											<% } else { %>
+ 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">신고하기</a>
+											<% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -525,7 +501,7 @@ button {
                             <ul data-s-1 class="body-list"></ul>
                             <div data-j-1 data-s-1 class="greate">
                                 <div data-j-1 class="like">
-                                    <i class="bi bi-hand-thumbs-up"></i> <span data-j-1 class="text2">좋아요</span>
+                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요</span>
                                 </div>
                                 <div data-j-1 class="item">
                                     <span data-j-1 class="text2">댓글</span>
@@ -556,11 +532,6 @@ button {
             </div>
         </div>
 </div>
-
-
-	
-	
-
 
 	<%@ include file="../common/footer.jsp" %>
 
@@ -607,14 +578,17 @@ button {
 		function selectReplyList(){
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
+		 	var bno = "<%=b.getBoardNo()%>";
+		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
-					console.log(list)
+
 					let htmls="";
 					for(let i of list) {
-
+						index += 1;
+						
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
@@ -626,7 +600,7 @@ button {
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="content">';
 						htmls +=        '<p data-c-1 class="text comment-input">';
-						htmls +=            '<span data-c-1 id="replycontent" style="font-weight: 400px;">'+i.replyContent+'</span>';
+						htmls +=            '<span data-c-1 id="replycontent'+index+'" style="font-weight: 400px;width:100%; display:block" contenteditable=false>'+i.replyContent+'</span>';
 						htmls +=        '</p>';
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="comment-action">';
@@ -640,10 +614,10 @@ button {
 						if(loginNo == i.userNo){
 			                htmls    +=        '<div data-c-1 class="more-action">';
 			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
-                			htmls	 +=					'<button type="button" onclick = "udatebtn();" class="btn btn-secondary .btn-dropdown">수정하기</button>';
-			                htmls    +=                '<button type="button" id="delete-btn" class="btn btn-secondary .btn-dropdown">삭제하기</button>';			
+                			htmls	 +=					'<button type="button" class="btn btn-secondary .btn-danger" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
+			                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
 						} else { 
-				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
+				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown" onclick="report('+i.replyNo+', '+bno+')">신고하기</button>';
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
 						 } 
@@ -660,9 +634,39 @@ button {
 			});
 		};
 		
-		function updatebtn() {
+		// 댓글 수정
+		function replyUpdate(index, rno, bno){
+			var isUpdate = $("#replycontent"+index).attr("contenteditable");
+			
+			if(isUpdate == "false"){
+				$("#replycontent"+index).attr("contenteditable", true);
+				$("#replycontent"+index).focus();
+				return false;
+			}
+			else {
+				var content = $("#replycontent"+index).text();
+				location.href="<%=contextPath%>" + "/update.ro?rno="+rno+"&bno="+bno+"&content="+content;
+			}
 			
 		}
+		
+		// 댓글 삭제
+		function replyDelete(rno, bno){
+			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
+		}
+		
+		// 게시글 신고
+		function report(rno, bno) {
+			location.href="<%=contextPath%>" + "/"
+		}
+		
+
+		// 댓글 신고
+		
+		// 좋아요 기능
+		
+		// 댓글 수 기능
+		
  	</script>
 
 	

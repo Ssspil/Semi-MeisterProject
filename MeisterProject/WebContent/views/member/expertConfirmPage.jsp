@@ -36,9 +36,10 @@
 	<%@include file="../common/header.jsp" %>
 	<%
 		String userId = loginUser.getUserId();
+		int userNo = loginUser.getUserNo();
 	%>
 	
-	<form action="<%=contextPath %>/expertSubmit.me" method="post">
+	<form action="<%=contextPath %>/expertSubmit.me" method="post" enctype="multipart/form-data">
 		<div class="outer">
 			<br>
 			<div id="titleImg">
@@ -47,6 +48,7 @@
 			<br><br>
 			<h4><b>&nbsp;&nbsp;전문가 인증</b></h4> 
 			<br><br>
+			<input type="hidden" name="userNo" value="<%=userNo %>">
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>&nbsp;&nbsp;* 이름</b></h6> 
 			&nbsp;&nbsp;<input type="text" name="userName" size="30" placeholder="이름을 입력해 주세요" maxlength="4" required>
@@ -73,7 +75,7 @@
 			&nbsp; - &nbsp;
 			<input type="text" name="phoneMid" size="4" required>
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneast" size="4" required>
+			<input type="text" name="phoneLast" size="4" required>
 			
 			<br><br>
 			<h6><b>* 전문분야 : &nbsp;</b></h6> 
@@ -89,7 +91,7 @@
 			<br><br>
 			<h6><b>&nbsp;첨부파일 : &nbsp;</b></h6>
 			&nbsp;&nbsp;
-			<input type="file" name="expertFile" accept="image/*">
+			<input type="file" name="expertFile">
 			<br><br><br><br>
 			<div style="text-align:center">
 				<button type="submit">제출</button>

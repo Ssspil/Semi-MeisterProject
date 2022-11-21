@@ -97,43 +97,43 @@
       	<div class="icon-container" align="center">
 			<div class="icon" >
 				<a href="#">
-					<img src="./resources/image/icon1.gif" width="90" height="100"/>
+					<img src="./resources/image/icon1.gif" width="80" height="90"/>
 					<br><b>전체</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon2.gif" width="90" height="100"/>
+					<img src="./resources/image/icon2.gif" width="80" height="90"/>
 					<br><b>영상</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon3.gif" width="90" height="100"/>
+					<img src="./resources/image/icon3.gif" width="80" height="90"/>
 					<br><b>영화</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon4.gif" width="90" height="100"/>
+					<img src="./resources/image/icon4.gif" width="80" height="90"/>
 					<br><b>게임</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon5.gif" width="90" height="100"/>
+					<img src="./resources/image/icon5.gif" width="80" height="90"/>
 					<br><b>IT</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon6.gif" width="90" height="100"/>
+					<img src="./resources/image/icon6.gif" width="80" height="90"/>
 					<br><b>운동</b>
 				</a>
 			</div>
 			<div class="icon">
 				<a href="#">
-					<img src="./resources/image/icon7.gif" width="90" height="100"/>
+					<img src="./resources/image/icon7.gif" width="80" height="90"/>
 					<br><b>요리</b>
 				</a>
 			</div>

@@ -115,13 +115,20 @@ public class MemberService {
 		 return result;
 	 }
 
-	 public Member expertSubmit(Member m) {
+	 public Member expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
 		 int result = new MemberDao().expertSubmit(conn, m);
 		 Member updateMem = null;
 		 
-		 if (result > 0) {
+		 int result2 = 1;
+		 
+		 if(at != null) {
+			 result2 = new MemberDao().insertExpertAttachment(conn, at);
+			 System.out.println("service : "+result2);
+		 }
+		 
+		 if (result > 0 && result2 > 0) {
 			 JDBCTemplate.commit(conn);
 			 updateMem = new MemberDao().selectMember(conn, m.getUserId());
 		 } else {

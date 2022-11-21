@@ -142,17 +142,17 @@
 	
 	<entry key="selectBoard">
 		SELECT
-		BOARD_NO,
-		BOARD_TITLE ,
-		BOARD_CONTENT,
-		BOARD_RECOMMEND,
-		USER_NO,
-		BOARD_DATE,
-		m.NICKNAME
-		FROM BOARD b
-		JOIN MEMBER m using(user_no)
-		WHERE BOARD_NO = ?
-		AND b.STATUS = 'Y'
+			BOARD_NO,
+			BOARD_TITLE,
+	        BOARD_CONTENT,
+			BOARD_RECOMMEND,
+			USER_NO,
+			BOARD_DATE,
+			M.NICKNAME
+			FROM BOARD B
+			JOIN MEMBER M USING(USER_NO)
+			WHERE BOARD_NO = ?
+			AND B.STATUS = 'Y'
 	</entry>
 	
 <!-- 	<entry key="selectBoardWriter"> -->
@@ -202,9 +202,16 @@
 		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
 	</entry>
 	
+	<entry key="updateReply">
+		UPDATE REPLY 
+		SET REPLY_CONTENT = ?
+		WHERE REPLY_NO = ?
+	</entry>
+	
 	<entry key="deleteReply">
 		UPDATE REPLY
 		SET STATUS = 'N'
-		WHERE USER_NO = ?
+		WHERE REPLY_NO = ?
 	</entry>
+	
 </properties>
