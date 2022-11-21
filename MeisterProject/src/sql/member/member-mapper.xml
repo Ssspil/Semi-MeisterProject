@@ -231,4 +231,11 @@
 		SET BLACKLIST = 'N'
 		WHERE USER_NO = ?
 	</entry>
+	
+	<!-- 닉네임으로 유저번호를 찾는 쿼리문 -->
+	<entry key="userNoFromNickname">
+		SELECT USER_NO
+		FROM MEMBER
+		WHERE NICKNAME = ?
+	</entry>
 </properties>

@@ -133,16 +133,6 @@ public class BoardService {
 		return b;
 
 	}
-	
-//	public int selectBoardWriter(int boardNo) {
-//		Connection conn = getConnection();
-//
-//		int no = new BoardDao().selectBoardWriter(conn, boardNo);
-//
-//		close();
-//
-//		return no;
-//	}
 
 	public Attachment selectAttachment(int boardNo) {
 		Connection conn = getConnection();
