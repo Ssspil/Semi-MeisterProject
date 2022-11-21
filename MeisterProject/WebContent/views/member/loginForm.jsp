@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
-
+<%
+	String errorMsg = (String)session.getAttribute("errorMsg");
+	// 서비스 요청 전 : null
+	// 서비스 요청 성공 후 : alert로 띄워줄 메시지 문구.
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,9 +69,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body style="background-color: rgb(249, 247, 247);">
+		<script>
+		let errorMsg = "<%= errorMsg %>";	// let msg = 성공적으로 로그인 되었습니다.
+		
+		// 알람을 띄워준후 session에 담긴 해당메세지는 지워줘야한다.
+		if(errorMsg != "null"){
+			alert(errorMsg);
+			
+			<% session.removeAttribute("errorMsg"); %>
+		}
+	</script>
+
 	<%@ include file="../common/header.jsp" %>
 	<br><br><br><br><br>
 	<h3 style="text-align:center"> 로그인 </h3>
+	
+
 	
     <div class="outer">
         <br><br>

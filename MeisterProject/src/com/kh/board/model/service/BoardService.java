@@ -233,10 +233,10 @@ public class BoardService {
 		return result;
 	}
 	
-	public ArrayList<Board> myCommunity(){
+	public ArrayList<Board> myCommunity(int userNo){
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new BoardDao().myCommunity(conn);
+		ArrayList<Board> list = new BoardDao().myCommunity(conn,userNo);
 		
 		close();
 		
@@ -251,6 +251,16 @@ public class BoardService {
 		close();
 
 		return listCount;
+	}
+public ArrayList<Reply> myReply(int type) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new BoardDao().myReply(conn,type);
+		
+		close();
+		
+		return list;
 	}
 	
 	

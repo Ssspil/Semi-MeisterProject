@@ -9,6 +9,7 @@ public class Reply {
 	private int boardNo;
 	private int userNo;
 	private String mbNic;
+	private String boardTitle;
 	
 	
 	public Reply(){
@@ -49,6 +50,28 @@ public class Reply {
 		this.userNo = userNo;
 		this.replyDate = replyDate;
 	}
+	
+	//내 댓글 보기
+	public Reply(int replyNo,String boardTitle, String replyContent, String replyDate, int userNo) {
+		super();
+		this.replyNo = replyNo;
+		this.boardTitle = boardTitle;
+		this.replyContent = replyContent;
+		this.replyDate = replyDate;
+		this.userNo = userNo;
+		
+		
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
 
 	public String getMbNic() {
 		return mbNic;
@@ -123,7 +146,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyCount=" + replyCount + ", replyContent=" + replyContent
-				+ ", replyDate=" + replyDate + ", boardNo=" + boardNo + ", userNo=" + userNo + "]";
+				+ ", replyDate=" + replyDate + ", boardNo=" + boardNo + ",boardTitle=" + boardTitle +", userNo=" + userNo + ",]";
 	}
 	
 	

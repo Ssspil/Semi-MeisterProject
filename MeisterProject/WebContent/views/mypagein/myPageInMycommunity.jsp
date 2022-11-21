@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.*, com.kh.common.model.vo.PageInfo"%>
     <%  ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-    
+   
     PageInfo pi = (PageInfo) request.getAttribute("pi");
      int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
@@ -42,7 +42,16 @@ height:1400px;
     box-sizing: border-box;
     height: 80px;
 }
-.content{
+#name1Body{
+    box-sizing: border-box;
+    border: 3px solid orange;
+    border-radius: 30px;
+    height:210px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+}
+#name2Body{
     box-sizing: border-box;
     border: 3px solid orange;
     border-radius: 30px;
@@ -135,9 +144,31 @@ width: 60%;
 margin: auto;
 height: 50px;
 }
+.page_wrap {
+	text-align: center;
+	position: relative;
+	top: 15px;
+}
+
+.page_wrap span {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.page_wrap .sel {
+	color: orange;
+	border-bottom: 1px solid orange;
+}
+
+.page_wrap span:hover {
+	color: orange;
+	cursor: pointer;
+	border-bottom: 1px solid orange;
+}
 </style>
 </head>
 <body>
+<input id="boardType" type="hidden" value="name1Body" />
 <%@include file="../common/header.jsp" %>
   <div class="header"></div>
     <div id=main>
@@ -154,31 +185,81 @@ height: 50px;
 
         </div>
         <div id="contenthead"></div>
-        <div class="content" id="name1Body" >
+		
+				<% for (int i = 0; i < list.size(); i++) { %>
+        <div id="name1Body" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
             <div id="title"> 
-           
                 <div id="titlepost">커뮤니티 게시글 제목</div> 
-                <div id="titlepost1"><%=list.get(0).getBoardTitle() %></div>
+                <div id="titlepost1"><%=list.get(i).getBoardTitle() %></div>
             </div>
             <br><br>
             <div id="body">
                 <div id="bodypost">커뮤니티 게시글 내용</div>
-                <div id="bodypost1"><%=list.get(0).getBoardContent() %></div>
+                <div id="bodypost1"><%=list.get(i).getBoardContent() %></div>
             </div>
             <br><br><br><br><br>
             <div id="footer">
                 <div id="footerpost">커뮤니티 작성 날짜</div>
-                <div id="footerpost1"><%=list.get(0).getBoardDate() %></div>
-                <div id="footerpost2"><i class="bi bi-chat-dots"></i> <%=list.get(0).getReplyCount() %> <i class="bi bi-hand-thumbs-up"></i> <%=list.get(0).getBoardRecommend()%> </div>
+                <div id="footerpost1"><%=list.get(i).getBoardDate() %></div>
+                <div id="footerpost2"><i class="bi bi-chat-dots"></i> <%=list.get(i).getReplyCount() %>
+                 <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%> </div>
             </div>
         
         </div>
+        <% } %>
+       
+
         <%@ include file="../mypagein/myPageInMyReply.jsp"%>
 <!--        여기부턴 댓글 -->
         
 <br><br>
         <div id="page">
-            페이징 처리공간
+            <div class="page_wrap">
+				<% if (currentPage != 1) {
+				%>
+				<span>&lt&lt</span>
+				<%
+					}
+				%>
+				<%
+					if (startPage != 1) {
+				%>
+				<span onclick="pageMove('pre')">&lt</span>
+				<%
+					}
+				%>
+				<%
+					for (int i = startPage; i <= endPage; i++) {
+					if (i == currentPage) {
+				%>
+				<span class="page<%=i%> sel" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					} else {
+				%>
+				<span class="page<%=i%>" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<%
+					if (currentPage != endPage) {
+				%>
+				<span onclick="pageMove('next')">&gt</span>
+				<%
+					}
+				%>
+				<%
+					if (currentPage != maxPage) {
+				%>
+				<span>&gt&gt</span>
+				<%
+					}
+				%>
+			</div>
         </div>
 
 </div>
@@ -201,21 +282,38 @@ height: 50px;
       if (type == "name1") {
          $("#name1Body").show();
          $("#name2Body").hide();
-         $("#name1").addClass("bodyClick");
-         $("#name2").removeClass("bodyClick");
-<!--          $("#type").val("1"); -->
-<!--          $("#boardType").val("name1"); -->
+//          $("#name1").addClass("bodyClick");
+//          $("#name2").removeClass("bodyClick");
+		$("#type").val("1"); 
+		$("#boardType").val("name1"); 
 
       } else if (type == "name2") {
          $("#name2Body").show();
          $("#name1Body").hide();
-         $("#name2").addClass("bodyClick");
-         $("#name1").removeClass("bodyClick");
-<!--          $("#type").val("2"); -->
-<!--          $("#boardType").val("name2"); -->
+//          $("#name2").addClass("bodyClick");
+//          $("#name1").removeClass("bodyClick");
+         $("#type").val("2");
+		$("#boardType").val("name2");
 
       }
    }
+   
+   function pageMove(currentPage) {
+	      if (currentPage == "next") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+	      }
+	      if (currentPage == "pre") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+	      }
+	      var cnt = (currentPage - 1) * 6;
+	      $(".board").hide();
+	      for (var i = cnt; i < cnt + 6; i++) {
+	         $(".board" + (i)).show();
+	      }
+	      $(".page_wrap span").removeClass("sel");
+	      $(".page" + currentPage).addClass("sel");
+	   }
+	  
    </script>
 </body>
 </html>

@@ -51,7 +51,7 @@
     <footer class="footer">
         <!-- footer-head 시작 -->
         <div class="footer-head">
-            <table>
+            <table class="footerTable">
                 <tr>
                     <th width="400">meister</th>
                     <th width="200">팀명</th>
@@ -64,7 +64,7 @@
                     <td>Team"JSP"</td>
                     <td>재능마켓</td>
                     <td><a href="https://kmong.com/">크몽</a></td>
-                    <td><a href="#">공지사항</a></td>
+                    <td><a href="<%= request.getContextPath() %>/noticeList.no">공지사항</a></td>
                 </tr>
                 <tr>
                     <td>저녁시간 : 18시 20분 ~ 19시 00분</td>
@@ -78,7 +78,7 @@
                     <td>기획의도 : N잡러</td>
                     <td>홈페이지</td>
                     <td><a href="https://iei.or.kr/main/main.kh">KH 정보 교육원</a></td>
-                    <td><a href="#">신고하기</a></td>
+                    <td><a href="<%= request.getContextPath() %>/report.me" id="report">신고하기</a></td>
                 </tr>
             </table>
         </div>
@@ -96,6 +96,6 @@
         <!-- footer-body 끝 -->
     </footer>
 
-    
+
 </body>
 </html>

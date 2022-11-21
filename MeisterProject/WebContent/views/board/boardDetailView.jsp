@@ -11,6 +11,7 @@
 	}
 	
 	Reply r = (Reply) request.getAttribute("r");
+	
 %>
 
 
@@ -160,6 +161,7 @@ body {
 	position: relative;
 	display: inline-flex;
 	vertical-align: middle;
+	
 }
 
 .btn[data-d-1] .btn-toggle {
@@ -531,7 +533,9 @@ body {
                 </div>
             </div>
         </div>
-</div>
+	</div>
+	
+	
 
 	<%@ include file="../common/footer.jsp" %>
 
@@ -555,6 +559,7 @@ body {
 			//setInterval(selectReplyList, 2000);
 		})
 		
+		// 댓글 등록
 		function insertReply() {
 			$.ajax({
 				url : "rinsert.bo",
@@ -575,10 +580,12 @@ body {
 			});
 		};
 		
+		// 댓글 리스트
 		function selectReplyList(){
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
+		 	
 		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
@@ -606,7 +613,7 @@ body {
 						htmls +=    '<div data-c-1 class="comment-action">';
 						htmls +=        '<div data-c-1 class="comment-react">';
 						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+// 						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
 						htmls +=            '<div data-c-1 class="like-area">';
 						htmls +=                '<span data-c-1 class="text"></span>' ;
 						htmls +=            '</div>';
@@ -614,10 +621,10 @@ body {
 						if(loginNo == i.userNo){
 			                htmls    +=        '<div data-c-1 class="more-action">';
 			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
-                			htmls	 +=					'<button type="button" class="btn btn-secondary .btn-danger" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
-			                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
-						} else { 
-				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown" onclick="report('+i.replyNo+', '+bno+')">신고하기</button>';
+                			htmls	 +=					'<button type="button" class="btn-toggle btn-warning btn-sm" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
+			                htmls    +=                '<button type="button" class="btn-toggle btn-danger btn-sm" name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
+						} else {
+				                htmls    +=                "<a href='<%=contextPath %>/report.me?rno="+i.replyNo+"'><button type='button' class='btn-toggle btn-danger btn-sm'>신고하기</button></a>";
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
 						 } 
@@ -655,13 +662,6 @@ body {
 			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
 		
-		// 게시글 신고
-		function report(rno, bno) {
-			location.href="<%=contextPath%>" + "/"
-		}
-		
-
-		// 댓글 신고
 		
 		// 좋아요 기능
 		

@@ -70,7 +70,7 @@ position: relative;
 <body>
 <div class="body2-1" id="gungBody" style="display:none">
     <div id="body2-1">
-             
+             <input id="boardType" type="hidden" value="gung" />
                <%for(int i=0; i< list2.size(); i++){ %>
                    <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
                   
