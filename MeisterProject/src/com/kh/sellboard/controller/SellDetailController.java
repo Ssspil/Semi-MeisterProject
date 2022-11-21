@@ -47,7 +47,7 @@ public class SellDetailController extends HttpServlet {
 			request.getRequestDispatcher("views/sell/sellDetailView.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("errorMsg", "게시글 상세조회 실패");
+			request.setAttribute("errorMsg", "판매 상세조회 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 		
