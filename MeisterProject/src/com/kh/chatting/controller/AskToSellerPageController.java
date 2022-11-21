@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.chatting.model.service.ChattingService;
 import com.kh.chatting.model.vo.Chatting;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -57,15 +58,17 @@ public class AskToSellerPageController extends HttpServlet {
 			senderName = new MemberService().selectNickName(list.get(i).getSender());
 			nickNameList[i] = senderName;
 		}
-
-//		for(int i=0; i < list.size()-1; i++) {	
-//			if(list.get(i).getReceiver() == list.get(i+1).getReceiver()) {
-//				list.remove(i);
-//			}
-//		}		
+	
+		System.out.println(userNo);
+		System.out.println(receiver);
 		
+		Attachment profileUser = new ChattingService().getProfile(userNo);
+		Attachment profileOpp = new ChattingService().getProfile(receiver);
+
 		request.setAttribute("list", list);
 		request.setAttribute("nickNameList", nickNameList);
+		request.setAttribute("profileUser", profileUser);
+		request.setAttribute("profileOpp", profileOpp);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
