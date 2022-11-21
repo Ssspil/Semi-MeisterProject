@@ -22,6 +22,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+
+	<script>
+        const IMP = window.IMP; 
+        IMP.init("imp31080000"); 
+
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'html5_inicis',
+                pay_method : 'card',
+                merchant_uid: 'merchant_'+new Date().getTime(), 
+                name : '결제 테스트', // 결제창에서 보여질 이름
+                amount : 100, // 실제 결제되는 가격
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : '구매자 이름',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 역삼동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+            	console.log(rsp);
+                if (rsp.success) {
+
+                    let msg = '결제가 완료되었습니다.';
+                    alert(msg);
+                    /* location.href= "결제 완료 후 이동할 페이지 url" */
+                } else {
+
+                    let msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                    alert(msg);
+                }
+            });
+        }
+    </script>
+
 <meta charset="UTF-8">
 <title>판매게시판 메인</title>
 <style>
@@ -169,7 +207,7 @@ div.main #price{
 
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
@@ -277,7 +315,11 @@ div.main #price{
 			
 		</script>
 		
-		
+		<button onclick="requestPay()">결제하기</button>
+
+
+    
+    
 	</div><!-- outer 끝 -->
 	
 		<!-- 페이징처리 -->           
@@ -304,6 +346,7 @@ div.main #price{
 				
 			}
 		</script>
+		
 	
 	
 	
