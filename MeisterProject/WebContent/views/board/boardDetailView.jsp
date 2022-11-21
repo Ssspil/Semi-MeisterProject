@@ -476,7 +476,7 @@ body {
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
  											<% } else { %>
- 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">신고하기</a>
+ 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm" name="report">신고하기</a>
 											<% } %>
                                         </div>
                                     </div>
@@ -531,7 +531,9 @@ body {
                 </div>
             </div>
         </div>
-</div>
+	</div>
+	
+	
 
 	<%@ include file="../common/footer.jsp" %>
 
@@ -579,6 +581,7 @@ body {
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
+		 	
 		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
@@ -606,7 +609,7 @@ body {
 						htmls +=    '<div data-c-1 class="comment-action">';
 						htmls +=        '<div data-c-1 class="comment-react">';
 						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+// 						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
 						htmls +=            '<div data-c-1 class="like-area">';
 						htmls +=                '<span data-c-1 class="text"></span>' ;
 						htmls +=            '</div>';
@@ -617,7 +620,7 @@ body {
                 			htmls	 +=					'<button type="button" class="btn btn-secondary .btn-danger" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
 			                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
 						} else { 
-				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown" onclick="report('+i.replyNo+', '+bno+')">신고하기</button>';
+				                htmls    +=                '<button type="button" class="btn btn-secondary .btn-dropdown">신고하기</button>';
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
 						 } 
