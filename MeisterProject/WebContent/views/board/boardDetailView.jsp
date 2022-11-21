@@ -476,7 +476,7 @@ body {
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
  											<% } else { %>
- 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">신고하기</a>
+ 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm" name="report">신고하기</a>
 											<% } %>
                                         </div>
                                     </div>
@@ -581,6 +581,7 @@ body {
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
+		 	
 		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
