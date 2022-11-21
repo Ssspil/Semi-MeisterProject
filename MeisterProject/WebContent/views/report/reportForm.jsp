@@ -50,6 +50,20 @@
 	    border-radius: 10px;
 	}
 	
+	#nickname{
+		border: 1px solid #C4C4C4;
+	    box-sizing: border-box;
+	    border-radius: 10px;
+	    padding-left : 15px;
+	}
+	#nickname:focus{
+		border: 1px solid orange;
+	    box-sizing: border-box;
+	    border-radius: 10px;
+	    outline: 3px solid #fff1e4;
+	    border-radius: 10px;
+	}
+	
 	/* 제목 css */
 	.reportTitle{
 		float : left;
@@ -129,12 +143,14 @@
 			
 			<br><hr class="formHr"><br>
 			<form action="<%= contextPath %>/insert.re" method="post" name="report-form" id="report-form" enctype="multipart/form-data">
+				<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>" />
+				
 				<table class="reportTable" align="center">
 					<tbody>
 						<tr>
-							<td colspan="2">
+							<td>
 								<select class="reportSelect" name="reason" size="1">
-									<option value="0" selected>카테고리선택</option>
+									<option value="0">카테고리선택</option>
 									<option value="사기">사기</option>
 									<option value="버그">버그</option>
 									<option value="욕설">욕설</option>
@@ -142,6 +158,10 @@
 									<option value="광고">광고</option>
 									<option value="기타">기타</option>
 								</select>	
+							</td>
+							<td>
+								<input type="text" id="nickname" name="nickname" maxlength="5" placeholder="닉네임을 입력해주세요." required onkeyup="nicknameCheck();">
+	           					 <font id="chkNick" size="3"></font>
 							</td>
 						</tr>
 						<!-- 한줄 띄어쓰기 -->
@@ -160,7 +180,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<textarea rows=7 cols=100 class="reportContent" placeholder="신고하는 내용을 상세하게 작성해주세요" required></textarea>
+								<textarea rows=7 cols=100 class="reportContent" name="reportContent" placeholder="신고하는 내용을 상세하게 작성해주세요" required></textarea>
 							</td>
 						</tr>
 						<!-- 한줄 띄어쓰기 -->
@@ -169,12 +189,10 @@
 						</tr>
 						<tr>
 							<td width="400vw">
-								<input type="file" name="reportFile" id="reportFile">
+								<input type="file" name="reportFile" id="reportFile" onchange="loadImg(this);">
 							</td>
-							<td>
-								<div id="repostThumnail">
-									사진공간
-								</div>
+							<td style="backgrond-color :red;">
+								<img id="repostThumnail" width=“120” height="110" alt="사진을 선택해주세요"/>
 							</td>
 						</tr>
 					</tbody>
@@ -194,12 +212,79 @@
 	<script>
 		$(function(){
 			$('#report-form').submit(function(){
-				if($('.reportSelect option').val() == 0){
+				if($('.reportSelect').val() == 0){
 					alert("카테고리를 선택해주세요!");
 					return false;
-				}		
+				}
+				
+				if($("#chkNick").html().equals('현재 존재하지 않는 닉네임입니다.')) {
+					return false;
+				}
 			})
+			
+			$('.reported-user').blur(function(){
+				$(this).css("outline", "2px solid #fdd3fc", "border", "1px solid purple" );
+			})
+			
 		})
+
+		 function nicknameCheck() {
+	    	let regExp = /^[가-힣]+$/gmi;
+	    	let nickname = $("#nickname").val();
+	    	let tet = $("#chkNick");
+	    
+	    	if(!regExp.test(nickname)) {
+	    		$(tet).html("현재 존재하지 않는 닉네임입니다.");
+	    		$(tet).attr("color", "red");
+	    		return false;
+	    	} 
+	    	
+    		if($("#nickname").val().length < 2 || $("#nickname").val().length > 5) {
+	        	$(tet).html("현재 존재하지 않는 닉네임입니다.");
+	        	$(tet).attr("color", "red");
+	        	return false;
+	        }
+	    	
+	    	$.ajax({
+	    		url : "check.me",
+	    		method : "post",
+	    		data : {checkData : nickname, type : "nickname"},
+	    		success : function(result) {
+	    			if(result == "NNNNN") {
+	    				$(tet).html("마이스터에 존재하는 닉네임입니다.");
+	    				$(tet).attr("color", "darkslateblue");
+	    				$('.report-submit').html('제출하기');
+	    				$('.report-submit').attr("disabled", false);
+	    				
+	    			} else {
+	    				$(tet).html("현재 존재하지 않는 닉네임입니다.");
+	    				$(tet).attr("color", "red");
+	    				$('.report-submit').html('제대로된 닉네임 입력하세요!')
+	    				$('.report-submit').attr("disabled", true);
+	    				
+	    				
+	    			}
+	    		},
+	    		error : function() {
+	    			console.log("닉네임 중복체크용 ajax통신 실패");
+	    		}
+	    	})
+	    }
+		
+		function loadImg(inputFile){
+				if(inputFile.files.length != 0) {	// 선택된 파일이 존재할 경우
+					let reader = new FileReader();	// 파일을 읽어들이는 FileReader 객체생성
+					reader.readAsDataURL(inputFile.files[0]);
+					console.log(inputFile.files[0]);
+					reader.onload = function(e) {
+						$('#repostThumnail').attr('src',e.target.result).html('');
+					} 
+				
+				
+				} else {
+					$('#repostThumnail').attr('src',null);
+				}
+			}		
 	</script>
 </body>
 </html>

@@ -230,8 +230,8 @@
 	    		return false;
 	    	} 
 	    	
-    		if($("#nickname").val().length < 2 || $("#nickname").val().length > 6) {
-	        	$(tet).html("닉네임은 2 ~ 6자 이내로 입력하세요.");
+    		if($("#nickname").val().length < 2 || $("#nickname").val().length > 5) {
+	        	$(tet).html("닉네임은 2 ~ 5자 이내로 입력하세요.");
 	        	$(tet).attr("color", "green");
 	        	return false;
 	        }

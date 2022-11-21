@@ -203,7 +203,7 @@
 				<b>마켓 글 제목 :</b>
 				</td>
 				<td>
-				<input name="sellTitle" type="text" id="input1" class="inpu" placeholder="등록할 제목을 입력해주세요" required>
+				<input name="sellTitle" type="text" id="input1" placeholder="등록할 제목을 입력해주세요" required>
 				</td>
 			</tr>
 			<tr>
@@ -215,7 +215,7 @@
 				<b>간단한 설명 작성 : </b>
 				</td>
 				<td>
-				<input name="sellContent" type="text" id="input2" class="inpu" placeholder="작성할 내용을 입력해주세요" required>
+				<input name="sellContent" type="text" id="input2" placeholder="작성할 내용을 입력해주세요" required>
 				</td>			
 			</tr>
 			<tr>
@@ -231,7 +231,7 @@
 				<label for="file">
 					<b>첨부파일</b>
 				</label>
-				<input type="file" name="upfile" id="file" class="inpu">
+				<input type="button" name="upfile" id="file" class="inpu">
 				</td>
 			</tr>
 			<tr>
@@ -239,7 +239,7 @@
 				
 				</td>
 				<td>
-				<img id="titleImg" width="200" height="150">
+				<img id="titleImg" class="inpu" width="200" height="150">
 				</td>
 			</tr>
 			<tr>
@@ -255,7 +255,7 @@
 				<b>가격 정보 :</b> 
 				</td>
 				<td>
-					<textarea name="price" id="textarea1" style="resize: none;" class="inpu" placeholder="가격 정보를 입력해주세요." required></textarea>
+					<textarea name="price" id="textarea1" style="resize: none;" placeholder="가격 정보를 입력해주세요." required></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -267,7 +267,7 @@
 				<b>마켓 서비스 설명 :</b> 
 				</td>
 				<td>
-					<textarea id="textarea2" style="resize: none;" class="inpu" placeholder="판매할 재능에 대한 구체적인 설명을 작성해주세요&#13;&#10;자유롭게 url이나 포트폴리오 이미지를 추가해주세요" required></textarea>
+					<textarea id="textarea2" style="resize: none;" placeholder="판매할 재능에 대한 구체적인 설명을 작성해주세요&#13;&#10;자유롭게 url이나 포트폴리오 이미지를 추가해주세요" required></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -279,7 +279,7 @@
 				<b>취소 및 환불 규정 :</b> 
 				</td>
 				<td>
-					<textarea id="textarea3" style="resize: none;" class="inpu" placeholder="취소 및 환불 규정을 작성해주세요." required></textarea>
+					<textarea id="textarea3" style="resize: none;" placeholder="취소 및 환불 규정을 작성해주세요." required></textarea>
 				</td>
 			</tr>
 		</table>
@@ -287,14 +287,14 @@
 			
 		<br><br>
 		 <div id="file-area">
-		<input type="file" id="file1" name="file1" onchange="loadImg(this, 1);">
+		<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
 		</div>
 	
 		<script>
 		$(function(){
 			$("#file-area").hide();
 			
-			$("#titleImg").click(function(){
+			$(".inpu").click(function(){
 				$("#file1").click();
 			});
 		});

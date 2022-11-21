@@ -507,6 +507,7 @@ body {
                                 </div>
                                 <div data-j-1 class="item">
                                     <span data-j-1 class="text2">댓글</span>
+                                    	<p><%=b.getReplyCount() %></p>
                                 </div>
                             </div>
                         </div>

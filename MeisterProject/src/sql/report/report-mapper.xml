@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="insertReport">
+		INSERT INTO REPORT(REPORT_NO, REPORT_TITLE, REPORT_CONTENT, REASON, REPORT_USER, REPORTED_USER)
+		VALUES (SEQ_RPNO.NEXTVAL, ? , ?, ?, ?, ?)
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
+		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 3)
+	</entry>
+</properties>

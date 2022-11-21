@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.chatting.model.service.ChattingService;
 import com.kh.chatting.model.vo.Chatting;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -43,7 +44,6 @@ public class ChattingListPageController extends HttpServlet {
 		request.setAttribute("nickname", nickName);
 		request.setAttribute("sender", userNo);
 		ArrayList<Chatting> list = new ArrayList<Chatting>();
-		ArrayList<Chatting> resultList = new ArrayList<Chatting>();
 		
 		ArrayList<Integer> receiverList = new ChattingService().selectAllReceiver();
 		ArrayList<Integer> senderList = new ChattingService().selectAllSender();
@@ -52,15 +52,27 @@ public class ChattingListPageController extends HttpServlet {
 			list.add(new ChattingService().selectNoteList(receiverList.get(i), senderList.get(i)));			
 		}
 		
-		 for (int i = 0; i < list.size(); i++) {
-             for (int j = 0; j < list.size(); j++) {
-                 if (i == j) {
-                 } else if (list.get(j).getChatContent().equals(list.get(i).getChatContent())) {
-                     list.remove(j);
-                 }
-             }
-         }
-		
+		for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (i == j) {
+                } else if (list.get(j).getChatContent().equals(list.get(i).getChatContent())) {
+                    list.remove(j);
+                }
+            }
+        }
+		 
+		for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (i == j) {
+                } else if (list.get(j).getChatContent().equals(list.get(i).getChatContent())) {
+                    list.remove(j);
+                }
+            }
+        }
+
+		System.out.println(receiverList.size());
+		//Attachment profile = new ChattingService().getProfile(receiver);
+
 		System.out.println(list);
 
 		String[] nickNameList = null;

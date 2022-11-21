@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.chatting.model.vo.Chatting;
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.dao.MemberDao;
 
 public class ChattingDao {
@@ -231,5 +232,38 @@ public class ChattingDao {
 		}
 		
 		return list;
+	}
+	
+	public Attachment getProfile(Connection conn, int userNo) {
+		
+		Attachment at = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getProfile");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment();
+				
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getNString("CHANGE_NAME"));
+				at.setFilePath(rset.getNString("FILE_PATH"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return at;
 	}
 }

@@ -315,8 +315,24 @@ public class MemberService {
 		
 		return delMem;
 	}
+
+	/**
+	 * 닉네임으로 유저번호를 찾는 메소드
+	 * @param findNick
+	 * @return
+	 */
+	public int userNoFromNickname(String findNick) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int reportedUserNo = new MemberDao().userNoFromNickname(conn, findNick);
+		
+		JDBCTemplate.close();
+		
+		return reportedUserNo;
+	}
 	   
-	   
+	
 	   
 	   
 	   

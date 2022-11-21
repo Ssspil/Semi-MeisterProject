@@ -39,4 +39,13 @@
 		FROM CHATTING
 		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
 	</entry>
+	
+	<entry key="getProfile">
+		SELECT FILE_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+	   	FROM ATTACHMENT
+	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
+	</entry>
 </properties>
