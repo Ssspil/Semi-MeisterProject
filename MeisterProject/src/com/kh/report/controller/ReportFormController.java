@@ -40,6 +40,8 @@ public class ReportFormController extends HttpServlet {
 	        
 	        return;
 	    }
+	    
+	    System.out.println("신고하러 가기");
 		
 		request.getRequestDispatcher("views/report/reportForm.jsp").forward(request, response);;
 	}

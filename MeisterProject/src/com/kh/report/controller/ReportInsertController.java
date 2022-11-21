@@ -65,6 +65,9 @@ public class ReportInsertController extends HttpServlet {
 			re.setReportUser(userNo);
 			re.setReportedUser(reportedUserNo);
 			
+			System.out.println("controller 의 userNo : " + userNo);
+			System.out.println("controller 의 reportedUserNo : " + reportedUserNo);
+			
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("reportFile") != null ) {
@@ -77,7 +80,8 @@ public class ReportInsertController extends HttpServlet {
 			int result = new ReportService().insertReport(re, at);
 			
 			if( result > 0 ) {	// 성공 시 홈으로 
-				request.getRequestDispatcher(savePath);
+				
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} else {	// 실패 시 > 첨부파일 있었을 경우 이미 업로드된 첨부파일을 서버에 보관할 이유가 없다 -> 삭제
 				if(at != null) {
 					//	삭제시키고자 하는 파일 객체 생성 > delete메소드 호출

@@ -9,6 +9,7 @@
 	
 	<entry key="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
-		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 3)
+		VALUES(SEQ_FNO.NEXTVAL, SEQ_RPNO.CURRVAL, ?, ?, ?, 3)
 	</entry>
+	
 </properties>

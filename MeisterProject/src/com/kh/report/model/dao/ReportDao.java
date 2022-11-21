@@ -43,13 +43,16 @@ public class ReportDao {
 		
 		String sql = prop.getProperty("insertReport");
 		
+		System.out.println("dao의 re.getReportUser() : " + re.getReportUser());
+		System.out.println("re.getReportUser() : " + re.getReportedUser());
+		
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setString(1, re.getReportTitle());
 			psmt.setString(2, re.getReportContent());
 			psmt.setString(3, re.getReason());
-			psmt.setInt(4, re.getReportNo());
+			psmt.setInt(4, re.getReportUser());
 			psmt.setInt(5, re.getReportedUser());
 			
 			result1 = psmt.executeUpdate();
@@ -79,6 +82,7 @@ public class ReportDao {
 	        try {
 	            psmt = conn.prepareStatement(sql);
 	            
+	            //psmt.setInt(1, at.getRefNo());
 	            psmt.setString(1, at.getOriginName());
 	            psmt.setString(2, at.getChangeName());
 	            psmt.setString(3, at.getFilePath());
