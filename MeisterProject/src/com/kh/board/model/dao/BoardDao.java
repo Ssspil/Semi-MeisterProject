@@ -626,7 +626,7 @@ public class BoardDao {
 		}
 		return result;
 	}
-	public ArrayList<Board> myCommunity(Connection conn){
+	public ArrayList<Board> myCommunity(Connection conn,int userNo){
 		
 			ArrayList<Board> list = new ArrayList<>();
 			
@@ -638,6 +638,7 @@ public class BoardDao {
 			
 			try {
 				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, userNo);
 				
 				rset = psmt.executeQuery();
 		
@@ -650,7 +651,7 @@ public class BoardDao {
 							rset.getInt("USER_NO"),
 							rset.getInt("REPLY_COUNT"),
 						    rset.getString("BOARD_DATE"));
-		System.out.println(b);
+		
 					list.add(b);
 				}
 				
@@ -665,10 +666,11 @@ public class BoardDao {
 			return list;
 		}
 	public int selectListCount2(Connection conn,int type) {
-		// select문 -> Result객체
+		
 		int listCount = 0;
 		
 		PreparedStatement psmt = null;
+		
 		
 		ResultSet rset = null;
 		
@@ -676,16 +678,16 @@ public class BoardDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			
 			psmt.setInt(1, type);
 			
 			rset = psmt.executeQuery();
 			
+			
 			if(rset.next()) {
-				listCount = rset.getInt("COUNT");
+				listCount = rset.getInt("BOARD_COUNT");
 			}
 			
-			
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -695,6 +697,41 @@ public class BoardDao {
 		
 		return listCount;
 	}
+	
+public ArrayList<Reply> myReply(Connection conn,int type) {
+		
+		ArrayList<Reply> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myReply");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, type);
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Reply(
+						rset.getInt("REPLY_NO"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("REPLY_CONTENT"),
+						rset.getString("REPLY_DATE"),
+						rset.getInt("USER_NO")
+						));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return list;
+	}
+	
 
 
 }

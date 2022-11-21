@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.*, com.kh.common.model.vo.PageInfo"%>
     <%  ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-    
+   
     PageInfo pi = (PageInfo) request.getAttribute("pi");
      int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
@@ -43,6 +43,15 @@ height:1400px;
     height: 80px;
 }
 #name1Body{
+    box-sizing: border-box;
+    border: 3px solid orange;
+    border-radius: 30px;
+    height:210px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+}
+#name2Body{
     box-sizing: border-box;
     border: 3px solid orange;
     border-radius: 30px;
@@ -138,7 +147,7 @@ height: 50px;
 .page_wrap {
 	text-align: center;
 	position: relative;
-	top: 25px;
+	top: 15px;
 }
 
 .page_wrap span {
@@ -159,6 +168,7 @@ height: 50px;
 </style>
 </head>
 <body>
+<input id="boardType" type="hidden" value="name1Body" />
 <%@include file="../common/header.jsp" %>
   <div class="header"></div>
     <div id=main>
@@ -175,10 +185,10 @@ height: 50px;
 
         </div>
         <div id="contenthead"></div>
-        <% for (int i = 0; i < list.size(); i++) { %>
-        <div id="name1Body" class="board board<%=i%> <%=i > 5 ? "hide" : "" %>" >
+		
+				<% for (int i = 0; i < list.size(); i++) { %>
+        <div id="name1Body" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
             <div id="title"> 
-           
                 <div id="titlepost">커뮤니티 게시글 제목</div> 
                 <div id="titlepost1"><%=list.get(i).getBoardTitle() %></div>
             </div>
@@ -196,8 +206,9 @@ height: 50px;
             </div>
         
         </div>
-        <br><br>
         <% } %>
+       
+
         <%@ include file="../mypagein/myPageInMyReply.jsp"%>
 <!--        여기부턴 댓글 -->
         
@@ -271,18 +282,18 @@ height: 50px;
       if (type == "name1") {
          $("#name1Body").show();
          $("#name2Body").hide();
-         $("#name1").addClass("bodyClick");
-         $("#name2").removeClass("bodyClick");
-<!--          $("#type").val("1"); -->
-<!--          $("#boardType").val("name1"); -->
+//          $("#name1").addClass("bodyClick");
+//          $("#name2").removeClass("bodyClick");
+		$("#type").val("1"); 
+		$("#boardType").val("name1"); 
 
       } else if (type == "name2") {
          $("#name2Body").show();
          $("#name1Body").hide();
-         $("#name2").addClass("bodyClick");
-         $("#name1").removeClass("bodyClick");
-<!--          $("#type").val("2"); -->
-<!--          $("#boardType").val("name2"); -->
+//          $("#name2").addClass("bodyClick");
+//          $("#name1").removeClass("bodyClick");
+         $("#type").val("2");
+		$("#boardType").val("name2");
 
       }
    }

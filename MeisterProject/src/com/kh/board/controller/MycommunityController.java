@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MycommunityController
@@ -32,7 +35,7 @@ public class MycommunityController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		
 		int listCount; 
 		int currentPage; 
 		int pageLimit; 
@@ -63,12 +66,23 @@ public class MycommunityController extends HttpServlet {
 		
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-
 		
-		ArrayList<Board> list = new BoardService().myCommunity();
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<Board> list = new BoardService().myCommunity(userNo);
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
-		System.out.println(list);
+		
+		
+		
+		ArrayList<Reply> list2 = new BoardService().myReply(userNo);
+		request.setAttribute("list2",list2);
+		System.out.println(list2);
+	
+		
+	
+		
+		
 		
 		
 		

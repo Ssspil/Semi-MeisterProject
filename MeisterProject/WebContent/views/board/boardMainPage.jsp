@@ -47,7 +47,6 @@ String searchType = request.getAttribute("searchType") == null ? "" : request.ge
 	height: 58px;
 }
 
-
 .bodyWrite_wrap {
 	box-sizing: border-box;
 	margin: auto;
@@ -133,10 +132,10 @@ hr {
 
 #ge {
 	border: 5px solid orange;
-	background-color:white;
+	background-color: white;
 	font-size: 27px;
-	height:58px;
-	width:160px;
+	height: 58px;
+	width: 160px;
 	float: left;
 	border-style: groove;
 	border-radius: 15px;
@@ -150,22 +149,21 @@ hr {
 
 #gung {
 	border: 5px solid orange;
-	background-color:white;
+	background-color: white;
 	font-size: 27px;
-	height:58px;
+	height: 58px;
 	float: left;
 	border-style: groove;
 	border-radius: 15px;
 	cursor: pointer;
 }
+
 #bodyClick1 {
-	
-	background-color:black;
+	background-color: black;
 }
+
 #bodyClick2 {
-	background-color:blue;
-
-
+	background-color: blue;
 }
 
 #gung:hover {
@@ -333,17 +331,17 @@ hr {
 	<%@ include file="../common/header.jsp"%>
 <body>
 	<input id="boardType" type="hidden" value="ge" />
-   <div class="body">
-      <h1 id="mainid">커뮤니티</h1>
-      <div id="body-1">
-         <button id="ge" class="bodyClick" onclick="menuClick('ge')">
-            <i class="bi bi-chat-square-text"></i> 게시판
-         </button>
-         <button id="gung" onclick="menuClick('gung')">
-            <i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요
-         </button>
-      </div>
-   </div>
+	<div class="body">
+		<h1 id="mainid">커뮤니티</h1>
+		<div id="body-1">
+			<button id="ge" class="bodyClick" onclick="menuClick('ge')">
+				<i class="bi bi-chat-square-text"></i> 게시판
+			</button>
+			<button id="gung" onclick="menuClick('gung')">
+				<i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요
+			</button>
+		</div>
+	</div>
 	<div id="line"></div>
 
 	<div class="bodyWrite_wrap">
@@ -587,11 +585,12 @@ hr {
 			</div>
 		</div>
 	</div>
-	
+
 
 	<%@ include file="../board/pageMove.jsp"%>
 	<%@ include file="../common/footer.jsp"%>
-</body>
+
+
 
 
 	<script>
@@ -605,7 +604,8 @@ hr {
 	  
    })
 	</script>
-<script>
+
+	<script>
    function menuClick(type) {
       /* body2 : 게시판 , */
       if (type == "ge") {
@@ -628,8 +628,7 @@ hr {
 
       }
    }
-   </script>
-   <script>
+   
    function pageMove(currentPage) {
       if (currentPage == "next") {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
@@ -650,7 +649,7 @@ hr {
       $(".page" + currentPage).addClass("sel");
    }
    </script>
-<script>
+	<script>
  
 function searchEnter(){
 	   if(window.event.keycode == 13) search();
@@ -661,6 +660,7 @@ function detail(no){
 
 	}
    
-</script>
+	</script>
+</body>
 </html>
 
