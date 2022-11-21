@@ -8,22 +8,6 @@
     
 <%
     String contextPath = request.getContextPath();
-
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	
-	
-	
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
- 	
- 	int currentPage = pi.getCurrentPage();
- 	int startPage = pi.getStartPage();
- 	int endPage = pi.getEndPage();
- 	int maxPage = pi.getMaxPage();
- 	
- 	
-   	String alertMsg = (String)session.getAttribute("alertMsg");
-	// 서비스 요청 전 : null
-	// 서비스 요청 성공 후 : alert로 띄워줄 메시지 문구
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -69,18 +53,6 @@ table>tbody>tr:hover{
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-    <script>
-		let msg = "<%= alertMsg %>";	// let msg = 성공적으로 공지사항이 등록되었습니다.
-		
-		// 알람을 띄워준후 session에 담긴 해당메세지는 지워줘야한다.
-		// 안그러면 menuber.jsp가 로딩될때마다 계속 알림창잉 뜬다.
-		if(msg != "null"){
-			alert(msg);
-			
-			<% session.removeAttribute("alertMsg"); %>
-		} 
-		
-	</script>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <div class="navbar-brand ps-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관리자 페이지</div>
@@ -149,87 +121,34 @@ table>tbody>tr:hover{
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main>
-            
-                
+             <main>
+
+
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">신고 관리</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">신고목록</li>
+                        <li class="breadcrumb-item active">신고 목록</li>
                     </ol>
+
+
+                    <table align="center">
+                         <thead>
+                             <tr>
+                                 <th>번호</th>
+                                 <th>아이디</th>
+                                 <th>신고된 아이디</th>
+                                 <th>사유</th>
+                                 <th>상세</th>
+                                 <th>상태</th>
+                             </tr>
+                         </thead>
+                         
+                     </table>
                     
                     
-                    <br>
-                    <div class="list-area">
-	                    <table border="1" align="center">
-	                    	<thead>
-	                    		<tr>
-	                    			<td colspan="4"><!--  버튼 추가할라면 여기서 작성 -->
-	                    				<div class="listbtn">
-											<a class="btn btn-secondary" href="<%=contextPath%>/enrollForm.ad">글작성</a> 
-										</div>
-									</td>
-	                    		</tr>
-		                    	<tr>
-		                    		<th width="100">신고번호</th>
-		                    		<th width="500">신고제목</th>
-		                    		<th width="100">신고내용?</th>
-		                    		<th width="300">이유</th>
-		                    	</tr>
-		                    </thead>
-							<tbody>
-								<% if(list.isEmpty()) { %>
-									<!--  리스트가 비어있는 경우. -->
-									<tr>
-										<td colspan="5">존재하는 공지사항이 없습니다.</td>
-									</tr>
-								
-								<% }  else {%>
-									<% for(Notice n : list) { %>
-										<tr>
-											<td><%= n.getNoticeNo() %></td>
-											<td><%= n.getNoticeTitle() %></td>
-											<td>관리자</td>
-											<td><%= n.getCreateDate() %></td>
-										</tr>
-								
-									<% } %>
-								<% } %>
-								
-							</tbody>
-	                    </table>
-                    </div>
-				</div>
-                
-                <br>
-                
-		     <!-- 페이징처리 -->           
-		     <div align="center" class="paging-area">
-				<% if(currentPage != 1) {%>
-					<button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button>
-				<%} %>
-				
-				<%for(int i = startPage; i<=endPage; i++){ %>
-					<% if(i != currentPage) {%>
-						<button onclick="doPageClick(<%=i%>)"><%= i%></button>
-					<% } else { %>
-						<button disabled><%=i %></button>
-					<%} %>
-				<%} %>
-				
-				<%if(currentPage != maxPage) {%>
-					<button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button>
-				<%} %>
-			</div>
-			<script>
-				function doPageClick(currentPage){
-					location.href= "<%=contextPath%>/search.no?currentPage="+currentPage+"&search=${search}";
-					
-				}
-			</script>
                     
-                    		
-            </main> 
+                </div>
+            </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">

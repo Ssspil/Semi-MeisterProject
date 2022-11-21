@@ -1,6 +1,7 @@
 package com.kh.report.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
@@ -37,6 +38,17 @@ public class ReportService {
 		JDBCTemplate.close();
 		
 		return result1 * result2;
+	}
+
+	public ArrayList<Report> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Report> list = new ReportDao().selectAllList(conn);
+		
+		JDBCTemplate.close();
+		
+		return list;
 	}
 
 }

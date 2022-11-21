@@ -41,6 +41,7 @@
 	    font-weight: 400;
 	    font-size: 14px;
 	    line-height: 16px;
+		box-shadow: 1px 2px darkgray;
 	}
 	.reportSelect:focus{
 	    border: 1px solid orange;
@@ -50,11 +51,13 @@
 	    border-radius: 10px;
 	}
 	
+	/* 닉네임 css */
 	#nickname{
 		border: 1px solid #C4C4C4;
 	    box-sizing: border-box;
 	    border-radius: 10px;
 	    padding-left : 15px;
+		box-shadow: 1px 2px darkgray;
 	}
 	#nickname:focus{
 		border: 1px solid orange;
@@ -73,6 +76,7 @@
 	    box-sizing: border-box;
 	    border-radius: 10px;
 	    padding-left : 15px;
+		box-shadow: 1px 2px darkgray;
 	}
 	.reportTitle:focus{
 		border: 1px solid orange;
@@ -87,10 +91,12 @@
 		border: 1px solid #C4C4C4;
 	    box-sizing: border-box;
 	    border-radius: 10px;
+		min-height: 100px;
 	    max-height: 500px;
 	    resize: vertical;
 	    padding-left : 15px;
 		padding-top : 10px;
+		box-shadow: 1px 2px darkgray;
 	}
 	.reportContent:focus {
 		border: 1px solid orange;
@@ -108,6 +114,7 @@
 	  border: 1px solid rgb(77,77,77);
 	  border-radius: 10px;
 	  cursor: pointer;
+	  
 	}
 	 input[type=file]::file-selector-button:hover {
 	    background: rgb(77,77,77);
@@ -191,7 +198,7 @@
 							<td width="400vw">
 								<input type="file" name="reportFile" id="reportFile" onchange="loadImg(this);">
 							</td>
-							<td style="backgrond-color :red;">
+							<td>
 								<img id="repostThumnail" width=“120” height="110" alt="사진을 선택해주세요"/>
 							</td>
 						</tr>
