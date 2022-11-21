@@ -230,20 +230,35 @@ div.main #price{
 		<div class="navigator">
 		
 	        <ul id="navi">
-	        	<li class="list">
-	                <a href="<%= contextPath %>/market.se" name="marketAll">전체</a>
+	        	<li class="list-1">
+	                <a href="<%= contextPath %>/market.se" id="marketAll">전체</a>
 	            </li>
-	        	<% for (Interest i : interest) { %>
-	        	<li class="list">		
-	       			<a href="<%= contextPath %>/ ##"><%= i.getInterestName() %></a>
+	        	<% for (Interest i : interest) { %> 
+	        	
+	        	<li class="list-2">
+	       			<a href="<%= contextPath %>/category.se" > <%= i.getInterestName() %></a>
+	       			<input type="hidden" name ="interest">
 	       			<ul>
 	       				<% for (Local l : local) { %>
-	       					<li class="list-in-list"><a href="<%= contextPath %>/ ##"><%= l.getLocalName() %></a></li>
+	       					<li class="list-in-list"><a href="<%= contextPath %>/category.se"> <%= l.getLocalName() %></a></li>
 	       				<% } %>
 					</ul>
 				</li>
 	       		<% } %>
 	        </ul> 
+	        
+	        <!-- 일단 작성 -->
+	        <script>
+	        $(function(){
+		        $(".list-2").on("click","li",function(e){
+			        console.log($(e.target).data("value"));
+			        console.log($(this).data("value"));
+			        console.log(this);
+		        })		        
+		    })	      	
+	        </script>
+	        
+	        
         
 	    </div> 
 		
@@ -267,9 +282,17 @@ div.main #price{
 			<% } %>
 		<% } %>
 		
-		<br>
 		
-		
+		<!-- 카테고리 클릭시 local_no, interest_no에 맞게 글 뜨도록 -->
+		<!--  <script>
+       		$(function(){    
+       			
+       			$(".list-in-list").click(function(){
+
+       				  var value = $(this).val();
+       				});       			
+       		})  
+		</script> -->
 		
 		
 		
@@ -347,10 +370,6 @@ div.main #price{
 			}
 		</script>
 		
-	
-	
-	
-	
 	
 
 	<%@ include file="../common/footer.jsp" %>
