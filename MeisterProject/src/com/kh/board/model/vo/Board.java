@@ -81,14 +81,15 @@ public class Board {
       this.boardDate = boardDate;
       this.memberNic = memberNic;
    }
-   
-   public Board(int boardNo,String boardContent, String boardTitle,int boardType, int boardCount, int userNo, String boardDate) {
+   //내 커뮤니티 게시글 보기
+   public Board(int boardNo,String boardTitle,String boardContent, int replyCount,int userNo,int boardRecommend,String boardDate) {
 	      super();
 	      this.boardNo = boardNo;
-	      this.boardContent =  boardContent;
 	      this.boardTitle = boardTitle;
-	      this.boardCount = boardCount;
+	      this.boardContent =  boardContent;
+	      this.replyCount = replyCount;
 	      this.userNo = userNo;
+	      this.boardRecommend = boardRecommend; 
 	      this.boardDate = boardDate;
 	   }
 
