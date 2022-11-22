@@ -21,6 +21,10 @@ overflow: hidden;
 -webkit-line-clamp: 2;
 
 }
+#contenthead2{
+    box-sizing: border-box;
+    height: 40px;
+}
 </style>
 </head>
 <body>
