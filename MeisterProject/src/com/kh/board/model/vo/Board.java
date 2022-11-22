@@ -71,8 +71,9 @@ public class Board {
    }
    
    // 게시글 상세보기
-   public Board(int boardNo, String boardTitle, String boardContent, int boardRecommend, int userNo, String boardDate, String memberNic) {
+   public Board(int replyCount,int boardNo, String boardTitle, String boardContent, int boardRecommend, int userNo, String boardDate, String memberNic) {
 	   super();
+	   this.replyCount = replyCount;
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
@@ -80,6 +81,7 @@ public class Board {
       this.userNo = userNo;
       this.boardDate = boardDate;
       this.memberNic = memberNic;
+      
    }
    //내 커뮤니티 게시글 보기
    public Board(int boardNo,String boardTitle,String boardContent, int replyCount,int userNo,int boardRecommend,String boardDate) {
