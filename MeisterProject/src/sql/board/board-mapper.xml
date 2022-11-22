@@ -104,10 +104,7 @@
 		UPDATE BOARD
 		SET BOARD_TITLE = ?,
 			BOARD_CONTENT = ?,
-			REPLY
-		FROM BOARD B
-		JOIN REPLY R USING(BOARD_NO)
-			
+		FROM BOARD
 		WHERE BOARD_NO = ?
 	</entry>
 	
@@ -145,18 +142,19 @@
 	</entry>
 	
 	<entry key="selectBoard">
-		SELECT
+		SELECT (SELECT COUNT(REPLY_NO)
+                    FROM REPLY
+                    WHERE BOARD_NO = ?
+                    AND STATUS = 'Y') REPLY_COUNT,
 			BOARD_NO,
 			B.BOARD_TITLE,
 	        B.BOARD_CONTENT,
 			B.BOARD_RECOMMEND,
-			R.USER_NO,
-            R.REPLY_COUNT,
+			USER_NO,
 			B.BOARD_DATE,
 			M.NICKNAME
 			FROM BOARD B
 			JOIN MEMBER M USING(USER_NO)
-            JOIN REPLY R USING(BOARD_NO)
 			WHERE BOARD_NO = ?
             AND B.STATUS ='Y'
 	</entry>
@@ -251,9 +249,6 @@
 		WHERE STATUS = 'Y'
 		  AND BOARD_TYPE = ?
 	</entry>  
-	
-	
-	
 	
 	
 </properties>

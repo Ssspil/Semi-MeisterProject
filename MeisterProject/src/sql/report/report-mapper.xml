@@ -2,14 +2,50 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+	<!-- 신고접수 -->
 	<entry key="insertReport">
 		INSERT INTO REPORT(REPORT_NO, REPORT_TITLE, REPORT_CONTENT, REASON, REPORT_USER, REPORTED_USER)
 		VALUES (SEQ_RPNO.NEXTVAL, ? , ?, ?, ?, ?)
 	</entry>
 	
+	<!-- 신고접수 첨부파일  -->
 	<entry key="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
 		VALUES(SEQ_FNO.NEXTVAL, SEQ_RPNO.CURRVAL, ?, ?, ?, 3)
 	</entry>
 	
+	<!-- 신고접수 전체글 조회 -->
+	<entry key="selectAllList">
+	SELECT *
+	FROM (SELECT ROWNUM RNUM,
+		  		 A.* 
+		  FROM (	SELECT 
+					    REPORT_NO,
+					    REPORT_TITLE,
+					    REPORT_CONTENT,
+					    REASON,
+					    REPORT_DATE,
+					    R.STATUS,
+					    m2.USER_ID AS REPORTED_USER,
+					    m1.USER_ID AS REPORT_USER
+					FROM REPORT R
+					JOIN MEMBER m1 ON (R.REPORT_USER= m1.USER_NO)
+					JOIN MEMBER m2 ON (R.REPORTED_USER= m2.USER_NO)
+					ORDER BY REPORT_DATE DESC ) A
+		  )
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 신고접수 전체개수 -->
+	<entry key="selectReportCount">
+		SELECT COUNT(*) AS COUNT
+		FROM REPORT
+	</entry>
+	
+	<!-- 관리자가 처리완료 하게만들기  -->
+	<entry key="reportProcessed">
+		UPDATE REPORT
+		SET STATUS = 'Y'
+		WHERE REPORT_NO = ?
+	</entry>
 </properties>

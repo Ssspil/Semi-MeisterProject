@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"  import="java.util.ArrayList, com.kh.board.model.vo.*, com.kh.common.model.vo.PageInfo"%>
     <%  
     ArrayList<Reply> list2 = (ArrayList<Reply>)request.getAttribute("list2");
-  
+    String contextPath2 = request.getContextPath();
     %>
 <!DOCTYPE html>
 <html>
@@ -21,15 +21,16 @@ overflow: hidden;
 -webkit-line-clamp: 2;
 
 }
+
 </style>
 </head>
 <body>
-
-
-				<%
-					for (int i = 0; i < list2.size(); i++) {
-				%>
-		<div id="name2Body"  style="display:none" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
+  		<input type="hidden" id="boardType" value="2">
+				<%for (int i = 0; i < list2.size(); i++) { %>
+		<div id="name2Body" class="name2Body board<%=i%> <%=i > 5 ? "hide" : ""%>">
+<!-- 		myReply 매퍼에 board_no 추가하기 -->
+<%-- 		 onclick="location.href='<%=contextPath2%>/detail.bo?&bno=<%=list2.get(i).getBoardNo() %>';"  --%>
+		
             <div id="title"> 
                 <div id="titlepost">게시글 제목</div>
                 <div id="titlepost1"><%=list2.get(i).getBoardTitle() %></div>
@@ -46,6 +47,8 @@ overflow: hidden;
               
             </div>
         </div>
+       
+    
        
 				<%	}%>
 				

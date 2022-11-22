@@ -179,7 +179,7 @@ div.main{
     display: inline-block;
 }
 div.main div{
-    border : 1px solid red;
+   /* border : 1px solid red; */
     height: 250px;
     width : 250px;
     margin : 15px 15px 100px 15px;
@@ -227,39 +227,25 @@ div.main #price{
 		<br>
 		<br>
 		
-		<div class="navigator">
-		
+		<div class="navigator">		
 	        <ul id="navi">
 	        	<li class="list-1">
 	                <a href="<%= contextPath %>/market.se" id="marketAll">전체</a>
 	            </li>
 	        	<% for (Interest i : interest) { %> 
-	        	
 	        	<li class="list-2">
-	       			<a href="<%= contextPath %>/category.se" > <%= i.getInterestName() %></a>
-	       			<input type="hidden" name ="interest">
+	       			<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>" > <%= i.getInterestName() %> </a>
 	       			<ul>
 	       				<% for (Local l : local) { %>
-	       					<li class="list-in-list"><a href="<%= contextPath %>/category.se"> <%= l.getLocalName() %></a></li>
+	       					<li class="list-in-list">
+	       						<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
+	       					</li>
 	       				<% } %>
 					</ul>
 				</li>
 	       		<% } %>
 	        </ul> 
 	        
-	        <!-- 일단 작성 -->
-	        <script>
-	        $(function(){
-		        $(".list-2").on("click","li",function(e){
-			        console.log($(e.target).data("value"));
-			        console.log($(this).data("value"));
-			        console.log(this);
-		        })		        
-		    })	      	
-	        </script>
-	        
-	        
-        
 	    </div> 
 		
 		<div class="main">
@@ -271,8 +257,12 @@ div.main #price{
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 					<img src="../resources/sellBoard_upfiles/<%=sb.getTitleImg()%>"width="230px" height="210px">
+					
 					<p>
 					판매글 제목 : <%=sb.getSellTitle() %> <br>
+					
+					관심사 : <%=sb.getInterestNo() %><br>
+					지역 : <%=sb.getLocalNo() %><br>
 					
 					<!-- 판매글 no는 임시로 넣어둠(확인을 위해) -->
 					No. <%=sb.getSellNo() %> <br>
@@ -283,49 +273,6 @@ div.main #price{
 		<% } %>
 		
 		
-		<!-- 카테고리 클릭시 local_no, interest_no에 맞게 글 뜨도록 -->
-		<!--  <script>
-       		$(function(){    
-       			
-       			$(".list-in-list").click(function(){
-
-       				  var value = $(this).val();
-       				});       			
-       		})  
-		</script> -->
-		
-		
-		
-		
-		<!-- 잠시 주석 -->
-			<%-- <div>
-				<a href="<%= contextPath %>/detail.se" class="thumb" id="thumb1">썸네일1</a>
-				<img src="" class="" >
-				<h6 class="content" id="title"> <%= s.getSellTitle() %> 타이틀 제목</h6>
-				<h6 class="content" id="price"> 가격 :  <%= s.getPrice() %>  원 </h6>
-			</div>
-            
-			<div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일2</a>
-			
-			</div>
-			
-            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일3</a>
-            
-            </div>
-			
-            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일4</a>
-            
-            </div>
-
-            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일5</a>
-            
-            </div>
-			
-            <div><a href="<%= contextPath %>/detail.se" class="thumb"><img src="#">썸네일6</a>
-            
-            </div> --%>
-
-
 		</div>
 		<script>
 			$(function(){

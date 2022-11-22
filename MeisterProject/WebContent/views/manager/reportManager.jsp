@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
     							  java.util.ArrayList, 
-    							  com.kh.manager.notice.model.vo.Notice,
+    							  com.kh.report.model.vo.*,
     							  com.kh.common.model.vo.PageInfo" 
 %>
     
     
 <%
     String contextPath = request.getContextPath();
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+ 	
+ 	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+ 	
+ 	
+   	String alertMsg = (String)session.getAttribute("alertMsg");
+	// 서비스 요청 전 : null
+	// 서비스 요청 성공 후 : alert로 띄워줄 메시지 문구
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -18,7 +31,11 @@
 <meta name="author" content="JSP" />
 <title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!--  jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- css -->
@@ -44,8 +61,8 @@ table>tbody>tr:hover{
 	color : darkblue;
 	
 }
-.search{
-	text-align : center;
+table{
+	text-align :center;
 }
  	
 </style>
@@ -134,18 +151,110 @@ table>tbody>tr:hover{
                     <table align="center">
                          <thead>
                              <tr>
-                                 <th>번호</th>
-                                 <th>아이디</th>
-                                 <th>신고된 아이디</th>
-                                 <th>사유</th>
-                                 <th>상세</th>
-                                 <th>상태</th>
+                                 <th width="100">번호</th>
+                                 <th width="200">아이디</th>
+                                 <th width="200">신고된 아이디</th>
+                                 <th width="150">날짜</th>
+                                 <th width="100">사유</th>
+                                 <th width="100">상세</th>
+                                 <th width="100">상태</th>
                              </tr>
+                             <% for(Report re : list) { %>
+                             	<tr>
+                             		<td><%= re.getReportNo() %>
+                             			<input type="hidden" id="rpNo<%= re.getReportNo() %>" name="rpNo" value="<%= re.getReportNo() %>"/>
+                             		</td>
+                             		<td><%= re.getReportUserId() %></td>
+                             		<td><%= re.getReportedUserId() %></td>
+                             		<td><%= re.getReportEnrollDate() %></td>
+                             		<td><%= re.getReason() %></td>
+                             		<td>
+                             			<button type="button" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#Info<%= re.getReportNo()%>">보기</button>
+                             			<!-- 모달 테스트 -->
+                                            <div id="Info<%= re.getReportNo()%>" class="modal" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">신고내용</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <br>
+                                                        <div class="modal-body" align="center">
+                                                        	<h2><%= re.getReportTitle() %></h2>
+                                                        	<hr>
+                                                            <%= re.getReportContent() %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  모달 테스트 끝 -->
+                             		
+                             		</td>
+                             		<td>
+                             			<% if (re.getStatus().equals("N")) { %>
+                             				<button type="button" class="btn btn-primary btn-sm" id="process<%= re.getReportNo() %>" >처리중</button>
+                             				
+                             			<% }  else { %>
+                             				<button type="button" class="btn btn-secondary btn-sm">처리완료</button>
+                             			<% } %>
+                             			
+                             			    <script>
+										        $(function(){
+													$("#process<%= re.getReportNo() %>").click(function(){
+														$.ajax({
+															url : "processed.do",
+															data : {rpno : $('#rpNo<%= re.getReportNo() %>').val()},
+															type : "post",
+															success : function(result) {
+																
+																alert(result);
+																
+																$('#process<%= re.getReportNo() %>').addClass("btn btn-secondary btn-sm");
+																$('#process<%= re.getReportNo() %>').html("처리완료");
+															}
+													
+														})
+													});
+												})
+										    </script>
+                             		</td>
+                           
+                             	</tr>
+                             <% } %>
                          </thead>
                          
                      </table>
                     
+                    <br><br>
                     
+                     <!-- 페이징처리 -->           
+				     <div align="center" class="paging-area">
+						<% if(currentPage != 1) {%>
+							<button onclick="doPageClick(<%=currentPage-1 %>)">&lt;</button>
+						<%} %>
+						
+						<%for(int i = startPage; i<=endPage; i++){ %>
+							<% if(i != currentPage) {%>
+								<button onclick="doPageClick(<%=i%>)"><%= i%></button>
+							<% } else { %>
+								<button disabled><%=i %></button>
+							<%} %>
+						<%} %>
+						
+						<%if(currentPage != maxPage) {%>
+							<button onclick="doPageClick(<%=currentPage+1 %>)">&gt;</button>
+						<%} %>
+					</div>
+					<script>
+						function doPageClick(currentPage){
+							location.href= "<%=contextPath%>/search.no?currentPage="+currentPage+"&search=${search}";
+							
+						}
+					</script>
                     
                 </div>
             </main>
@@ -158,24 +267,7 @@ table>tbody>tr:hover{
             </footer>
         </div>
     </div>
-    <script>
-        $(function(){
-			$("table>tbody>tr").click(function(){
-				// 클릭시 해당 공지사항의 번호를 넘겨야한다.
-				// 해당 tr요소의 자손 중에서 첫번째 td태그의 영역의 내용 필요
-				
-				let nno = $(this).children().eq(0).text(); //글번호 1, 2 가져옴
-				//현재 내가 클릭한 tr의 자손들 중 0번째에 위치한 자식의 textnode내용을 가져온다.
-				
-				//요청할 url?키=밸류&키=밸류&키=밸류
-				//물음표 뒤에 내용을 쿼리스트링이라고 부름 => 값들은 직접 만들엉서 넘겨야함.
-						
-				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
-			});
-		})
-		
-		
-    </script>
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
