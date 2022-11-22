@@ -824,4 +824,34 @@ public class MemberDao {
 		
 		return result2;
 	}
+
+	public int userNoFromNickname(Connection conn, String findNick) {
+		PreparedStatement psmt = null;
+		int reportedUserNo = 0;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("userNoFromNickname");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, findNick);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				reportedUserNo = Integer.parseInt(rset.getString("USER_NO"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return reportedUserNo;
+	}
+
 }

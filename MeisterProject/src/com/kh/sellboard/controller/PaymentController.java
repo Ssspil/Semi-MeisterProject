@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Attachment;
+import com.kh.sellboard.model.service.SellBoardService;
+import com.kh.sellboard.model.vo.SellBoard;
+
 /**
  * Servlet implementation class PaymentController
  */
@@ -28,7 +32,8 @@ public class PaymentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		request.getRequestDispatcher("views/sell/payment.jsp").forward(request, response);
+			request.getRequestDispatcher("views/sell/payment.jsp").forward(request, response);
+		
 	}
 
 	/**

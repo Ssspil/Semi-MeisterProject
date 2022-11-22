@@ -287,12 +287,12 @@
 			관심분야 : &nbsp;
 			<input id="textInterest" disabled>
 			<select id="interest" name="interests">
-				<option value="영상">영상</option>
-				<option value="영화">영화</option>
-				<option value="게임">게임</option>
-				<option value="IT">IT</option>
-				<option value="운동">운동</option>
-				<option value="요리">요리</option>
+				<option value="10">영상</option>
+				<option value="20">영화</option>
+				<option value="30">게임</option>
+				<option value="40">IT</option>
+				<option value="50">운동</option>
+				<option value="60">요리</option>
 			</select>
 			<br><br>
 			<div style="text-align:center;">

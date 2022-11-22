@@ -49,6 +49,7 @@ public class SellInsertController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 				
 			
+			// DB에 저장
 		    String sellTitle = multiRequest.getParameter("sellTitle");
 		    String sellContent = multiRequest.getParameter("sellContent");
 		    int price = Integer.parseInt (multiRequest.getParameter("price"));

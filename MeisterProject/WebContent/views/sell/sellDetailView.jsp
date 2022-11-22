@@ -29,31 +29,32 @@
 		
 	}
 	.outer{
-	       height: 750px;
+	       height: 850px;
 	       /* 상 , 우 , 하, 좌  띄우기 */
 			margin: 150px 200px 20px 200px;
-			border: 1px solid;
+			border : 1px solid;
 	}
 	.container{
 		width: 500px;
 	}
 	ul.tabs li{
 		background: none;
-		color: mediumseagreen;
+		color: white;
 		display: inline-block;
-		background: seashell;
+		background-color: royalblue;
 		border-radius: 10px;
 		padding: 10px 15px;
 		cursor: pointer;
 	}
 	ul.tabs li.current{
 		background: orange;
-		color: white;
+		color: black;
 	}
 	.tab-content{
+		height : 300px;
 		display: none;
 		background: #ededed;
-		padding: 100px;
+		padding: 5%;
 	}
 	.tab-content.current{
 		display: inherit;
@@ -62,22 +63,34 @@
 		width: 60%;
 		float: left;
 		box-sizing: border-box;
-		background: wheat;
+		background: white;
 		padding: 5%;
 	}
 	.right{
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: mediumaquamarine;
+		background: white;
 		padding: 5%;
+		text-align : center;
 	}
 	.right-under{
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: darkkhaki;
+		background: #ededed;
 		
+	}
+	.btn-cls{
+		text-align : center;
+		padding : 10px;
+	}
+	.content-form{
+		border : 1px solid;
+		padding : 10px;
+	}
+	.seller-info{
+		padding : 5%;
 	}
 	
 
@@ -90,39 +103,39 @@
 	<div class="outer">
 		<section>
 		<div class="left">
+			<input type="hidden" name="userNO" value="<%= loginUser.getUserNo() %>">
 			<div>
 				<a href="">관심분야</a>
 				<span>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
 				</span>
 				<span id="interest">		
-					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterest() %></a>
+					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterestNo() %></a>
 				</span>
 			</div>
 			
 			
 				<section>
-					<div>
-					첨부파일이 들어갈 섹션<br>
-					<img id="titleImg" width="500" height="200">
-					<br>
+					<div>				
 					<%if(at == null)  {%>
 						첨부파일이 없습니다.
 					<%}else %>
-						<a href="<%= contextPath %>/<%= at.getFilePath()+at.getChangeName() %>"
+						<%-- <a href="<%= contextPath %>/<%= at.getFilePath()+at.getChangeName() %>"
 						download="<%= at.getOriginName() %>">
 							<%= at.getOriginName() %>
-						</a>
+						</a> --%>
+						<img src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>" width="550" height="300">
 					</div>
 				</section>
+				<br><br>
 
 				<div class="container">
 
 					<ul class="tabs">
-						<li class="tab-link current" data-tab="tab-1">서비스 설명</li>
-						<li class="tab-link" data-tab="tab-2">가격 정보</li>
-						<li class="tab-link" data-tab="tab-3" style="width: 70px; text-align: center;">리뷰</li>
-						<li class="tab-link" data-tab="tab-4">취소/환불</li>
+						<li class="tab-link current" data-tab="tab-1">&nbsp;서비스 설명&nbsp;</li>
+						<li class="tab-link" data-tab="tab-2">&nbsp;가격 정보&nbsp;</li>
+						<li class="tab-link" data-tab="tab-3" style="width: 100px; text-align: center;">리뷰</li>
+						<li class="tab-link" data-tab="tab-4">&nbsp;취소/환불&nbsp;</li>
 					</ul>
 		
 					<div id="tab-1" class="tab-content current">
@@ -143,40 +156,73 @@
 		</div>
 
 		<div class="right">
-			<div class="sell-info" style="border: 1px solid;">
+			<div class="sell-info">
 				<section>
 						<section>
-						좋아요 넣을 섹션
+						좋아요 넣을 섹션 ♡
 						</section>
 
 						<section>
-						<h1>제목 넣을 섹션
-							<%= s.getSellTitle() %></h1>
+						<h5><%= s.getSellTitle() %></h5>
 						</section>
-
+						
+						<br>
 						<section>
-							<div>
+							<div class="content-form">
 								<div>
-								작성일
+								<b>게시일</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<%= s.getSellDate() %>
 								</div>
+								<br>
 								<div>
-								가격 넣을 섹션
-								<%= s.getPrice() %>
+								<b>가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<%= s.getPrice() %> 원
 								</div>
+								<br>
 								<div>
-								간단 내용
 								<%= s.getSellContent() %>
 								</div>
+								<div class="btn-cls">
+								<a href="<%=contextPath%>/market.se" id="inquireBtn" class="btn btn-primary">문의하기</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="<%=contextPath%>/payment.se" id="paymentBtn" class="btn btn-warning">구매하기</a>
 							</div>
-							<div style="border: 1px solid;">
-								<button>문의하기</button>
-								<a href="<%=contextPath%>/payment.se" id="paymentBtn" class="btn btn-secondary">구매하기</a>
 							</div>
+							
+							<%-- <table>
+								<tr>
+									<td>
+									작성일
+									</td>
+									<td>
+									<%= s.getSellDate() %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									가격
+									</td>
+									<td>
+									<%= s.getPrice() %> 원
+									</td>
+								</tr>
+								<tr>
+									<td>
+									<%= s.getSellContent() %>
+									</td>
+								</tr>
+								
+							
+							</table> --%>
+							
+							
+						
+							
 						</section>
 				</section>
-				<section style="border: 1px solid;">
-					<h5>서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.</h5>
+				<br><br>
+				<section style="border: 1px solid; padding : 5px; margin : 5px;">
+					<h6>서비스 제공이 완료된 이후에 전문가에게 <br>결제 대금이 전달됩니다.</h6>
 				</section>
 			</div>
 			
@@ -186,12 +232,12 @@
 		<div class="right-under">
 			<div class="seller-info">
 				<section>
-				새로 나누어야할곳
-				판매자 정보 : 닉네임!
-				<%= s.getNickname() %>
+				<b><%= s.getNickname() %></b> 
+				<br><br>
 				</section>
 				<section>
-					하하하하하하하
+					안녕하세요<br>
+					전문가유저 입니다.
 				</section>
 				
 				

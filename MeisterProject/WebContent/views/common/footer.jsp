@@ -71,14 +71,14 @@
                     <td></td>
                     <td>플랫폼</td>
                     <td><a href="https://soomgo.com/?from=logo">숨고</a></td>
-                    <td><a href="#">문의하기</a></td>
+                    <td><a href="<%= request.getContextPath() %>/report.me" id="report">신고하기</a></td>
                 </tr>
                 <tr>
                     <td>2022년 11월 30일 까지</td>
                     <td>기획의도 : N잡러</td>
                     <td>홈페이지</td>
                     <td><a href="https://iei.or.kr/main/main.kh">KH 정보 교육원</a></td>
-                    <td><a href="<%= request.getContextPath() %>/report.me" id="report">신고하기</a></td>
+                    
                 </tr>
             </table>
         </div>
