@@ -346,6 +346,10 @@ font-family: 'Nanum Gothic', sans-serif;
 	position: relative;
 	left: 440px;
 }
+
+.pre, .next{
+	/* display:none; */
+}
 </style>
 </head>
 
@@ -560,20 +564,20 @@ font-family: 'Nanum Gothic', sans-serif;
 			<br>
 			<hr>
 			<div class="page_wrap">
-				<%
+				<%-- <%
 					if (currentPage != 1) {
 				%>
 				<span>&lt&lt</span>
 				<%
 					}
-				%>
-				<%
+				%> --%>
+				<%-- <%
 					if (startPage != 1) {
-				%>
-				<span onclick="pageMove('pre')">&lt</span>
-				<%
+				%> --%>
+				<span class="pre" onclick="pageMove('pre')">&lt</span>
+				<%-- <%
 					}
-				%>
+				%> --%>
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 					if (i == currentPage) {
@@ -591,20 +595,20 @@ font-family: 'Nanum Gothic', sans-serif;
 				<%
 					}
 				%>
-				<%
+				<%-- <%
 					if (currentPage != endPage) {
-				%>
-				<span onclick="pageMove('next')">&gt</span>
-				<%
+				%> --%>
+				<span class="next" onclick="pageMove('next')">&gt</span>
+				<%-- <%
 					}
-				%>
-				<%
+				%> --%>
+				<%-- <%
 					if (currentPage != maxPage) {
 				%>
 				<span>&gt&gt</span>
 				<%
 					}
-				%>
+				%> --%>
 			</div>
 		</div>
 	</div>
@@ -658,6 +662,7 @@ font-family: 'Nanum Gothic', sans-serif;
    </script>
    <script>
    function pageMove(currentPage) {
+	   
       if (currentPage == "next") {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
       }

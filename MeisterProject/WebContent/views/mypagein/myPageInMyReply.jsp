@@ -25,14 +25,17 @@ overflow: hidden;
 </style>
 </head>
 <body>
-<%--  <% if(list2.isEmpty()){ %> --%>
-<!--          <div id="ddddd"></div> -->
-<!--          <div id="nullhead"> -->
-<!-- 			<div id="img"><i class="bi bi-emoji-expressionless-fill"></i></div> -->
-<!-- 			<br><br> -->
-<!-- 			<div id="null">등록한 댓글이 없습니다.</div> -->
-<!-- 		</div> -->
-<%-- 		<%} else { %>	 --%>
+
+		<div id="nameBody_2">
+ 			<% if(list2.isEmpty()){ %>
+         <div id="ddddd"></div>
+         <div id="nullhead">
+			<div id="img"><i class="bi bi-emoji-expressionless"></i></div>
+			<br><br>
+			<div id="null">작성한 댓글이 없습니다.</div>
+			<div id="null2">커뮤니티에서 댓글을 작성해 보세요!</div>
+		</div>
+		<%} else { %>	
 				<%for (int i = 0; i < list2.size(); i++) { %>
 		<div id="name2Body" class="name2Body board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?&bno=<%=list2.get(i).getBoardNo() %>';">
 
@@ -56,7 +59,9 @@ overflow: hidden;
        
     
        
-				<%	}%>
+				<%}	}%>
+				
+		</div>
 				
         
         
