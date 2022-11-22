@@ -177,7 +177,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="text" class="reportTitle" name="reportTitle" placeholder="신고제목을 입력해주세요" required />
+								<input type="text" class="reportTitle" name="reportTitle" placeholder="신고제목을 입력해주세요" maxlength="100"  required />
 							</td>
 						</tr>
 

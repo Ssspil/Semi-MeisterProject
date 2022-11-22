@@ -10,17 +10,19 @@ public class Report {
 	private String reportContent;
 	private Date reportEnrollDate;
 	private String status;
-	private int reportUser;
-	private int reportedUser;
+	private int reportUserNo;
+	private int reportedUserNo;
+	private String reportUserId;
+	private String reportedUserId;
 
 	// 기본생성자
 	public Report() {
 		
 	}
-
+	
 	// 전체 매개변수 생성자
 	public Report(int reportNo, String reportTitle, String reason, String reportContent, Date reportEnrollDate,
-			String status, int reportUser, int reportedUser) {
+			String status, int reportUserNo, int reportedUserNo, String reportUserId, String reportedUserId) {
 		super();
 		this.reportNo = reportNo;
 		this.reportTitle = reportTitle;
@@ -28,21 +30,38 @@ public class Report {
 		this.reportContent = reportContent;
 		this.reportEnrollDate = reportEnrollDate;
 		this.status = status;
-		this.reportUser = reportUser;
-		this.reportedUser = reportedUser;
+		this.reportUserNo = reportUserNo;
+		this.reportedUserNo = reportedUserNo;
+		this.reportUserId = reportUserId;
+		this.reportedUserId = reportedUserId;
 	}
-	
-	// 신고할 때 
-	public Report(String reportTitle, String reason, String reportContent, int reportUser, int reportedUser) {
+	// 신고하기 넣기 생성자
+	public Report(int reportNo, String reportTitle, String reason, String reportContent, Date reportEnrollDate,
+			String status, int reportUserNo, int reportedUserNo) {
 		super();
+		this.reportNo = reportNo;
 		this.reportTitle = reportTitle;
 		this.reason = reason;
 		this.reportContent = reportContent;
-		this.reportUser = reportUser;
-		this.reportedUser = reportedUser;
+		this.reportEnrollDate = reportEnrollDate;
+		this.status = status;
+		this.reportUserNo = reportUserNo;
+		this.reportedUserNo = reportedUserNo;
 	}
 
-	
+	// 신고하기 보기 생성자
+	public Report(int reportNo, String reportTitle, String reason, String reportContent, Date reportEnrollDate,
+			String status, String reportUserId, String reportedUserId) {
+		super();
+		this.reportNo = reportNo;
+		this.reportTitle = reportTitle;
+		this.reason = reason;
+		this.reportContent = reportContent;
+		this.reportEnrollDate = reportEnrollDate;
+		this.status = status;
+		this.reportUserId = reportUserId;
+		this.reportedUserId = reportedUserId;
+	}
 
 	public int getReportNo() {
 		return reportNo;
@@ -92,30 +111,50 @@ public class Report {
 		this.status = status;
 	}
 
-	public int getReportUser() {
-		return reportUser;
+	public int getReportUserNo() {
+		return reportUserNo;
 	}
 
-	public void setReportUser(int reportUser) {
-		this.reportUser = reportUser;
+	public void setReportUserNo(int reportUserNo) {
+		this.reportUserNo = reportUserNo;
 	}
 
-	public int getReportedUser() {
-		return reportedUser;
+	public int getReportedUserNo() {
+		return reportedUserNo;
 	}
 
-	public void setReportedUser(int reportedUser) {
-		this.reportedUser = reportedUser;
+	public void setReportedUserNo(int reportedUserNo) {
+		this.reportedUserNo = reportedUserNo;
+	}
+
+	public String getReportUserId() {
+		return reportUserId;
+	}
+
+	public void setReportUserId(String reportUserId) {
+		this.reportUserId = reportUserId;
+	}
+
+	public String getReportedUserId() {
+		return reportedUserId;
+	}
+
+	public void setReportedUserId(String reportedUserId) {
+		this.reportedUserId = reportedUserId;
 	}
 
 	@Override
 	public String toString() {
 		return "Report [reportNo=" + reportNo + ", reportTitle=" + reportTitle + ", reason=" + reason
 				+ ", reportContent=" + reportContent + ", reportEnrollDate=" + reportEnrollDate + ", status=" + status
-				+ ", reportUser=" + reportUser + ", reportedUser=" + reportedUser + "]";
+				+ ", reportUserNo=" + reportUserNo + ", reportedUserNo=" + reportedUserNo + ", reportUserId="
+				+ reportUserId + ", reportedUserId=" + reportedUserId + "]";
 	}
+
+
 	
-	
+
+
 	
 	
 }

@@ -459,7 +459,7 @@ body {
                     <section data-s-1 data-a-1 class="detail-container">
                         <div data-d-1 data-s-1 class="detail-header">
                             <div data-d-1 class="detail-title">
-                                <h1 data-d-1 class="header-text"><%=b.getBoardTitle() %></h1>
+                                <h1 data-d-1 class="header-text"><%=b.getBoardTitle()%></h1>
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
@@ -503,10 +503,10 @@ body {
                             <ul data-s-1 class="body-list"></ul>
                             <div data-j-1 data-s-1 class="greate">
                                 <div data-j-1 class="like">
-                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요</span>
+                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요<%=b.getBoardRecommend() %></span>
                                 </div>
                                 <div data-j-1 class="item">
-                                    <span data-j-1 class="text2">댓글<%=b.getReplyCount() %></span>
+                                    <span data-j-1 class="text2">댓글<%=b.getReplyCount()%></span>
                                 </div>
                             </div>
                         </div>

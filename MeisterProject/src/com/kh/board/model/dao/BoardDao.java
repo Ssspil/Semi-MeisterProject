@@ -157,11 +157,14 @@ public class BoardDao {
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setInt(1, boardNo);
-
+			psmt.setInt(2, boardNo);
+			
 			rset = psmt.executeQuery();
 
 			if (rset.next()) {
-				b = new Board(rset.getInt("BOARD_NO"),
+				b = new Board(
+						rset.getInt("REPLY_COUNT"),
+						rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
 						rset.getString("BOARD_CONTENT"),
 						rset.getInt("BOARD_RECOMMEND"),
@@ -169,7 +172,6 @@ public class BoardDao {
 						rset.getString("BOARD_DATE"),
 						rset.getString("NICKNAME")
 						);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
