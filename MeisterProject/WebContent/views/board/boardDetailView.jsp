@@ -446,6 +446,8 @@ body {
 /* 	line-height: 15px; */
 /* 	cursor: pointer; */
 /* } */
+
+/* 목록 버튼 */
 #btn {
 	background-color: white;
 	height: 30px;
@@ -680,9 +682,50 @@ body {
 		}
 		
 		
-		// 좋아요 기능
 		
-		// 댓글 수 기능
+		let likeBtn = true;
+		// 좋아요 기능
+		$(document).on("click", ".like", (e) => { // "div.like"
+			e.preventDefault();
+			likeBtn = false;
+			$.ajax({
+				url : "boardLike.bo",
+				type : "post",
+				data : { boardNo : <%=b.getBoardNo() %>, type : "I" },
+				success : function(data) {
+					if (data.result == 1) {
+						alert("좋아요가 등록되었습니다.");
+						$(".like > .text2").text("좋아요 " + data.recommend);
+					} else if (data.result == 2) {
+						if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) {
+							$.ajax({
+								url : "boardLike.bo",
+								type : "post",
+								data : { boardNo : <%=b.getBoardNo() %>, type : "D" },
+								success : function(data) {
+									if (data.result == 1) {
+										alert("취소되었습니다.");
+										$(".like > .text2").text("좋아요 " + data.recommend);
+									}
+								},
+								error : function(xhr, status, res) {
+									console.log("ERROR >> ", xhr.responseText, status, res);
+								}
+							})
+						}
+					} else {
+						alert("오류가 발생했습니다.");
+					}
+				},
+				error : function(xhr, status, res) {
+					console.log("ERROR >> ", xhr.responseText, status, res);
+				},
+				done : function() {
+					likeBtn = true;
+					
+				}
+			});
+		});
 		
  	</script>
 
