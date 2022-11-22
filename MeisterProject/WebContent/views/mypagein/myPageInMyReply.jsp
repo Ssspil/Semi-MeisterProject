@@ -25,11 +25,17 @@ overflow: hidden;
 </style>
 </head>
 <body>
-  		<input type="hidden" id="boardType" value="2">
+<%--  <% if(list2.isEmpty()){ %> --%>
+<!--          <div id="ddddd"></div> -->
+<!--          <div id="nullhead"> -->
+<!-- 			<div id="img"><i class="bi bi-emoji-expressionless-fill"></i></div> -->
+<!-- 			<br><br> -->
+<!-- 			<div id="null">등록한 댓글이 없습니다.</div> -->
+<!-- 		</div> -->
+<%-- 		<%} else { %>	 --%>
 				<%for (int i = 0; i < list2.size(); i++) { %>
-		<div id="name2Body" class="name2Body board<%=i%> <%=i > 5 ? "hide" : ""%>">
-<!-- 		myReply 매퍼에 board_no 추가하기 -->
-<%-- 		 onclick="location.href='<%=contextPath2%>/detail.bo?&bno=<%=list2.get(i).getBoardNo() %>';"  --%>
+		<div id="name2Body" class="name2Body board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?&bno=<%=list2.get(i).getBoardNo() %>';">
+
 		
             <div id="title"> 
                 <div id="titlepost">게시글 제목</div>

@@ -77,7 +77,7 @@ public class MycommunityController extends HttpServlet {
 		
 		ArrayList<Reply> list2 = new BoardService().myReply(userNo);
 		request.setAttribute("list2",list2);
-		System.out.println(list2);
+		
 	
 		
 	

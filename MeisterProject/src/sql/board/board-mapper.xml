@@ -77,10 +77,10 @@
        	FROM BOARD B
         LEFT OUTER JOIN REPLY R USING(BOARD_NO)
 		WHERE ROWNUM <= 3 
-        AND TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE-1,'YYYYMMDDHH')
+        AND BOARD_DATE < TO_CHAR(SYSDATE-1,'YYYYMMDD')
         AND B.STATUS = 'Y'
 		AND BOARD_TYPE = 1                                
-		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
+		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc , REPLY_COUNT desc]]>
 	</entry>
 
 	<!-- 게시글 글작성 -->
@@ -219,13 +219,13 @@
 	</entry>
 	
 	<entry key="myCommunity">
-			SELECT  BOARD_NO,
+		SELECT  BOARD_NO,
                 BOARD_TITLE,
                 BOARD_CONTENT,
                 REPLY_COUNT,
                 BOARD_RECOMMEND,
                 B.USER_NO,
-                BOARD_DATE 
+                TO_CHAR(BOARD_DATE,'YYYY-MM-DD') BOARD_DATE
        	FROM BOARD B
         LEFT OUTER JOIN REPLY R USING(BOARD_NO)
 		WHERE B.STATUS = 'Y'
@@ -234,6 +234,7 @@
 	<entry key="myReply">
 	SELECT 
     R.REPLY_NO,
+    BOARD_NO,
     B.BOARD_TITLE,
     R.REPLY_CONTENT,
     TO_CHAR(R.REPLY_DATE, 'YY-MM-DD') REPLY_DATE,
@@ -242,6 +243,7 @@
     LEFT OUTER JOIN BOARD B USING(BOARD_NO)
     WHERE R.STATUS = 'Y'
     AND R.USER_NO = ?
+ 
 	</entry>
 		<entry key="selectListCount2">
 		SELECT COUNT(*) BOARD_COUNT

@@ -10,6 +10,7 @@ public class Reply {
 	private int userNo;
 	private String mbNic;
 	private String boardTitle;
+
 	
 	
 	public Reply(){
@@ -51,9 +52,10 @@ public class Reply {
 	}
 	
 	//내 댓글 보기
-	public Reply(int replyNo,String boardTitle, String replyContent, String replyDate, int userNo) {
+	public Reply(int replyNo,int boardNo,String boardTitle, String replyContent, String replyDate, int userNo) {
 		super();
 		this.replyNo = replyNo;
+		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.replyContent = replyContent;
 		this.replyDate = replyDate;

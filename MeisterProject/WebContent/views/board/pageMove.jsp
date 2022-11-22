@@ -48,13 +48,13 @@ top:40px;
 #page_wrap2{ 
 position: relative;
 text-align:center;
-top:12%;
+top:25px;
 
 }
 #chat3{
 float:right;
 position: relative;
-    right: 120px;
+    right: -60px;
 }
 #date1{
   color: lightgrey;
@@ -133,10 +133,7 @@ position: relative;
                
                 </div>
                <%} %>
-     
-        </div>
-        
-        	<div class="page_wrap" id="page_wrap2">
+               <div class="page_wrap" id="page_wrap2">
 				<% if (currentPage2 != 1) { %>
 				<span>&lt&lt</span>
 				<% }%>
@@ -162,6 +159,8 @@ position: relative;
 				
 				
 			</div>
+     
+        </div>
     </div>
   
 

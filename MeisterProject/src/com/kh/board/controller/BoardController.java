@@ -57,8 +57,6 @@ public class BoardController extends HttpServlet {
 			keyword2 = "";
 		}
 		
-		System.out.println(request.getParameter("searchKeyword"));
-		
 		listCount = new BoardService().selectListCount(1, keyword1);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));

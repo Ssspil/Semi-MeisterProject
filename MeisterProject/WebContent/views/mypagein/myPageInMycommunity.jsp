@@ -18,8 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
    
    <style>
    .header{
@@ -58,6 +57,16 @@ height:100%;
     margin: auto;
     padding: 15px;
 }
+#name1Body:hover{
+background-color:rgb(250, 247, 247);
+         
+
+}
+#name2Body:hover{
+background-color:rgb(250, 247, 247);
+         
+
+}
 #name2Body{
     box-sizing: border-box;
     border: 3px solid orange;
@@ -83,7 +92,7 @@ height:100%;
    
 }
 #name1:hover{
-    background-color: orange;
+    background-color:rgb(255, 200, 98);
     
     color: white;
 }
@@ -101,7 +110,7 @@ height:100%;
     font-weight: bold;
 }
 #name2:hover{
-    background-color: orange;
+    background-color:rgb(255, 200, 98);
  
     color: white;
 }
@@ -191,6 +200,25 @@ color: black;
 #bodyClick2{
 color: blue;
 }
+#null{
+ text-align: center;
+}
+#null2{
+ text-align: center;
+ color:gray;
+  font-size:15px;
+}
+#img{
+    text-align: center; 
+}
+#nullhead{
+height:400px;
+margin:auto;
+}
+#ddddd{
+height:100px;
+}
+
 
 </style>
 </head>
@@ -212,9 +240,20 @@ color: blue;
 
         </div>
         <div id="contenthead"></div>
-         
-		
-				<% for (int i = 0; i < list.size(); i++) { %>
+         <% if(list.isEmpty()){ %>
+         <div id="ddddd"></div>
+         <div id="nullhead">
+			<div id="img"><i class="bi bi-emoji-expressionless"></i></div>
+			<br><br>
+			<div id="null">등록된 게시글이 없습니다.</div>
+			<div id="null2">커뮤니티에서 게시글을 작성해 보세요!</div>
+			
+		</div>
+		<%} else { %>	
+				<% for (int i = 0; i < list.size(); i++) {%>
+					
+						
+						
         <div id="name1Body" class="name1Body board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?&bno=<%=list.get(i).getBoardNo() %>';">
 			
 			<div id="title"> 
@@ -237,8 +276,7 @@ color: blue;
        
         </div>
       <br>
-        <% } %>
-       
+       <% } }%>
 
        
          

@@ -207,20 +207,6 @@ public class BoardDao {
 			
 			close(rset);
 			close(psmt);
-			//프로필이미지
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, 5);
-
-			rset = psmt.executeQuery();
-			//글내용 이미지
-			if (rset.next()) {
-				at = new Attachment();
-
-				at.setFileNo(rset.getInt("FILE_NO"));
-				at.setOriginName(rset.getString("ORIGIN_NAME"));
-				at.setChangeName(rset.getString("CHANGE_NAME"));
-				at.setFilePath(rset.getString("FILE_PATH"));
-			}
 			
 			
 		} catch (SQLException e) {
@@ -267,7 +253,7 @@ public class BoardDao {
 				String change_name = rset.getString("change_name") == null ? "" : rset.getString("change_name");
 
 				String file = "";
-				file = file_name + "/" + change_name;
+				file = "/" + file_name + "/" + change_name;
 				Board b;
 				b = new Board(rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
@@ -717,6 +703,7 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 			while(rset.next()) {
 				list.add(new Reply(
 						rset.getInt("REPLY_NO"),
+						rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
 						rset.getString("REPLY_CONTENT"),
 						rset.getString("REPLY_DATE"),

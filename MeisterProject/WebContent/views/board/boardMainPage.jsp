@@ -16,7 +16,7 @@ int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 int maxPage = pi.getMaxPage();
 
-String searchType = request.getAttribute("searchType") == null ? "" : request.getAttribute("searchType").toString();
+String searchType = request.getAttribute("searchType") == null ? "1" : request.getAttribute("searchType").toString();
 %>
 <!DOCTYPE html>
 <html>
@@ -121,7 +121,8 @@ hr {
 }
 
 #body2-4:hover {
-	color:blue;
+	
+	color:rgb(255, 200, 98);
 }
 
 
@@ -142,15 +143,14 @@ hr {
 
 #ge {
 	border: 5px solid orange;
-	background-color: white;
 	font-size: 25px;
 	height: 58px;
 	width: 150px;
 	float: left;
-	border-style: groove;
 	border-radius: 18px;
-	
+	cursor:pointer;
 	font-family: 'Nanum Gothic', sans-serif;
+	outline:none;
 }
 
 #ge:hover {
@@ -160,26 +160,22 @@ hr {
 
 #gung {
 	border: 5px solid orange;
-	background-color: white;
 	font-size: 25px;
 	height: 58px;
 	width: 150px;
 	float: left;
-	border-style: groove;
 	border-radius: 18px;
-	
+	cursor:pointer;
 	font-family: 'Nanum Gothic', sans-serif;
+	outline:none;
 }
 #gfont{
 font-family: 'Nanum Gothic', sans-serif;
 }
 
-#bodyClick1 {
-	background-color: black;
-}
-
-#bodyClick2 {
-	background-color: blue;
+.bodyClick1 {
+	background-color: orange;
+	color:white;
 }
 
 #gung:hover {
@@ -360,12 +356,12 @@ font-family: 'Nanum Gothic', sans-serif;
 	<div class="body">
 		<h1 id="mainid">커뮤니티</h1>
 		<div id="body-1">
-			<button id="ge" class="bodyClick" onclick="menuClick('ge')">
-				<i class="bi bi-chat-square-text"></i> 게시판
-			</button>
-			<button id="gung" onclick="menuClick('gung')">
+			<span id="ge" class="bodyClick bodyClick1" onclick="menuClick('ge')">
+				<i class="bi bi-chat-square-text" style="margin-left:10px"></i> 게시판
+			</span>
+			<span id="gung" onclick="menuClick('gung')">
 				<i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요
-			</button>
+			</span>
 		</div>
 	</div>
 	<div id="line"></div>
@@ -442,14 +438,17 @@ font-family: 'Nanum Gothic', sans-serif;
 					</div>
 				</div>
 			</div>
+			
+			<%if(session.getAttribute("loginUser") != null){ %>
 			<form action="<%=contextPath%>/enrollForm.bo">
 				<button type="submit" id="madebutton" value=""
 					class="btn btn-secondary">
 					<span id="gfont">글작성</span> </i>
 				</button>
 				<input type="hidden" id="type" name="type" value="1">
+				
 			</form>
-
+			<%} %>
 
 		</div>
 		<hr>
@@ -499,16 +498,13 @@ font-family: 'Nanum Gothic', sans-serif;
 					<br>
 					<p id="text"><%=list.get(i).getBoardContent()%></p>
 					<%
-						if (!"/".equals(list.get(i).getTitleImg())) {
+						if (!"//".equals(list.get(i).getTitleImg())) {
 					%>
 					<img src="<%=contextPath%><%=list.get(i).getTitleImg()%>" id="img1">
+
 					<%
 						}
 					%>
-					<!-- 사진이 없을떄 글자뛰우기 -->
-					<!--           } else {%> -->
-					<!--                  <span>사진이 없습니다.</span> -->
-					<%--                   <%} %>  --%>
 				</div>
 				<br> <br> <br>
 				<div id="titlefooter">
@@ -639,20 +635,22 @@ font-family: 'Nanum Gothic', sans-serif;
          $("#geBody").show();
          $("#gungBody").hide();
          $("#ge").addClass("bodyClick1"); 
-         $("#gung").removeClass("bodyClick2"); 
+         $("#gung").removeClass("bodyClick1"); 
          $("#type").val("1");
          $("#type1").val("1");
          $("#search_main").val("1");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
          $("#boardType").val("ge");
+         $("#searchType").val("1");
 
       } else if (type == "gung") {
          $("#geBody").hide();
          $("#gungBody").show();
          $("#gung").addClass("bodyClick1");
-         $("#ge").removeClass("bodyClick2");
+         $("#ge").removeClass("bodyClick1");
          $("#type").val("2");
          $("#type1").val("2");
          $("#search_main").val("2");
+         $("#searchType").val("2");
          $("#boardType").val("gung");
 
       }
