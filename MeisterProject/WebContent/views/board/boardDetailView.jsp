@@ -506,8 +506,7 @@ body {
                                     <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요</span>
                                 </div>
                                 <div data-j-1 class="item">
-                                    <span data-j-1 class="text2">댓글</span>
-                                    	<p><%=b.getReplyCount() %></p>
+                                    <span data-j-1 class="text2">댓글<%=b.getReplyCount() %></span>
                                 </div>
                             </div>
                         </div>
