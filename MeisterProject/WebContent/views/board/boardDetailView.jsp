@@ -685,7 +685,7 @@ body {
 		
 		let likeBtn = true;
 		// 좋아요 기능
-		$(document).on("click", ".like", (e) => { // "div.like"
+		$(document).on("click", ".like", (e) => { /* "div.like" */
 			e.preventDefault();
 			likeBtn = false;
 			$.ajax({
@@ -722,7 +722,6 @@ body {
 				},
 				done : function() {
 					likeBtn = true;
-					
 				}
 			});
 		});

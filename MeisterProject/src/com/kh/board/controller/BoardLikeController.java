@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class BoardLikeController
  */
@@ -26,8 +29,32 @@ public class BoardLikeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
+		int result = 0;
+		int recommend = 0;
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
+		String type = request.getParameter("type");
+		
+		boardService = new BoardService();
+		
+		if (type.equals("I")) {
+			int count = boardService.selectRecommend(boardNo, userNo);
+			if (count == 0) {
+				result = boardService.insertRecommend(boardNo, userNo);
+			} else {
+				result = 2;
+			}
+		} else if (type.equals("D")) {
+			int count = boardService.selectRecommend(boardNo, userNo);
+			if (count == 0) {
+				result = -2;
+			} else {
+				result = boardService.deleteRecommend(boardNo, userNo);
+			}
+		}
+		recommend = boardService.countRecommend(boardNo);
 	
 	}
 
