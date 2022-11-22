@@ -66,6 +66,14 @@ public class ChattingService {
 		return list;
 	}
 	
+	public ArrayList<String> selectChatDate(int receiver, int sender, int sellNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<String> list = new ChattingDao().selectChatDate(conn, receiver, sender, sellNo);
+		
+		JDBCTemplate.close();
+		return list;
+	}
+	
 	public Attachment getProfile(int userNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		Attachment at = new ChattingDao().getProfile(conn, userNo);

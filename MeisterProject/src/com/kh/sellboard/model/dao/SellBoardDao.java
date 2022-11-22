@@ -354,4 +354,67 @@ public class SellBoardDao {
         
     }
 
+
+	public ArrayList<Interest> clickInterestCategory(Connection conn, int interest_no) {
+
+		ArrayList<Interest> interest = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("clickInterestCategory");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, interest_no);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				interest.add(new Interest(rset.getInt("INTEREST_NO"),
+								  		  rset.getString("INTEREST_NAME")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return interest;
+	}
+
+	public ArrayList<Local> clickLocalCategory(Connection conn, int local_no) {
+		
+		ArrayList<Local> local = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		 
+		String sql = prop.getProperty("clickLocalCategory");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, local_no);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				local.add(new Local(rset.getInt("LOCAL_NO"),
+								    rset.getString("LOCAL_NAME")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return local;
+	}
+	
+	
+
 }
