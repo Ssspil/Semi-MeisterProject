@@ -89,7 +89,8 @@ public class ChattingListPageController extends HttpServlet {
 				nickNameList[i] = receiverName;
 			}
 		}
-
+		
+		request.setAttribute("userNo", userNo);
 		request.setAttribute("list", list);
 		request.setAttribute("nickNameList", nickNameList);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");

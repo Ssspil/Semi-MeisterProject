@@ -221,7 +221,9 @@
 	    				$(tet).html("사용중인 닉네임 입니다. 다른 닉네임을 입력해주세요.");
 	    				$(tet).attr("color", "red");
 	    				
-	    			} else {
+	    			} 
+
+	    			else {
 	    				$(tet).html("사용 가능한 닉네임 입니다.");
 	    				$(tet).attr("color", "darkslateblue");
 	    				

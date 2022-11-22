@@ -1,13 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, java.util.Date, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment" %>
+<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
 	int userNo = (Integer) request.getAttribute("userNo");
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
 	String oppNick = "";
-	Date recentDay = list.get(0).getChatDate();
+	ArrayList<String> chatDate = (ArrayList<String>) request.getAttribute("dateList");
+	ArrayList<String> timeList = new ArrayList<String>();
+	ArrayList<String> dateList = new ArrayList<String>();
+	
+	int idx = chatDate.get(0).indexOf(" ");
+	int hour = 0;
+	String time = "";
+	String date = "";
+	
+	for(int i = 0; i < chatDate.size(); i++){
+		date = chatDate.get(i).substring(0, idx);
+		date = date.replace("-", "");
+		dateList.add(date);
+	}
+	
+	for(int i = 0; i < chatDate.size(); i++){
+		hour = Integer.parseInt(chatDate.get(i).substring(idx+1,idx+3));
+		time = chatDate.get(i).substring(idx+3, chatDate.get(i).length());
+		if(hour > 12){
+			hour = hour - 12;
+			time = ("오후 ".concat(Integer.toString(hour))).concat(time);
+		}
+		else{
+			time = ("오전 ".concat(Integer.toString(hour))).concat(time);
+		}
+		timeList.add(time);
+	}
+	
 	
 	for(int i = 0; i < nickNameList.length; i++){
 		if(!nickName.equals(nickNameList[i])){
@@ -94,14 +121,23 @@
     	position: static;
     	border-radius:30px / 100px;
     }
-    #nickName{
+    #divDate{
     	width: 700px;
     	height: 30px;
+    	margin-bottom: 10px;
+    	text-align: right;
+    	border: 1px solid black;
+    }
+    #myTime{
+    	width: 700px;
+    	height: 30px;
+    	margin-bottom: 10px;
     	text-align: right;
     }
-    #oppNickName{
+    #oppTime{
     	width: 700px;
     	height: 30px;
+    	margin-bottom: 10px;
     	text-align: left;
     }
     #profileImg{
@@ -134,17 +170,27 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		console.log("<%=recentDay%>");
+		console.log('<%=dateList.get(count)%>');
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
 					$(document).ready(function() {	
 						$('.outer').append(
 							$('<div>').prop({
+								id: 'divDate<%=c.getChatNo()%>',
+								innerHTML: '<%=dateList.get(count).substring(0,4)%>' + '년 '+'<%=dateList.get(count).substring(4,6)%>'+'월 '+'<%=dateList.get(count).substring(6,8)%>'+'일'
+							})
+						);
+						$('.outer').append(
+							$('<hr>').prop({
+								id: 'hr<%=c.getChatNo()%>'
+							})
+						);	
+						$('.outer').append(
+							$('<div>').prop({
 								id: 'divEntry<%=c.getChatNo()%>'
 							})
 						);
-							
 <%-- 						$('#divEntry<%=c.getChatNo()%>').append( --%>
 // 							$('<div>').prop({
 // 								id: 'profile'
@@ -168,17 +214,34 @@
 								innerHTML: '&nbsp;&nbsp;&nbsp;<%=c.getChatContent()%>'
 							})
 						);
+						<%if(count != 0 && dateList.get(count).equals(dateList.get(count-1))){%>
+							$('#divDate<%=c.getChatNo()%>').hide();
+							$('#hr<%=c.getChatNo()%>').hide();
+						<%}%>
+
+					    $('#divDate<%=c.getChatNo()%>').css({'width': '700px', 'height': '30px','margin-bottom': '10px', 'text-align': 'center'});
 						$('#divEntry<%=c.getChatNo()%> >div').css({'float': 'right'});	
 						$('#divEntry<%=c.getChatNo()%>').css({'width': '700px', 'height': '50px'});
 						$('.outer').append(
 							$('<div>').prop({
-								id: 'nickName',
-								innerHTML: '<%=nickNameList[count]%>'
+								id: 'myTime',
+								innerHTML: '<%=timeList.get(count)%>&nbsp;&nbsp;&nbsp;&nbsp;'
 							})
 						);
 					});
 				<%} else{%>
 					$(document).ready(function() {	
+						$('.outer').append(
+							$('<div>').prop({
+								id: 'divDate<%=c.getChatNo()%>',
+								innerHTML: '<%=dateList.get(count).substring(0,4)%>' + '년 '+'<%=dateList.get(count).substring(4,6)%>'+'월 '+'<%=dateList.get(count).substring(6,8)%>'+'일'
+							})
+						);	
+						$('.outer').append(
+								$('<hr>').prop({
+								id: 'hr<%=c.getChatNo()%>'
+							})
+						);	
 						$('.outer').append(
 							$('<div>').prop({
 								id: 'divEntry<%=c.getChatNo()%>'
@@ -202,13 +265,19 @@
 								id: 'myDiv',
 								innerHTML: '&nbsp;&nbsp;&nbsp;<%=c.getChatContent()%>'
 							})
-						);    
+						);
+						<%if(count != 0 && dateList.get(count).equals(dateList.get(count-1))){%>
+							$('#divDate<%=c.getChatNo()%>').hide();
+							$('#hr<%=c.getChatNo()%>').hide();
+						<%}%>
+
+				   		$('#divDate<%=c.getChatNo()%>').css({'width': '700px', 'height': '30px','margin-bottom': '10px', 'text-align': 'center'});
 						$('#divEntry<%=c.getChatNo()%> >div').css({'float': 'left'});
 						$('#divEntry<%=c.getChatNo()%>').css({'width': '700px', 'height': '50px'});
 						$('.outer').append(
 							$('<div>').prop({
-								id: 'oppNickName',
-								innerHTML: '&nbsp;&nbsp;<%=nickNameList[count]%>'
+								id: 'oppTime',
+								innerHTML: '&nbsp;&nbsp;&nbsp;&nbsp;<%=timeList.get(count)%>'
 						})
 					);
 				});
@@ -268,17 +337,13 @@
 			let text = message.data.substr(msg+2);
 			let name = message.data.substr(0, msg-2);
 			var data = document.getElementById("chatData");
+			let now = new Date();
 			
+			console.log(name == '<%=oppNick%>');
 			$(document).ready(function() {	
 				$('.outer').append(
 					$('<div>').prop({
 						id: 'divOpp'+oppCnt
-					})
-				);
-				
-				$('#divOpp'+oppCnt).append(
-					$('<div>').prop({
-						id: 'profile'
 					})
 				);
 				
@@ -291,7 +356,7 @@
 				$('#divOpp'+oppCnt).append(
 					$('<div>').prop({
 						id: 'myDiv',
-						innerHTML: text
+						innerHTML: '&nbsp;&nbsp;'+text
 					})
 				);    
 				
@@ -300,10 +365,18 @@
 				
 				$('.outer').append(
 					$('<div>').prop({
-						id: 'oppNickName',
-						innerHTML: name
+						id: 'oppTime'+oppCnt,
+						innerHTML: '&nbsp;&nbsp;&nbsp;&nbsp;'+now.toLocaleTimeString()
 					})
 				);
+				
+				$('#oppTime'+oppCnt).css({'width': '700px', 'height': '30px', 'margin-bottom': '10px', 'text-align': 'left'})
+				
+				if(name != '<%=oppNick%>'){
+					$('#divOpp'+oppCnt).hide();
+					$('#divOpp'+oppCnt+'>div').hide();
+					$('#oppTime'+oppCnt).hide();
+				}
 				oppCnt += 1;
 			});
 			
@@ -324,6 +397,8 @@
 			var receiver = document.getElementById("receiver");
 			var message = document.getElementById("textMessage");
 			var data = document.getElementById("chatData");
+			let now = new Date();
+			
 			if (data.value != "") {
 				data.value += ",";
 			}
@@ -346,12 +421,6 @@
 				);
 			    
 			    $('#divMe'+cnt).append(
-			    	$('<div>').prop({
-			    		id: 'profile'
-			    	})
-			    );
-			    
-			    $('#divMe'+cnt).append(
 				    $('<div>').prop({
 				        id: 'triangle'
 				    })
@@ -360,7 +429,7 @@
 			    $('#divMe'+cnt).append(
 			        $('<div>').prop({
 			            id: 'myDiv',
-			            innerHTML: msgVal
+			            innerHTML: '&nbsp;&nbsp;'+msgVal
 			        })
 			    );
 			   
@@ -369,8 +438,8 @@
 			    
 			    $('.outer').append(
 				    $('<div>').prop({
-				    	id: 'nickName',
-				    	innerHTML: user.value
+				    	id: 'myTime',
+				    	innerHTML: now.toLocaleTimeString()+'&nbsp;&nbsp;&nbsp;&nbsp;'
 				    })
 				);
 			    cnt += 1;

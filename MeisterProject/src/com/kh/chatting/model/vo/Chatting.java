@@ -5,12 +5,12 @@ import java.util.Date;
 public class Chatting {
 	private int chatNo;
 	private String chatContent;
-	private Date chatDate;
+	private String chatDate;
 	private int sender;
 	private int receiver;
 	private int sellNo;
 	
-	public Chatting(int chatNo, String chatContent, Date chatDate, int sender, int receiver, int sellNo) {
+	public Chatting(int chatNo, String chatContent, String chatDate, int sender, int receiver, int sellNo) {
 		super();
 		this.chatNo = chatNo;
 		this.chatContent = chatContent;
@@ -32,10 +32,10 @@ public class Chatting {
 	public void setChatContent(String chatContent) {
 		this.chatContent = chatContent;
 	}
-	public Date getChatDate() {
+	public String getChatDate() {
 		return chatDate;
 	}
-	public void setChatDate(Date chatDate) {
+	public void setChatDate(String chatDate) {
 		this.chatDate = chatDate;
 	}
 	public int getSender() {
