@@ -38,18 +38,16 @@ height:100%;
 }
 #body1{
     box-sizing: border-box;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    height: 80px;
+    border-top: 3px solid yellow;
+    border-bottom: 3px solid yellow;
+    height: 70px;
     margin: auto;
     width: 60%;
 }
-#bodyClick{
-background-color: red;
-}
+
 #contenthead{
     box-sizing: border-box;
-    height: 80px;
+    height: 60px;
 }
 #name1Body{
     box-sizing: border-box;
@@ -68,40 +66,43 @@ background-color: red;
     width: 60%;
     margin: auto;
     padding: 15px;
+ 
 }
 #name1{
     box-sizing: border-box;
-    height: 77px;
-    width: 200px;
+    height: 67px;
+    width: 170px;
     float: left;
     background-color: white;
-    border: 6px solid yellow;
+    border: 5px solid orange;
     color:orange;
     border-radius: 25px;
     font-size: 17px;
     font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
    
 }
 #name1:hover{
     background-color: orange;
-    border:6px solid yellow;
+    
     color: white;
 }
 #name2{
     box-sizing: border-box;
-    height: 77px;
-    width: 200px;
+    height: 67px;
+    width: 170px;
     float: left;
     background-color: white;
-    border: 6px solid  yellow;
+    border: 5px solid orange;
     color:orange;
     border-radius: 25px;
     font-size: 17px;
     font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
 }
 #name2:hover{
     background-color: orange;
-    border:6px solid yellow;
+ 
     color: white;
 }
 #title{
@@ -166,7 +167,7 @@ height: 50px;
 .page_wrap {
 	text-align: center;
 	position: relative;
-	top: 15px;
+	top: 10px;
 }
 
 .page_wrap span {
@@ -184,10 +185,17 @@ height: 50px;
 	cursor: pointer;
 	border-bottom: 1px solid orange;
 }
+#bodyClick1{
+color: black;
+}
+#bodyClick2{
+color: blue;
+}
+
 </style>
 </head>
 <body>
-<input id="boardType" type="hidden" value="name1Body" />
+
 <%@include file="../common/header.jsp" %>
   <div class="header"></div>
     <div id=main>
@@ -195,19 +203,21 @@ height: 50px;
 
         <div id="body1">
             <div>
-            <button class="bodyClick" id="name1" onclick="menuClick('name1')">내가 쓴 게시물</button>
+            <button class="bodyClick1" id="name1" onclick="menuClick('name1')">내가 쓴 게시물</button>
         </div>
         <div>
-            <button class="bodyClick" id="name2"  onclick="menuClick('name2')">내가 쓴 댓글</button>
+            <button class="bodyClick2" id="name2"  onclick="menuClick('name2')">내가 쓴 댓글</button>
             
         </div>
 
         </div>
         <div id="contenthead"></div>
+         
 		
 				<% for (int i = 0; i < list.size(); i++) { %>
-        <div id="name1Body" class="board<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?&bno=<%=list.get(i).getBoardNo() %>';">
-            <div id="title"> 
+        <div id="name1Body" class="name1Body board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?&bno=<%=list.get(i).getBoardNo() %>';">
+			
+			<div id="title"> 
                 <div id="titlepost">커뮤니티 게시글 제목</div> 
                 <div id="titlepost1"><%=list.get(i).getBoardTitle() %></div>
             </div>
@@ -224,17 +234,17 @@ height: 50px;
                  <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%> </div>
             </div>
    
+       
         </div>
-        <br>
-     
+      <br>
         <% } %>
        
 
-        <%@ include file="../mypagein/myPageInMyReply.jsp"%>
-          <br><br>
+       
+         
 <!--        여기부턴 댓글 -->
         
-<br><br>
+<%@ include file="../mypagein/myPageInMyReply.jsp"%>
         <div id="page">
             <div class="page_wrap">
 				<% if (currentPage != 1) {
@@ -302,20 +312,19 @@ height: 50px;
    function menuClick(type) {
       /* body2 : 게시판 , */
       if (type == "name1") {
-         $("#name1Body").show();
-         $("#name2Body").hide();
-         $("#name1").addClass("bodyClick");
-         $("#name2").removeClass("bodyClick");
-// 		 $("#type").val("1"); 
+         $(".name1Body").show();
+         $(".name2Body").hide();
+         $("#name1").addClass("bodyClick1");
+         $("#name2").removeClass("bodyClick2");
+		 $("#type").val("1"); 
 		 $("#boardType").val("name1"); 
 		 
       } else if (type == "name2") {
-         $("#name2Body").show();
-         $("#name1Body").hide();
-         $("#name2").addClass("bodyClick");
-   
-         $("#name1").removeClass("bodyClick");
-//          $("#type").val("2");
+         $(".name2Body").show();
+         $(".name1Body").hide();
+         $("#name2").addClass("bodyClick1");
+         $("#name1").removeClass("bodyClick2");
+         $("#type").val("2");
 		 $("#boardType").val("name2");
 
       }
@@ -328,9 +337,9 @@ height: 50px;
 	      if (currentPage == "pre") {
 	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 	      }
-	      var cnt = (currentPage - 1) * 6;
+	      var cnt = (currentPage - 1) * 7;
 	      $(".board").hide();
-	      for (var i = cnt; i < cnt + 6; i++) {
+	      for (var i = cnt; i < cnt + 7; i++) {
 	         $(".board" + (i)).show();
 	      }
 	      $(".page_wrap span").removeClass("sel");

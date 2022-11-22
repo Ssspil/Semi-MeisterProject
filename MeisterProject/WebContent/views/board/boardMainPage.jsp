@@ -120,6 +120,11 @@ hr {
 	cursor: pointer;
 }
 
+#body2-4:hover {
+	color:blue;
+}
+
+
 #date {
 	color: lightgrey;
 	font-size: 14px;
@@ -347,7 +352,7 @@ font-family: 'Nanum Gothic', sans-serif;
 }
 </style>
 </head>
-<body>
+
 
 	<%@ include file="../common/header.jsp"%>
 <body>
