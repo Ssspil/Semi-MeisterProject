@@ -91,7 +91,7 @@ public class ChattingDao {
 			while(rset.next()) {
 				list = new Chatting(rset.getInt("CHAT_NO"),
 									rset.getString("CHAT_CONTENT"),
-									rset.getDate("CHAT_DATE"),
+									rset.getString("CHAT_DATE"),
 									rset.getInt("SENDER"),
 									rset.getInt("RECEIVER"),
 									rset.getInt("SELL_NO")
@@ -127,7 +127,7 @@ public class ChattingDao {
 			while(rset.next()) {
 				list.add(new Chatting(rset.getInt("CHAT_NO"),
 									rset.getString("CHAT_CONTENT"),
-									rset.getDate("CHAT_DATE"),
+									rset.getString("CHAT_DATE"),
 									rset.getInt("SENDER"),
 									rset.getInt("RECEIVER"),
 									rset.getInt("SELL_NO")
@@ -218,12 +218,46 @@ public class ChattingDao {
 			while(rset.next()) {
 				list.add(new Chatting(rset.getInt("CHAT_NO"),
 									rset.getString("CHAT_CONTENT"),
-									rset.getDate("CHAT_DATE"),
+									rset.getString("CHAT_DATE"),
 									rset.getInt("SENDER"),
 									rset.getInt("RECEIVER"),
 									rset.getInt("SELL_NO")
 				));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<String> selectChatDate(Connection conn, int receiver, int sender, int sellNo){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectChatDate");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sender);
+			psmt.setInt(2, receiver);
+			psmt.setInt(3, sellNo);
+			psmt.setInt(4, receiver);
+			psmt.setInt(5, sender);
+			psmt.setInt(6, sellNo);
+			
+			rset = psmt.executeQuery();
+
+			while(rset.next()) {
+				list.add(rset.getString("CHAT_DATE"));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

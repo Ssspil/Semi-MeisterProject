@@ -1,12 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting" %>
+<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, java.time.LocalTime, java.time.LocalDate" %>
 <%
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
+	int userNo = (Integer) request.getAttribute("userNo");
 	int count = 0;
 	int last = 0;
+	
+	int idx = list.get(0).getChatDate().indexOf(" ");
+	
+	ArrayList<Integer> timeList = new ArrayList<Integer>();
+	ArrayList<String> dateList = new ArrayList<String>();
+	
+	LocalDate today = LocalDate.now();
+	LocalTime now = LocalTime.now();
+	String nowDate = today.toString();
+	
+	int hour = 0;
+	int min = 0;
+	
+	int currHour = now.getHour(); 
+	int currMin = now.getMinute();
+	
+	int diffDate = 0;
+	int diffHour = 0;
+	int diffMin = 0;
+
+	String date = "";
+	
+	for(int i = 0; i < list.size(); i++){
+		date = list.get(i).getChatDate().substring(0, idx);
+		date = date.replace("-", "");
+		nowDate = nowDate.replace("-", "");
+		diffDate = Integer.parseInt(nowDate) - Integer.parseInt(date);
+		if(diffDate == 0){
+			hour = Integer.parseInt(list.get(i).getChatDate().substring(idx+1, idx+3));
+			diffHour = currHour - hour;
+			
+			if(diffHour == 0){
+				min = Integer.parseInt(list.get(i).getChatDate().substring(idx+4, idx+6));
+				diffMin = currMin - min;
+				
+				if(diffMin == 0){
+					dateList.add("0분 전");
+				}
+				else{
+					dateList.add(diffMin+"시간 전");
+				}
+			}
+			else{
+				dateList.add(diffHour+"시간 전");
+			}
+		}
+		else{
+			dateList.add(diffDate+"일 전");
+		}
+	}
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,15 +92,30 @@
     	background-color: white;
     }
     #inputNick{
-    	width: 200px;
+    	width: 100px;
     	margin-top: 10px;
     	margin-bottom: 10px;
+    	margin-right: 30px;
+    }
+    #inputDate{
+    	width: 400px;
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	text-align: center;
+    }
+    #inputDate{
+    	width: 130px;
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	text-align: right;
     }
 </style>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
+		console.log('<%=dateList%>');
+
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				$(document).ready(function() {				
@@ -57,7 +124,6 @@
 							id: 'divList<%=count%>'
 						})
 					);
-					
 					$('#divList<%=count%>').append(
 						$('<form>').prop({
 							method: 'post',
@@ -77,7 +143,7 @@
 						$('<input>').prop({
 							id: 'inputNick',
 							type: 'text',
-							value: '            <%=nickNameList[count] %>',
+							value: '    <%=nickNameList[count] %>',
 							name: 'receiverNick'
 						})
 					);
@@ -91,9 +157,17 @@
 					);
 					$('#selectForm<%=count%>').append(
 						$('<input>').prop({
-							id: 'input',
+							id: 'inputContent',
 							type: 'text',
 							value: "<%=c.getChatContent() %>",
+							name: 'content'
+						})
+					);
+					$('#selectForm<%=count%>').append(
+						$('<input>').prop({
+							id: 'inputDate',
+							type: 'text',
+							value: "<%=dateList.get(count) %>",
 							name: 'content'
 						})
 					);
@@ -111,9 +185,16 @@
 					
 					$('.outer').append(
 						$('<hr>').prop({
-							id: 'hr'
+							id: 'hr<%=count%>'
 						})
 					);
+					
+					<%if(userNo != c.getSender() && userNo != c.getReceiver()){%>
+						$('#divList<%=count%>').hide();
+						$('#selectForm<%=count%>').hide();
+						$('#selectForm<%=count%>>input').hide();
+						$('#hr<%=count%>').hide();
+					<%}%>
 				});
 				
 				

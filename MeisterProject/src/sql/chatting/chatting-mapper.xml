@@ -35,11 +35,25 @@
 	</entry>
 	
 	<entry key="selectChatDetail">
-		SELECT *
+		SELECT 
+			CHAT_NO, 
+			CHAT_CONTENT, 
+			CHAT_DATE, 
+			SENDER,
+			RECEIVER, 
+			SELL_NO
 		FROM CHATTING
 		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
+		ORDER BY CHAT_NO
 	</entry>
 	
+	<entry key="selectChatDate">
+		SELECT 
+			CHAT_DATE 
+		FROM CHATTING
+		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
+		ORDER BY CHAT_NO
+	</entry>
 	<entry key="getProfile">
 		SELECT FILE_NO,
 			   ORIGIN_NAME,
