@@ -231,26 +231,50 @@
 		WHERE B.STATUS = 'Y'
         AND B.USER_NO = ?
 	</entry>
+	
 	<entry key="myReply">
-	SELECT 
-    R.REPLY_NO,
-    BOARD_NO,
-    B.BOARD_TITLE,
-    R.REPLY_CONTENT,
-    TO_CHAR(R.REPLY_DATE, 'YY-MM-DD') REPLY_DATE,
-    R.USER_NO
-    FROM REPLY R
-    LEFT OUTER JOIN BOARD B USING(BOARD_NO)
-    WHERE R.STATUS = 'Y'
-    AND R.USER_NO = ?
- 
+		SELECT 
+		    R.REPLY_NO,
+		    BOARD_NO,
+		    B.BOARD_TITLE,
+		    R.REPLY_CONTENT,
+		    TO_CHAR(R.REPLY_DATE, 'YY-MM-DD') REPLY_DATE,
+		    R.USER_NO
+	    FROM REPLY R
+	    LEFT OUTER JOIN BOARD B USING(BOARD_NO)
+	    WHERE R.STATUS = 'Y'
+	    AND R.USER_NO = ?
 	</entry>
-		<entry key="selectListCount2">
+	
+	<entry key="selectListCount2">
 		SELECT COUNT(*) BOARD_COUNT
 		FROM BOARD
 		WHERE STATUS = 'Y'
-		  AND BOARD_TYPE = ?
+	  	AND BOARD_TYPE = ?
 	</entry>  
 	
+	<entry key="selectRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+		FROM RECOMMEND
+		WHERE BOARD_NO = ?
+			AND USER_NO = ?
+	</entry>
+
+	<entry key="insertRecommend">
+		INSERT INTO RECOMMEND(RED_NO, BOARD_NO, USER_NO)
+		VALUES(SEQ_RCNO.NEXTVAL, ?, ?)
+	</entry>
+	
+	<entry key="deleteRecommend">
+		DELETE RECOMMEND
+		WHERE BOARD_NO = ?
+			AND USER_NO = ?
+	</entry>
+	
+	<entry key="countRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+	  	FROM RECOMMEND
+	 	WHERE BOARD_NO = ?
+	</entry>
 	
 </properties>

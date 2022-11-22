@@ -16,7 +16,9 @@ import com.kh.member.model.vo.Member;
 @WebServlet("/boardLike.bo")
 public class BoardLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private BoardService boardService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,16 +33,15 @@ public class BoardLikeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int result = 0;
-		int recommend = 0;
+		int recommend = 0; 
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		String type = request.getParameter("type");
-		
-		boardService = new BoardService();
-		
+			
 		if (type.equals("I")) {
 			int count = boardService.selectRecommend(boardNo, userNo);
+			
 			if (count == 0) {
 				result = boardService.insertRecommend(boardNo, userNo);
 			} else {
@@ -55,7 +56,6 @@ public class BoardLikeController extends HttpServlet {
 			}
 		}
 		recommend = boardService.countRecommend(boardNo);
-	
 	}
 
 	/**

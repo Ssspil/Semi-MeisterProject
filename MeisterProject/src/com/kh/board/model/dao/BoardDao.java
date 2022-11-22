@@ -720,6 +720,112 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		
 		return list;
 	}
+
+	public int selectRecommend(Connection conn, int boardNo, int userNo) {
+
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("selectRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+	
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+	
+		return result;
+	}
+	
+	public int insertRecommend(Connection conn, int boardNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("insertRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	public int deleteRecommend(Connection conn, int boardNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("deleteRecommend");
+		System.out.println(sql);
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	public int countRecommend(Connection conn, int boardNo) {
+
+		int result = 0;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("countRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+	
+		return result;
+	}
 	
 
 

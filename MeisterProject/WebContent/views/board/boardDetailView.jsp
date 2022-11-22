@@ -685,7 +685,7 @@ body {
 		
 		let likeBtn = true;
 		// 좋아요 기능
-		$(document).on("click", ".like", (e) => { /* "div.like" */
+		$(document).on("click", "div.like", (e) => {
 			e.preventDefault();
 			likeBtn = false;
 			$.ajax({
@@ -708,8 +708,8 @@ body {
 										$(".like > .text2").text("좋아요 " + data.recommend);
 									}
 								},
-								error : function(xhr, status, res) {
-									console.log("ERROR >> ", xhr.responseText, status, res);
+								error : function() {
+									console.log("ERROR");
 								}
 							})
 						}
@@ -717,8 +717,8 @@ body {
 						alert("오류가 발생했습니다.");
 					}
 				},
-				error : function(xhr, status, res) {
-					console.log("ERROR >> ", xhr.responseText, status, res);
+				error : function() {
+					console.log("ERROR");
 				},
 				done : function() {
 					likeBtn = true;
