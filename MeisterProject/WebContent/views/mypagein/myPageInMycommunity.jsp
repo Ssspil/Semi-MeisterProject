@@ -13,8 +13,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--  google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <link rel="stylesheet"
    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+   
    <style>
    .header{
     box-sizing: border-box;
@@ -22,7 +28,7 @@
 }
 #main{
 
-height:1400px;
+height:100%;
 
 }
 #titlename{
@@ -37,6 +43,9 @@ height:1400px;
     height: 80px;
     margin: auto;
     width: 60%;
+}
+#bodyClick{
+background-color: red;
 }
 #contenthead{
     box-sizing: border-box;
@@ -62,16 +71,21 @@ height:1400px;
 }
 #name1{
     box-sizing: border-box;
-    margin: auto;
     height: 77px;
     width: 200px;
     float: left;
     background-color: white;
-    border: 3px solid yellow;
-    color:black;
+    border: 6px solid yellow;
+    color:orange;
+    border-radius: 25px;
+    font-size: 17px;
+    font-family: 'Nanum Gothic', sans-serif;
+   
 }
 #name1:hover{
     background-color: orange;
+    border:6px solid yellow;
+    color: white;
 }
 #name2{
     box-sizing: border-box;
@@ -79,11 +93,16 @@ height:1400px;
     width: 200px;
     float: left;
     background-color: white;
-     border: 3px solid yellow;
-    color:black;
+    border: 6px solid  yellow;
+    color:orange;
+    border-radius: 25px;
+    font-size: 17px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 #name2:hover{
     background-color: orange;
+    border:6px solid yellow;
+    color: white;
 }
 #title{
 float: left;
@@ -187,7 +206,7 @@ height: 50px;
         <div id="contenthead"></div>
 		
 				<% for (int i = 0; i < list.size(); i++) { %>
-        <div id="name1Body" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
+        <div id="name1Body" class="board<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?&bno=<%=list.get(i).getBoardNo() %>';">
             <div id="title"> 
                 <div id="titlepost">커뮤니티 게시글 제목</div> 
                 <div id="titlepost1"><%=list.get(i).getBoardTitle() %></div>
@@ -204,12 +223,15 @@ height: 50px;
                 <div id="footerpost2"><i class="bi bi-chat-dots"></i> <%=list.get(i).getReplyCount() %>
                  <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%> </div>
             </div>
-        
+   
         </div>
+        <br><br>
+     
         <% } %>
        
 
         <%@ include file="../mypagein/myPageInMyReply.jsp"%>
+          <br><br>
 <!--        여기부턴 댓글 -->
         
 <br><br>
@@ -282,18 +304,19 @@ height: 50px;
       if (type == "name1") {
          $("#name1Body").show();
          $("#name2Body").hide();
-//          $("#name1").addClass("bodyClick");
-//          $("#name2").removeClass("bodyClick");
-		$("#type").val("1"); 
-		$("#boardType").val("name1"); 
-
+         $("#name1").addClass("bodyClick");
+         $("#name2").removeClass("bodyClick");
+// 		 $("#type").val("1"); 
+		 $("#boardType").val("name1"); 
+		 
       } else if (type == "name2") {
          $("#name2Body").show();
          $("#name1Body").hide();
-//          $("#name2").addClass("bodyClick");
-//          $("#name1").removeClass("bodyClick");
-         $("#type").val("2");
-		$("#boardType").val("name2");
+         $("#name2").addClass("bodyClick");
+   
+         $("#name1").removeClass("bodyClick");
+//          $("#type").val("2");
+		 $("#boardType").val("name2");
 
       }
    }

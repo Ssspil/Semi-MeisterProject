@@ -108,7 +108,7 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
 		
-
+	
 		
 		ArrayList<Board> list2 = new BoardService().selectList(2, keyword2); //ArrayList<Board> list2 = new BoardService().selectList(2);
 		request.setAttribute("list2",list2);

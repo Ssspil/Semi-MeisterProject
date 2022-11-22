@@ -8,6 +8,7 @@
 ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 String nowDate = new SimpleDateFormat("MMddHHmm").format(new Date());
 
+
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 
 int currentPage = pi.getCurrentPage();
@@ -22,8 +23,12 @@ String searchType = request.getAttribute("searchType") == null ? "" : request.ge
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+	
 
 <style>
 .body {
@@ -133,29 +138,35 @@ hr {
 #ge {
 	border: 5px solid orange;
 	background-color: white;
-	font-size: 27px;
+	font-size: 25px;
 	height: 58px;
-	width: 160px;
+	width: 150px;
 	float: left;
 	border-style: groove;
-	border-radius: 15px;
-	cursor: pointer;
+	border-radius: 18px;
+	
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #ge:hover {
-	background-color: wihte;
+	background-color: white;
 	border: 5px solid yellow;
 }
 
 #gung {
 	border: 5px solid orange;
 	background-color: white;
-	font-size: 27px;
+	font-size: 25px;
 	height: 58px;
+	width: 150px;
 	float: left;
 	border-style: groove;
-	border-radius: 15px;
-	cursor: pointer;
+	border-radius: 18px;
+	
+	font-family: 'Nanum Gothic', sans-serif;
+}
+#gfont{
+font-family: 'Nanum Gothic', sans-serif;
 }
 
 #bodyClick1 {
@@ -169,6 +180,7 @@ hr {
 #gung:hover {
 	background-color: white;
 	border: 5px solid yellow;
+	
 }
 
 #textmade {
@@ -176,6 +188,7 @@ hr {
 	margin: auto;
 	padding: 15px;
 }
+
 
 #img1 {
 	position: relative;
@@ -299,12 +312,20 @@ hr {
 }
 
 #madebutton {
-	background-color: orange;
+	background-color: white;
 	float: right;
+	border:5px solid orange;
+	color: orange;
+	border-radius: 15px;
+	font-family: 'Nanum Gothic';
+	font-size:15px;
+
+	width:95px;
 }
 
 #madebutton:hover {
-	background-color: rgba(255, 106, 0, 0.87);
+	background-color: orange;
+	color:white;
 }
 
 #chat {
@@ -359,17 +380,19 @@ hr {
 									style="background-color: orange; height: 35px; float: left;">
 									<datalist id="list">
 									</datalist>
-									<i class="bi bi-search"></i> 검색
+									<i class="bi bi-search"></i> <span id="gfont">검색</span>
 								</button>
 							</div>
-
-							<input type="hidden" id="type" name="type" value="1">
+							
+							
 							<form id="formSearch" action="<%=contextPath%>/boardlist.bo"
 								method="post">
+									<input type="hidden" id="type1" name="type1" value="1">
 								<input type="hidden" id="searchType" name="searchType" value="1">
 								<input type="hidden" id="searchKeyword" name="searchKeyword"
 									value="">
 							</form>
+							
 
 							<script>
             $(function() {
@@ -417,7 +440,7 @@ hr {
 			<form action="<%=contextPath%>/enrollForm.bo">
 				<button type="submit" id="madebutton" value=""
 					class="btn btn-secondary">
-					<i class="bi bi-pencil-square "> 글작성 </i>
+					<span id="gfont">글작성</span> </i>
 				</button>
 				<input type="hidden" id="type" name="type" value="1">
 			</form>
@@ -462,8 +485,7 @@ hr {
 			<%
 				for (int i = 0; i < list.size(); i++) {
 			%>
-			<div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"
-				onclick="detail('<%=list.get(i).getBoardNo()%>')">
+			<div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"onclick="detail('<%=list.get(i).getBoardNo()%>')">
 				<input type='hidden' name='bno'
 					value='<%=list.get(i).getBoardNo()%>' />
 				<hr>
@@ -614,6 +636,7 @@ hr {
          $("#ge").addClass("bodyClick1"); 
          $("#gung").removeClass("bodyClick2"); 
          $("#type").val("1");
+         $("#type1").val("1");
          $("#search_main").val("1");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
          $("#boardType").val("ge");
 
@@ -623,12 +646,14 @@ hr {
          $("#gung").addClass("bodyClick1");
          $("#ge").removeClass("bodyClick2");
          $("#type").val("2");
+         $("#type1").val("2");
          $("#search_main").val("2");
          $("#boardType").val("gung");
 
       }
    }
-   
+   </script>
+   <script>
    function pageMove(currentPage) {
       if (currentPage == "next") {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
@@ -648,8 +673,7 @@ hr {
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
    }
-   </script>
-	<script>
+   
  
 function searchEnter(){
 	   if(window.event.keycode == 13) search();

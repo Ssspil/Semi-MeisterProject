@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, com.kh.manager.notice.model.vo.Notice"%>
+    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
+    							  java.util.ArrayList, 
+    							  com.kh.manager.notice.model.vo.Notice,
+    							  com.kh.common.model.vo.PageInfo" 
+%>
+    
+    
 <%
     String contextPath = request.getContextPath();
-
-	Notice n = (Notice)request.getAttribute("n");
-	
-
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,7 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="JSP" />
-<title>공지사항 수정하기</title>
+<title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
 <!--  jQuery -->
@@ -24,19 +25,28 @@
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.myBtnArea{
-	width:44rem; 
-	margin-top : 30px; 
-	margin-botton : 30px;
-}
-#inputTitle{
-	width:44rem;
-}
-#inputContent{
-	width:44rem;
-	height : 500px;
+.listbtn{
+	float:right;
 }
 
+table>thead>tr>th{
+	background-color : black;
+	color : white;
+	text-align : center;
+}
+table>tbody {
+	text-align : center;
+}
+
+table>tbody>tr:hover{
+	background-color : orange;
+	cursor : pointer;
+	color : darkblue;
+	
+}
+.search{
+	text-align : center;
+}
  	
 </style>
     
@@ -111,48 +121,34 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main>
+             <main>
+
+
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">공지사항 글 수정하기</h1>
+                    <h1 class="mt-4">신고 관리</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">공지사항</li>
+                        <li class="breadcrumb-item active">신고 목록</li>
                     </ol>
 
 
-									<div class="card-body">
-                                        <form action="<%= contextPath %>/update.no" method="post" name="noticeUpdateForm">
-                                            <div class="form-floating mb-3">
-                                            	<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
-                                                <textarea class="form-control" id="inputTitle" type="text" name="noticeTitle" required ><%= n.getNoticeTitle()%></textarea>
-                                               
-                                                <label for="inputTitle" name ="title" >제목  </label>
-                                            </div>
-                                            
-                                            <div class="form-floating mb-6">
-                                            	<textarea id="inputContent" class="form-control" name="noticeContent"  maxlength="1100"> <%=n.getNoticeContent() %></textarea>
-                                                <label for="inputContent" name="content">글내용 &nbsp;&nbsp;&nbsp;&nbsp;<span id="count">0</span>   / 1100 <br></label>
-                                            </div>
-												                                      
-                                        
-                                            
-                                            <div class="myBtnArea" align="center"><button type="submit" class="btn btn-primary btn-sm">수정하기</button></div>
-                                            
-                                        </form>
-
-                                    </div>
-                                    <!-- 글자 수 나타내기 위한 스크립트 -->
-                                      <script>
-										    $(function(){
-										        $("#inputContent").keyup(function(){
-										            if ($("#inputContent").val().length <= 1100){
-										                $("#count").text($("#inputContent").val().length);      // "#content" = "this"
-										            } 
-										
-										        });
-										    })
-										</script>
+                    <table align="center">
+                         <thead>
+                             <tr>
+                                 <th>번호</th>
+                                 <th>아이디</th>
+                                 <th>신고된 아이디</th>
+                                 <th>사유</th>
+                                 <th>상세</th>
+                                 <th>상태</th>
+                             </tr>
+                         </thead>
+                         
+                     </table>
+                    
+                    
+                    
                 </div>
-            </main> 
+            </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -162,6 +158,25 @@
             </footer>
         </div>
     </div>
+    <script>
+        $(function(){
+			$("table>tbody>tr").click(function(){
+				// 클릭시 해당 공지사항의 번호를 넘겨야한다.
+				// 해당 tr요소의 자손 중에서 첫번째 td태그의 영역의 내용 필요
+				
+				let nno = $(this).children().eq(0).text(); //글번호 1, 2 가져옴
+				//현재 내가 클릭한 tr의 자손들 중 0번째에 위치한 자식의 textnode내용을 가져온다.
+				
+				//요청할 url?키=밸류&키=밸류&키=밸류
+				//물음표 뒤에 내용을 쿼리스트링이라고 부름 => 값들은 직접 만들엉서 넘겨야함.
+						
+				location.href= '<%=contextPath%>/detail.ad?nno='+nno; //get방식. url에 주소가 노출됨
+			});
+		})
+		
+		
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
