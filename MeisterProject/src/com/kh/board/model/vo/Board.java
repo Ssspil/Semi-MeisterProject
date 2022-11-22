@@ -71,13 +71,12 @@ public class Board {
    }
    
    // 게시글 상세보기
-   public Board(int boardNo, String boardTitle, String boardContent, int boardRecommend, int replyCount, int userNo, String boardDate, String memberNic) {
+   public Board(int boardNo, String boardTitle, String boardContent, int boardRecommend, int userNo, String boardDate, String memberNic) {
 	   super();
       this.boardNo = boardNo;
       this.boardTitle = boardTitle;
       this.boardContent = boardContent;
       this.boardRecommend = boardRecommend;
-      this.replyCount = replyCount;
       this.userNo = userNo;
       this.boardDate = boardDate;
       this.memberNic = memberNic;
@@ -107,10 +106,10 @@ public class Board {
 
    }
 
-
-   public int getReplyCount() {
-      return replyCount;
-   }
+   
+	public int getReplyCount() {
+		return replyCount;
+	}
 
    public void setReplyCount(int replyCount) {
       this.replyCount = replyCount;

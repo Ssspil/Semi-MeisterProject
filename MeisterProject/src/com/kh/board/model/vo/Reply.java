@@ -39,7 +39,6 @@ public class Reply {
 		this.replyContent = replyContent;
 		this.replyDate = replyDate;
 		this.userNo = userNo;
-		
 		this.mbNic = mbNic;
 	}
 	
