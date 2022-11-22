@@ -691,6 +691,7 @@ body {
 			$.ajax({
 				url : "boardLike.bo",
 				type : "post",
+				dataType : "json",
 				data : { boardNo : <%=b.getBoardNo() %>, type : "I" },
 				success : function(data) {
 					if (data.result == 1) {
@@ -701,6 +702,7 @@ body {
 							$.ajax({
 								url : "boardLike.bo",
 								type : "post",
+								dataType : "json",
 								data : { boardNo : <%=b.getBoardNo() %>, type : "D" },
 								success : function(data) {
 									if (data.result == 1) {
@@ -709,7 +711,7 @@ body {
 									}
 								},
 								error : function() {
-									console.log("ERROR");
+									console.log("ERROR >> ");
 								}
 							})
 						}
@@ -718,14 +720,14 @@ body {
 					}
 				},
 				error : function() {
-					console.log("ERROR");
+					console.log("ERROR >> ");
 				},
 				done : function() {
 					likeBtn = true;
+					
 				}
 			});
 		});
-		
  	</script>
 
 	

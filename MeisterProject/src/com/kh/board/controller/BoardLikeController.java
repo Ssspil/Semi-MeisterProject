@@ -38,6 +38,7 @@ public class BoardLikeController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		String type = request.getParameter("type");
+		System.out.println(type);
 			
 		if (type.equals("I")) {
 			int count = boardService.selectRecommend(boardNo, userNo);

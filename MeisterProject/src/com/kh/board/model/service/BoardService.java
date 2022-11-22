@@ -254,6 +254,7 @@ public ArrayList<Reply> myReply(int type) {
 	}
 	
 	public int selectRecommend(int boardNo, int userNo) {
+		
 		Connection conn = getConnection();
 	
 		int result = new BoardDao().selectRecommend(conn, boardNo, userNo);
@@ -264,6 +265,7 @@ public ArrayList<Reply> myReply(int type) {
 	}
 	
 	public int insertRecommend(int boardNo, int userNo) {
+		
 		Connection conn = getConnection();
 	
 		int result = new BoardDao().insertRecommend(conn, boardNo, userNo);
@@ -274,6 +276,7 @@ public ArrayList<Reply> myReply(int type) {
 	}
 	
 	public int deleteRecommend(int boardNo, int userNo) {
+		
 		Connection conn = getConnection();
 	
 		int result = new BoardDao().deleteRecommend(conn, boardNo, userNo);
@@ -284,6 +287,7 @@ public ArrayList<Reply> myReply(int type) {
 	}
 	
 	public int countRecommend(int boardNo) {
+		
 		Connection conn = getConnection();
 	
 		int result = new BoardDao().countRecommend(conn, boardNo);

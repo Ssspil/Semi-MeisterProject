@@ -117,18 +117,6 @@
 		WHERE FILE_NO = ?
 	</entry>
 	
-<!-- 	<entry key="selectSameAttachment"> -->
-<!-- 		SELECT FILE_NO -->
-<!-- 	   	FROM ATTACHMENT -->
-<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
-<!-- 	</entry> -->
-	
-<!-- 	<entry key="deleteAttachment"> -->
-<!-- 		DELETE -->
-<!-- 	   	FROM ATTACHMENT -->
-<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
-<!-- 	</entry> -->
-	
 	<entry key="deleteBoard">
 		UPDATE BOARD
 		SET STATUS = 'N'
@@ -142,21 +130,25 @@
 	</entry>
 	
 	<entry key="selectBoard">
-		SELECT (SELECT COUNT(REPLY_NO)
-                    FROM REPLY
-                    WHERE BOARD_NO = ?
-                    AND STATUS = 'Y') REPLY_COUNT,
-			BOARD_NO,
-			B.BOARD_TITLE,
-	        B.BOARD_CONTENT,
-			B.BOARD_RECOMMEND,
-			USER_NO,
-			B.BOARD_DATE,
-			M.NICKNAME
-			FROM BOARD B
-			JOIN MEMBER M USING(USER_NO)
-			WHERE BOARD_NO = ?
-            AND B.STATUS ='Y'
+		SELECT 
+		    B.BOARD_NO,
+		    B.BOARD_TITLE,
+		    B.BOARD_CONTENT,
+		    B.USER_NO,
+		    B.BOARD_DATE,
+		    M.NICKNAME,
+		    	(SELECT COUNT(BOARD_NO)
+		    	FROM REPLY
+		    	WHERE BOARD_NO = B.BOARD_NO
+		    	) AS REPLY_COUNT,
+		    	(SELECT COUNT(BOARD_NO)
+		    	FROM RECOMMEND
+		    	WHERE BOARD_NO = B.BOARD_NO
+		    	) AS BOARD_RECOMMEND
+		FROM BOARD B, MEMBER M
+		WHERE B.USER_NO = M.USER_NO
+		    AND B.STATUS = 'Y'
+		    AND BOARD_NO = ?
 	</entry>
 	
 <!-- 	<entry key="selectBoardWriter"> -->
