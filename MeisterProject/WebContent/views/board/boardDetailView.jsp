@@ -161,7 +161,6 @@ body {
 	position: relative;
 	display: inline-flex;
 	vertical-align: middle;
-	
 }
 
 .btn[data-d-1] .btn-toggle {
@@ -447,7 +446,21 @@ body {
 /* 	line-height: 15px; */
 /* 	cursor: pointer; */
 /* } */
+#btn {
+	background-color: white;
+	height: 30px;
+	color: orange;
+	outline-color: rgb(248, 162, 3);
+	border: solid;
+	border-radius: 12px;
+	text-decoration: none;
+	font-weight: bold;
+}
 
+#btn:hover {
+	background-color: orange;
+	color: white;
+}
 </style>
 </head>
 <body class="bdy">
@@ -501,13 +514,17 @@ body {
                                 </ul>
                             </div>
                             <ul data-s-1 class="body-list"></ul>
-                            <div data-j-1 data-s-1 class="greate">
-                                <div data-j-1 class="like">
-                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요<%=b.getBoardRecommend() %></span>
+                            <div data-j-1 data-s-1 class="greate" style='display:inline-block; float:left;'>
+                                <div data-j-1 class="like" style='display:inline-block; float:left;'>
+                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요 <%=b.getBoardRecommend() %></span>
                                 </div>
-                                <div data-j-1 class="item">
-                                    <span data-j-1 class="text2">댓글<%=b.getReplyCount()%></span>
+                                <div data-j-1 class="item" style='display:inline-block; float:left;'>
+                                    <span data-j-1 class="text2">댓글 <%=b.getReplyCount()%></span>
                                 </div>
+                                <div data-j-1 class="item" style='display:inline-block; float:right;'>
+                            	<a href="<%=contextPath %>/boardlist.bo?currentPage=1" id="btn">목록</a>
+                            	</div>
+                            	<br clear='both'>
                             </div>
                         </div>
                         <hr data-s-1 class="hr-sen">

@@ -143,6 +143,9 @@
       position: relative;
      left: 15%;
    }
+   .input-file-button:hover {
+   		background-color : navy;
+   }
    
    #camera{
       width: 30px;
@@ -210,7 +213,7 @@
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
-                  <font style="font-size: 30px; font-weight: bold;">게시판 글작성</font>
+                  <font style="font-size: 30px; font-weight: bold;"><%= type == 2 ? "궁금해요" : "게시판" %> 글작성</font>
                   <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">등록</button>
                   <input type="hidden" name="type" value="<%=type %>">   
                </div>
