@@ -19,6 +19,8 @@ public class SellBoard {
 	private String changeName;
 	private String filePath;
 	private String interestName;
+	private String sellDetail;
+	private String sellRegulation;
 	
 	public SellBoard() {
 		
@@ -27,7 +29,7 @@ public class SellBoard {
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
 			Date sellDate, String status, int userNO, String titleImg, int localNo, int interestNo, String nickname,
-			String changeName, String filePath) {
+			String changeName, String filePath, String sellDetail, String sellRegulation) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -44,11 +46,13 @@ public class SellBoard {
 		this.nickname = nickname;
 		this.changeName = changeName;
 		this.filePath = filePath;
+		this.sellDetail = sellDetail;
+		this.sellRegulation = sellRegulation;
 	}
 	
 	// 양진호
 	// 판매 게시판 등록 부분 생성자
-	public SellBoard(String sellTitle, String sellContent, int price, int localNo, int interestNo, int userNO) {
+	public SellBoard(String sellTitle, String sellContent, int price, int localNo, int interestNo, int userNO, String sellDetail, String sellRegulation) {
 		super();
 		this.sellTitle = sellTitle;
 		this.sellContent = sellContent;
@@ -56,6 +60,8 @@ public class SellBoard {
 		this.localNo = localNo;
 		this.interestNo = interestNo;
 		this.userNO = userNO;
+		this.sellDetail = sellDetail;
+		this.sellRegulation = sellRegulation;
 	}
 
 	// 판매 게시판 수정 부분 생성자
@@ -74,7 +80,7 @@ public class SellBoard {
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int interest, int local, String nickname, String changeName, String filePath) {
+			int interestNo, int localNo, String nickname, String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -90,7 +96,7 @@ public class SellBoard {
 	
 	// 판매 게시판 상세조회 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellRecommend, Date sellDate,
-			String interestName, int localNo, String nickname) {
+			String interestName, int localNo, String nickname, String sellDetail, String sellRegulation) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -101,6 +107,8 @@ public class SellBoard {
 		this.interestName= interestName;
 		this.localNo = localNo;
 		this.nickname = nickname;
+		this.sellDetail = sellDetail;
+		this.sellRegulation = sellRegulation;
 	}
 
 	public int getSellNo() {
@@ -231,6 +239,22 @@ public class SellBoard {
 	public void setInterestName(String interestName) {
 		this.interestName = interestName;
 	}
+	
+	public String getSellDetail() {
+		return sellDetail;
+	}
+	
+	public void setSellDetail(String sellDetail) {
+		this.sellDetail = sellDetail;
+	}
+	
+	public String getSellRegulation() {
+		return sellRegulation;
+	}
+	
+	public void setSellRegulation(String sellRegulation) {
+		this.sellRegulation = sellRegulation;
+	}
 
 	
 	
@@ -241,7 +265,8 @@ public class SellBoard {
 		return "SellBoard [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellContent=" + sellContent + ", price="
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", localNo=" + localNo
-				+ ", interestNo=" + interestNo + ", nickname=" + nickname + ", interestName="+ interestName +"]";
+				+ ", interestNo=" + interestNo + ", nickname=" + nickname + ", interestName="+ interestName +""
+						+ ", sellDetail="+ sellDetail +",, sellRegulation="+ sellRegulation +"]";
 	}
 
 	

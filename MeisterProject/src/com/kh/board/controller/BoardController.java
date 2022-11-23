@@ -103,7 +103,7 @@ public class BoardController extends HttpServlet {
 		PageInfo pi2 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		ArrayList<Board> list = new BoardService().selectList(1, keyword1);//new BoardService().selectList("1");
-		request.setAttribute("list",list);
+//		request.setAttribute("list",list);
 		request.setAttribute("pi", pi);
 		
 	
@@ -122,7 +122,7 @@ public class BoardController extends HttpServlet {
 		
 		// 메인 페이지에도 작성글 보이게 하기위한것.
 		HttpSession session = request.getSession();
-		session.setAttribute("mainList", hotList);
+		session.setAttribute("list", list);
 		
 		request.setAttribute("hotList",hotList);
 		request.getRequestDispatcher("views/board/boardMainPage.jsp").forward(request, response);
