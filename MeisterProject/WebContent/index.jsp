@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList,
     							com.kh.board.model.vo.*"%>
 <%
-	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("mainList");	
+	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("list");	
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+<style>
+.community-main {
+	margin : auto;
+	width : 70%;
+	height : 100%;
+}
+.headtext {
+	font-weight : 700;
+	font-size : 28px;
+	width : 206px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-inline-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+.bodytext {
+	width : 206px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-inline-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+</style>
+
 </head>
 <body>
   <%@ include file="/views/common/header.jsp" %>
@@ -141,19 +176,66 @@
       </div>
       
       <div class="interest-area">
+        <div style="background-color: white">
+      		판매글 입니당
+      	</div>
       	모두모두화이팅 입니다  마무리 잘되었으면 좋겠습니다..
       </div>
       
+      
       <div class="community-area">
+      		<div >
+      			커뮤니티 입니당
+      		</div>
       		<div class="area1">
       			<div class="community-main">
       				<% for(int i = 0; i < 1; i++) { %>
-      					 <%= list %>
+      					<br>
+      					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
+      					 <span class="bodytext"><%= list.get(i).getBoardContent() %></span>
+			      			<div id="titlefooter">
+								<div>
+									<i class="bi bi-eye"></i>
+									<%=list.get(i).getBoardCount()%>
+									<i class="bi bi-hand-thumbs-up"></i>
+									<%=list.get(i).getBoardRecommend()%>
+			
+
+									<div class="foot_wrap" style="float: right">
+										<span id="date"><span id="chat2">
+											<i class="bi bi-chat-dots"></i> <%=list.get(i).getReplyCount()%></span>
+										</span>
+									</div>
+								</div>
+							</div>
+      					 
       				<% } %>
       			</div>
       		</div>
       		<div class="area2">
-      			에효..
+      			<div class="community-main">
+      				<% for(int i = 1; i < 2; i++) { %>
+      					<br>
+      					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
+      					 <span class="bodytext"><%= list.get(i).getBoardContent() %></span>
+			      			<div id="titlefooter">
+								<div>
+									<i class="bi bi-eye"></i>
+									<%=list.get(i).getBoardCount()%>
+									<i class="bi bi-hand-thumbs-up"></i>
+									<%=list.get(i).getBoardRecommend()%>
+			
+
+									<div class="foot_wrap" style="float: right">
+										<span id="date"><span id="chat2">
+											<i class="bi bi-chat-dots"></i> <%=list.get(i).getReplyCount()%></span>
+										</span>
+									</div>
+								</div>
+							</div>
+      					 
+      				<% } %>
+      			</div>
       		</div>
       </div>
     </div><!-- outer 끝 -->

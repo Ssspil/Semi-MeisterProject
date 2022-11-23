@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
-import com.kh.manager.notice.model.vo.Notice;
+
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {

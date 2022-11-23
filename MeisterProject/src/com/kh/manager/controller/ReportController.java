@@ -63,8 +63,6 @@ public class ReportController extends HttpServlet {
 		// * currentPage : 현재페이지
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 		
-		System.out.println(currentPage);
-		
 		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수(페이지목록들을 몇 개 단위로 출력할건지!)
 		pageLimit = 10;
 		
@@ -88,7 +86,7 @@ public class ReportController extends HttpServlet {
 	    // --------- 페이징처리 끝 --------  //
 		
 
-		
+		// 게시글 전체, 첨부파일 전체 긁어오기
 		ArrayList<Report> list = new ReportService().selectAllList(pi);
 		ArrayList<Attachment> atArr = new ReportService().selectAllList();
 		

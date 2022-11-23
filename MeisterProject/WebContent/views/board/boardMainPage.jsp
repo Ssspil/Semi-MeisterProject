@@ -5,7 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat, java.util.Date"%>
 <%
 	ArrayList<Board> hotList = (ArrayList<Board>) request.getAttribute("hotList"); //핫 게시글 순위용
-ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+ArrayList<Board> list = (ArrayList<Board>) session.getAttribute("list");
 String nowDate = new SimpleDateFormat("MMddHHmm").format(new Date());
 
 
