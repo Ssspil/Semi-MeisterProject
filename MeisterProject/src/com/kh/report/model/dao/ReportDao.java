@@ -204,6 +204,42 @@ public class ReportDao {
 		
 		return complete;
 	}
+	
+	/**
+	 * 신고하기의 전체 첨부파일을 가져오는 메소드
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllAt(Connection conn) {
+		ArrayList<Attachment> atArr = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAt");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				atArr.add(new Attachment(rset.getInt("FILE_NO"),
+										 rset.getString("ORIGIN_NAME"),
+										 rset.getString
+										
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return atArr;
+	}
+
+	
+	
 
 
 

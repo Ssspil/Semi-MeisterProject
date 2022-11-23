@@ -444,8 +444,8 @@ public class MemberDao {
 				
 				at.setFileNo(rset.getInt("FILE_NO"));
 				at.setOriginName(rset.getString("ORIGIN_NAME"));
-				at.setChangeName(rset.getNString("CHANGE_NAME"));
-				at.setFilePath(rset.getNString("FILE_PATH"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
 			}
 			
 		} catch (SQLException e) {
