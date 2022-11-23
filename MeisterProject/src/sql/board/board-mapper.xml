@@ -77,10 +77,10 @@
        	FROM BOARD B
         LEFT OUTER JOIN REPLY R USING(BOARD_NO)
 		WHERE ROWNUM <= 3 
-        AND TO_CHAR(BOARD_DATE) > TO_CHAR(SYSDATE-1,'YYYYMMDDHH')
+        AND BOARD_DATE < TO_CHAR(SYSDATE-1,'YYYYMMDD')
         AND B.STATUS = 'Y'
 		AND BOARD_TYPE = 1                                
-		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc]]>
+		ORDER BY BOARD_COUNT desc , Board_RECOMMEND desc , REPLY_COUNT desc]]>
 	</entry>
 
 	<!-- 게시글 글작성 -->
@@ -104,10 +104,7 @@
 		UPDATE BOARD
 		SET BOARD_TITLE = ?,
 			BOARD_CONTENT = ?,
-			REPLY
-		FROM BOARD B
-		JOIN REPLY R USING(BOARD_NO)
-			
+		FROM BOARD
 		WHERE BOARD_NO = ?
 	</entry>
 	
@@ -119,18 +116,6 @@
 			UPLOAD_DATE = SYSDATE
 		WHERE FILE_NO = ?
 	</entry>
-	
-<!-- 	<entry key="selectSameAttachment"> -->
-<!-- 		SELECT FILE_NO -->
-<!-- 	   	FROM ATTACHMENT -->
-<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
-<!-- 	</entry> -->
-	
-<!-- 	<entry key="deleteAttachment"> -->
-<!-- 		DELETE -->
-<!-- 	   	FROM ATTACHMENT -->
-<!-- 	   	WHERE REF_NO = ? AND FILE_LEVEL = 1 -->
-<!-- 	</entry> -->
 	
 	<entry key="deleteBoard">
 		UPDATE BOARD
@@ -145,20 +130,25 @@
 	</entry>
 	
 	<entry key="selectBoard">
-		SELECT
-			BOARD_NO,
-			B.BOARD_TITLE,
-	        B.BOARD_CONTENT,
-			B.BOARD_RECOMMEND,
-			R.USER_NO,
-            R.REPLY_COUNT,
-			B.BOARD_DATE,
-			M.NICKNAME
-			FROM BOARD B
-			JOIN MEMBER M USING(USER_NO)
-            JOIN REPLY R USING(BOARD_NO)
-			WHERE BOARD_NO = ?
-            AND B.STATUS ='Y'
+		SELECT 
+		    B.BOARD_NO,
+		    B.BOARD_TITLE,
+		    B.BOARD_CONTENT,
+		    B.USER_NO,
+		    B.BOARD_DATE,
+		    M.NICKNAME,
+		    	(SELECT COUNT(BOARD_NO)
+		    	FROM REPLY
+		    	WHERE BOARD_NO = B.BOARD_NO
+		    	) AS REPLY_COUNT,
+		    	(SELECT COUNT(BOARD_NO)
+		    	FROM RECOMMEND
+		    	WHERE BOARD_NO = B.BOARD_NO
+		    	) AS BOARD_RECOMMEND
+		FROM BOARD B, MEMBER M
+		WHERE B.USER_NO = M.USER_NO
+		    AND B.STATUS = 'Y'
+		    AND BOARD_NO = ?
 	</entry>
 	
 <!-- 	<entry key="selectBoardWriter"> -->
@@ -221,39 +211,62 @@
 	</entry>
 	
 	<entry key="myCommunity">
-			SELECT  BOARD_NO,
+		SELECT  BOARD_NO,
                 BOARD_TITLE,
                 BOARD_CONTENT,
                 REPLY_COUNT,
                 BOARD_RECOMMEND,
                 B.USER_NO,
-                BOARD_DATE 
+                TO_CHAR(BOARD_DATE,'YYYY-MM-DD') BOARD_DATE
        	FROM BOARD B
         LEFT OUTER JOIN REPLY R USING(BOARD_NO)
 		WHERE B.STATUS = 'Y'
         AND B.USER_NO = ?
 	</entry>
+	
 	<entry key="myReply">
-	SELECT 
-    R.REPLY_NO,
-    B.BOARD_TITLE,
-    R.REPLY_CONTENT,
-    TO_CHAR(R.REPLY_DATE, 'YY-MM-DD') REPLY_DATE,
-    R.USER_NO
-    FROM REPLY R
-    LEFT OUTER JOIN BOARD B USING(BOARD_NO)
-    WHERE R.STATUS = 'Y'
-    AND R.USER_NO = ?
+		SELECT 
+		    R.REPLY_NO,
+		    BOARD_NO,
+		    B.BOARD_TITLE,
+		    R.REPLY_CONTENT,
+		    TO_CHAR(R.REPLY_DATE, 'YY-MM-DD') REPLY_DATE,
+		    R.USER_NO
+	    FROM REPLY R
+	    LEFT OUTER JOIN BOARD B USING(BOARD_NO)
+	    WHERE R.STATUS = 'Y'
+	    AND R.USER_NO = ?
 	</entry>
-		<entry key="selectListCount2">
+	
+	<entry key="selectListCount2">
 		SELECT COUNT(*) BOARD_COUNT
 		FROM BOARD
 		WHERE STATUS = 'Y'
-		  AND BOARD_TYPE = ?
+	  	AND BOARD_TYPE = ?
 	</entry>  
 	
+	<entry key="selectRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+		FROM RECOMMEND
+		WHERE BOARD_NO = ?
+			AND USER_NO = ?
+	</entry>
+
+	<entry key="insertRecommend">
+		INSERT INTO RECOMMEND(RED_NO, BOARD_NO, USER_NO)
+		VALUES(SEQ_RCNO.NEXTVAL, ?, ?)
+	</entry>
 	
+	<entry key="deleteRecommend">
+		DELETE RECOMMEND
+		WHERE BOARD_NO = ?
+			AND USER_NO = ?
+	</entry>
 	
-	
+	<entry key="countRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+	  	FROM RECOMMEND
+	 	WHERE BOARD_NO = ?
+	</entry>
 	
 </properties>

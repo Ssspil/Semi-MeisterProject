@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"  import="java.util.ArrayList, com.kh.board.model.vo.*, com.kh.common.model.vo.PageInfo"%>
     <%  
     ArrayList<Reply> list2 = (ArrayList<Reply>)request.getAttribute("list2");
-  
+    String contextPath2 = request.getContextPath();
     %>
 <!DOCTYPE html>
 <html>
@@ -21,15 +21,25 @@ overflow: hidden;
 -webkit-line-clamp: 2;
 
 }
+
 </style>
 </head>
 <body>
 
+		<div id="nameBody_2">
+ 			<% if(list2.isEmpty()){ %>
+         <div id="ddddd"></div>
+         <div id="nullhead">
+			<div id="img"><i class="bi bi-emoji-expressionless"></i></div>
+			<br><br>
+			<div id="null">작성한 댓글이 없습니다.</div>
+			<div id="null2">커뮤니티에서 댓글을 작성해 보세요!</div>
+		</div>
+		<%} else { %>	
+				<%for (int i = 0; i < list2.size(); i++) { %>
+		<div id="name2Body" class="name2Body board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?&bno=<%=list2.get(i).getBoardNo() %>';">
 
-				<%
-					for (int i = 0; i < list2.size(); i++) {
-				%>
-		<div id="name2Body"  style="display:none" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>">
+		
             <div id="title"> 
                 <div id="titlepost">게시글 제목</div>
                 <div id="titlepost1"><%=list2.get(i).getBoardTitle() %></div>
@@ -47,7 +57,11 @@ overflow: hidden;
             </div>
         </div>
        
-				<%	}%>
+    
+       
+				<%}	}%>
+				
+		</div>
 				
         
         

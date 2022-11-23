@@ -103,8 +103,20 @@
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, ? )
 	</entry>
 	
-	
-	
+	<entry key="clickInterestCategory">
+		SELECT INTEREST_NO,
+			   INTEREST_NAME
+		FROM INTEREST
+		WHERE INTEREST_NO = ?
+	</entry>
+		
+	<entry key="clickLocalCategory">
+		SELECT LOCAL_NO,
+			   LOCAL_NAME
+		FROM LOCAL
+		WHERE LOCAL_NO = ?
+	</entry>
+		
 	
 	
 </properties>

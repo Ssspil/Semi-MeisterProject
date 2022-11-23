@@ -135,7 +135,38 @@ public class SellBoardService {
 	        }
 	        close();
 	    }
-	 
+
+
+	//'관심사'카테고리 선택시 
+	public ArrayList<Interest> clickInterestCategory(int interest_no) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Interest> interest = new SellBoardDao().clickInterestCategory(conn, interest_no);
+		
+		close();
+		
+		return interest;
+	
+	}
+
+	//'지역'카테고리 선택시 
+	public ArrayList<Local> clickLocalCategory(int local_no) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Local> local = new SellBoardDao().clickLocalCategory(conn, local_no);
+		
+		close();
+		
+		return local;
+		
+	}
+
+
+
+
+
 	 
 	
 

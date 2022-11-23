@@ -45,16 +45,35 @@ top:40px;
 	margin: auto;
 	height: 19%;
 }
-#page_wrap2{ 
-position: relative;
-text-align:center;
-top:12%;
 
+.page_wrap2 {
+	text-align: center;
+	position: relative;
+	top: 25px;
 }
+
+.page_wrap2 span {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.page_wrap2 .sel {
+	color: orange;
+	border-bottom: 1px solid orange;
+}
+
+.page_wrap2 span:hover {
+	color: orange;
+	cursor: pointer;
+	border-bottom: 1px solid orange;
+}
+
+
 #chat3{
-float:right;
-position: relative;
-    right: 120px;
+    float: right;
+    position: relative;
+    top: -25px;
+    left: 610px;
 }
 #date1{
   color: lightgrey;
@@ -70,27 +89,24 @@ position: relative;
 <body>
 <div class="body2-1" id="gungBody" style="display:none">
     <div id="body2-1">
-             <input id="boardType" type="hidden" value="gung" />
+             
                <%for(int i=0; i< list2.size(); i++){ %>
-                   <div class="body2-3 <%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
+                   <div class="body2-3 board2 board2<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
                   
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
                         <br>
                   <p id="text"><%=list2.get(i).getBoardContent()  %></p>
                   
-                  <%if(!"/".equals(list2.get(i).getTitleImg())){ %>
+                  <%if(!"//".equals(list2.get(i).getTitleImg())){ %>
                   <img src="<%=contextPath2 %><%=list2.get(i).getTitleImg()%>" id="img1">
                   
                   <%} %>
-         
-
-                  
-                </div><br><br><br>
+                </div>
+                <br> <br> <br>
                 <div id="titlefooter">
                     <div><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
                     <i class="bi bi-hand-thumbs-up"></i> <%= list2.get(i).getBoardRecommend() %>
-                </div>
                 </div>
                     <%
                     String boardDate2 = list2.get(i).getBoardDate();
@@ -129,39 +145,38 @@ position: relative;
                     <i class="bi bi-chat-dots"></i> <%=list2.get(i).getReplyCount()%>
                     <span id="date1"><%=result2 %> </span>
                     </div>
-                    <hr>
-               
+                    </div>
+               	<hr>
                 </div>
                <%} %>
-     
-        </div>
-        
-        	<div class="page_wrap" id="page_wrap2">
-				<% if (currentPage2 != 1) { %>
+               <div class="page_wrap2">
+				<%-- <% if (currentPage2 != 1) { %>
 				<span>&lt&lt</span>
-				<% }%>
-				<% if (startPage2 != 1) { %>
+				<% }%> --%>
+				<%-- <% if (startPage2 != 1) { %> --%>
 				<span onclick="pageMove2('pre')">&lt</span>
-				<% }%>
+				<%-- <% }%> --%>
 				<% for (int i = startPage2; i <= endPage2; i++) {
 					if (i == currentPage2) { %>
-				<span class="page<%=i%> sel" onclick="pageMove2('<%=i%>')">[<%=i%>]
+				<span class="page2<%=i%> sel" onclick="pageMove2('<%=i%>')">[<%=i%>]
 				</span>
 				<%} else { %>
-				<span class="page<%=i%>" onclick="pageMove2('<%=i%>')">[<%=i%>]
+				<span class="page2<%=i%>" onclick="pageMove2('<%=i%>')">[<%=i%>]
 				</span>
 				<% } %>
 				<% } %>
 
-				<% if (currentPage2 != endPage2) { %>
+				<%-- <% if (currentPage2 != endPage2) { %> --%>
 				<span onclick="pageMove2('next')">&gt</span>
-				<% }%>
-				<% if (currentPage2 != maxPage2) { %>
+				<%-- <% }%> --%>
+				<%-- <% if (currentPage2 != maxPage2) { %>
 				<span>&gt&gt</span>
-				<% }%>
+				<% }%> --%>
 				
 				
 			</div>
+     
+        </div>
     </div>
   
 
@@ -171,19 +186,19 @@ position: relative;
 <script>
 function pageMove2(currentPage) {
 	if (currentPage == "next") {
-		currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+		currentPage = Number($(".page_wrap2 .sel").text().substring(1, 2)) + 1;
 	}
 	if (currentPage == "pre") {
-		currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+		currentPage = Number($(".page_wrap2 .sel").text().substring(1, 2)) - 1;
 	}
 
 	var cnt = (currentPage - 1) * 6;
-	$(".board").hide();
+	$(".board2").hide();
 	for (var i = cnt; i < cnt + 6; i++) {
-		$(".board" + (i)).show();
+		$(".board2" + (i)).show();
 	}
-	$(".page_wrap span").removeClass("sel");
-	$(".page" + currentPage).addClass("sel");
+	$(".page_wrap2 span").removeClass("sel");
+	$(".page2" + currentPage).addClass("sel");
 	
 }
 

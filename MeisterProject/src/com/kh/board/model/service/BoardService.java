@@ -253,6 +253,48 @@ public ArrayList<Reply> myReply(int type) {
 		return list;
 	}
 	
+	public int selectRecommend(int boardNo, int userNo) {
+		
+		Connection conn = getConnection();
 	
+		int result = new BoardDao().selectRecommend(conn, boardNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+	
+	public int insertRecommend(int boardNo, int userNo) {
+		
+		Connection conn = getConnection();
+	
+		int result = new BoardDao().insertRecommend(conn, boardNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+	
+	public int deleteRecommend(int boardNo, int userNo) {
+		
+		Connection conn = getConnection();
+	
+		int result = new BoardDao().deleteRecommend(conn, boardNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+	
+	public int countRecommend(int boardNo) {
+		
+		Connection conn = getConnection();
+	
+		int result = new BoardDao().countRecommend(conn, boardNo);
+	
+		close();
+	
+		return result;
+	}
 
 }

@@ -155,22 +155,22 @@ public class BoardDao {
 
 		try {
 			psmt = conn.prepareStatement(sql);
-
+			
 			psmt.setInt(1, boardNo);
-
+			
 			rset = psmt.executeQuery();
 
 			if (rset.next()) {
-				b = new Board(rset.getInt("BOARD_NO"),
+				b = new Board(
+						rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
 						rset.getString("BOARD_CONTENT"),
 						rset.getInt("BOARD_RECOMMEND"),
-						rset.getInt("REPLY_COUNT"),
 						rset.getInt("USER_NO"),
 						rset.getString("BOARD_DATE"),
 						rset.getString("NICKNAME")
 						);
-
+				b.setReplyCount(rset.getInt("REPLY_COUNT"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -206,20 +206,6 @@ public class BoardDao {
 			
 			close(rset);
 			close(psmt);
-			//프로필이미지
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, 5);
-
-			rset = psmt.executeQuery();
-			//글내용 이미지
-			if (rset.next()) {
-				at = new Attachment();
-
-				at.setFileNo(rset.getInt("FILE_NO"));
-				at.setOriginName(rset.getString("ORIGIN_NAME"));
-				at.setChangeName(rset.getString("CHANGE_NAME"));
-				at.setFilePath(rset.getString("FILE_PATH"));
-			}
 			
 			
 		} catch (SQLException e) {
@@ -266,7 +252,7 @@ public class BoardDao {
 				String change_name = rset.getString("change_name") == null ? "" : rset.getString("change_name");
 
 				String file = "";
-				file = file_name + "/" + change_name;
+				file = "/" + file_name + "/" + change_name;
 				Board b;
 				b = new Board(rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
@@ -716,6 +702,7 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 			while(rset.next()) {
 				list.add(new Reply(
 						rset.getInt("REPLY_NO"),
+						rset.getInt("BOARD_NO"),
 						rset.getString("BOARD_TITLE"),
 						rset.getString("REPLY_CONTENT"),
 						rset.getString("REPLY_DATE"),
@@ -731,6 +718,112 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		}
 		
 		return list;
+	}
+
+	public int selectRecommend(Connection conn, int boardNo, int userNo) {
+
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("selectRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+	
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+	
+		return result;
+	}
+	
+	public int insertRecommend(Connection conn, int boardNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("insertRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	public int deleteRecommend(Connection conn, int boardNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("deleteRecommend");
+		System.out.println(sql);
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	public int countRecommend(Connection conn, int boardNo) {
+
+		int result = 0;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("countRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+			
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+	
+		return result;
 	}
 	
 

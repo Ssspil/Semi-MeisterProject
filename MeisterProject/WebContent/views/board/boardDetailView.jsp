@@ -161,7 +161,6 @@ body {
 	position: relative;
 	display: inline-flex;
 	vertical-align: middle;
-	
 }
 
 .btn[data-d-1] .btn-toggle {
@@ -448,6 +447,22 @@ body {
 /* 	cursor: pointer; */
 /* } */
 
+/* 목록 버튼 */
+#btn {
+	background-color: white;
+	height: 30px;
+	color: orange;
+	outline-color: rgb(248, 162, 3);
+	border: solid;
+	border-radius: 12px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#btn:hover {
+	background-color: orange;
+	color: white;
+}
 </style>
 </head>
 <body class="bdy">
@@ -459,7 +474,7 @@ body {
                     <section data-s-1 data-a-1 class="detail-container">
                         <div data-d-1 data-s-1 class="detail-header">
                             <div data-d-1 class="detail-title">
-                                <h1 data-d-1 class="header-text"><%=b.getBoardTitle() %></h1>
+                                <h1 data-d-1 class="header-text"><%=b.getBoardTitle()%></h1>
                             </div>
                             <div data-f-1 data-d-1 class="nickname-container">
                                 <div data-d-1 data-f-1 class="user-profile">
@@ -501,14 +516,17 @@ body {
                                 </ul>
                             </div>
                             <ul data-s-1 class="body-list"></ul>
-                            <div data-j-1 data-s-1 class="greate">
-                                <div data-j-1 class="like">
-                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요</span>
+                            <div data-j-1 data-s-1 class="greate" style='display:inline-block; float:left;'>
+                                <div data-j-1 class="like" style='display:inline-block; float:left;'>
+                                    <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요 <%=b.getBoardRecommend() %></span>
                                 </div>
-                                <div data-j-1 class="item">
-                                    <span data-j-1 class="text2">댓글</span>
-                                    	<p><%=b.getReplyCount() %></p>
+                                <div data-j-1 class="item" style='display:inline-block; float:left;'>
+                                    <span data-j-1 class="text2">댓글 <%=b.getReplyCount()%></span>
                                 </div>
+                                <div data-j-1 class="item" style='display:inline-block; float:right;'>
+                            	<a href="<%=contextPath %>/boardlist.bo?currentPage=1" id="btn">목록</a>
+                            	</div>
+                            	<br clear='both'>
                             </div>
                         </div>
                         <hr data-s-1 class="hr-sen">
@@ -664,10 +682,52 @@ body {
 		}
 		
 		
+		
+		let likeBtn = true;
 		// 좋아요 기능
-		
-		// 댓글 수 기능
-		
+		$(document).on("click", "div.like", (e) => {
+			e.preventDefault();
+			likeBtn = false;
+			$.ajax({
+				url : "boardLike.bo",
+				type : "post",
+				dataType : "json",
+				data : { boardNo : <%=b.getBoardNo() %>, type : "I" },
+				success : function(data) {
+					if (data.result == 1) {
+						alert("좋아요가 등록되었습니다.");
+						$(".like > .text2").text("좋아요 " + data.recommend);
+					} else if (data.result == 2) {
+						if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) {
+							$.ajax({
+								url : "boardLike.bo",
+								type : "post",
+								dataType : "json",
+								data : { boardNo : <%=b.getBoardNo() %>, type : "D" },
+								success : function(data) {
+									if (data.result == 1) {
+										alert("취소되었습니다.");
+										$(".like > .text2").text("좋아요 " + data.recommend);
+									}
+								},
+								error : function() {
+									console.log("ERROR >> ");
+								}
+							})
+						}
+					} else {
+						alert("오류가 발생했습니다.");
+					}
+				},
+				error : function() {
+					console.log("ERROR >> ");
+				},
+				done : function() {
+					likeBtn = true;
+					
+				}
+			});
+		});
  	</script>
 
 	
