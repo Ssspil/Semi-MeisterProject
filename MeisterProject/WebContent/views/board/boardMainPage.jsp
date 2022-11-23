@@ -75,10 +75,17 @@ String searchType = request.getAttribute("searchType") == null ? "1" : request.g
 #body2-3 {
 	box-sizing: border-box;
 	margin: auto;
-	height: 19%;
+	height: 21%;
 }
 
+#body2-4:hover {
+background-color:rgb(250, 247, 247);
+border-radius: 20px;
+}
 hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+    border: 0;
 	background-color: orange;
 }
 
@@ -116,13 +123,8 @@ hr {
 	box-sizing: border-box;
 	height: 18%;
 	width: 100%;
-	padding: 20px;
-	cursor: pointer;
-}
-
-#body2-4:hover {
 	
-	color:rgb(255, 200, 98);
+	cursor: pointer;
 }
 
 
@@ -131,7 +133,7 @@ hr {
 	font-size: 14px;
 	float: right;
 	position: relative;
-	left: 160px;
+	left: 170px;
 }
 
 #mainid {
@@ -147,14 +149,16 @@ hr {
 	height: 58px;
 	width: 150px;
 	float: left;
-	border-radius: 18px;
+	border-radius: 16px;
 	cursor:pointer;
-	font-family: 'Nanum Gothic', sans-serif;
 	outline:none;
+	font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
 }
 
 #ge:hover {
-	background-color: white;
+background-color: white;
+	color:black;
 	border: 5px solid yellow;
 }
 
@@ -164,10 +168,11 @@ hr {
 	height: 58px;
 	width: 150px;
 	float: left;
-	border-radius: 18px;
+	border-radius: 16px;
 	cursor:pointer;
-	font-family: 'Nanum Gothic', sans-serif;
 	outline:none;
+	 font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
 }
 #gfont{
 font-family: 'Nanum Gothic', sans-serif;
@@ -180,6 +185,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 #gung:hover {
 	background-color: white;
+	color:black;
 	border: 5px solid yellow;
 	
 }
@@ -190,7 +196,6 @@ font-family: 'Nanum Gothic', sans-serif;
 	padding: 15px;
 }
 
-
 #img1 {
 	position: relative;
 	top: -45px;
@@ -198,6 +203,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	width: 10rem;
 	height: 10rem;
 	border-radius: 20px;
+	right: 12px;
 }
 
 #icon1, #ask {
@@ -213,6 +219,8 @@ font-family: 'Nanum Gothic', sans-serif;
 #titlefooter {
 	margin: auto;
 	display: inline-block;
+	 position: relative;
+	left:25px;
 }
 
 #text {
@@ -223,6 +231,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	display: -webkit-inline-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
+	 font-family: 'Nanum Gothic', sans-serif;
+	  position: relative;
+	left:25px;
 }
 
 #hottext {
@@ -237,8 +248,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	left: 15px;
 	word-break: break-word;
 	margin: auto;
+	 font-family: 'Nanum Gothic', sans-serif;
+    
 }
-
 .font {
 	width: 400px;
 	display: -webkit-inline-box;
@@ -247,6 +259,10 @@ font-family: 'Nanum Gothic', sans-serif;
 	-webkit-line-clamp: 1;
 	font-weight: bold;
 	font-size: 20px;
+	font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    position: relative;
+	left:25px;
 }
 
 #hotfont {
@@ -260,6 +276,8 @@ font-family: 'Nanum Gothic', sans-serif;
 	position: relative;
 	top: -20px;
 	left: 18px;
+	font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
 }
 
 .page_wrap {
@@ -320,7 +338,6 @@ font-family: 'Nanum Gothic', sans-serif;
 	border-radius: 15px;
 	font-family: 'Nanum Gothic';
 	font-size:15px;
-
 	width:95px;
 }
 
@@ -350,6 +367,11 @@ font-family: 'Nanum Gothic', sans-serif;
 .pre, .next{
 	/* display:none; */
 }
+#gsp, #gghy{
+position: relative;
+    top: 4px;
+    left: 7px;
+}
 </style>
 </head>
 
@@ -361,10 +383,10 @@ font-family: 'Nanum Gothic', sans-serif;
 		<h1 id="mainid">커뮤니티</h1>
 		<div id="body-1">
 			<span id="ge" class="bodyClick bodyClick1" onclick="menuClick('ge')">
-				<i class="bi bi-chat-square-text" style="margin-left:10px"></i> 게시판
+				<span id="gsp"><i class="bi bi-chat-square-text" style="margin-left:10px"></i> 게시판</span>
 			</span>
 			<span id="gung" onclick="menuClick('gung')">
-				<i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요
+				<span id="gghy"><i class="bi bi-wechat" style="color: deepskyblue"></i> 궁금해요</span>
 			</span>
 		</div>
 	</div>
@@ -466,6 +488,7 @@ font-family: 'Nanum Gothic', sans-serif;
 				<%
 					for (int i = 0; i < hotList.size(); i++) {
 				%>
+<!-- 				제일 핫한글  -->
 				<div id="body2-3-1"
 					onclick="detail('<%=hotList.get(i).getBoardNo()%>')">
 					<br>
@@ -493,9 +516,10 @@ font-family: 'Nanum Gothic', sans-serif;
 			<%
 				for (int i = 0; i < list.size(); i++) {
 			%>
+<!-- 			일반 게시글 -->
 			<div id="body2-4" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"onclick="detail('<%=list.get(i).getBoardNo()%>')">
 				<input type='hidden' name='bno'
-					value='<%=list.get(i).getBoardNo()%>' />
+					value='<%=list.get(i).getBoardNo()%>'/>
 				<hr>
 				<span class="font"><%=list.get(i).getBoardTitle()%></span>
 				<div>
@@ -518,7 +542,7 @@ font-family: 'Nanum Gothic', sans-serif;
 						<i class="bi bi-hand-thumbs-up"></i>
 						<%=list.get(i).getBoardRecommend()%>
 
-
+<!-- 						시간기능  -->
 						<%
 							String boardDate = list.get(i).getBoardDate();
 						int now = Integer.parseInt(nowDate);
@@ -563,6 +587,7 @@ font-family: 'Nanum Gothic', sans-serif;
 			%>
 			<br>
 			<hr>
+<!-- 			페이징 처리 -->
 			<div class="page_wrap">
 				<%-- <%
 					if (currentPage != 1) {
@@ -619,7 +644,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 
 
-
+<!-- 검색창 스크립트 -->
 	<script>
    $(function() {
 	   var type = "${searchType}";
@@ -634,7 +659,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 	<script>
    function menuClick(type) {
-      /* body2 : 게시판 , */
+	//type=ge 는 게시판
       if (type == "ge") {
          $("#geBody").show();
          $("#gungBody").hide();
@@ -645,7 +670,7 @@ font-family: 'Nanum Gothic', sans-serif;
          $("#search_main").val("1");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
          $("#boardType").val("ge");
          $("#searchType").val("1");
-
+       //type=gung 는 궁금해요
       } else if (type == "gung") {
          $("#geBody").hide();
          $("#gungBody").show();
@@ -661,6 +686,7 @@ font-family: 'Nanum Gothic', sans-serif;
    }
    </script>
    <script>
+//    페이징 처리
    function pageMove(currentPage) {
 	   
       if (currentPage == "next") {
@@ -682,11 +708,11 @@ font-family: 'Nanum Gothic', sans-serif;
       $(".page" + currentPage).addClass("sel");
    }
    
- 
+// 엔터눌렀을떄도 검색 허용
 function searchEnter(){
 	   if(window.event.keycode == 13) search();
 };
-
+// 게시글이없으면 상세보기페이지로 이동못하게만들기
 function detail(no){
 	   if(no != 0) location.href="<%=contextPath%>" + "/detail.bo?type=1&bno=" + no;
 
