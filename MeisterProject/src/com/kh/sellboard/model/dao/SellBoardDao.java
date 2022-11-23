@@ -91,13 +91,23 @@ public class SellBoardDao {
     
     
     // 판매게시판 메인 리스트와 페이징처리
-    public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi){
+public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , int local_no, int interest_no ){
     	
     	ArrayList<SellBoard> list = new ArrayList<>();
     	
     	PreparedStatement psmt = null;
     	ResultSet rset = null;
     	String sql = prop.getProperty("selectSellBoardList");
+    	if(local_no == 0) {
+    		sql = sql.replace("$1", "");
+    	}else {
+    		sql = sql.replace("$1", "AND S.LOCAL_NO = ?");
+    	}
+    	if(interest_no == 0) {
+    		sql = sql.replace("$2", "");
+    	}else {
+    		sql = sql.replace("$2", "AND S.INTEREST_NO = ?");
+    	}
     	
     	try {
 			psmt = conn.prepareStatement(sql);
@@ -105,8 +115,19 @@ public class SellBoardDao {
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
 			int endRow = startRow + pi.getBoardLimit() -1;
 			
-			psmt.setInt(1, startRow);
-			psmt.setInt(2, endRow);
+			int i =1;
+			
+			if(local_no != 0 && interest_no != 0) {
+				psmt.setInt(i++, local_no);
+				psmt.setInt(i++, interest_no);	
+			}else if(local_no != 0){
+				psmt.setInt(i++, local_no);
+			}else if(interest_no != 0){
+				psmt.setInt(i++, interest_no);
+			}
+			
+			psmt.setInt(i++, startRow);
+			psmt.setInt(i++, endRow);
 			
 			rset = psmt.executeQuery();
 			
@@ -116,8 +137,8 @@ public class SellBoardDao {
 										rset.getInt("PRICE"),
 										rset.getInt("SELL_RECOMMEND"),
 										rset.getDate("SELL_DATE"),
-										rset.getInt("INTEREST"),
-										rset.getInt("LOCAL"),
+										rset.getInt("INTEREST_NO"),
+										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
 										rset.getString("CHANGE_NAME"),
 										rset.getString("FILE_PATH")));	

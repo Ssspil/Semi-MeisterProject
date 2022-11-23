@@ -80,7 +80,7 @@ public class SellBoard {
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int interest, int local, String nickname, String changeName, String filePath) {
+			int interestNo, int localNo, String nickname, String changeName, String filePath) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
