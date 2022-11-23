@@ -267,7 +267,7 @@
 				<b>마켓 서비스 설명 :</b> 
 				</td>
 				<td>
-					<textarea id="textarea2" style="resize: none;" placeholder="판매할 재능에 대한 구체적인 설명을 작성해주세요&#13;&#10;자유롭게 url이나 포트폴리오 이미지를 추가해주세요" required></textarea>
+					<textarea id="textarea2" name="sellDetail" style="resize: none;" placeholder="판매할 재능에 대한 구체적인 설명을 작성해주세요&#13;&#10;자유롭게 url이나 포트폴리오 이미지를 추가해주세요" required></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -279,7 +279,7 @@
 				<b>취소 및 환불 규정 :</b> 
 				</td>
 				<td>
-					<textarea id="textarea3" style="resize: none;" placeholder="취소 및 환불 규정을 작성해주세요." required></textarea>
+					<textarea id="textarea3" name="sellRegulation" style="resize: none;" placeholder="취소 및 환불 규정을 작성해주세요." required></textarea>
 				</td>
 			</tr>
 		</table>

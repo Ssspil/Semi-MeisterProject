@@ -224,7 +224,9 @@ public class SellBoardDao {
                         rset.getDate("SELL_DATE"),
                         rset.getString("INTEREST_NAME"),
                         rset.getInt("LOCAL_NO"),
-                        rset.getString("NICKNAME")
+                        rset.getString("NICKNAME"),
+                        rset.getString("SELL_DETAIL"),
+                        rset.getString("SELL_REGULATION")
                         ); 
             }
 
@@ -256,6 +258,8 @@ public class SellBoardDao {
             psmt.setInt(4, s.getInterestNo());
             psmt.setInt(5, s.getLocalNo());
             psmt.setInt(6, s.getUserNO());
+            psmt.setString(7, s.getSellDetail());
+            psmt.setString(8, s.getSellRegulation());
 			
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {

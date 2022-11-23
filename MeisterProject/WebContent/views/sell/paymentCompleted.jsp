@@ -49,9 +49,9 @@
 			            결제가 정상적으로 완료되었습니다.
 			        </div>
 			        <br>
-		            상품명 : 
+		            상품명 : &nbsp;&nbsp;&nbsp;
 		            <span><img src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>" width="280" height="150"></span>
-		            <span><b><%= pc.getSellTitle() %></b></span>
+		            &nbsp;&nbsp;&nbsp;<span><b><%= pc.getSellTitle() %></b></span>
 		        </div>
 		    </div>
 		    <br>

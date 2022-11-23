@@ -53,6 +53,8 @@ public class SellInsertController extends HttpServlet {
 		    String sellTitle = multiRequest.getParameter("sellTitle");
 		    String sellContent = multiRequest.getParameter("sellContent");
 		    int price = Integer.parseInt (multiRequest.getParameter("price"));
+		    String sellDetail = multiRequest.getParameter("sellDetail");
+		    String sellRegulation = multiRequest.getParameter("sellRegulation");
 		    
 		    int local = Integer.parseInt (multiRequest.getParameter("local"));
 		    int interest  = Integer.parseInt (multiRequest.getParameter("interest"));
@@ -65,6 +67,8 @@ public class SellInsertController extends HttpServlet {
 			s.setSellTitle(sellTitle);
 			s.setSellContent(sellContent);
 			s.setPrice(price);
+			s.setSellDetail(sellDetail);
+			s.setSellRegulation(sellRegulation);
 			
 			s.setLocalNo(local);
 			s.setInterestNo(interest);

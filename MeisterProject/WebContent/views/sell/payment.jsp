@@ -191,8 +191,8 @@
 			            pg : 'html5_inicis',
 			            pay_method : 'card',
 			            merchant_uid: 'merchant_'+new Date().getTime(), 
-			            name : '결제 테스트', // 결제창에서 보여질 이름
-			            amount : 100, // 실제 결제되는 가격
+			            name : '<%= pm.getSellTitle() %>', 
+			            amount : <%= pm.getPrice() %>,
 			            buyer_email : 'Iamport@chai.finance',
 			            buyer_name : '구매자 이름',
 			            buyer_tel : '010-1234-5678',

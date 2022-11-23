@@ -51,7 +51,7 @@
 		color: black;
 	}
 	.tab-content{
-		height : 300px;
+		height : 250px;
 		display: none;
 		background: #ededed;
 		padding: 5%;
@@ -138,17 +138,17 @@
 					</ul>
 		
 					<div id="tab-1" class="tab-content current">
-						서비스 설명 부분
+						<%= s.getSellDetail() %>
 					</div>
 					<div id="tab-2" class="tab-content">
-						가격 정보 부분
+						<%= s.getPrice() %> 원 으로 책정 되었습니다.
 					</div>
 					<div id="tab-3" class="tab-content">
 						리뷰가 나오게 값을 가져와야 하는데
 						이 탭을 누르면 리뷰가
 					</div>
 					<div id="tab-4" class="tab-content">
-						취소/환불 규정
+						<%= s.getSellRegulation() %>
 					</div>
 		
 				</div>
