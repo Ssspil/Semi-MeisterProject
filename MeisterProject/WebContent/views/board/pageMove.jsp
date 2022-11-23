@@ -68,12 +68,12 @@ top:40px;
 	border-bottom: 1px solid orange;
 }
 
-
+                              
 #chat3{
-    float: right;
+float: right;
     position: relative;
-    top: -25px;
-    left: 610px;
+    top: -2px;
+    left: 590px;
 }
 #date1{
   color: lightgrey;
@@ -82,7 +82,13 @@ position: relative;
     left: 90px;
 
 }
-
+.bodypage:hover{
+background-color:rgb(250, 247, 247);
+}
+#titlefooter2{
+position: relative;
+    top: 23px;
+}
 
 </style>
 </head>
@@ -91,7 +97,7 @@ position: relative;
     <div id="body2-1">
              
                <%for(int i=0; i< list2.size(); i++){ %>
-                   <div class="body2-3 board2 board2<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
+                   <div class="bodypage board2 board2<%=i%> <%=i > 5 ? "hide" : ""%>" onclick="location.href='<%=contextPath2%>/detail.bo?type=2&bno=<%=list2.get(i).getBoardNo() %>';">
                   
                     <span class="font"><%=list2.get(i).getBoardTitle()  %></span>
                     <div>
@@ -105,7 +111,7 @@ position: relative;
                 </div>
                 <br> <br> <br>
                 <div id="titlefooter">
-                    <div><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
+                    <div id="titlefooter2"><i class="bi bi-eye"></i> <%=list2.get(i).getBoardCount()  %> 
                     <i class="bi bi-hand-thumbs-up"></i> <%= list2.get(i).getBoardRecommend() %>
                 </div>
                     <%
@@ -143,7 +149,7 @@ position: relative;
                     
                     <div id="chat3">
                     <i class="bi bi-chat-dots"></i> <%=list2.get(i).getReplyCount()%>
-                    <span id="date1"><%=result2 %> </span>
+                    <span id="date1"><%=result2 %> 
                     </div>
                     </div>
                	<hr>
