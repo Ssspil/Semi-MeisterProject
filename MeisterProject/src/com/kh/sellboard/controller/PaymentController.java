@@ -43,7 +43,8 @@ public class PaymentController extends HttpServlet {
 		request.setAttribute("pm", pm);
 		request.setAttribute("at", at);
 		request.setAttribute("sno", sellNo);
-			request.getRequestDispatcher("views/sell/payment.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("views/sell/payment.jsp").forward(request, response);
 		
 	}
 

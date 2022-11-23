@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.sellboard.model.vo.SellBoard, com.kh.common.model.vo.Attachment"%>
+<%
+	SellBoard pc = (SellBoard) request.getAttribute("pc");
+	Attachment at = (Attachment) request.getAttribute("at");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +14,25 @@
 	.outer{
 		width : 800px;
 		margin: 150px 200px 200px 400px;
+		text-align : center;
 	}
+	.product-name{
+		text-align : center;
+		padding : 5%;
+	}
+	.payment-info{
+		border : 1px solid;
+		padding : 5%;
+	}
+	.pay-method{
+		float: right;
+		font-size: small;
+		
+	}
+	.btn-cls{
+		text-align : center;
+	}
+	
 </style>
 </head>
 <body>
@@ -20,20 +43,24 @@
 		    <br>
 		
 		    <div style="border: 1px solid;">
-		        <div>
-		            결제가 정상적으로 완료되었습니다.
-		        </div>
-		        <div>
+		        
+		        <div class="product-name">
+			        <div>
+			            결제가 정상적으로 완료되었습니다.
+			        </div>
+			        <br>
 		            상품명 : 
-		            <span>이미지</span>
-		            <span>판매글 제목</span>
+		            <span><img src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>" width="280" height="150"></span>
+		            <span><b><%= pc.getSellTitle() %></b></span>
 		        </div>
 		    </div>
-		<hr>
-		
+		    <br>
+			<hr>
+			<br>
 		    <h3>결제 정보</h3>
-		    <div style="border: 1px solid;">
-		        <table>
+		    <br>
+		    <div class="payment-info">
+		        <table style="border: 1 solid;">
 		            <tr>
 		                <td>
 		                    주문 합계 금액
@@ -53,41 +80,32 @@
 		            </tr>
 		            <tr>
 		                <td>
-		                    5,000원
+		                    <%= pc.getPrice() %> 원
 		                </td>
 		                <td>
 		
 		                </td>
 		                <td>
-		                    0원
+		                    0 원
 		                </td>
 		                <td>
 		
 		                </td>
 		                <td>
-		                    5,000원
+		                    <b><%= pc.getPrice() %></b> 원
 		                </td>
-		            </tr>
-		            <tr>
-		                <td>
-		                    
-		                </td>
-		                <td>
-		
-		                </td>
-		                <td>
-		                    
-		                </td>
-		                <td>
-		                    결제수단 : 신용카드
-		                </td>
-		            </tr>
-		
+		            </tr>            
 		        </table>
+		        <hr>
+		        <div class="pay-method">
+		        	결제수단 : 신용카드
+		        </div>
 		    </div>
-		    <div>
-		    <button>쇼핑 계속하기</button>
-		    <button>거래내역보기</button>
+		    <br>
+		    <div class="btn-cls">
+		    <a href="<%=contextPath%>/market.se" id="" class="btn btn-primary">쇼핑 계속하기</a>
+		    &nbsp;&nbsp;&nbsp;&nbsp;
+		    <a href="<%=contextPath%>/market.se" id="" class="btn btn-warning">거래내역보기</a>
 		    </div>
     </div>
 
