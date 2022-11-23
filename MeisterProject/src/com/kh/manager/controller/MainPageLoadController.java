@@ -1,4 +1,4 @@
-package com.kh.sellboard.controller;
+package com.kh.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.model.vo.Attachment;
-import com.kh.sellboard.model.service.SellBoardService;
-import com.kh.sellboard.model.vo.SellBoard;
-
 /**
- * Servlet implementation class PaymentController
+ * Servlet implementation class MainPageLoadController
  */
-@WebServlet("/payment.se")
-public class PaymentController extends HttpServlet {
+@WebServlet("/mainLoad.do")
+public class MainPageLoadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentController() {
+    public MainPageLoadController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +27,14 @@ public class PaymentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int sellNo = Integer.parseInt(request.getParameter("sno"));
+		String responseData = "처리를 완료하였습니다.";
+		// 응답데이터에 한글이 있을 경우 대비해서 설정
+		//response.setContentType("text/html; charset=UTF-8");
 		
-		SellBoardService sService = new SellBoardService();
+		//response.getWriter().print(responseData);
 		
-		
-		SellBoard pm = sService.selectSellBoard(sellNo); // 게시글 조회
-		Attachment at = sService.selectAttachment(sellNo); // 첨부파일 조회(Attachment)
-		
-		
-		request.setAttribute("pm", pm);
-		request.setAttribute("at", at);
-		request.setAttribute("sno", sellNo);
-		
-		request.getRequestDispatcher("views/sell/payment.jsp").forward(request, response);
-		
+		System.out.println("ddddd");
+		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
 	}
 
 	/**

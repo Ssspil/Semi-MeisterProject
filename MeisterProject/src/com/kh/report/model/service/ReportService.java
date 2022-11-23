@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.manager.notice.model.dao.NoticeDao;
 import com.kh.report.model.dao.ReportDao;
 import com.kh.report.model.vo.Report;
 
@@ -87,6 +86,21 @@ public class ReportService {
 		JDBCTemplate.close();
 		
 		return complete;
+	}
+
+	/**
+	 * 신고접수에 파일(사진) 가져오기
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Attachment> atArr = new ReportDao().selectAllAt(conn);
+		
+		JDBCTemplate.close();
+		
+		return atArr;
 	}
 
 }

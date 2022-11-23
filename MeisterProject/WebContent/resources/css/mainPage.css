@@ -63,7 +63,7 @@
    width: 62%;
    margin: auto;
    border-radius: 40px;
-   box-shadow: 0px 1px 5px #0000ffcf;
+   box-shadow: 0px 1px 5px skyblue;
 
 }
 svg {
@@ -149,13 +149,11 @@ svg {
 	height : 80%;
 	float : left;
 	margin-left : 4rem;
-	background-color :red;
 }
 .area2 {
 	width:40%;
 	height : 80%;
 	float : right;
 	margin-right : 4rem;
-	background-color : pink;
 }
 

@@ -2,14 +2,18 @@
     pageEncoding="UTF-8" 
     import="java.util.ArrayList, com.kh.common.model.vo.Interest, 
     		com.kh.common.model.vo.Local, com.kh.sellboard.model.vo.SellBoard,
-    		com.kh.common.model.vo.PageInfo"%>
+    		com.kh.common.model.vo.PageInfo,
+    		com.kh.common.model.vo.Attachment"
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 	ArrayList<SellBoard> list = (ArrayList<SellBoard>) request.getAttribute("list");
 	
 	SellBoard s = (SellBoard) request.getAttribute("s");
-	
+	Attachment at = (Attachment) request.getAttribute("at");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
  	
  	int currentPage = pi.getCurrentPage();
@@ -75,14 +79,14 @@ div{
 .outer{
        height: 1000px;
        /* 상 , 우 , 하, 좌  띄우기 */
-	margin: 150px 200px 20px 200px;
+	   margin: 150px 200px 20px 200px;
+	   font-family: 'Nanum Gothic';
 }
 /*맨 위 마켓*/
 h2{
 	border-bottom: 5px solid rgb(255, 212, 0);
     padding-bottom: 16px;
     margin-bottom: 8px;
-	font-family: 'Nanum Gothic';
 }
 
 
@@ -185,13 +189,14 @@ div.main div{
     margin : 15px 15px 100px 15px;
     float : left;
     flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
+    font-size : 13px;
 
 }
 div.main > #thumb1{
 	 position : relative;
 }
 
-/*예시 위치*/
+/*예시 위치
 div.main #title{
 	position : absolute;
 	display: inline;
@@ -204,7 +209,13 @@ div.main #price{
 	bottom : 50px;
 	margin : 0 0 0 100px;
 }
+*/
 
+/*금액 표시*/
+div.thumbnail b {
+	 color: orange;
+	 font-size : 17px;
+}
 
 </style>
 
@@ -234,11 +245,11 @@ div.main #price{
 	            </li>
 	        	<% for (Interest i : interest) { %> 
 	        	<li class="list-2">
-	       			<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>" > <%= i.getInterestName() %> </a>
+	       			<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>"  id="inter<%=i.getInterestNo() %>"> <%= i.getInterestName() %> </a>
 	       			<ul>
 	       				<% for (Local l : local) { %>
 	       					<li class="list-in-list">
-	       						<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
+	       						<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
 	       					</li>
 	       				<% } %>
 					</ul>
@@ -256,30 +267,28 @@ div.main #price{
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
-					<img src="../resources/sellBoard_upfiles/<%=sb.getTitleImg()%>"width="230px" height="210px">
+					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>"width="230px" height="210px">
 					
 					<p>
-					판매글 제목 : <%=sb.getSellTitle() %> <br>
-					
-					관심사 : <%=sb.getInterestNo() %><br>
-					지역 : <%=sb.getLocalNo() %><br>
-					
-					<!-- 판매글 no는 임시로 넣어둠(확인을 위해) -->
-					No. <%=sb.getSellNo() %> <br>
-					<%=sb.getPrice() %> 원
+					<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
+						관심사 : <%=sb.getInterestNo() %><br>							
+						지역 : <%= sb.getLocalNo() %><br>					
+					<img src="./resources/image/sell_price.png" width="20" height="20">
+					<c:set var = "price" value="<%= sb.getPrice() %>"/>
+					<b> <fmt:formatNumber value="${price }"  /> 원 </b>
 					</p>
 				</div>
 			<% } %>
+			
 		<% } %>
 		
 		
 		</div>
 		<script>
+			//썸네일 클릭 시 이동되는 주소
 			$(function(){
-				$(".thumbnail").click(function(){
-					
-					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();
-					
+				$(".thumbnail").click(function(){			
+					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
 				})	
 			});
 			

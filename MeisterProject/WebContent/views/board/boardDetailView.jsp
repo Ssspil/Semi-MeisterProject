@@ -1,6 +1,6 @@
 <%@page import="oracle.net.aso.l"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment, java.util.ArrayList" %>
 <%
 	Board b = (Board) request.getAttribute("b");
 	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
@@ -9,9 +9,6 @@
 	if(at == null){
 		at = new Attachment();
 	}
-	
-	Reply r = (Reply) request.getAttribute("r");
-	
 %>
 
 
@@ -169,7 +166,7 @@ body {
 	margin: 0 0 0 1.25rem;
 	white-space: nowrap;
 	cursor: pointer;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 .bin {
@@ -435,34 +432,82 @@ body {
 	margin: 0 0 0 1.25rem;
 }
 
-/* button { */
-/* 	position: absolute; */
-/* 	top: 50%; */
-/* 	left: 50%; */
-/* 	width: 120px; */
-/* 	height: 30px; */
-/* 	margin-top: -15px; */
-/* 	margin-left: -60px; */
-/* 	line-height: 15px; */
-/* 	cursor: pointer; */
-/* } */
+/* 수정 및 삭제하기 버튼 */
+#btn1 {
+	font-size: 13px;
+    font-weight: bold;
+    background-color: orange;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+}
 
-/* 목록 버튼 */
+/* 신고하기 버튼 */
+#btn2 {
+	font-size: 13px;
+    font-weight: bold;
+    background-color: #d72e2e;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.buttons {
+    margin: 10%;
+    text-align: center;
+}
 #btn {
-	background-color: white;
-	height: 30px;
-	color: orange;
-	outline-color: rgb(248, 162, 3);
-	border: solid;
-	border-radius: 12px;
-	text-decoration: none;
-	font-weight: bold;
+    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+    
+}
+#btn {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 
 #btn:hover {
-	background-color: orange;
-	color: white;
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
+
+.btn-hover:focus {
+    outline: none;
+}
+/* 목록 버튼 */
+#btn {
+/* 	background-color: white; */
+/* 	height: 30px; */
+/* 	color: orange; */
+/* 	outline-color: rgb(248, 162, 3); */
+/* 	border: solid; */
+/* 	border-radius: 12px; */
+/* 	text-decoration: none; */
+/* 	font-weight: bold; */
+}
+
+/* #btn:hover { */
+/* 	background-color: orange; */
+/* 	color: white; */
+/* } */
 </style>
 </head>
 <body class="bdy">
@@ -493,7 +538,7 @@ body {
 	                                        	<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-warning btn-sm">수정하기</a>
 												<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">삭제하기</a>
  											<% } else { %>
- 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" class="btn-toggle btn-danger btn-sm">신고하기</a>
+ 													<a href="<%=contextPath %>/report.me?bno=<%=b.getBoardNo() %>" id="btn1" class="btn-toggle btn-danger btn-sm">신고하기</a>
 											<% } %>
                                         </div>
                                     </div>
@@ -521,7 +566,7 @@ body {
                                     <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요 <%=b.getBoardRecommend() %></span>
                                 </div>
                                 <div data-j-1 class="item" style='display:inline-block; float:left;'>
-                                    <span data-j-1 class="text2">댓글 <%=b.getReplyCount()%></span>
+                                    <span data-j-1 class="text3">댓글 <%=b.getReplyCount()%></span>
                                 </div>
                                 <div data-j-1 class="item" style='display:inline-block; float:right;'>
                             	<a href="<%=contextPath %>/boardlist.bo?currentPage=1" id="btn">목록</a>
@@ -553,12 +598,12 @@ body {
             </div>
         </div>
 	</div>
-	
-	
 
 	<%@ include file="../common/footer.jsp" %>
 
 	<script>
+	
+	// 댓글 키업 시 등록 버튼 활성화
 		$(function () {
 	        $('#replyContent').keyup(function () {
 	            if ($("#replyContent").val() != "") {
@@ -604,21 +649,21 @@ body {
 			
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
-		 	
 		 	var index = 0;
+		 	
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
-
+					console.log(list)
 					let htmls="";
 					for(let i of list) {
 						index += 1;
-						
+						console.log(i)
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
-						htmls +=    '<img data-c-1 class="image" src="">';
+						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"'>";
 						htmls += '</div>';
 						htmls += '<div data-c-1 class="comment-information">';
 						htmls +=    '<div data-c-1 class="user-info">';
@@ -632,18 +677,18 @@ body {
 						htmls +=    '<div data-c-1 class="comment-action">';
 						htmls +=        '<div data-c-1 class="comment-react">';
 						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-// 						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+// 						htmls +=            '<span data-c-1 class="divider" style="margin:s 0 0.5rem; color: black;">·</span>';
 						htmls +=            '<div data-c-1 class="like-area">';
-						htmls +=                '<span data-c-1 class="text"></span>' ;
+						htmls +=                '<span data-c-1 class="text"></span>';
 						htmls +=            '</div>';
 						htmls +=        '</div>';
 						if(loginNo == i.userNo){
 			                htmls    +=        '<div data-c-1 class="more-action">';
 			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
-                			htmls	 +=					'<button type="button" class="btn-toggle btn-warning btn-sm" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
-			                htmls    +=                '<button type="button" class="btn-toggle btn-danger btn-sm" name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
+                			htmls	 +=					'<button type="button" id="btn1"  name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
+			                htmls    +=                '<button type="button" id="btn1"  name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
 						} else {
-				                htmls    +=                "<a href='<%=contextPath %>/report.me?rno="+i.replyNo+"'><button type='button' class='btn-toggle btn-danger btn-sm'>신고하기</button></a>";
+				                htmls    +=                "<a href='<%=contextPath %>/report.me?rno="+i.replyNo+"'><button type='button' id='btn2'>신고하기</button></a>";
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
 						 } 
@@ -673,7 +718,6 @@ body {
 				var content = $("#replycontent"+index).text();
 				location.href="<%=contextPath%>" + "/update.ro?rno="+rno+"&bno="+bno+"&content="+content;
 			}
-			
 		}
 		
 		// 댓글 삭제
@@ -681,11 +725,10 @@ body {
 			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
 		
-		
-		
-		let likeBtn = true;
 		// 좋아요 기능
-		$(document).on("click", ".like", (e) => { /* "div.like" */
+		let likeBtn = true;
+		
+		$(document).on("click", "div.like", (e) => {
 			e.preventDefault();
 			likeBtn = false;
 			$.ajax({
@@ -708,8 +751,8 @@ body {
 										$(".like > .text2").text("좋아요 " + data.recommend);
 									}
 								},
-								error : function(xhr, status, res) {
-									console.log("ERROR >> ", xhr.responseText, status, res);
+								error : function() {
+									console.log("ERROR >> ");
 								}
 							})
 						}
@@ -717,15 +760,14 @@ body {
 						alert("오류가 발생했습니다.");
 					}
 				},
-				error : function(xhr, status, res) {
-					console.log("ERROR >> ", xhr.responseText, status, res);
+				error : function() {
+					console.log("ERROR >> ");
 				},
 				done : function() {
 					likeBtn = true;
 				}
 			});
 		});
-		
  	</script>
 
 	

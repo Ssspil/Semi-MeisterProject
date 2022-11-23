@@ -41,9 +41,10 @@ public class SellDetailController extends HttpServlet {
 			SellBoard s = sService.selectSellBoard(sellNo); // 게시글 조회
 			Attachment at = sService.selectAttachment(sellNo); // 첨부파일 조회(Attachment)
 			
+			
 			request.setAttribute("s", s);
 			request.setAttribute("at", at);
-			
+			request.setAttribute("sno", sellNo);
 			request.getRequestDispatcher("views/sell/sellDetailView.jsp").forward(request, response);
 			
 		}else {

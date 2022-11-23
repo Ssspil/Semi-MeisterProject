@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
 import com.kh.common.model.vo.PageInfo;
@@ -40,6 +41,9 @@ public class SellBoardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int interest_no = Integer.parseInt(request.getParameter("interest_no") == null? "0" : request.getParameter("interest_no") );
+		int local_no = Integer.parseInt(request.getParameter("local_no") == null ? "0":request.getParameter("local_no") );
+		
 		// 페이징 처리
 		int listCount;
 		int currentPage;
@@ -51,7 +55,6 @@ public class SellBoardController extends HttpServlet {
 		int endPage;
 		
 		listCount = new SellBoardService().selectSellBoardListCount();
-		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null? "1" : request.getParameter("currentPage"));
 		pageLimit = 10;
 		boardLimit = 6;
@@ -70,12 +73,10 @@ public class SellBoardController extends HttpServlet {
 		System.out.println("마켓으로 이동");
 		
 	    // 판매게시판 전체 리스트 조회 한 후 조회결과를 담아서 응답페이지로 포워딩.
-	    ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi);
+	    ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi , local_no, interest_no );
 	    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
 	    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
-	    
-	    
-	    
+		
 	    request.setAttribute("list", list);
 	    request.setAttribute("interest", interest);
 	    request.setAttribute("local", local);
@@ -84,10 +85,6 @@ public class SellBoardController extends HttpServlet {
 	    request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
 		
 
-	    
-
-	
-	
 	}
 
 	/**

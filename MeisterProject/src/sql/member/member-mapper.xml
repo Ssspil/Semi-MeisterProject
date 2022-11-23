@@ -81,7 +81,13 @@
 		FROM MEMBER
 		WHERE NICKNAME = ?
 	</entry>
-
+	
+	<entry key="idCheck">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_PWD = ? AND USER_NO = ?
+	</entry>
+	
 	<entry key="expertSubmit">
 		UPDATE MEMBER
 		SET USER_NAME = ?,
@@ -237,5 +243,14 @@
 		SELECT USER_NO
 		FROM MEMBER
 		WHERE NICKNAME = ?
+	</entry>
+	
+	<entry key="replyAttachment">
+		SELECT FILE_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+	   	FROM ATTACHMENT
+	   	WHERE FILE_LEVEL = 5
 	</entry>
 </properties>

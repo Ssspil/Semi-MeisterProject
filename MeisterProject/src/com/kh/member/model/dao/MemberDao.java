@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
-import com.kh.manager.notice.model.vo.Notice;
+
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -326,6 +326,35 @@ public class MemberDao {
 		return result;
 	}
 		
+	public int pwdCheck(Connection conn, String password, int userNo) {
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pwdCheck");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, password);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;		
+	}
 
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
@@ -444,8 +473,8 @@ public class MemberDao {
 				
 				at.setFileNo(rset.getInt("FILE_NO"));
 				at.setOriginName(rset.getString("ORIGIN_NAME"));
-				at.setChangeName(rset.getNString("CHANGE_NAME"));
-				at.setFilePath(rset.getNString("FILE_PATH"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
 			}
 			
 		} catch (SQLException e) {

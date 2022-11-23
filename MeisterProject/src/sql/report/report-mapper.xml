@@ -48,4 +48,15 @@
 		SET STATUS = 'Y'
 		WHERE REPORT_NO = ?
 	</entry>
+	
+	<!-- 첨부파일 전체 다가져오는 쿼리문 -->
+	<entry key="selectAllAt">
+		SELECT FILE_NO,
+			   REF_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+		FROM ATTACHMENT
+		WHERE FILE_LEVEL = 3
+	</entry>
 </properties>

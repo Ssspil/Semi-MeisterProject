@@ -63,7 +63,6 @@ public class BoardInsertConteroller extends HttpServlet {
 			
 			Attachment at = null;
 			
-//			System.out.println(multiRequest.getOriginalFileName("upfile"));
 			if(multiRequest.getOriginalFileName("upfile") != null) {
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("upfile")); 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment" %>
+<%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment, java.time.LocalDate" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
 	int userNo = (Integer) request.getAttribute("userNo");
@@ -10,6 +10,10 @@
 	ArrayList<String> chatDate = (ArrayList<String>) request.getAttribute("dateList");
 	ArrayList<String> timeList = new ArrayList<String>();
 	ArrayList<String> dateList = new ArrayList<String>();
+	
+	LocalDate today = LocalDate.now();
+	String nowDate = today.toString();
+	nowDate = nowDate.replace("-", "");
 	
 	int idx = chatDate.get(0).indexOf(" ");
 	int hour = 0;
@@ -42,7 +46,9 @@
 			break;			
 		}
 	}
+	
 	Attachment user = (Attachment) request.getAttribute("profileUser");
+	
 	if(user == null){
 		user = new Attachment();
 	}
@@ -313,7 +319,8 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
+		var webSocket = new WebSocket("ws://192.168.20.13:8888/meister/broadsocket");
+		console.log(webSocket);
 		let count = 0;
 		var data = document.getElementById("chatData");
 		let cnt = 0;
@@ -340,7 +347,7 @@
 			let now = new Date();
 			
 			console.log(name == '<%=oppNick%>');
-			$(document).ready(function() {	
+			$(document).ready(function() {
 				$('.outer').append(
 					$('<div>').prop({
 						id: 'divOpp'+oppCnt
@@ -363,6 +370,11 @@
 				$('#divOpp'+oppCnt+'>div').css({'float': 'left'});	
 				$('#divOpp'+oppCnt).css({'width': '700px', 'height': '50px'});
 				
+				if(oppCnt != 0 && '#divDate'+oppCnt.innerHtml.equals('#divDate'+oppCnt.innerHtml)){
+					$('#divDate'+oppCnt).hide();
+					$('#hr'+oppCnt).hide();
+				}
+				
 				$('.outer').append(
 					$('<div>').prop({
 						id: 'oppTime'+oppCnt,
@@ -371,12 +383,7 @@
 				);
 				
 				$('#oppTime'+oppCnt).css({'width': '700px', 'height': '30px', 'margin-bottom': '10px', 'text-align': 'left'})
-				
-				if(name != '<%=oppNick%>'){
-					$('#divOpp'+oppCnt).hide();
-					$('#divOpp'+oppCnt+'>div').hide();
-					$('#oppTime'+oppCnt).hide();
-				}
+
 				oppCnt += 1;
 			});
 			
@@ -413,7 +420,7 @@
 			let msgVal = message.value;
 			
 			console.log(cnt);
-			$(document).ready(function() {			
+			$(document).ready(function() {	
 				$('.outer').append(
 				    $('<div>').prop({
 				        id: 'divMe'+cnt
@@ -434,8 +441,8 @@
 			    );
 			   
 			    $('#divMe'+cnt+'>div').css({'float': 'right'});	
-			    $('#divMe'+cnt).css({'width': '700px', 'height': '50px'});
-			    
+			    $('#divMe'+cnt).css({'width': '700px', 'height': '50px'});			 
+				
 			    $('.outer').append(
 				    $('<div>').prop({
 				    	id: 'myTime',
@@ -451,11 +458,11 @@
 		function disconnect() {
 			webSocket.close();
 		}
-		const beforeUnloadListener = (event) => {
-		  event.preventDefault();
-		  return event.returnValue = "Are you sure you want to exit?";
-		};
-		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
+ 		const beforeUnloadListener = (event) => {
+ 		  event.preventDefault();
+ 		  return event.returnValue = "Are you sure you want to exit?";
+ 		};
+ 		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
 	</script>
 </body>
 </html>

@@ -97,8 +97,7 @@
 		<hr>
 		<h4><b>&nbsp;고객센터</b></h4>
 		<br>
-		<h6><b><a href="<%=contextPath %>/??">&nbsp;&nbsp;&nbsp;&nbsp;1:1 문의하기</a></b></h6>
-		<h6><b><a href="<%=contextPath %>/??">&nbsp;&nbsp;&nbsp;&nbsp;신고하기</a></b></h6>
+		<h6><b><a href="<%=contextPath %>/report.me">&nbsp;&nbsp;&nbsp;&nbsp;신고하기</a></b></h6>
 		<h6><b><a href="<%=contextPath %>/noticeList.no">&nbsp;&nbsp;&nbsp;&nbsp;공지사항</a></b></h6>
 		<br>
 	</div>
