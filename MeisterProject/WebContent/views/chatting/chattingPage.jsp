@@ -313,7 +313,8 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		var webSocket = new WebSocket("ws://localhost:8888/meister/broadsocket");
+		var webSocket = new WebSocket("ws://192.168.20.13:8888/meister/broadsocket");
+		console.log(webSocket);
 		let count = 0;
 		var data = document.getElementById("chatData");
 		let cnt = 0;
