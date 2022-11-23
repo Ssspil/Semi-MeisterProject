@@ -326,6 +326,35 @@ public class MemberDao {
 		return result;
 	}
 		
+	public int pwdCheck(Connection conn, String password, int userNo) {
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pwdCheck");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, password);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;		
+	}
 
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;

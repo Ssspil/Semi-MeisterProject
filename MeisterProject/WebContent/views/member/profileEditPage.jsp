@@ -42,6 +42,40 @@
     	border-radius:50px / 100px;
     	line-height:50px;
     }
+    #ex1{
+    	width:700px;
+    	height:350px;
+    }
+    #newPwd>input{
+    	margin-top: 30px;
+    	margin-bottom: 50px;
+    	margin-left: 15px;
+    	float: left;
+    }
+    #newPwdText{
+    	border: none;
+    	background-color: inherit;
+    }
+    #oldPwd>input{
+    	margin-top: 40px;
+    	margin-left: 15px;
+    	float: left;
+    }
+    #oldPwdText{
+    	border: none;
+    	background-color: inherit;
+    }
+    #btnChange{
+    	width:450px;
+    	height:30px;
+    	text-align: center;
+    }
+    #btnC{
+    	width:100px;
+    	height:50px;
+    	background-color: inherit;
+    	border: 3px solid black;
+    }
 </style>
 </head>
 <body>
@@ -160,7 +194,7 @@
        			return true;
        		}
        		
-       		if($("#chkNick").attr("color") != "darkslateblue"){
+       		if($("#chkNick").attr("color") != "darkslateblue" && $("#chkNick").html() != ""){
        			event.preventDefault();
        			alert("닉네임을 올바르게 입력해주세요");
        			$('#chkNick').focus();
@@ -235,7 +269,7 @@
 	    	})
 	    }		
 	</script>
-	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();" enctype="multipart/form-data">	
+	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();" enctype="multipart/form-data">
 		<div class="outer">
 			<br>
 			<h2><b>&nbsp;개인정보 변경</b></h2>
@@ -301,11 +335,90 @@
 				<button type="submit">변경</button>
 			</div>
 			<hr>
-			<h5><b><a href="<%=contextPath %>/??" style="text-decoration:none; color:black; line-height:40px">&nbsp;비밀번호 변경</a></b></h5>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+			
+			<h5><b><a href="javascript:show()" style="text-decoration:none; color:black; line-height:40px">&nbsp;비밀번호 변경</a></b></h5>
 			<hr>
 			<h5><b><a href="<%=contextPath %>/??" style="text-decoration:none; color:red; line-height:40px">&nbsp;회원탈퇴</a></b></h5>
 		</div>
 	</form>
+	<div id="ex1" class="modal">
+		<h3>비밀번호 변경</h3>
+		<hr>
+		<form action="<%=contextPath %>/pwdChange.me" method="post">
+			<input type="hidden" id="userNo" name="userNo" value="<%=userNo %>">
+			<div id="oldPwd">
+				<input id="oldPwdText" name="oldPwdText" type="text" value="현재 비밀번호 : " size="15" disabled>
+				<input id="oldPwdInput" name="oldPwdInput" type="password" size="20" required onkeyup="pwdCheck();">
+			</div>
+			<div id="newPwd">
+				<input id="newPwdText" type="text" value="새로운 비밀번호 : " size="15" disabled>
+				<input id="newPwdInput" type="password" size="20" required>
+			</div>
+			<br>
+			<div id="btnChange">
+				<font id="chkNotice" size="3"></font>
+				<button id="btnC" type="submit">변경하기</button>
+			</div>
+		</form>
+	</div>	
+	<script>
+	      function show() {
+	        $("#ex1").modal({
+	          fadeDuration: 1000,
+	          fadeDelay: 0.25,
+	        });
+	      }
+	</script>
+	<script>
+	    $(function(){
+		    $("#oldPwd").keyup(function(){
+		      $("#chkNotice").html("");
+		    });
+			
+			$("#newPwd").keyup(function(){
+				let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+				if($("#oldPwdInput").val() != $("#newPwdInput").val()){
+					console.log("Diff");
+					$("#newPwdInput").css({"border": "2px solid crimson"});
+			    }
+				else{
+				    if(!regExp.test($("#oldPwdInput").val()) || !regExp.test($("#newPwdInput").val())) {
+				    	console.log("Reg");
+				    	$("#newPwdInput").css({"border": "2px solid orange"});
+					}
+				    else{
+				    	console.log("Corr");
+						$("#newPwdInput").css({"border": "2px solid green"});				    	
+				    }
+				}
+			});
+	    });
+	</script>
+	<script>
+		function pwdCheck(){
+			$.ajax({
+	    		url : "checkPwd.me",
+	    		method : "post",
+	    		data : {password : oldPwdInput, userNo : userNo},
+	    		success : function(result) {
+	    			console.log(result);
+	    			if(result == "NNNNN") {
+	    				$("#newPwdInput").css({"border": "2px solid crimson"});		
+	    			} else {
+	    				$("#newPwdInput").css({"border": "1px solid black"});
+	    			}
+	    		},
+	    		error : function() {
+	    			console.log("닉네임 중복체크용 ajax통신 실패");
+	    		}
+	    	})
+		}
+	</script>
+
+	
 	<hr>
 	<%@include file="../common/footer.jsp" %>
 </body>
