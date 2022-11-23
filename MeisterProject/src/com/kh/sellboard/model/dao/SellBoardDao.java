@@ -140,8 +140,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("CHANGE_NAME"),
-										rset.getString("FILE_PATH")));	
+										rset.getString("TITLEIMG")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
