@@ -42,9 +42,6 @@ public class BoardDetailController extends HttpServlet {
 		
 		if(result > 0) {
 			
-			
-//			int no = bService.selectBoardWriter(boardNo); // 유저번호
-			
 			Board b = bService.selectBoard(boardNo); // 게시판 번호
 			Attachment at = bService.selectAttachment(boardNo);
 			

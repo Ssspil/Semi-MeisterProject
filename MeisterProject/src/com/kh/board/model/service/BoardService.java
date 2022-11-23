@@ -312,5 +312,16 @@ public class BoardService {
 	
 		return result;
 	}
+	
+	public int countRecommend(int boardNo, int num) {
+		
+		Connection conn = getConnection();
+	
+		int result = new BoardDao().countRecommend(conn, boardNo);
+	
+		close();
+	
+		return result;
+	}
 
 }
