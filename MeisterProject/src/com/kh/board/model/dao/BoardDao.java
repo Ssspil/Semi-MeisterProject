@@ -217,6 +217,47 @@ public class BoardDao {
 
 		return at;
 	}
+	
+	public Attachment selectAttachment(Connection conn, ArrayList<Reply> list) {
+
+		Attachment at = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectAttachmentThumbnail");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			for(Reply r : list) {
+				
+				psmt.setInt(1, r.getUserNo());
+				rset = psmt.executeQuery();
+				//글내용 이미지
+				if (rset.next()) {
+					at = new Attachment();
+					
+					at.setFileNo(rset.getInt("FILE_NO"));
+					at.setOriginName(rset.getString("ORIGIN_NAME"));
+					at.setChangeName(rset.getString("CHANGE_NAME"));
+					at.setFilePath(rset.getString("FILE_PATH"));
+					r.setAt(at);
+				}
+			}
+			
+			close(rset);
+			close(psmt);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+
+		return at;
+	}
 
 	public ArrayList<Board> selectList(Connection conn, int type, String keyword) {
 
@@ -549,6 +590,7 @@ public class BoardDao {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, boardNo);
 			
+			
 			rset = psmt.executeQuery();
 			
 			while(rset.next()) {
@@ -824,7 +866,4 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		}
 		return result;
 	}
-	
-
-
 }

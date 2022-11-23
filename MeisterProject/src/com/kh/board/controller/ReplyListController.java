@@ -38,13 +38,16 @@ public class ReplyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+	
 		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
+		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		//Gson을 이용해서 응답 => ArrayList -> JSONObject 배열형태로 변환
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
+		
 		
 	
 	}

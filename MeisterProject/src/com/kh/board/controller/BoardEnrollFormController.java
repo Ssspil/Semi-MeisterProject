@@ -35,6 +35,7 @@ public class BoardEnrollFormController extends HttpServlet {
 		int type = Integer.parseInt(request.getParameter("type"));
 		request.setAttribute("type", type);
 		
+		
 		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
 	}
 	

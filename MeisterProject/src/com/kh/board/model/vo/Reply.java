@@ -1,5 +1,7 @@
 package com.kh.board.model.vo;
 
+import com.kh.common.model.vo.Attachment;
+
 public class Reply {
 
 	private int replyNo;
@@ -10,6 +12,7 @@ public class Reply {
 	private int userNo;
 	private String mbNic;
 	private String boardTitle;
+	private Attachment at;
 
 	
 	
@@ -148,6 +151,16 @@ public class Reply {
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyCount=" + replyCount + ", replyContent=" + replyContent
 				+ ", replyDate=" + replyDate + ", boardNo=" + boardNo + ",boardTitle=" + boardTitle +", userNo=" + userNo + ",]";
+	}
+
+
+	public Attachment getAt() {
+		return at;
+	}
+
+
+	public void setAt(Attachment at) {
+		this.at = at;
 	}
 	
 	

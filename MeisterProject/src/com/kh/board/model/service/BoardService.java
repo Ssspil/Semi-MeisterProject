@@ -133,6 +133,18 @@ public class BoardService {
 		return b;
 
 	}
+	
+//	public Board selectBoardWriter(int boardNo) {
+//		
+//		Connection conn = getConnection();
+//		
+//		int no = new BoardDao().selectBoardWriter(conn, boardNo);
+//		
+//		close();
+//		
+//		return no;
+//		
+//	}
 
 	public Attachment selectAttachment(int boardNo) {
 		Connection conn = getConnection();
@@ -186,6 +198,8 @@ public class BoardService {
 		
 		ArrayList<Reply> list = new BoardDao().selectReplyList(conn, boardNo);
 		
+		new BoardDao().selectAttachment(conn, list);
+		
 		close();
 		
 		return list;
@@ -223,6 +237,7 @@ public class BoardService {
 		return result;
 	}
 	
+	
 	public ArrayList<Board> myCommunity(int userNo){
 		Connection conn = getConnection();
 		
@@ -242,16 +257,17 @@ public class BoardService {
 
 		return listCount;
 	}
-public ArrayList<Reply> myReply(int type) {
-		
-		Connection conn = getConnection();
-		
-		ArrayList<Reply> list = new BoardDao().myReply(conn,type);
-		
-		close();
-		
-		return list;
-	}
+	
+	public ArrayList<Reply> myReply(int type) {
+			
+			Connection conn = getConnection();
+			
+			ArrayList<Reply> list = new BoardDao().myReply(conn,type);
+			
+			close();
+			
+			return list;
+		}
 	
 	public int selectRecommend(int boardNo, int userNo) {
 		

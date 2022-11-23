@@ -1,6 +1,6 @@
 <%@page import="oracle.net.aso.l"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment" %>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment, java.util.ArrayList" %>
 <%
 	Board b = (Board) request.getAttribute("b");
 	// 게시글번호, 제목, 내용, 작성자 닉네임, 작성일
@@ -9,9 +9,6 @@
 	if(at == null){
 		at = new Attachment();
 	}
-	
-	Reply r = (Reply) request.getAttribute("r");
-	
 %>
 
 
@@ -553,8 +550,6 @@ body {
             </div>
         </div>
 	</div>
-	
-	
 
 	<%@ include file="../common/footer.jsp" %>
 
@@ -605,20 +600,21 @@ body {
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
 		 	
+		 	
 		 	var index = 0;
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
 				success : (list) => {
-
+					console.log(list)
 					let htmls="";
 					for(let i of list) {
 						index += 1;
-						
+						console.log(i)
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
-						htmls +=    '<img data-c-1 class="image" src="">';
+						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"'>";
 						htmls += '</div>';
 						htmls += '<div data-c-1 class="comment-information">';
 						htmls +=    '<div data-c-1 class="user-info">';
@@ -632,9 +628,9 @@ body {
 						htmls +=    '<div data-c-1 class="comment-action">';
 						htmls +=        '<div data-c-1 class="comment-react">';
 						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-// 						htmls +=            '<span data-c-1 class="divider" style="margin: 0 0.5rem; color: black;">·</span>';
+// 						htmls +=            '<span data-c-1 class="divider" style="margin:s 0 0.5rem; color: black;">·</span>';
 						htmls +=            '<div data-c-1 class="like-area">';
-						htmls +=                '<span data-c-1 class="text"></span>' ;
+						htmls +=                '<span data-c-1 class="text"></span>';
 						htmls +=            '</div>';
 						htmls +=        '</div>';
 						if(loginNo == i.userNo){
