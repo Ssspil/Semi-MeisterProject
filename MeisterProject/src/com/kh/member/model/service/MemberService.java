@@ -114,6 +114,17 @@ public class MemberService {
 		
 		 return result;
 	 }
+	 
+	 public int pwdCheck(String password, int userNo) {
+		 
+		 Connection conn = JDBCTemplate.getConnection();
+			
+		 int result = new MemberDao().pwdCheck(conn, password, userNo);
+		 
+		 JDBCTemplate.close();
+		
+		 return result;
+	 }
 
 	 public Member expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
