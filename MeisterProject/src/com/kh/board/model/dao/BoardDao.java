@@ -822,7 +822,6 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 			close(rset);
 			close(psmt);
 		}
-	
 		return result;
 	}
 	

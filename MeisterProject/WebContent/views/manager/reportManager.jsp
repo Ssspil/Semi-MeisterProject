@@ -42,9 +42,6 @@
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
 
 <style>
-.listbtn{
-	float:right;
-}
 
 table>thead>tr>th{
 	background-color : black;
@@ -54,16 +51,11 @@ table>thead>tr>th{
 table>tbody {
 	text-align : center;
 }
-
-table>tbody>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
-}
 table{
 	text-align :center;
 }
+
+
  	
 </style>
     
@@ -182,12 +174,20 @@ table{
                                                             </button>
                                                         </div>
 
-                                                        <br>
+                                                        
                                                         <div class="modal-body" align="center">
                                                         	<h2><%= re.getReportTitle() %></h2>
                                                         	<hr>
-                                                            <%= re.getReportContent() %>
+                                                        	
+                                                        	<div class="ReContent">
+                                                        		<%= re.getReportContent() %>
+                                                        	</div>
+                                                        	<div class="ReAttach">
+                                                        		
+                                                        	</div>
                                                         </div>
+                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
