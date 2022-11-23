@@ -10,7 +10,7 @@
 			A.*
 			FROM  (SELECT  S.SELL_NO as SELL_NO,
 					        S.SELL_TITLE as SELL_TITLE,
-					        TO_CHAR(S.PRICE, 'FM999,999,999,999') as PRICE,
+					        S.PRICE as PRICE,
 					        S.SELL_RECOMMEND as SELL_RECOMMEND,
 					        S.SELL_DATE as SELL_DATE,
 					        S.INTEREST_NO AS INTEREST_NO,
