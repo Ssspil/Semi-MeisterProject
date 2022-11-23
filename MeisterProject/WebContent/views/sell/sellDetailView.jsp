@@ -110,10 +110,9 @@
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
 				</span>
 				<span id="interest">		
-					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterestNo() %></a>
+					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterestName() %></a>
 				</span>
 			</div>
-			
 			
 				<section>
 					<div>				
@@ -185,38 +184,10 @@
 								<div class="btn-cls">
 								<a href="<%=contextPath%>/market.se" id="inquireBtn" class="btn btn-primary">문의하기</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="<%=contextPath%>/payment.se" id="paymentBtn" class="btn btn-warning">구매하기</a>
+								<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
+								</div>
 							</div>
-							</div>
 							
-							<%-- <table>
-								<tr>
-									<td>
-									작성일
-									</td>
-									<td>
-									<%= s.getSellDate() %>
-									</td>
-								</tr>
-								<tr>
-									<td>
-									가격
-									</td>
-									<td>
-									<%= s.getPrice() %> 원
-									</td>
-								</tr>
-								<tr>
-									<td>
-									<%= s.getSellContent() %>
-									</td>
-								</tr>
-								
-							
-							</table> --%>
-							
-							
-						
 							
 						</section>
 				</section>
@@ -232,12 +203,12 @@
 		<div class="right-under">
 			<div class="seller-info">
 				<section>
-				<b><%= s.getNickname() %></b> 
+				<b><%= s.getNickname() %></b> ●
 				<br><br>
 				</section>
 				<section>
 					안녕하세요<br>
-					전문가유저 입니다.
+					<%= s.getNickname() %> 입니다.
 				</section>
 				
 				

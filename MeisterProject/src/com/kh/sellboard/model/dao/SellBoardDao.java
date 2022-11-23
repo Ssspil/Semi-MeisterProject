@@ -222,11 +222,12 @@ public class SellBoardDao {
                         rset.getInt("PRICE"),
                         rset.getInt("SELL_RECOMMEND"),
                         rset.getDate("SELL_DATE"),
-                        rset.getInt("INTEREST_NO"),
+                        rset.getString("INTEREST_NAME"),
                         rset.getInt("LOCAL_NO"),
                         rset.getString("NICKNAME")
                         ); 
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
