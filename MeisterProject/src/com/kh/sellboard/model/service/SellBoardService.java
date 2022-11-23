@@ -28,11 +28,11 @@ public class SellBoardService {
 	
 	
 	// 판매게시판 메인 리스트와 페이징처리
-	public ArrayList<SellBoard> selectSellBoardList(PageInfo pi){
+	public ArrayList<SellBoard> selectSellBoardList(PageInfo pi ,int local_no, int interest_no ){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<SellBoard> list = new SellBoardDao().selectSellBoardList(conn, pi);
+		ArrayList<SellBoard> list = new SellBoardDao().selectSellBoardList(conn, pi, local_no, interest_no);
 		
 		close();
 		

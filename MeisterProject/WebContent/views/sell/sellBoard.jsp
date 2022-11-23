@@ -75,14 +75,14 @@ div{
 .outer{
        height: 1000px;
        /* 상 , 우 , 하, 좌  띄우기 */
-	margin: 150px 200px 20px 200px;
+	   margin: 150px 200px 20px 200px;
+	   font-family: 'Nanum Gothic';
 }
 /*맨 위 마켓*/
 h2{
 	border-bottom: 5px solid rgb(255, 212, 0);
     padding-bottom: 16px;
     margin-bottom: 8px;
-	font-family: 'Nanum Gothic';
 }
 
 
@@ -185,6 +185,7 @@ div.main div{
     margin : 15px 15px 100px 15px;
     float : left;
     flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
+    font-size : 13px;
 
 }
 div.main > #thumb1{
@@ -234,11 +235,11 @@ div.main #price{
 	            </li>
 	        	<% for (Interest i : interest) { %> 
 	        	<li class="list-2">
-	       			<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>" > <%= i.getInterestName() %> </a>
+	       			<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>"  id="inter<%=i.getInterestNo() %>"> <%= i.getInterestName() %> </a>
 	       			<ul>
 	       				<% for (Local l : local) { %>
 	       					<li class="list-in-list">
-	       						<a href="<%= contextPath %>/category.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
+	       						<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
 	       					</li>
 	       				<% } %>
 					</ul>
@@ -259,27 +260,23 @@ div.main #price{
 					<img src="../resources/sellBoard_upfiles/<%=sb.getTitleImg()%>"width="230px" height="210px">
 					
 					<p>
-					판매글 제목 : <%=sb.getSellTitle() %> <br>
-					
-					관심사 : <%=sb.getInterestNo() %><br>
-					지역 : <%=sb.getLocalNo() %><br>
-					
-					<!-- 판매글 no는 임시로 넣어둠(확인을 위해) -->
-					No. <%=sb.getSellNo() %> <br>
-					<%=sb.getPrice() %> 원
+					<img src="../resources/image/sell_title"> <%=sb.getSellTitle() %> <br>					
+						관심사 : <%=sb.getInterestNo() %><br>							
+						지역 : <%= sb.getLocalNo() %><br>					
+					<img src="../resources/image/sell_price"><%=sb.getPrice() %> 원
 					</p>
 				</div>
 			<% } %>
+			
 		<% } %>
 		
 		
 		</div>
 		<script>
+			//썸네일 클릭 시 이동되는 주소
 			$(function(){
-				$(".thumbnail").click(function(){
-					
-					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();
-					
+				$(".thumbnail").click(function(){			
+					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
 				})	
 			});
 			

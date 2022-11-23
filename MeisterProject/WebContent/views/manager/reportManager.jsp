@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
-    							  java.util.ArrayList, 
+    pageEncoding="UTF-8"  import="java.util.ArrayList, 
     							  com.kh.report.model.vo.*,
-    							  com.kh.common.model.vo.PageInfo" 
+    							  com.kh.common.model.vo.PageInfo,
+    							  com.kh.common.model.vo.Attachment" 
 %>
     
     
 <%
     String contextPath = request.getContextPath();
 	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+	ArrayList<Attachment> atArr = (ArrayList<Attachment>) request.getAttribute("atArr");
+	
 	
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
  	
@@ -179,12 +181,22 @@ table{
                                                         	<h2><%= re.getReportTitle() %></h2>
                                                         	<hr>
                                                         	
-                                                        	<div class="ReContent">
-                                                        		<%= re.getReportContent() %>
-                                                        	</div>
-                                                        	<div class="ReAttach">
-                                                        		
-                                                        	</div>
+                                                        	<table>
+                                                        		<tr>
+                                                        			<th width="700">내용</th>
+                                                        			<th width="700">사진</th>
+                                                        		</tr>
+                                                        		<tr>
+                                                        			<td><%= re.getReportContent() %></td>
+                                                        			<td>
+		                                                        		<% for(Attachment at : atArr) { %>
+		                                                        			<% if(at.getRefNo() == re.getReportNo()) { %>
+		                                                        			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="200" height="200" />
+		                                                        			<% } %>
+		                                                        		<% } %>
+                                                        			</td>
+                                                        		</tr>
+                                                        	</table>
                                                         </div>
                                                         
 

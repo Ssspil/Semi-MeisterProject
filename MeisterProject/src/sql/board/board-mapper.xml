@@ -168,6 +168,17 @@
 		 ORDER BY FILE_LEVEL
 	</entry>
 	
+	<entry key="selectAttachmentThumbnail">
+		SELECT FILE_NO,
+		       ORIGIN_NAME,
+		       CHANGE_NAME,
+		       FILE_PATH,
+		       FILE_LEVEL
+		 FROM ATTACHMENT
+		 WHERE REF_NO = ? AND FILE_LEVEL = 5
+		 ORDER BY FILE_LEVEL
+	</entry>
+	
 	<entry key="searchList">
 	SELECT BOARD_TITLE
 	FROM BOARD 
@@ -267,6 +278,17 @@
 		SELECT COUNT(RED_NO) AS CNT
 	  	FROM RECOMMEND
 	 	WHERE BOARD_NO = ?
+	</entry>
+	
+	<entry key="replyAttachment">
+		SELECT FILE_NO,
+		       ORIGIN_NAME,
+		       CHANGE_NAME,
+		       FILE_PATH,
+		       FILE_LEVEL
+		 FROM ATTACHMENT
+		 WHERE REF_NO = ? AND FILE_LEVEL = 5
+		 ORDER BY FILE_LEVEL
 	</entry>
 	
 </properties>

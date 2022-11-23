@@ -40,6 +40,7 @@ public class SellBoardCategoryController extends HttpServlet {
 		int interest_no = Integer.parseInt(request.getParameter("interest_no"));
 		int local_no = Integer.parseInt(request.getParameter("local_no"));
 		
+		
 		// 페이징 처리
 		int listCount;
 		int currentPage;
@@ -67,7 +68,7 @@ public class SellBoardCategoryController extends HttpServlet {
 		
 		ArrayList<Interest> interest = new SellBoardService().clickInterestCategory(interest_no);
 		ArrayList<Local> local = new SellBoardService().clickLocalCategory(local_no);
-		ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi);
+		ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi,local_no,  interest_no );
 	
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

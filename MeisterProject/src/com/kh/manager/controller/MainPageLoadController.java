@@ -1,34 +1,23 @@
-package com.kh.board.controller;
+package com.kh.manager.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.google.gson.Gson;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
-import com.kh.chatting.model.service.ChattingService;
-import com.kh.common.model.vo.Attachment;
-import com.kh.member.model.vo.Member;
-
 
 /**
- * Servlet implementation class ReplyListController
+ * Servlet implementation class MainPageLoadController
  */
-@WebServlet("/rlist.bo")
-public class ReplyListController extends HttpServlet {
+@WebServlet("/mainLoad.do")
+public class MainPageLoadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyListController() {
+    public MainPageLoadController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,18 +27,14 @@ public class ReplyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int boardNo = Integer.parseInt(request.getParameter("bno"));
-	
-		ArrayList<Reply> list = new BoardService().selectReplyList(boardNo);
+		String responseData = "처리를 완료하였습니다.";
+		// 응답데이터에 한글이 있을 경우 대비해서 설정
+		//response.setContentType("text/html; charset=UTF-8");
 		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		//response.getWriter().print(responseData);
 		
-		//Gson을 이용해서 응답 => ArrayList -> JSONObject 배열형태로 변환
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
-		
-		
-	
+		System.out.println("ddddd");
+		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
 	}
 
 	/**

@@ -47,7 +47,6 @@ public class BoardLikeController extends HttpServlet {
 		
 		if (type.equals("I")) {
 			int count = boardService.selectRecommend(boardNo, userNo);
-			System.out.println(count);
 			
 			if (count == 0) {
 				result = boardService.insertRecommend(boardNo, userNo);
@@ -67,12 +66,11 @@ public class BoardLikeController extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		JsonObject json = new JsonObject();
-		
 		json.addProperty("result", result);
 		json.addProperty("recommend", recommend);
 		Gson gson = new Gson();
 		out.print(gson.toJson(json));
-			
+		
 	}
 
 	/**
