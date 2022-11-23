@@ -39,13 +39,24 @@
 	font-family: 'Nanum Gothic', sans-serif;
 }
 .bodytext {
-	width : 206px;
+	width : 300px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-inline-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 5;
 	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.area1, .area2 {
+	border-radius : 30px;
+	box-shadow : 1px 1px skyblue;
+}
+
+.area1:hover, .area2:hover{
+	background-color : lightgrey;
+	box-shadow : 1px 1px orange;
+	cursor : pointer;
 }
 </style>
 
@@ -192,7 +203,23 @@
       				<% for(int i = 0; i < 1; i++) { %>
       					<br>
       					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
-      					 <span class="bodytext"><%= list.get(i).getBoardContent() %></span>
+      					 <span class="bodytext">
+      					 	<% if(list.get(i).getBoardContent().length() < 21) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br><br><br>
+      					 	<% } else if (list.get(i).getBoardContent().length() < 42) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br><br>
+      					 	<% } else if (list.get(i).getBoardContent().length() < 63) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br>
+      					 	<% } else if(list.get(i).getBoardContent().length() < 84){%>
+      					 		<br><br>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 	<% } else { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 	<% } %>
+      					 </span>
 			      			<div id="titlefooter">
 								<div>
 									<i class="bi bi-eye"></i>
@@ -217,8 +244,23 @@
       				<% for(int i = 1; i < 2; i++) { %>
       					<br>
       					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
-      					 <span class="bodytext"><%= list.get(i).getBoardContent() %></span>
-			      			<div id="titlefooter">
+      					 <span class="bodytext">
+      					 	<% if(list.get(i).getBoardContent().length() < 21) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br><br><br>
+      					 	<% } else if (list.get(i).getBoardContent().length() < 42) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br><br>
+      					 	<% } else if (list.get(i).getBoardContent().length() < 63) { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 		<br><br><br>
+      					 	<% } else if(list.get(i).getBoardContent().length() < 84){%>
+      					 		<br><br>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 	<% } else { %>
+      					 		<%= list.get(i).getBoardContent() %>
+      					 	<% } %>
+      					 </span>
 								<div>
 									<i class="bi bi-eye"></i>
 									<%=list.get(i).getBoardCount()%>
