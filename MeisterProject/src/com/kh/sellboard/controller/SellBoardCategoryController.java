@@ -69,11 +69,13 @@ public class SellBoardCategoryController extends HttpServlet {
 		ArrayList<Interest> interest = new SellBoardService().clickInterestCategory(interest_no);
 		ArrayList<Local> local = new SellBoardService().clickLocalCategory(local_no);
 		ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi,local_no,  interest_no );
-	
+		
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("interest", interest);
 	    request.setAttribute("local", local);
+	    
 	    
 		request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
 	
