@@ -566,7 +566,7 @@ body {
                                     <i class="bi bi-hand-thumbs-up"></i><span data-j-1 class="text2">좋아요 <%=b.getBoardRecommend() %></span>
                                 </div>
                                 <div data-j-1 class="item" style='display:inline-block; float:left;'>
-                                    <span data-j-1 class="text2">댓글 <%=b.getReplyCount()%></span>
+                                    <span data-j-1 class="text3">댓글 <%=b.getReplyCount()%></span>
                                 </div>
                                 <div data-j-1 class="item" style='display:inline-block; float:right;'>
                             	<a href="<%=contextPath %>/boardlist.bo?currentPage=1" id="btn">목록</a>
@@ -602,6 +602,8 @@ body {
 	<%@ include file="../common/footer.jsp" %>
 
 	<script>
+	
+	// 댓글 키업 시 등록 버튼 활성화
 		$(function () {
 	        $('#replyContent').keyup(function () {
 	            if ($("#replyContent").val() != "") {
@@ -716,7 +718,6 @@ body {
 				var content = $("#replycontent"+index).text();
 				location.href="<%=contextPath%>" + "/update.ro?rno="+rno+"&bno="+bno+"&content="+content;
 			}
-			
 		}
 		
 		// 댓글 삭제
@@ -724,8 +725,9 @@ body {
 			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
 		
-		let likeBtn = true;
 		// 좋아요 기능
+		let likeBtn = true;
+		
 		$(document).on("click", "div.like", (e) => {
 			e.preventDefault();
 			likeBtn = false;
@@ -763,7 +765,6 @@ body {
 				},
 				done : function() {
 					likeBtn = true;
-					
 				}
 			});
 		});

@@ -114,34 +114,6 @@ public class BoardDao {
 
 		return board;
 	}
-	
-//	public int selectBoardWriter(Connection conn, int boardNo) {
-//
-//		int no = 0;
-//		
-//		PreparedStatement psmt = null;
-//		ResultSet rset = null;
-//
-//		String sql = prop.getProperty("selectBoardWriter");
-//
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//
-//			psmt.setInt(1, boardNo);
-//
-//			rset = psmt.executeQuery();
-//
-//			if (rset.next()) {
-//				 no = rset.getInt("USER_NO");
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(psmt);
-//		}
-//		return no;
-//	}
 
 	// 게시글 상세보기
 	public Board selectBoard(Connection conn, int boardNo) {
@@ -181,6 +153,7 @@ public class BoardDao {
 		return b;
 	}
 
+	// 게시글 상세보기 이미지
 	public Attachment selectAttachment(Connection conn, int boardNo) {
 
 		Attachment at = null;
@@ -194,7 +167,6 @@ public class BoardDao {
 			psmt.setInt(1, boardNo);
 
 			rset = psmt.executeQuery();
-			//글내용 이미지
 			if (rset.next()) {
 				at = new Attachment();
 
@@ -218,6 +190,7 @@ public class BoardDao {
 		return at;
 	}
 	
+	// 댓글 프로필 
 	public Attachment selectAttachment(Connection conn, ArrayList<Reply> list) {
 
 		Attachment at = null;
@@ -261,7 +234,6 @@ public class BoardDao {
 
 	public ArrayList<Board> selectList(Connection conn, int type, String keyword) {
 
-		// select 문 => ResultSet
 		ArrayList<Board> list = new ArrayList<>();
 
 		PreparedStatement psmt = null;
@@ -371,6 +343,7 @@ public class BoardDao {
 		return result;
 	}
 
+	// 게시글 사진 등록
 	public int insertAttachment(Attachment at, Connection conn) {
 
 		int result = 0;
@@ -447,6 +420,7 @@ public class BoardDao {
 		return result;
 	}
 	
+	// 게시글 사진 수정
 	public int updateAttachment(Attachment at, Connection conn) {
 
 		int result = 0;
@@ -497,6 +471,7 @@ public class BoardDao {
 		return result;
 	}
 
+	// 게시글 사진 삭제
 	public void deleteAttachment(int boardNo, Connection conn) {
 
 		PreparedStatement psmt = null;
@@ -612,6 +587,7 @@ public class BoardDao {
 		return list;
 	}
 	
+	// 댓글 수정
 	public int updateReply(Connection conn, Reply r) {
 
 		int result = 0;
@@ -634,6 +610,7 @@ public class BoardDao {
 		return result;
 	}
 	
+	// 댓글 삭제
 	public int deleteReply(int replyNo, Connection conn) {
 
 		int result = 0;
@@ -655,6 +632,7 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
 	public ArrayList<Board> myCommunity(Connection conn,int userNo){
 		
 			ArrayList<Board> list = new ArrayList<>();
@@ -694,6 +672,7 @@ public class BoardDao {
 			
 			return list;
 		}
+	
 	public int selectListCount2(Connection conn,int type) {
 		
 		int listCount = 0;
@@ -727,41 +706,42 @@ public class BoardDao {
 		return listCount;
 	}
 	
-public ArrayList<Reply> myReply(Connection conn,int type) {
-		
-		ArrayList<Reply> list = new ArrayList<>();
-		
-		PreparedStatement psmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("myReply");
-		
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, type);
-			rset = psmt.executeQuery();
+	public ArrayList<Reply> myReply(Connection conn,int type) {
 			
-			while(rset.next()) {
-				list.add(new Reply(
-						rset.getInt("REPLY_NO"),
-						rset.getInt("BOARD_NO"),
-						rset.getString("BOARD_TITLE"),
-						rset.getString("REPLY_CONTENT"),
-						rset.getString("REPLY_DATE"),
-						rset.getInt("USER_NO")
-						));
+			ArrayList<Reply> list = new ArrayList<>();
+			
+			PreparedStatement psmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("myReply");
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, type);
+				rset = psmt.executeQuery();
 				
+				while(rset.next()) {
+					list.add(new Reply(
+							rset.getInt("REPLY_NO"),
+							rset.getInt("BOARD_NO"),
+							rset.getString("BOARD_TITLE"),
+							rset.getString("REPLY_CONTENT"),
+							rset.getString("REPLY_DATE"),
+							rset.getInt("USER_NO")
+							));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(psmt);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(psmt);
+			
+			return list;
 		}
-		
-		return list;
-	}
 
+	// 좋아요 조회
 	public int selectRecommend(Connection conn, int boardNo, int userNo) {
 
 		int result = 0;
@@ -794,6 +774,7 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		return result;
 	}
 	
+	// 좋아요 등록
 	public int insertRecommend(Connection conn, int boardNo, int userNo) {
 		
 		int result = 0;
@@ -817,6 +798,7 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		return result;
 	}
 	
+	// 좋아요 삭제
 	public int deleteRecommend(Connection conn, int boardNo, int userNo) {
 		
 		int result = 0;
@@ -840,6 +822,7 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		return result;
 	}
 	
+	// 좋아요 갯수
 	public int countRecommend(Connection conn, int boardNo) {
 
 		int result = 0;
@@ -866,4 +849,5 @@ public ArrayList<Reply> myReply(Connection conn,int type) {
 		}
 		return result;
 	}
+	
 }
