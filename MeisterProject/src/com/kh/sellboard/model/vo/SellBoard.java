@@ -18,6 +18,7 @@ public class SellBoard {
 	private String nickname;
 	private String changeName;
 	private String filePath;
+	private String interestName;
 	
 	public SellBoard() {
 		
@@ -87,9 +88,9 @@ public class SellBoard {
 		this.filePath = filePath;
 	}
 	
-	// 판매 게시판 조회 부분 생성자
+	// 판매 게시판 상세조회 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellRecommend, Date sellDate,
-			int interestNo, int localNo, String nickname) {
+			String interestName, int localNo, String nickname) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -97,7 +98,7 @@ public class SellBoard {
 		this.price = price;
 		this.sellRecommend = sellRecommend;
 		this.sellDate = sellDate;
-		this.interestNo = interestNo;
+		this.interestName= interestName;
 		this.localNo = localNo;
 		this.nickname = nickname;
 	}
@@ -223,6 +224,14 @@ public class SellBoard {
 		this.filePath = filePath;
 	}
 	
+	public String getInterestName() {
+		return interestName;
+	}
+
+	public void setInterestName(String interestName) {
+		this.interestName = interestName;
+	}
+
 	
 	
 	
@@ -232,9 +241,10 @@ public class SellBoard {
 		return "SellBoard [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellContent=" + sellContent + ", price="
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", localNo=" + localNo
-				+ ", interestNo=" + interestNo + ", nickname=" + nickname + "]";
+				+ ", interestNo=" + interestNo + ", nickname=" + nickname + ", interestName="+ interestName +"]";
 	}
 
+	
 	
 	
 }

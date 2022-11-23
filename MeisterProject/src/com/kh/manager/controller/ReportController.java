@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.report.model.service.ReportService;
@@ -62,11 +63,13 @@ public class ReportController extends HttpServlet {
 		// * currentPage : 현재페이지
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 		
+		System.out.println(currentPage);
+		
 		// * pageLimit : 페이지 하단에 보여질 페이징바의 페이지 최대 갯수(페이지목록들을 몇 개 단위로 출력할건지!)
 		pageLimit = 10;
 		
 		// * boardLimit : 한 페이지에 보여질 게시글의 최대갯수(게시글 몇 개 단위씩)
-		boardLimit = 20;
+		boardLimit = 10;
 	    
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
 	    
@@ -87,8 +90,10 @@ public class ReportController extends HttpServlet {
 
 		
 		ArrayList<Report> list = new ReportService().selectAllList(pi);
+		ArrayList<Attachment> atArr = new ReportService().selectAllList();
 		
 		request.setAttribute("list", list);
+		request.setAttribute("atArr", atArr);
 		request.setAttribute("pi", pi);
 		
 		request.getRequestDispatcher("views/manager/reportManager.jsp").forward(request, response);
