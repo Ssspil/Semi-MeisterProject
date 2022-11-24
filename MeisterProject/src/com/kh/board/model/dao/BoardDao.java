@@ -870,6 +870,7 @@ public class BoardDao {
 				b = new Board(
 								rset.getInt("BOARD_NO"),
 								rset.getString("BOARD_TITLE"),
+								rset.getInt("BOARD_TYPE"),
 								rset.getString("BOARD_CONTENT"),
 								rset.getInt("BOARD_COUNT"), 
 								rset.getInt("BOARD_RECOMMEND"),

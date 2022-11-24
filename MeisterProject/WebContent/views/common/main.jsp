@@ -24,10 +24,19 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
+.community-area a{
+	color : black;
+	decoration : none;
+}
+.community-area a:hover{
+	color : black;
+	text-decoration:none
+}
 .community-main {
 	margin : auto;
 	width : 70%;
 	height : 100%;
+	decoration : none;
 }
 .headtext {
 	font-weight : 700;
@@ -214,7 +223,7 @@
       			커뮤니티 최신글 ↓
       		</div>
       		<br>
-      		<div class="area1">
+      		<div class="area1"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(0).getBoardType() %>&bno=<%= list.get(0).getBoardNo() %>">
       			<div class="community-main">
       			<% if (list != null) { %>
       				<% for(int i = 0; i < 1; i++) { %>
@@ -260,8 +269,9 @@
       					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
+      			</a>
       		</div>
-      		<div class="area2">
+      		<div class="area2"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(1).getBoardType() %>&bno=<%= list.get(1).getBoardNo()%>">
       			<div class="community-main">
       				<% if (list != null) { %>
 	      				<% for(int i = 1; i < 2; i++) { %>
@@ -305,6 +315,7 @@
       					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
+      			</a>
       		</div>
       </div>
     </div><!-- outer 끝 -->
@@ -350,18 +361,7 @@
 			}, 3500);
 		
 
-		$(function(){
-			$('.area1').click(function(){
-				$.ajax({
-					url : "detail.bo",
-					data : {
-						type : 1,
-						bno : <%= list.get(0).getBoardNo() %>
-						
-					},
-				})
-			})
-		});
+
 	</script>
 
 	
