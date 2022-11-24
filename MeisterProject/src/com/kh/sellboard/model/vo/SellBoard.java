@@ -109,6 +109,18 @@ public class SellBoard {
 		this.sellDetail = sellDetail;
 		this.sellRegulation = sellRegulation;
 	}
+	
+	// 메인페이지에 띄울 생성자
+	public SellBoard(String sellTitle, String sellContent, int price, String titleImg, int interestNo,
+			String nickname) {
+		super();
+		this.sellTitle = sellTitle;
+		this.sellContent = sellContent;
+		this.price = price;
+		this.titleImg = titleImg;
+		this.interestNo = interestNo;
+		this.nickname = nickname;
+	}
 
 	public int getSellNo() {
 		return sellNo;

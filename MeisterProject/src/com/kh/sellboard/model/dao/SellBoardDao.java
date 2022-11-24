@@ -485,7 +485,45 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 		return local;
 	}
-	
-	
+
+	// 메인페이지에 띄울 메소드
+	public ArrayList<SellBoard> selectAllList(Connection conn) {
+		
+		ArrayList<SellBoard> sellList = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		SellBoard sb = null;
+		
+		String sql = prop.getProperty("selectAllList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+            rset = psmt.executeQuery();
+            
+            while(rset.next()) {
+                sb = new SellBoard(
+                        rset.getString("SELL_TITLE"),
+                        rset.getString("SELL_CONTENT"),
+                        rset.getInt("PRICE"),
+                        rset.getString("TITLEIMG"),
+                        rset.getInt("INTEREST_NO"),
+                        rset.getString("NICKNAME")
+                        ); 
+                
+                sellList.add(sb);
+            }
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return sellList;
+	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import java.util.ArrayList;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
@@ -174,6 +175,18 @@ public class SellBoardService {
 		
 		return local;
 		
+	}
+
+
+	public ArrayList<SellBoard> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<SellBoard> sellList = new SellBoardDao().selectAllList(conn);
+		
+		JDBCTemplate.close();
+		
+		return sellList;
 	}
 
 
