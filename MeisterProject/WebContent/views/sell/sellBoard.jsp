@@ -126,6 +126,7 @@ h2{
     padding: 0;
     height: 100%;
     position: relative; /*z-index를 위한 기준 위치 */
+    z-index: 5;
     
 }
 #navi > li {
@@ -182,7 +183,6 @@ h2{
 
 div.main{
     margin-left:10rem;
-	z-index : 200;
     display: inline-block;
 }
 
@@ -191,31 +191,39 @@ div.main div{
    /* border : 1px solid red; */
     height: 250px;
     width : 250px;
-    margin : 15px 15px 100px 15px;
+    margin : 10px 15px 130px 15px;
     float : left;
     flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
     font-size : 13px;
 
 }
-div.main > #thumb1{
-	 position : relative;
-}
 
+div.thumbnail {
+	margin : 25px 15px 100px 15px;
+}
 /*마켓글 호버시 썸네일 크기 변경*/
 div.thumbnail #thumbImg{
 	transform : scale(1); 
 	-webkit-transform:scale(1);
+	z-index : -1;
 }
 div.thumbnail #thumbImg:hover{
 	transform : scale(1.05); 
 	-webkit-transform:scale(1.05);
+	z-index : -1;
 }
-
 
 /*금액 표시*/
 div.thumbnail b {
 	 color: orange;
 	 font-size : 17px;
+}
+
+p.heartIcon{
+	margin : 0px;
+	color: orange; 
+	font-size: 20px; 
+	text-align: right;
 }
 
 </style>
@@ -270,6 +278,12 @@ div.thumbnail b {
 		<% } else{ %>
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
+				
+						<!-- 찜 하트 아이콘 -->
+						<p class="heartIcon">
+							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>							
+						</p>
+						
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					
@@ -280,16 +294,13 @@ div.thumbnail b {
 						<img src="./resources/image/sell_price.png" width="25" height="25">
 						<c:set var = "price" value="<%= sb.getPrice() %>"/>
 						<b> <fmt:formatNumber value="${price }"  /> 원 </b> <br>
-						<p class="heartIcon" style="color:orange; font-size:18px">
-							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>							
-						</p>
 					</p>
 				</div>
 			<% } %>
 			
 		<% } %>
 		
-		
+	
 		</div>
 		<script>
 			//썸네일 클릭 시 이동되는 주소

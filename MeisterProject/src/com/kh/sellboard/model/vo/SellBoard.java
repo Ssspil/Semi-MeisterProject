@@ -122,6 +122,15 @@ public class SellBoard {
 		this.nickname = nickname;
 	}
 
+	public SellBoard(int sellNo, String sellTitle, int price, int localNo, int interestNo) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.price = price;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
+	}
+
 	public int getSellNo() {
 		return sellNo;
 	}

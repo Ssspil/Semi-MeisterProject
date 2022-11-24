@@ -99,7 +99,7 @@
 			   CHANGE_NAME,
 			   FILE_PATH
 	   	FROM ATTACHMENT
-	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
+	   	WHERE REF_NO = ? AND FILE_LEVEL = ?
 	</entry>
 	
 	<entry key="selectSameAttachment">
@@ -258,5 +258,23 @@
 		UPDATE MEMBER
 		SET STATUS = 'N'
 		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectMySellBoard">
+		SELECT *
+		FROM SELL
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectInterest">
+		SELECT INTEREST_NAME
+		FROM INTEREST
+		WHERE INTEREST_NO = ?
+	</entry>
+	
+	<entry key="selectLocal">
+		SELECT LOCAL_NAME
+		FROM LOCAL
+		WHERE LOCAL_NO = ?
 	</entry>
 </properties>
