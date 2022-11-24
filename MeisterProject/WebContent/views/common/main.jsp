@@ -197,9 +197,8 @@
       	</div>
       	<br>
       	<div class="sell-main">
-      		<% if (sellList.get(0) != null || sellList.get(1) != null || sellList.get(2)!= null ) {%>
+      		<% if (sellList.size() > 2 ) {%>
       			<% for (int i = 0 ; i < 3; i++) { %>
-      			
 	      			<div class="area">
 	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
 	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
@@ -207,10 +206,41 @@
 	      				<span><%= sellList.get(i).getPrice() %></span>
 	      			</div>
 	      		<%  } %>
+	      	<% } else if (sellList.size() == 2) { %>
+	      		<% for (int i = 0 ; i < 2; i++) { %>
+	      			<div class="area">
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
+	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
+	      				<span><%= sellList.get(i).getNickname() %></span><br>
+	      				<span><%= sellList.get(i).getPrice() %></span>
+	      			</div>
+	      		<%  } %>
+	      		<% for (int i = 0; i < 1; i++) {%>
+	      		
+	      		<% } %>
+	      	<% } else if (sellList.size() == 1) { %>
+				<% for (int i = 0 ; i < 1; i++) { %>
+	      			<div class="area">
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
+	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
+	      				<span><%= sellList.get(i).getNickname() %></span><br>
+	      				<span><%= sellList.get(i).getPrice() %></span>
+	      			</div>
+	      		<%  } %>
+	      		<% for (int i = 0 ; i < 2; i++) { %>
+	      			<div class="area">
+	      				<h5>게시글이 없습니다.</h5>
+	      				<span>게시글이 없습니다.</span><br>
+	      			</div>
+	      		<% } %>
 	      	<% } else { %>
-	      			등록된 게시물이 없습니다.
+	      		<% for(int i = 0; i < 3; i++) {%>
+	      			<div class="area">
+	      				<h5>게시글이 없습니다.</h5>
+	      				<span>게시글이 없습니다.</span><br>
+	      			</div>
+	      		<% } %>
 	      	<% } %>
-
       		
       	</div>
       </div>
@@ -223,7 +253,7 @@
       		<br>
       		<div class="area1"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(0).getBoardType() %>&bno=<%= list.get(0).getBoardNo() %>">
       			<div class="community-main">
-      			<% if (list != null) { %>
+      			<% if (list.get(0) != null) { %>
       				<% for(int i = 0; i < 1; i++) { %>
       					<br>
       					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
@@ -271,7 +301,7 @@
       		</div>
       		<div class="area2"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(1).getBoardType() %>&bno=<%= list.get(1).getBoardNo()%>">
       			<div class="community-main">
-      				<% if (list != null) { %>
+      				<% if (list.get(1) != null) { %>
 	      				<% for(int i = 1; i < 2; i++) { %>
 	      					<br>
 	      					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
