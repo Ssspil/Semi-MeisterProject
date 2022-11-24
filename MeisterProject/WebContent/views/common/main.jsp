@@ -197,18 +197,19 @@
       	</div>
       	<br>
       	<div class="sell-main">
-      		<% for (int i = 0 ; i < 3; i++) { %>
-      			<% if (sellList.get(i) != null ) {%>
+      		<% if (sellList.get(0) != null || sellList.get(1) != null || sellList.get(2)!= null ) {%>
+      			<% for (int i = 0 ; i < 3; i++) { %>
+      			
 	      			<div class="area">
 	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
 	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
 	      				<span><%= sellList.get(i).getNickname() %></span><br>
 	      				<span><%= sellList.get(i).getPrice() %></span>
 	      			</div>
-	      		<% } else { %>
+	      		<%  } %>
+	      	<% } else { %>
 	      			등록된 게시물이 없습니다.
-	      		<% } %>
-      		<%  } %>
+	      	<% } %>
 
       		
       	</div>
