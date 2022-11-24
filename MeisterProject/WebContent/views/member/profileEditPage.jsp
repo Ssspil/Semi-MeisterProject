@@ -37,6 +37,9 @@
     	border-radius:100px / 100px;
     	margin-bottom: 10px;
     }
+    #fileUploadBtn{
+    	margin-top: 70px;
+    }
     input{
     	border: 1px solid gray;
     	border-radius:50px / 100px;
@@ -147,6 +150,10 @@
 	%>
 	
 	<script>
+		<%if(userName == null){%>
+			<%userName = " ";%>
+		<%}%>
+		
 		$ (function selectInterest(){
 			$("#interest").val("<%=interests%>").prop("selected", true);
 			$('#textInterest').val($('#interest').val());
@@ -391,14 +398,13 @@
 			<div id="profileImg">
 				<img id="titleImage" src="<%=contextPath %>/<%=at.getFilePath() %>/<%=at.getChangeName() %>" alt="프로필">
 				<input type="file" id="profile" name="profileImg" style="display:none" onchange="loadImg(this);" accept="img/jpeg, img/png">
-				<br><br>
 				<button id="fileUploadBtn" type="button">프로필변경</button>
 			</div>
 			<br><br>
 			<input type="hidden" name="userNo" value="<%=userNo %>">
 			<input type="hidden" name="userId" value="<%=userId %>">
 			<h6><b>닉네임</b></h6> 
-			<input type="text" id="nickname" name="nickName" maxlength="5" value="<%=nickname %>" size="80" onkeyup="nicknameCheck();">
+			<input type="text" id="nickname" name="nickName" maxlength="6" value="<%=nickname %>" size="80" onkeyup="nicknameCheck();">
 			<br>
 			<font id="chkNick" size="3"></font>
 			<br><br>
@@ -407,7 +413,7 @@
 			<hr>
 			<br>
 			이름 : &nbsp;&nbsp;&nbsp;
-			<input type="text" name="userName" id="userName" value="<%=userName %>" size="50">
+			<input type="text" name="userName" id="userName" maxlength="5" value="<%=userName %>" size="50">
 			<br><br>
 			휴대폰 번호 : &nbsp;
 			<select id="phoneFront">
@@ -415,9 +421,9 @@
 				<option value="010">010</option>
 			</select>
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneMid" id="phoneMid" value="<%=phoneMid%>" size="4">
+			<input type="text" name="phoneMid" id="phoneMid" value="<%=phoneMid%>" size="4" maxlength="4">
 			&nbsp; - &nbsp;
-			<input type="text" name="phoneLast" id="phoneLast" value="<%=phoneLast%>" size="4">
+			<input type="text" name="phoneLast" id="phoneLast" value="<%=phoneLast%>" size="4" maxlength="4">
 			<br><br>
 			이메일 : &nbsp;
 			<input type="text" name="emailFront" id="emailFront" value="<%=emailFront %>" size="15">

@@ -65,7 +65,7 @@
                         </li>
                         <li>
                             <div class="search">
-                                <input type="text" id="header-search" placeholder="마이스터 검색">
+                                <input type="search" id="header-search" name="search" placeholder="마이스터 검색" onkeypress="if( event.keyCode == 13 ){ searchData2();}">
                             </div>
                         </li>
                     </ul>
@@ -143,7 +143,16 @@
             }});
 
         });
+        
+        
+        function searchData2(){
+        	
+        	console.log($('#header-search').val());
+        	
+        	location.href="<%= contextPath %>/market.se?search="+$('#header-search').val();
+		}
 
+      
     </script>
 </body>
 </html>

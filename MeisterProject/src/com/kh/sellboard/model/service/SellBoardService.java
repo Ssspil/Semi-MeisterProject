@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import java.util.ArrayList;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
@@ -33,6 +34,19 @@ public class SellBoardService {
 		Connection conn = getConnection();
 		
 		ArrayList<SellBoard> list = new SellBoardDao().selectSellBoardList(conn, pi, local_no, interest_no);
+		
+		close();
+		
+		return list;
+		
+	}
+	
+	// 판매게시판 검색 리스트와 페이징처리
+	public ArrayList<SellBoard> selectSearchSellBoardList(PageInfo pi , String search){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<SellBoard> list = new SellBoardDao().selectSearchSellBoardList(conn, pi, search);
 		
 		close();
 		
@@ -161,6 +175,18 @@ public class SellBoardService {
 		
 		return local;
 		
+	}
+
+
+	public ArrayList<SellBoard> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<SellBoard> sellList = new SellBoardDao().selectAllList(conn);
+		
+		JDBCTemplate.close();
+		
+		return sellList;
 	}
 
 

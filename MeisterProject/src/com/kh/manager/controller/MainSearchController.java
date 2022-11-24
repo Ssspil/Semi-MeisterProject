@@ -1,31 +1,23 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
-import com.kh.sellboard.model.service.SellBoardService;
-import com.kh.sellboard.model.vo.SellBoard;
-
 /**
- * Servlet implementation class MainPageLoadController
+ * Servlet implementation class MainSearchController
  */
-@WebServlet("/mainLoad.do")
-public class MainPageLoadController extends HttpServlet {
+@WebServlet("/search.do")
+public class MainSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageLoadController() {
+    public MainSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +26,13 @@ public class MainPageLoadController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Board> list = new BoardService().selectAllList();
-		ArrayList<SellBoard> sellList = new SellBoardService().selectAllList();
-		
-		
-		System.out.println("index.jsp 와서 바로 main.jsp로 포워딩");
-		
-		request.setAttribute("list", list);
-		request.setAttribute("sellList",sellList);
-		
-		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
-		
-			
-		
+	    request.setCharacterEncoding("UTF-8");
+	    
+	    String search = request.getParameter("search");
+	    
+	    System.out.println(search);
+	    
+	    request.getRequestDispatcher("views/sell/sellboard.jsp").forward(request, response);
 	}
 
 	/**

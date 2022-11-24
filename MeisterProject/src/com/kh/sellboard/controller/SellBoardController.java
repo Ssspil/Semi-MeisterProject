@@ -40,49 +40,106 @@ public class SellBoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	    request.setCharacterEncoding("UTF-8");
+	    
+	    
+	    if(request.getParameter("search") != null) {	// 검색으로 들어왔을 때
+		    String search = request.getParameter("search");
+			
+		    System.out.println(search + " 을 검색하였습니다.");
+		    
+			
+			// 페이징 처리
+			int listCount;
+			int currentPage;
+			int pageLimit;
+			int boardLimit;
+			
+			int maxPage;
+			int startPage;
+			int endPage;
+			
+			listCount = new SellBoardService().selectSellBoardListCount();
+			currentPage = Integer.parseInt(request.getParameter("currentPage") == null? "1" : request.getParameter("currentPage"));
+			pageLimit = 10;
+			boardLimit = 6;
+			maxPage = (int) Math.ceil((double)(listCount/boardLimit));
+			startPage = (currentPage-1) / pageLimit * pageLimit +1;
+			endPage = startPage + pageLimit -1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			// 페이징 객체
+			PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+			
+			// console에 이동글 출력
+			System.out.println("마켓으로 이동");
+			
+		    // 판매게시판 전체 리스트 조회 한 후 조회결과를 담아서 응답페이지로 포워딩.
+		    ArrayList<SellBoard> list = new SellBoardService().selectSearchSellBoardList(pi , search);
+		    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
+		    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
+			
+		    request.setAttribute("list", list);
+		    request.setAttribute("interest", interest);
+		    request.setAttribute("local", local);
+		    request.setAttribute("pi", pi);
+			
+		    request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
+		    
+		    
+	    } else { 	// 기본으로 들어왔을 때
+	    	
+	    	int interest_no = Integer.parseInt(request.getParameter("interest_no") == null? "0" : request.getParameter("interest_no") );
+			int local_no = Integer.parseInt(request.getParameter("local_no") == null ? "0":request.getParameter("local_no") );
+			
+			// 페이징 처리
+			int listCount;
+			int currentPage;
+			int pageLimit;
+			int boardLimit;
+			
+			int maxPage;
+			int startPage;
+			int endPage;
+			
+			listCount = new SellBoardService().selectSellBoardListCount();
+			currentPage = Integer.parseInt(request.getParameter("currentPage") == null? "1" : request.getParameter("currentPage"));
+			pageLimit = 10;
+			boardLimit = 6;
+			maxPage = (int) Math.ceil((double)(listCount/boardLimit));
+			startPage = (currentPage-1) / pageLimit * pageLimit +1;
+			endPage = startPage + pageLimit -1;
+			
+			if(endPage > maxPage) {
+				endPage = maxPage;
+			}
+			
+			// 페이징 객체
+			PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+			
+			// console에 이동글 출력
+			System.out.println("마켓으로 이동");
+			
+		    // 판매게시판 전체 리스트 조회 한 후 조회결과를 담아서 응답페이지로 포워딩.
+		    ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi , local_no, interest_no );
+		    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
+		    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
+			
+		    request.setAttribute("list", list);
+		    request.setAttribute("interest", interest);
+		    request.setAttribute("local", local);
+		    request.setAttribute("pi", pi);
+			
+		    request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
+	    }
+
+	    
+	    
 		
-		int interest_no = Integer.parseInt(request.getParameter("interest_no") == null? "0" : request.getParameter("interest_no") );
-		int local_no = Integer.parseInt(request.getParameter("local_no") == null ? "0":request.getParameter("local_no") );
-		
-		// 페이징 처리
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		listCount = new SellBoardService().selectSellBoardListCount();
-		currentPage = Integer.parseInt(request.getParameter("currentPage") == null? "1" : request.getParameter("currentPage"));
-		pageLimit = 10;
-		boardLimit = 6;
-		maxPage = (int) Math.ceil((double)(listCount/boardLimit));
-		startPage = (currentPage-1) / pageLimit * pageLimit +1;
-		endPage = startPage + pageLimit -1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		// 페이징 객체
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
-		// console에 이동글 출력
-		System.out.println("마켓으로 이동");
-		
-	    // 판매게시판 전체 리스트 조회 한 후 조회결과를 담아서 응답페이지로 포워딩.
-	    ArrayList<SellBoard> list = new SellBoardService().selectSellBoardList(pi , local_no, interest_no );
-	    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
-	    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
-		
-	    request.setAttribute("list", list);
-	    request.setAttribute("interest", interest);
-	    request.setAttribute("local", local);
-	    request.setAttribute("pi", pi);
-		
-	    request.getRequestDispatcher("views/sell/sellBoard.jsp").forward(request, response);
 		
 
 	}

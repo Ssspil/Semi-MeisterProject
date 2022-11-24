@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.Attachment;
 import com.kh.sellboard.model.service.SellBoardService;
@@ -29,6 +30,15 @@ public class SellDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 로그인이 된 상태가 아니면 실행 안되게 하는 것.
+	    if( request.getSession().getAttribute("loginUser") == null) {
+	    	HttpSession session = request.getSession();
+	    	session.setAttribute("errorMsg", "회원가입 후 이용하실 수 있습니다.");
+	        request.getRequestDispatcher("views/member/loginForm.jsp").forward(request, response);
+	        
+	        return;
+	    }
 		
 		int sellNo = Integer.parseInt(request.getParameter("sno"));
 		

@@ -39,7 +39,7 @@ public class MyPageController extends HttpServlet {
 		MemberService mService = new MemberService();
 		
 		Member m = mService.selectMember(userNo);
-		Attachment at = mService.selectAttachment(userNo);		
+		Attachment at = mService.selectAttachment(userNo, 5);		
 			
 		request.setAttribute("b", m);
 		request.setAttribute("at", at);

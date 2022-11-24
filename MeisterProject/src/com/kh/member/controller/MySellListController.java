@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +13,19 @@ import javax.servlet.http.HttpSession;
 import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.sellboard.model.vo.SellBoard;
 
 /**
- * Servlet implementation class ProfileEditController
+ * Servlet implementation class MySellListController
  */
-@WebServlet("/profile.me")
-public class ProfileEditController extends HttpServlet {
+@WebServlet("/sellList.se")
+public class MySellListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileEditController() {
+    public MySellListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +35,30 @@ public class ProfileEditController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNum"));
+		int userNo = loginUser.getUserNo();
+		ArrayList<String> interest = new ArrayList<String>();
+		ArrayList<String> local = new ArrayList<String>();
 		
+		ArrayList<SellBoard> s = new MemberService().getMySellBoard(userNo);
+		ArrayList<Attachment> at = new ArrayList<Attachment>();		
 		
-		MemberService mService = new MemberService();
-		
-		Member m = mService.selectMember(userNo);
-		Attachment at = mService.selectAttachment(userNo, 5);
-		
-		if(m != null) {			
-			
-			request.setAttribute("b", m);
-			request.setAttribute("at", at);
-			
-			request.getRequestDispatcher("views/member/profileEditPage.jsp").forward(request, response);
-			
-		} else { // 에러페이지
-			request.setAttribute("errorMsg", "게시글 상세조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
+		for(int i = 0; i < s.size(); i++) {
+			interest.addAll(new MemberService().selectInterest(s.get(i).getInterestNo()));
+			local.addAll(new MemberService().selectLocal(s.get(i).getLocalNo()));
+			at.add(new MemberService().selectAttachment(s.get(i).getSellNo(), 2));
 		}
+		
+			
+		request.setAttribute("s", s);
+		request.setAttribute("at", at);
+		
+		System.out.println(s);
+		System.out.println(at);
+		System.out.println(interest);
+		System.out.println(local);
+		request.getRequestDispatcher("views/mypagein/myPageInSellList.jsp").forward(request, response);
 	}
 
 	/**
