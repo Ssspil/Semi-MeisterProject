@@ -324,4 +324,19 @@ public class BoardService {
 		return result;
 	}
 
+	/**
+	 * 게시글 전체 다 가져오는 메소드
+	 * @return
+	 */
+	public ArrayList<Board> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectAllList(conn);
+		
+		JDBCTemplate.close();
+		
+		return list;
+	}
+
 }

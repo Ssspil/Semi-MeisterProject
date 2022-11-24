@@ -849,5 +849,43 @@ public class BoardDao {
 		}
 		return result;
 	}
+
+	public ArrayList<Board> selectAllList(Connection conn) {
+		ArrayList<Board> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			Board b = null;
+			
+			while(rset.next()) {
+				b = new Board(
+								rset.getString("BOARD_TITLE"),
+								rset.getString("BOARD_CONTENT"),
+								rset.getInt("BOARD_COUNT"), 
+								rset.getInt("BOARD_RECOMMEND"),
+								rset.getInt("REPLY_COUNT"));
+				
+				
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
 	
 }

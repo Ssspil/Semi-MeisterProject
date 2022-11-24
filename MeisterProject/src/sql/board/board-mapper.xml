@@ -289,4 +289,17 @@
 	 	WHERE BOARD_NO = ?
 	</entry>
 	
+		<!-- 게시글 전체 가져오는 쿼리문 -->
+	<entry key="selectAllList">
+		SELECT BOARD_TITLE,
+			   BOARD_CONTENT,
+			   BOARD_COUNT,
+			   BOARD_RECOMMEND,
+			   REPLY_COUNT
+		FROM BOARD B
+		LEFT OUTER JOIN REPLY R USING(BOARD_NO)
+		WHERE B.STATUS = 'Y'
+		ORDER BY BOARD_DATE DESC
+	</entry>
+	
 </properties>
