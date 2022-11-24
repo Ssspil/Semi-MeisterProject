@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
+import com.kh.sellboard.model.service.SellBoardService;
+import com.kh.sellboard.model.vo.SellBoard;
 
 /**
  * Servlet implementation class MainPageLoadController
@@ -34,10 +36,13 @@ public class MainPageLoadController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Board> list = new BoardService().selectAllList();
+		ArrayList<SellBoard> sellList = new SellBoardService().selectAllList();
+		
 		
 		System.out.println("index.jsp 와서 바로 main.jsp로 포워딩");
 		
 		request.setAttribute("list", list);
+		request.setAttribute("sellList",sellList);
 		
 		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
 		
