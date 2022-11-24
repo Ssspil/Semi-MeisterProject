@@ -163,20 +163,19 @@ body {
     outline-color: rgb(248, 162, 3);
     border: solid;
     border-radius: 12px;
-    
 }
 .btn1:hover {
 	background-color: orange;
     color: white;
+    text-decoration: none;
 }
-.btn1[data-d-1] .btn1 {
+.btn1[data-d-1]{
 	border: none;
 	height: 1.5rem;
 	margin: 0 0 0 1.25rem;
 	white-space: nowrap;
 	cursor: pointer;
 	font-weight: 400;
-	text-decoration: none;
 }
 
 .bin {
@@ -446,7 +445,6 @@ body {
 #report1 {
 	background-color: white;
     color: #dc5555;
-    outline-color: rgb(248, 162, 3);
     border: solid;
     border-radius: 12px;
     text-decoration: none;
@@ -460,7 +458,6 @@ body {
 #btn2 {
 	background-color: white;
     color: #dc5555;
-    outline-color: rgb(248, 162, 3);
     border: solid;
     border-radius: 12px;
     text-decoration: none;
@@ -470,52 +467,23 @@ body {
     color: white;
 }
 
-#btn {
-    width: 200px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    margin: 20px;
-    height: 55px;
-    text-align:center;
-    border: none;
-    background-size: 300% 100%;
 
-    border-radius: 50px;
-    moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
-
-#btn:hover {
-    background-position: 100% 0;
-    moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
-
-.btn-hover:focus {
-    outline: none;
-}
 /* 목록 버튼 */
 #btn {
-/* 	background-color: white; */
-/* 	height: 30px; */
-/* 	color: orange; */
-/* 	outline-color: rgb(248, 162, 3); */
-/* 	border: solid; */
-/* 	border-radius: 12px; */
-/* 	text-decoration: none; */
-/* 	font-weight: bold; */
+	background-color: white;
+ 	color: orange; 
+ 	outline-color: rgb(248, 162, 3); 
+ 	border: solid; 
+ 	border-radius: 10px;
+ 	text-decoration: none; 
+ 	font-weight: bold; 
+ 	font-size: 18px;
 }
 
-/* #btn:hover { */
-/* 	background-color: orange; */
-/* 	color: white; */
-/* } */
+#btn:hover { 
+ 	background-color: orange; 
+ 	color: white; 
+ } 
 </style>
 </head>
 <body class="bdy">
