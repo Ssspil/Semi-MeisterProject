@@ -327,5 +327,14 @@ public class BoardService {
 		
 		return list;
 	}
+	public ArrayList<Board> selectBoardList() {
+		Connection conn = getConnection();
+
+		ArrayList<Board> list = new BoardDao().selectBoardList(conn);
+
+		close();
+
+		return list;
+	}
 
 }

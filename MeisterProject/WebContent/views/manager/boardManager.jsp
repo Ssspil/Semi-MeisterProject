@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.board.model.vo.*, java.util.ArrayList, com.kh.common.model.vo.PageInfo" 
+    pageEncoding="UTF-8"  import="com.kh.board.model.vo.*, java.util.ArrayList" 
 %>
     
     
@@ -7,7 +7,6 @@
     String contextPath = request.getContextPath();
 	
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
-	
 
 %>
 <!DOCTYPE html>
@@ -157,7 +156,7 @@ table>tfoot>tr:hover{
 						</tbody>
 						
 						<tfoot>
-					    <% for(Member m : blacklist) { %>
+					    <% for(int i= 0; i<list.size(); i++) { %>
 					    	<% if( blacklist.isEmpty() ) { %>
 					    	<tr>
 					    		<td colspan="8">블랙 컨슈머가 없습니다.</td>
@@ -171,8 +170,8 @@ table>tfoot>tr:hover{
 							           <input type="checkbox" name="user" id="<%=m.getUserNo() %>" value="<%=m.getUserNo() %>" onclick="singleCheck();">
 							      </td>
 							      
-							      <td><%= b.getBoardNo() %></td>
-							      <td><%= m.getUserId() %></td>
+							      <td><%=list.get(i).getBoardNo()%></td>
+							      <td><%=list.get(i).getUserId()%></td>
 							      <td>
 							      <% if (m.getUserName() == null ) { %>
 							      	x
@@ -186,9 +185,9 @@ table>tfoot>tr:hover{
 							      <td class="status">
 							      <% if ((m.getBlackList()).equals("Y"))  { %>
 							      	제적
-							      <% } %>
+							      <% } } %>
+				
 							      </td> 
-					
 						    </tr>
 						    
 						  	<script>

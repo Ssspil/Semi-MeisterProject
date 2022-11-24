@@ -888,5 +888,44 @@ public class BoardDao {
 		
 		return list;
 	}
+	public ArrayList<Board> selectBoardList(Connection conn) {
+		ArrayList<Board> board = new ArrayList<Board>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectBoardList");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+
+			rset = psmt.executeQuery();
+
+			while (rset.next()) {
+				Board b = new Board(rset.getInt("USER_NO"),
+						rset.getInt("BOARD_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("NICKNAME"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getString("BOARD_DATE"));
+						
+						
+				board.add(b);
+	
+				
+			
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+
+		return board;
+	}
 	
 }

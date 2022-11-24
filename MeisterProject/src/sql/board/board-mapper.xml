@@ -303,4 +303,19 @@
 		ORDER BY BOARD_DATE DESC
 	</entry>
 	
+	<entry key="selectBoardList">
+    SELECT
+    USER_NO,
+    B.BOARD_NO,
+    M.USER_ID,
+    M.NICKNAME,
+    B.BOARD_TITLE,
+    B.BOARD_DATE,
+    B.BOARD_CONTENT,
+    B.STATUS
+    FROM BOARD B
+    JOIN MEMBER M USING(USER_NO)
+    WHERE B.STATUS = 'Y'
+	</entry>
+	
 </properties>

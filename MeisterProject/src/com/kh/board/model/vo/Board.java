@@ -12,9 +12,16 @@ public class Board {
    private String titleImg;
    private int replyCount;   // 커뮤니티 게시판에 썸네일 표시용
    private String memberNic;
+   private String userId;
    
    
-   public Board() {
+   public String getUserId() {
+	return userId;
+}
+public void setUserId(String userId) {
+	this.userId = userId;
+}
+public Board() {
 	   
    }
    // 이이수 hot list
@@ -120,12 +127,18 @@ public class Board {
 		this.boardRecommend = boardRecommend;
 		this.replyCount = replyCount;
 	}
-   
-   
-   
-   
-   
- 
+
+ // BoardList
+	public Board(int boardNo,int userNo,String userId, String memberNic,String boardTitle, String boardContent, String boardDate) {
+	super();
+	this.boardNo = boardNo;
+	this.userNo = userNo;
+	this.userId = userId;
+	this.memberNic = memberNic;
+	this.boardTitle = boardTitle;
+	this.boardContent = boardContent;
+	this.boardDate = boardDate;
+}
 	public int getReplyCount() {
 		return replyCount;
 	}
@@ -218,7 +231,7 @@ public void setReplyCount(int replyCount) {
    public String toString() {
       return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardType=" + boardType +", boardContent=" + boardContent
             + ", boardCount=" + boardCount + ", boardRecommend=" + boardRecommend + ", boardDate=" + boardDate
-            + ", status=" + status + ", userNo=" + userNo + ", titleImg=" + titleImg + ", replyCount=" + replyCount + "]";
+            + ", status=" + status + ", userNo=" + userNo + ",userId=" + userId + ", titleImg=" + titleImg + ", replyCount=" + replyCount + "]";
    }
 
    public String getMemberNic() {

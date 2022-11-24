@@ -23,6 +23,7 @@ public class Member {
 	private Date blackenrollDate;
 	private String reason;
 	
+	
 	// 기본 생성자
 	public Member() {
 		

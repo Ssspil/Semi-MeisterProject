@@ -1,4 +1,4 @@
-package com.kh.manager.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -43,8 +44,9 @@ public class BoardListController extends HttpServlet {
 	        return;
 	    }
 	    
-	    ArrayList
-	    
+	    ArrayList<Board> list = new BoardService().selectBoardList();
+		request.setAttribute("list",list);
+		
 	    
 		request.getRequestDispatcher("views/manager/boardManager.jsp").forward(request, response);
 	
