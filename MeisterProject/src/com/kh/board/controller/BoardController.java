@@ -77,9 +77,9 @@ public class BoardController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
+//		페이징 처리2
 		listCount = new BoardService().selectListCount(2, keyword2);
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));

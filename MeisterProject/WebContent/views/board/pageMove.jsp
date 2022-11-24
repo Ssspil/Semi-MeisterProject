@@ -156,12 +156,9 @@ position: relative;
                 </div>
                <%} %>
                <div class="page_wrap2">
-				<%-- <% if (currentPage2 != 1) { %>
-				<span>&lt&lt</span>
-				<% }%> --%>
-				<%-- <% if (startPage2 != 1) { %> --%>
+	
 				<span onclick="pageMove2('pre')">&lt</span>
-				<%-- <% }%> --%>
+			
 				<% for (int i = startPage2; i <= endPage2; i++) {
 					if (i == currentPage2) { %>
 				<span class="page2<%=i%> sel" onclick="pageMove2('<%=i%>')">[<%=i%>]
@@ -171,13 +168,8 @@ position: relative;
 				</span>
 				<% } %>
 				<% } %>
-
-				<%-- <% if (currentPage2 != endPage2) { %> --%>
 				<span onclick="pageMove2('next')">&gt</span>
-				<%-- <% }%> --%>
-				<%-- <% if (currentPage2 != maxPage2) { %>
-				<span>&gt&gt</span>
-				<% }%> --%>
+				
 				
 				
 			</div>

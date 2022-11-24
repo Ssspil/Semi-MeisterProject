@@ -64,8 +64,29 @@ public class MycommunityController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		listCount = new BoardService().selectListCount2(2);
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
+	
+		pageLimit = 10;
+		
+		boardLimit = 6;
+	
+		maxPage = 11;
+
+		maxPage = (int)Math.ceil((double)listCount/ boardLimit);
+		
+		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi2 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
@@ -77,6 +98,7 @@ public class MycommunityController extends HttpServlet {
 		
 		ArrayList<Reply> list2 = new BoardService().myReply(userNo);
 		request.setAttribute("list2",list2);
+		request.setAttribute("pi2", pi2);
 		
 	
 		
