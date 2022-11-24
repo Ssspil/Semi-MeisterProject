@@ -290,7 +290,8 @@
 	
 		<!-- 게시글 전체 가져오는 쿼리문 -->
 	<entry key="selectAllList">
-		SELECT BOARD_TITLE,
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
 			   BOARD_CONTENT,
 			   BOARD_COUNT,
 			   BOARD_RECOMMEND,

@@ -868,6 +868,7 @@ public class BoardDao {
 			
 			while(rset.next()) {
 				b = new Board(
+								rset.getInt("BOARD_NO"),
 								rset.getString("BOARD_TITLE"),
 								rset.getString("BOARD_CONTENT"),
 								rset.getInt("BOARD_COUNT"), 
