@@ -172,22 +172,17 @@ table>tfoot>tr:hover{
 							      
 							      <td><%=list.get(i).getBoardNo()%></td>
 							      <td><%=list.get(i).getUserId()%></td>
-							      <td>
-							      <% if (m.getUserName() == null ) { %>
-							      	x
-							      <% }  else { %>
-							      	<%= m.getUserName() %>
-							      <% } %>
-							      </td>
-							      <td><%= m.getNickName() %></td>
-							      <td><%= b.getBoardTitle() %></td>
-							      <td><%= b.getBoardDate() %></td>
-							      <td class="status">
-							      <% if ((m.getBlackList()).equals("Y"))  { %>
-							      	제적
-							      <% } } %>
+							      <td><%=list.get(i).getMemberNic() %></td>
+							      <td><%=list.get(i).getBoardTitle() %></td>
+							      <td><%=list.get(i).getBoardDate() %></td>
+							      <td><%=list.get(i).getBoardContent() %></td>
+							      
+<!-- 							      <td class="status"> -->
+<%-- 							      <% if ((m.getBlackList()).equals("Y"))  { %> --%>
+<!-- 							      	제적 -->
+<%-- 							      <% } } %> --%>
 				
-							      </td> 
+<!-- 							      </td>  -->
 						    </tr>
 						    
 						  	<script>
