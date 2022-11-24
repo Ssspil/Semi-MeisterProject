@@ -151,6 +151,52 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
     	return list;
     	
     }
+
+	// 판매게시판 검색 리스트와 페이징처리
+	public ArrayList<SellBoard> selectSearchSellBoardList(Connection conn, PageInfo pi , String search ){
+		
+		ArrayList<SellBoard> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSearchSellBoardList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			
+			psmt.setString(1, "%"+search+"%");
+			psmt.setString(2, "%"+search+"%");
+			psmt.setInt(3, startRow);
+			psmt.setInt(4, endRow);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new SellBoard(rset.getInt("SELL_NO"),
+										rset.getString("SELL_TITLE"),
+										rset.getInt("PRICE"),
+										rset.getInt("SELL_RECOMMEND"),
+										rset.getDate("SELL_DATE"),
+										rset.getInt("INTEREST_NO"),
+										rset.getInt("LOCAL_NO"),
+										rset.getString("NICKNAME"),
+										rset.getString("TITLEIMG")));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);
+		}
+		return list;
+		
+	}
+
     
     // 카테고리 관심사
 	public ArrayList<Interest> selectInterestCategory(Connection conn) {

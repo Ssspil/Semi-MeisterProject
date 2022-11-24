@@ -39,6 +39,19 @@ public class SellBoardService {
 		return list;
 		
 	}
+	
+	// 판매게시판 검색 리스트와 페이징처리
+	public ArrayList<SellBoard> selectSearchSellBoardList(PageInfo pi , String search){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<SellBoard> list = new SellBoardDao().selectSearchSellBoardList(conn, pi, search);
+		
+		close();
+		
+		return list;
+		
+	}
 
 	// 카테고리 관심사
 	public ArrayList<Interest> selectInterestCategory() {

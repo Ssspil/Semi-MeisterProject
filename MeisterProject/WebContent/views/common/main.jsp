@@ -24,55 +24,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
-.community-area a{
-	color : black;
-	decoration : none;
-}
-.community-area a:hover{
-	color : black;
-	text-decoration:none
-}
-.community-main {
-	margin : auto;
-	width : 70%;
-	height : 100%;
-	decoration : none;
-}
-.headtext {
-	font-weight : 700;
-	font-size : 28px;
-	width : 206px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-inline-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 1;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-.bodytext {
-	width : 300px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-inline-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 5;
-	font-family: 'Nanum Gothic', sans-serif;
-}
 
-.area1, .area2 {
-	border-radius : 30px;
-	box-shadow : 2px 2px skyblue;
-}
-
-.area1:hover, .area2:hover{
-	background-color : lightgrey;
-	box-shadow : 2px 2px orange;
-	cursor : pointer;
-}
-.smalltext-nav {
-	color : lightgrey;
-	font-size : 12px;
-}
 </style>
 
 </head>
@@ -147,11 +99,19 @@
               <use class="close" xlink:href="#close" x="511" y="300"/>
           </g>
         </svg>
-        <input id="search" name="mainSearch" autocomplete="off" maxlength="32"></input>
+        <input id="search" type="text" name="search" autocomplete="off" maxlength="32" onkeypress="if( event.keyCode == 13 ){ searchData1();}" />
+ 
         <!-- partial -->
       </div>
       <!-- 메인 검색창  끝-->
-      
+      <script>
+              function searchData1(){
+        	
+        	console.log($('#search').val());
+        	
+        	location.href="<%= contextPath %>/market.se?search="+$('#search').val();
+		}
+       </script>
       
       
       <div class="icon-area">
