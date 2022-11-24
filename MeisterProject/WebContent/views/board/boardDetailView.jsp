@@ -532,7 +532,7 @@ body {
                             <div data-h-1 data-g-1 class="body-image">
                                 <ul data-h-1 class="image-wrapper">
                                     <li data-h-1 class="image-list">
-  										<img data-h-1 class="image" src="<%=contextPath%>/<%=at.getFilePath()%>/<%=at.getChangeName()%>"> <!-- 이미지 임시용 -->
+  										<img data-h-1 class="image" src="<%=contextPath%>/<%=at.getFilePath()%>/<%=at.getChangeName()%>">
                                     </li>
                                 </ul>
                             </div>
