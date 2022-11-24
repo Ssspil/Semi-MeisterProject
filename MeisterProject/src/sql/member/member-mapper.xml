@@ -82,12 +82,6 @@
 		WHERE NICKNAME = ?
 	</entry>
 	
-	<entry key="idCheck">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE USER_PWD = ? AND USER_NO = ?
-	</entry>
-	
 	<entry key="expertSubmit">
 		UPDATE MEMBER
 		SET USER_NAME = ?,
@@ -252,5 +246,17 @@
 			   FILE_PATH
 	   	FROM ATTACHMENT
 	   	WHERE FILE_LEVEL = 5
+	</entry>
+	
+	<entry key="changePwd">
+		UPDATE MEMBER
+		SET USER_PWD = ?
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE MEMBER
+		SET STATUS = 'N'
+		WHERE USER_NO = ?
 	</entry>
 </properties>

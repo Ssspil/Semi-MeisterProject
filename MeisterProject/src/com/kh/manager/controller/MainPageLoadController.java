@@ -38,7 +38,11 @@ public class MainPageLoadController extends HttpServlet {
 		System.out.println("index.jsp 와서 바로 main.jsp로 포워딩");
 		
 		request.setAttribute("list", list);
+		
 		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
+		
+			
+		
 	}
 
 	/**

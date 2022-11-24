@@ -354,10 +354,10 @@ public class BoardDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			
-			psmt.setString(1, at.getOriginName());
-			psmt.setString(2, at.getChangeName());
-			psmt.setString(3, at.getFilePath());
+			psmt.setInt(1, at.getRefNo());
+			psmt.setString(2, at.getOriginName());
+			psmt.setString(3, at.getChangeName());
+			psmt.setString(4, at.getFilePath());
 
 			result = psmt.executeUpdate();
 
@@ -868,7 +868,9 @@ public class BoardDao {
 			
 			while(rset.next()) {
 				b = new Board(
+								rset.getInt("BOARD_NO"),
 								rset.getString("BOARD_TITLE"),
+								rset.getInt("BOARD_TYPE"),
 								rset.getString("BOARD_CONTENT"),
 								rset.getInt("BOARD_COUNT"), 
 								rset.getInt("BOARD_RECOMMEND"),

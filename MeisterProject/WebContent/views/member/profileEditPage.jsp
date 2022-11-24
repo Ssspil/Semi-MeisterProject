@@ -46,9 +46,15 @@
     	width:700px;
     	height:350px;
     }
+    #ex2{
+    	width:700px;
+    	height:350px;
+    }
+    #warning{
+    	line-height: 40px;
+    }
     #newPwd>input{
     	margin-top: 30px;
-    	margin-bottom: 50px;
     	margin-left: 15px;
     	float: left;
     }
@@ -57,11 +63,21 @@
     	background-color: inherit;
     }
     #oldPwd>input{
-    	margin-top: 40px;
+    	margin-top: 30px;
     	margin-left: 15px;
     	float: left;
     }
     #oldPwdText{
+    	border: none;
+    	background-color: inherit;
+    }
+    #newPwd2>input{
+    	margin-top: 30px;
+    	margin-bottom: 50px;
+    	margin-left: 15px;
+    	float: left;
+    }
+    #newPwdText2{
     	border: none;
     	background-color: inherit;
     }
@@ -72,9 +88,29 @@
     }
     #btnC{
     	width:100px;
-    	height:50px;
+    	height:30px;
     	background-color: inherit;
-    	border: 3px solid black;
+    	border: 1px solid black;
+    }
+    #pwd>input{
+    	margin-top: 5px;
+    	margin-left: 15px;
+    	float: left;
+    }
+    #pwdText{
+    	border: none;
+    	background-color: inherit;
+    }
+    h6{
+    	margin-left: 18px;
+    }
+    #btnDelete{
+    	width:100px;
+    	height:30px;
+    	background-color: inherit;
+    	margin-left: 150px;
+    	margin-top: 20px;
+    	border: 1px solid black;
     }
 </style>
 </head>
@@ -84,6 +120,7 @@
 	<%
 		int userNo = loginUser.getUserNo();
 		String userId = loginUser.getUserId();
+		String password = loginUser.getUserPwd();
 		String userName = " ";
 		if(userName != null){
 			userName = loginUser.getUserName();
@@ -267,7 +304,81 @@
 	    			console.log("닉네임 중복체크용 ajax통신 실패");
 	    		}
 	    	})
-	    }		
+	    }
+	    function show() {
+		      $("#ex1").modal({
+		        fadeDuration: 1000,
+		        fadeDelay: 0.25,
+		      });
+		}
+	    function show2() {
+		      $("#ex2").modal({
+		        fadeDuration: 1000,
+		        fadeDelay: 0.25,
+		      });
+		}
+	    
+		$(function(){	
+			$("#oldPwd").keyup(function(){
+				if($("#oldPwdInput").val() != "<%=password%>"){
+					$("#oldPwdInput").css({"border": "2px solid crimson"});
+				}
+				else{
+					$("#oldPwdInput").css({"border": "2px solid green"});
+				}
+			});
+			
+			$("#newPwd2").keyup(function(){
+				let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+				if($("#newPwdInput").val() != $("#newPwdInput2").val()){
+					console.log("Diff");
+					$("#newPwdInput2").css({"border": "2px solid crimson"});
+				}
+				else{
+					if(!regExp.test($("#newPwdInput").val())) {
+					    console.log("Reg");
+					    $("#newPwdInput").css({"border": "2px solid crimson"});
+					}
+					else{
+					    console.log("Corr");
+						$("#newPwdInput").css({"border": "2px solid green"});
+						$("#newPwdInput2").css({"border": "2px solid green"});
+					}
+				}
+			});
+		});
+		
+		function submitPwdCheck(e) {  
+			if($("#oldPwdInput").val() != "<%=password%>"){
+				event.preventDefault();
+       			alert("현재 비밀번호가 일치하지 않습니다");
+       			$('#oldPwdInput').focus();
+       			return false;
+			}
+			
+			if($("#oldPwdInput").val() == $("#newPwdInput").val()){
+       			event.preventDefault();
+       			alert("비밀번호를 다르게 입력해주세요");
+       			$('#newPwdInput2').focus();
+       			return false;
+       		} 
+			
+       		if($("#newPwdInput").val() != $("#newPwdInput2").val()){
+       			event.preventDefault();
+       			alert("두 비밀번호가 다릅니다");
+       			$('#newPwdInput2').focus();
+       			return false;
+       		}       		
+       		
+       		if(!regExp.test($("#newPwdInput").val())){
+       			event.preventDefault();
+       			alert("비밀번호의 형식이 잘못되었습니다");
+       			$('#newPwdInput').focus();
+       		}    
+       		else{
+       			return true;
+       		}
+    	}
 	</script>
 	<form action="<%=contextPath %>/update.me" method="post" onsubmit="submitCheck();" enctype="multipart/form-data">
 		<div class="outer">
@@ -341,84 +452,52 @@
 			
 			<h5><b><a href="javascript:show()" style="text-decoration:none; color:black; line-height:40px">&nbsp;비밀번호 변경</a></b></h5>
 			<hr>
-			<h5><b><a href="<%=contextPath %>/??" style="text-decoration:none; color:red; line-height:40px">&nbsp;회원탈퇴</a></b></h5>
+			<h5><b><a href="javascript:show2()" style="text-decoration:none; color:red; line-height:40px">&nbsp;회원탈퇴</a></b></h5>
 		</div>
 	</form>
 	<div id="ex1" class="modal">
 		<h3>비밀번호 변경</h3>
 		<hr>
-		<form action="<%=contextPath %>/pwdChange.me" method="post">
+		<form action="<%=contextPath %>/pwdChange.me" method="post" onsubmit="submitPwdCheck();">
 			<input type="hidden" id="userNo" name="userNo" value="<%=userNo %>">
 			<div id="oldPwd">
 				<input id="oldPwdText" name="oldPwdText" type="text" value="현재 비밀번호 : " size="15" disabled>
-				<input id="oldPwdInput" name="oldPwdInput" type="password" size="20" required onkeyup="pwdCheck();">
+				<input id="oldPwdInput" name="oldPwdInput" type="password" size="20" required>
 			</div>
 			<div id="newPwd">
 				<input id="newPwdText" type="text" value="새로운 비밀번호 : " size="15" disabled>
-				<input id="newPwdInput" type="password" size="20" required>
+				<input id="newPwdInput" name="newPwdInput" type="password" size="20" required>
+			</div>
+			<div id="newPwd2">
+				<input id="newPwdText2" type="text" value="비밀번호 재입력 : " size="15" disabled>
+				<input id="newPwdInput2" name="newPwdInput2" type="password" size="20" required>
 			</div>
 			<br>
 			<div id="btnChange">
-				<font id="chkNotice" size="3"></font>
 				<button id="btnC" type="submit">변경하기</button>
 			</div>
 		</form>
 	</div>	
-	<script>
-	      function show() {
-	        $("#ex1").modal({
-	          fadeDuration: 1000,
-	          fadeDelay: 0.25,
-	        });
-	      }
-	</script>
-	<script>
-	    $(function(){
-		    $("#oldPwd").keyup(function(){
-		      $("#chkNotice").html("");
-		    });
-			
-			$("#newPwd").keyup(function(){
-				let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-				if($("#oldPwdInput").val() != $("#newPwdInput").val()){
-					console.log("Diff");
-					$("#newPwdInput").css({"border": "2px solid crimson"});
-			    }
-				else{
-				    if(!regExp.test($("#oldPwdInput").val()) || !regExp.test($("#newPwdInput").val())) {
-				    	console.log("Reg");
-				    	$("#newPwdInput").css({"border": "2px solid orange"});
-					}
-				    else{
-				    	console.log("Corr");
-						$("#newPwdInput").css({"border": "2px solid green"});				    	
-				    }
-				}
-			});
-	    });
-	</script>
-	<script>
-		function pwdCheck(){
-			$.ajax({
-	    		url : "checkPwd.me",
-	    		method : "post",
-	    		data : {password : oldPwdInput, userNo : userNo},
-	    		success : function(result) {
-	    			console.log(result);
-	    			if(result == "NNNNN") {
-	    				$("#newPwdInput").css({"border": "2px solid crimson"});		
-	    			} else {
-	    				$("#newPwdInput").css({"border": "1px solid black"});
-	    			}
-	    		},
-	    		error : function() {
-	    			console.log("닉네임 중복체크용 ajax통신 실패");
-	    		}
-	    	})
-		}
-	</script>
 
-	
+	<div id="ex2" class="modal">
+		<h3>회원 탈퇴</h3>
+		<hr>
+		<form action="<%=contextPath %>/deleteMember.me" method="post">
+			<input type="hidden" id="userNo" name="userNo" value="<%=userNo %>">
+			<h4 id="warning"><b>※ 회원 탈퇴시 <font color="red">모든 정보</font>
+			가 삭제되며<br> 삭제된 데이터는 복구되지 않습니다.</b></h4>
+			<br><br>
+			<h6>탈퇴를 원하신다면 <font color="red">비밀번호</font>를 입력해주세요</h6>
+			<div id="pwd">
+				<input id="pwdText" name="pwdText" type="text" value="* 비밀번호 : " size="10" disabled>
+				<input id="pwdInput" name="pwdInput" type="password" size="20" required>
+			</div>
+			<br><br>
+			<div id="btnDel">
+				<button id="btnDelete" type="submit">탈퇴하기</button>
+			</div>
+		</form>
+	</div>	
 	<hr>
 	<%@include file="../common/footer.jsp" %>
 </body>
