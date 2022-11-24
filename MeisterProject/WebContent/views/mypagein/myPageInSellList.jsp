@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-   
+    pageEncoding="UTF-8" import ="com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList"%>
+<%
+    String cssPath = request.getContextPath();
+	ArrayList<SellBoard> s = (ArrayList<SellBoard>) request.getAttribute("s");
+	ArrayList<Attachment> at = (ArrayList<Attachment>) request.getAttribute("at");
+	if(at == null){
+		at.add(new Attachment());
+	}
+%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,12 +101,12 @@ height: 50px;
         <div id="contenthead"></div>
         <div id="main2">                                                  
         <div id="sellboard">
-        <span id="category">분야>운동</span>
-            <img src="resources/image/peng.jpg" id="img">
+        <span id="category">분야><%=s.get(1).getInterestNo() %></span>
+            <img src="<%=contextPath %>/<%=at.get(1).getFilePath() %>/<%=at.get(1).getChangeName() %>" id="img">
             <br><br>
-            <div id="title">재능판매글 제목</div>
+            <div id="title"><%=s.get(1).getSellTitle() %></div>
             <br>
-            <div id="price">300.000원</div>
+            <div id="price"><%=s.get(1).getPrice() %>원</div>
 		</div>
         <div id="sellboard">
         <span id="category">분야>운동</span>

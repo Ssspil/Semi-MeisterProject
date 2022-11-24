@@ -143,4 +143,18 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- 메인페이지에 보일 쿼리문 -->
+	<entry key="selectAllList">
+		SELECT SELL_TITLE,
+			   SELL_CONTENT,
+			   PRICE,
+			   INTEREST_NO,
+			   FILE_PATH || CHANGE_NAME TITLEIMG,
+			   NICKNAME
+		FROM SELL S
+		JOIN MEMBER M USING (USER_NO)
+		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
+        ORDER BY SELL_DATE DESC
+	</entry>
+	
 </properties>

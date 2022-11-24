@@ -1,11 +1,19 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.common.model.vo.Attachment;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+import com.kh.sellboard.model.vo.SellBoard;
 
 /**
  * Servlet implementation class MySellListController
@@ -26,7 +34,30 @@ public class MySellListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		int userNo = loginUser.getUserNo();
+		ArrayList<String> interest = new ArrayList<String>();
+		ArrayList<String> local = new ArrayList<String>();
+		
+		ArrayList<SellBoard> s = new MemberService().getMySellBoard(userNo);
+		ArrayList<Attachment> at = new ArrayList<Attachment>();		
+		
+		for(int i = 0; i < s.size(); i++) {
+			interest.addAll(new MemberService().selectInterest(s.get(i).getInterestNo()));
+			local.addAll(new MemberService().selectLocal(s.get(i).getLocalNo()));
+			at.add(new MemberService().selectAttachment(s.get(i).getSellNo(), 2));
+		}
+		
+			
+		request.setAttribute("s", s);
+		request.setAttribute("at", at);
+		
+		System.out.println(s);
+		System.out.println(at);
+		System.out.println(interest);
+		System.out.println(local);
 		request.getRequestDispatcher("views/mypagein/myPageInSellList.jsp").forward(request, response);
 	}
 

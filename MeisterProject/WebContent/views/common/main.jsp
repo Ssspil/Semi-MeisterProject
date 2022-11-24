@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList,
-    							com.kh.board.model.vo.*"%>
+    							com.kh.board.model.vo.*,
+    							com.kh.sellboard.model.vo.*"%>
 <%
 	ArrayList<Board> list =	(ArrayList<Board>) request.getAttribute("list");
+	ArrayList<SellBoard> sellList = (ArrayList<SellBoard>) request.getAttribute("sellList");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +26,26 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
-
+.sell-main{
+	height: 100%;
+}
+.area {
+	background-color : orange;
+	height : 100%;
+	width : 30%;
+	float : left;
+	margin-left : 2.5%;
+	padding-left : 3rem;
+	padding-top : 0.9rem;
+}
+.area:hover {
+	/* 카드형식으로 해보기*/
+}
+#sellImg{
+	width : 80%;
+	border-radius : 10px;
+	
+}
 </style>
 
 </head>
@@ -38,6 +59,7 @@
         <ul class="slides">
           <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
             <img src="./resources/image/main1.jpeg" alt="" />
+            <div class="centerText">ㅋㅋdsfasdfdas</div>
           </li>
           <li class="slide">
             <img src="./resources/image/main2.jpeg" alt="" />
@@ -60,9 +82,16 @@
     </div>
 
     </div>
+    	
     	<br>
       <!-- 메인 검색창 -->
+      <div>
+      	<div class="smalltext-nav" style="margin-left:15%;">
+      	검색창으로 바로가기↓<br><br>
+      	</div>
+      
       <div class="search-area">
+      	
         <svg class="close-search" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
           <defs>
             
@@ -103,9 +132,10 @@
  
         <!-- partial -->
       </div>
+     </div>
       <!-- 메인 검색창  끝-->
       <script>
-              function searchData1(){
+         function searchData1(){
         	
         	console.log($('#search').val());
         	
@@ -165,19 +195,27 @@
         <div class="smalltext-nav">
       		판매글로 바로가기↓ 
       	</div>
+      	<br>
       	<div class="sell-main">
-      		<div class="area1">
-      			<div class="community-main">
-      			zz
-      			</div>
-      		</div>
-      		<div class="area2">
+      		<% if (sellList.get(0) != null || sellList.get(1) != null || sellList.get(2)!= null ) {%>
+      			<% for (int i = 0 ; i < 3; i++) { %>
+      			
+	      			<div class="area">
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
+	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
+	      				<span><%= sellList.get(i).getNickname() %></span><br>
+	      				<span><%= sellList.get(i).getPrice() %></span>
+	      			</div>
+	      		<%  } %>
+	      	<% } else { %>
+	      			등록된 게시물이 없습니다.
+	      	<% } %>
+
       		
-      		</div>
       	</div>
       </div>
       
-      <br>
+      <br><br>
       <div class="community-area">
       		<div class="smalltext-nav">
       			커뮤니티 최신글 ↓

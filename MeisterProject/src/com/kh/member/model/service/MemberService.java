@@ -7,6 +7,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberService {
 	
@@ -152,11 +153,11 @@ public class MemberService {
 			
 	}
 	
-	 public Attachment selectAttachment(int userNo) {
+	 public Attachment selectAttachment(int userNo, int fileLevel) {
 			
 			Connection conn = JDBCTemplate.getConnection();
 			
-			Attachment at = new MemberDao().selectAttachment(conn, userNo);
+			Attachment at = new MemberDao().selectAttachment(conn, userNo, fileLevel);
 			
 			JDBCTemplate.close();
 			
@@ -366,9 +367,35 @@ public class MemberService {
 	      
 	}   
 	   
+	public ArrayList<SellBoard> getMySellBoard(int userNo){
+		Connection conn = JDBCTemplate.getConnection();
+	      
+		ArrayList<SellBoard> result = new MemberDao().getMySellBoard(conn, userNo);
+	      	      
+	    JDBCTemplate.close();
+	      	     
+	    return result;
+	}
 	   
-	   
-	   
+	public ArrayList<String> selectInterest(int categoryNo){
+		Connection conn = JDBCTemplate.getConnection();
+	      
+		ArrayList<String> result = new MemberDao().selectInterest(conn, categoryNo);
+	      	      
+	    JDBCTemplate.close();
+	      	     
+	    return result;
+	}
+	
+	public ArrayList<String> selectLocal(int categoryNo){
+		Connection conn = JDBCTemplate.getConnection();
+	      
+		ArrayList<String> result = new MemberDao().selectLocal(conn, categoryNo);
+	      	      
+	    JDBCTemplate.close();
+	      	     
+	    return result;
+	}   
 	   
 	   
 	   

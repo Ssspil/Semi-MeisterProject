@@ -1,31 +1,25 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
-import com.kh.sellboard.model.service.SellBoardService;
-import com.kh.sellboard.model.vo.SellBoard;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class MainPageLoadController
+ * Servlet implementation class BoardListRemoveController
  */
-@WebServlet("/mainLoad.do")
-public class MainPageLoadController extends HttpServlet {
+@WebServlet("/boardRemove.ad")
+public class BoardListRemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageLoadController() {
+    public BoardListRemoveController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +29,17 @@ public class MainPageLoadController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Board> list = new BoardService().selectAllList();
-		ArrayList<SellBoard> sellList = new SellBoardService().selectAllList();
+		request.setCharacterEncoding("UTF-8");
 		
-		
-		System.out.println("index.jsp 와서 바로 main.jsp로 포워딩");
-		
-		request.setAttribute("list", list);
-		request.setAttribute("sellList",sellList);
-		
-		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
-		
-			
-		
+	    // 관리자가 아니면 실행 안되게 하는 것.
+	    if( !(request.getSession().getAttribute("loginUser") != null && 
+	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
+	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
+	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+	        
+	        return;
+	    }
+	
 	}
 
 	/**

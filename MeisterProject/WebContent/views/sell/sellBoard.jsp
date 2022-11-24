@@ -30,7 +30,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-
+<!-- fontawesome icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script>
         const IMP = window.IMP; 
         IMP.init("imp31080000"); 
@@ -123,6 +126,7 @@ h2{
     padding: 0;
     height: 100%;
     position: relative; /*z-index를 위한 기준 위치 */
+    z-index: 5;
     
 }
 #navi > li {
@@ -145,7 +149,8 @@ h2{
 /* 현재 보이는 목록의 글자들 (전체-마우스를 올렸을 때)*/
 #navi a:hover {
     font-size: 22px;
-    color: coral;
+    color: orange;
+    font-weight: 700;
 }
 #navi > li > ul {
     list-style-type: none;
@@ -154,21 +159,20 @@ h2{
 }
 /* 지역들 목록 보이게 하는 css*/
 #navi > li > ul a {
-    font-size: 18px;
+    font-size: 15px;
     margin-left: 110px;
     margin-top: -1px;
     background-color: rgb(253, 215, 184);
     color: black;
     font-weight: 350;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
    
 }
 #navi > li > ul a:hover {
-    font-size: 18px;
+    font-size: 15px;
     background-color: orange;
-    color: white;
-    
+    color: white;    
 }
 #navi > li > a:hover+ul {
     display: block;
@@ -179,42 +183,47 @@ h2{
 
 div.main{
     margin-left:10rem;
-	z-index : 200;
     display: inline-block;
 }
+
+/*썸네일 위치 설정*/
 div.main div{
    /* border : 1px solid red; */
     height: 250px;
     width : 250px;
-    margin : 15px 15px 100px 15px;
+    margin : 10px 15px 130px 15px;
     float : left;
     flex-wrap: nowrap; /*자동 줄 바꿈 처리*/
     font-size : 13px;
 
 }
-div.main > #thumb1{
-	 position : relative;
-}
 
-/*예시 위치
-div.main #title{
-	position : absolute;
-	display: inline;
-	bottom : 80px;
-	margin : 0 0 0 100px;
+div.thumbnail {
+	margin : 25px 15px 100px 15px;
 }
-div.main #price{
-	position : absolute;
-	display: inline;
-	bottom : 50px;
-	margin : 0 0 0 100px;
+/*마켓글 호버시 썸네일 크기 변경*/
+div.thumbnail #thumbImg{
+	transform : scale(1); 
+	-webkit-transform:scale(1);
+	z-index : -1;
 }
-*/
+div.thumbnail #thumbImg:hover{
+	transform : scale(1.05); 
+	-webkit-transform:scale(1.05);
+	z-index : -1;
+}
 
 /*금액 표시*/
 div.thumbnail b {
 	 color: orange;
 	 font-size : 17px;
+}
+
+p.heartIcon{
+	margin : 0px;
+	color: orange; 
+	font-size: 20px; 
+	text-align: right;
 }
 
 </style>
@@ -228,6 +237,7 @@ div.thumbnail b {
 		<h2>마켓</h2>
 		
 		<br>
+		<!------ 전문가/비전문가 글등록 버튼 유무  ------>
 		<div>
 		<%if(loginUser !=null && loginUser.getExpert().equals("Y")) { %>					
 			<a href="<%=contextPath%>/sellEnrollForm.se" id="sellEnrollBtn" class="btn btn-secondary">글 등록</a>
@@ -238,6 +248,7 @@ div.thumbnail b {
 		<br>
 		<br>
 		
+		<!---- 왼쪽 카테고리 메뉴바 ---->
 		<div class="navigator">		
 	        <ul id="navi">
 	        	<li class="list-1">
@@ -245,7 +256,7 @@ div.thumbnail b {
 	            </li>
 	        	<% for (Interest i : interest) { %> 
 	        	<li class="list-2">
-	       			<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>"  id="inter<%=i.getInterestNo() %>"> <%= i.getInterestName() %> </a>
+	       			<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>" > <%= i.getInterestName() %> </a>
 	       			<ul>
 	       				<% for (Local l : local) { %>
 	       					<li class="list-in-list">
@@ -259,6 +270,7 @@ div.thumbnail b {
 	        
 	    </div> 
 		
+		<!----- 메인 썸네일 ------>
 		<div class="main">
 		<% if(list.isEmpty()){ %>
 			<!-- 리스트가 비어있는 경우 -->
@@ -266,23 +278,29 @@ div.thumbnail b {
 		<% } else{ %>
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
+				
+						<!-- 찜 하트 아이콘 -->
+						<p class="heartIcon">
+							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>							
+						</p>
+						
 					<input type="hidden" value="<%=sb.getSellNo() %>">
-					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>"width="230px" height="210px">
+					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					
 					<p>
-					<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
-						관심사 : <%=sb.getInterestNo() %><br>							
-						지역 : <%= sb.getLocalNo() %><br>					
-					<img src="./resources/image/sell_price.png" width="20" height="20">
-					<c:set var = "price" value="<%= sb.getPrice() %>"/>
-					<b> <fmt:formatNumber value="${price }"  /> 원 </b>
+						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
+							관심사 : <%=sb.getInterestNo() %><br>							
+							지역 : <%= sb.getLocalNo() %><br>					
+						<img src="./resources/image/sell_price.png" width="25" height="25">
+						<c:set var = "price" value="<%= sb.getPrice() %>"/>
+						<b> <fmt:formatNumber value="${price }"  /> 원 </b> <br>
 					</p>
 				</div>
 			<% } %>
 			
 		<% } %>
 		
-		
+	
 		</div>
 		<script>
 			//썸네일 클릭 시 이동되는 주소
@@ -291,8 +309,50 @@ div.thumbnail b {
 					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
 				})	
 			});
-			
 		</script>
+			
+		<%-- <script>
+			$(document).on("click", "p.heart", (e) => { // 이벤트 인자/
+				e.preventDefault();// 한번 클릭후 다음 클릭 방지
+				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
+				$.ajax({
+					url : "sellBoardLike.se",
+					type : "post",
+					data : { boardNo : <%=s.getSellNo() %>, type : "I" },
+					success : function(data) {
+						if (data.result == 1) {
+							alert("좋아요가 등록되었습니다.");
+							$(".like > .text2").text("좋아요 " + data.recommend);
+						} else if (data.result == 2) {
+							if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) {
+								$.ajax({
+									url : "sellBoardLike.se",
+									type : "post",
+									data : { sellNo : <%=s.getSellNo() %>, type : "D" },
+									success : function(data) {
+										if (data.result == 1) {
+											alert("취소되었습니다.");
+											$(".like > .text2").text("좋아요 " + data.recommend);
+										} //if
+									}, //success
+									error : function() {
+										console.log("ERROR >> ");
+									} //error
+								}) //$.ajax
+							} //if
+						} else {
+							alert("오류가 발생했습니다.");
+						}
+					},
+					error : function() {
+						console.log("ERROR >> ");
+					},
+					done : function() {
+						likeBtn = true;
+					}
+				}); //$.ajax
+			}); //on.click 
+     	</script> --%>
 		
 		<button onclick="requestPay()">결제하기</button>
 
