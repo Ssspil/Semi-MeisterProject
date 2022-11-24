@@ -32,12 +32,7 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
-		
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String boardTitle = request.getParameter("boardTitle");
-		String boardContent = request.getParameter("boardContent");
 		
 	    // 관리자가 아니면 실행 안되게 하는 것.
 	    if( !(request.getSession().getAttribute("loginUser") != null && 
@@ -48,9 +43,7 @@ public class BoardListController extends HttpServlet {
 	        return;
 	    }
 	    
-	    Board b = new Board();
-	    b.setBoardTitle(boardTitle);
-	    b.setBoardContent(boardContent);
+	    ArrayList
 	    
 	    
 		request.getRequestDispatcher("views/manager/boardManager.jsp").forward(request, response);

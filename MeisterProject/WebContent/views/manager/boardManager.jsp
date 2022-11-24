@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, com.kh.board.model.vo.*, java.util.ArrayList, com.kh.common.model.vo.PageInfo" 
+    pageEncoding="UTF-8"  import="com.kh.board.model.vo.*, java.util.ArrayList, com.kh.common.model.vo.PageInfo" 
 %>
     
     
 <%
     String contextPath = request.getContextPath();
 	
-	Board b = (Board) request.getAttribute("b");
+	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	
 
 %>
@@ -171,7 +171,7 @@ table>tfoot>tr:hover{
 							           <input type="checkbox" name="user" id="<%=m.getUserNo() %>" value="<%=m.getUserNo() %>" onclick="singleCheck();">
 							      </td>
 							      
-							      <td name="boardNo"><%= b.getBoardNo() %></td>
+							      <td><%= b.getBoardNo() %></td>
 							      <td><%= m.getUserId() %></td>
 							      <td>
 							      <% if (m.getUserName() == null ) { %>
