@@ -5,6 +5,10 @@
    	Board b = (Board) request.getAttribute("b");
    	
 	Attachment at = (Attachment) request.getAttribute("at");
+	if(at == null)
+	{
+		at = new Attachment();
+	}
 %>
     
 <!DOCTYPE html>
@@ -224,7 +228,7 @@
 						<!-- 원본파일의 파일번호, 수정명을 hidden으로 넘길것. -->
 						<input type="hidden" name="originFileNo" value="<%= at.getFileNo() %>">
 						<input type="hidden" name="originFileName" value="<%= at.getChangeName() %>">
-					<% } %>	
+					<% } %>	 
                      <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
                      <label id="fileName"><%=at.getOriginName()%></label>
                   </div>
@@ -256,7 +260,7 @@
    
    <%@ include file="../common/footer.jsp" %>
    
-   
+  
       
    <script>
       function fileChange(){
