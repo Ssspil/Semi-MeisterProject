@@ -354,10 +354,10 @@ public class BoardDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			
-			psmt.setString(1, at.getOriginName());
-			psmt.setString(2, at.getChangeName());
-			psmt.setString(3, at.getFilePath());
+			psmt.setInt(1, at.getRefNo());
+			psmt.setString(2, at.getOriginName());
+			psmt.setString(3, at.getChangeName());
+			psmt.setString(4, at.getFilePath());
 
 			result = psmt.executeUpdate();
 
@@ -848,6 +848,46 @@ public class BoardDao {
 			close(psmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Board> selectAllList(Connection conn) {
+		ArrayList<Board> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			Board b = null;
+			
+			while(rset.next()) {
+				b = new Board(
+								rset.getInt("BOARD_NO"),
+								rset.getString("BOARD_TITLE"),
+								rset.getInt("BOARD_TYPE"),
+								rset.getString("BOARD_CONTENT"),
+								rset.getInt("BOARD_COUNT"), 
+								rset.getInt("BOARD_RECOMMEND"),
+								rset.getInt("REPLY_COUNT"));
+				
+				
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
 	}
 	
 }

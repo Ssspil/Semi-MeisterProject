@@ -20,12 +20,9 @@
    }
    #wrap {
 /*       background: black; */
-
-        
-
         height: 800px;
         margin: auto;
-          padding-top: 105px;
+        padding-top: 105px;
    }
    #wrap2{
       min-height: 700px;
@@ -56,7 +53,7 @@
 
     }
    #file {
-     box-sizing: border-box;
+   	  box-sizing: border-box;
       justify-content: center;
       height: 70px;
       width:1800px;
@@ -68,9 +65,8 @@
    }
    
    #file2 {
-  box-sizing: border-box;
-        margin: auto;
-       
+	  box-sizing: border-box;
+	  margin: auto;
    }
 
    .file2Wrap{
@@ -164,13 +160,13 @@
       
    }
    #btn {
-      background-color: white;
+   	  background-color: white;
       width: 100px;
       height: 45px;
-       color: orange;
-       outline-color: rgb(248, 162, 3);
-       border: solid;
-       border-radius: 12px;
+      color: orange;
+      outline-color: rgb(248, 162, 3);
+      border: solid;
+      border-radius: 12px;
    }
    #btn:hover {
       background-color: orange;

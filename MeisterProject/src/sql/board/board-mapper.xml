@@ -92,11 +92,11 @@
 	<!-- 게시글 글작성  쿼리문 -->
 	<entry key ="insertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO , REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
-		VALUES (SEQ_FNO.NEXTVAL, SEQ_BNO.CURRVAL , ? , ? , ?, 1)
+		VALUES (SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 1)
 	</entry>
 	
 	<entry key="insertNewAttachment">
-		INSERT INTO ATTACHMENT(FILE_NO, REF_BNO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
+		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH)
 		VALUES (SEQ_FNO.NEXTVAL, ?, ?, ?, ?)
 	</entry>
 	
@@ -104,8 +104,7 @@
 	<entry key="updateBoard">
 		UPDATE BOARD
 		SET BOARD_TITLE = ?,
-			BOARD_CONTENT = ?,
-		FROM BOARD
+			BOARD_CONTENT = ?
 		WHERE BOARD_NO = ?
 	</entry>
 	
@@ -287,6 +286,21 @@
 		SELECT COUNT(RED_NO) AS CNT
 	  	FROM RECOMMEND
 	 	WHERE BOARD_NO = ?
+	</entry>
+	
+		<!-- 게시글 전체 가져오는 쿼리문 -->
+	<entry key="selectAllList">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   BOARD_CONTENT,
+			   BOARD_COUNT,
+			   BOARD_RECOMMEND,
+			   REPLY_COUNT,
+			   BOARD_TYPE
+		FROM BOARD B
+		LEFT OUTER JOIN REPLY R USING(BOARD_NO)
+		WHERE B.STATUS = 'Y'
+		ORDER BY BOARD_DATE DESC
 	</entry>
 	
 </properties>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList,
     							com.kh.board.model.vo.*"%>
 <%
-	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("list");	
+	ArrayList<Board> list =	(ArrayList<Board>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,10 +24,19 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
+.community-area a{
+	color : black;
+	decoration : none;
+}
+.community-area a:hover{
+	color : black;
+	text-decoration:none
+}
 .community-main {
 	margin : auto;
 	width : 70%;
 	height : 100%;
+	decoration : none;
 }
 .headtext {
 	font-weight : 700;
@@ -52,13 +61,17 @@
 
 .area1, .area2 {
 	border-radius : 30px;
-	box-shadow : 1px 1px skyblue;
+	box-shadow : 2px 2px skyblue;
 }
 
 .area1:hover, .area2:hover{
 	background-color : lightgrey;
-	box-shadow : 1px 1px orange;
+	box-shadow : 2px 2px orange;
 	cursor : pointer;
+}
+.smalltext-nav {
+	color : lightgrey;
+	font-size : 12px;
 }
 </style>
 
@@ -144,43 +157,43 @@
       <div class="icon-area">
       	<div class="icon-container" align="center">
 			<div class="icon" >
-				<a href="#">
+				<a href="<%= contextPath %>/market.se">
 					<img src="./resources/image/icon1.gif" width="80" height="90"/>
 					<br><b>전체</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=10">
 					<img src="./resources/image/icon2.gif" width="80" height="90"/>
 					<br><b>영상</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=20">
 					<img src="./resources/image/icon3.gif" width="80" height="90"/>
 					<br><b>영화</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=30">
 					<img src="./resources/image/icon4.gif" width="80" height="90"/>
 					<br><b>게임</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=40">
 					<img src="./resources/image/icon5.gif" width="80" height="90"/>
 					<br><b>IT</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=50">
 					<img src="./resources/image/icon6.gif" width="80" height="90"/>
 					<br><b>운동</b>
 				</a>
 			</div>
 			<div class="icon">
-				<a href="#">
+				<a href="<%= contextPath %>/market.se?interest_no=60">
 					<img src="./resources/image/icon7.gif" width="80" height="90"/>
 					<br><b>요리</b>
 				</a>
@@ -189,18 +202,28 @@
       </div>
       
       <div class="interest-area">
-        <div style="background-color: white">
-      		판매글 입니당
+        <div class="smalltext-nav">
+      		판매글로 바로가기↓ 
       	</div>
-      	모두모두화이팅 입니다  마무리 잘되었으면 좋겠습니다..
+      	<div class="sell-main">
+      		<div class="area1">
+      			<div class="community-main">
+      			zz
+      			</div>
+      		</div>
+      		<div class="area2">
+      		
+      		</div>
+      	</div>
       </div>
       
-      
+      <br>
       <div class="community-area">
-      		<div >
-      			커뮤니티 입니당
+      		<div class="smalltext-nav">
+      			커뮤니티 최신글 ↓
       		</div>
-      		<div class="area1">
+      		<br>
+      		<div class="area1"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(0).getBoardType() %>&bno=<%= list.get(0).getBoardNo() %>">
       			<div class="community-main">
       			<% if (list != null) { %>
       				<% for(int i = 0; i < 1; i++) { %>
@@ -241,10 +264,14 @@
 							</div>
       					 
       				<% } %>
+      			<% } else { %>
+      				<span class="headtext">게시글이 아직 없습니다.</span>
+      					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
+      			</a>
       		</div>
-      		<div class="area2">
+      		<div class="area2"><a href="<%= contextPath %>/detail.bo?type=<%= list.get(1).getBoardType() %>&bno=<%= list.get(1).getBoardNo()%>">
       			<div class="community-main">
       				<% if (list != null) { %>
 	      				<% for(int i = 1; i < 2; i++) { %>
@@ -283,8 +310,12 @@
 								</div>
       					 
       				<% } %>
+      			<% } else { %>
+      				<span class="headtext">게시글이 아직 없습니다.</span>
+      					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
+      			</a>
       		</div>
       </div>
     </div><!-- outer 끝 -->
@@ -330,7 +361,8 @@
 			}, 3500);
 		
 
-</script>
+
+	</script>
 
 	
 

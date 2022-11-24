@@ -1,11 +1,17 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.board.model.dao.BoardDao;
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
 
 /**
  * Servlet implementation class MainPageLoadController
@@ -27,14 +33,16 @@ public class MainPageLoadController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String responseData = "처리를 완료하였습니다.";
-		// 응답데이터에 한글이 있을 경우 대비해서 설정
-		//response.setContentType("text/html; charset=UTF-8");
+		ArrayList<Board> list = new BoardService().selectAllList();
 		
-		//response.getWriter().print(responseData);
+		System.out.println("index.jsp 와서 바로 main.jsp로 포워딩");
 		
-		System.out.println("ddddd");
+		request.setAttribute("list", list);
+		
 		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
+		
+			
+		
 	}
 
 	/**
