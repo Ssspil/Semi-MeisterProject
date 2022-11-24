@@ -24,8 +24,8 @@
 	
 	<%
 		int userNo = loginUser.getUserNo();
-		String userName = loginUser.getUserName();
-		String email = loginUser.getEmail() == null? "NONE" : loginUser.getEmail();
+		String userName = loginUser.getUserName()== null? "설정된 이름이 없습니다" : loginUser.getUserName();
+		String email = loginUser.getEmail() == null? "설정된 이메일이 없습니다" : loginUser.getEmail();
 		String nickname = loginUser.getNickName();
 		String expert = loginUser.getExpert();
 		String exp = loginUser.getExpSubmit();

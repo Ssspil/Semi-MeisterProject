@@ -182,7 +182,7 @@
 								<%= s.getSellContent() %>
 								</div>
 								<div class="btn-cls">
-								<a href="<%=contextPath%>/market.se" id="inquireBtn" class="btn btn-primary">문의하기</a>
+								<a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
 								</div>

@@ -193,8 +193,8 @@
 			            merchant_uid: 'merchant_'+new Date().getTime(), 
 			            name : '<%= pm.getSellTitle() %>', 
 			            amount : <%= pm.getPrice() %>,
-			            buyer_email : 'Iamport@chai.finance',
-			            buyer_name : '구매자 이름',
+			            buyer_email : 'abcd@naver.com',
+			            buyer_name : '<%= pm.getNickname() %>',
 			            buyer_tel : '010-1234-5678',
 			            buyer_addr : '서울특별시 강남구 역삼동',
 			            buyer_postcode : '123-456'
@@ -205,7 +205,7 @@
 			                let msg = '결제가 완료되었습니다.';
 			                alert(msg);
 			                location.href= "결제 완료 후 이동할 페이지 url"
-			                location.href= "<%=contextPath%>/paycom.se"<%-- ?sno=<%= (int) request.getAttribute("sno") %> --%>
+			                location.href= "<%=contextPath%>/paycom.se?sno=<%= (int) request.getAttribute("sno") %>"
 			            } else {
 			
 			                let msg = '결제에 실패하였습니다.';
