@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList,
     							com.kh.board.model.vo.*"%>
 <%
-	ArrayList<Board> list =	(ArrayList<Board>) session.getAttribute("list");	
+	ArrayList<Board> list =	(ArrayList<Board>) request.getAttribute("list");	
 %>
 <!DOCTYPE html>
 <html>
@@ -202,7 +202,7 @@
       		</div>
       		<div class="area1">
       			<div class="community-main">
-      			<% if (list != null) { %>
+      			<% if (list.get(0) != null) { %>
       				<% for(int i = 0; i < 1; i++) { %>
       					<br>
       					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
@@ -241,12 +241,15 @@
 							</div>
       					 
       				<% } %>
+      			<% } else { %>
+      				<span class="headtext">게시글이 아직 없습니다.</span>
+      					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
       		</div>
       		<div class="area2">
       			<div class="community-main">
-      				<% if (list != null) { %>
+      				<% if (list.get(1) != null) { %>
 	      				<% for(int i = 1; i < 2; i++) { %>
 	      					<br>
 	      					 <span class="headtext"><%= list.get(i).getBoardTitle() %></span>
@@ -283,6 +286,9 @@
 								</div>
       					 
       				<% } %>
+      			<% } else { %>
+      				<span class="headtext">게시글이 아직 없습니다.</span>
+      					 <span class="bodytext">게시글이 없습니다.</span>
       			<% } %>
       			</div>
       		</div>

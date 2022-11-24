@@ -107,8 +107,16 @@ public class Board {
       this.userNo = userNo;
 
    }
-
    
+   	// 메인페이지에 쓸 생성자
+	public Board(String boardTitle, String boardContent, int boardCount, int boardRecommend, int replyCount) {
+	super();
+	this.boardTitle = boardTitle;
+	this.boardContent = boardContent;
+	this.boardCount = boardCount;
+	this.boardRecommend = boardRecommend;
+	this.replyCount = replyCount;
+}
 	public int getReplyCount() {
 		return replyCount;
 	}
