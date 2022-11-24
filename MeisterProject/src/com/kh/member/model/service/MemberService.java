@@ -114,17 +114,6 @@ public class MemberService {
 		
 		 return result;
 	 }
-	 
-	 public int pwdCheck(String password, int userNo) {
-		 
-		 Connection conn = JDBCTemplate.getConnection();
-			
-		 int result = new MemberDao().pwdCheck(conn, password, userNo);
-		 
-		 JDBCTemplate.close();
-		
-		 return result;
-	 }
 
 	 public Member expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
@@ -343,9 +332,39 @@ public class MemberService {
 		return reportedUserNo;
 	}
 	   
-	
+	public int changePwd(int userNo, String newPwd) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new MemberDao().changePwd(conn, userNo, newPwd);
+	      
+	      if(result > 0) {
+	         JDBCTemplate.commit(conn);
+	      }else {
+	         JDBCTemplate.rollback(conn);
+	      }
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}
 	   
-	   
+	public int deleteMember(int userNo) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new MemberDao().deleteMember(conn, userNo);
+	      
+	      if(result > 0) {
+	         JDBCTemplate.commit(conn);
+	      }else {
+	         JDBCTemplate.rollback(conn);
+	      }
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}   
 	   
 	   
 	   
