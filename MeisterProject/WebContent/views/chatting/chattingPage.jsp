@@ -68,9 +68,9 @@
         color: black;
         width: 800px;
         margin: auto;
-        margin-top: 50px;
+        margin-top: 55px;
         margin-bottom: 50px;
-        height: 700px;
+        height: 600px;
         overflow: scroll;
  		overflow-x: hidden;
     }
@@ -85,7 +85,7 @@
         color: black;
         width: 700px;
         margin: auto;
-        margin-bottom: 150px;
+        margin-bottom: 50px;
         height: 100px;
     }
     #textMessage{
@@ -106,7 +106,7 @@
 		margin-top: 15px;
 		border-bottom: 10px solid transparent;
 		border-top: 10px solid transparent;
-		border-left: 10px solid black;
+		border-left: 10px solid orange;
 		border-right: 10px solid transparent;
     }
     #triangleLeft{
@@ -116,14 +116,23 @@
 		border-bottom: 10px solid transparent;
 		border-top: 10px solid transparent;
 		border-left: 10px solid transparent;
-		border-right: 10px solid black;
+		border-right: 10px solid skyblue;
     }
     #myDiv{
     	width: 300px;
     	height: 50px;
     	line-height: 50px;
     	margin: auto;
-    	border: 1px solid black;
+    	border: 2px solid orange;
+    	position: static;
+    	border-radius:30px / 100px;
+    }
+    #oppDiv{
+    	width: 300px;
+    	height: 50px;
+    	line-height: 50px;
+    	margin: auto;
+    	border: 2px solid skyblue;
     	position: static;
     	border-radius:30px / 100px;
     }
@@ -268,7 +277,7 @@
 						
 						$('#divEntry<%=c.getChatNo()%>').append(
 							$('<div>').prop({
-								id: 'myDiv',
+								id: 'oppDiv',
 								innerHTML: '&nbsp;&nbsp;&nbsp;<%=c.getChatContent()%>'
 							})
 						);
@@ -314,7 +323,7 @@
 		</div>
 		<div class="chat-format">
 			<input id="textMessage" type="text" value=""> 
-			<input onclick="sendMessage()" value="Send" type="button">
+			<input id="sendBtn" onclick="sendMessage(); moveScroll();" value="Send" type="button">
 			<button type="submit">저장하기</button>	
 		</div>
 	</form>
@@ -463,6 +472,14 @@
  		  return event.returnValue = "Are you sure you want to exit?";
  		};
  		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
+ 		
+ 		function moveScroll(){
+ 			$(".outer").scrollTop($(".outer")[0].scrollHeight);
+ 		}
+ 		
+		$(document).ready(function(){
+			$(".outer").scrollTop($(".outer")[0].scrollHeight);
+		});
 	</script>
 </body>
 </html>

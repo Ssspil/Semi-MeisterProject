@@ -45,12 +45,13 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("nickname", nickName);
 		
-		int sender = Integer.parseInt(request.getParameter("sender"));
+		//int sender = Integer.parseInt(request.getParameter("sender"));
+
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
-		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
-		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, sender, sellNo);
+		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, userNo, sellNo);
+		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, userNo, sellNo);
 		
 		String[] nickNameList = new String[list.size()];
 		String senderName = "";
