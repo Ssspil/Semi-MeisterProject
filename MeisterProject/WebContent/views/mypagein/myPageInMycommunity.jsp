@@ -219,12 +219,10 @@ margin:auto;
 #ddddd{
 height:100px;
 }
-
 #nameBody_1, #nameBody_2{
 	height:1700px;
 	display:none;
 }
-
 .hide{
 	display: none;
 }
@@ -299,19 +297,8 @@ height:100px;
 <%@ include file="../mypagein/myPageInMyReply.jsp"%>
         <div id="page">
             <div class="page_wrap">
-				<%-- <% if (currentPage != 1) {
-				%>
-				<span>&lt&lt</span>
-				<%
-					}
-				%>
-				<% 
-					if (startPage != 1) {
-				%>--%>
 				<span onclick="pageMove('pre')">&lt</span>
-				<%-- <%
-					}
-				%> --%>
+		
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 					if (i == currentPage) {
@@ -329,20 +316,9 @@ height:100px;
 				<%
 					}
 				%>
-				<%-- <%
-					if (currentPage != endPage) {
-				%> --%>
+				
 				<span onclick="pageMove('next')">&gt</span>
-				<%-- <%
-					}
-				%> --%>
-				<%-- <%
-					if (currentPage != maxPage) {
-				%>
-				<span>&gt&gt</span>
-				<%
-					}
-				%> --%>
+				
 			</div>
         </div>
 

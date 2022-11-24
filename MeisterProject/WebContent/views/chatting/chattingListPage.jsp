@@ -67,7 +67,7 @@
 <style>
 	.outer {
         color: black;
-        width: 500px;
+        width: 60%;
         margin: auto;
         margin-top: 100px;
         margin-bottom: 150px;
