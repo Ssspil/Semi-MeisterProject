@@ -354,10 +354,9 @@ public class BoardDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setInt(1, at.getRefNo());
-			psmt.setString(2, at.getOriginName());
-			psmt.setString(3, at.getChangeName());
-			psmt.setString(4, at.getFilePath());
+			psmt.setString(1, at.getOriginName());
+			psmt.setString(2, at.getChangeName());
+			psmt.setString(3, at.getFilePath());
 
 			result = psmt.executeUpdate();
 

@@ -59,7 +59,6 @@ public class BoardInsertConteroller extends HttpServlet {
 		    b.setBoardTitle(boardTitle);
 		    b.setBoardContent(boardContent);
 		    b.setUserNo(userNo);
-		 
 			
 			Attachment at = null;
 			

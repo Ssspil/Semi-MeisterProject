@@ -125,7 +125,7 @@ public class Board {
    
    
    
-   
+ 
 	public int getReplyCount() {
 		return replyCount;
 	}
