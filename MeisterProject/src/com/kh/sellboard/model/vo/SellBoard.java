@@ -110,6 +110,15 @@ public class SellBoard {
 		this.sellRegulation = sellRegulation;
 	}
 
+	public SellBoard(int sellNo, String sellTitle, int price, int localNo, int interestNo) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.price = price;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
+	}
+
 	public int getSellNo() {
 		return sellNo;
 	}

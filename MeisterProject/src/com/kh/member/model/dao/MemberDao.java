@@ -16,6 +16,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 
 import com.kh.member.model.vo.Member;
+import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberDao {
 	
@@ -424,7 +425,7 @@ public class MemberDao {
 		}
 		return result;
 	}
-	public Attachment selectAttachment(Connection conn, int userNo) {
+	public Attachment selectAttachment(Connection conn, int userNo, int fileLevel) {
 		
 		Attachment at = null;
 		PreparedStatement psmt = null;
@@ -435,6 +436,7 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, userNo);
+			psmt.setInt(2, fileLevel);
 			
 			rset = psmt.executeQuery();
 			
@@ -900,5 +902,93 @@ public class MemberDao {
 		return result;
 	}
 
+	public ArrayList<SellBoard> getMySellBoard(Connection conn, int userNo){
+		ArrayList<SellBoard> sell = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMySellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				sell.add(new SellBoard(rset.getInt("SELL_NO"),
+									rset.getString("SELL_TITLE"),
+									rset.getInt("PRICE"),
+									rset.getInt("INTEREST_NO"),
+									rset.getInt("LOCAL_NO")
+					));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return sell;
+	}
+	
+	public ArrayList<String> selectInterest(Connection conn, int categoryNo){
+		ArrayList<String> category = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;	
+		String sql = prop.getProperty("selectInterest");
 
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, categoryNo);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				category.add(rset.getString("INTEREST_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return category;
+	}
+	
+	public ArrayList<String> selectLocal(Connection conn, int categoryNo){
+		ArrayList<String> category = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLocal");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, categoryNo);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				category.add(rset.getString("LOCAL_NAME"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return category;
+	}
 }
