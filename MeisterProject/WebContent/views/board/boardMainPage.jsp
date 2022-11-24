@@ -220,7 +220,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	margin: auto;
 	display: inline-block;
 	 position: relative;
-	left:25px;
+	left:45px;
 }
 
 #text {
@@ -233,7 +233,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	-webkit-line-clamp: 2;
 	 font-family: 'Nanum Gothic', sans-serif;
 	  position: relative;
-	left:25px;
+	left:45px;
 }
 
 #hottext {
@@ -262,7 +262,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	font-family: 'Nanum Gothic', sans-serif;
     font-weight: bold;
     position: relative;
-	left:25px;
+	left:45px;
 }
 
 #hotfont {
