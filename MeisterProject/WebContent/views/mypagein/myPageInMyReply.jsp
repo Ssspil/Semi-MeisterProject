@@ -19,7 +19,6 @@ display: -webkit-inline-box;
 overflow: hidden;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 2;
-
 }
 
 </style>
