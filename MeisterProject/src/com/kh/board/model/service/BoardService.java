@@ -336,5 +336,15 @@ public class BoardService {
 
 		return list;
 	}
+	
+	public ArrayList<Board> deleteboardlist(userNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().deleteboardlist(conn);
+		
+		close();
+		
+		return list;
+	}
 
 }
