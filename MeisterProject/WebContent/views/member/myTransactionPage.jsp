@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo"%>
+  <%
+  PageInfo pi = (PageInfo) request.getAttribute("pi");
+  int currentPage = pi.getCurrentPage();
+ int startPage = pi.getStartPage();
+ int endPage = pi.getEndPage();
+ int maxPage = pi.getMaxPage(); 
   
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +50,26 @@ height:100%;
     height: 60px;
 }
 .name1Body{
+    box-sizing: border-box;
+    border: 3px solid black;
+    height:271px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+    margin-bottom:30px;
+    border-radius: 15px;
+}
+.name2Body{
+    box-sizing: border-box;
+    border: 3px solid black;
+    height:271px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+    margin-bottom:30px;
+    border-radius: 15px;
+}
+.name3Body{
     box-sizing: border-box;
     border: 3px solid black;
     height:271px;
@@ -138,6 +165,53 @@ width: 60%;
 margin: auto;
 height: 50px;
 }
+#page2{
+box-sizing: border-box;
+border-bottom: 2px solid black;
+border-top: 2px solid black;
+width: 60%;
+margin: auto;
+height: 50px;
+}
+#page3{
+box-sizing: border-box;
+border-bottom: 2px solid black;
+border-top: 2px solid black;
+width: 60%;
+margin: auto;
+height: 50px;
+}
+#nameBody_2,#nameBody_3{
+	height:100%;
+	display:none;
+}
+#page2,#page3{
+	display:none;
+}
+.hide{
+	display: none;
+}
+.page_wrap {
+	text-align: center;
+	position: relative;
+	top: 10px;
+}
+
+.page_wrap span {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.page_wrap .sel {
+	color: orange;
+	border-bottom: 1px solid orange;
+}
+
+.page_wrap span:hover {
+	color: orange;
+	cursor: pointer;
+	border-bottom: 1px solid orange;
+}
 
 </style>
 </head>
@@ -150,26 +224,24 @@ height: 50px;
 
         <div id="body1">
             <div>
-            <button class="statusBtn" id="current">진행중인 거래</button>
+            <button class="statusBtn" id="current" onclick="menuClick('current')">진행중인 거래</button>
         </div>
         <div>
-            <button class="statusBtn" id="done">완료된 거래</button>
+            <button class="statusBtn" id="complete" onclick="menuClick('complete')">완료된 거래</button>
         </div>
         <div>
-            <button class="statusBtn" id="cancle">취소된 거래</button>
+            <button class="statusBtn" id="cancel" onclick="menuClick('cancel')">취소된 거래</button>
         </div>
 
         </div>
+        <div id="nameBody_1">
         <div id="contenthead"></div>
         
-        <div id="nameBody_1">
-       
-					
-				<!-- 테스트용 반목문 -->
-					<% for(int i = 0; i<=5; i++) { %>	
-        <div class="name1Body">
+<!--         테스트용 반목분 -->
+       <%for(int i =0; i <= 8; i++) { %>
+        <div class="name1Body board board<%=i%> <%=i > 6 ? "hide" : ""%>">
             <div id="title">
-                <span id="title1">거래 상태</span>
+                <span id="title1">진행중인 거래</span>
                 <span id="title2">재능 판매글 제목</span>
             </div>
             <br><br>
@@ -184,42 +256,92 @@ height: 50px;
             <button id="btn2" >판매자문의</button>
             <button id="btn3" >작업완료</button>
         </div>
-     <% } %>
+   <%} %>
+	   
 	   
 	   </div>
-	   
+	   <%@ include file="../member/myCompletedTransactionPage.jsp"%>
+	<%@ include file="../member/myCanceledTransactionPage.jsp"%>
+		
 	   <div id="page">
-	   
+	   <div class="page_wrap">
+				<span onclick="pageMove('pre')">&lt</span>
+				<%
+					for (int i = startPage; i <= endPage; i++) {
+					if (i == currentPage) {
+				%>
+				<span class="page<%=i%> sel" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					} else {
+				%>
+				<span class="page<%=i%>" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				<span onclick="pageMove('next')">&gt</span>
+				
+			</div>
 	   </div>
-
-       
-         
-
 
 </div>
 
 
+
 		<script>
-		$(document).ready(function(){
-			$(".statusBtn").on('click', function(e){
-				if(e.target.id == 'current'){
-					$("#current").css("background-color", "orange");
-					$("#done").css("background-color", "gray");
-					$("#cancel").css("background-color", "gray");
-				}
-				else if(e.target.id == 'done'){
-					$("#current").css("background-color", "gray");
-					$("#done").css("background-color", "orange");
-					$("#cancel").css("background-color", "gray");
-				}
-				else{
-					$("#current").css("background-color", "gray");
-					$("#done").css("background-color", "gray");
-					$("#cancel").css("background-color", "orange");
-				}
-			});
-		});
-	</script>
+	  function menuClick(type) {
+      if (type == "current") {
+         $("#nameBody_1").show();
+         $("#nameBody_2").hide();
+         $("#nameBody_3").hide();
+         $("#page").show();
+         $("#page2").hide();
+         $("#page3").hide();
+     
+      } else if (type == "complete") {
+         $("#nameBody_2").show();
+         $("#nameBody_1").hide();
+         $("#nameBody_3").hide();
+         $("#page2").show();
+         $("#page").hide();
+         $("#page3").hide();	
+      } else if(type == "cancel") {
+         $("#nameBody_3").show();
+         $("#nameBody_1").hide();
+         $("#nameBody_2").hide();
+         $("#page3").show();
+         $("#page").hide();
+         $("#page2").hide();
+       }
+
+      }  
+	  function pageMove(currentPage) {
+	      if (currentPage == "next") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+	      }
+	      if (currentPage == "pre") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+	      }
+	      var cnt = (currentPage - 1) * 7;
+	      $(".board").hide();
+	      for (var i = cnt; i < cnt + 7; i++) {
+	         $(".board" + (i)).show();
+	      }
+	      $(".page_wrap span").removeClass("sel");
+	      $(".page" + currentPage).addClass("sel");
+	   }
+	 
+  
+		</script>
+	
+	
+	
+	
+	
 	<%@include file="../common/footer.jsp" %>
 </body>
 </html>

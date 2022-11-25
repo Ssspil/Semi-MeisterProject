@@ -174,6 +174,14 @@ width: 60%;
 margin: auto;
 height: 50px;
 }
+#page2{
+box-sizing: border-box;
+border-bottom: 2px solid black;
+border-top: 2px solid black;
+width: 60%;
+margin: auto;
+height: 50px;
+}
 .page_wrap {
 	text-align: center;
 	position: relative;
@@ -220,7 +228,7 @@ margin:auto;
 height:100px;
 }
 #nameBody_1, #nameBody_2{
-	height:1700px;
+	height:100%;
 	display:none;
 }
 .hide{
@@ -298,7 +306,6 @@ height:100px;
         <div id="page">
             <div class="page_wrap">
 				<span onclick="pageMove('pre')">&lt</span>
-		
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 					if (i == currentPage) {
@@ -315,8 +322,7 @@ height:100px;
 				%>
 				<%
 					}
-				%>
-				
+				%>				
 				<span onclick="pageMove('next')">&gt</span>
 				
 			</div>
@@ -348,16 +354,18 @@ height:100px;
       if (type == "name1") {
          $("#nameBody_1").show();
          $("#nameBody_2").hide();
+         $("#page").show();
          $("#name1").addClass("bodyClick1");
-         $("#name2").removeClass("bodyClick2");
+         $("#name2").removeClass("bodyClick1");
 		 $("#type").val("1"); 
 		 $("#boardType").val("name1"); 
 		 
       } else if (type == "name2") {
          $("#nameBody_2").show();
          $("#nameBody_1").hide();
+         $("#page").hide();
          $("#name2").addClass("bodyClick1");
-         $("#name1").removeClass("bodyClick2");
+         $("#name1").removeClass("bodyClick1");
          $("#type").val("2");
 		 $("#boardType").val("name2");
 

@@ -30,7 +30,7 @@ overflow: hidden;
 .page_wrap2 {
 	text-align: center;
 	position: relative;
-	top: 25px;
+	top: 10px;
 }
 
 .page_wrap2 span {
@@ -84,10 +84,10 @@ overflow: hidden;
             </div>
         </div>
        
-    
+    <br><br>
        
 				<%}	}%>
-				<div id="page">
+				<div id="page2">
             <div class="page_wrap2">
 				<span onclick="pageMove2('pre')">&lt</span>
 				<%
