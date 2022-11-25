@@ -76,6 +76,7 @@ border-bottom: 2px solid black;
 border-top: 2px solid black;
 margin: auto;
 height: 50px;
+text-align: center;
 }
 #img{  
       width: 230px;
