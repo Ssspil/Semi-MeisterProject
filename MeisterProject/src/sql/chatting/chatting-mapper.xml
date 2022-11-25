@@ -21,7 +21,7 @@
 	<entry key="selectNote">
 		SELECT *
 		FROM CHATTING
-		WHERE SENDER = ? AND RECEIVER = ? AND SELL_NO = ?
+		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
 	</entry>
 	
 	<entry key="selectAllReceiver">

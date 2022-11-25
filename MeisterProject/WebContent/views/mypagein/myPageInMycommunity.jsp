@@ -306,7 +306,6 @@ height:100px;
         <div id="page">
             <div class="page_wrap">
 				<span onclick="pageMove('pre')">&lt</span>
-		
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 					if (i == currentPage) {
@@ -323,8 +322,7 @@ height:100px;
 				%>
 				<%
 					}
-				%>
-				
+				%>				
 				<span onclick="pageMove('next')">&gt</span>
 				
 			</div>

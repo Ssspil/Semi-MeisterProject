@@ -26,9 +26,9 @@ public class ChattingService {
 	      return result;
 	}
 	
-	public Chatting selectNoteList(int receiver, int sender, int sellNo){
+	public Chatting selectChatList(int receiver, int sender, int sellNo){
 		Connection conn = JDBCTemplate.getConnection();
-		Chatting list = new ChattingDao().selectNoteList(conn, receiver, sender, sellNo);
+		Chatting list = new ChattingDao().selectChatList(conn, receiver, sender, sellNo);
 		
 		JDBCTemplate.close();
 		return list;

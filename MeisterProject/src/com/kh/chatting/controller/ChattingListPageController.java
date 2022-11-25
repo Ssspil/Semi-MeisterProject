@@ -50,7 +50,7 @@ public class ChattingListPageController extends HttpServlet {
 		ArrayList<Integer> sellList = new ChattingService().selectAllSellNo();
 		
 		for(int i = 0; i < senderList.size(); i++) {
-			list.add(new ChattingService().selectNoteList(receiverList.get(i), senderList.get(i), sellList.get(i)));			
+			list.add(new ChattingService().selectChatList(receiverList.get(i), senderList.get(i), sellList.get(i)));			
 		}
 		
 		for (int i = 0; i < list.size(); i++) {

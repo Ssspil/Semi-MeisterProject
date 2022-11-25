@@ -61,7 +61,7 @@
         width: 800px;
         margin: auto;
         margin-top: 55px;
-        margin-bottom: 50px;
+        margin-bottom: 50px; 
         height: 600px;
         overflow: scroll;
  		overflow-x: hidden;
@@ -120,6 +120,15 @@
     	border-radius:30px / 100px;
     }
     #oppDiv{
+    	width: 300px;
+    	height: 50px;
+    	line-height: 50px;
+    	margin: auto;
+    	border: 2px solid skyblue;
+    	position: static;
+    	border-radius:30px / 100px;
+    }
+    #divOpp{
     	width: 300px;
     	height: 50px;
     	line-height: 50px;
@@ -291,7 +300,10 @@
 				<%} %>
 				<% count += 1;%>
 			<%}%>
-		<%} %>
+		<%} else{%>
+			조회된 문의가 없습니다
+		<%}%>
+		}
 	</script>
 	<div class="upside">
 		<br>
