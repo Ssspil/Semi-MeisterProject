@@ -616,5 +616,116 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 	}
+	
+	// 좋아요 조회
+	public int selectRecommend(Connection conn, int sellNo, int userNo) {
+
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("selectRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+	
+			psmt.setInt(1, sellNo);
+			psmt.setInt(2, userNo);
+	
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+	
+		return result;
+	}
+	
+	// 좋아요 등록
+	public int insertRecommend(Connection conn, int sellNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("insertRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	// 좋아요 삭제
+	public int deleteRecommend(Connection conn, int sellNo, int userNo) {
+		
+		int result = 0;
+	
+		PreparedStatement psmt = null;
+	
+		String sql = prop.getProperty("deleteRecommend");
+		System.out.println(sql);
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			psmt.setInt(2, userNo);
+	
+			result = psmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+	
+	// 좋아요 갯수
+	public int countRecommend(Connection conn, int sellNo) {
+
+		int result = 0;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("countRecommend");
+	
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			
+			rset = psmt.executeQuery();
+	
+			if (rset.next()) {
+				result = rset.getInt("CNT");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		return result;
+	}
+	
+	
 
 }

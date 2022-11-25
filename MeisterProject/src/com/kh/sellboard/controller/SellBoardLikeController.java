@@ -38,7 +38,7 @@ public class SellBoardLikeController extends HttpServlet {
 		int result = 0; // int타입 result 변수 선언 0
 		int recommend = 0; // int타입 recommend 변수 선언 0
 		
-		int SellNo = Integer.parseInt(request.getParameter("SellNo")); // boardNo 데이터를 받아와 int 타입 boardNo에 변수 선언 // getParameter로 가져온 String boardNo값을 인티져로 변환한뒤 int타입 boardNo변수선언
+		int SellNo = Integer.parseInt(request.getParameter("SellNo")); // sellNo 데이터를 받아와 int 타입 sellNo에 변수 선언 // getParameter로 가져온 String sellNo값을 인티져로 변환한뒤 int타입 sellNo변수선언
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		String type = request.getParameter("type");
 		out = response.getWriter();
