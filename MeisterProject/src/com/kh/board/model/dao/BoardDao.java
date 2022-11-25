@@ -929,6 +929,7 @@ public class BoardDao {
 		return board;
 	}
 	
-	public ArrayList<Board> deleteboardlist(Connection conn) {
+	public ArrayList<Board> deleteboardlist(Connection conn, int userNo) {
 	
-}
+	}
+}	

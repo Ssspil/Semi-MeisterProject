@@ -11,6 +11,8 @@ import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
 import com.kh.chatting.model.dao.ChattingDao;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Member;
 
 public class BoardService {
 	public int selectListCount(int type, String keyword) {
@@ -337,14 +339,22 @@ public class BoardService {
 		return list;
 	}
 	
-	public ArrayList<Board> deleteboardlist(userNo) {
-		Connection conn = getConnection();
+	public Board deleteboardlist(int userNo) {
+		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Board> list = new BoardDao().deleteboardlist(conn);
+		int result1 = new BoardDao().deleteboardlist(conn, userNo);
 		
-		close();
+		Member delMem = null;
+
+		if(result1 > 0) {
+			delMem = new BoardDao().selectMemberByNo(conn, userNo);
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		
-		return list;
+		return delMem;
 	}
 
 }
