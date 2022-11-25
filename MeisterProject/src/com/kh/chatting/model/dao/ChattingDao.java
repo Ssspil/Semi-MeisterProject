@@ -72,7 +72,7 @@ public class ChattingDao {
 		return result;
 	}
 	
-	public Chatting selectNoteList(Connection conn, int receiver, int sender, int sellNo){
+	public Chatting selectChatList(Connection conn, int receiver, int sender, int sellNo){
 		Chatting list = null;
 		
 		PreparedStatement psmt = null;
@@ -230,7 +230,8 @@ public class ChattingDao {
 		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
-		
+		System.out.println(sender);
+		System.out.println(receiver);
 		String sql = prop.getProperty("selectChatDetail");
 		
 		try {
@@ -260,7 +261,7 @@ public class ChattingDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(psmt);
 		}
-		
+		System.out.println(list);
 		return list;
 	}
 	
