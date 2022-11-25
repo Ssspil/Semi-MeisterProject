@@ -157,11 +157,11 @@ table>tfoot>tr:hover{
 						
 						<tfoot>
 					    <% for(int i= 0; i<list.size(); i++) { %>
-<%-- 					    	<% if( blacklist.isEmpty() ) { %> --%>
-					    	<tr>
+ 					    	<% if( list.isEmpty() ) { %>
+					    	<tr> 
 					    		<td colspan="8">블랙 컨슈머가 없습니다.</td>
 					    	</tr>
-<%-- 					    	<% } else { %> --%>
+ 					    	<% } else { %>
 
 					    	
 						    <tr class="user<%=list.get(i).getUserNo() %>">
@@ -176,7 +176,7 @@ table>tfoot>tr:hover{
 							      <td><%=list.get(i).getBoardTitle() %></td>
 							      <td><%=list.get(i).getBoardDate() %></td>
 							      <td><%=list.get(i).getBoardContent() %></td>
-							      
+							      <% } } %>
 <!-- 							      <td class="status"> -->
 <%-- 							      <% if ((m.getBlackList()).equals("Y"))  { %> --%>
 <!-- 							      	제적 -->

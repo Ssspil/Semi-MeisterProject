@@ -12,7 +12,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class BoardListRemoveController
  */
-@WebServlet("/boardRemove.ad")
+@WebServlet("/boardremove.ad")
 public class BoardListRemoveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
