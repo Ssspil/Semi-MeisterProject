@@ -157,17 +157,17 @@ table>tfoot>tr:hover{
 						
 						<tfoot>
 					    <% for(int i= 0; i<list.size(); i++) { %>
-					    	<% if( blacklist.isEmpty() ) { %>
-					    	<tr>
+ 					    	<% if( list.isEmpty() ) { %>
+					    	<tr> 
 					    		<td colspan="8">블랙 컨슈머가 없습니다.</td>
 					    	</tr>
-					    	<% } else { %>
+ 					    	<% } else { %>
 
 					    	
-						    <tr class="user<%=m.getUserNo() %>">
+						    <tr class="user<%=list.get(i).getUserNo() %>">
 						
 							      <td>
-							           <input type="checkbox" name="user" id="<%=m.getUserNo() %>" value="<%=m.getUserNo() %>" onclick="singleCheck();">
+							           <input type="checkbox" name="user" id="<%=list.get(i).getUserNo() %>" value="<%=list.get(i).getUserNo() %>" onclick="singleCheck();">
 							      </td>
 							      
 							      <td><%=list.get(i).getBoardNo()%></td>
@@ -176,7 +176,7 @@ table>tfoot>tr:hover{
 							      <td><%=list.get(i).getBoardTitle() %></td>
 							      <td><%=list.get(i).getBoardDate() %></td>
 							      <td><%=list.get(i).getBoardContent() %></td>
-							      
+							      <% } } %>
 <!-- 							      <td class="status"> -->
 <%-- 							      <% if ((m.getBlackList()).equals("Y"))  { %> --%>
 <!-- 							      	제적 -->
@@ -185,19 +185,19 @@ table>tfoot>tr:hover{
 <!-- 							      </td>  -->
 						    </tr>
 						    
-						  	<script>
-						      $(function(){
-						    	  $('.user<%=m.getUserNo() %>').click(function(){
-						    		  if($(this).children().children('[type="checkbox"]:checked') == true){
-						    			  $(this).children().children('[name="user"]').attr("checked", false);
-						    		  } else {
-						    			  $(this).children().children('[name="user"]').attr("checked", true);
-						    		  }
+<!-- 						  	<script> -->
+<!-- // 						      $(function(){ -->
+<%-- 						    	  $('.user<%=m.getUserNo() %>').click(function(){ --%>
+<!-- // 						    		  if($(this).children().children('[type="checkbox"]:checked') == true){ -->
+<!-- // 						    			  $(this).children().children('[name="user"]').attr("checked", false); -->
+<!-- // 						    		  } else { -->
+<!-- // 						    			  $(this).children().children('[name="user"]').attr("checked", true); -->
+<!-- // 						    		  } -->
 									
-						    	  });
-						      })
+<!-- // 						    	  }); -->
+<!-- // 						      }) -->
 						      
-						  	</script>
+<!-- 						  	</script> -->
 
  					  </table>
  					</form>

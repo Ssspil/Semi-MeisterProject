@@ -129,10 +129,9 @@ public Board() {
 	}
 
  // BoardList
-	public Board(int boardNo,int userNo,String userId, String memberNic,String boardTitle, String boardContent, String boardDate) {
+	public Board(int boardNo,String userId, String memberNic,String boardTitle, String boardContent, String boardDate) {
 	super();
 	this.boardNo = boardNo;
-	this.userNo = userNo;
 	this.userId = userId;
 	this.memberNic = memberNic;
 	this.boardTitle = boardTitle;

@@ -293,7 +293,8 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
                         rset.getString("NICKNAME"),
                         rset.getString("SELL_DETAIL"),
                         rset.getString("SELL_REGULATION")
-                        ); 
+                        );
+                s.setUserNO(rset.getInt("USER_NO"));
             }
 
         } catch (SQLException e) {
@@ -524,6 +525,95 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 		
 		return sellList;
+	}
+	
+	public int updateSellBoard(Connection conn, SellBoard s) {
+		
+		int result = 0;
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("updateSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, s.getSellTitle());
+			psmt.setString(2, s.getSellContent());
+			psmt.setInt(3, s.getPrice());
+			psmt.setInt(4, s.getInterestNo());
+			psmt.setInt(5, s.getLocalNo());
+			psmt.setInt(6, s.getUserNO());
+			psmt.setString(7, s.getSellDetail());
+			psmt.setString(8, s.getSellRegulation());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(psmt);
+		}
+		return result;
+		
+	}
+	
+	public int updateAttachment(Attachment at, Connection conn) {
+		
+		int result = 0;
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("updateAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, at.getOriginName());
+			psmt.setString(2, at.getChangeName());
+			psmt.setString(3, at.getFilePath());
+			psmt.setInt(4, at.getFileNo());
+			
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(psmt);
+		}
+		return result;
+		
+		
+	}
+	
+	public int deleteSellBoard(int sellNo, Connection conn) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("deleteSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(psmt);
+		}
+		return result;
+		
+	}
+	
+	public void deleteAttachment(int sellNo, Connection conn) {
+		
+		PreparedStatement psmt = null;
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			
+			psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(psmt);
+		}
 	}
 
 }

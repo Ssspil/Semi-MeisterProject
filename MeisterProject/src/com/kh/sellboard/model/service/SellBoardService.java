@@ -188,6 +188,54 @@ public class SellBoardService {
 		
 		return sellList;
 	}
+	
+	public int updateSellBoard(SellBoard s, Attachment at) {
+		Connection conn = getConnection();
+		
+		int result1 = new SellBoardDao().updateSellBoard(conn, s);
+		
+		int result2 = 1;
+		
+		//
+		if(at != null){
+			if(at.getFileNo() != 0) {
+				
+				result2 = new SellBoardDao().updateAttachment(at, conn);
+				
+			}else {
+				result2 = new SellBoardDao().insertNewAttachment(at, conn);
+			}
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close();
+		
+		return result1 * result2;
+	}
+	
+	public int deleteSellBoard(int sellNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().deleteSellBoard(sellNo, conn);
+		
+		new SellBoardDao().deleteAttachment(sellNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
+	}
+	
+	
 
 
 
