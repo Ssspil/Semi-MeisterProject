@@ -147,7 +147,8 @@
 	
 	<!-- 메인페이지에 보일 쿼리문 -->
 	<entry key="selectAllList">
-		SELECT SELL_TITLE,
+		SELECT SELL_NO,
+			   SELL_TITLE,
 			   SELL_CONTENT,
 			   PRICE,
 			   INTEREST_NO,
@@ -191,6 +192,39 @@
 		UPDATE ATTACHMENT
 		SET STATUS = 'N'
 		WHERE REF_NO = ?
+	</entry>
+	
+	<entry key="insertMyTransaction">
+		INSERT INTO TRANSACTION(SELL_NO, USER_NO, REVIEW_NO)
+        VALUES (?,?,?)
+	</entry>
+	
+	<!-- 좋아요 조회 쿼리문 -->
+	<entry key="selectRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+		FROM RECOMMEND
+		WHERE SELL_NO = ?
+		  AND USER_NO = ?
+	</entry>
+
+	<!-- 좋아요 추가 쿼리문 -->
+	<entry key="insertRecommend">
+		INSERT INTO RECOMMEND(RED_NO, SELL_NO, USER_NO)
+		VALUES(SEQ_RCNO.NEXTVAL, ?, ?)
+	</entry>
+	
+	<!-- 좋아요 삭제 쿼리문 -->
+	<entry key="deleteRecommend">
+		DELETE RECOMMEND
+		WHERE SELL_NO = ?
+		  AND USER_NO = ?
+	</entry>
+	
+	<!-- 좋아요 갯수 쿼리문 -->
+	<entry key="countRecommend">
+		SELECT COUNT(RED_NO) AS CNT
+	  	FROM RECOMMEND
+	 	WHERE SELL_NO = ?
 	</entry>
 	
 </properties>

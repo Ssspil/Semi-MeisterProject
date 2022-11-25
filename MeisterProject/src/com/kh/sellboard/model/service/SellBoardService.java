@@ -236,6 +236,54 @@ public class SellBoardService {
 	}
 	
 	
+	/*찜 조회*/
+	public static int selectRecommend(int sellNo, int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().selectRecommend(conn, sellNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+
+	/*찜 선택*/
+	public static int insertRecommend(int sellNo, int userNo) {
+		
+		Connection conn = getConnection();
+	
+		int result = new SellBoardDao().insertRecommend(conn, sellNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+
+	/*찜 삭제*/
+	public static int deleteRecommend(int sellNo, int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().deleteRecommend(conn, sellNo, userNo);
+	
+		close();
+	
+		return result;
+	}
+
+	/*찜 선택 카운팅*/
+	public static int countRecommend(int sellNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().countRecommend(conn, sellNo);
+	
+		close();
+	
+		return result;
+		
+	}
 
 
 

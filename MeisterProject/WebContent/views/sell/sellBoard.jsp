@@ -280,8 +280,8 @@ p.heartIcon{
 			});
 		</script>
 			
-		<script>
-			$(document).on("click", "p.heart", (e) => { // 이벤트 인자/
+		<%-- <script>
+			$(document).on("click", "p.heartIcon", (e) => { // 이벤트 인자/
 				e.preventDefault();// 한번 클릭후 다음 클릭 방지
 				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 				$.ajax({
@@ -321,7 +321,7 @@ p.heartIcon{
 					}
 				}); //$.ajax
 			}); //on.click 
-     	</script>
+     	</script> --%>
 		
 	
     
