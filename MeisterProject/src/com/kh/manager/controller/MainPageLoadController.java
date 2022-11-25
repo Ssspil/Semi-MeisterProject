@@ -44,6 +44,9 @@ public class MainPageLoadController extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("sellList",sellList);
 		
+		System.out.println("커뮤니티 개수 : " + list.size());
+		System.out.println("판매글 개수 : " + sellList.size());
+		
 		request.getRequestDispatcher("views/common/main.jsp").forward(request, response);
 		
 			
