@@ -278,13 +278,13 @@ p.heartIcon{
 		<% } else{ %>
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
-				
+					<input type="hidden" value="<%=sb.getSellNo() %>">
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon">
 							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>							
 						</p>
 						
-					<input type="hidden" value="<%=sb.getSellNo() %>">
+					
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					
 					<p>
