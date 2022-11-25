@@ -635,11 +635,10 @@ body {
 					let htmls="";
 					for(let i of list) {
 						index += 1;
-						console.log(i)
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
-						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"'>";
+						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"' alt='aa'>";
 						htmls += '</div>';
 						htmls += '<div data-c-1 class="comment-information">';
 						htmls +=    '<div data-c-1 class="user-info">';
