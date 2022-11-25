@@ -165,8 +165,8 @@ height: 50px;
         <div id="nameBody_1">
        
 					
-				
-						
+				<!-- 테스트용 반목문 -->
+					<% for(int i = 0; i<=5; i++) { %>	
         <div class="name1Body">
             <div id="title">
                 <span id="title1">거래 상태</span>
@@ -184,7 +184,7 @@ height: 50px;
             <button id="btn2" >판매자문의</button>
             <button id="btn3" >작업완료</button>
         </div>
-     
+     <% } %>
 	   
 	   </div>
 	   

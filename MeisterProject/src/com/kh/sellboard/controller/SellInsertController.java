@@ -61,7 +61,6 @@ public class SellInsertController extends HttpServlet {
 		    int userNO = Integer.parseInt(multiRequest.getParameter("userNO"));
 		    
 		    
-		    
 			SellBoard s = new SellBoard();
 				
 			s.setSellTitle(sellTitle);
@@ -90,6 +89,7 @@ public class SellInsertController extends HttpServlet {
 			int result = new SellBoardService().insertSellBoard(s, at);
 			
 			if(result > 0) {
+				
 				request.getSession().setAttribute("alrtMsg", "글 등록 성공!");
 				response.sendRedirect(request.getContextPath()+"/market.se?currentPage=1");
 				

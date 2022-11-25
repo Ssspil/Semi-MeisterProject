@@ -921,8 +921,7 @@ public class MemberDao {
 				sell.add(new SellBoard(rset.getInt("SELL_NO"),
 									rset.getString("SELL_TITLE"),
 									rset.getInt("PRICE"),
-									rset.getInt("INTEREST_NO"),
-									rset.getInt("LOCAL_NO")
+									rset.getString("INTEREST_NAME")
 					));
 			}
 			

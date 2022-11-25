@@ -38,15 +38,11 @@ public class MySellListController extends HttpServlet {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		int userNo = loginUser.getUserNo();
-		ArrayList<String> interest = new ArrayList<String>();
-		ArrayList<String> local = new ArrayList<String>();
 		
 		ArrayList<SellBoard> s = new MemberService().getMySellBoard(userNo);
 		ArrayList<Attachment> at = new ArrayList<Attachment>();		
 		
 		for(int i = 0; i < s.size(); i++) {
-			interest.addAll(new MemberService().selectInterest(s.get(i).getInterestNo()));
-			local.addAll(new MemberService().selectLocal(s.get(i).getLocalNo()));
 			at.add(new MemberService().selectAttachment(s.get(i).getSellNo(), 2));
 		}
 		
@@ -56,8 +52,7 @@ public class MySellListController extends HttpServlet {
 		
 		System.out.println(s);
 		System.out.println(at);
-		System.out.println(interest);
-		System.out.println(local);
+		
 		request.getRequestDispatcher("views/mypagein/myPageInSellList.jsp").forward(request, response);
 	}
 

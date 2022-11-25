@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 찜 목록</title>
 <!--  google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +19,15 @@
   height: 130px;
 }
 #main{
-height:100%;
+box-sizing: border-box;
+height:1550px;
 margin: auto;
 width: 60%;
 }
 #main2{
     box-sizing: border-box;
-    margin: auto;
-    width: 95%;
+    width: 100%;
+    height:100%;
 }
 #titleName{
 font-size: 30px;
@@ -43,13 +44,31 @@ font-family: 'Nanum Gothic', sans-serif;
 }
 #contenthead{
     box-sizing: border-box;
-    height: 60px;
+    height: 50px;
 }
-#sellboard{
-    height:230px;
-    width: 220px;
-    display: inline-block;
-    margin-right:56px;
+#sellboard1{
+box-sizing: border-box;
+    height:250px;
+    width: 33%;
+    float: left;
+    padding: 30px;
+
+}
+#sellboard2{
+box-sizing: border-box;
+       height: 230px;
+    width: 33%;
+    float: left;
+    padding: 30px;
+
+}
+#sellboard3{
+box-sizing: border-box;
+    height:250px;
+   width: 33%;
+    float: left;
+padding: 30px;
+
 }
 #page{
 box-sizing: border-box;
@@ -61,7 +80,6 @@ height: 50px;
 #img{  
       width: 230px;
     height: 160px;
-
 }
 #title{
     float: right;
@@ -84,50 +102,53 @@ height: 50px;
 <%@include file="../common/header.jsp" %>
   <div class="header"></div>
     <div id=main>
-        
         <div id="body1">
           <span id="titleName">나의 찜 목록</span>
         </div>    
-        <div id="contenthead"></div>
-        <div id="main2">                                                  
-        <div id="sellboard">
+        <div id="contenthead"></div>                                                   
+    <div id="main2">
+    
+    <!-- 테스트용 반복문 -->
+    <%for(int i = 0; i<= 5; i++) { %>
+        <div id="sellboard1">
+            <img src="resources/image/peng.jpg" id="img">
+            <br><br>
+            <div id="title">재능판매글 제목</div>
+            <br>
+            <div id="price">300.000원</div>
+		</div>                                             
+        <div id="sellboard2">
             <img src="resources/image/peng.jpg" id="img">
             <br><br>
             <div id="title">재능판매글 제목</div>
             <br>
             <div id="price">300.000원</div>
 		</div>
-        <div id="sellboard">
+		<div id="main2">                                                  
+        <div id="sellboard3">
             <img src="resources/image/peng.jpg" id="img">
             <br><br>
             <div id="title">재능판매글 제목</div>
             <br>
             <div id="price">300.000원</div>
 		</div>
-        <div id="sellboard">
-            <img src="resources/image/peng.jpg" id="img">
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>
+<%} %>
+       </div> 
 			
 
 
         </div>
         
-	   
+   
+	   <div id="page">페이징 처리 공간</div>
 	   <br><br><br>
-	   <div id="page">
-	   페이징 처리 공간
-	   </div>
 	  
-    </div>
+	  
 
 
-
-
+</div>
 <%@ include file="../common/footer.jsp"%>
+
 
 </body>
 </html>
