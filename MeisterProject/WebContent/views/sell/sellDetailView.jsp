@@ -181,8 +181,18 @@
 								<div>
 								<%= s.getSellContent() %>
 								</div>
+								
+								
 								<div class="btn-cls">
-								<a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a>
+								
+								<form action="askToSeller.ch?sno=<%=(int)request.getAttribute("sno") %>" method="post">
+								<input type="hidden" name="sellNo" value=<%=s.getSellNo() %> >
+								<input type="hidden" name="receiver" value=<%=s.getUserNO() %> >
+								
+								<%-- <a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a> --%>
+								<button id="inquireBtn" class="btn btn-primary">문의하기</button>
+								</form>
+								
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
 								</div>
@@ -213,6 +223,17 @@
 				
 				
 			</div>
+		<div align="center">
+			<a href="<%=contextPath %>/market.se?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
+			
+			<%if(loginUser != null && loginUser.getUserId().equals(s.getUserNO())) {%>
+					<!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
+					<a href="<%=contextPath%>/updateForm.se?sno=<%= s.getSellNo() %>" class="btn btn-warning btn-sm">수정하기</a>
+					<a href="<%=contextPath %>/delete.se?sno=<%= s.getSellNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+				<%} %>
+		
+		
+		</div>
 		</div>
 
 		</section>

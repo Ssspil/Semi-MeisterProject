@@ -14,8 +14,10 @@
 	LocalDate today = LocalDate.now();
 	String nowDate = today.toString();
 	nowDate = nowDate.replace("-", "");
-	
-	int idx = chatDate.get(0).indexOf(" ");
+	int idx  = 0;
+	if(!chatDate.isEmpty()){
+		idx = chatDate.get(0).indexOf(" ");
+	}
 	int hour = 0;
 	String time = "";
 	String date = "";
@@ -185,7 +187,7 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		console.log('<%=dateList.get(count)%>');
+		
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
@@ -334,9 +336,9 @@
 		var data = document.getElementById("chatData");
 		let cnt = 0;
 		let oppCnt = 0;
-		if(<%=!list.isEmpty()%>){
+		<% if (!list.isEmpty()) {%>)
 			count = <%=list.get(list.size()-1).getChatNo()%>+1;
-		}
+		<% }%>
 		console.log(count);
 		
 		webSocket.onopen = function(message) {

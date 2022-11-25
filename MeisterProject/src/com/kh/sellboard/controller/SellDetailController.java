@@ -40,7 +40,11 @@ public class SellDetailController extends HttpServlet {
 	        return;
 	    }
 		
+	    
+	    
 		int sellNo = Integer.parseInt(request.getParameter("sno"));
+		
+		System.out.println(sellNo);
 		
 		SellBoardService sService = new SellBoardService();
 		

@@ -16,7 +16,8 @@
 					        S.INTEREST_NO AS INTEREST_NO,
 					        S.LOCAL_NO AS LOCAL_NO,
 					        M.NICKNAME AS NICKNAME,
-					        FILE_PATH || CHANGE_NAME AS TITLEIMG
+					        FILE_PATH || CHANGE_NAME AS TITLEIMG,
+					        USER_NO
 					FROM SELL S
 					JOIN MEMBER M USING (USER_NO)
 					JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
@@ -68,7 +69,8 @@
 				LOCAL_NO,
 				NICKNAME,
 				SELL_DETAIL,
-				SELL_REGULATION
+				SELL_REGULATION,
+				USER_NO
 		FROM SELL S
 		JOIN MEMBER M USING (USER_NO)
 		JOIN INTEREST I USING (INTEREST_NO)
@@ -155,6 +157,40 @@
 		JOIN MEMBER M USING (USER_NO)
 		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
         ORDER BY SELL_DATE DESC
+	</entry>
+	
+	<entry key="updateSellBoard">
+		UPDATE SELL
+		SET SELL_TITLE = ?,
+			SELL_CONTENT = ?,
+			PRICE = ?,
+			INTEREST_NO = ?,
+			LOCAL_N0 = ?,
+			USER_NO = ?,
+			SELL_DETAIL =?,
+			SELL_REGULATION =?
+		WHERE SELL_NO =?
+	</entry>
+	
+	<entry key="updateAttachment">
+		UPDATE ATTACHMENT
+		SET ORIGIN_NAME = ? ,
+			CHANGE_NAME = ? ,
+			FILE_PATH = ? ,
+			UPLOAD_DATE = SYSDATE
+		WHERE FILE_NO = ?
+	</entry>
+	
+	<entry key="deleteSellBoard">
+		UPDATE SELL
+		SET STATUS = 'N'
+		WHERE SELL_NO = ?
+	</entry>
+	
+	<entry key="deleteAttachment">
+		UPDATE ATTACHMENT
+		SET STATUS = 'N'
+		WHERE REF_NO = ?
 	</entry>
 	
 </properties>
