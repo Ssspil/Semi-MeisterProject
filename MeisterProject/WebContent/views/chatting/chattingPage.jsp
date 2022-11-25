@@ -42,7 +42,7 @@
 		timeList.add(time);
 	}
 	
-	if(nickNameList.length != 0){	
+	if(nickNameList.length != 1){	
 		for(int i = 0; i < nickNameList.length; i++){
 			if(!nickName.equals(nickNameList[i])){
 				oppNick = nickNameList[i];
@@ -187,7 +187,7 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		console.log(<%=nickNameList.length%>);
+		console.log(<%=oppNick%>);
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
