@@ -248,10 +248,13 @@ p.heartIcon{
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 						<!-- 찜 하트 아이콘 -->
-						<p class="heartIcon">
-							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>">							
-							<i class="fa-solid fa-heart-circle-check"></i><input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>
+						<p class="heartIcon"> 
+							
+								<i class="fa-regular fa-heart"></i>							
+								<i class="fa-solid fa-heart-circle-check"></i><input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>
+							
 						</p>
+					
 						
 					
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
@@ -280,8 +283,10 @@ p.heartIcon{
 			});
 		</script>
 			
-		<%-- <script>
-			$(document).on("click", "p.heartIcon", (e) => { // 이벤트 인자/
+			
+		<%--
+		 <script>
+			$(document).on("click", ".heartIcon", (e) => { 
 				e.preventDefault();// 한번 클릭후 다음 클릭 방지
 				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 				$.ajax({
@@ -291,9 +296,7 @@ p.heartIcon{
 					success : function(data) {
 						if (data.result == 1) {
 							alert("좋아요가 등록되었습니다.");
-							$(".like > .text2").text("좋아요 " + data.recommend);
 						} else if (data.result == 2) {
-							if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) {
 								$.ajax({
 									url : "sellBoardLike.se",
 									type : "post",
@@ -301,7 +304,6 @@ p.heartIcon{
 									success : function(data) {
 										if (data.result == 1) {
 											alert("취소되었습니다.");
-											$(".like > .text2").text("좋아요 " + data.recommend);
 										} //if
 									}, //success
 									error : function() {
@@ -314,11 +316,10 @@ p.heartIcon{
 						}
 					},
 					error : function() {
-						console.log("ERROR >> ");
+						console.log("ERROR");
 					},
 					done : function() {
 						likeBtn = true;
-					}
 				}); //$.ajax
 			}); //on.click 
      	</script> --%>
