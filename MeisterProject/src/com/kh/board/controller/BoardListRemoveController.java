@@ -1,12 +1,17 @@
-package com.kh.manager.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -39,6 +44,18 @@ public class BoardListRemoveController extends HttpServlet {
 	        
 	        return;
 	    }
+	    
+	    int boardNo = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new BoardService().deleteBoard(boardNo);
+	    
+		if (result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 삭제했습니다.");
+			response.sendRedirect(request.getContextPath()+"/board.ad");
+		} else {
+			request.setAttribute("errorMsg", "게시글 삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	
 	}
 

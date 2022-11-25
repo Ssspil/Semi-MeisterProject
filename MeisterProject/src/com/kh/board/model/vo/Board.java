@@ -129,14 +129,15 @@ public Board() {
 	}
 
  // BoardList
-	public Board(int boardNo,String userId, String memberNic,String boardTitle, String boardContent, String boardDate) {
+	public Board(int boardNo, String userId, String memberNic, String boardTitle, String boardDate, String boardContent, String status) {
 	super();
 	this.boardNo = boardNo;
 	this.userId = userId;
 	this.memberNic = memberNic;
 	this.boardTitle = boardTitle;
-	this.boardContent = boardContent;
 	this.boardDate = boardDate;
+	this.boardContent = boardContent;
+	this.status = status;
 }
 	public int getReplyCount() {
 		return replyCount;

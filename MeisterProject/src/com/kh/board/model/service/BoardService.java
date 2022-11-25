@@ -11,6 +11,8 @@ import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
 import com.kh.chatting.model.dao.ChattingDao;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Member;
 
 public class BoardService {
 	public int selectListCount(int type, String keyword) {
@@ -335,6 +337,23 @@ public class BoardService {
 		close();
 
 		return list;
+	}
+	
+	public int deleteboardlist(int boardNo) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteboardlist(boardNo, conn);
+		
+		new BoardDao().deleteAttachment(boardNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close();
+		
+		return result;
 	}
 
 }

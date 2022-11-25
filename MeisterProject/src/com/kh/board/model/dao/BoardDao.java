@@ -908,8 +908,9 @@ public class BoardDao {
 						rset.getString("USER_ID"),
 						rset.getString("NICKNAME"),
 						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_DATE"),
 						rset.getString("BOARD_CONTENT"),
-						rset.getString("BOARD_DATE"));
+						rset.getString("STATUS"));
 						
 						
 				board.add(b);
@@ -928,4 +929,25 @@ public class BoardDao {
 		return board;
 	}
 	
-}
+	public int deleteboardlist(int boardNo, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteboardlist");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
+	}
+}	

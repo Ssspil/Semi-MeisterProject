@@ -314,7 +314,12 @@
 	    B.STATUS
     FROM BOARD B
     JOIN MEMBER M USING(USER_NO)
-    WHERE B.STATUS = 'Y'
+	</entry>
+	
+	<entry key="deleteboardlist">
+		UPDATE BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = ?
 	</entry>
 	
 </properties>
