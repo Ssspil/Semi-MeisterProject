@@ -278,6 +278,11 @@
 		FROM LOCAL
 		WHERE LOCAL_NO = ?
 	</entry>
+	<entry key="selectListCount">
+	SELECT COUNT(*) 
+		FROM SELL
+	</entry>  
+	
 	
 	
 	

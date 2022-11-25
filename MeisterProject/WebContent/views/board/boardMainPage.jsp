@@ -589,20 +589,9 @@ position: relative;
 			<hr>
 <!-- 			페이징 처리 -->
 			<div class="page_wrap">
-				<%-- <%
-					if (currentPage != 1) {
-				%>
-				<span>&lt&lt</span>
-				<%
-					}
-				%> --%>
-				<%-- <%
-					if (startPage != 1) {
-				%> --%>
+		
 				<span class="pre" onclick="pageMove('pre')">&lt</span>
-				<%-- <%
-					}
-				%> --%>
+				
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 					if (i == currentPage) {
@@ -620,20 +609,9 @@ position: relative;
 				<%
 					}
 				%>
-				<%-- <%
-					if (currentPage != endPage) {
-				%> --%>
+				
 				<span class="next" onclick="pageMove('next')">&gt</span>
-				<%-- <%
-					}
-				%> --%>
-				<%-- <%
-					if (currentPage != maxPage) {
-				%>
-				<span>&gt&gt</span>
-				<%
-					}
-				%> --%>
+				
 			</div>
 		</div>
 	</div>

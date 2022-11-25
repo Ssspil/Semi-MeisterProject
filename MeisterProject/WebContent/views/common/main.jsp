@@ -30,10 +30,11 @@
         display: flex;
         justify-content: center;
         background-color: #111;
+        heght: 100px;
     }
     .hover-Text h2{
         position: relative;
-        font-size: 20px;
+        font-size: 40px;
         color : #222;
 
     }
@@ -45,7 +46,7 @@
         overflow: hidden;
         white-space: nowrap;
         border-right : 4px solid #fff;
-        animation:  animate 2s linear infinite;
+        animation:  animate 1.22s linear infinite;
         filter : drop-shadow(0 0 5px #fff) drop-shadow(0 0 0.01px #fff);
     }
 
@@ -71,7 +72,7 @@
         <ul class="slides">
           <li class="slide"><!-- 첫번째와 마지막꺼 같은 사진 둬야함. -->
             <img src="./resources/image/main1.jpeg" alt="" />
-            <div class="centerText">ㅋㅋdsfasdfdas</div>
+            <div class="centerText"></div>
           </li>
           <li class="slide">
             <img src="./resources/image/main2.jpeg" alt="" />
@@ -213,10 +214,20 @@
       			<% for (int i = 0 ; i < 3; i++) { %>
       				<script>
       				$(function(){
-      					$(".area").hover(function(){
-      						$(this).html('<div class="hover-Text"><h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2></div>');
+      					$('.area').hover(function(){
+      						$(this).html('<div class="hover-Text">'
+      									+ '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>'
+      									+ '</div><br><br>' 
+      									+ '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />');
+
       					}, function(){
-      						$(this).html('<div class="img-gradient"></div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" /><div class="text-wrap"><h5><%= sellList.get(i).getSellTitle() %></h5><span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br><span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span></div>');
+      						$(this).html('<div class="img-gradient">'
+      									+ '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />'
+      									+ '<div class="text-wrap">'
+      									+ '<h5><%= sellList.get(i).getSellTitle() %></h5>'
+      									+ '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>'
+      									+ '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>'
+      									+ '</div>');
       					});
       				})
       				</script>

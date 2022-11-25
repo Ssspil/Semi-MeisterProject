@@ -145,14 +145,14 @@ svg {
 .sell-main{
 	height: 100%;
 }
-.area {
+.card-box {
 	height : 100%;
 	width : 30%;
 	float : left;
 	margin-left : 2.5%;
 }
 
-}
+
 #sellImg{
 	width : 70%;
 	border-radius : 28px;
@@ -166,6 +166,9 @@ svg {
 	height : 300px;
 	box-shadow: 0px 2px 1px rgba(255, 165, 0, 26);
 	overflow: hidden;
+}
+.card-box:hover{
+	cursor: pointer;
 }
 /* 이미지 그라데이션 */
 .img-gradient{
