@@ -39,22 +39,24 @@ public class ChattingDao {
 		String content = "";
 		int sender = 0;
 		int receiver = 0;
+		int sellNo = 0;
 		PreparedStatement psmt = null;
 		
 		String sql = prop.getProperty("insertChat");
 		
 		try {
-			for(int i = 0; i < data.length; i += 3) {
+			for(int i = 0; i < data.length; i += 4) {
 				psmt = conn.prepareStatement(sql);
-				content = data[i+2];
+				content = data[i+3];
 				sender = Integer.parseInt(data[i]);
 				receiver = Integer.parseInt(data[i+1]);
-				System.out.println("content : "+content+" sender : "+sender+" receiver : "+receiver);
+				sellNo = Integer.parseInt(data[i+2]);
+				System.out.println("content : "+content+" sender : "+sender+" receiver : "+receiver+" sellNo : "+sellNo);
 				
 				psmt.setString(1, content);
 				psmt.setInt(2, sender);
 				psmt.setInt(3, receiver);
-				psmt.setInt(4, 1);
+				psmt.setInt(4, sellNo);
 				
 				result = psmt.executeUpdate();
 				psmt = null;
@@ -70,21 +72,23 @@ public class ChattingDao {
 		return result;
 	}
 	
-	public Chatting selectNoteList(Connection conn, int receiver, int sender){
+	public Chatting selectNoteList(Connection conn, int receiver, int sender, int sellNo){
 		Chatting list = null;
 		
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectNoteList");
+		String sql = prop.getProperty("selectChatList");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			psmt.setInt(1, sender);
 			psmt.setInt(2, receiver);
-			psmt.setInt(3, receiver);
-			psmt.setInt(4, sender);
+			psmt.setInt(3, sellNo);
+			psmt.setInt(4, receiver);
+			psmt.setInt(5, sender);
+			psmt.setInt(6, sellNo);
 			
 			rset = psmt.executeQuery();
 
@@ -183,6 +187,32 @@ public class ChattingDao {
 			rset = psmt.executeQuery();
 			while(rset.next()) {
 				list.add(rset.getInt("SENDER"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Integer> selectAllSellNo(Connection conn){
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllSellNo");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			while(rset.next()) {
+				list.add(rset.getInt("SELL_NO"));
 			}
 			
 		} catch (SQLException e) {

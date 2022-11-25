@@ -339,22 +339,21 @@ public class BoardService {
 		return list;
 	}
 	
-	public Board deleteboardlist(int userNo) {
-		Connection conn = JDBCTemplate.getConnection();
+	public int deleteboardlist(int boardNo) {
+		Connection conn = getConnection();
 		
-		int result1 = new BoardDao().deleteboardlist(conn, userNo);
+		int result = new BoardDao().deleteboardlist(boardNo, conn);
 		
-		Member delMem = null;
-
-		if(result1 > 0) {
-			delMem = new BoardDao().selectMemberByNo(conn, userNo);
-			
-			JDBCTemplate.commit(conn);
+		new BoardDao().deleteAttachment(boardNo, conn);
+		
+		if(result > 0) {
+			commit(conn);
 		} else {
-			JDBCTemplate.rollback(conn);
+			rollback(conn);
 		}
+		close();
 		
-		return delMem;
+		return result;
 	}
 
 }

@@ -45,26 +45,20 @@ public class BoardListRemoveController extends HttpServlet {
 	        return;
 	    }
 	    
-	 // input 벨뷰로 해서값을 가져오고 키값은 name이라고 보면 된다.
-	 		String[] userArr = request.getParameterValues("user");
-	 		
-	 		ArrayList<Board> list = new ArrayList<>();
-	 		
-	 		for(String s : userArr) {
-	 			int userNo  = Integer.parseInt(s);
-	 			
-	 			Board delMem = new BoardService().deleteboardlist(userNo);
-	 			
-	 			list.add(delMem);
-	 		}
-	 		
-	 		if(list == null) {
-	 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-	 		} else {
-	 			System.out.printf("관리자가 게시글을 삭제하였습니다. \n");
-	 			
-	 			response.sendRedirect(request.getContextPath()+"/boardlist.ad");
-	 		}
+	    int boardNo = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new BoardService().deleteBoard(boardNo);
+	    
+		if (result > 0) {
+			
+			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 삭제했습니다.");
+			response.sendRedirect(request.getContextPath()+"/board.ad");
+		} else {
+			request.setAttribute("errorMsg", "게시글 삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+					
+		}
 	
 	}
 

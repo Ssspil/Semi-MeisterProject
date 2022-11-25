@@ -193,7 +193,6 @@
 								<button id="inquireBtn" class="btn btn-primary">문의하기</button>
 								</form>
 								
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
 								</div>
 							</div>

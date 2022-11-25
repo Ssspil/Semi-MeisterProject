@@ -34,39 +34,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
 		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script>
-        const IMP = window.IMP; 
-        IMP.init("imp31080000"); 
-
-        function requestPay() {
-            IMP.request_pay({
-                pg : 'html5_inicis',
-                pay_method : 'card',
-                merchant_uid: 'merchant_'+new Date().getTime(), 
-                name : '결제 테스트', // 결제창에서 보여질 이름
-                amount : 100, // 실제 결제되는 가격
-                buyer_email : 'Iamport@chai.finance',
-                buyer_name : '구매자 이름',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '서울특별시 강남구 역삼동',
-                buyer_postcode : '123-456'
-            }, function (rsp) { // callback
-            	console.log(rsp);
-                if (rsp.success) {
-
-                    let msg = '결제가 완료되었습니다.';
-                    alert(msg);
-                    /* location.href= "결제 완료 후 이동할 페이지 url" */
-                } else {
-
-                    let msg = '결제에 실패하였습니다. ';
-                    msg += '에러내용 : ' + rsp.error_msg;
-                    alert(msg);
-                }
-            });
-        }
-    </script>
-
+	
 <meta charset="UTF-8">
 <title>판매게시판 메인</title>
 <style>
@@ -281,7 +249,8 @@ p.heartIcon{
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon">
-							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>							
+							<i class="fa-regular fa-heart"></i> <input type="hidden" value="<%=sb.getSellRecommend() %>">							
+							<i class="fa-solid fa-heart-circle-check"></i><input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>
 						</p>
 						
 					
@@ -312,13 +281,13 @@ p.heartIcon{
 		</script>
 			
 		<%-- <script>
-			$(document).on("click", "p.heart", (e) => { // 이벤트 인자/
+			$(document).on("click", "p.heartIcon", (e) => { // 이벤트 인자/
 				e.preventDefault();// 한번 클릭후 다음 클릭 방지
 				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 				$.ajax({
 					url : "sellBoardLike.se",
 					type : "post",
-					data : { boardNo : <%=s.getSellNo() %>, type : "I" },
+					data : { sellNo : <%=s.getSellNo() %>, type : "I" },
 					success : function(data) {
 						if (data.result == 1) {
 							alert("좋아요가 등록되었습니다.");
@@ -354,10 +323,7 @@ p.heartIcon{
 			}); //on.click 
      	</script> --%>
 		
-		<button onclick="requestPay()">결제하기</button>
-
-
-    
+	
     
 	</div><!-- outer 끝 -->
 	
