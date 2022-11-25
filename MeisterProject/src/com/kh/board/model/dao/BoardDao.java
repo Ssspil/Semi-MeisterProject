@@ -903,7 +903,7 @@ public class BoardDao {
 			rset = psmt.executeQuery();
 
 			while (rset.next()) {
-				Board b = new Board(rset.getInt("USER_NO"),
+				Board b = new Board(
 						rset.getInt("BOARD_NO"),
 						rset.getString("USER_ID"),
 						rset.getString("NICKNAME"),

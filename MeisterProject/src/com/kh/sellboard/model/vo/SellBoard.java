@@ -121,14 +121,14 @@ public class SellBoard {
 		this.interestNo = interestNo;
 		this.nickname = nickname;
 	}
-
-	public SellBoard(int sellNo, String sellTitle, int price, int localNo, int interestNo) {
+	
+	// 내가 쓴 판매 게시글 용도
+	public SellBoard(int sellNo, String sellTitle, int price, String interestName) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.price = price;
-		this.localNo = localNo;
-		this.interestNo = interestNo;
+		this.interestName = interestName;
 	}
 
 	public int getSellNo() {

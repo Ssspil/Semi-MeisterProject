@@ -129,6 +129,7 @@ public class SellBoardController extends HttpServlet {
 		    ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
 		    ArrayList<Local> local = new SellBoardService().selectLocalCategory();
 			
+		    
 		    request.setAttribute("list", list);
 		    request.setAttribute("interest", interest);
 		    request.setAttribute("local", local);

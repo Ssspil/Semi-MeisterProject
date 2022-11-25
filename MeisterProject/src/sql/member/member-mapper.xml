@@ -261,8 +261,9 @@
 	</entry>
 	
 	<entry key="selectMySellBoard">
-		SELECT *
+		SELECT SELL_NO, SELL_TITLE, PRICE, INTEREST_NAME
 		FROM SELL
+		JOIN INTEREST USING(INTEREST_NO)
 		WHERE USER_NO = ?
 	</entry>
 	
