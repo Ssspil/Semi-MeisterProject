@@ -929,7 +929,25 @@ public class BoardDao {
 		return board;
 	}
 	
-	public ArrayList<Board> deleteboardlist(Connection conn, int userNo) {
-	
+	public int deleteboardlist(int boardNo, Connection conn) {
+
+		int result = 0;
+
+		PreparedStatement psmt = null;
+
+		String sql = prop.getProperty("deleteboardlist");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, boardNo);
+
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		return result;
 	}
 }	

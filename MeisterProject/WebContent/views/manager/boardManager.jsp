@@ -129,14 +129,14 @@ table>tfoot>tr:hover{
 				
 				
 				<div class="myOuter">
-				<form action="<%= contextPath %>/boardremove.ad" method="post">
+<%-- 				<form action="<%= contextPath %>/boardremove.ad" method="post"> --%>
 					
 					<table align="center" border="1">
 						<thead>
 							<tr>
 								<td colspan="9">
 								<div style="float : right;">
-									<button type="submit" class="btn btn-danger">삭제하기</button>
+<!-- 									<button type="submit" class="btn btn-danger">삭제하기</button> -->
 								</div>
 								</td>
 							</tr>
@@ -175,8 +175,9 @@ table>tfoot>tr:hover{
 							      <td><%=list.get(i).getMemberNic() %></td>
 							      <td><%=list.get(i).getBoardTitle() %></td>
 							      <td><%=list.get(i).getBoardDate() %></td>
-							      <td><%=list.get(i).getBoardContent() %></td>
-							      <td><%=list.get(i).getStatus() %></td> 
+							      <td><a href="<%=contextPath %>/detail.bo?bno=<%=list.get(i).getBoardNo() %>" class="btn1">보기</a></td>
+							      <td><%=list.get(i).getStatus() %></td>
+							      <td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>" class="btn1">삭제하기</a></td>
 							      <% } %>
 						      <% } %>
 						    </tr>

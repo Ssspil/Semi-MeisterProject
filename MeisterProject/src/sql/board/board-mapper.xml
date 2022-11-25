@@ -316,4 +316,10 @@
     JOIN MEMBER M USING(USER_NO)
 	</entry>
 	
+	<entry key="deleteboardlist">
+		UPDATE BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = ?
+	</entry>
+	
 </properties>
