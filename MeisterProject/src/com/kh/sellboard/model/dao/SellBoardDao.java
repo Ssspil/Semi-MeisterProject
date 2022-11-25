@@ -506,6 +506,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
             
             while(rset.next()) {
                 sb = new SellBoard(
+                		rset.getInt("SELL_NO"),
                         rset.getString("SELL_TITLE"),
                         rset.getString("SELL_CONTENT"),
                         rset.getInt("PRICE"),

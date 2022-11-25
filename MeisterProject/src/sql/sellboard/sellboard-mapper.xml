@@ -147,7 +147,8 @@
 	
 	<!-- 메인페이지에 보일 쿼리문 -->
 	<entry key="selectAllList">
-		SELECT SELL_TITLE,
+		SELECT SELL_NO,
+			   SELL_TITLE,
 			   SELL_CONTENT,
 			   PRICE,
 			   INTEREST_NO,
@@ -191,6 +192,12 @@
 		UPDATE ATTACHMENT
 		SET STATUS = 'N'
 		WHERE REF_NO = ?
+	</entry>
+	
+	<entry key="insertMyTransaction">
+		INSERT INTO TRANSACTION(SELL_NO, USER_NO, REVIEW_NO)
+        VALUES (?,?,?)
+	
 	</entry>
 	
 </properties>

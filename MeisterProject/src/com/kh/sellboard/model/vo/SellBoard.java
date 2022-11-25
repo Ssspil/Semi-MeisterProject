@@ -111,9 +111,10 @@ public class SellBoard {
 	}
 	
 	// 메인페이지에 띄울 생성자
-	public SellBoard(String sellTitle, String sellContent, int price, String titleImg, int interestNo,
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, String titleImg, int interestNo,
 			String nickname) {
 		super();
+		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
 		this.sellContent = sellContent;
 		this.price = price;
