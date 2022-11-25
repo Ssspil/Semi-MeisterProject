@@ -908,8 +908,9 @@ public class BoardDao {
 						rset.getString("USER_ID"),
 						rset.getString("NICKNAME"),
 						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_DATE"),
 						rset.getString("BOARD_CONTENT"),
-						rset.getString("BOARD_DATE"));
+						rset.getString("STATUS"));
 						
 						
 				board.add(b);
@@ -927,5 +928,7 @@ public class BoardDao {
 
 		return board;
 	}
+	
+	public ArrayList<Board> deleteboardlist(Connection conn) {
 	
 }

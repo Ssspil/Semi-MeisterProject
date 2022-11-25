@@ -1,12 +1,17 @@
 package com.kh.manager.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -39,6 +44,27 @@ public class BoardListRemoveController extends HttpServlet {
 	        
 	        return;
 	    }
+	    
+	 // input 벨뷰로 해서값을 가져오고 키값은 name이라고 보면 된다.
+	 		String[] userArr = request.getParameterValues("user");
+	 		
+	 		ArrayList<Board> list = new ArrayList<>();
+	 		
+	 		for(String s : userArr) {
+	 			int userNo  = Integer.parseInt(s);
+	 			
+	 			Board delMem = new BoardService().deleteboardlist(userNo);
+	 			
+	 			list.add(delMem);
+	 		}
+	 		
+	 		if(list == null) {
+	 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+	 		} else {
+	 			System.out.printf("관리자가 게시글을 삭제하였습니다. \n");
+	 			
+	 			response.sendRedirect(request.getContextPath()+"/boardlist.ad");
+	 		}
 	
 	}
 

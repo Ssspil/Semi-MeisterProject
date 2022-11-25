@@ -176,28 +176,24 @@ table>tfoot>tr:hover{
 							      <td><%=list.get(i).getBoardTitle() %></td>
 							      <td><%=list.get(i).getBoardDate() %></td>
 							      <td><%=list.get(i).getBoardContent() %></td>
-							      <% } } %>
-<!-- 							      <td class="status"> -->
-<%-- 							      <% if ((m.getBlackList()).equals("Y"))  { %> --%>
-<!-- 							      	제적 -->
-<%-- 							      <% } } %> --%>
-				
-<!-- 							      </td>  -->
+							      <td><%=list.get(i).getStatus() %></td> 
+							      <% } %>
+						      <% } %>
 						    </tr>
 						    
-<!-- 						  	<script> -->
-<!-- // 						      $(function(){ -->
-<%-- 						    	  $('.user<%=m.getUserNo() %>').click(function(){ --%>
-<!-- // 						    		  if($(this).children().children('[type="checkbox"]:checked') == true){ -->
-<!-- // 						    			  $(this).children().children('[name="user"]').attr("checked", false); -->
-<!-- // 						    		  } else { -->
-<!-- // 						    			  $(this).children().children('[name="user"]').attr("checked", true); -->
-<!-- // 						    		  } -->
+ 						  	<script>
+ 						      $(function(){
+ 					    	  $('.user<%=list.get(0).getUserNo() %>').click(function(){
+ 						    		  if($(this).children().children('[type="checkbox"]:checked') == true){
+ 						    			  $(this).children().children('[name="user"]').attr("checked", false);
+ 						    		  } else {
+ 						    			  $(this).children().children('[name="user"]').attr("checked", true); 
+ 						    		  }
 									
-<!-- // 						    	  }); -->
-<!-- // 						      }) -->
+ 						    	  });
+					      })
 						      
-<!-- 						  	</script> -->
+ 						  	</script>
 
  					  </table>
  					</form>
