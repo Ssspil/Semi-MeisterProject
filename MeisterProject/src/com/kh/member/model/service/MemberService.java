@@ -396,6 +396,16 @@ public class MemberService {
 	      	     
 	    return result;
 	}   
+	//페이징 처리용
+	public int selectListCount(int type) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int listCount = new MemberDao().selectListCount(conn,type);
+
+		JDBCTemplate.close();
+
+		return listCount;
+	}
 	   
 	   
 	   

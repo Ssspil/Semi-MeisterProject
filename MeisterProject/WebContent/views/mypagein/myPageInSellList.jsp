@@ -8,6 +8,15 @@
 		at.add(new Attachment());
 	}
 	int count = 0;
+	
+	//페이징 처리용
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage(); 	
+	
+	
 %>   
 <!DOCTYPE html>
 <html>
@@ -55,9 +64,9 @@ font-family: 'Nanum Gothic', sans-serif;
 }
 #sellboard{
     height:230px;
-    width: 220px;
+    width: 230px;
     display: inline-block;
-    margin-right:56px;
+   
 }
 #page{
 box-sizing: border-box;
@@ -83,7 +92,30 @@ height: 50px;
 #category{
     color: lightgray;
 }
+.page_wrap {
+	text-align: center;
+	position: relative;
+	top: 10px;
+}
 
+.page_wrap span {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.page_wrap .sel {
+	color: orange;
+	border-bottom: 1px solid orange;
+}
+
+.page_wrap span:hover {
+	color: orange;
+	cursor: pointer;
+	border-bottom: 1px solid orange;
+}
+.hide{
+display:none;
+}
 
 
 
@@ -176,7 +208,30 @@ height: 50px;
 	   </script>
 	   <br><br><br>
 	   <div id="page">
-	   페이징 처리 공간
+	   <div class="page_wrap">
+				<span onclick="pageMove('pre')">&lt</span>
+		
+				<%
+					for (int i = startPage; i <= endPage; i++) {
+					if (i == currentPage) {
+				%>
+				<span class="page<%=i%> sel" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					} else {
+				%>
+				<span class="page<%=i%>" onclick="pageMove('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				
+				<span onclick="pageMove('next')">&gt</span>
+				
+			</div>
 	   </div>
 	  
     </div>
@@ -185,6 +240,25 @@ height: 50px;
 
 
 <%@ include file="../common/footer.jsp"%>
+
+<script>
+function pageMove(currentPage) {
+    if (currentPage == "next") {
+       currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+    }
+    if (currentPage == "pre") {
+       currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+    }
+    var cnt = (currentPage - 1) * 7;
+    $(".board").hide();
+    for (var i = cnt; i < cnt + 7; i++) {
+       $(".board" + (i)).show();
+    }
+    $(".page_wrap span").removeClass("sel");
+    $(".page" + currentPage).addClass("sel");
+ }
+
+</script>
 
 </body>
 </html>

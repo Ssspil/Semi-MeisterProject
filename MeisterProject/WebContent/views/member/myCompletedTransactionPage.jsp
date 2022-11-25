@@ -29,5 +29,9 @@
             <button id="btn3" >리뷰쓰기</button>
         </div>
         </div>
+        
+        <div id="page2">
+	   페이징 처리 2
+	   </div>
 </body>
 </html>
