@@ -52,6 +52,26 @@ height:100%;
     margin-bottom:30px;
     border-radius: 15px;
 }
+.name2Body{
+    box-sizing: border-box;
+    border: 3px solid black;
+    height:271px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+    margin-bottom:30px;
+    border-radius: 15px;
+}
+.name3Body{
+    box-sizing: border-box;
+    border: 3px solid black;
+    height:271px;
+    width: 60%;
+    margin: auto;
+    padding: 15px;
+    margin-bottom:30px;
+    border-radius: 15px;
+}
 #name1Body:hover{
 background-color:rgb(250, 247, 247);     
 }
@@ -138,6 +158,13 @@ width: 60%;
 margin: auto;
 height: 50px;
 }
+#nameBody_2,#nameBody_3{
+	height:100%;
+	display:none;
+}
+.hide{
+	display: none;
+}
 
 </style>
 </head>
@@ -150,26 +177,23 @@ height: 50px;
 
         <div id="body1">
             <div>
-            <button class="statusBtn" id="current">진행중인 거래</button>
+            <button class="statusBtn" id="current" onclick="menuClick('current')">진행중인 거래</button>
         </div>
         <div>
-            <button class="statusBtn" id="done">완료된 거래</button>
+            <button class="statusBtn" id="complete" onclick="menuClick('complete')">완료된 거래</button>
         </div>
         <div>
-            <button class="statusBtn" id="cancle">취소된 거래</button>
+            <button class="statusBtn" id="cancel" onclick="menuClick('cancel')">취소된 거래</button>
         </div>
 
         </div>
+        <div id="nameBody_1">
         <div id="contenthead"></div>
         
-        <div id="nameBody_1">
        
-					
-				<!-- 테스트용 반목문 -->
-					<% for(int i = 0; i<=5; i++) { %>	
         <div class="name1Body">
             <div id="title">
-                <span id="title1">거래 상태</span>
+                <span id="title1">진행중인 거래</span>
                 <span id="title2">재능 판매글 제목</span>
             </div>
             <br><br>
@@ -184,10 +208,12 @@ height: 50px;
             <button id="btn2" >판매자문의</button>
             <button id="btn3" >작업완료</button>
         </div>
-     <% } %>
+   
+	   
 	   
 	   </div>
-	   
+	   <%@ include file="../member/myCompletedTransactionPage.jsp"%>
+	<%@ include file="../member/myCanceledTransactionPage.jsp"%>
 	   <div id="page">
 	   
 	   </div>
@@ -199,27 +225,32 @@ height: 50px;
 </div>
 
 
+
 		<script>
-		$(document).ready(function(){
-			$(".statusBtn").on('click', function(e){
-				if(e.target.id == 'current'){
-					$("#current").css("background-color", "orange");
-					$("#done").css("background-color", "gray");
-					$("#cancel").css("background-color", "gray");
-				}
-				else if(e.target.id == 'done'){
-					$("#current").css("background-color", "gray");
-					$("#done").css("background-color", "orange");
-					$("#cancel").css("background-color", "gray");
-				}
-				else{
-					$("#current").css("background-color", "gray");
-					$("#done").css("background-color", "gray");
-					$("#cancel").css("background-color", "orange");
-				}
-			});
-		});
-	</script>
+	  function menuClick(type) {
+      if (type == "current") {
+         $("#nameBody_1").show();
+         $("#nameBody_2").hide();
+         $("#nameBody_3").hide();
+      } else if (type == "complete") {
+         $("#nameBody_2").show();
+         $("#nameBody_1").hide();
+         $("#nameBody_3").hide();
+       
+      } else if(type == "cancel") {
+         $("#nameBody_3").show();
+         $("#nameBody_1").hide();
+         $("#nameBody_2").hide();
+       }
+
+      }
+  
+		</script>
+	
+	
+	
+	
+	
 	<%@include file="../common/footer.jsp" %>
 </body>
 </html>

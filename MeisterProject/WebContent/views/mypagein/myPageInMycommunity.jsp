@@ -349,7 +349,7 @@ height:100px;
          $("#nameBody_1").show();
          $("#nameBody_2").hide();
          $("#name1").addClass("bodyClick1");
-         $("#name2").removeClass("bodyClick2");
+         $("#name2").removeClass("bodyClick1");
 		 $("#type").val("1"); 
 		 $("#boardType").val("name1"); 
 		 
@@ -357,7 +357,7 @@ height:100px;
          $("#nameBody_2").show();
          $("#nameBody_1").hide();
          $("#name2").addClass("bodyClick1");
-         $("#name1").removeClass("bodyClick2");
+         $("#name1").removeClass("bodyClick1");
          $("#type").val("2");
 		 $("#boardType").val("name2");
 
