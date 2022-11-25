@@ -7,6 +7,7 @@
 	if(at == null){
 		at.add(new Attachment());
 	}
+	int count = 0;
 %>   
 <!DOCTYPE html>
 <html>
@@ -93,43 +94,86 @@ height: 50px;
 
 <%@include file="../common/header.jsp" %>
   <div class="header"></div>
-    <div id=main>
-        
+    <div id=main>        
         <div id="body1">
           <span id="titleName">내가 작성한 판매글</span>
         </div>    
         <div id="contenthead"></div>
         <div id="main2">                                                  
-        <div id="sellboard">
-        <span id="category">분야><%=s.get(1).getInterestNo() %></span>
-            <img src="<%=contextPath %>/<%=at.get(1).getFilePath() %>/<%=at.get(1).getChangeName() %>" id="img">
-            <br><br>
-            <div id="title"><%=s.get(1).getSellTitle() %></div>
-            <br>
-            <div id="price"><%=s.get(1).getPrice() %>원</div>
-		</div>
-        <div id="sellboard">
-        <span id="category">분야>운동</span>
-            <img src="resources/image/peng.jpg" id="img">
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>
-        <div id="sellboard">
-        <span id="category">분야>운동</span>
-            <img src="resources/image/peng.jpg" id="img">
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>
-			
-
 
         </div>
         
-	   
+	   <script>
+	   		<%if(!s.isEmpty()){ %>
+   				<%for(int i = 0; i < s.size(); i++){ %>  
+   					$(document).ready(function() {
+   						$('#main2').append(
+   							$('<div>').prop({
+   								id: 'sellboard<%=count%>'
+   							})
+   						);
+   						
+   						$('#sellboard<%=count%>').append(
+   	   	   	   				$('<div>').prop({ 
+   	   	   	   					id: 'category',
+   	   	   	   					innerHTML: '분야>'+'<%=s.get(i).getInterestName() %>'
+   	   	   	   				})
+   	   	   	   			);
+   						$('#sellboard<%=count%>').append(
+   	   						$('<img>').prop({ 
+   	   							id: 'img',
+   	   							src: '<%=contextPath %>/<%=at.get(i).getFilePath() %>/<%=at.get(i).getChangeName() %>'
+   	   						})
+   	   					);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   	   		$('<br>').prop({ 
+   	   	   	   	   	   		})
+   	   	   	   	   	   	);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   			$('<div>').prop({ 
+   	   	   	   	   				id: 'title',
+   	   	   	   	   				innerHTML: '<%=s.get(i).getSellTitle() %>'
+   	   	   	   	   			})
+   	   	   	   	   		);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   			$('<br>').prop({ 
+   	   	   	   	   			})
+   	   	   	   	   		);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   	   		$('<div>').prop({ 
+   	   	   	   	   	   			id: 'price',
+   	   	   	   	   				innerHTML: '<%=s.get(i).getPrice() %>'+'원'
+   	   	   	   	   	   		})
+   	   	   	   	   	   	);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   	   		$('<br>').prop({ 
+   	   	   	   	   	   		})
+   	   	   	   	   	   	);
+   						$('#sellboard<%=count%>').append(
+   	   	   	   	   	   	   	$('<input>').prop({ 
+   	   	   	   	   	   	   		id: 'sno<%=count%>',
+   	   	   	   	   	   	   		type: 'hidden',
+   	   	   	   	   	   	   		name: 'sno',
+   	   	   	   	   	   	   		value: '<%=s.get(i).getSellNo() %>'
+   	   	   	   	   	   	   	})
+   	   	   	   	   	   	);
+   						$('#sellboard<%=count%>').css({'display': 'inline-block','height':'230px', 'width': '220px', 'margin-right':'56px'});
+
+   					});
+   					<%count += 1;%>
+       			<%} %>
+   			<%} else{%>
+       			조회된 게시글이 없습니다
+   			<%} %>
+
+			
+			$(function(){
+				$('[id^=sellboard]').click(function(){	
+					let sno = $(this).find('input').val();
+					location.href = "<%=contextPath%>/detail.se?sno="+sno;					
+				})	
+			});
+	   </script>
 	   <br><br><br>
 	   <div id="page">
 	   페이징 처리 공간
