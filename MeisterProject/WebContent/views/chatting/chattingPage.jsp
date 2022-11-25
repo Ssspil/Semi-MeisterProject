@@ -3,14 +3,15 @@
 <%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, com.kh.common.model.vo.Attachment, java.time.LocalDate" %>
 <%
 	String nickName = (String) request.getAttribute("nickname");
-	int userNo = (Integer) request.getAttribute("userNo");
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
 	String oppNick = "";
 	ArrayList<String> chatDate = (ArrayList<String>) request.getAttribute("dateList");
 	ArrayList<String> timeList = new ArrayList<String>();
 	ArrayList<String> dateList = new ArrayList<String>();
-	
+	int userNo = (Integer) request.getAttribute("userNo");
+	int sellNo = (Integer) request.getAttribute("sellNo");
+	int receiver = (Integer) request.getAttribute("receiver");
 	LocalDate today = LocalDate.now();
 	String nowDate = today.toString();
 	nowDate = nowDate.replace("-", "");
@@ -41,19 +42,18 @@
 		timeList.add(time);
 	}
 	
-	
-	for(int i = 0; i < nickNameList.length; i++){
-		if(!nickName.equals(nickNameList[i])){
-			oppNick = nickNameList[i];
-			break;			
+	if(nickNameList.length != 0){	
+		for(int i = 0; i < nickNameList.length; i++){
+			if(!nickName.equals(nickNameList[i])){
+				oppNick = nickNameList[i];
+				break;			
+			}
 		}
 	}
-	
-	Attachment user = (Attachment) request.getAttribute("profileUser");
-	
-	if(user == null){
-		user = new Attachment();
+	else{
+		oppNick = (String) request.getAttribute("oppNick");
 	}
+	
 	Attachment opp = (Attachment) request.getAttribute("profileOpp");
 	if(opp == null){
 		opp = new Attachment();
@@ -187,7 +187,7 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		
+		console.log(<%=nickNameList.length%>);
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
@@ -317,10 +317,11 @@
 				<input id="user" type="hidden" value="<%=nickName%>" readonly> 
 				<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
 				<input id="opponent" type="hidden" value=<%=nickName %> readonly>
-				<input id="receiver" type="hidden" value="1" readonly>  
+				<input id="receiver" type="hidden" value=<%=receiver %> readonly> 
+				<input id="sellNo" type="hidden" value=<%=sellNo %> readonly>  
 	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 				<br>
-				<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+				<input id="chatData" type="text" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
 			<br>
 		</div>
 		<div class="chat-format">
@@ -333,10 +334,16 @@
 		var webSocket = new WebSocket("ws://192.168.20.13:8888/meister/broadsocket");
 		console.log(webSocket);
 		let count = 0;
-		var data = document.getElementById("chatData");
 		let cnt = 0;
 		let oppCnt = 0;
-		<% if (!list.isEmpty()) {%>)
+		var user = document.getElementById("user");
+		var sender = document.getElementById("sender");
+		var opponent = document.getElementById("opponent");
+		var receiver = document.getElementById("receiver");
+		var sellNo = document.getElementById("sellNo");
+		var message = document.getElementById("textMessage");
+		var data = document.getElementById("chatData");
+		<% if (!list.isEmpty()) {%>
 			count = <%=list.get(list.size()-1).getChatNo()%>+1;
 		<% }%>
 		console.log(count);
@@ -381,10 +388,6 @@
 				$('#divOpp'+oppCnt+'>div').css({'float': 'left'});	
 				$('#divOpp'+oppCnt).css({'width': '700px', 'height': '50px'});
 				
-				if(oppCnt != 0 && '#divDate'+oppCnt.innerHtml.equals('#divDate'+oppCnt.innerHtml)){
-					$('#divDate'+oppCnt).hide();
-					$('#hr'+oppCnt).hide();
-				}
 				
 				$('.outer').append(
 					$('<div>').prop({
@@ -394,7 +397,13 @@
 				);
 				
 				$('#oppTime'+oppCnt).css({'width': '700px', 'height': '30px', 'margin-bottom': '10px', 'text-align': 'left'})
-
+				
+				if(<%=oppNick%> !=  name){
+					$('#divOpp'+oppCnt).hide();
+					$('#divOpp'+oppCnt+'>div').hide();
+					$('#oppTime'+oppCnt).hide();
+				}
+				
 				oppCnt += 1;
 			});
 			
@@ -405,16 +414,12 @@
 			data.value += ",";
 			data.value += sender.value;
 			data.value += ",";
+			data.value += sellNo.value;
+			data.value += ",";
 			data.value += text;
 		};
 		
 		function sendMessage() {
-			var user = document.getElementById("user");
-			var sender = document.getElementById("sender");
-			var opponent = document.getElementById("opponent");
-			var receiver = document.getElementById("receiver");
-			var message = document.getElementById("textMessage");
-			var data = document.getElementById("chatData");
 			let now = new Date();
 			
 			if (data.value != "") {
@@ -424,6 +429,8 @@
 			data.value += sender.value;
 			data.value += ",";
 			data.value += receiver.value;
+			data.value += ",";
+			data.value += sellNo.value;
 			data.value += ",";
 			data.value += message.value;
 			webSocket.send("{{" + user.value + "}}" + message.value);

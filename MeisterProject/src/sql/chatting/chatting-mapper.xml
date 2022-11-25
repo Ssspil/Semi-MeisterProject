@@ -8,11 +8,11 @@
 		VALUES(SEQ_CNO.NEXTVAL, ?, ?, ?, ?)
 	</entry>
 	
-	<entry key="selectNoteList">
+	<entry key="selectChatList">
 		SELECT *
 		FROM (SELECT *
 		        FROM CHATTING
-		        WHERE (SENDER = ? AND RECEIVER = ?) OR (SENDER = ? AND RECEIVER = ?)
+		        WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
 		        ORDER BY CHAT_NO DESC
 		    )
 		<![CDATA[WHERE ROWNUM <= 1]]>
@@ -31,6 +31,11 @@
 	
 	<entry key="selectAllSender">
 		SELECT SENDER
+		FROM CHATTING
+	</entry>
+	
+	<entry key="selectAllSellNo">
+		SELECT SELL_NO
 		FROM CHATTING
 	</entry>
 	

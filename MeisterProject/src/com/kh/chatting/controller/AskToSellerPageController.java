@@ -50,28 +50,38 @@ public class AskToSellerPageController extends HttpServlet {
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
+		System.out.println("receiver : "+receiver);
+		System.out.println("sellNo : "+sellNo);
+		
 		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, userNo, sellNo);
 		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, userNo, sellNo);
 		
-		String[] nickNameList = new String[list.size()];
+		String[] nickNameList = new String[1];
 		String senderName = "";
-		
-		for(int i=0; i < list.size(); i++) {
-			senderName = new MemberService().selectNickName(list.get(i).getSender());
-			nickNameList[i] = senderName;
+		if(!list.isEmpty()) {
+			nickNameList = new String[list.size()];
+			for(int i=0; i < list.size(); i++) {
+				senderName = new MemberService().selectNickName(list.get(i).getSender());
+				nickNameList[i] = senderName;
+			}					
+		}
+		else {
+			senderName = new MemberService().selectNickName(receiver);
+			request.setAttribute("oppNick", senderName);
 		}
 	
 		System.out.println(list);
 		System.out.println(receiver);
 		
-		Attachment profileUser = new ChattingService().getProfile(userNo);
 		Attachment profileOpp = new ChattingService().getProfile(receiver);
 
 		request.setAttribute("list", list);
 		request.setAttribute("nickNameList", nickNameList);
-		request.setAttribute("profileUser", profileUser);
 		request.setAttribute("profileOpp", profileOpp);
 		request.setAttribute("dateList", dateList);
+		request.setAttribute("sellNo", sellNo);
+		request.setAttribute("userNo", userNo);
+		request.setAttribute("receiver", receiver);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
