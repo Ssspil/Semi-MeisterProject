@@ -7,7 +7,8 @@
     String contextPath = request.getContextPath();
 	
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
-
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -49,6 +50,15 @@ table>tfoot>tr:hover{
     
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<script>
+		let msg = "<%= alertMsg %>";	
+		
+		if(msg != "null"){
+			alert(msg);
+			
+			<% session.removeAttribute("alertMsg"); %>
+		} 
+</script>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -175,13 +185,14 @@ table>tfoot>tr:hover{
 							      <td><%=list.get(i).getMemberNic() %></td>
 							      <td><%=list.get(i).getBoardTitle() %></td>
 							      <td><%=list.get(i).getBoardDate() %></td>
-							      <td><a href="<%=contextPath %>/detail.bo?bno=<%=list.get(i).getBoardNo() %>" class="btn1">보기</a></td>
+							      <td><button>보기</button></td>
 							      <td><%=list.get(i).getStatus() %></td>
 							      <td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>" class="btn1">삭제하기</a></td>
 							      <% } %>
 						      <% } %>
 						    </tr>
-						    
+						   
+						    </script>
  						  	<script>
  						      $(function(){
  					    	  $('.user<%=list.get(0).getUserNo() %>').click(function(){

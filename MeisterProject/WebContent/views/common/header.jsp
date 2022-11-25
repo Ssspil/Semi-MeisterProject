@@ -1,3 +1,4 @@
+<%@page import="oracle.net.ns.SessionAtts"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member" %>
 <%
