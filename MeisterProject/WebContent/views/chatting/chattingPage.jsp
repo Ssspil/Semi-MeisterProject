@@ -41,18 +41,8 @@
 		}
 		timeList.add(time);
 	}
-	
-	if(nickNameList.length != 1){	
-		for(int i = 0; i < nickNameList.length; i++){
-			if(!nickName.equals(nickNameList[i])){
-				oppNick = nickNameList[i];
-				break;			
-			}
-		}
-	}
-	else{
-		oppNick = (String) request.getAttribute("oppNick");
-	}
+
+	oppNick = (String) request.getAttribute("oppNick");
 	
 	Attachment opp = (Attachment) request.getAttribute("profileOpp");
 	if(opp == null){
@@ -187,7 +177,7 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<script>
-		console.log(<%=oppNick%>);
+		console.log('<%=oppNick%>');
 		<% if(!list.isEmpty()){ %>
 			<%for(Chatting c : list){ %>
 				<%if(c.getSender() == userNo){%>
@@ -398,7 +388,7 @@
 				
 				$('#oppTime'+oppCnt).css({'width': '700px', 'height': '30px', 'margin-bottom': '10px', 'text-align': 'left'})
 				
-				if(<%=oppNick%> !=  name){
+				if(<%=oppNick%> != name){
 					$('#divOpp'+oppCnt).hide();
 					$('#divOpp'+oppCnt+'>div').hide();
 					$('#oppTime'+oppCnt).hide();
@@ -468,7 +458,6 @@
 				    })
 				);
 			    cnt += 1;
-			    console.log(cnt);
 			});
 			message.value = "";
 		}
