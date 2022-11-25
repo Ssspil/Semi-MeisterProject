@@ -26,26 +26,38 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <style>
-.sell-main{
-	height: 100%;
-}
-.area {
-	background-color : orange;
-	height : 100%;
-	width : 30%;
-	float : left;
-	margin-left : 2.5%;
-	padding-left : 3rem;
-	padding-top : 0.9rem;
-}
-.area:hover {
-	/* 카드형식으로 해보기*/
-}
-#sellImg{
-	width : 80%;
-	border-radius : 10px;
+     .hover-Text{
+        display: flex;
+        justify-content: center;
+        background-color: #111;
+    }
+    .hover-Text h2{
+        position: relative;
+        font-size: 20px;
+        color : #222;
+
+    }
+    .hover-Text h2::before{
+        content: attr(data-text);
+        position: absolute;
+        color: #fff;
+        width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right : 4px solid #fff;
+        animation:  animate 2s linear infinite;
+        filter : drop-shadow(0 0 5px #fff) drop-shadow(0 0 0.01px #fff);
+    }
+
+    @keyframes animate {
+        0%, 10%, 100%{
+            width :0;
+        }
+        70%, 90% {
+            width: 100%;
+        }
+    }
 	
-}
 </style>
 
 </head>
@@ -199,32 +211,58 @@
       	<div class="sell-main">
       		<% if (sellList.size() > 2 ) {%>
       			<% for (int i = 0 ; i < 3; i++) { %>
-	      			<div class="area">
-	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
-	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
-	      				<span><%= sellList.get(i).getNickname() %></span><br>
-	      				<span><%= sellList.get(i).getPrice() %></span>
+      				<script>
+      				$(function(){
+      					$(".area").hover(function(){
+      						$(this).html('<div class="hover-Text"><h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2></div>');
+      					}, function(){
+      						$(this).html('<div class="img-gradient"></div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" /><div class="text-wrap"><h5><%= sellList.get(i).getSellTitle() %></h5><span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br><span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span></div>');
+      					});
+      				})
+      				</script>
+
+      			
+	      			<div class="area card-box" align="center">
+	      				<div class="img-gradient"></div>
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
+	      				<div class="text-wrap">
+	      					<h5><%= sellList.get(i).getSellTitle() %></h5>
+	      					 <span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span>
+	      					<br>
+	      					 <span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>
+	      				</div>
 	      			</div>
 	      		<%  } %>
 	      	<% } else if (sellList.size() == 2) { %>
 	      		<% for (int i = 0 ; i < 2; i++) { %>
-	      			<div class="area">
-	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
-	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
-	      				<span><%= sellList.get(i).getNickname() %></span><br>
-	      				<span><%= sellList.get(i).getPrice() %></span>
+	      			<div class="area card-box" align="center">
+	      				<div class="img-gradient"></div>
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
+	      				<div class="text-wrap">
+	      					<h5><%= sellList.get(i).getSellTitle() %></h5>
+	      					 <span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span>
+	      					<br>
+	      					 <span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>
+	      				</div>
 	      			</div>
 	      		<%  } %>
 	      		<% for (int i = 0; i < 1; i++) {%>
-	      		
+	      			<div class="area">
+	      				<h5>게시글이 없습니다.</h5>
+	      				<span>게시글이 없습니다.</span><br>
+	      			</div>
 	      		<% } %>
 	      	<% } else if (sellList.size() == 1) { %>
 				<% for (int i = 0 ; i < 1; i++) { %>
-	      			<div class="area">
-	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" width="200" height="200" />
-	      				<h5> <%= sellList.get(i).getSellTitle() %></h5>
-	      				<span><%= sellList.get(i).getNickname() %></span><br>
-	      				<span><%= sellList.get(i).getPrice() %></span>
+	      			<div class="area card-box" align="center">
+	      				<div class="img-gradient"></div>
+	      				<img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="150" />
+	      				<div class="text-wrap">
+	      					<h5><%= sellList.get(i).getSellTitle() %></h5>
+	      					 <span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span>
+	      					<br>
+	      					 <span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>
+	      				</div>
 	      			</div>
 	      		<%  } %>
 	      		<% for (int i = 0 ; i < 2; i++) { %>
@@ -245,7 +283,7 @@
       	</div>
       </div>
       
-      <br><br>
+      <br><br><br><br><br>
       <div class="community-area">
       		<div class="smalltext-nav">
       			커뮤니티 최신글 ↓
@@ -387,8 +425,9 @@
 			    }
 			    
 			}, 3500);
-		
 
+
+			
 
 	</script>
 

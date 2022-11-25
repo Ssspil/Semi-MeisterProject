@@ -2,7 +2,7 @@
 .outer{
 	margin-top : 100px;
 	width : 100%;
-	height : 1500px;	
+	height : 1600px;	
 }
 .outer .slider-area{
 	margin-left : auto;
@@ -25,6 +25,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.smalltext-nav {
+	color : lightgrey;
+	font-size : 12px;
+}
+
 
 
 /************************
@@ -63,7 +69,7 @@
    width: 62%;
    margin: auto;
    border-radius: 40px;
-   box-shadow: 0px 1px 5px skyblue;
+   box-shadow: 0px 4px 8px skyblue;
 
 }
 svg {
@@ -136,6 +142,82 @@ svg {
 	width: 70%;
     margin: auto;
 }
+.sell-main{
+	height: 100%;
+}
+.area {
+	height : 100%;
+	width : 30%;
+	float : left;
+	margin-left : 2.5%;
+}
+
+}
+#sellImg{
+	width : 70%;
+	border-radius : 28px;
+	
+}
+/* 이미지 글을 넣어줄 큰틀 */
+.card-box{
+	position: relative;
+	border-radius: 28px;
+	width : 30%;
+	height : 300px;
+	box-shadow: 0px 2px 1px rgba(255, 165, 0, 26);
+	overflow: hidden;
+}
+/* 이미지 그라데이션 */
+.img-gradient{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(rgba(0, 0, 0, 0), rgb(135, 206, 235, 0.08));
+	z-index: 1;
+}
+/* 텍스트 위치 */
+.text-wrap{
+	position: absolute;
+	bottom : 0;
+	padding: 24px;
+	z-index: 2;
+}
+	/* 텍스트 설정 */
+.text-wrap h5 {
+	margin-bottom: 8px;
+	font-weight: bold;
+	overflow:hidden;
+	max-width : 100%;
+	text-overflow:ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+       -webkit-line-clamp:1;
+}
+.text-wrap span {
+	line-height: 1.5;
+}
+
+.text-wrap span.sell-Nickname {
+	color:black;
+	float : left;
+}
+.textColor1{
+	color:red;	
+}
+
+.text-wrap span.sell-Price {
+	color:black;
+	float : left;
+}
+.textColor2{
+	font-weight : 600;	
+}
+
+
+
+
 
 /* 커뮤니티 공간 */
 .community-area{
@@ -155,6 +237,17 @@ svg {
 	float : right;
 	margin-right : 4rem;
 }
+.area1, .area2 {
+	border-radius : 30px;
+	box-shadow : 2px 2px skyblue;
+}
+
+.area1:hover, .area2:hover{
+	background-color : lightgrey;
+	box-shadow : 2px 2px orange;
+	cursor : pointer;
+}
+
 
 .community-area a{
 	color : black;
@@ -168,7 +261,6 @@ svg {
 	margin : auto;
 	width : 70%;
 	height : 100%;
-	decoration : none;
 }
 .headtext {
 	font-weight : 700;
@@ -191,17 +283,3 @@ svg {
 	font-family: 'Nanum Gothic', sans-serif;
 }
 
-.area1, .area2 {
-	border-radius : 30px;
-	box-shadow : 2px 2px skyblue;
-}
-
-.area1:hover, .area2:hover{
-	background-color : lightgrey;
-	box-shadow : 2px 2px orange;
-	cursor : pointer;
-}
-.smalltext-nav {
-	color : lightgrey;
-	font-size : 12px;
-}
