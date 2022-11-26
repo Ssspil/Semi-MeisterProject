@@ -408,20 +408,13 @@
 
 
 
-
-
-
-
-
-
     <script>
         // 2) Image Slider
 
         var slider = document.querySelector("#slider");
         var slides = slider.querySelector(".slides");
         var slide = slides.querySelectorAll(".slide");
-
-
+        
         var currentSlide = 0;
         setInterval(function() {
 
