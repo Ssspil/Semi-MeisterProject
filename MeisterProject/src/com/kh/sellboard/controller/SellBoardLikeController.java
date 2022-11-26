@@ -38,28 +38,28 @@ public class SellBoardLikeController extends HttpServlet {
 		int result = 0; // int타입 result 변수 선언 0
 		int recommend = 0; // int타입 recommend 변수 선언 0
 		
-		int SellNo = Integer.parseInt(request.getParameter("SellNo")); // sellNo 데이터를 받아와 int 타입 sellNo에 변수 선언 // getParameter로 가져온 String sellNo값을 인티져로 변환한뒤 int타입 sellNo변수선언
+		int sellNo = Integer.parseInt(request.getParameter("sellNo")); // sellNo 데이터를 받아와 int 타입 sellNo에 변수 선언 // getParameter로 가져온 String sellNo값을 인티져로 변환한뒤 int타입 sellNo변수선언
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
 		String type = request.getParameter("type");
 		out = response.getWriter();
 		
 		if (type.equals("I")) {
-			int count = SellBoardService.selectRecommend(SellNo, userNo);
+			int count = SellBoardService.selectRecommend(sellNo, userNo);
 			
 			if (count == 0) {
-				result = SellBoardService.insertRecommend(SellNo, userNo);
+				result = SellBoardService.insertRecommend(sellNo, userNo);
 			} else {
 				result = 2;
 			}
 		} else if (type.equals("D")) {
-			int count = SellBoardService.selectRecommend(SellNo, userNo);
+			int count = SellBoardService.selectRecommend(sellNo, userNo);
 			if (count == 0) {
 				result = -2;
 			} else {
-				result = SellBoardService.deleteRecommend(SellNo, userNo);
+				result = SellBoardService.deleteRecommend(sellNo, userNo);
 			}
 		}
-		recommend = SellBoardService.countRecommend(SellNo);
+		recommend = SellBoardService.countRecommend(sellNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
