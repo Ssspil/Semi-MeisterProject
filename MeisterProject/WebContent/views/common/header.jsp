@@ -93,9 +93,6 @@
             	<div class="sub-menu">
 	                <ul class="menu">
 	                    <li>
-	                        <a id="myPage" href="<%= contextPath %>/alert.me">알림</a>
-	                    </li>
-	                    <li>
 	                    	<a href="<%= contextPath %>/mypage.me">마이페이지</a>
 	                    </li>
 	                    <li>
@@ -112,10 +109,6 @@
             <% } else { %>
             	<div class="sub-menu">
 	                <ul class="menu">
-
-	                    <li>
-	                        <a href="<%= contextPath %>/alert.me">알림</a>
-	                    </li>
 	                    <li>
 	                        <a href="<%= contextPath %>/mypage.me">마이페이지</a>
 	                    </li>
