@@ -153,6 +153,16 @@ svg {
 	margin-left : 2.5%;
 }
 
+/* 게시글없을 때 뜨게 할라고하는것 */
+.area9 {
+	height : 100%;
+	width : 30%;
+	float : left;
+	margin-left : 2.5%;
+}
+
+
+
 
 #sellImg{
 	width : 70%;
