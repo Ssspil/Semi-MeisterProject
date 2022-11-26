@@ -249,9 +249,10 @@ p.heartIcon{
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon"> 
-							
+						
 								<i class="fa-regular fa-heart"></i>							
 								<i class="fa-solid fa-heart-circle-check"></i><input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>
+						
 							
 						</p>
 					
@@ -284,8 +285,8 @@ p.heartIcon{
 		</script>
 			
 			
-		<%--
-		 <script>
+		
+		<%--  <script>
 			$(document).on("click", ".heartIcon", (e) => { 
 				e.preventDefault();// 한번 클릭후 다음 클릭 방지
 				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
