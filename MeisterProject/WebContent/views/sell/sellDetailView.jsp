@@ -29,10 +29,13 @@
 		
 	}
 	.outer{
-	       height: 850px;
+			width: 70%;
+	        height: 850px;
 	       /* 상 , 우 , 하, 좌  띄우기 */
 			margin: 150px 200px 20px 200px;
-			border : 1px solid;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			background-color: mintcream;
+			position: relative;
 	}
 	.container{
 		width: 500px;
@@ -47,13 +50,13 @@
 		cursor: pointer;
 	}
 	ul.tabs li.current{
-		background: orange;
+		background: #FFBA00;
 		color: black;
 	}
 	.tab-content{
 		height : 250px;
 		display: none;
-		background: #ededed;
+		background: #f5f5dc;
 		padding: 5%;
 	}
 	.tab-content.current{
@@ -63,14 +66,14 @@
 		width: 60%;
 		float: left;
 		box-sizing: border-box;
-		background: white;
+		background: mintcream;
 		padding: 5%;
 	}
 	.right{
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: white;
+		background: mintcream;
 		padding: 5%;
 		text-align : center;
 	}
@@ -78,7 +81,7 @@
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: #ededed;
+		background: mintcream;
 		
 	}
 	.btn-cls{
@@ -92,7 +95,23 @@
 	.seller-info{
 		padding : 5%;
 	}
-	
+	#nick{
+		color: #FFBA00;
+	}
+	.serve{
+		border: 1px solid; 
+		padding : 5px; 
+		margin : 5px;
+		font-size: smaller;
+	}
+	button:hover{
+		transition: 1s;
+		transform: scale(1.1);
+	}
+	a:hover{
+		transition: 1s;
+		transform: scale(1.1);
+	}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -185,15 +204,15 @@
 								
 								<div class="btn-cls">
 								
-								<form action="askToSeller.ch?sno=<%=(int)request.getAttribute("sno") %>" method="post">
-								<input type="hidden" name="sellNo" value=<%=s.getSellNo() %> >
-								<input type="hidden" name="receiver" value=<%=s.getUserNO() %> >
+									<form action="askToSeller.ch?sno=<%=(int)request.getAttribute("sno") %>" method="post">
+									<input type="hidden" name="sellNo" value=<%=s.getSellNo() %> >
+									<input type="hidden" name="receiver" value=<%=s.getUserNO() %> >
+									
+									<%-- <a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a> --%>
+									<button id="inquireBtn" class="btn btn-primary">문의하기</button>
+									</form>
 								
-								<%-- <a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a> --%>
-								<button id="inquireBtn" class="btn btn-primary">문의하기</button>
-								</form>
-								
-								<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
+									<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
 								</div>
 							</div>
 							
@@ -201,8 +220,8 @@
 						</section>
 				</section>
 				<br><br>
-				<section style="border: 1px solid; padding : 5px; margin : 5px;">
-					<h6>서비스 제공이 완료된 이후에 전문가에게 <br>결제 대금이 전달됩니다.</h6>
+				<section class="serve">
+					서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.
 				</section>
 			</div>
 			
@@ -212,7 +231,7 @@
 		<div class="right-under">
 			<div class="seller-info">
 				<section>
-				<b><%= s.getNickname() %></b> ●
+				<b id="nick"><%= s.getNickname() %></b> ●
 				<br><br>
 				</section>
 				<section>
@@ -222,17 +241,19 @@
 				
 				
 			</div>
-		<div align="center">
-			<a href="<%=contextPath %>/market.se?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
 			
-			<%if(loginUser != null && loginUser.getUserId().equals(s.getUserNO())) {%>
-					<!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
-					<a href="<%=contextPath%>/updateForm.se?sno=<%= s.getSellNo() %>" class="btn btn-warning btn-sm">수정하기</a>
-					<a href="<%=contextPath %>/delete.se?sno=<%= s.getSellNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-				<%} %>
+			
+				<div align="center">
+					
+				<a href="<%=contextPath %>/market.se?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
+				<%if(loginUser != null && loginUser.getUserNo() == s.getUserNO()) {%>
+						<!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
+						<!-- <a href="<%=contextPath%>/updateForm.se?sno=<%= s.getSellNo() %>" class="btn btn-warning btn-sm">수정하기</a>  -->
+						<a href="<%=contextPath %>/delete.se?sno=<%= s.getSellNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+					<%} %>
+				
+				</div>
 		
-		
-		</div>
 		</div>
 
 		</section>

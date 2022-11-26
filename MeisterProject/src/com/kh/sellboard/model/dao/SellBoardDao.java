@@ -590,6 +590,10 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 		try {
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			
+			result = psmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -1,6 +1,8 @@
 package com.kh.sellboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.model.vo.Attachment;
+import com.kh.common.model.vo.Interest;
+import com.kh.common.model.vo.Local;
 import com.kh.sellboard.model.service.SellBoardService;
 import com.kh.sellboard.model.vo.SellBoard;
 
@@ -34,6 +38,14 @@ public class SellUpdateFormController extends HttpServlet {
 		SellBoardService sService = new SellBoardService();
 		
 		int sellNo = Integer.parseInt(request.getParameter("sno"));
+		
+		ArrayList<Interest> interest = new SellBoardService().selectInterestCategory();
+		
+		request.setAttribute("interest", interest);
+		
+		ArrayList<Local> local = new SellBoardService().selectLocalCategory();
+		
+		request.setAttribute("local", local);
 		
 		SellBoard s = sService.selectSellBoard(sellNo);
 		
