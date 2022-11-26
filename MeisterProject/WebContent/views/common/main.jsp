@@ -221,15 +221,14 @@
             <div class="sell-main">
                 <% if (sellList.size() > 2 ) {%>
                 <% for (int i = 0 ; i < 3; i++) { %>
-                <script>
-                    $(function() {
-                        $('.area').hover(function() {
+               	<script>
+                     $(function() {
+                        $('#<%= i %>').on({'mouseenter' : function() {
                             $(this).html('<div class="hover-Text">' +
                                 '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
                                 '</div><br><br>' +
-                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />');
-
-                        }, function() {
+                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+                            }, 'mouseout' : function() {
                             $(this).html('<div class="img-gradient">' +
                                 '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
                                 '<div class="text-wrap">' +
@@ -237,11 +236,11 @@
                                 '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
                                 '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
                                 '</div>');
-                        });
-                    })
+                            }});
+                    })                   
                 </script>
 
-                <div class="area card-box" align="center">
+                <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
                     <div class="text-wrap">
@@ -258,14 +257,13 @@
                 <% for (int i = 0 ; i < 2; i++) { %>
                 
                	<script>
-                    $(function() {
-                        $('.area').hover(function() {
+                     $(function() {
+                        $('#<%= i %>').on({'mouseenter' : function() {
                             $(this).html('<div class="hover-Text">' +
                                 '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
                                 '</div><br><br>' +
-                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />');
-
-                        }, function() {
+                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+                            }, 'mouseout' : function() {
                             $(this).html('<div class="img-gradient">' +
                                 '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
                                 '<div class="text-wrap">' +
@@ -273,10 +271,10 @@
                                 '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
                                 '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
                                 '</div>');
-                        });
-                    })
+                            }});
+                    })                   
                 </script>
-                <div class="area card-box" align="center">
+                <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
                     <div class="text-wrap">
@@ -288,7 +286,7 @@
                 </div>
                 <%  } %>
                 <% for (int i = 0; i < 1; i++) {%>
-                <div class="area9 card-box">
+                <div class="area9">
                     <h5>게시글이 없습니다.</h5>
                     <span>게시글이 없습니다.</span><br>
                 </div>
@@ -335,7 +333,7 @@
                 <% } %>
                 <% } else { %>
                 <% for(int i = 0; i < 3; i++) {%>
-                <div class="area9 card-box">
+                <div class="area9">
                     <h5>게시글이 없습니다.</h5>
                     <span>게시글이 없습니다.</span><br>
                 </div>
