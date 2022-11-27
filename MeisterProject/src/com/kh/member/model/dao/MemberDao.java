@@ -992,7 +992,7 @@ public class MemberDao {
 	}
 	
 	//페이징처리용 
- public int selectListCount(Connection conn,int type) {
+	public int selectListCount(Connection conn,int type) {
 		
 		int listCount = 0;
 		
@@ -1020,5 +1020,69 @@ public class MemberDao {
 		}
 		
 		return listCount;
+	}
+ 
+ 	public ArrayList<Integer> getTransaction(Connection conn, int userNo){
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;	
+		String sql = prop.getProperty("getTransaction");
+
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(rset.getInt("SELL_NO"));
+				list.add(rset.getInt("STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+ 	
+ 	public ArrayList<SellBoard> getSellBoard(Connection conn, int sellNo){
+		ArrayList<SellBoard> sell = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				sell.add(new SellBoard(rset.getInt("SELL_NO"),
+									rset.getString("SELL_TITLE"),
+									rset.getString("SELL_CONTENT"),
+									rset.getInt("PRICE"),
+									rset.getString("INTEREST_NAME"),
+									rset.getInt("USER_NO")
+					));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return sell;
 	}
 }

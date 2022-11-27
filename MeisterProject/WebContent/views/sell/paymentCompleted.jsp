@@ -105,7 +105,7 @@
 		    <div class="btn-cls">
 		    <a href="<%=contextPath%>/market.se" id="" class="btn btn-primary">쇼핑 계속하기</a>
 		    &nbsp;&nbsp;&nbsp;&nbsp;
-		    <a href="<%=contextPath%>/market.se" id="" class="btn btn-warning">거래내역보기</a>
+		    <a href="<%=contextPath%>/myTransaction.me" id="" class="btn btn-warning">거래내역보기</a>
 		    </div>
     </div>
 

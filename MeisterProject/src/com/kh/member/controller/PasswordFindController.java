@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.vo.Member;
+import com.kh.common.MailSend;
 import com.kh.member.model.service.MemberService;
 
 /**
@@ -39,6 +40,11 @@ public class PasswordFindController extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
+		
+		
+		System.out.println(email);
+		new MailSend().welcomeMailSend(email);
+		System.out.println("메세지 보내기 완료");
 		
 		Member pwUser = ms.pwdFind(userId);
 		

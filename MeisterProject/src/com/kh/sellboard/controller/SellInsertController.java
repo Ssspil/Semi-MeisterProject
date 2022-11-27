@@ -90,7 +90,7 @@ public class SellInsertController extends HttpServlet {
 			
 			if(result > 0) {
 				
-				request.getSession().setAttribute("alrtMsg", "글 등록 성공!");
+				request.getSession().setAttribute("alertMsg", "마켓 글 등록 완료!");
 				response.sendRedirect(request.getContextPath()+"/market.se?currentPage=1");
 				
 			} else {

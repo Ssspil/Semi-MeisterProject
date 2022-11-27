@@ -135,6 +135,7 @@
 		<form id="update-form" action="<%=contextPath %>/update.se" method="post" enctype="multipart/form-data">
 		
 		<input type="hidden" name="sno" value="<%= s.getSellNo()%>">
+		<input type="hidden" name="userNO" value="<%= s.getUserNO()%>">
 		
 		<table class="tb1">
 			<tr>

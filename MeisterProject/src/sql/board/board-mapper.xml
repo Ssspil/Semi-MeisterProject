@@ -314,6 +314,7 @@
 	    B.STATUS
     FROM BOARD B
     JOIN MEMBER M USING(USER_NO)
+    
 	</entry>
 	
 	<entry key="deleteboardlist">

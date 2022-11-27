@@ -45,13 +45,24 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("nickname", nickName);
 		
-		int sender = Integer.parseInt(request.getParameter("sender"));
+		int sender = 0;
+		if(request.getParameter("sender") == null) {
+			sender = userNo;
+		}
+		else {
+			sender = Integer.parseInt(request.getParameter("sender"));
+		}
 
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
-		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, userNo, sellNo);
-		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, userNo, sellNo);
+		System.out.println("userNo : "+userNo);
+		System.out.println("sender : "+sender);
+		System.out.println("receiver : "+receiver);
+		System.out.println("sellNo : "+sellNo);
+		
+		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
+		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, sender, sellNo);
 		
 		String[] nickNameList = new String[0];
 		String senderName = "";
@@ -62,8 +73,6 @@ public class AskToSellerPageController extends HttpServlet {
 				nickNameList[i] = senderName;
 			}					
 		}
-		System.out.println("userNo : "+userNo);
-		System.out.println("receiver : "+receiver);
 		if(userNo == receiver) {
 			senderName = new MemberService().selectNickName(sender);
 		}

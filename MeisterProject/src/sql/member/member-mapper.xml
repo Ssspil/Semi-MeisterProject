@@ -278,10 +278,24 @@
 		FROM LOCAL
 		WHERE LOCAL_NO = ?
 	</entry>
+	
 	<entry key="selectListCount">
 	SELECT COUNT(*) 
 		FROM SELL
 	</entry>  
+	
+	<entry key="getTransaction">
+		SELECT SELL_NO, STATUS
+		FROM TRANSACTION
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectSellBoard">
+		SELECT SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NAME, USER_NO
+		FROM SELL
+		JOIN INTEREST USING(INTEREST_NO)
+		WHERE SELL_NO = ?
+	</entry>
 	
 	
 	
