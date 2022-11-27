@@ -396,7 +396,8 @@ public class MemberService {
 	      	     
 	    return result;
 	}   
-	//페이징 처리용
+	
+	//myPageIn 페이징 처리용 
 	public int selectListCount(int type) {
 		Connection conn = JDBCTemplate.getConnection();
 
