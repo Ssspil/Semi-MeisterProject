@@ -45,7 +45,13 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("nickname", nickName);
 		
-		int sender = Integer.parseInt(request.getParameter("sender"));
+		int sender = 0;
+		if(request.getParameter("sender") == null) {
+			sender = userNo;
+		}
+		else {
+			sender = Integer.parseInt(request.getParameter("sender"));
+		}
 
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));

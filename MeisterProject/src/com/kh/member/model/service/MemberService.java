@@ -366,7 +366,7 @@ public class MemberService {
 	      return result;
 	      
 	}   
-	   
+	// 판매게시판 조회(유저번호 사용)   
 	public ArrayList<SellBoard> getMySellBoard(int userNo){
 		Connection conn = JDBCTemplate.getConnection();
 	      
@@ -386,16 +386,7 @@ public class MemberService {
 	      	     
 	    return result;
 	}
-	
-	public ArrayList<String> selectLocal(int categoryNo){
-		Connection conn = JDBCTemplate.getConnection();
-	      
-		ArrayList<String> result = new MemberDao().selectLocal(conn, categoryNo);
-	      	      
-	    JDBCTemplate.close();
-	      	     
-	    return result;
-	}   
+ 
 	//페이징 처리용
 	public int selectListCount(int type) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -405,6 +396,26 @@ public class MemberService {
 		JDBCTemplate.close();
 
 		return listCount;
+	}
+	
+	public ArrayList<Integer> getTransaction(int userNo){
+		Connection conn = JDBCTemplate.getConnection();
+	      
+		ArrayList<Integer> result = new MemberDao().getTransaction(conn, userNo);
+	      	      
+	    JDBCTemplate.close();
+	      	     
+	    return result;
+	}
+	// 거래내역 조회(판매글 번호 사용)
+	public ArrayList<SellBoard> getSellBoard(int sellNo){
+		Connection conn = JDBCTemplate.getConnection();
+	      
+		ArrayList<SellBoard> result = new MemberDao().getSellBoard(conn, sellNo);
+	      	      
+	    JDBCTemplate.close();
+	      	     
+	    return result;
 	}
 	   
 	   
