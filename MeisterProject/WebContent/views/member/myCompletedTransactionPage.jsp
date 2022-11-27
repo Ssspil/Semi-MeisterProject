@@ -22,15 +22,49 @@
 <meta charset="UTF-8">
 <!-- 여긴 완료된거래 내역 페이지입니다 -->
 <title>Insert title here</title>
+
+<style>
+.page_wrap2 {
+	text-align: center;
+	position: relative;
+	top: 10px;
+}
+
+.page_wrap2 span {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.page_wrap2 .sel {
+	color: orange;
+	border-bottom: 1px solid orange;
+}
+
+.page_wrap2 span:hover {
+	color: orange;
+	cursor: pointer;
+	border-bottom: 1px solid orange;
+}
+
+</style>
 </head>
 <body>
 
 <div id="nameBody_2">
 <div id="contenthead"></div>
-	<%if(!s2.isEmpty()){ %>
+	<%if(s2.isEmpty()){ %>
+	   <div id="ddddd"></div>
+         <div id="nullhead">
+			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
+			<br>
+			<div id="null">완료된 거래가 없습니다.</div>
+			<div id="null2">쇼핑 ㄱㄱ</div>
+			
+		</div>
+		<%}else {%>
    		<%for(int i =0; i < s2.size(); i++) { %>
        		<%if(status2.get(i) == 2 ){%>       		
-		        <div class="name2Body">
+		        <div class="name2Body Tran2 Tran2<%=i%> <%=i > 6 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">거래 완료</span>
 		                <span id="title2"><%=s2.get(i).getSellTitle() %></span>
@@ -54,7 +88,48 @@
 </div>
         
         <div id="page2">
-	   페이징 처리 2
+	    <div class="page_wrap2">
+				<span onclick="pageMove2('pre')">&lt</span>
+				<%
+					for (int i = startPage2; i <= endPage2; i++) {
+					if (i == currentPage2) {
+				%>
+				<span class="page2<%=i%> sel" onclick="pageMove2('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					} else {
+				%>
+				<span class="page2<%=i%>" onclick="pageMove2('<%=i%>')">[<%=i%>]
+				</span>
+				<%
+					}
+				%>
+				<%
+					}
+				%>				
+				<span onclick="pageMove2('next')">&gt</span>
+				
+			</div>
 	   </div>
+	   
+	   <script>
+	   function pageMove2(currentPage) {
+		      if (currentPage == "next") {
+		         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+		      }
+		      if (currentPage == "pre") {
+		         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+		      }
+		      var cnt = (currentPage - 1) * 7;
+		      $(".Tran2").hide();
+		      for (var i = cnt; i < cnt + 7; i++) {
+		         $(".Tran2" + (i)).show();
+		      }
+		      $(".page_wrap2 span").removeClass("sel");
+		      $(".page2" + currentPage2).addClass("sel");
+		   }
+		 
+	   
+	   </script>
 </body>
 </html>

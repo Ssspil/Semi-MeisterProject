@@ -268,10 +268,7 @@ height:100px;
 			
 		</div>
 		<%} else { %>	
-				<% for (int i = 0; i < list.size(); i++) {%>
-					
-						
-						
+				<% for (int i = 0; i < list.size(); i++) {%>	
         <div class="name1Body board board<%=i%> <%=i > 6 ? "hide" : ""%>" onclick="location.href='<%=contextPath%>/detail.bo?&bno=<%=list.get(i).getBoardNo() %>';">
 			
 			<div id="title"> 

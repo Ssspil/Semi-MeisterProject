@@ -220,7 +220,24 @@ height: 50px;
 	cursor: pointer;
 	border-bottom: 1px solid orange;
 }
-
+#null{
+ text-align: center;
+}
+#null2{
+ text-align: center;
+ color:rgb(249, 172, 30);
+  font-size:15px;
+}
+#img1{
+    text-align: center; 
+}
+#nullhead{
+height:400px;
+margin:auto;
+}
+#ddddd{
+height:100px;
+}
 </style>
 </head>
 <body>
@@ -245,11 +262,20 @@ height: 50px;
         <div id="nameBody_1">
         <div id="contenthead"></div>
         
-<!--         테스트용 반목분 -->
-	<%if(!s.isEmpty()){ %>
+
+	<%if(s.isEmpty()){ %>
+	   <div id="ddddd"></div>
+         <div id="nullhead">
+			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
+			<br>
+			<div id="null">진행중인 거래가 없습니다.</div>
+			<div id="null2">쇼핑 ㄱㄱ</div>
+			
+		</div>
+		<%}else {%>
        <%for(int i =0; i < s.size(); i++) { %>
        		<%if(status.get(i) == 1 ){%>       		
-		        <div class="name1Body board board<%=i%> <%=i > 6 ? "hide" : ""%>">
+		        <div class="name1Body Tran Tran<%=i%> <%=i > 6 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">진행중인 거래</span>
 		                <span id="title2"><%=s.get(i).getSellTitle() %></span>
@@ -340,9 +366,9 @@ height: 50px;
 	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 	      }
 	      var cnt = (currentPage - 1) * 7;
-	      $(".board").hide();
+	      $(".Tran").hide();
 	      for (var i = cnt; i < cnt + 7; i++) {
-	         $(".board" + (i)).show();
+	         $(".Tran" + (i)).show();
 	      }
 	      $(".page_wrap span").removeClass("sel");
 	      $(".page" + currentPage).addClass("sel");

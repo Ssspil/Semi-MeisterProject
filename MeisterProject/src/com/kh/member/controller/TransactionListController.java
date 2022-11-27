@@ -52,7 +52,7 @@ public class TransactionListController extends HttpServlet {
 			
 				pageLimit = 10;
 				
-				boardLimit = 6;
+				boardLimit = 7;
 			
 				maxPage = 11;
 
@@ -67,7 +67,11 @@ public class TransactionListController extends HttpServlet {
 				}
 				
 				PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+				PageInfo pi2 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+				PageInfo pi3 = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 				request.setAttribute("pi", pi);
+				request.setAttribute("pi2", pi2);
+				request.setAttribute("pi3", pi3);
 				
 				Member loginUser = (Member)session.getAttribute("loginUser");
 				

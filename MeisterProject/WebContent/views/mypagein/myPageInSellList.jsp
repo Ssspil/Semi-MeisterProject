@@ -135,7 +135,11 @@ display:none;
 
         </div>
         
-	   <script>
+        
+	  
+
+   				<div class="sell sell<%=s.get(0).getSellNo()%> <%=s.get(0).getSellNo() > 6 ? "hide" : ""%>">
+   			 <script>
 	   		<%if(!s.isEmpty()){ %>
    				<%for(int i = 0; i < s.size(); i++){ %>  
    					$(document).ready(function() {
@@ -197,8 +201,9 @@ display:none;
    			<%} else{%>
        			조회된 게시글이 없습니다
    			<%} %>
-
-			
+   			</script>
+   			</div>
+			<script>
 			$(function(){
 				$('[id^=sellboard]').click(function(){	
 					let sno = $(this).find('input').val();
@@ -206,6 +211,7 @@ display:none;
 				})	
 			});
 	   </script>
+	 
 	   <br><br><br>
 	   <div id="page">
 	   <div class="page_wrap">
@@ -250,9 +256,9 @@ function pageMove(currentPage) {
        currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
     }
     var cnt = (currentPage - 1) * 7;
-    $(".board").hide();
+    $(".sell").hide();
     for (var i = cnt; i < cnt + 7; i++) {
-       $(".board" + (i)).show();
+       $("sell" + (i)).show();
     }
     $(".page_wrap span").removeClass("sel");
     $(".page" + currentPage).addClass("sel");
