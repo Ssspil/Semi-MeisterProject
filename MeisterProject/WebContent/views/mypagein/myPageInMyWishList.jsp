@@ -231,7 +231,6 @@ display:none;}
       if (currentPage == "pre") {
          currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
       }
-
       
       var cnt = (currentPage - 1) * 6;
       $(".board").hide();

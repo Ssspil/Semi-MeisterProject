@@ -257,10 +257,19 @@
 	</entry>
 	
 	<entry key="selectMySellBoard">
-		SELECT SELL_NO, SELL_TITLE, PRICE, INTEREST_NAME
-		FROM SELL
-		JOIN INTEREST USING(INTEREST_NO)
-		WHERE USER_NO = ?
+		<![CDATA[
+				select *
+		from (SELECT *
+				FROM (
+		  			SELECT rownum rnum, SELL_NO, SELL_TITLE, PRICE, INTEREST_NAME
+		            FROM SELL
+		            JOIN INTEREST USING(INTEREST_NO)
+		            where user_no = ?
+					) SELL
+				where rnum <= ?
+			)
+		where  rnum >= ?       
+		]]>
 	</entry>
 	
 	<entry key="selectInterest">
@@ -276,9 +285,14 @@
 	</entry>
 	
 	<entry key="selectListCount">
-	SELECT COUNT(*) 
+	SELECT COUNT(*) as SELL_COUNT
 		FROM SELL
 	</entry>  
+	
+	<entry key="selectListStatusCount">
+	SELECT COUNT(*) as SELL_COUNT
+		FROM TRANSACTION where status = ?
+	</entry>
 	
 	<entry key="getTransaction">
 		SELECT SELL_NO, REVIEW_NO, STATUS

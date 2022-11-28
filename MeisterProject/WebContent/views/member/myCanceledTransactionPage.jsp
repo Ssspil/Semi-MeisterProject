@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo, com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList"%>
   <%
- 	PageInfo pi3 = (PageInfo) request.getAttribute("pi");
+ 	PageInfo pi3 = (PageInfo) request.getAttribute("pi3");
 	int currentPage3 = pi3.getCurrentPage();
 	int startPage3 = pi3.getStartPage();
 	int endPage3 = pi3.getEndPage();
@@ -47,7 +47,7 @@
 <body>
 <div id="nameBody_3">
 <div id="contenthead"></div>
-	<%if(s3.isEmpty()){ %>
+	<%if(!s3.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
@@ -59,7 +59,7 @@
 		<%}else {%>
    		<%for(int i =0; i < s3.size(); i++) { %>
        		<%if(status3.get(i) == 3 ){%>       		
-		        <div class="name3Body Tran3 Tran3<%=i%> <%=i > 6 ? "hide" : ""%>">
+		        <div class="name3Body Tran3 Tran3<%=i%> <%=i > 5 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">취소된 거래</span>
 		                <span id="title2"><%=s3.get(i).getSellTitle() %></span>
@@ -114,9 +114,9 @@
 		      if (currentPage == "pre") {
 		         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 		      }
-		      var cnt = (currentPage - 1) * 7;
+		      var cnt = (currentPage - 1) * 6;
 		      $(".Tran3").hide();
-		      for (var i = cnt; i < cnt + 7; i++) {
+		      for (var i = cnt; i < cnt + 6; i++) {
 		         $(".Tran3" + (i)).show();
 		      }
 		      $(".page_wrap3 span").removeClass("sel");

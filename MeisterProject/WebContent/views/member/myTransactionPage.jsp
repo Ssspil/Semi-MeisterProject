@@ -275,7 +275,7 @@ height:100px;
 		<%}else {%>
        <%for(int i =0; i < s.size(); i++) { %>
        		<%if(status.get(i) == 1 ){%>       		
-		        <div class="name1Body Tran Tran<%=i%> <%=i > 6 ? "hide" : ""%>">
+		        <div class="name1Body Tran Tran<%=i%> <%=i > 5 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">진행중인 거래</span>
 		                <span id="title2"><%=s.get(i).getSellTitle() %>안녕</span>
@@ -376,9 +376,9 @@ height:100px;
 	      if (currentPage == "pre") {
 	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 	      }
-	      var cnt = (currentPage - 1) * 7;
+	      var cnt = (currentPage - 1) * 6;
 	      $(".Tran").hide();
-	      for (var i = cnt; i < cnt + 7; i++) {
+	      for (var i = cnt; i < cnt + 6; i++) {
 	         $(".Tran" + (i)).show();
 	      }
 	      $(".page_wrap span").removeClass("sel");

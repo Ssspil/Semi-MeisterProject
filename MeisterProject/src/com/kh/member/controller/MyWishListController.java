@@ -37,7 +37,7 @@ public class MyWishListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectListCount(1);
+		listCount = new MemberService().selectListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 	

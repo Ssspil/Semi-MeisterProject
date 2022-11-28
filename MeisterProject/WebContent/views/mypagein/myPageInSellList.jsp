@@ -135,11 +135,6 @@ display:none;
         <div id="main2">                                                  
 
         </div>
-        
-        
-	  
-
-   			
    			 <script>
 	   		<%if(!s.isEmpty()){ %>
    				<%for(int i = 0; i < s.size(); i++){ %>  
@@ -250,7 +245,7 @@ display:none;
 
 <script>
 function pageMove(currentPage) {
-    if (currentPage == "next") {
+   /* if (currentPage == "next") {
        currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
     }
     if (currentPage == "pre") {
@@ -262,7 +257,9 @@ function pageMove(currentPage) {
        $("sell" + (i)).show();
     }
     $(".page_wrap span").removeClass("sel");
-    $(".page" + currentPage).addClass("sel");
+    $(".page" + currentPage).addClass("sel");*/
+    
+    location.href="<%=contextPath %>"+"/sellList.se?currentPage="+currentPage;
  }
 
 </script>

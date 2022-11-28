@@ -905,7 +905,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<SellBoard> getMySellBoard(Connection conn, int userNo){
+	public ArrayList<SellBoard> getMySellBoard(Connection conn, int userNo, int startPage, int endPage){
 		ArrayList<SellBoard> sell = new ArrayList<>();
 		
 		PreparedStatement psmt = null;
@@ -917,6 +917,11 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, userNo);
+			psmt.setInt(2, endPage);
+			psmt.setInt(3, startPage);
+			
+			System.out.println(endPage);
+			System.out.println(startPage);
 			
 			rset = psmt.executeQuery();
 			
@@ -995,7 +1000,7 @@ public class MemberDao {
 	}
 	
 	//페이징처리용 
-	public int selectListCount(Connection conn,int type) {
+	public int selectListCount(Connection conn) {
 		
 		int listCount = 0;
 		
@@ -1006,7 +1011,6 @@ public class MemberDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, type);
 			
 			rset = psmt.executeQuery();
 			
@@ -1024,6 +1028,36 @@ public class MemberDao {
 		
 		return listCount;
 	}
+	
+	//페이징처리용 
+		public int selectListStatusCount(Connection conn, int type) {
+			
+			int listCount = 0;
+			
+			PreparedStatement psmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectListStatusCount");
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, type);
+				rset = psmt.executeQuery();
+				
+				
+				if(rset.next()) {
+					listCount = rset.getInt("SELL_COUNT");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(psmt);
+			}
+			
+			return listCount;
+		}
  
  	public ArrayList<Integer> getTransaction(Connection conn, int userNo){
 		ArrayList<Integer> list = new ArrayList<>();
