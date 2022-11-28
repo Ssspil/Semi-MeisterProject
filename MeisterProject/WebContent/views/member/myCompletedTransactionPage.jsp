@@ -258,23 +258,6 @@ textarea {
 	    	$('#avg').text("평점 : "+target.value * 0.5+"점");	
 	    	console.log($('#avg').text());
 	    }
-	    
-	    $(document).ready(function(){
-	    	<%if(!review.isEmpty()){%>
-		    	<%for(int i =0; i < s2.size(); i++) { %>
-		       		<%if(status2.get(i) == 2 ){%>   
-						<%for(int j=0; j<review.size(); j++){%>
-							<%if(s2.get(i).getUserNO() == review.get(j).getUserNo() && s2.get(i).getSellNo() == review.get(j).getSellNo()){%>
-								$("btn3").attr("disabled", "true");
-							<%} else{%>
-								$("btn1").attr("disabled", "true");
-								$("btn2").attr("disabled", "true");
-							<%} %>
-						<%} %>
-					<%} %>
-				<%} %>
-			<%} %>
-	    });
 	   </script>
 	   
 	   
