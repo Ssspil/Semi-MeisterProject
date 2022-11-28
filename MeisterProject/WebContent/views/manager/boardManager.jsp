@@ -202,7 +202,7 @@ table>tfoot>tr:hover {
 								<td><%=list.get(i).getMemberNic() %></td>
 								<td><%=list.get(i).getBoardTitle() %></td>
 								<td><%=list.get(i).getBoardDate() %></td>
-								<td><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#userInfo" onclick="location.href='<%=contextPath%>/board.ad?&bno=<%=list.get(i).getBoardNo() %>';">보기</button></td>
+								<td><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#userInfo" >보기</button></td>
 								<td><%=list.get(i).getStatus() %></td>
 								<td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>">삭제하기</a></td>
 							      <% } %>

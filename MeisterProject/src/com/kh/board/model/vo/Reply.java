@@ -66,8 +66,9 @@ public class Reply {
 		this.userNo = userNo;
 	}
 	
-	public Reply(int replyNo, String userId, String mbNic , String replyDate, String replyContent) {
+	public Reply(int boardNo,int replyNo, String userId, String mbNic , String replyDate, String replyContent) {
 		super();
+		this.boardNo = boardNo;
 		this.replyNo = replyNo;
 		this.userId = userId;
 		this.mbNic = mbNic;

@@ -947,21 +947,26 @@ public class BoardDao {
 		return result;
 	}
 	
-	public ArrayList<Reply> replyList(Connection conn) {
+	public ArrayList<Reply> replyList(Connection conn,int boardNo) {
 		
-		ArrayList<Reply> rlist = new ArrayList<>();
+		ArrayList<Reply> list = new ArrayList<>();
 		
 		PreparedStatement psmt = null;
+			
+	
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("replyList");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			rset = psmt.executeQuery();
+			psmt.setInt(1, boardNo);
+			rset = psmt.executeQuery(); 
+			
 			
 			while(rset.next()) {
-				rlist.add(new Reply(
+				list.add(new Reply(
+						rset.getInt("BOARD_NO"),
 						rset.getInt("REPLY_NO"),
 						rset.getString("USER_ID"),
 						rset.getString("NICKNAME"),
@@ -976,6 +981,6 @@ public class BoardDao {
 			close(psmt);
 		}
 		
-		return rlist;
+		return list;
 	}
 }	

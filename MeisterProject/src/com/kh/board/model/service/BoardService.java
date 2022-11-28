@@ -357,15 +357,15 @@ public class BoardService {
 		return result;
 	}
 	
-	public ArrayList<Reply> replyList() {
+	public ArrayList<Reply> replyList(int boardNo) {
 		
 		Connection conn = getConnection();
 
-		ArrayList<Reply> rlist = new BoardDao().replyList(conn);
+		ArrayList<Reply> list = new BoardDao().replyList(conn,boardNo);
 
 		close();
 
-		return rlist;
+		return list;
 	}
 
 }
