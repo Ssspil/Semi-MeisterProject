@@ -72,13 +72,10 @@ public class ExpertSubmitController extends HttpServlet {
 			// multiRequest.getOriginalFileName("input의 name명") 
 			if(multiRequest.getOriginalFileName("upfile") != null) {	
 				at = new Attachment();
-				at.setRefNo(userNo);
 				at.setOriginName(multiRequest.getOriginalFileName("upfile"));
 				at.setChangeName(multiRequest.getFilesystemName("upfile"));
 				at.setFilePath("resources/expert_upfiles/");
 			}
-			
-			System.out.println(at);
 			
 
 			

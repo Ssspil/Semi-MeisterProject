@@ -114,6 +114,7 @@
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 5)
 	</entry>
 	
+	<!--  전문가 신청 첨부파일 넣는 쿼리문 -->
 	<entry key="insertExpertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 4)
@@ -322,4 +323,9 @@
 		WHERE FILE_LEVEL = 4
 	</entry>
 	
+	<entry key="getReview">
+		SELECT REVIEW_CONTENT, AVG, USER_NO, SELL_NO
+		FROM REVIEW
+		WHERE USER_NO = ? AND SELL_NO = ?
+	</entry>
 </properties>

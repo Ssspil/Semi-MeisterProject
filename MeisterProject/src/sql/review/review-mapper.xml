@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="insertReview">
+		INSERT INTO REVIEW
+		VALUES(SEQ_RENO.NEXTVAL, ?, ?, SYSDATE, ?, ?)
+	</entry>
+	
+	<entry key="getReviewNo">
+		SELECT REVIEW_NO
+		FROM REVIEW
+		WHERE USER_NO = ? AND SELL_NO = ?
+	</entry>
+	
+	<entry key="updateTransaction">
+		UPDATE TRANSACTION
+		SET REVIEW_NO = ?
+		WHERE USER_NO =? AND SELL_NO = ?
+	</entry>
+	
+</properties>

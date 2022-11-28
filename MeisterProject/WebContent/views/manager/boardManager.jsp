@@ -8,8 +8,6 @@
 	
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	
-	ArrayList<Reply> rlist = (ArrayList<Reply>) request.getAttribute("rlist");
-	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
@@ -202,7 +200,10 @@ table>tfoot>tr:hover {
 								<td><%=list.get(i).getMemberNic() %></td>
 								<td><%=list.get(i).getBoardTitle() %></td>
 								<td><%=list.get(i).getBoardDate() %></td>
-								<td><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#userInfo" >보기</button></td>
+								<td><button class="btn btn-info btn-sm" type="button"  onclick="showBoard(this, '<%= list.get(i).getBoardNo() %>');" >보기</button>
+								<button data-toggle="modal" data-target="#userInfo" style="display:none;">dd</button>
+								
+								</td>
 								<td><%=list.get(i).getStatus() %></td>
 								<td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>">삭제하기</a></td>
 							      <% } %>
@@ -239,59 +240,21 @@ table>tfoot>tr:hover {
     </div>
 
 	<div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<table class="center">
-				<tr>
-					<th style="width:500px;">글내용</th>
-					<th style="width:500px;">커뮤니티 게시글 사진</th>
-				</tr>
-				
-				<tr>
-					<td name="bno" style="height: 100px;"><%=list.get(0).getBoardContent() %></td>
-					<td style="height: 100px;"></td>
-				</tr>
-			
-			</table>
-			<br> <br>
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="width: 100px;">댓글 번호</th>
-						<th style="width: 150px;">작성자 아이디</th>
-						<th style="width: 100px;">닉네임</th>
-						<th style="width: 100px;">작성일</th>
-						<th style="width: 200px;">댓글 상세</th>
-						<th style="width: 100px;">삭제</th>
-					</tr>
-				</thead>
-				<tbody>
-				<% for(int i= 0; i < rlist.size(); i++) { %>
-					<tr>
-						<td><%=rlist.get(i).getReplyNo() %></td>
-						<td><%=rlist.get(i).getUserNo() %></td>
-						<td><%=rlist.get(i).getMbNic() %></td>
-						<td><%=rlist.get(i).getReplyDate() %></td>
-						<td><%=rlist.get(i).getReplyContent() %></td>
-						<td><button>삭제</button></td>
-					</tr>
-					<% } %>
-				</tbody>
-			</table>
-		</div>
+		
 	</div>
 	<!-- 	모달창 이벤트 -->
-	<script>
-		$(function() {
+//	<script>
+//		$(function() {
 
-			$(".btn").click(function() {
-				$(".modal").fadeIn();
-			});
+// 			$(".btn").click(function() {
+// 				$(".modal").fadeIn();
+// 			});
 
-			$(".modal_content").click(function() {
-				$(".modal").fadeOut();
-			});
-		});
-	</script>
+// 			$(".modal_content").click(function() {
+// 				$(".modal").fadeOut();
+// 			});
+//		});
+//	</script>
 
 	<script>
 		const USERALL = document.querySelector('#userAll');
@@ -314,6 +277,18 @@ table>tfoot>tr:hover {
 				USERALL.checked = false;
 			}
 		}
+		
+		function showBoard(element, bno){
+			$.ajax({
+				url: "boardModal.ad",
+				data :{bno },
+				success : function(data) {
+					$(".modal").html(data);
+					$(element).next().click();
+				}
+			})
+		}
+		
 	</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
