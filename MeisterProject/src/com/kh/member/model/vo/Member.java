@@ -30,12 +30,7 @@ public class Member {
 	public Member() {
 		
 	}
-	public int getSubNo() {
-		return subNo;
-	}
-	public void setSubNo(int subNo) {
-		this.subNo = subNo;
-	}
+
 	// 전체 매개변수 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
 			String userName, String gender, String email, String phone, String status, String blackList,
@@ -298,6 +293,14 @@ public class Member {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	public int getSubNo() {
+		return subNo;
+	}
+	public void setSubNo(int subNo) {
+		this.subNo = subNo;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", nickName=" + nickName

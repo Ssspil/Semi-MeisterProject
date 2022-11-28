@@ -151,7 +151,7 @@ table>tfoot {
 						    	</tr>
 					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
 						    	<tr>
-						    		<td><%= m.getSubNo %></td>
+						    		<td><%= m.getSubNo() %></td>
 						    		<td><%= m.getUserNo() %></td>
 						    		<td><%= m.getUserName() %></td>
 						    		<td><%= m.getGender() %></td>
