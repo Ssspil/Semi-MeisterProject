@@ -326,13 +326,15 @@
 	
 	<!-- 관리자 커뮤니티 댓글 조회 -->
 	<entry key="replyList">
-	SELECT BOARD_NO, REPLY_NO, M.USER_ID, M.NICKNAME, TO_CHAR(REPLY_DATE, 'YY/MM/DD HH:MI') REPLY_DATE, REPLY_CONTENT
+		SELECT
+		    R.REPLY_NO,
+		    M.USER_ID,
+		    M.NICKNAME,
+		    R.REPLY_DATE,
+		    R.REPLY_CONTENT
 		FROM REPLY R
 		JOIN MEMBER M USING(USER_NO)
-        JOIN BOARD B USING(BOARD_NO)
-       WHERE BOARD_NO = ?
-		
-
+		WHERE BOARD_NO = ?
 	</entry>
 	
 	<!-- 관리자 커뮤니티 댓글 삭제 -->

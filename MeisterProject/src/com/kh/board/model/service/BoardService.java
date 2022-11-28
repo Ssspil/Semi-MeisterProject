@@ -361,20 +361,22 @@ public class BoardService {
 		
 		Connection conn = getConnection();
 
-		ArrayList<Reply> list = new BoardDao().replyList(conn,boardNo);
+		ArrayList<Reply> rlist = new BoardDao().replyList(conn, boardNo);
 
 		close();
 
-		return list;
+		return rlist;
 	}
+	
 	public ArrayList<Board> modalList() {
+		
 		Connection conn = getConnection();
 
 		ArrayList<Board> list = new BoardDao().modalList(conn);
 
 		close();
+		
 		return list;
 	}
-	
 
 }

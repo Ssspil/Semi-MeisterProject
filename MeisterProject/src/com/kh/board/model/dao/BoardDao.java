@@ -948,32 +948,26 @@ public class BoardDao {
 	}
 	
 	public ArrayList<Reply> replyList(Connection conn, int boardNo) {
-		
-		ArrayList<Reply> list = new ArrayList<>();
-		
+
+		ArrayList<Reply> rlist = new ArrayList<>();
+
 		PreparedStatement psmt = null;
-			
-	
 		ResultSet rset = null;
-		
+
 		String sql = prop.getProperty("replyList");
-		
+
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, boardNo);
-			
-			rset = psmt.executeQuery(); 
-			
-			
-			while(rset.next()) {
-				list.add(new Reply(
-						rset.getInt("BOARD_NO"),
-						rset.getInt("REPLY_NO"),
-						rset.getString("USER_ID"),
-						rset.getString("NICKNAME"),
-						rset.getString("REPLY_DATE"),
-						rset.getString("REPLY_CONTENT")
-						));
+
+			rset = psmt.executeQuery();
+
+			while (rset.next()) {
+				rlist.add(new Reply(rset.getInt("REPLY_NO"), 
+									rset.getString("USER_ID"),
+									rset.getString("NICKNAME"), 
+									rset.getString("REPLY_DATE"),
+									rset.getString("REPLY_CONTENT")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -981,44 +975,42 @@ public class BoardDao {
 			close(rset);
 			close(psmt);
 		}
-		
-		return list;
+
+		return rlist;
 	}
 	
 	
-	
-	
-  public ArrayList<Board> modalList(Connection conn) {
-		      
-		      ArrayList<Board> list = new ArrayList<>();
-		      
-		      PreparedStatement psmt = null;
-		      
-		      ResultSet rset = null;
-		      
-		      String sql = prop.getProperty("modalList");
-		      
-		      try {
-		         psmt = conn.prepareStatement(sql);
-		         rset = psmt.executeQuery();
-		         
-		         while(rset.next()) {
-		            Board b = new Board();
-		            b.setBoardNo(rset.getInt(1));
-		            b.setBoardContent(rset.getString(2));  
-		            b.setTitleImg(rset.getString(3));
-		            
-		            list.add(b);
-		         }
-		         
-		      } catch (SQLException e) {
-		         e.printStackTrace();
-		      } finally {
-		         close(rset);
-		         close(psmt);
-		      }
-		      
-		      return list;
-		   }
+	public ArrayList<Board> modalList(Connection conn) {
+
+		ArrayList<Board> list = new ArrayList<>();
+
+		PreparedStatement psmt = null;
+
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("modalList");
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			rset = psmt.executeQuery();
+
+			while (rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt(1));
+				b.setBoardContent(rset.getString(2));
+				b.setTitleImg(rset.getString(3));
+
+				list.add(b);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+
+		return list;
+	}
 
 }	

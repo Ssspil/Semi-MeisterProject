@@ -34,9 +34,6 @@ public class Reply {
 		this.mbNic = mbNic;
 	}
 
-
-
-
 	// 댓글 리스트
 	public Reply(int replyNo, String replyContent, int userNo, String mbNic, String replyDate) {
 		super();
@@ -45,6 +42,15 @@ public class Reply {
 		this.replyDate = replyDate;
 		this.userNo = userNo;
 		this.mbNic = mbNic;
+	}
+	
+	public Reply(int replyNo, String user_id, String mbNic, String replyDate, String replyContent) {
+		super();
+		this.replyNo = replyNo;
+		this.userId = user_id;
+		this.mbNic = mbNic;
+		this.replyDate = replyDate;
+		this.replyContent = replyContent;
 	}
 	
 	// 댓글 등록

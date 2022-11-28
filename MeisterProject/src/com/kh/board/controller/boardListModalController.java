@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
@@ -34,15 +35,26 @@ public class boardListModalController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		String type = request.getParameter("type") == null ? "" : request.getParameter("type");
 		
 		
-		ArrayList<Board> list = new BoardService().modalList();
-		request.setAttribute("list", list);
-		
-		ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
-		request.setAttribute("rlist", rlist);
+		if("".equals(type)) {
+			ArrayList<Board> list = new BoardService().modalList();
+			request.setAttribute("list", list);
+			System.out.println(list);
 			
-		request.getRequestDispatcher("views/manager/boardManagerModal.jsp").forward(request, response);
+			ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
+			request.setAttribute("rlist", rlist);
+			
+			request.getRequestDispatcher("views/manager/boardManagerModal.jsp").forward(request, response);
+		} else {
+			ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
+			//request.setAttribute("rlist", rlist);
+			
+			System.out.println(rlist);
+			Gson gson = new Gson();
+			response.getWriter().print(gson.toJson(rlist));
+		}
 			
 			
 			
