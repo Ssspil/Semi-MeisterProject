@@ -200,8 +200,8 @@ table>tfoot>tr:hover {
 								<td><%=list.get(i).getMemberNic() %></td>
 								<td><%=list.get(i).getBoardTitle() %></td>
 								<td><%=list.get(i).getBoardDate() %></td>
-								<td><button class="btn btn-info btn-sm" type="button"  onclick="showBoard(this, '<%= list.get(i).getBoardNo() %>');" >보기</button>
-								<button data-toggle="modal" data-target="#userInfo" style="display:none;">dd</button>
+ 								<td><button class="btn btn-info btn-sm" type="button"  onclick="showBoard(bno);" >보기</button>
+								<button data-toggle="modal" data-target="#userInfo" style="display:none;">삭제</button>
 								
 								</td>
 								<td><%=list.get(i).getStatus() %></td>
@@ -240,21 +240,37 @@ table>tfoot>tr:hover {
     </div>
 
 	<div class="modal">
-		
+		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
+			<table class="center">
+				<tr>
+					<th style="width:500px;">글내용</th>
+					<th style="width:500px;">커뮤니티 게시글 사진</th>
+				</tr>
+				
+				<tr>
+					<td name="bno" style="height: 100px;"><%=list.get(0).getBoardContent() %></td>
+					<td style="height: 100px;"><%=list.get(0).getTitleImg() %></td>
+				</tr>
+			</table>
+			<br> <br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 100px;">댓글 번호</th>
+						<th style="width: 150px;">작성자 아이디</th>
+						<th style="width: 100px;">닉네임</th>
+						<th style="width: 100px;">작성일</th>
+						<th style="width: 200px;">댓글 상세</th>
+						<th style="width: 100px;">삭제</th>
+					</tr>
+				</thead>
+				<tbody class="comments-list">
+					
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<!-- 	모달창 이벤트 -->
-//	<script>
-//		$(function() {
-
-// 			$(".btn").click(function() {
-// 				$(".modal").fadeIn();
-// 			});
-
-// 			$(".modal_content").click(function() {
-// 				$(".modal").fadeOut();
-// 			});
-//		});
-//	</script>
+	
 
 	<script>
 		const USERALL = document.querySelector('#userAll');
@@ -277,19 +293,45 @@ table>tfoot>tr:hover {
 				USERALL.checked = false;
 			}
 		}
-		
-		function showBoard(element, bno){
-			$.ajax({
-				url: "boardModal.ad",
-				data :{bno },
-				success : function(data) {
-					$(".modal").html(data);
-					$(element).next().click();
-				}
-			})
-		}
-		
 	</script>
+	
+	
+		
+		<script>
+			$(function() {
+	 			$(".btn").click(function() {
+	 				$(".modal").fadeIn();
+	 			});
+	 			$(".modal_content").click(function() {
+	 				$(".modal").fadeOut();
+	 			});
+			});
+				
+		
+			function showBoard() {
+				$.ajax({
+					url : "boardModal.ad",
+					data : {bno},
+					success : (list) => {
+						let htmls="";
+						for(let i of list)
+						let htmls="";
+							htmls += '<tr>';
+							htmls += 	'<td>'+i.replyNo+'</td>';
+							htmls +=	'<td>'+i.userId+'</td>';	
+							htmls += 	'<td>'+i.mbNic+'</td>';
+							htmls += 	'<td>'+i.replyDate+'</td>';
+							htmls += 	'<td>'+i.replyContent+'</td>';
+							htmls += '</tr>';
+			}),
+				 $(".comments-list").html(htmls);
+			},
+				error : function() {
+					console.log("댓글리스트조회용 ajax통신 실패~");
+				}
+			});
+		</script>
+		
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>

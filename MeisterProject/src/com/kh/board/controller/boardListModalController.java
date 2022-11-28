@@ -38,12 +38,11 @@ public class boardListModalController extends HttpServlet {
 		
 		ArrayList<Board> list = new BoardService().modalList();
 		request.setAttribute("list", list);
-		System.out.println(list);
-		ArrayList<Reply> rlist = new BoardService().myReply(boardNo);
+		
+		ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
 		request.setAttribute("rlist", rlist);
-		System.out.println(rlist);
 			
-			request.getRequestDispatcher("views/manager/boardManagerModal.jsp").forward(request, response);
+		request.getRequestDispatcher("views/manager/boardManagerModal.jsp").forward(request, response);
 			
 			
 			
