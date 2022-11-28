@@ -372,10 +372,10 @@ public class MemberService {
 	      
 	}   
 	// 판매게시판 조회(유저번호 사용)   
-	public ArrayList<SellBoard> getMySellBoard(int userNo){
+	public ArrayList<SellBoard> getMySellBoard(int userNo, int startPage, int endPage){
 		Connection conn = JDBCTemplate.getConnection();
 	      
-		ArrayList<SellBoard> result = new MemberDao().getMySellBoard(conn, userNo);
+		ArrayList<SellBoard> result = new MemberDao().getMySellBoard(conn, userNo, startPage, endPage);
 	      	      
 	    JDBCTemplate.close();
 	      	     
@@ -406,10 +406,10 @@ public class MemberService {
 
 	//페이징 처리용
 
-	public int selectListCount(int type) {
+	public int selectListCount() {
 		Connection conn = JDBCTemplate.getConnection();
 
-		int listCount = new MemberDao().selectListCount(conn,type);
+		int listCount = new MemberDao().selectListCount(conn);
 
 		JDBCTemplate.close();
 

@@ -45,15 +45,13 @@ public class MySellListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new MemberService().selectListCount(1);
+		listCount = new MemberService().selectListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 	
 		pageLimit = 10;
 		
-		boardLimit = 6;
-	
-		maxPage = 11;
+		boardLimit = 15;
 
 		maxPage = (int)Math.ceil((double)listCount/ boardLimit);
 		
@@ -66,7 +64,7 @@ public class MySellListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
+		System.out.println("pageInfo:"+pi.toString());
 		
 		
 		
@@ -75,7 +73,7 @@ public class MySellListController extends HttpServlet {
 		
 		int userNo = loginUser.getUserNo();
 		
-		ArrayList<SellBoard> s = new MemberService().getMySellBoard(userNo);
+		ArrayList<SellBoard> s = new MemberService().getMySellBoard(userNo, (currentPage-1)*boardLimit+1, (currentPage-1)*boardLimit+boardLimit);
 		ArrayList<Attachment> at = new ArrayList<Attachment>();		
 		
 		for(int i = 0; i < s.size(); i++) {
@@ -93,9 +91,6 @@ public class MySellListController extends HttpServlet {
 		request.setAttribute("s", s);
 		request.setAttribute("at", at);
 		request.setAttribute("pi", pi);
-		
-		System.out.println(s);
-		System.out.println(at);
 		
 		request.getRequestDispatcher("views/mypagein/myPageInSellList.jsp").forward(request, response);
 	}

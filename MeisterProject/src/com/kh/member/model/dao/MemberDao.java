@@ -905,7 +905,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<SellBoard> getMySellBoard(Connection conn, int userNo){
+	public ArrayList<SellBoard> getMySellBoard(Connection conn, int userNo, int startPage, int endPage){
 		ArrayList<SellBoard> sell = new ArrayList<>();
 		
 		PreparedStatement psmt = null;
@@ -917,6 +917,11 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, userNo);
+			psmt.setInt(2, endPage);
+			psmt.setInt(3, startPage);
+			
+			System.out.println(endPage);
+			System.out.println(startPage);
 			
 			rset = psmt.executeQuery();
 			
@@ -995,7 +1000,7 @@ public class MemberDao {
 	}
 	
 	//페이징처리용 
-	public int selectListCount(Connection conn,int type) {
+	public int selectListCount(Connection conn) {
 		
 		int listCount = 0;
 		
@@ -1006,7 +1011,6 @@ public class MemberDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, type);
 			
 			rset = psmt.executeQuery();
 			

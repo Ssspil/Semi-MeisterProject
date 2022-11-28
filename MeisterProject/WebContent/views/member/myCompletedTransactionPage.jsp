@@ -103,7 +103,7 @@ textarea {
 		<%}else {%>
    		<%for(int i =0; i < s2.size(); i++) { %>
        		<%if(status2.get(i) == 2 ){%>       		
-		        <div class="name2Body Tran2 Tran2<%=i%> <%=i > 6 ? "hide" : ""%>">
+		        <div class="name2Body Tran2 Tran2<%=i%> <%=i > 5 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">거래 완료</span>
 		                <span id="title2"><%=s2.get(i).getSellTitle() %></span>
@@ -200,9 +200,9 @@ textarea {
 		      if (currentPage == "pre") {
 		         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
 		      }
-		      var cnt = (currentPage - 1) * 7;
+		      var cnt = (currentPage - 1) * 6;
 		      $(".Tran2").hide();
-		      for (var i = cnt; i < cnt + 7; i++) {
+		      for (var i = cnt; i < cnt + 6; i++) {
 		         $(".Tran2" + (i)).show();
 		      }
 		      $(".page_wrap2 span").removeClass("sel");

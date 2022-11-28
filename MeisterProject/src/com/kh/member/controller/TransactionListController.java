@@ -37,8 +37,7 @@ public class TransactionListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		//페이징 처리
-		//페이징 처리~
+	
 				int listCount; 
 				int currentPage; 
 				int pageLimit; 
@@ -47,7 +46,7 @@ public class TransactionListController extends HttpServlet {
 				int startPage;
 				int endPage;
 				
-				listCount = new MemberService().selectListCount(1);
+				listCount = new MemberService().selectListCount();
 				
 				currentPage = Integer.parseInt(request.getParameter("currentPage") == null ? "1" : request.getParameter("currentPage"));
 			
