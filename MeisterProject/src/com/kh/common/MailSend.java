@@ -42,7 +42,7 @@ public class MailSend {
 //        Session session = Session.getDefaultInstance(prop, auth);
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                PasswordAuthentication pw = new PasswordAuthentication("rius0918", "wvcekazwswcmwxsp");
+                PasswordAuthentication pw = new PasswordAuthentication("", "");
                 
                 return pw;
             }
