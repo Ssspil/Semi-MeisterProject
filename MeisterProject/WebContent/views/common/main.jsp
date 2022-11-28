@@ -11,8 +11,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>메인페이지</title>
+    <title>마이스터 메인페이지</title>
     <link href="./resources/css/mainPage.css" rel="stylesheet" type="text/css" />
+    <!-- 홈페이지 아이콘 -->
+    <link rel="icon" href="./resources/image/mainLogo.png" />
     <!-- 제이쿼리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!--  google font -->
