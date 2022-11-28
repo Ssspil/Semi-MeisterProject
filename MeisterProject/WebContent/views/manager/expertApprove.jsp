@@ -22,6 +22,12 @@
 <meta name="author" content="JSP" />
 <title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<!--  부트스트립 ajax까지 가져와야함 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!--  jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -133,6 +139,7 @@ table>tfoot {
 						
 						<tbody>
 						    <tr>
+						      <th width="100">신청번호</th>
 						      <th width="100">회원번호</th>
 						      <th width="100">이름</th>
 						      <th width="50">성별</th>
@@ -140,6 +147,7 @@ table>tfoot {
 						      <th width="200">핸드폰</th>
 						      <th width="100">전문분야</th>
 						      <th width="100">상세보기</th>
+						      <th width="100">여부</th>
 						    </tr>
 						</tbody>
 
@@ -147,7 +155,7 @@ table>tfoot {
 					    <% for(Member m : submitList) { %>
 					    	<% if( submitList.isEmpty() ) { %>
 						    	<tr>
-						    		<td colspan="6">블랙 컨슈머가 없습니다.</td>
+						    		<td colspan="6">리스트가 없습니다.</td>
 						    	</tr>
 					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
 						    	<tr>
@@ -158,7 +166,38 @@ table>tfoot {
 						    		<td><%= m.getEmail() %></td>
 						    		<td><%= m.getPhone() %></td>
 						    		<td><%= m.getSpeciality() %></td>
-						    		<td></td>
+						    		<td>
+						    			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ex<%= m.getSubNo() %>">보기</button>
+                             			<!-- 모달 테스트 -->
+                                            <div id="ex<%= m.getSubNo()%>" class="modal" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">전문가 인증 첨부파일</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="modal-body" align="center">
+	                                               			<% for(Attachment at : atArr) { %>
+	                                                  			<% if(at.getRefNo() == m.getSubNo()) { %>
+	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="200" height="200" />
+	                                                  			<% } %>
+	                                                  		<% } %>
+                                                        	
+                                                        </div>
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  모달 테스트 끝 -->
+						    		</td>
+						    		<td>
+						    			<button type="button">승인</button>
+						    		</td>
 						    	</tr>
 					  		<% } %>
 					  <% } %>

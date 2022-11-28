@@ -80,23 +80,20 @@ public class TransactionListController extends HttpServlet {
 				ArrayList<SellBoard> s = new ArrayList<>();
 				ArrayList<Integer> status = new ArrayList<>();
 				ArrayList<Integer> trans = new MemberService().getTransaction(userNo);
+				ArrayList<Integer> reviewNo = new ArrayList<>();
 				ArrayList<Review> review = new ArrayList<>();
 				
-				for(int i = 0; i < trans.size(); i++) {
-					if(i == 0 || i % 2 == 0) {
-						System.out.println(i);
-						s.addAll(new MemberService().getSellBoard(trans.get(i)));
-					}
-					else {
-						status.add(trans.get(i));
-					}
+				for(int i = 0; i < trans.size(); i+=3) {
+					s.addAll(new MemberService().getSellBoard(trans.get(i)));
+					reviewNo.add(trans.get(i+1));
+					status.add(trans.get(i+2));
 				}
+				
 				System.out.println(trans);
 				ArrayList<Attachment> at = new ArrayList<Attachment>();
 				
 				for(int i = 0; i < s.size(); i++) {
 					Attachment atTest = new MemberService().selectAttachment(s.get(i).getSellNo(), 2);
-					System.out.println(atTest);
 					if(atTest != null) {
 						at.add(atTest);				
 					}
@@ -105,17 +102,20 @@ public class TransactionListController extends HttpServlet {
 					}
 				}
 				
-				for(int i = 0; i < s.size(); i++) {
-					review.add(new MemberService().getReview(userNo, s.get(i).getSellNo()));
+				for(int i = 0; i < reviewNo.size(); i++) {
+					if(reviewNo.get(i) != 0) {
+						review.add(new MemberService().getReview(reviewNo.get(i)));
+					}
+					else {
+						review.add(new Review());
+					}
 				}
+				
 				request.setAttribute("s", s);
 				request.setAttribute("at", at);
 				request.setAttribute("status", status);
-				request.setAttribute("review", review);
-				
-				System.out.println(s);
-				System.out.println(at);
-				System.out.println(status);
+				request.setAttribute("review", reviewNo);
+
 				System.out.println(review);
 				
 		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태
