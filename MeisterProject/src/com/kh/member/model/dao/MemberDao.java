@@ -338,15 +338,6 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			System.out.println("======================");
-			System.out.println(m.getUserNo());
-			System.out.println(m.getGender());
-			System.out.println(m.getUserName());
-			System.out.println(m.getEmail());
-			System.out.println(m.getSpeciality());
-			
-			
-			
 			psmt.setInt(1, m.getUserNo());
 			psmt.setString(2, m.getUserName());
 			psmt.setString(3, m.getGender());
@@ -413,7 +404,7 @@ public class MemberDao {
 	 * @param at
 	 * @return
 	 */
-	public int insertExpertAttachment(Connection conn, Attachment at) {
+	public int insertExpertAttachment(Connection conn, Attachment at, int subNo) {
 		int result = 0;
 		
 		PreparedStatement psmt = null;
@@ -423,7 +414,7 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setInt(1, at.getRefNo());
+			psmt.setInt(1, subNo);
 			psmt.setString(2, at.getOriginName());
 			psmt.setString(3, at.getChangeName());
 			psmt.setString(4, at.getFilePath());
@@ -1051,6 +1042,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				list.add(rset.getInt("SELL_NO"));
+				list.add(rset.getInt("REVIEW_NO"));
 				list.add(rset.getInt("STATUS"));
 			}
 			
@@ -1146,8 +1138,7 @@ public class MemberDao {
 							   rset.getString("EMAIL"),
 							   rset.getString("PHONE"),
 							   rset.getString("SPECIALITY")
-							   );
-				
+							   );		
 				submlitListAllSelect.add(m);
 			}
 			
@@ -1200,7 +1191,7 @@ public class MemberDao {
 		return atArr;
 	}
 
-	public Review getReview(Connection conn, int userNo, int sellNo) {
+	public Review getReview(Connection conn, int reviewNo) {
 		Review r = null;
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
@@ -1209,8 +1200,7 @@ public class MemberDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, userNo);
-			psmt.setInt(2, sellNo);
+			psmt.setInt(1, reviewNo);
 			rset = psmt.executeQuery();
 			
 			while(rset.next()) {
@@ -1222,5 +1212,41 @@ public class MemberDao {
 		}
 		
 		return r;
+	}
+
+	public int selectSubNo(Connection conn, Member m) {
+		int subNo = 0;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSubNo");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				subNo = rset.getInt("SUBNO");
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		
+		return subNo;
+	}
+
+	public int expertCommit(int userNo) {
+		
+		
+		
+		return 0;
 	}
 }

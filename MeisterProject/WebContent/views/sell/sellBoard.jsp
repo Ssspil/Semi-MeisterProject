@@ -257,7 +257,7 @@ p button{
 					
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon" > 
-								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <i class="fa-regular fa-heart"></i> </button>
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" width="20" height="20" id= "zzim"> </button>
 						</p>
 						
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
@@ -265,7 +265,7 @@ p button{
 					<p>
 						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
 							
-							관심사 :<%= sb.getInterestName() %><br>							
+							관심사 :<%= sb.getInterestNo() %><br>							
 							지역 : <%= sb.getLocalNo() %><br>					
 						<img src="./resources/image/sell_price.png" width="25" height="25">
 						<c:set var = "price" value="<%= sb.getPrice() %>"/>
@@ -277,6 +277,7 @@ p button{
 		
 	
 		</div>
+		
 		<script>
 		//썸네일 클릭 시 이동되는 주소
 		$(function(){
@@ -292,12 +293,23 @@ p button{
 		 function heartAttack(sellNo){
 			 window.event.stopPropagation(); //이벤트 추가 발생 방지
 			 likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
+			 let likeval = document.getElementById("zzim").value;
+			 
+				if (likeval > 0) {
+				 	zzim.src = "./resources/image/sell_noZzim.png";
+				}
+				else {
+					zzim.src = "./resources/image/sell_zzim.png";
+				}
+			 
+			 
 				$.ajax({
 					url : "sellBoardLike.se",
 					type : "post",
 					data : { sellNo, type : "I" },
 					success : function(data) {
 						if (data.result == 1) {
+							$("#zzim").attr("src", "./resources/image/sell_zzim.png");
 							alert("찜 등록 완료!");
 						} else if (data.result == 2) {
 								$.ajax({
@@ -306,6 +318,7 @@ p button{
 									data : { sellNo, type : "D" },
 									success : function(data) {
 										if (data.result == 1) {
+											$("#zzim").attr("src", "./resources/image/sell_noZzim.png");
 											alert("찜 등록이 취소되었습니다.");
 										} //if
 									}, //success

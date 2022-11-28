@@ -114,6 +114,7 @@
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 5)
 	</entry>
 	
+	<!--  전문가 신청 첨부파일 넣는 쿼리문 -->
 	<entry key="insertExpertAttachment">
 		INSERT INTO ATTACHMENT(FILE_NO, REF_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, FILE_LEVEL)
 		VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, ?, 4)
@@ -280,7 +281,7 @@
 	</entry>  
 	
 	<entry key="getTransaction">
-		SELECT SELL_NO, STATUS
+		SELECT SELL_NO, REVIEW_NO, STATUS
 		FROM TRANSACTION
 		WHERE USER_NO = ?
 	</entry>
@@ -325,6 +326,15 @@
 	<entry key="getReview">
 		SELECT REVIEW_CONTENT, AVG, USER_NO, SELL_NO
 		FROM REVIEW
-		WHERE USER_NO = ? AND SELL_NO = ?
+		WHERE REVIEW_NO = ?
+	</entry>
+	
+	<entry key="selectSubNo">
+		SELECT SUBNO
+		FROM (SELECT ROWNUM NUM, A.*
+		        FROM (SELECT *
+		               FROM SUBMIT) A
+		        ORDER BY NUM DESC) B
+		WHERE ROWNUM = 1
 	</entry>
 </properties>

@@ -163,7 +163,7 @@ table{
                              		<td><%= re.getReportEnrollDate() %></td>
                              		<td><%= re.getReason() %></td>
                              		<td>
-                             			<button type="button" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#Info<%= re.getReportNo()%>">보기</button>
+                             			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Info<%= re.getReportNo()%>">보기</button>
                              			<!-- 모달 테스트 -->
                                             <div id="Info<%= re.getReportNo()%>" class="modal" tabindex="-1">
                                                 <div class="modal-dialog">

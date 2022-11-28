@@ -26,4 +26,34 @@ public class ReviewService {
 	      return result;
 	      
 	}
+	
+	public int getReviewNo(int userNo, int sellNo) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new ReviewDao().getReviewNo(conn, userNo, sellNo);
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}
+	
+	public int updateTransaction(int userNo, int sellNo, int reviewNo) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new ReviewDao().updateTransaction(conn, userNo, sellNo, reviewNo);
+	      
+	      if(result > 0) {
+	         JDBCTemplate.commit(conn);
+	      }
+	      
+	      else {
+	         JDBCTemplate.rollback(conn);
+	      }
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}
 }

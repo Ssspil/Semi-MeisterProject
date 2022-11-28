@@ -43,8 +43,10 @@ public class ReviewWriteController extends HttpServlet {
 		
 		Review r = new Review(reviewContent, reviewScore, userNo, sellNo);
 		int result = new ReviewService().insertReview(r);
+		int reviewNo = new ReviewService().getReviewNo(userNo, sellNo);
+		int result2 = new ReviewService().updateTransaction(userNo, sellNo, reviewNo);
 		
-		if(result > 0) {
+		if(result > 0 && result2 > 0) {
 			session.setAttribute("alertMsg", "리뷰 작성 성공");
 			response.sendRedirect(request.getContextPath()+"/mypage.me");
 		} 
