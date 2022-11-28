@@ -281,7 +281,7 @@
 	</entry>  
 	
 	<entry key="getTransaction">
-		SELECT SELL_NO, STATUS
+		SELECT SELL_NO, REVIEW_NO, STATUS
 		FROM TRANSACTION
 		WHERE USER_NO = ?
 	</entry>
@@ -326,7 +326,7 @@
 	<entry key="getReview">
 		SELECT REVIEW_CONTENT, AVG, USER_NO, SELL_NO
 		FROM REVIEW
-		WHERE USER_NO = ? AND SELL_NO = ?
+		WHERE REVIEW_NO = ?
 	</entry>
 	
 	<entry key="selectSubNo">

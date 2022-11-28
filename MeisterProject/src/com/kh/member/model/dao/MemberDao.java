@@ -1042,6 +1042,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				list.add(rset.getInt("SELL_NO"));
+				list.add(rset.getInt("REVIEW_NO"));
 				list.add(rset.getInt("STATUS"));
 			}
 			
@@ -1190,7 +1191,7 @@ public class MemberDao {
 		return atArr;
 	}
 
-	public Review getReview(Connection conn, int userNo, int sellNo) {
+	public Review getReview(Connection conn, int reviewNo) {
 		Review r = null;
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
@@ -1199,8 +1200,7 @@ public class MemberDao {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, userNo);
-			psmt.setInt(2, sellNo);
+			psmt.setInt(1, reviewNo);
 			rset = psmt.executeQuery();
 			
 			while(rset.next()) {
