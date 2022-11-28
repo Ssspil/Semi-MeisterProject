@@ -22,17 +22,20 @@ public class Member {
 	// 	블랙리스트 필드
 	private Date blackenrollDate;
 	private String reason;
+	// 전문가 필드
+	private int subNo;
 	
 	
 	// 기본 생성자
 	public Member() {
 		
 	}
+
 	// 전체 매개변수 생성자
 	public Member(int userNo, String userId, String userPwd, String nickName, String interest, Date enrollDate,
 			String userName, String gender, String email, String phone, String status, String blackList,
-			String speciality, String expSubmit, String expert, String profileImg, Date blackenrollDate,
-			String reason) {
+			String speciality, String expSubmit, String expert, String profileImg, Date blackenrollDate, String reason,
+			int subNo) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -52,6 +55,7 @@ public class Member {
 		this.profileImg = profileImg;
 		this.blackenrollDate = blackenrollDate;
 		this.reason = reason;
+		this.subNo = subNo;
 	}
 
 
@@ -88,8 +92,9 @@ public class Member {
 
 	// 전문가 인증 부분 생성자 int, String, String, String, String, String 는 이미 겹치기 때문에 매개변수 순서만 바꾸어주었다
 	//	String, int, String, String, String, String 이런식으로 임시 방편 했습니다.
-	public Member(String userName, int userNo, String gender, String email, String phone, String speciality) {
+	public Member(int subNo, int userNo, String userName, String gender, String email, String phone, String speciality) {
 		super();
+		this.subNo = subNo;
 		this.userNo = userNo;
 		this.userName = userName;
 		this.gender = gender;
@@ -288,6 +293,13 @@ public class Member {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	public int getSubNo() {
+		return subNo;
+	}
+	public void setSubNo(int subNo) {
+		this.subNo = subNo;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -295,14 +307,8 @@ public class Member {
 				+ ", interest=" + interest + ", enrollDate=" + enrollDate + ", userName=" + userName + ", gender="
 				+ gender + ", email=" + email + ", phone=" + phone + ", status=" + status + ", blackList=" + blackList
 				+ ", speciality=" + speciality + ", expSubmit=" + expSubmit + ", expert=" + expert + ", profileImg="
-				+ profileImg + ", blackenrollDate=" + blackenrollDate + ", reason=" + reason + "]";
+				+ profileImg + ", blackenrollDate=" + blackenrollDate + ", reason=" + reason + ", subNo=" + subNo + "]";
 	}
-
-	
-	
-
-	
-	
 
 	
 }
