@@ -453,7 +453,22 @@ public class MemberService {
 		JDBCTemplate.close();
 		
 		return submitList;
-	}   
+	}
+
+	/**
+	 * 전문가 인증 첨부파일 가져오기
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Attachment> atArr = new MemberDao().selectAllAt(conn);
+		
+		JDBCTemplate.close();
+		
+		return atArr;
+	}
 	   
 	   
 	  

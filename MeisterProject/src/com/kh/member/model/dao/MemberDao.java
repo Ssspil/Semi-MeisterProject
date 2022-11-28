@@ -1138,7 +1138,8 @@ public class MemberDao {
 			
 			Member m = null;
 			while(rset.next()) {
-				m = new Member(rset.getInt("USER_NO"),
+				m = new Member(rset.getInt("SUBNO"),
+							   rset.getInt("USER_NO"),
 							   rset.getString("USER_NAME"),
 							   rset.getString("GENDER"),
 							   rset.getString("EMAIL"),
@@ -1157,6 +1158,45 @@ public class MemberDao {
 		}
 		
 		return submlitListAllSelect;
+	}
+
+	/**
+	 * 전문가 인증하기 위한 첨부파일 다 가져오는 메소드
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllAt(Connection conn) {
+		
+		ArrayList<Attachment> atArr = new ArrayList<>();
+		Attachment at = null;
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAt");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				at = new Attachment();
+			
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setRefNo(rset.getInt("REF_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+				
+				atArr.add(at);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return atArr;
 	}
 
 

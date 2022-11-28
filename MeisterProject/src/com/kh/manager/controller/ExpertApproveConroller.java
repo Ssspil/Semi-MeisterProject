@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -42,12 +43,14 @@ public class ExpertApproveConroller extends HttpServlet {
 	        return;
 	    }
 	    
-	    ArrayList<Member> submitList = new  MemberService().submlitListAllSelect();
+	    ArrayList<Member> submitList = new MemberService().submlitListAllSelect();
+	    ArrayList<Attachment> atArr = new MemberService().selectAllList();
 	    
 	    System.out.println("전문가 승인 관리 페이지로 이동");
 	    
 	    if(submitList != null) {
 		    request.setAttribute("submitList", submitList);
+		    request.setAttribute("atArr", atArr);
 		    request.getRequestDispatcher("views/manager/expertApprove.jsp").forward(request, response);
 	    } else {
 	    	request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
-    							  java.util.ArrayList" 
+    							  java.util.ArrayList,
+    							  com.kh.common.model.vo.Attachment" 
 %>
     
     
@@ -8,6 +9,7 @@
     String contextPath = request.getContextPath();
 
 	ArrayList<Member> submitList = (ArrayList<Member>)request.getAttribute("submitList");
+	ArrayList<Attachment> atArr = (ArrayList<Attachment>)request.getAttribute("atArr");
 	
 
 %>
@@ -40,12 +42,6 @@ table>tfoot {
 	text-align : center;
 }
 
-table>tfoot>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
-}
  	
 </style>
     
@@ -131,47 +127,43 @@ table>tfoot>tr:hover{
 				
 				
 				<div class="myOuter">
-				<form action="<%= contextPath %>/blackremove.ad" method="post">
 					
 					<table align="center" border="1">
-						<thead>
-							<tr>
-								<td colspan="8">
-								<div style="float : right;">
-									<button type="submit" class="btn btn-danger">삭제하기</button>
-								</div>
-								</td>
-							</tr>
-						</thead>
 							
 						
 						<tbody>
 						    <tr>
-						      <th><input type="checkbox" name="userAll" id="userAll" onclick="selectAll();"></th>
 						      <th width="100">회원번호</th>
 						      <th width="100">이름</th>
-						      <th width="150">성별</th>
-						      <th width="150">이메일</th>
-						      <th width="150">핸드폰</th>
+						      <th width="50">성별</th>
+						      <th width="250">이메일</th>
+						      <th width="200">핸드폰</th>
 						      <th width="100">전문분야</th>
+						      <th width="100">상세보기</th>
 						    </tr>
 						</tbody>
 
 						<tfoot>
 					    <% for(Member m : submitList) { %>
 					    	<% if( submitList.isEmpty() ) { %>
-					    	<tr>
-					    		<td colspan="6">블랙 컨슈머가 없습니다.</td>
-					    	</tr>
-					    	<% } else { %>
-					    	<tr>
-					    		<td colspan="6">블랙 컨슈머가 있습니다.</td>
-					    	</tr>
+						    	<tr>
+						    		<td colspan="6">블랙 컨슈머가 없습니다.</td>
+						    	</tr>
+					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
+						    	<tr>
+						    		<td><%= m.getSubNo %></td>
+						    		<td><%= m.getUserNo() %></td>
+						    		<td><%= m.getUserName() %></td>
+						    		<td><%= m.getGender() %></td>
+						    		<td><%= m.getEmail() %></td>
+						    		<td><%= m.getPhone() %></td>
+						    		<td><%= m.getSpeciality() %></td>
+						    		<td></td>
+						    	</tr>
 					  		<% } %>
 					  <% } %>
 					  </tfoot>
 					  </table>
-					</form>
 				</div>
 				<!--  myOuter끝 -->
 				
