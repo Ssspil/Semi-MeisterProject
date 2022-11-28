@@ -13,6 +13,7 @@ public class Reply {
 	private String mbNic;
 	private String boardTitle;
 	private Attachment at;
+	private String userId;
 
 	
 	
@@ -63,8 +64,15 @@ public class Reply {
 		this.replyContent = replyContent;
 		this.replyDate = replyDate;
 		this.userNo = userNo;
-		
-		
+	}
+	
+	public Reply(int replyNo, String userId, String mbNic , String replyDate, String replyContent) {
+		super();
+		this.replyNo = replyNo;
+		this.userId = userId;
+		this.mbNic = mbNic;
+		this.replyDate = replyDate;
+		this.replyContent = replyContent;
 	}
 
 	public String getBoardTitle() {
@@ -150,7 +158,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyCount=" + replyCount + ", replyContent=" + replyContent
-				+ ", replyDate=" + replyDate + ", boardNo=" + boardNo + ",boardTitle=" + boardTitle +", userNo=" + userNo + ",]";
+				+ ", replyDate=" + replyDate + ", boardNo=" + boardNo + ",boardTitle=" + boardTitle +", userNo=" + userNo +  ", user_Id=" + userId + ",]";
 	}
 
 
@@ -161,6 +169,16 @@ public class Reply {
 
 	public void setAt(Attachment at) {
 		this.at = at;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

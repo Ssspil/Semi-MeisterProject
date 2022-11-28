@@ -288,7 +288,7 @@
 	 	WHERE BOARD_NO = ?
 	</entry>
 	
-		<!-- 게시글 전체 가져오는 쿼리문 -->
+	<!-- 게시글 전체 가져오는 쿼리문 -->
 	<entry key="selectAllList">
 		SELECT BOARD_NO,
 			   BOARD_TITLE,
@@ -303,24 +303,41 @@
 		ORDER BY BOARD_DATE DESC
 	</entry>
 	
+	<!-- 관리자 커뮤니티 게시글 관리 -->
 	<entry key="selectBoardList">
-    SELECT
-	    B.BOARD_NO,
-	    M.USER_ID,
-	    M.NICKNAME,
-	    B.BOARD_TITLE,
-	    B.BOARD_DATE,
-	    B.BOARD_CONTENT,
-	    B.STATUS
-    FROM BOARD B
-    JOIN MEMBER M USING(USER_NO)
-    
+	    SELECT
+		    B.BOARD_NO,
+		    M.USER_ID,
+		    M.NICKNAME,
+		    B.BOARD_TITLE,
+		    B.BOARD_DATE,
+		    B.BOARD_CONTENT,
+		    B.STATUS
+	    FROM BOARD B
+	    JOIN MEMBER M USING(USER_NO)
 	</entry>
 	
+	<!-- 관리자 커뮤니티 게시글 삭제  -->
 	<entry key="deleteboardlist">
 		UPDATE BOARD
 		SET STATUS = 'N'
 		WHERE BOARD_NO = ?
+	</entry>
+	
+	<!-- 관리자 커뮤니티 댓글 조회 -->
+	<entry key="replyList">
+		SELECT REPLY_NO, M.USER_ID, M.NICKNAME, TO_CHAR(REPLY_DATE, 'YY/MM/DD HH:MI') REPLY_DATE, REPLY_CONTENT,
+		FROM REPLY R
+		JOIN MEMBER M USING(USER_NO)
+		WHERE BOARD_NO = ?
+		ORDER BY REPLY_DATE DESC, REPLY_NO DESC
+	</entry>
+	
+	<!-- 관리자 커뮤니티 댓글 삭제 -->
+	<entry key="deleteReplylist">
+		UPDATE REPLY
+		SET STATUS = 'N'
+		WHERE REPLY_NO = ?
 	</entry>
 	
 </properties>

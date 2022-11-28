@@ -329,6 +329,7 @@ public class BoardService {
 		
 		return list;
 	}
+	
 	public ArrayList<Board> selectBoardList() {
 		Connection conn = getConnection();
 
@@ -354,6 +355,17 @@ public class BoardService {
 		close();
 		
 		return result;
+	}
+	
+	public ArrayList<Reply> replyList() {
+		
+		Connection conn = getConnection();
+
+		ArrayList<Reply> rlist = new BoardDao().replyList(conn);
+
+		close();
+
+		return rlist;
 	}
 
 }

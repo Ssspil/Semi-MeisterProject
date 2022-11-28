@@ -8,6 +8,8 @@
 	
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	
+	ArrayList<Reply> rlist = (ArrayList<Reply>) request.getAttribute("rlist");
+	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
@@ -45,7 +47,27 @@ table>tfoot>tr:hover {
 	cursor: pointer;
 	color: darkblue;
 }
-
+.modal {
+	position: absolute;
+	width: 100%;
+	height: 1770px;
+	background: rgba(0,0,0,0.8);
+	top: 0;
+	left: 0;
+	display: none;
+	z-index: 2;
+}
+.modal_content {
+	width: 1000px; height: 400px;
+	background: #fff; border-radius: 10px;
+	position: relative; top: 24%; left: 50%;
+	margin-top: -200px; margin-left: -450px;
+	overflow: scroll;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
     
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -165,48 +187,47 @@ table>tfoot>tr:hover {
 					    <% for(int i= 0; i<list.size(); i++) { %>
  					    	<% if( list.isEmpty() ) { %>
 					    	<tr> 
-					    		<td colspan="8">게시글이 없습니다.</td>
+					    		<td colspan="9">게시글이 없습니다.</td>
 					    	</tr>
  					    	<% } else { %>
 
 					    	
 						    <tr class="user<%=list.get(i).getUserNo() %>">
-						
-							      <td>
-							           <input type="checkbox" name="user" id="<%=list.get(i).getUserNo() %>" value="<%=list.get(i).getUserNo() %>" onclick="singleCheck();">
-							      </td>
-							      
-							      <td><%=list.get(i).getBoardNo()%></td>
-							      <td><%=list.get(i).getUserId()%></td>
-							      <td><%=list.get(i).getMemberNic() %></td>
-							      <td><%=list.get(i).getBoardTitle() %></td>
-							      <td><%=list.get(i).getBoardDate() %></td>
-							      <td><button class="btn btn-info btn-sm" type="button" id="modal_btn" data-toggle="modal" data-target="#userInfo<%= list.get(i).getBoardContent()%>">보기</button></td>
-							      <td><%=list.get(i).getStatus() %></td>
-							      <td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>">삭제하기</a></td>
+						    	
+								<td>
+								     <input type="checkbox" name="user" id="<%=list.get(i).getUserNo() %>" value="<%=list.get(i).getUserNo() %>" onclick="singleCheck();">
+								</td>
+								<td><%=list.get(i).getBoardNo()%></td>
+								<td><%=list.get(i).getUserId()%></td>
+								<td><%=list.get(i).getMemberNic() %></td>
+								<td><%=list.get(i).getBoardTitle() %></td>
+								<td><%=list.get(i).getBoardDate() %></td>
+								<td><button class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#userInfo" onclick="location.href='<%=contextPath%>/board.ad?&bno=<%=list.get(i).getBoardNo() %>';">보기</button></td>
+								<td><%=list.get(i).getStatus() %></td>
+								<td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>">삭제하기</a></td>
 							      <% } %>
 						      <% } %>
 						    </tr>
-						    
-							<script>
- 						      $(function(){
- 					    	  $('.user<%=list.get(0).getBoardNo() %>').click(function(){
- 						    		  if($(this).children().children('[type="checkbox"]:checked') == true){
- 						    			  $(this).children().children('[name="user"]').attr("checked", false);
- 						    		  } else {
- 						    			  $(this).children().children('[name="user"]').attr("checked", true); 
- 						    		  }
- 						    	  });
-					      		})
- 						  	</script>
+						   
+					    </tfoot>
+<!-- 						<script> -->
+<!-- // 							$(function(){ -->
+<%-- 							$('.user<%=list.get(0).getBoardNo() %>').click(function(){ --%>
+<!--  								if($(this).children().children('[type="checkbox"]:checked') == true){ -->
+<!-- // 									$(this).children().children('[name="user"]').attr("checked", false); -->
+<!-- // 								} else { -->
+<!-- // 									$(this).children().children('[name="user"]').attr("checked", true);  -->
+<!-- // 								} -->
+<!-- // 							}); -->
+<!-- // 						}) -->
+<!-- 					  	</script> -->
  					  </table>
 <!--  					</form> -->
  				</div>
 				<!--  myOuter끝 -->
             </div>    	
-
-                		
             </main> 
+            
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -216,33 +237,84 @@ table>tfoot>tr:hover {
             </footer>
         </div>
     </div>
-    
-    <script>
-      const USERALL = document.querySelector('#userAll');
-      const users = document.querySelectorAll('[name="user"]');
 
-      function selectAll(){
-        for(let i = 0; i < users.length; i++){
-          users[i].checked = USERALL.checked;
-        }
-      }
+	<div class="modal">
+		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
+			<table class="center">
+				<tr>
+					<th style="width:500px;">글내용</th>
+					<th style="width:500px;">커뮤니티 게시글 사진</th>
+				</tr>
+				
+				<tr>
+					<td name="bno" style="height: 100px;"><%=list.get(0).getBoardContent() %></td>
+					<td style="height: 100px;"></td>
+				</tr>
+			
+			</table>
+			<br> <br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 100px;">댓글 번호</th>
+						<th style="width: 150px;">작성자 아이디</th>
+						<th style="width: 100px;">닉네임</th>
+						<th style="width: 100px;">작성일</th>
+						<th style="width: 200px;">댓글 상세</th>
+						<th style="width: 100px;">삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% for(int i= 0; i < rlist.size(); i++) { %>
+					<tr>
+						<td><%=rlist.get(i).getReplyNo() %></td>
+						<td><%=rlist.get(i).getUserNo() %></td>
+						<td><%=rlist.get(i).getMbNic() %></td>
+						<td><%=rlist.get(i).getReplyDate() %></td>
+						<td><%=rlist.get(i).getReplyContent() %></td>
+						<td><button>삭제</button></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 	모달창 이벤트 -->
+	<script>
+		$(function() {
 
-      function singleCheck(){
-        let total = users.length;
-        let checkedUsers = document.querySelectorAll('[name="user"]:checked').length;
+			$(".btn").click(function() {
+				$(".modal").fadeIn();
+			});
 
-        if(total == checkedUsers){
-          USERALL.checked = true;
-        } else {
-          USERALL.checked = false;
-        }
-      }
-      
+			$(".modal_content").click(function() {
+				$(".modal").fadeOut();
+			});
+		});
+	</script>
 
-      
+	<script>
+		const USERALL = document.querySelector('#userAll');
+		const users = document.querySelectorAll('[name="user"]');
 
-      
-    </script>
+		function selectAll() {
+			for (let i = 0; i < users.length; i++) {
+				users[i].checked = USERALL.checked;
+			}
+		}
+
+		function singleCheck() {
+			let total = users.length;
+			let checkedUsers = document
+					.querySelectorAll('[name="user"]:checked').length;
+
+			if (total == checkedUsers) {
+				USERALL.checked = true;
+			} else {
+				USERALL.checked = false;
+			}
+		}
+	</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>

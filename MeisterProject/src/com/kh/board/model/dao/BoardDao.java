@@ -888,6 +888,7 @@ public class BoardDao {
 		
 		return list;
 	}
+	
 	public ArrayList<Board> selectBoardList(Connection conn) {
 		ArrayList<Board> board = new ArrayList<Board>();
 		
@@ -912,12 +913,7 @@ public class BoardDao {
 						rset.getString("BOARD_CONTENT"),
 						rset.getString("STATUS"));
 						
-						
 				board.add(b);
-	
-				
-			
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -949,5 +945,37 @@ public class BoardDao {
 			close(psmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Reply> replyList(Connection conn) {
+		
+		ArrayList<Reply> rlist = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("replyList");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				rlist.add(new Reply(
+						rset.getInt("REPLY_NO"),
+						rset.getString("USER_ID"),
+						rset.getString("NICKNAME"),
+						rset.getString("REPLY_DATE"),
+						rset.getString("REPLY_CONTENT")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return rlist;
 	}
 }	
