@@ -139,10 +139,18 @@ public Board() {
 	this.boardContent = boardContent;
 	this.status = status;
 }
+	
+	//modal
+	public Board( String boardContent) {
+		super();
+	
+		this.boardContent = boardContent;
+		
+	}
+	
 	public int getReplyCount() {
 		return replyCount;
 	}
-
 
 public void setReplyCount(int replyCount) {
       this.replyCount = replyCount;

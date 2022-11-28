@@ -947,7 +947,7 @@ public class BoardDao {
 		return result;
 	}
 	
-	public ArrayList<Reply> replyList(Connection conn,int boardNo) {
+	public ArrayList<Reply> replyList(Connection conn, int boardNo) {
 		
 		ArrayList<Reply> list = new ArrayList<>();
 		
@@ -961,6 +961,7 @@ public class BoardDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, boardNo);
+			
 			rset = psmt.executeQuery(); 
 			
 			
@@ -983,4 +984,41 @@ public class BoardDao {
 		
 		return list;
 	}
+	
+	
+	
+	
+  public ArrayList<Board> modalList(Connection conn) {
+		      
+		      ArrayList<Board> list = new ArrayList<>();
+		      
+		      PreparedStatement psmt = null;
+		      
+		      ResultSet rset = null;
+		      
+		      String sql = prop.getProperty("modalList");
+		      
+		      try {
+		         psmt = conn.prepareStatement(sql);
+		         rset = psmt.executeQuery();
+		         
+		         while(rset.next()) {
+		            Board b = new Board();
+		            b.setBoardNo(rset.getInt(1));
+		            b.setBoardContent(rset.getString(2));  
+		            b.setTitleImg(rset.getString(3));
+		            
+		            list.add(b);
+		         }
+		         
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(rset);
+		         close(psmt);
+		      }
+		      
+		      return list;
+		   }
+
 }	

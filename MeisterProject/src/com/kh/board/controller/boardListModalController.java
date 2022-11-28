@@ -13,20 +13,18 @@ import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Reply;
 import com.kh.common.model.vo.Attachment;
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class BoardListController
+ * Servlet implementation class boardListModalController
  */
-@WebServlet("/board.ad")
-public class BoardListController extends HttpServlet {
+@WebServlet("/boardModal.ad")
+public class boardListModalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public boardListModalController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +33,22 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-	    // 관리자가 아니면 실행 안되게 하는 것.
-	    if( !(request.getSession().getAttribute("loginUser") != null && 
-	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
-	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
-	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-	        
-	        return;
-	    }
-	    
-	    ArrayList<Board> list = new BoardService().selectBoardList();
-		request.setAttribute("list",list);
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
 		
 		
-	
-		request.getRequestDispatcher("views/manager/boardManager.jsp").forward(request, response);
-	
+		ArrayList<Board> list = new BoardService().modalList();
+		request.setAttribute("list", list);
+		System.out.println(list);
+		ArrayList<Reply> rlist = new BoardService().myReply(boardNo);
+		request.setAttribute("rlist", rlist);
+		System.out.println(rlist);
+			
+			request.getRequestDispatcher("views/manager/boardManagerModal.jsp").forward(request, response);
+			
+			
+			
+		
+		
 	}
 
 	/**

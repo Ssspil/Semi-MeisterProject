@@ -367,5 +367,14 @@ public class BoardService {
 
 		return list;
 	}
+	public ArrayList<Board> modalList() {
+		Connection conn = getConnection();
+
+		ArrayList<Board> list = new BoardDao().modalList(conn);
+
+		close();
+		return list;
+	}
+	
 
 }
