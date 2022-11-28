@@ -224,7 +224,7 @@
                      <label class="input-file-button" id="file-btn" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i> 
                      </label>
-                     <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
+                     <input type="file" name="upfile" id="input-file" onchange="fileChange();"style=display:none>
                      <label id="fileName"></label>
                   </div>
                </div>
@@ -253,7 +253,7 @@
 			});
 		});
 	</script>
-	    <script>
+	<script>
        function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
        }
@@ -263,7 +263,7 @@
     	        const reader = new FileReader();
     	        
     	        reader.onload = (e) => {
-    	            const titleImg = document.getElementById('titleImg');
+    	            const titleImg = document.getElementById('img');
     	            titleImg.src = e.target.result;
     	        }
     	        reader.readAsDataURL(input.files[0]);
@@ -273,6 +273,8 @@
      	document.getElementById('input-file').addEventListener('change', (e) => {
     	    readImage(e.target);
      	})
+     	
+     	
     </script>
    
 	<hr>

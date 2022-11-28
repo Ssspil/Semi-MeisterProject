@@ -430,7 +430,15 @@ public class MemberService {
 	    return result;
 	}
 	   
-	   
+	public int updateStatus(int userNo, int sellNo, int status) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int listCount = new MemberDao().updateStatus(conn, userNo, sellNo, status);
+
+		JDBCTemplate.close();
+
+		return listCount;
+	}   
 	   
 	   
 	  

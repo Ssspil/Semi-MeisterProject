@@ -299,7 +299,11 @@
 		WHERE SELL_NO = ?
 	</entry>
 	
-	
+	<entry key="updateStatus">
+		UPDATE TRANSACTION
+		SET STATUS = ?
+		WHERE SELL_NO = ? AND USER_NO = ?
+	</entry>
 	
 	
 </properties>

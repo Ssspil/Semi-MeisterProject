@@ -45,7 +45,10 @@
 	cursor: pointer;
 	border-bottom: 1px solid orange;
 }
-
+#ex1{
+    width:700px;
+    height:350px;
+}
 </style>
 </head>
 <body>
@@ -78,13 +81,18 @@
 		            <br><br>
 		            <span id="price"><%=s2.get(i).getPrice() %> 원</span>
 		            <br>
+		            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 		            <button id="btn1" >리뷰삭제</button>
 		            <button id="btn2" >리뷰수정</button>
-		            <button id="btn3" >리뷰쓰기</button>
+		            <button id="btn3" onclick="show();">리뷰쓰기</button>
 		        </div>
         	<%} %>
    		<%} %>
    	<%} %>
+   	
+   	<div id="ex1" class="modal"></div>
 </div>
         
         <div id="page2">
@@ -129,7 +137,14 @@
 		      $(".page2" + currentPage2).addClass("sel");
 		   }
 		 
-	   
+	    function show() {
+		      $("#ex1").modal({
+		        fadeDuration: 1000,
+		        fadeDelay: 0.25,
+		      });
+		}
 	   </script>
+	   
+	   
 </body>
 </html>

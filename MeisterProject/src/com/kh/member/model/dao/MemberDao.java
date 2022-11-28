@@ -1086,4 +1086,29 @@ public class MemberDao {
 		
 		return sell;
 	}
+ 	
+ 	public int updateStatus(Connection conn, int userNo, int sellNo, int status) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("updateStatus");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, status);
+			psmt.setInt(2, sellNo);
+			psmt.setInt(3, userNo);
+			
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
 }
