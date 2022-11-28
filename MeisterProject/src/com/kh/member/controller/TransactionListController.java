@@ -104,7 +104,7 @@ public class TransactionListController extends HttpServlet {
 				
 				for(int i = 0; i < reviewNo.size(); i++) {
 					if(reviewNo.get(i) != 0) {
-						s.add(new MemberService().getReview(reviewNo.get(i));
+						review.add(new MemberService().getReview(reviewNo.get(i)));
 					}
 					else {
 						review.add(new Review());
@@ -116,6 +116,7 @@ public class TransactionListController extends HttpServlet {
 				request.setAttribute("status", status);
 				request.setAttribute("review", reviewNo);
 
+				System.out.println(review);
 				
 		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");

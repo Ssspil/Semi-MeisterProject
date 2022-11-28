@@ -472,11 +472,11 @@ public class MemberService {
 		return atArr;
 	}
 	   
-	public Review getReview(int userNo, int sellNo) {
+	public Review getReview(int reviewNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		Review review = new MemberDao().getReview(conn, userNo, sellNo);
+		Review review = new MemberDao().getReview(conn, reviewNo);
 		
 		JDBCTemplate.close();
 		
