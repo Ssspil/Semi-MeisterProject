@@ -15,6 +15,7 @@
 	SellBoard s = (SellBoard) request.getAttribute("s");
 	Attachment at = (Attachment) request.getAttribute("at");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	Member m = (Member) request.getAttribute("m");
  	
  	int currentPage = pi.getCurrentPage();
  	int startPage = pi.getStartPage();
@@ -244,20 +245,17 @@ p.heartIcon{
 			<!-- 리스트가 비어있는 경우 -->
 			등록된 게시글이 없습니다.
 		<% } else{ %>
+		
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
+					
 						<!-- 찜 하트 아이콘 -->
-						<p class="heartIcon"> 
-						
-								<i class="fa-regular fa-heart"></i>							
-								<i class="fa-solid fa-heart-circle-check"></i><input type="hidden" value="<%=sb.getSellRecommend() %>"> <br>
-						
-							
+						<p class="heartIcon" > 
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')">♡	</button>
+								<!-- <i class="fa-regular fa-heart"></i> -->
 						</p>
-					
 						
-					
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					
 					<p>
@@ -270,7 +268,6 @@ p.heartIcon{
 					</p>
 				</div>
 			<% } %>
-			
 		<% } %>
 		
 	
@@ -278,22 +275,24 @@ p.heartIcon{
 		<script>
 			//썸네일 클릭 시 이동되는 주소
 			$(function(){
-				$(".thumbnail").click(function(){			
+				$(".thumbnail").click(function(){		
+				
 					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
 				})	
 			});
 		</script>
 			
-			
-		
-		<%--  <script>
-			$(document).on("click", ".heartIcon", (e) => { 
-				e.preventDefault();// 한번 클릭후 다음 클릭 방지
-				likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
+		 <script>
+		 
+		 let likeBtn = true; // 변수 likeBtn을 true로 선언
+		 
+		 function heartAttack(sellNo){
+			 window.event.stopPropagation(); //이벤트 추가 발생 방지
+			 likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 				$.ajax({
 					url : "sellBoardLike.se",
 					type : "post",
-					data : { sellNo : <%=s.getSellNo() %>, type : "I" },
+					data : { sellNo, type : "I" },
 					success : function(data) {
 						if (data.result == 1) {
 							alert("좋아요가 등록되었습니다.");
@@ -301,32 +300,31 @@ p.heartIcon{
 								$.ajax({
 									url : "sellBoardLike.se",
 									type : "post",
-									data : { sellNo : <%=s.getSellNo() %>, type : "D" },
+									data : { sellNo, type : "D" },
 									success : function(data) {
 										if (data.result == 1) {
 											alert("취소되었습니다.");
 										} //if
 									}, //success
 									error : function() {
-										console.log("ERROR >> ");
+										console.log("ERROR > ");
 									} //error
 								}) //$.ajax
 							} //if
-						} else {
+						 else {
 							alert("오류가 발생했습니다.");
 						}
 					},
 					error : function() {
-						console.log("ERROR");
+						console.log("ERROR>>");
 					},
 					done : function() {
 						likeBtn = true;
-				}); //$.ajax
-			}); //on.click 
-     	</script> --%>
-		
-	
-    
+				} 
+			 })//$.ajax
+		 }
+     	</script>
+		    
 	</div><!-- outer 끝 -->
 	
 		<!-- 페이징처리 -->           
