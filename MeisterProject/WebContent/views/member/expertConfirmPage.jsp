@@ -15,14 +15,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
+	body {
+		background-color: #DFDFDF;
+	}
+    form{
+        background-color: #DFDFDF;
+    }
 	.outer {
+		background-color : white;
         color: black;
         width: 700px;
         margin: auto;
-        margin-top: 150px;
+        margin-top: 100px;
         margin-bottom: 100px;
         height: 1300px;
-        border: 1px yellow solid;
     }
     #profileImg{
     	width: 250px;
@@ -204,12 +210,12 @@
 			<h6><b><i class="bi bi-list-stars"></i> 전문분야 : </b></h6> 
 			
 			<select name="speciality" id="speciality">
-				<option value="영상">영상</option>
-				<option value="영화">영화</option>
-				<option value="게임">게임</option>
-				<option value="IT">IT</option>
-				<option value="운동">운동</option>
-				<option value="요리">요리</option>
+				<option value="10">영상</option>
+				<option value="20">영화</option>
+				<option value="30">게임</option>
+				<option value="40">IT</option>
+				<option value="50">운동</option>
+				<option value="60">요리</option>
 			</select>
 			<br><br><br>
 			<h6><b><i class="bi bi-card-image"></i> 첨부파일 : </b></h6>

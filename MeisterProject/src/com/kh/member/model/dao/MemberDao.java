@@ -327,6 +327,7 @@ public class MemberDao {
 		return result;
 	}
 
+	// 이거 수정해야함 SUBMIT 테이블로 넣어보자
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
 
@@ -339,13 +340,13 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(1, m.getUserName());
-			psmt.setString(2, m.getGender());
-			psmt.setString(3, m.getEmail());
-			psmt.setString(4, m.getPhone());
-			psmt.setString(5, m.getSpeciality());
-			psmt.setString(6, m.getExpSubmit());
-			psmt.setString(7, m.getUserId());
+//			psmt.setString(1, m.getUserName());
+//			psmt.setString(2, m.getGender());
+//			psmt.setString(3, m.getEmail());
+//			psmt.setString(4, m.getPhone());
+//			psmt.setString(5, m.getSpeciality());
+//			psmt.setString(6, m.getExpSubmit());
+//			psmt.setString(7, m.getUserId());
 			
 			result = psmt.executeUpdate();	
 			

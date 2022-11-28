@@ -126,7 +126,6 @@ public class MemberService {
 		 
 		 if(at != null) {
 			 result2 = new MemberDao().insertExpertAttachment(conn, at);
-			 System.out.println("service : "+result2);
 		 }
 		 
 		 if (result > 0 && result2 > 0) {
