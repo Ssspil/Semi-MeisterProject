@@ -322,4 +322,9 @@
 		WHERE FILE_LEVEL = 4
 	</entry>
 	
+	<entry key="getReview">
+		SELECT REVIEW_CONTENT, AVG, USER_NO, SELL_NO
+		FROM REVIEW
+		WHERE USER_NO = ? AND SELL_NO = ?
+	</entry>
 </properties>

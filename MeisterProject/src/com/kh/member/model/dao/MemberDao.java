@@ -16,6 +16,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 
 import com.kh.member.model.vo.Member;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberDao {
@@ -1199,5 +1200,27 @@ public class MemberDao {
 		return atArr;
 	}
 
-
+	public Review getReview(Connection conn, int userNo, int sellNo) {
+		Review r = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getReview");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			psmt.setInt(2, sellNo);
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				r = new Review(rset.getString("REVIEW_CONTENT"), rset.getDouble("AVG"), rset.getInt("USER_NO"), rset.getInt("SELL_NO"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return r;
+	}
 }

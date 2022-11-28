@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo, com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo, com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList, com.kh.review.model.vo.*"%>
   <%
  	PageInfo pi2 = (PageInfo) request.getAttribute("pi");
 	int currentPage2 = pi2.getCurrentPage();
@@ -10,8 +10,9 @@
 	ArrayList<SellBoard> s2 = (ArrayList<SellBoard>) request.getAttribute("s");
 	ArrayList<Attachment> at2 = (ArrayList<Attachment>) request.getAttribute("at");
 	ArrayList<Integer> status2 = (ArrayList<Integer>) request.getAttribute("status");
-	
-	if(at2 == null){
+	ArrayList<Review> review = (ArrayList<Review>) request.getAttribute("review");
+
+ 	if(at2 == null){
 		at2.add(new Attachment());
 	}
   
@@ -49,6 +50,41 @@
     width:700px;
     height:350px;
 }
+textarea {
+    width: 400px;
+    height: 100px;
+    border: 2px solid black;
+    marign: auto;
+    resize: none;
+}
+.star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+}
+
+.star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}  
+
+.star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#revSubmit{
+	margin-left: 150px;
+	background-color: inherit;
+}
 </style>
 </head>
 <body>
@@ -73,6 +109,7 @@
 		                <span id="title2"><%=s2.get(i).getSellTitle() %></span>
 		            </div>
 		            <br><br>
+		            <input type="hidden" id="sellNo" value="<%=s2.get(i).getSellNo() %>">
 		            <input type="hidden" name="receiver" value="<%=s2.get(i).getUserNO() %>">
 					<img src="<%=request.getContextPath() %>/<%=at2.get(i).getFilePath() %>/<%=at2.get(i).getChangeName() %>" id="img">
 		            <span id="category">분류><%=s2.get(i).getInterestName() %></span>
@@ -84,15 +121,50 @@
 		            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-		            <button id="btn1" >리뷰삭제</button>
-		            <button id="btn2" >리뷰수정</button>
-		            <button id="btn3" onclick="show();">리뷰쓰기</button>
+		       		<button id="btn1" >리뷰삭제</button>
+			        <button id="btn2" >리뷰수정</button>
+			        <button id="btn3" onclick="show();">리뷰쓰기</button>
 		        </div>
+			   
+			   	<div id="ex1" class="modal">
+					<form action="<%=request.getContextPath() %>/reviewWrite.rv" method="post">
+						<h3>리뷰 작성</h3>
+						<hr>
+						<h6>리뷰 내용</h6>
+						<textarea name="reviewText" rows="3" cols="20" placeholder="여기에 리뷰 내용을 작성하세요" required></textarea>
+						<hr>
+						<h6 id="avg">평점</h6>
+						<span class="star">
+							★★★★★
+							<span>★★★★★</span>
+							<input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+						</span>
+						<input type="hidden" name="sellNo" value="<%=s2.get(i).getSellNo() %>">
+						<button id="revSubmit" type="submit">제출하기</button>
+					</form>
+				</div>
+				
+				<div id="ex2" class="modal">
+					<form action="<%=request.getContextPath() %>/reviewUpdate.rv" method="post">
+						<h3>리뷰 수정</h3>
+						<hr>
+						<h6>리뷰 내용</h6>
+						<textarea name="reviewText" rows="3" cols="20" placeholder="여기에 리뷰 내용을 작성하세요" required></textarea>
+						<hr>
+						<h6 id="avg">평점</h6>
+						<span class="star">
+							★★★★★
+							<span>★★★★★</span>
+							<input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+						</span>
+						<input type="hidden" name="sellNo" value="<%=s2.get(i).getSellNo() %>">
+						<button id="revSubmit" type="submit">제출하기</button>
+					</form>
+				</div>
         	<%} %>
    		<%} %>
    	<%} %>
    	
-   	<div id="ex1" class="modal"></div>
 </div>
         
         <div id="page2">
@@ -138,11 +210,71 @@
 		   }
 		 
 	    function show() {
-		      $("#ex1").modal({
-		        fadeDuration: 1000,
+			$('#ex1').modal({
+				fadeDuration: 1000,
 		        fadeDelay: 0.25,
-		      });
+				escapeClose: false,
+				clickClose: false
+			});
+			$('#reviewText').val('');
 		}
+	    
+	    function drawStar(target){
+	    	let percent = 0;
+	    	
+	    	switch(target.value){
+	    	case '1':
+	    		percent = target.value * 10+'%';
+	    		break;
+	    	case '2':
+	    		percent = target.value * 10+'%';
+	    		break;
+	    	case '3':
+	    		percent = target.value * 10 - 1+'%';
+	    		break;
+	    	case '4':
+	    		percent = target.value * 10 - 1+'%';
+	    		break;
+	    	case '5':
+	    		percent = target.value * 10 - 2+'%';
+	    		break;
+	    	case '6':
+	    		percent = target.value * 10 - 2+'%';
+	    		break;
+	    	case '7':
+	    		percent = target.value * 10 - 3+'%';
+	    		break;
+	    	case '8':
+	    		percent = target.value * 10 - 4+'%';
+	    		break;
+	    	case '9':
+	    		percent = target.value * 10 - 5+'%';
+	    		break;
+	    	case '10':
+	    		percent = target.value * 10+'%';
+	    		break;
+	    	}
+	    	$('.star>span').width(percent);
+	    	$('#avg').text("평점 : "+target.value * 0.5+"점");	
+	    	console.log($('#avg').text());
+	    }
+	    
+	    $(document).ready(function(){
+	    	<%if(!review.isEmpty()){%>
+		    	<%for(int i =0; i < s2.size(); i++) { %>
+		       		<%if(status2.get(i) == 2 ){%>   
+						<%for(int j=0; j<review.size(); j++){%>
+							<%if(s2.get(i).getUserNO() == review.get(j).getUserNo() && s2.get(i).getSellNo() == review.get(j).getSellNo()){%>
+								$("btn3").attr("disabled", "true");
+							<%} else{%>
+								$("btn1").attr("disabled", "true");
+								$("btn2").attr("disabled", "true");
+							<%} %>
+						<%} %>
+					<%} %>
+				<%} %>
+			<%} %>
+	    });
 	   </script>
 	   
 	   

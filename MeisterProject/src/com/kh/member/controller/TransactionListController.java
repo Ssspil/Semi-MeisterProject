@@ -14,6 +14,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 /**
@@ -79,6 +80,7 @@ public class TransactionListController extends HttpServlet {
 				ArrayList<SellBoard> s = new ArrayList<>();
 				ArrayList<Integer> status = new ArrayList<>();
 				ArrayList<Integer> trans = new MemberService().getTransaction(userNo);
+				ArrayList<Review> review = new ArrayList<>();
 				
 				for(int i = 0; i < trans.size(); i++) {
 					if(i == 0 || i % 2 == 0) {
@@ -103,14 +105,19 @@ public class TransactionListController extends HttpServlet {
 					}
 				}
 				
+				for(int i = 0; i < s.size(); i++) {
+					review.add(new MemberService().getReview(userNo, s.get(i).getSellNo()));
+				}
 				request.setAttribute("s", s);
 				request.setAttribute("at", at);
 				request.setAttribute("status", status);
+				request.setAttribute("review", review);
 				
 				System.out.println(s);
 				System.out.println(at);
 				System.out.println(status);
-		
+				System.out.println(review);
+				
 		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
 			response.sendRedirect(request.getContextPath());

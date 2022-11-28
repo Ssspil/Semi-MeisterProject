@@ -7,6 +7,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberService {
@@ -470,7 +471,16 @@ public class MemberService {
 		return atArr;
 	}
 	   
-	   
+	public Review getReview(int userNo, int sellNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Review review = new MemberDao().getReview(conn, userNo, sellNo);
+		
+		JDBCTemplate.close();
+		
+		return review;
+	}   
 	  
 
 	
