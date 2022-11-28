@@ -82,15 +82,8 @@
 		WHERE NICKNAME = ?
 	</entry>
 	
+	<!--  전문가 승인 요청한 사용자의 정보넣는 쿼리문  -->
 	<entry key="expertSubmit">
-<!-- 		UPDATE MEMBER
-		SET USER_NAME = ?,
-			GENDER = ?,
-			EMAIL = ?,
-			PHONE = ?,
-			SPECIALITY = ?,
-			EXP_SUBMIT = ?
-		WHERE USER_ID = ? AND STATUS = 'Y' -->
 		INSERT INTO SUBMIT (SUBNO, USER_NO, USER_NAME, GENDER, EMAIL, PHONE, SPECIALITY)
 		VALUES (SEQ_SBNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
 	</entry>
@@ -299,7 +292,11 @@
 		WHERE SELL_NO = ?
 	</entry>
 	
-	
+	<entry key="updateStatus">
+		UPDATE TRANSACTION
+		SET STATUS = ?
+		WHERE SELL_NO = ? AND USER_NO = ?
+	</entry>
 	
 	
 </properties>

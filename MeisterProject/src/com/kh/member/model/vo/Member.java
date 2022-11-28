@@ -86,18 +86,16 @@ public class Member {
 		this.interest = interest;
 	}
 
-	// 전문가 인증 부분 생성자
-	// 아이디를 조건문으로 사용, UPDATE 문으로 나머지 값들 삽입	
-	public Member(String userId, String userName, String gender, String email, String phone, String speciality,
-			String expSubmit) {
+	// 전문가 인증 부분 생성자 int, String, String, String, String, String 는 이미 겹치기 때문에 매개변수 순서만 바꾸어주었다
+	//	String, int, String, String, String, String 이런식으로 임시 방편 했습니다.
+	public Member(String userName, int userNo, String gender, String email, String phone, String speciality) {
 		super();
-		this.userId = userId;
+		this.userNo = userNo;
 		this.userName = userName;
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
 		this.speciality = speciality;
-		this.expSubmit = expSubmit;
 	}
 
 	// 개인정보 수정 부분 생성자

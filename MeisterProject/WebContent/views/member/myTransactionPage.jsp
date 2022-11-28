@@ -281,7 +281,6 @@ height:100px;
 		                <span id="title2"><%=s.get(i).getSellTitle() %>안녕</span>
 		            </div>
 		            <br><br>
-		            <input type="hidden" name="receiver" value="<%=s.get(i).getUserNO() %>">
 					<img src="<%=contextPath %>/<%=at.get(i).getFilePath() %>/<%=at.get(i).getChangeName() %>" id="img">
 		            <span id="category">분류><%=s.get(i).getInterestName() %></span>
 		            <br>
@@ -289,9 +288,21 @@ height:100px;
 		            <br><br>
 		            <span id="price"><%=s.get(i).getPrice() %> 원</span>
 		            <br>
-		            <button id="btn1" >구매취소</button>
-		            <button id="btn2" >판매자문의</button>
-		            <button id="btn3" >작업완료</button>
+		            <form action="changeStatus.me" method="post">
+		            	<input type="hidden" name="sellNo" value="<%=s.get(i).getSellNo() %>">
+		            	<input type="hidden" name="status" value=3>
+		            	<button id="btn1" type="submit">구매취소</button>
+		            </form>
+		            <form action="askToSeller.ch" method="post">
+		            	<input type="hidden" name="sellNo" value="<%=s.get(i).getSellNo() %>">
+			            <input type="hidden" name="receiver" value="<%=s.get(i).getUserNO() %>">
+		            	<button id="btn2" type="submit">판매자문의</button>
+		            </form>
+		            <form action="changeStatus.me" method="post">
+		            	<input type="hidden" name="sellNo" value="<%=s.get(i).getSellNo() %>">
+		            	<input type="hidden" name="status" value=2>
+			            <button id="btn3" type="submit">작업완료</button>		            	
+		            </form>
 		        </div>
         	<%} %>
    		<%} %>

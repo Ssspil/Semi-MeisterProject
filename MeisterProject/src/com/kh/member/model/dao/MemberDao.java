@@ -330,30 +330,34 @@ public class MemberDao {
 	// 이거 수정해야함 SUBMIT 테이블로 넣어보자
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
-
 		PreparedStatement psmt = null;
-		
-		ResultSet rset = null;
 		
 		String sql = prop.getProperty("expertSubmit");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-//			psmt.setString(1, m.getUserName());
-//			psmt.setString(2, m.getGender());
-//			psmt.setString(3, m.getEmail());
-//			psmt.setString(4, m.getPhone());
-//			psmt.setString(5, m.getSpeciality());
-//			psmt.setString(6, m.getExpSubmit());
-//			psmt.setString(7, m.getUserId());
+			System.out.println("======================");
+			System.out.println(m.getUserNo());
+			System.out.println(m.getGender());
+			System.out.println(m.getUserName());
+			System.out.println(m.getEmail());
+			System.out.println(m.getSpeciality());
 			
-			result = psmt.executeUpdate();	
+			
+			
+			psmt.setInt(1, m.getUserNo());
+			psmt.setString(2, m.getUserName());
+			psmt.setString(3, m.getGender());
+			psmt.setString(4, m.getEmail());
+			psmt.setString(5, m.getPhone());
+			psmt.setString(6, m.getSpeciality());
+			
+			result = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(rset);
 			JDBCTemplate.close(psmt);
 		}
 		
@@ -1085,5 +1089,30 @@ public class MemberDao {
 		}
 		
 		return sell;
+	}
+ 	
+ 	public int updateStatus(Connection conn, int userNo, int sellNo, int status) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("updateStatus");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, status);
+			psmt.setInt(2, sellNo);
+			psmt.setInt(3, userNo);
+			
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
 	}
 }
