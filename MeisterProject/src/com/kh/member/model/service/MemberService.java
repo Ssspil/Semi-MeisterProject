@@ -129,9 +129,10 @@ public class MemberService {
 		 int result1 = new MemberDao().expertSubmit(conn, m);
 		 
 		 int result2 = 1;
-		 
+		 //				at.setRefNo(subNo);
 		 if(at != null) {
-			 result2 = new MemberDao().insertExpertAttachment(conn, at);
+			 int subNo = new MemberDao().selectSubNo(conn, m);
+			 result2 = new MemberDao().insertExpertAttachment(conn, at, subNo);
 		 }
 		 
 		 if (result1 > 0 && result2 > 0) {
@@ -480,8 +481,8 @@ public class MemberService {
 		JDBCTemplate.close();
 		
 		return review;
-	}   
-	  
+	}
+
 
 	
 	
