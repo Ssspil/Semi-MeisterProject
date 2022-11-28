@@ -278,7 +278,7 @@ height:100px;
 		        <div class="name1Body Tran Tran<%=i%> <%=i > 6 ? "hide" : ""%>">
 		            <div id="title">
 		                <span id="title1">진행중인 거래</span>
-		                <span id="title2"><%=s.get(i).getSellTitle() %></span>
+		                <span id="title2"><%=s.get(i).getSellTitle() %>안녕</span>
 		            </div>
 		            <br><br>
 		            <input type="hidden" name="receiver" value="<%=s.get(i).getUserNO() %>">
