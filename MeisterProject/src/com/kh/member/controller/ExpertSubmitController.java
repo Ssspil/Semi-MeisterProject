@@ -44,13 +44,42 @@ public class ExpertSubmitController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 	
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
-			String userId = multiRequest.getParameter("userId");
 			String userName = multiRequest.getParameter("userName");
 			String gender = multiRequest.getParameter("gender");
 			String phone = ("010".concat(multiRequest.getParameter("phoneMid"))).concat(multiRequest.getParameter("phoneLast"));
 			String email = ((multiRequest.getParameter("emailFront")).concat("@")).concat(multiRequest.getParameter("emailBack"));
 			String speciality = multiRequest.getParameter("speciality");
 			
+			if(speciality.equals("10")) {
+				speciality = "영상";
+			} else if (speciality.equals("20")) {
+				speciality = "영화";
+			} else if (speciality.equals("30")) {
+				speciality = "게임";
+			} else if (speciality.equals("40")) {
+				speciality = "IT";
+			} else if (speciality.equals("50")) {
+				speciality = "운동";
+			} else {
+				speciality = "요리";
+			}
+				
+			System.out.println("=============파라미터로 값 가져올때");
+			System.out.println(userNo);
+			System.out.println(userName);
+			System.out.println(gender);
+			System.out.println(phone);
+			System.out.println(email);
+			System.out.println(speciality);
+			
+			Member m = new Member(userName, userNo, gender, email, phone, speciality);
+			System.out.println("=============객체넣은후");
+			System.out.println(m.getUserNo());
+			System.out.println(m.getGender());
+			System.out.println(m.getUserName());
+			System.out.println(m.getEmail());
+			System.out.println(m.getSpeciality());
+
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("expertFile") != null) {	
@@ -61,19 +90,16 @@ public class ExpertSubmitController extends HttpServlet {
 				at.setFilePath("resources/expert_upfiles/");
 			}
 			
-			Member m = new Member(userId, userName, gender, email, phone, speciality, "Y");
-	
-			Member result = new MemberService().expertSubmit(m, at);
+
 			
-			if(result == null) {
-				request.setAttribute("errorMsg", "회원정보 수정에 실패했습니다.");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			} else {
+			int result = new MemberService().expertSubmit(m, at);
+			
+			if(result > 0) {
 				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", result);
-				session.setAttribute("alertMsg", "제출");
-	
+				session.setAttribute("alertMsg", "전문가 신청이 제출되었습니다.");
 				response.sendRedirect(request.getContextPath()+"/mypage.me");
+			} else {
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		}
 	}

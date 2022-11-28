@@ -116,11 +116,16 @@ public class MemberService {
 		 return result;
 	 }
 
-	 public Member expertSubmit(Member m, Attachment at) {
+	 /**
+	  * 전문가되기 위해 관리자에게 요청을 보내는 메소드
+	  * @param m
+	  * @param at
+	  * @return
+	  */
+	 public int expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
-		 int result = new MemberDao().expertSubmit(conn, m);
-		 Member updateMem = null;
+		 int result1 = new MemberDao().expertSubmit(conn, m);
 		 
 		 int result2 = 1;
 		 
@@ -128,16 +133,15 @@ public class MemberService {
 			 result2 = new MemberDao().insertExpertAttachment(conn, at);
 		 }
 		 
-		 if (result > 0 && result2 > 0) {
+		 if (result1 > 0 && result2 > 0) {
 			 JDBCTemplate.commit(conn);
-			 updateMem = new MemberDao().selectMember(conn, m.getUserId());
 		 } else {
 			 JDBCTemplate.rollback(conn);
 		 }
 			 
 		 JDBCTemplate.close();
 		 
-		 return updateMem;
+		 return result1 * result2;
 	 }
 	
 	 public Member selectMember(int userNo) {
