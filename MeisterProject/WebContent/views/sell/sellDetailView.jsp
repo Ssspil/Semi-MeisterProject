@@ -30,7 +30,7 @@
 	}
 	.outer{
 			width: 70%;
-	        height: 850px;
+	        height: 100%;
 	       /* 상 , 우 , 하, 좌  띄우기 */
 			margin: 150px 200px 20px 200px;
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -54,16 +54,18 @@
 		color: black;
 	}
 	.tab-content{
-		height : 250px;
+		height : 300px;
 		display: none;
-		background: #f5f5dc;
+		background: whitesmoke;
 		padding: 5%;
+		width: 530px;
 	}
 	.tab-content.current{
 		display: inherit;
 	}
 	.left{
 		width: 60%;
+		height: 100%;
 		float: left;
 		box-sizing: border-box;
 		background: mintcream;
@@ -81,7 +83,7 @@
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: mintcream;
+		background: whitesmoke;
 		
 	}
 	.btn-cls{
@@ -90,10 +92,12 @@
 	}
 	.content-form{
 		border : 1px solid;
-		padding : 10px;
+		padding : 5%;
+		border-radius: 10px;
 	}
 	.seller-info{
 		padding : 5%;
+		border-radius: 10px;
 	}
 	#nick{
 		color: #FFBA00;
@@ -103,14 +107,33 @@
 		padding : 5px; 
 		margin : 5px;
 		font-size: smaller;
+		border-radius: 10px;
 	}
 	button:hover{
 		transition: 1s;
 		transform: scale(1.1);
 	}
-	a:hover{
+	.outer a:hover{
 		transition: 1s;
 		transform: scale(1.1);
+	}
+	#inquireBtn{
+		width: 200px;
+	}
+	#paymentBtn{
+		width: 200px;
+	}
+	#img1{
+		border-radius: 10px;
+		width: 550px;
+		height: 300px;
+	}
+	.category a{
+		text-decoration: none;
+		color: #727272;
+	}
+	.category a:hover{
+		color: orange;
 	}
 
 </style>
@@ -123,13 +146,13 @@
 		<section>
 		<div class="left">
 			<input type="hidden" name="userNO" value="<%= loginUser.getUserNo() %>">
-			<div>
-				<a href="">관심분야</a>
+			<div class="category">
+				<a href="market.se">관심분야</a>
 				<span>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
 				</span>
 				<span id="interest">		
-					<a color="textSecondary" href="" class="css-1arz1ip e1lsgt8r0"><%= s.getInterestName() %></a>
+					<a color="textSecondary" href="market.se?=interest_no=10" class="css-1arz1ip e1lsgt8r0"><%= s.getInterestName() %></a>
 				</span>
 			</div>
 			
@@ -142,12 +165,12 @@
 						download="<%= at.getOriginName() %>">
 							<%= at.getOriginName() %>
 						</a> --%>
-						<img src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>" width="550" height="300">
+						<img id="img1" src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>">
 					</div>
 				</section>
 				<br><br>
 
-				<div class="container">
+				<div class="container" style="display: table-cell;">
 
 					<ul class="tabs">
 						<li class="tab-link current" data-tab="tab-1">&nbsp;서비스 설명&nbsp;</li>
@@ -200,6 +223,8 @@
 								<div>
 								<%= s.getSellContent() %>
 								</div>
+
+								<br>
 								
 								
 								<div class="btn-cls">
@@ -211,6 +236,8 @@
 									<%-- <a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a> --%>
 									<button id="inquireBtn" class="btn btn-primary">문의하기</button>
 									</form>
+									
+									<br>
 								
 									<a href="<%=contextPath%>/payment.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-warning">구매하기</a>
 								</div>
@@ -221,7 +248,7 @@
 				</section>
 				<br><br>
 				<section class="serve">
-					서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.
+					결제 완료 후 서비스가 제공됩니다.
 				</section>
 			</div>
 			
@@ -255,7 +282,7 @@
 				</div>
 		
 		</div>
-
+		<br clear="both">
 		</section>
 		
 		
