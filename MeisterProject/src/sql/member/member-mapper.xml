@@ -328,4 +328,13 @@
 		FROM REVIEW
 		WHERE USER_NO = ? AND SELL_NO = ?
 	</entry>
+	
+	<entry key="selectSubNo">
+		SELECT SUBNO
+		FROM (SELECT ROWNUM NUM, A.*
+		        FROM (SELECT *
+		               FROM SUBMIT) A
+		        ORDER BY NUM DESC) B
+		WHERE ROWNUM = 1
+	</entry>
 </properties>

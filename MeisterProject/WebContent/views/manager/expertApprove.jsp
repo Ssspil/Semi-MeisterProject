@@ -147,6 +147,7 @@ table>tfoot {
 						      <th width="200">핸드폰</th>
 						      <th width="100">전문분야</th>
 						      <th width="100">상세보기</th>
+						      <th width="100">여부</th>
 						    </tr>
 						</tbody>
 
@@ -154,7 +155,7 @@ table>tfoot {
 					    <% for(Member m : submitList) { %>
 					    	<% if( submitList.isEmpty() ) { %>
 						    	<tr>
-						    		<td colspan="6">블랙 컨슈머가 없습니다.</td>
+						    		<td colspan="6">리스트가 없습니다.</td>
 						    	</tr>
 					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
 						    	<tr>
@@ -193,6 +194,9 @@ table>tfoot {
                                                 </div>
                                             </div>
                                             <!--  모달 테스트 끝 -->
+						    		</td>
+						    		<td>
+						    			<button type="button">승인</button>
 						    		</td>
 						    	</tr>
 					  		<% } %>

@@ -1130,15 +1130,14 @@ public class MemberDao {
 			
 			Member m = null;
 			while(rset.next()) {
-//				m = new Member(rset.getInt("SUBNO"),
-//							   rset.getInt("USER_NO"),
-//							   rset.getString("USER_NAME"),
-//							   rset.getString("GENDER"),
-//							   rset.getString("EMAIL"),
-//							   rset.getString("PHONE"),
-//							   rset.getString("SPECIALITY")
-//							   );
-//				
+				m = new Member(rset.getInt("SUBNO"),
+							   rset.getInt("USER_NO"),
+							   rset.getString("USER_NAME"),
+							   rset.getString("GENDER"),
+							   rset.getString("EMAIL"),
+							   rset.getString("PHONE"),
+							   rset.getString("SPECIALITY")
+							   );		
 				submlitListAllSelect.add(m);
 			}
 			
@@ -1225,13 +1224,19 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			
-			
 			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				subNo = rset.getInt("SUBNO");
+			}
+			
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
 		}
 		
 		

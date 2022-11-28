@@ -44,11 +44,11 @@ public class ExpertApproveConroller extends HttpServlet {
 	    }
 	    
 	    ArrayList<Member> submitList = new MemberService().submlitListAllSelect();
-	    ArrayList<Attachment> atArr = new ArrayList<>();
+	    ArrayList<Attachment> atArr = new MemberService().selectAllList();
 	    
-	    for(int i = 0; i < submitList.size(); i++) {
-	    	atArr = new MemberService().selectAllList();
-	    }
+
+	    	
+
 	    	
 	    
 	    System.out.println("전문가 승인 관리 페이지로 이동");

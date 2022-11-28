@@ -100,6 +100,20 @@ public class Member {
 		this.phone = phone;
 		this.speciality = speciality;
 	}
+	
+	// 전문가 신청 보이게 하는 생성자ㅣ
+	public Member(int subNo, int userNo, String userName, String gender, String email, String phone, String speciality) {
+		super();
+		this.subNo = subNo;
+		this.userNo = userNo;
+		this.userName = userName;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.speciality = speciality;
+	}
+	
+
 
 	// 개인정보 수정 부분 생성자
 	public Member(String userId, String nickName, String interest, String userName, String email, String phone) {
