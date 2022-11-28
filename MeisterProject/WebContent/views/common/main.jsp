@@ -223,23 +223,22 @@
                 <% if (sellList.size() > 2 ) {%>
                 <% for (int i = 0 ; i < 3; i++) { %>
                	<script>
-	                $(function() {
-	                    $('#<%= i %>').on({'mouseenter' : function() {
-	                        $(this).html('<div class="hover-Text">' +
-	                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
-	                            '</div><br><br>' +
-	                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
-	                        }, 'mouseout' : function() {
-	                        $(this).html('<div class="img-gradient">' +
-	                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
-	                            '<div class="text-wrap">' +
-	                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
-	                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
-	                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
-	                            '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ');
-	                        }});
-	                    
-	                })    	                
+                $(function() {
+                    $('#<%= i %>').on({'mouseenter' : function() {
+                        $(this).html('<div class="hover-Text">' +
+                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br><input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ' +
+                            '</div><br><br>' +
+                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+                        }, 'mouseout' : function() {
+                        $(this).html('<div class="img-gradient">' +
+                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
+                            '<div class="text-wrap">' +
+                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
+                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
+                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
+                            '</div> ');        	
+                        }});     
+                })        	                
                 </script>
 
                 <div class="area card-box" align="center" id="<%= i %>">
@@ -259,22 +258,22 @@
                 <% for (int i = 0 ; i < 2; i++) { %>
                 
                	<script>
-	                $(function() {
-	                    $('#<%= i %>').on({'mouseenter' : function() {
-	                        $(this).html('<div class="hover-Text">' +
-	                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
-	                            '</div><br><br>' +
-	                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
-	                        }, 'mouseout' : function() {
-	                        $(this).html('<div class="img-gradient">' +
-	                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
-	                            '<div class="text-wrap">' +
-	                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
-	                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
-	                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
-	                            '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" />''}});
-	                    
-	                })                 
+                $(function() {
+                    $('#<%= i %>').on({'mouseenter' : function() {
+                        $(this).html('<div class="hover-Text">' +
+                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br><input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ' +
+                            '</div><br><br>' +
+                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+                        }, 'mouseout' : function() {
+                        $(this).html('<div class="img-gradient">' +
+                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
+                            '<div class="text-wrap">' +
+                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
+                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
+                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
+                            '</div> ');        	
+                        }});     
+                })                      
                 </script>
                 <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
@@ -303,7 +302,7 @@
                      $(function() {
                         $('#<%= i %>').on({'mouseenter' : function() {
                             $(this).html('<div class="hover-Text">' +
-                                '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
+                                '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br><input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ' +
                                 '</div><br><br>' +
                                 '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
                             }, 'mouseout' : function() {
@@ -313,17 +312,12 @@
                                 '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
                                 '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
                                 '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
-                                '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ');
-                            
-                            	
-                            }});
-                        
+                                '</div> ');        	
+                            }});     
                     })          
-                    
-                    
                 </script>
                 <div class="area card-box" align="center" id="<%= i %>">
-                    <div class="img-gradient"></div>
+                    <div class="img-gradient dddddd"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="150" />
                     <div class="text-wrap">
                         <h5><%= sellList.get(i).getSellTitle() %></h5>

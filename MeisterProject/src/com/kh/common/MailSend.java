@@ -7,6 +7,7 @@ import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -28,8 +29,8 @@ public class MailSend {
         // SMTP 서버의 인증을 사용한다는 의미
         prop.put("mail.smtp.auth", "true");
         
-        // TLS의 포트번호는 587이며 SSL의 포트번호는 465이다.
-        prop.put("mail.smtp.port", "587");
+        // TLS의 포트번호는 587이며 SSL의 포트번호는 465이다. 25로 열어야합니다
+        prop.put("mail.smtp.port", "25");
 
         // soket문제와 protocol문제 해결
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
@@ -38,7 +39,18 @@ public class MailSend {
         
         Authenticator auth = new MailAuth();
 
-        Session session = Session.getDefaultInstance(prop, auth);
+//        Session session = Session.getDefaultInstance(prop, auth);
+        Session session = Session.getDefaultInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                PasswordAuthentication pw = new PasswordAuthentication("rius0918", "wvcekazwswcmwxsp");
+                
+                return pw;
+            }
+        });
+        
+        
+        
+        
 
         MimeMessage msg = new MimeMessage(session);
 
@@ -47,7 +59,7 @@ public class MailSend {
             msg.setSentDate(new Date());
 
             // 발송자를 지정한다. 발송자의 메일, 발송자명
-            msg.setFrom(new InternetAddress("rius0918@gamil.com", "관리"));
+            msg.setFrom(new InternetAddress("rius0918@gamil.com", "관리자"));
             
             // 수신자의 메일을 생성한다.
             InternetAddress to = new InternetAddress(email);
