@@ -189,10 +189,15 @@ div.thumbnail b {
 }
 
 p.heartIcon{
-	margin : 0px;
-	color: orange; 
 	font-size: 20px; 
 	text-align: right;
+}
+
+p button{
+  	background-color:transparent;	
+  	border : 0px;
+	outline: 0;
+	color: orange;
 }
 
 </style>
@@ -252,15 +257,15 @@ p.heartIcon{
 					
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon" > 
-								<button onclick="heartAttack('<%= sb.getSellNo()%>')">♡	</button>
-								<!-- <i class="fa-regular fa-heart"></i> -->
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <i class="fa-regular fa-heart"></i> </button>
 						</p>
 						
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					
 					<p>
 						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
-							관심사 : <%=sb.getInterestNo() %><br>							
+							
+							관심사 :<%= sb.getInterestName() %><br>							
 							지역 : <%= sb.getLocalNo() %><br>					
 						<img src="./resources/image/sell_price.png" width="25" height="25">
 						<c:set var = "price" value="<%= sb.getPrice() %>"/>
@@ -273,17 +278,15 @@ p.heartIcon{
 	
 		</div>
 		<script>
-			//썸네일 클릭 시 이동되는 주소
-			$(function(){
-				$(".thumbnail").click(function(){		
-				
-					location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
-				})	
-			});
-		</script>
+		//썸네일 클릭 시 이동되는 주소
+		$(function(){
+			$(".thumbnail").click(function(){		
 			
-		 <script>
-		 
+				location.href = "<%=contextPath%>/detail.se?sno="+$(this).children().eq(0).val();					
+			})	
+		});
+	
+		 //찜버튼 관련 스크립트
 		 let likeBtn = true; // 변수 likeBtn을 true로 선언
 		 
 		 function heartAttack(sellNo){
@@ -295,7 +298,7 @@ p.heartIcon{
 					data : { sellNo, type : "I" },
 					success : function(data) {
 						if (data.result == 1) {
-							alert("좋아요가 등록되었습니다.");
+							alert("찜 등록 완료!");
 						} else if (data.result == 2) {
 								$.ajax({
 									url : "sellBoardLike.se",
@@ -303,7 +306,7 @@ p.heartIcon{
 									data : { sellNo, type : "D" },
 									success : function(data) {
 										if (data.result == 1) {
-											alert("취소되었습니다.");
+											alert("찜 등록이 취소되었습니다.");
 										} //if
 									}, //success
 									error : function() {
@@ -324,6 +327,8 @@ p.heartIcon{
 			 })//$.ajax
 		 }
      	</script>
+		    
+		    
 		    
 	</div><!-- outer 끝 -->
 	
