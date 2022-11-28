@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo, com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList, com.kh.review.model.vo.*"%>
   <%
- 	PageInfo pi2 = (PageInfo) request.getAttribute("pi");
+ 	PageInfo pi2 = (PageInfo) request.getAttribute("pi2");
 	int currentPage2 = pi2.getCurrentPage();
 	int startPage2 = pi2.getStartPage();
 	int endPage2 = pi2.getEndPage();
@@ -11,7 +11,7 @@
 	ArrayList<Attachment> at2 = (ArrayList<Attachment>) request.getAttribute("at");
 	ArrayList<Integer> status2 = (ArrayList<Integer>) request.getAttribute("status");
 	ArrayList<Review> review = (ArrayList<Review>) request.getAttribute("review");
-
+ 
  	if(at2 == null){
 		at2.add(new Attachment());
 	}
@@ -91,14 +91,13 @@ textarea {
 
 <div id="nameBody_2">
 <div id="contenthead"></div>
-	<%if(s2.isEmpty()){ %>
+	<%if(!s2.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
 			<br>
 			<div id="null">완료된 거래가 없습니다.</div>
 			<div id="null2">쇼핑 ㄱㄱ</div>
-			
 		</div>
 		<%}else {%>
    		<%for(int i =0; i < s2.size(); i++) { %>

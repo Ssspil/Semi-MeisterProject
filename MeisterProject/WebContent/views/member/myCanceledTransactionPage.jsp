@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  import="com.kh.common.model.vo.PageInfo, com.kh.sellboard.model.vo.*, com.kh.common.model.vo.*, java.util.ArrayList"%>
   <%
- 	PageInfo pi3 = (PageInfo) request.getAttribute("pi");
+ 	PageInfo pi3 = (PageInfo) request.getAttribute("pi3");
 	int currentPage3 = pi3.getCurrentPage();
 	int startPage3 = pi3.getStartPage();
 	int endPage3 = pi3.getEndPage();
@@ -47,7 +47,7 @@
 <body>
 <div id="nameBody_3">
 <div id="contenthead"></div>
-	<%if(s3.isEmpty()){ %>
+	<%if(!s3.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>

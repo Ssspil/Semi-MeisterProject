@@ -404,12 +404,22 @@ public class MemberService {
 	}   
 	
 
-	//페이징 처리용
+	//sellList페이징 처리용
 
 	public int selectListCount() {
 		Connection conn = JDBCTemplate.getConnection();
 
 		int listCount = new MemberDao().selectListCount(conn);
+
+		JDBCTemplate.close();
+
+		return listCount;
+	}
+	//나의 거래내역(Transaction)페이징 처리용
+	public int selectListStatusCount(int type) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int listCount = new MemberDao().selectListStatusCount(conn, type);
 
 		JDBCTemplate.close();
 

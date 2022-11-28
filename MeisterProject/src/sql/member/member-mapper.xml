@@ -289,6 +289,11 @@
 		FROM SELL
 	</entry>  
 	
+	<entry key="selectListStatusCount">
+	SELECT COUNT(*) as SELL_COUNT
+		FROM TRANSACTION where status = ?
+	</entry>
+	
 	<entry key="getTransaction">
 		SELECT SELL_NO, REVIEW_NO, STATUS
 		FROM TRANSACTION

@@ -1028,6 +1028,36 @@ public class MemberDao {
 		
 		return listCount;
 	}
+	
+	//페이징처리용 
+		public int selectListStatusCount(Connection conn, int type) {
+			
+			int listCount = 0;
+			
+			PreparedStatement psmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectListStatusCount");
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, type);
+				rset = psmt.executeQuery();
+				
+				
+				if(rset.next()) {
+					listCount = rset.getInt("SELL_COUNT");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(psmt);
+			}
+			
+			return listCount;
+		}
  
  	public ArrayList<Integer> getTransaction(Connection conn, int userNo){
 		ArrayList<Integer> list = new ArrayList<>();
