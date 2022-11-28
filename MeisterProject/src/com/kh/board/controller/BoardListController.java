@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
+import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -47,7 +49,12 @@ public class BoardListController extends HttpServlet {
 	    ArrayList<Board> list = new BoardService().selectBoardList();
 		request.setAttribute("list",list);
 		
-	    
+		
+		int boardNo= Integer.parseInt(request.getParameter("boardNo"));
+		request.setAttribute("boardNo", boardNo);
+		ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
+		request.setAttribute("rlist", rlist);
+		System.out.println(rlist);
 		request.getRequestDispatcher("views/manager/boardManager.jsp").forward(request, response);
 	
 	}
