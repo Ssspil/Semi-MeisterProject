@@ -1246,4 +1246,11 @@ public class MemberDao {
 		
 		return subNo;
 	}
+
+	public int expertCommit(int userNo) {
+		
+		
+		
+		return 0;
+	}
 }

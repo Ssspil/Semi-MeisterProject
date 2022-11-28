@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.MemberService;
+
 /**
- * Servlet implementation class SelectReplyListController
+ * Servlet implementation class ExpertCommitController
  */
-@WebServlet("/SelectReplyListController")
-public class SelectReplyListController extends HttpServlet {
+@WebServlet("/exCommit.do")
+public class ExpertCommitController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectReplyListController() {
+    public ExpertCommitController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +28,14 @@ public class SelectReplyListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-	
+		request.setCharacterEncoding("UTF-8");
+		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		
+		Member ExMem = 
+		int result = new MemberService().expertCommit(userNo);
+		
 	}
 
 	/**
