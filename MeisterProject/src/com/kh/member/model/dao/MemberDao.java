@@ -327,6 +327,7 @@ public class MemberDao {
 		return result;
 	}
 
+	// 이거 수정해야함 SUBMIT 테이블로 넣어보자
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
 
@@ -339,13 +340,13 @@ public class MemberDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(1, m.getUserName());
-			psmt.setString(2, m.getGender());
-			psmt.setString(3, m.getEmail());
-			psmt.setString(4, m.getPhone());
-			psmt.setString(5, m.getSpeciality());
-			psmt.setString(6, m.getExpSubmit());
-			psmt.setString(7, m.getUserId());
+//			psmt.setString(1, m.getUserName());
+//			psmt.setString(2, m.getGender());
+//			psmt.setString(3, m.getEmail());
+//			psmt.setString(4, m.getPhone());
+//			psmt.setString(5, m.getSpeciality());
+//			psmt.setString(6, m.getExpSubmit());
+//			psmt.setString(7, m.getUserId());
 			
 			result = psmt.executeUpdate();	
 			
@@ -992,7 +993,7 @@ public class MemberDao {
 	}
 	
 	//페이징처리용 
- public int selectListCount(Connection conn,int type) {
+	public int selectListCount(Connection conn,int type) {
 		
 		int listCount = 0;
 		
@@ -1020,5 +1021,69 @@ public class MemberDao {
 		}
 		
 		return listCount;
+	}
+ 
+ 	public ArrayList<Integer> getTransaction(Connection conn, int userNo){
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;	
+		String sql = prop.getProperty("getTransaction");
+
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(rset.getInt("SELL_NO"));
+				list.add(rset.getInt("STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return list;
+	}
+ 	
+ 	public ArrayList<SellBoard> getSellBoard(Connection conn, int sellNo){
+		ArrayList<SellBoard> sell = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, sellNo);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				sell.add(new SellBoard(rset.getInt("SELL_NO"),
+									rset.getString("SELL_TITLE"),
+									rset.getString("SELL_CONTENT"),
+									rset.getInt("PRICE"),
+									rset.getString("INTEREST_NAME"),
+									rset.getInt("USER_NO")
+					));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return sell;
 	}
 }

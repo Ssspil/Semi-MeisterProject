@@ -132,6 +132,17 @@ public class SellBoard {
 		this.interestName = interestName;
 	}
 
+	// 거래내역 표시 용도
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, String interestName, int userNO) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellContent = sellContent;
+		this.price = price;
+		this.interestName = interestName;
+		this.userNO = userNO;
+	}
+	
 	public int getSellNo() {
 		return sellNo;
 	}

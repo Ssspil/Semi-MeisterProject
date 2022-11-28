@@ -83,14 +83,16 @@
 	</entry>
 	
 	<entry key="expertSubmit">
-		UPDATE MEMBER
+<!-- 		UPDATE MEMBER
 		SET USER_NAME = ?,
 			GENDER = ?,
 			EMAIL = ?,
 			PHONE = ?,
 			SPECIALITY = ?,
 			EXP_SUBMIT = ?
-		WHERE USER_ID = ? AND STATUS = 'Y'
+		WHERE USER_ID = ? AND STATUS = 'Y' -->
+		INSERT INTO SUBMIT (SUBNO, USER_NO, USER_NAME, GENDER, EMAIL, PHONE, SPECIALITY)
+		VALUES (SEQ_SBNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
 	</entry>
 	
 	<entry key="selectAttachment">
@@ -278,10 +280,24 @@
 		FROM LOCAL
 		WHERE LOCAL_NO = ?
 	</entry>
+	
 	<entry key="selectListCount">
 	SELECT COUNT(*) 
 		FROM SELL
 	</entry>  
+	
+	<entry key="getTransaction">
+		SELECT SELL_NO, STATUS
+		FROM TRANSACTION
+		WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectSellBoard">
+		SELECT SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NAME, USER_NO
+		FROM SELL
+		JOIN INTEREST USING(INTEREST_NO)
+		WHERE SELL_NO = ?
+	</entry>
 	
 	
 	

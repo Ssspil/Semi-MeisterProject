@@ -219,30 +219,30 @@
             </div>
             <br>
             <div class="sell-main">
+            	<!-- 게시글이 3개 이상 있을 때 -->
                 <% if (sellList.size() > 2 ) {%>
                 <% for (int i = 0 ; i < 3; i++) { %>
-                <script>
-                    $(function() {
-                        $('.area').hover(function() {
-                            $(this).html('<div class="hover-Text">' +
-                                '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
-                                '</div><br><br>' +
-                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />');
-
-                        }, function() {
-                            $(this).html('<div class="img-gradient">' +
-                                '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
-                                '<div class="text-wrap">' +
-                                '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
-                                '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
-                                '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
-                                '</div>');
-                        });
-                    })
+               	<script>
+	                $(function() {
+	                    $('#<%= i %>').on({'mouseenter' : function() {
+	                        $(this).html('<div class="hover-Text">' +
+	                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
+	                            '</div><br><br>' +
+	                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+	                        }, 'mouseout' : function() {
+	                        $(this).html('<div class="img-gradient">' +
+	                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
+	                            '<div class="text-wrap">' +
+	                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
+	                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
+	                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
+	                            '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ');
+	                        }});
+	                    
+	                })    	                
                 </script>
 
-
-                <div class="area card-box" align="center">
+                <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
                     <div class="text-wrap">
@@ -253,9 +253,30 @@
                     </div>
                 </div>
                 <%  } %>
+                
+                <!-- 게시글이 2개있을 때 -->
                 <% } else if (sellList.size() == 2) { %>
                 <% for (int i = 0 ; i < 2; i++) { %>
-                <div class="area card-box" align="center">
+                
+               	<script>
+	                $(function() {
+	                    $('#<%= i %>').on({'mouseenter' : function() {
+	                        $(this).html('<div class="hover-Text">' +
+	                            '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
+	                            '</div><br><br>' +
+	                            '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+	                        }, 'mouseout' : function() {
+	                        $(this).html('<div class="img-gradient">' +
+	                            '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
+	                            '<div class="text-wrap">' +
+	                            '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
+	                            '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
+	                            '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
+	                            '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" />''}});
+	                    
+	                })                 
+                </script>
+                <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />
                     <div class="text-wrap">
@@ -267,14 +288,41 @@
                 </div>
                 <%  } %>
                 <% for (int i = 0; i < 1; i++) {%>
-                <div class="area">
+                <div class="area9">
                     <h5>게시글이 없습니다.</h5>
                     <span>게시글이 없습니다.</span><br>
                 </div>
                 <% } %>
+                
+                
+                <!-- 게시글이 1개있을 때 -->
                 <% } else if (sellList.size() == 1) { %>
                 <% for (int i = 0 ; i < 1; i++) { %>
-                <div class="area card-box" align="center">
+                
+               	<script>
+                     $(function() {
+                        $('#<%= i %>').on({'mouseenter' : function() {
+                            $(this).html('<div class="hover-Text">' +
+                                '<h2 data-text="&nbsp;구매하러 가기&nbsp;">&nbsp;구매하러 가기&nbsp;</h2><br>' +
+                                '</div><br><br>' +
+                                '<img src="<%= contextPath %>/resources/image/click.gif" alt="클릭" />')
+                            }, 'mouseout' : function() {
+                            $(this).html('<div class="img-gradient">' +
+                                '</div><img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="180" />' +
+                                '<div class="text-wrap">' +
+                                '<h5><%= sellList.get(i).getSellTitle() %></h5>' +
+                                '<span class="sell-Nickname"> 판매자 : <span class="textColor1"><%= sellList.get(i).getNickname() %></span></span><br>' +
+                                '<span class="sell-Price"> 가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="textColor2"><%= sellList.get(i).getPrice() %> 원</span></span>' +
+                                '</div> <input id="gogo" type="hidden" name="sno" value="<%= sellList.get(i).getSellNo() %>" /> ');
+                            
+                            	
+                            }});
+                        
+                    })          
+                    
+                    
+                </script>
+                <div class="area card-box" align="center" id="<%= i %>">
                     <div class="img-gradient"></div>
                     <img id="sellImg" src="<%= sellList.get(i).getTitleImg() %>" height="150" />
                     <div class="text-wrap">
@@ -286,14 +334,16 @@
                 </div>
                 <%  } %>
                 <% for (int i = 0 ; i < 2; i++) { %>
-                <div class="area">
+                <div class="area9">
                     <h5>게시글이 없습니다.</h5>
                     <span>게시글이 없습니다.</span><br>
                 </div>
                 <% } %>
+                
+                <!-- 게시글이 아무것도 없을 때 -->
                 <% } else { %>
                 <% for(int i = 0; i < 3; i++) {%>
-                <div class="area">
+                <div class="area9">
                     <h5>게시글이 없습니다.</h5>
                     <span>게시글이 없습니다.</span><br>
                 </div>
@@ -302,6 +352,19 @@
 
             </div>
         </div>
+        
+        
+        
+        <!--  판매게시글로 가기위한 스크립트 -->
+	    <script>
+			$(".area").click(function(){
+		    	location.href="<%= contextPath%>/detail.se?sno="+$('#gogo').val();
+		    });
+	    </script>
+
+
+
+
 
         <br><br><br><br><br>
         <div class="community-area">
@@ -405,6 +468,9 @@
             </div>
         </div>
     </div><!-- outer 끝 -->
+    
+
+    
 
 
 
