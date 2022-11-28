@@ -64,38 +64,32 @@ public class ExpertSubmitController extends HttpServlet {
 				speciality = "요리";
 			}
 				
-			System.out.println("=============파라미터로 값 가져올때");
-			System.out.println(userNo);
-			System.out.println(userName);
-			System.out.println(gender);
-			System.out.println(phone);
-			System.out.println(email);
-			System.out.println(speciality);
 			
 			Member m = new Member(userName, userNo, gender, email, phone, speciality);
-			System.out.println("=============객체넣은후");
-			System.out.println(m.getUserNo());
-			System.out.println(m.getGender());
-			System.out.println(m.getUserName());
-			System.out.println(m.getEmail());
-			System.out.println(m.getSpeciality());
 
 			Attachment at = null;
 			
-			if(multiRequest.getOriginalFileName("expertFile") != null) {	
+			// multiRequest.getOriginalFileName("input의 name명") 
+			if(multiRequest.getOriginalFileName("upfile") != null) {	
 				at = new Attachment();
 				at.setRefNo(userNo);
-				at.setOriginName(multiRequest.getOriginalFileName("expertFile"));
-				at.setChangeName(multiRequest.getFilesystemName("expertFile"));
+				at.setOriginName(multiRequest.getOriginalFileName("upfile"));
+				at.setChangeName(multiRequest.getFilesystemName("upfile"));
 				at.setFilePath("resources/expert_upfiles/");
 			}
+			
+			System.out.println(at);
 			
 
 			
 			int result = new MemberService().expertSubmit(m, at);
 			
+			
+			System.out.println("마이스터 신청하기");
 			if(result > 0) {
 				HttpSession session = request.getSession();
+				
+				
 				session.setAttribute("alertMsg", "전문가 신청이 제출되었습니다.");
 				response.sendRedirect(request.getContextPath()+"/mypage.me");
 			} else {

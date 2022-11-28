@@ -298,5 +298,16 @@
 		WHERE SELL_NO = ? AND USER_NO = ?
 	</entry>
 	
+	<!-- 전문가신청 목록 보이게하는 쿼리문 -->
+	<entry key="submlitListAllSelect">
+		SELECT USER_NO,
+			   USER_NAME,
+			   GENDER,
+			   EMAIL,
+			   PHONE,
+			   SPECIALITY,
+			   EXP_SUBMIT
+		FROM SUBMIT
+	</entry>
 	
 </properties>

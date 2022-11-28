@@ -442,6 +442,17 @@ public class MemberService {
 		JDBCTemplate.close();
 
 		return listCount;
+	}
+
+	public ArrayList<Member> submlitListAllSelect() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> submitList =  new MemberDao().submlitListAllSelect(conn);
+		
+		JDBCTemplate.close();
+		
+		return submitList;
 	}   
 	   
 	   
