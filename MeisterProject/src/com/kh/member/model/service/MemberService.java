@@ -483,6 +483,18 @@ public class MemberService {
 		return review;
 	}
 
+	public int expertCommit(int userNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().expertCommit(userNo);
+		
+		JDBCTemplate.close();
+		
+		return result;
+		
+	}
+
 
 	
 	

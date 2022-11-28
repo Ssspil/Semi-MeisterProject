@@ -147,7 +147,6 @@ table>tfoot {
 						      <th width="200">핸드폰</th>
 						      <th width="100">전문분야</th>
 						      <th width="100">상세보기</th>
-						      <th width="100">여부</th>
 						    </tr>
 						</tbody>
 
@@ -155,7 +154,7 @@ table>tfoot {
 					    <% for(Member m : submitList) { %>
 					    	<% if( submitList.isEmpty() ) { %>
 						    	<tr>
-						    		<td colspan="6">리스트가 없습니다.</td>
+						    		<td colspan="8">리스트가 없습니다.</td>
 						    	</tr>
 					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
 						    	<tr>
@@ -183,20 +182,21 @@ table>tfoot {
                                                         <div class="modal-body" align="center">
 	                                               			<% for(Attachment at : atArr) { %>
 	                                                  			<% if(at.getRefNo() == m.getSubNo()) { %>
-	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="200" height="200" />
+	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="400" height="400" />
 	                                                  			<% } %>
 	                                                  		<% } %>
                                                         	
                                                         </div>
                                                         
+                                                        <div class="modal-footer">
+                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove();">승인</button>
+                                                        	<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
+                                                        </div>
 
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--  모달 테스트 끝 -->
-						    		</td>
-						    		<td>
-						    			<button type="button">승인</button>
 						    		</td>
 						    	</tr>
 					  		<% } %>
@@ -207,7 +207,32 @@ table>tfoot {
 				<!--  myOuter끝 -->
 				
                 </div>    	
-
+		
+			<script>
+				function ExApprove(){
+					if(confirm("정말로 승인하시겠습니까?")){
+						
+						$(function(){
+							$.ajax({
+								url : "exCommit.do",
+								data : {userNo : $('#userNo').val()},
+								type : "post",
+								success : function (){
+									alert("마이스터를 승인하였습니다.");
+								},
+					            error : function(request, status, error){
+					                console.log(request, status, error);
+					            }
+							});
+						});
+						
+						
+					} else {
+						return;
+					}
+				}
+			</script>
+		
                 		
             </main> 
             <footer class="py-4 bg-light mt-auto">
