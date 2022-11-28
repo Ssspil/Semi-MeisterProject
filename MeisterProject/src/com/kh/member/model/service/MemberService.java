@@ -7,6 +7,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberService {
@@ -116,11 +117,16 @@ public class MemberService {
 		 return result;
 	 }
 
-	 public Member expertSubmit(Member m, Attachment at) {
+	 /**
+	  * 전문가되기 위해 관리자에게 요청을 보내는 메소드
+	  * @param m
+	  * @param at
+	  * @return
+	  */
+	 public int expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
-		 int result = new MemberDao().expertSubmit(conn, m);
-		 Member updateMem = null;
+		 int result1 = new MemberDao().expertSubmit(conn, m);
 		 
 		 int result2 = 1;
 		 
@@ -128,16 +134,15 @@ public class MemberService {
 			 result2 = new MemberDao().insertExpertAttachment(conn, at);
 		 }
 		 
-		 if (result > 0 && result2 > 0) {
+		 if (result1 > 0 && result2 > 0) {
 			 JDBCTemplate.commit(conn);
-			 updateMem = new MemberDao().selectMember(conn, m.getUserId());
 		 } else {
 			 JDBCTemplate.rollback(conn);
 		 }
 			 
 		 JDBCTemplate.close();
 		 
-		 return updateMem;
+		 return result1 * result2;
 	 }
 	
 	 public Member selectMember(int userNo) {
@@ -430,9 +435,52 @@ public class MemberService {
 	    return result;
 	}
 	   
+	public int updateStatus(int userNo, int sellNo, int status) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int listCount = new MemberDao().updateStatus(conn, userNo, sellNo, status);
+
+		JDBCTemplate.close();
+
+		return listCount;
+	}
+
+	public ArrayList<Member> submlitListAllSelect() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> submitList =  new MemberDao().submlitListAllSelect(conn);
+		
+		JDBCTemplate.close();
+		
+		return submitList;
+	}
+
+	/**
+	 * 전문가 인증 첨부파일 가져오기
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Attachment> atArr = new MemberDao().selectAllAt(conn);
+		
+		JDBCTemplate.close();
+		
+		return atArr;
+	}
 	   
-	   
-	   
+	public Review getReview(int userNo, int sellNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Review review = new MemberDao().getReview(conn, userNo, sellNo);
+		
+		JDBCTemplate.close();
+		
+		return review;
+	}   
 	  
 
 	

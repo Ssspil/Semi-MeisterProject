@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이스터 신청하기</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -188,7 +188,7 @@
 			<input type="hidden" name="gender" id="gender" required>
 			<br><br>
 			<h6><b><i class="bi bi-envelope"></i> 이메일</b></h6> 
-			<input type="email" name="emailFront" width="100px" maxlength="10" required>
+			<input type="text" name="emailFront" style="width:250px; float:left; height : 51px;" maxlength="24" required>
             <div id="numberselect">@</div>
 			<select name="emailBack">
 				<option selected>gmail.com</option>
@@ -224,7 +224,7 @@
                      <label class="input-file-button" id="file-btn" for="input-file">
                         <i id="camera" class="bi bi-camera-fill"></i> 
                      </label>
-                     <input type="file" name="upfile" id="input-file" onchange="fileChange()"style=display:none>
+                     <input type="file" name="upfile" id="input-file" onchange="fileChange();"style=display:none>
                      <label id="fileName"></label>
                   </div>
                </div>
@@ -253,7 +253,7 @@
 			});
 		});
 	</script>
-	    <script>
+	<script>
        function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
        }
@@ -263,7 +263,7 @@
     	        const reader = new FileReader();
     	        
     	        reader.onload = (e) => {
-    	            const titleImg = document.getElementById('titleImg');
+    	            const titleImg = document.getElementById('img');
     	            titleImg.src = e.target.result;
     	        }
     	        reader.readAsDataURL(input.files[0]);
@@ -273,6 +273,8 @@
      	document.getElementById('input-file').addEventListener('change', (e) => {
     	    readImage(e.target);
      	})
+     	
+     	
     </script>
    
 	<hr>

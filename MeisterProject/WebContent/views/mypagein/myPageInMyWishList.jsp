@@ -91,11 +91,14 @@ text-align: center;
     float: right;
     font-family: 'Nanum Gothic', sans-serif;
 }
-
-
-
-
-
+.fa-heart {
+	top: 20px;
+	right: 45px;
+	z-index: 2;
+	color: red;
+	position: absolute;
+	font-size: 25px;
+}
 </style>
 </head>
 <body>
@@ -111,14 +114,21 @@ text-align: center;
     
     <!-- 테스트용 반복문 -->
     <%for(int i = 0; i<= 5; i++) { %>
-        <div id="sellboard1">
+        <div id="sellboard1" style="position: relative;">
+        	<div href="#" class="like-button" title="Like Button">
+    			<i class="fa fa-heart fa-1x">♥</i>
+  			</div>
             <img src="resources/image/peng.jpg" id="img">
+            
             <br><br>
             <div id="title">재능판매글 제목</div>
             <br>
             <div id="price">300.000원</div>
 		</div>                                             
-        <div id="sellboard2">
+        <div id="sellboard2" style="position: relative;">
+        	<div href="#" class="like-button" title="Like Button">
+    			<i class="fa fa-heart fa-1x">♥</i>
+  			</div>
             <img src="resources/image/peng.jpg" id="img">
             <br><br>
             <div id="title">재능판매글 제목</div>
@@ -126,7 +136,10 @@ text-align: center;
             <div id="price">300.000원</div>
 		</div>
 		<div id="main2">                                                  
-        <div id="sellboard3">
+        <div id="sellboard3" style="position: relative;">
+        	<div href="#" class="like-button" title="Like Button">
+    			<i class="fa fa-heart fa-1x">♥</i>
+  			</div>
             <img src="resources/image/peng.jpg" id="img">
             <br><br>
             <div id="title">재능판매글 제목</div>

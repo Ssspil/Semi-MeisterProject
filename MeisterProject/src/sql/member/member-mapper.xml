@@ -82,15 +82,8 @@
 		WHERE NICKNAME = ?
 	</entry>
 	
+	<!--  전문가 승인 요청한 사용자의 정보넣는 쿼리문  -->
 	<entry key="expertSubmit">
-<!-- 		UPDATE MEMBER
-		SET USER_NAME = ?,
-			GENDER = ?,
-			EMAIL = ?,
-			PHONE = ?,
-			SPECIALITY = ?,
-			EXP_SUBMIT = ?
-		WHERE USER_ID = ? AND STATUS = 'Y' -->
 		INSERT INTO SUBMIT (SUBNO, USER_NO, USER_NAME, GENDER, EMAIL, PHONE, SPECIALITY)
 		VALUES (SEQ_SBNO.NEXTVAL, ?, ?, ?, ?, ?, ?)
 	</entry>
@@ -299,7 +292,39 @@
 		WHERE SELL_NO = ?
 	</entry>
 	
+	<entry key="updateStatus">
+		UPDATE TRANSACTION
+		SET STATUS = ?
+		WHERE SELL_NO = ? AND USER_NO = ?
+	</entry>
 	
+	<!-- 전문가신청 목록 보이게하는 쿼리문 -->
+	<entry key="submlitListAllSelect">
+		SELECT SUBNO,
+			   USER_NO,
+			   USER_NAME,
+			   GENDER,
+			   EMAIL,
+			   PHONE,
+			   SPECIALITY,
+			   EXP_SUBMIT
+		FROM SUBMIT
+	</entry>
 	
+	<!-- 전문가 신청 첨부파일 전체 다가져오는 쿼리문 -->
+	<entry key="selectAllAt">
+		SELECT FILE_NO,
+			   REF_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+		FROM ATTACHMENT
+		WHERE FILE_LEVEL = 4
+	</entry>
 	
+	<entry key="getReview">
+		SELECT REVIEW_CONTENT, AVG, USER_NO, SELL_NO
+		FROM REVIEW
+		WHERE USER_NO = ? AND SELL_NO = ?
+	</entry>
 </properties>

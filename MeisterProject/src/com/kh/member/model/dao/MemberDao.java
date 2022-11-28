@@ -16,6 +16,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
 
 import com.kh.member.model.vo.Member;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 public class MemberDao {
@@ -330,30 +331,34 @@ public class MemberDao {
 	// 이거 수정해야함 SUBMIT 테이블로 넣어보자
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
-
 		PreparedStatement psmt = null;
-		
-		ResultSet rset = null;
 		
 		String sql = prop.getProperty("expertSubmit");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			
-//			psmt.setString(1, m.getUserName());
-//			psmt.setString(2, m.getGender());
-//			psmt.setString(3, m.getEmail());
-//			psmt.setString(4, m.getPhone());
-//			psmt.setString(5, m.getSpeciality());
-//			psmt.setString(6, m.getExpSubmit());
-//			psmt.setString(7, m.getUserId());
+			System.out.println("======================");
+			System.out.println(m.getUserNo());
+			System.out.println(m.getGender());
+			System.out.println(m.getUserName());
+			System.out.println(m.getEmail());
+			System.out.println(m.getSpeciality());
 			
-			result = psmt.executeUpdate();	
+			
+			
+			psmt.setInt(1, m.getUserNo());
+			psmt.setString(2, m.getUserName());
+			psmt.setString(3, m.getGender());
+			psmt.setString(4, m.getEmail());
+			psmt.setString(5, m.getPhone());
+			psmt.setString(6, m.getSpeciality());
+			
+			result = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(rset);
 			JDBCTemplate.close(psmt);
 		}
 		
@@ -402,6 +407,12 @@ public class MemberDao {
 		return result;
 	}
 	
+	/**
+	 * 전문가 신청할 때 전문가라고 증명할 첨부파일 넣기
+	 * @param conn
+	 * @param at
+	 * @return
+	 */
 	public int insertExpertAttachment(Connection conn, Attachment at) {
 		int result = 0;
 		
@@ -1085,5 +1096,131 @@ public class MemberDao {
 		}
 		
 		return sell;
+	}
+ 	
+ 	public int updateStatus(Connection conn, int userNo, int sellNo, int status) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("updateStatus");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, status);
+			psmt.setInt(2, sellNo);
+			psmt.setInt(3, userNo);
+			
+			result = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Member> submlitListAllSelect(Connection conn) {
+		ArrayList<Member> submlitListAllSelect = new ArrayList<>();
+		
+		PreparedStatement psmt = null;	
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("submlitListAllSelect");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			
+			Member m = null;
+			while(rset.next()) {
+				m = new Member(rset.getInt("SUBNO"),
+							   rset.getInt("USER_NO"),
+							   rset.getString("USER_NAME"),
+							   rset.getString("GENDER"),
+							   rset.getString("EMAIL"),
+							   rset.getString("PHONE"),
+							   rset.getString("SPECIALITY")
+							   );
+				
+				submlitListAllSelect.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return submlitListAllSelect;
+	}
+
+	/**
+	 * 전문가 인증하기 위한 첨부파일 다 가져오는 메소드
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<Attachment> selectAllAt(Connection conn) {
+		
+		ArrayList<Attachment> atArr = new ArrayList<>();
+		Attachment at = null;
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAt");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				at = new Attachment();
+			
+				at.setFileNo(rset.getInt("FILE_NO"));
+				at.setRefNo(rset.getInt("REF_NO"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+				
+				atArr.add(at);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return atArr;
+	}
+
+	public Review getReview(Connection conn, int userNo, int sellNo) {
+		Review r = null;
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getReview");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, userNo);
+			psmt.setInt(2, sellNo);
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				r = new Review(rset.getString("REVIEW_CONTENT"), rset.getDouble("AVG"), rset.getInt("USER_NO"), rset.getInt("SELL_NO"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return r;
 	}
 }

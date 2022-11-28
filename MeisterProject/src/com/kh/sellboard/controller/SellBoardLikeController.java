@@ -36,7 +36,6 @@ public class SellBoardLikeController extends HttpServlet {
 		
 		PrintWriter out = null; // 문자를 출력하는 타입에 변수 out 선언 null값으로
 		int result = 0; // int타입 result 변수 선언 0
-		int recommend = 0; // int타입 recommend 변수 선언 0
 		
 		int sellNo = Integer.parseInt(request.getParameter("sellNo")); // sellNo 데이터를 받아와 int 타입 sellNo에 변수 선언 // getParameter로 가져온 String sellNo값을 인티져로 변환한뒤 int타입 sellNo변수선언
 		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
@@ -51,6 +50,7 @@ public class SellBoardLikeController extends HttpServlet {
 			} else {
 				result = 2;
 			}
+			System.out.println("찜 등록");
 		} else if (type.equals("D")) {
 			int count = SellBoardService.selectRecommend(sellNo, userNo);
 			if (count == 0) {
@@ -58,14 +58,13 @@ public class SellBoardLikeController extends HttpServlet {
 			} else {
 				result = SellBoardService.deleteRecommend(sellNo, userNo);
 			}
+			System.out.println("찜 삭제");
 		}
-		recommend = SellBoardService.countRecommend(sellNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
 		JsonObject json = new JsonObject();
 			json.addProperty("result", result);
-			json.addProperty("recommend", recommend);
 		Gson gson = new Gson();
 		out.print(gson.toJson(json));
 		
