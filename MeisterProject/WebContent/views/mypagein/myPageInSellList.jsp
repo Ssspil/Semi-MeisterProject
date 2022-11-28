@@ -74,6 +74,7 @@ border-bottom: 2px solid black;
 border-top: 2px solid black;
 margin: auto;
 height: 50px;
+width:60%;
 }
 #img{  
       width: 230px;
@@ -138,7 +139,7 @@ display:none;
         
 	  
 
-   				<div class="sell sell<%=s.get(0).getSellNo()%> <%=s.get(0).getSellNo() > 6 ? "hide" : ""%>">
+   			
    			 <script>
 	   		<%if(!s.isEmpty()){ %>
    				<%for(int i = 0; i < s.size(); i++){ %>  
