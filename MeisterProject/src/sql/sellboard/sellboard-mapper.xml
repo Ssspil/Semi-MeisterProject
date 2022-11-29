@@ -227,17 +227,37 @@
 	 	WHERE SELL_NO = ?
 	</entry>
 	
+	<!-- 관리자에서 게시글 다가져오는 쿼리문 -->
 	<entry key="selectAllSellBoard">
 		SELECT SELL_NO,
-				USER_ID,
-				NICKNAME,
-				SELL_TITLE,
-				SELL_DATE,
-				SELL_CONTENT
-		FROM SELL
+		       SELL_TITLE,
+		       SELL_CONTENT,
+		       PRICE,
+		       SELL_COUNT,
+		       SELL_RECOMMEND,
+		       SELL_DATE,
+		       SELL_DETAIL,
+		       SELL_REGULATION,
+		       S.STATUS AS STATUS,
+		       INTEREST_NAME,
+		       LOCAL_NAME,
+			   NICKNAME,
+			   USER_ID
+		FROM SELL S
 		JOIN MEMBER USING(USER_NO)
-        ORDER BY SELL_DATE DESC
-		
+        JOIN INTEREST USING(INTEREST_NO)
+        JOIN LOCAL USING(LOCAL_NO)
+		ORDER BY SELL_DATE DESC
 	</entry>
 	
+	<!-- 첨부파일 전체 다가져오는 쿼리문 -->
+	<entry key="selectAllAttachment">
+		SELECT FILE_NO,
+			   REF_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+		FROM ATTACHMENT
+		WHERE FILE_LEVEL = 2
+	</entry>
 </properties>

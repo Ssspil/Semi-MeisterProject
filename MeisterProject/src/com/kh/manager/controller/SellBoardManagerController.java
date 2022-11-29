@@ -47,7 +47,7 @@ public class SellBoardManagerController extends HttpServlet {
 		    	
 		    
 		    	ArrayList<SellBoard> getAllSellBoard = new SellBoardService().selectAllSellBoard();
-//		    	ArrayList<Attachment> getAllAttachment = new SellBoardService().selectAllAttachment();
+		    	ArrayList<Attachment> getAllAttachment = new SellBoardService().selectAllAttachment();
 		    	
 		    	request.setAttribute("getAllSellBoard", getAllSellBoard);
 //		    	request.setAttribute("getAllAttachment", getAllAttachment);

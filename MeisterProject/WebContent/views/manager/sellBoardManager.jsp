@@ -136,27 +136,14 @@ table>tfoot>tr:hover{
 				<form action="<%= contextPath %>/blackremove.ad" method="post">
 					
 					<table align="center" border="1">
-						<thead>
-							<tr>
-								<td colspan="9">
-								<div style="float : right;">
-									<button type="submit" class="btn btn-danger">삭제하기</button>
-								</div>
-								</td>
-							</tr>
-						</thead>
-							
-						
+
 						<tbody>
 						    <tr>
-						      <th><input type="checkbox" name="userAll" id="userAll" onclick="selectAll();"></th>
 						      <th width="100">글 번호</th>
-						      <th width="150">작성자 아이디</th>
-						      <th width="100">닉네임</th>
-						      <th width="150">제목</th>
+						      <th width="250">작성자 아이디</th>
+						      <th width="150">닉네임</th>
+						      <th width="450">제목</th>
 						      <th width="150">작성일</th>
-						      <th width="150">게시글 상세</th>
-						      <th width="100">상태</th>
 						      <th width="100">삭제</th>
 						    </tr>
 						</tbody>
@@ -169,44 +156,14 @@ table>tfoot>tr:hover{
 					    		<td colspan="8">없습니다</td>
 					    	</tr>
 					    	<% } else { %>
-
-					    	
-						    <tr class="user<%=s.getUserNO() %>">
-								<tr>
-								<td><%= s.getSellNo() %></td>
-								
-								</tr>
-								<tr>
-							      <td>
-							           <input type="checkbox" name="user" id="<%=s.getUserNO() %>" value="<%=s.getUserNO() %>" onclick="singleCheck();">
-							      </td>
-							      
-							      <td><%= s.getUserNO() %></td>
-							      <td><%= s.getUserId() %></td>
-							      <td><%= s.getNickname() %></td>
-							      <td><%= s.getSellTitle() %></td>
-							      <td><%= s.getSellDate() %></td>
-							      <td class="status">
-							     <%--  <% if ((m.getBlackList()).equals("Y"))  { %>
-							      	제적
-							      <% } %> --%>
-							      </td> 
-					
-						    	</tr>
-						    
-						  	<script>
-						      $(function(){
-						    	  $('.user<%=s.getUserNO() %>').click(function(){
-						    		  if($(this).children().children('[type="checkbox"]:checked') == true){
-						    			  $(this).children().children('[name="user"]').attr("checked", false);
-						    		  } else {
-						    			  $(this).children().children('[name="user"]').attr("checked", true);
-						    		  }
-									
-						    	  });
-						      })
-						      
-						  	</script>
+							<tr>
+						      <td><%= s.getSellNo() %></td>
+						      <td><%= s.getUserId() %></td>
+						      <td><%= s.getNickname() %></td>
+						      <td><%= s.getSellTitle() %></td>
+						      <td><%= s.getSellDate() %></td>
+						      <td><button type="button" class="btn btn-danger btn-sm">삭제하기</button></td>
+					    	</tr>
 
 					  		<% } %>
 					  <% } %>
@@ -230,32 +187,7 @@ table>tfoot>tr:hover{
             </footer>
         </div>
     </div>
-    <script>
-      const USERALL = document.querySelector('#userAll');
-      const users = document.querySelectorAll('[name="user"]');
 
-      function selectAll(){
-        for(let i = 0; i < users.length; i++){
-          users[i].checked = USERALL.checked;
-        }
-      }
-
-      function singleCheck(){
-        let total = users.length;
-        let checkedUsers = document.querySelectorAll('[name="user"]:checked').length;
-
-        if(total == checkedUsers){
-          USERALL.checked = true;
-        } else {
-          USERALL.checked = false;
-        }
-      }
-      
-
-      
-
-      
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>

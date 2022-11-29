@@ -745,11 +745,18 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			
 			while(rset.next()) {
 				getAllSellBoard.add(new SellBoard(rset.getInt("SELL_NO"),
-													rset.getString("USER_ID"),
-													rset.getString("NICKNAME"),
-													rset.getString("SELL_TITLE"),
-													rset.getDate("SELL_DATE"),
-													rset.getString("SELL_CONTENT")
+												  rset.getString("SELL_TITLE"),
+												  rset.getString("SELL_CONTENT"),
+												  rset.getInt("PRICE"),
+												  rset.getInt("SELL_COUNT"),
+												  rset.getInt("SELL_RECOMMEND"),
+												  rset.getDate("SELL_DATE"),
+												  rset.getString("SELL_REGULATION"),
+												  rset.getString("STATUS"),
+												  rset.getString("INTEREST_NAME"),
+												  rset.getString("LOCAL_NAME"),
+												  rset.getString("NICKNAME"),
+												  rset.getString("USER_ID")
 						));
 			}
 			
@@ -763,6 +770,45 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 	
 	
 
+	}
+
+	/* 관리자 페이지 판매게시판 첨부파일*/
+	public ArrayList<Attachment> selectAllAttachment(Connection conn) {
+		
+		ArrayList<Attachment> getAllAttachment = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			Attachment at = null;
+			
+			while(rset.next()) {
+                at = new Attachment();
+                
+                at.setFileNo(rset.getInt("FILE_NO"));
+                at.setOriginName(rset.getString("ORIGIN_NAME"));
+                at.setChangeName(rset.getString("CHANGE_NAME")); 
+                at.setFilePath(rset.getString("FILE_PATH"));
+                at.setFileLevel(rset.getInt("FILE_LEVEL"));
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return getAllAttachment;
 	}
 	
 	

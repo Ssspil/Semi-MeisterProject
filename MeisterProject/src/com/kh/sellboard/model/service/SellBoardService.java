@@ -297,19 +297,20 @@ public class SellBoardService {
 		return getAllSellBoard;
 		
 	}
-	
+
+
 	/* 관리자 페이지 판매게시판 첨부파일*/
-//	public ArrayList<Attachment> selectAllAttachment(){
-//		
-//		Connection conn = getConnection();
-//		
-//		ArrayList<Attachment> getAllAttachment = new SellBoardDao().selectAllAttachment(conn);
-//		
-//		close();
-//		
-//		return getAllAttachment;
-//		
-//	}
+	public ArrayList<Attachment> selectAllAttachment(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Attachment> getAllAttachment = new SellBoardDao().selectAllAttachment(conn);
+		
+		close();
+		
+		return getAllAttachment;
+		
+	}
 	
 	
 	
