@@ -73,11 +73,13 @@
 		<hr>
 		<h4><b>&nbsp;전문가 인증하기</b></h4>
 		<br>
-		<%if(expert.equals("N")){ %>
+		<%if(loginUser.getExpert().equals("N")){ %>
 			<h6><b><a href="#" onclick="submitCheck();">&nbsp;&nbsp;&nbsp;&nbsp;인증하기</a></b></h6>
-		<%} else{%>
+		<%} else if(loginUser.getExpert().equals("Y")){%>
 			<h6><b>인증이 완료된 계정입니다</b></h6>
-		<%} %>
+		<%} else if(loginUser.getExpert().equals("W")){ %>
+			<h6><b style="text-decoration : underline;">마이스터 심사중입니다.</b></h6>
+		<% } %>
 		<hr>
 		<h4><b>&nbsp;내 마켓</b></h4>
 		<br>
