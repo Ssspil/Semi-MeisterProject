@@ -794,10 +794,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
                 at = new Attachment();
                 
                 at.setFileNo(rset.getInt("FILE_NO"));
+                at.setRefNo(rset.getInt("REF_NO"));
                 at.setOriginName(rset.getString("ORIGIN_NAME"));
                 at.setChangeName(rset.getString("CHANGE_NAME")); 
                 at.setFilePath(rset.getString("FILE_PATH"));
-                at.setFileLevel(rset.getInt("FILE_LEVEL"));
+
+                
 
 			}
 			

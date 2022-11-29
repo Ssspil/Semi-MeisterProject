@@ -50,8 +50,10 @@ public class SellBoardManagerController extends HttpServlet {
 		    	ArrayList<Attachment> getAllAttachment = new SellBoardService().selectAllAttachment();
 		    	
 		    	request.setAttribute("getAllSellBoard", getAllSellBoard);
-//		    	request.setAttribute("getAllAttachment", getAllAttachment);
+		    	request.setAttribute("getAllAttachment", getAllAttachment);
 		    	
+		    	System.out.println(getAllSellBoard);
+		    	System.out.println(getAllAttachment);
 		    	request.getRequestDispatcher("views/manager/sellBoardManager.jsp").forward(request, response);
 		    	
 		
