@@ -235,14 +235,14 @@ p button{
 	       			<ul>
 	       				<% for (Local l : local) { %>
 	       					<li class="list-in-list">
-	       						<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
+	       						<a href="<%= contextPath %>/market.se?interest_no=<%=i.getInterestNo() %>
+	       																&local_no=<%=l.getLocalNo()%>" > <%= l.getLocalName() %></a>
 	       					</li>
 	       				<% } %>
 					</ul>
 				</li>
 	       		<% } %>
 	        </ul> 
-	        
 	    </div> 
 	    
 		<!----- 메인 썸네일 ------>
