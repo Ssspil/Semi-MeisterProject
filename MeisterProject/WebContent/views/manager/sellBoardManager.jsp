@@ -9,8 +9,8 @@
 <%
     String contextPath = request.getContextPath();
 	
-ArrayList<SellBoard> getAllSellBoard  = (ArrayList<SellBoard>)request.getAttribute("getAllSellBoard");
-	
+	ArrayList<SellBoard> getAllSellBoard  = (ArrayList<SellBoard>)request.getAttribute("getAllSellBoard");
+	ArrayList<Attachment> getAllAttachment = (ArrayList<Attachment>)request.getAttribute("getAllAttachment");
 
 %>
 <!DOCTYPE html>
@@ -22,11 +22,17 @@ ArrayList<SellBoard> getAllSellBoard  = (ArrayList<SellBoard>)request.getAttribu
 <meta name="author" content="JSP" />
 <title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<!-- 부트스트립 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!--  jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- css -->
 <link href="<%= contextPath %>/resources/css/manager.css" rel="stylesheet" type="text/css"  />
+
 
 <style>
 .status{
@@ -38,15 +44,12 @@ table>tbody>tr>th{
 	color : white;
 	text-align : center;
 }
-table>tfoot {
+table {
 	text-align : center;
 }
-
-table>tfoot>tr:hover{
-	background-color : orange;
-	cursor : pointer;
-	color : darkblue;
-	
+#modal-dialog{
+	width:1100px;
+	max-width:1100px;
 }
  	
 </style>
@@ -133,7 +136,7 @@ table>tfoot>tr:hover{
 				
 				
 				<div class="myOuter">
-				<form action="<%= contextPath %>/blackremove.ad" method="post">
+				
 					
 					<table align="center" border="1">
 
@@ -144,6 +147,7 @@ table>tfoot>tr:hover{
 						      <th width="150">닉네임</th>
 						      <th width="450">제목</th>
 						      <th width="150">작성일</th>
+						      <th width="100">보기</th>
 						      <th width="100">삭제</th>
 						    </tr>
 						</tbody>
@@ -162,16 +166,67 @@ table>tfoot>tr:hover{
 						      <td><%= s.getNickname() %></td>
 						      <td><%= s.getSellTitle() %></td>
 						      <td><%= s.getSellDate() %></td>
-						      <td><button type="button" class="btn btn-danger btn-sm">삭제하기</button></td>
-					    	</tr>
+						      <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Info<%= s.getSellNo() %>">상세보기</button>
+						 <!-- 모달 테스트 -->
+                           <div id="Info<%= s.getSellNo() %>" class="modal" tabindex="-1">
+                               <div class="modal-dialog" id="modal-dialog">
+                                   <div class="modal-content">
 
+                                       <div class="modal-header">
+                                           <h5 class="modal-title">판매글 내용</h5>
+                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                               <span aria-hidden="true">&times;</span>
+                                           </button>
+                                       </div>
+
+                                       
+                                       <div class="modal-body" align="center">
+                                       	<h2>제목이당</h2>
+                                       	<hr>
+                                       	
+                                       	<table>
+                                       		<tr>
+                                       			<th width="500">내용</th>
+                                       			<th width="700">사진</th>
+                                       			<th width="200">가격</th>
+                                       		</tr>
+                                       		<tr>
+                                       			<td height="500"><%= s.getSellContent() %></td>
+                                       			<% for(Attachment at : getAllAttachment) { %>
+                                       				<% if (at.getRefNo() == s.getSellNo()) { %>
+                                       					 <td height="500">
+                                       					 	<input type="hidden" id="sellNo" name="sellNo" value="<%= s.getSellNo() %>" />
+                                       					 	<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="700" height="500" />
+                                       					 </td>
+                                       				<% } %>
+                                       			<% } %>
+                                       			
+                                       			<td height="500"><%= s.getPrice() %></td>
+                                       		</tr>
+
+                                       	</table>
+                                       </div>
+                                       
+
+                                   </div>
+                               </div>
+                           </div>
+                         	<!--  모달 테스트 끝 -->
+						      <td>
+						      <% if( s.getStatus().equals("Y")) { %>
+						      	<button type="button" class="btn btn-danger btn-sm" onclick="deletesell(<%= s.getSellNo() %>);">삭제하기</button>
+						      <% } else { %>
+						      	<button type="button" class="btn btn-secondary btn-sm" disabled> 삭제완료</button>
+						      <% } %>
+						      </td>
+					    	</tr>
 					  		<% } %>
 					  <% } %>
 					  </tfoot>
 
 					  </table>
-					</form>
-				</div>
+
+				</div>	
 				<!--  myOuter끝 -->
 				
                 </div>    	
@@ -187,6 +242,30 @@ table>tfoot>tr:hover{
             </footer>
         </div>
     </div>
+    <script>
+	function deletesell(sellNo){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			$(function(){
+				$.ajax({
+					url : "deleteSellboard.do",
+					data : {sellNo},
+					type : "post",
+					success : function (result){
+						alert(result);
+						location.reload();
+					},
+		            error : function(request, status, error){
+		                console.log(request, status, error);
+		            }
+				});
+			});
+			
+			
+		} else {
+			return;
+		}
+	}
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

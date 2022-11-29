@@ -25,7 +25,7 @@
 					JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
 					JOIN INTEREST I USING (INTEREST_NO)
                     JOIN LOCAL L USING (LOCAL_NO)
-					WHERE S.STATUS = 'Y'
+					WHERE S.STATUS = 'Y' AND FILE_LEVEL=2
 					$1
 					$2
 					ORDER BY SELL_DATE DESC) A
@@ -97,7 +97,7 @@
 				FILE_PATH,
 				FILE_LEVEL
 		FROM ATTACHMENT
-		WHERE REF_NO = ?
+		WHERE REF_NO = ? AND FILE_LEVEL = 2
 		ORDER BY FILE_LEVEL
 	</entry>
 		
@@ -160,7 +160,8 @@
 			   NICKNAME
 		FROM SELL S
 		JOIN MEMBER M USING (USER_NO)
-		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
+		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO) AND FILE_LEVEL=2
+		WHERE S.STATUS = 'Y'
         ORDER BY SELL_DATE DESC
 	</entry>
 	
@@ -263,5 +264,12 @@
 			   FILE_PATH
 		FROM ATTACHMENT
 		WHERE FILE_LEVEL = 2
+	</entry>
+	
+	<!-- 관리자가 판매게시글 삭제(상태변경)하는 쿼리문 -->
+	<entry key="deleteSellboard">
+		UPDATE SELL
+		SET STATUS = 'N'
+		WHERE SELL_NO = ?
 	</entry>
 </properties>

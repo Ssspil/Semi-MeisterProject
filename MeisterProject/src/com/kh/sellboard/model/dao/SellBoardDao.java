@@ -815,6 +815,32 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 		return getAllAttachment;
 	}
+
+	// 관리자가 판매게시글 삭제하는 메소드
+	public int deleteSellboard(Connection conn ,int sellNo) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("deleteSellboard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sellNo);
+			
+			result = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+
+		return result;
+	}
 	
 	
 

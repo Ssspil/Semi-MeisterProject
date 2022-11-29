@@ -311,6 +311,23 @@ public class SellBoardService {
 		return getAllAttachment;
 		
 	}
+
+	// 관리자가 판매게시글 삭제하는 메소드
+	public int deleteSellboard(int sellNo) {
+		Connection conn = getConnection();
+		
+		int result = new SellBoardDao().deleteSellboard(conn, sellNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close();
+		
+		return result;
+	}
 	
 	
 	
