@@ -19,4 +19,16 @@
 		WHERE USER_NO =? AND SELL_NO = ?
 	</entry>
 	
+	<entry key="updateReview">
+		UPDATE REVIEW
+		SET REVIEW_CONTENT = ?,
+			AVG = ?
+		WHERE REVIEW_NO = ?
+	</entry>
+	
+	<entry key="deleteReview">
+		DELETE FROM REVIEW
+		WHERE REVIEW_NO = ?
+	</entry>
+	
 </properties>

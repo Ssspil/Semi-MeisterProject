@@ -163,7 +163,7 @@ public class TransactionListController extends HttpServlet {
 						review.add(new MemberService().getReview(reviewNo.get(i)));
 					}
 					else {
-						review.add(new Review());
+						review.add(null);
 					}
 				}
 				

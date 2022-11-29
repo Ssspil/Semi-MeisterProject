@@ -109,4 +109,51 @@ public class ReviewDao {
 		
 		return result;
 	}
+	
+	public int updateReview(Connection conn, int reviewNo, String reviewContent, Double reviewScore) {
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("updateReview");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, reviewContent);
+			psmt.setDouble(2, reviewScore);
+			psmt.setInt(3, reviewNo);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteReview(Connection conn, int reviewNo) {
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("deleteReview");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, reviewNo);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
 }

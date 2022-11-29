@@ -56,4 +56,42 @@ public class ReviewService {
 	      return result;
 	      
 	}
+	
+	public int updateReview(int reviewNo, String reviewContent, Double reviewScore) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new ReviewDao().updateReview(conn, reviewNo, reviewContent, reviewScore);
+	      
+	      if(result > 0) {
+	         JDBCTemplate.commit(conn);
+	      }
+	      
+	      else {
+	         JDBCTemplate.rollback(conn);
+	      }
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}
+	
+	public int deleteReview(int reviewNo) {
+	      Connection conn = JDBCTemplate.getConnection();
+	      
+	      int result = new ReviewDao().deleteReview(conn, reviewNo);
+	      
+	      if(result > 0) {
+	         JDBCTemplate.commit(conn);
+	      }
+	      
+	      else {
+	         JDBCTemplate.rollback(conn);
+	      }
+	      
+	      JDBCTemplate.close();
+	      
+	      return result;
+	      
+	}
 }
