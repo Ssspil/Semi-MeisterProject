@@ -33,8 +33,9 @@ public class ExpertCommitController extends HttpServlet {
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		Member ExMem = 
-		int result = new MemberService().expertCommit(userNo);
+		System.out.println(userNo);
+//		Member ExMem = 
+//		int result = new MemberService().expertCommit(userNo);
 		
 	}
 
