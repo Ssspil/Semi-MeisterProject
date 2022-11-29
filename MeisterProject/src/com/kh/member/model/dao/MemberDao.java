@@ -328,7 +328,7 @@ public class MemberDao {
 		return result;
 	}
 
-	// 이거 수정해야함 SUBMIT 테이블로 넣어보자
+	// SUBMIT 테이블로 넣기
 	public int expertSubmit(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement psmt = null;
@@ -1277,10 +1277,41 @@ public class MemberDao {
 		return subNo;
 	}
 
+	/**
+	 * 아직 못했슈
+	 * @param userNo
+	 * @return
+	 */
 	public int expertCommit(int userNo) {
 		
 		
 		
 		return 0;
+	}
+
+	/**
+	 * MEMBER.submit 제출했으면 승인 받을때 까지 W로 바꾸는 메소드
+	 * @param userNo
+	 */
+	public void expertWait(Connection conn, int userNo) {
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("expertWait");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, userNo);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
 	}
 }

@@ -351,4 +351,11 @@
 		        ORDER BY NUM DESC) B
 		WHERE ROWNUM = 1
 	</entry>
+	
+	<entry key="expertWait">
+		UPDATE MEMBER
+		SET EXPERT = 'W',
+			EXP_SUBMIT = 'Y'
+		WHERE USER_NO = ?
+	</entry>
 </properties>
