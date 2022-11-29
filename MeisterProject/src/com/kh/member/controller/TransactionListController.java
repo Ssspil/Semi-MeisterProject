@@ -170,8 +170,8 @@ public class TransactionListController extends HttpServlet {
 				request.setAttribute("s", s);
 				request.setAttribute("at", at);
 				request.setAttribute("status", status);
-				request.setAttribute("review", reviewNo);
-
+				request.setAttribute("reviewNo", reviewNo);
+				request.setAttribute("review", review);
 				System.out.println(review);
 				
 		if(session.getAttribute("loginUser") == null) { // 로그인 안한 상태

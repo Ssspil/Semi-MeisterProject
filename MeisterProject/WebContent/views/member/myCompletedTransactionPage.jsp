@@ -48,7 +48,7 @@
 }
 #ex1{
     width:700px;
-    height:350px;
+    height:500px;
 }
 textarea {
     width: 400px;
@@ -91,7 +91,7 @@ textarea {
 
 <div id="nameBody_2">
 <div id="contenthead"></div>
-	<%if(!s2.isEmpty()){ %>
+	<%if(s2.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
@@ -120,9 +120,16 @@ textarea {
 		            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-		       		<button id="btn1" >리뷰삭제</button>
-			        <button id="btn2" >리뷰수정</button>
-			        <button id="btn3" onclick="show();">리뷰쓰기</button>
+					
+					<%if(review.get(i).getReviewContent() != null){ %>
+			       		<button id="btn1" >리뷰삭제</button>
+				        <button id="btn2" >리뷰수정</button>
+				        <button id="btn3" onclick="show();" disabled style="background-color : gray;">리뷰쓰기</button>
+				    <%} else{ %>
+				    	<button id="btn1" disabled style="background-color : gray;">리뷰삭제</button>
+				        <button id="btn2" disabled style="background-color : gray;">리뷰수정</button>
+				        <button id="btn3" onclick="show();">리뷰쓰기</button>
+				    <%} %>
 		        </div>
 			   
 			   	<div id="ex1" class="modal">
@@ -148,7 +155,7 @@ textarea {
 						<h3>리뷰 수정</h3>
 						<hr>
 						<h6>리뷰 내용</h6>
-						<textarea name="reviewText" rows="3" cols="20" placeholder="여기에 리뷰 내용을 작성하세요" required></textarea>
+						<textarea name="reviewText" rows="3" cols="20" required><%=review.get(i).getReviewContent() %></textarea>
 						<hr>
 						<h6 id="avg">평점</h6>
 						<span class="star">
