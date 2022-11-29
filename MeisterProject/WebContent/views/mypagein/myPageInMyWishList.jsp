@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.common.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="com.kh.common.model.vo.PageInfo, 
+    java.util.ArrayList, com.kh.common.model.vo.*, com.kh.sellboard.model.vo.*"%>
    <%
    PageInfo pi = (PageInfo) request.getAttribute("pi");
+   ArrayList<SellBoard> s = (ArrayList<SellBoard>) request.getAttribute("s");
+   ArrayList<Attachment> at = (ArrayList<Attachment>) request.getAttribute("at");
 
 int currentPage = pi.getCurrentPage();
 int startPage = pi.getStartPage();
@@ -134,59 +137,57 @@ display:none;}
 <body>
 
 <%@include file="../common/header.jsp" %>
+
   <div class="header"></div>
+
     <div id=main>
         <div id="body1">
           <span id="titleName">나의 찜 목록</span>
         </div>    
-        <div id="contenthead"></div>                                                   
-    <div id="main2">
-    
-    <!-- 테스트용 반복문 -->
-    <%for(int i = 0; i<= 5; i++) { %>
-        <div id="sellboard1" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"style="position: relative;">
-        	<div href="#" class="like-button" title="Like Button">
-    			<i class="fa fa-heart fa-1x">♥</i>
-  			</div>
-            <img src="resources/image/peng.jpg" id="img">
-            
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>                                             
-        <div id="sellboard2" style="position: relative;">
-        	<div href="#" class="like-button" title="Like Button">
-    			<i class="fa fa-heart fa-1x">♥</i>
-  			</div>
-            <img src="resources/image/peng.jpg" id="img">
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>
-		<div id="main2">                                                  
-        <div id="sellboard3" style="position: relative;">
-        	<div href="#" class="like-button" title="Like Button">
-    			<i class="fa fa-heart fa-1x">♥</i>
-  			</div>
-            <img src="resources/image/peng.jpg" id="img">
-            <br><br>
-            <div id="title">재능판매글 제목</div>
-            <br>
-            <div id="price">300.000원</div>
-		</div>
-<%} %>
-       </div> 
-			
-
-
-        </div>
+        <div id="contenthead"></div>  
+                                                         
+	    <div id="main2">
+		    <!-- 테스트용 반복문 -->
+		    <%for(int i = 0; i<= 5; i++) { %>
+		        <div id="sellboard1" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"style="position: relative;">
+		        	<div href="#" class="like-button" title="Like Button">
+		    			<i class="fa fa-heart fa-1x">♥</i>
+		  			</div>
+		            <img src="resources/image/peng.jpg" id="img">
+		            
+		            <br><br>
+		            <div id="title">재능판매글 제목</div>
+		            <br>
+		            <div id="price">300.000원</div>
+				</div>                                             
+		        <div id="sellboard2" style="position: relative;">
+		        	<div href="#" class="like-button" title="Like Button">
+		    			<i class="fa fa-heart fa-1x">♥</i>
+		  			</div>
+		            <img src="resources/image/peng.jpg" id="img">
+		            <br><br>
+		            <div id="title">재능판매글 제목</div>
+		            <br>
+		            <div id="price">300.000원</div>
+				</div>
+				<div id="main2">                                                  
+			        <div id="sellboard3" style="position: relative;">
+			        	<div href="#" class="like-button" title="Like Button">
+			    			<i class="fa fa-heart fa-1x">♥</i>
+			  			</div>
+			            <img src="resources/image/peng.jpg" id="img">
+			            <br><br>
+			            <div id="title">재능판매글 제목</div>
+			            <br>
+			            <div id="price">300.000원</div>
+					</div>
+			<%} %>
+		 		 </div> <!-- main2 -->
+        </div> <!-- main2 -->
         
    
 	   <div id="page">
-<div class="page_wrap">
-		
+			<div class="page_wrap">
 				<span class="pre" onclick="pageMove('pre')">&lt</span>
 				
 				<%
@@ -208,39 +209,40 @@ display:none;}
 				%>
 				
 				<span class="next" onclick="pageMove('next')">&gt</span>
-				
-			</div></div>
+			</div>
+		</div>
 	   
 	   <br><br><br>
-	  
-	  
+
+	</div> <!-- main outer -->
 
 
-</div>
+
+
 
 <%@ include file="../common/footer.jsp"%>
 
 <script>
 //    페이징 처리
-   function pageMove(currentPage) {
-	   
-      if (currentPage == "next") {
-         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
-      }
-
-      if (currentPage == "pre") {
-         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
-      }
-      
-      var cnt = (currentPage - 1) * 6;
-      $(".board").hide();
-      for (var i = cnt; i < cnt + 6; i++) {
-         $(".board" + (i)).show();
-      }
-
-      $(".page_wrap span").removeClass("sel");
-      $(".page" + currentPage).addClass("sel");
-   }
+	   function pageMove(currentPage) {
+		   
+	      if (currentPage == "next") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) + 1;
+	      }
+	
+	      if (currentPage == "pre") {
+	         currentPage = Number($(".page_wrap .sel").text().substring(1, 2)) - 1;
+	      }
+	      
+	      var cnt = (currentPage - 1) * 6;
+	      $(".board").hide();
+	      for (var i = cnt; i < cnt + 6; i++) {
+	         $(".board" + (i)).show();
+	      }
+	
+	      $(".page_wrap span").removeClass("sel");
+	      $(".page" + currentPage).addClass("sel");
+	   }
    </script>
 </body>
 </html>
