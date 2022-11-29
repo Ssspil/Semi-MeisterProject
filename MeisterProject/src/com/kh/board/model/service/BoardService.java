@@ -377,4 +377,21 @@ public class BoardService {
 		return list;
 	}
 
+	public int deleteReplylist(int replyNo) {
+			
+			Connection conn = getConnection();
+			
+			int result = new BoardDao().deleteReplylist(replyNo, conn);
+	
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close();
+			
+			return result;
+		}
+	
+	
 }
