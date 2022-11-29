@@ -176,15 +176,15 @@ table>tfoot>tr:hover{
 								<td><%= s.getSellNo() %></td>
 								
 								</tr>
+								<tr>
 							      <td>
 							           <input type="checkbox" name="user" id="<%=s.getUserNO() %>" value="<%=s.getUserNO() %>" onclick="singleCheck();">
 							      </td>
 							      
 							      <td><%= s.getUserNO() %></td>
 							      <td><%= s.getUserId() %></td>
-							      <td>
-							      </td>
 							      <td><%= s.getNickname() %></td>
+							      <td><%= s.getSellTitle() %></td>
 							      <td><%= s.getSellDate() %></td>
 							      <td class="status">
 							     <%--  <% if ((m.getBlackList()).equals("Y"))  { %>
@@ -192,7 +192,7 @@ table>tfoot>tr:hover{
 							      <% } %> --%>
 							      </td> 
 					
-						    </tr>
+						    	</tr>
 						    
 						  	<script>
 						      $(function(){
