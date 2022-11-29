@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -38,9 +39,18 @@ public class ExpertCommitController extends HttpServlet {
 		System.out.println("유저번호 : " + userNo);
 		System.out.println("신청번호 : " + subNo);
 		
-		//Member ExMem = new MemberService().exportData(subNo, userNo);
-//		int result = new MemberService().expertCommit(userNo);
+		Member ExMem = new MemberService().exportData(subNo);
+		System.out.println("SUBMIT 에서 가져왔음 " + ExMem);
 		
+		int result = new MemberService().expertCommit(ExMem);
+		
+		if(result > 0) {
+			response.setContentType("application/json; charset=UTF-8");
+			
+			// GSON : Google JSON
+			Gson gson = new Gson();
+			gson.toJson("성공적으로 마이스터 처리가 되었습니다.", response.getWriter());
+		} 
 	}
 
 	/**

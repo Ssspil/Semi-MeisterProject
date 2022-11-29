@@ -499,16 +499,46 @@ public class MemberService {
 		return review;
 	}
 
-	public int expertCommit(int userNo) {
+
+	/**
+	 * 전문가승인 되었을 때 개인정보 가져오는 메소드 
+	 * @param subNo
+	 * @return
+	 */
+	public Member exportData(int subNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MemberDao().expertCommit(userNo);
+		Member ExMem = new MemberDao().exportData(conn, subNo);
+		
+		// 값을 가져왔으니 SUBMIT 테이블에 값은 지워주기
+		int result = new MemberDao().deleteSubmit(conn, subNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close();
+		
+		return ExMem;
+	}
+
+	public int expertCommit(Member exMem) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().updateToExpert(conn, exMem);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		
 		JDBCTemplate.close();
 		
 		return result;
-		
 	}
 
 

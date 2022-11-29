@@ -101,12 +101,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
     	if(local_no == 0) {
     		sql = sql.replace("$1", "");
     	}else {
-    		sql = sql.replace("$1", "AND S.LOCAL_NO = ?");
+    		sql = sql.replace("$1", "AND LOCAL_NO = ?");
     	}
     	if(interest_no == 0) {
     		sql = sql.replace("$2", "");
     	}else {
-    		sql = sql.replace("$2", "AND S.INTEREST_NO = ?");
+    		sql = sql.replace("$2", "AND INTEREST_NO = ?");
     	}
     	
     	try {
@@ -140,7 +140,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCAL_NAME"),
+										rset.getString("INTEREST_NAME")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +187,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));	
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCALNAME"),
+										rset.getString("INTERESTNAME")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -728,6 +732,88 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 		return result;
+	}
+	
+	// 관리자 페이지 판매게시판
+	public ArrayList<SellBoard> selectAllSellBoard(Connection conn){
+		
+		ArrayList<SellBoard> getAllSellBoard = new ArrayList<>();
+		PreparedStatement psmt =  null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				getAllSellBoard.add(new SellBoard(rset.getInt("SELL_NO"),
+												  rset.getString("SELL_TITLE"),
+												  rset.getString("SELL_CONTENT"),
+												  rset.getInt("PRICE"),
+												  rset.getInt("SELL_COUNT"),
+												  rset.getInt("SELL_RECOMMEND"),
+												  rset.getDate("SELL_DATE"),
+												  rset.getString("SELL_REGULATION"),
+												  rset.getString("STATUS"),
+												  rset.getString("INTEREST_NAME"),
+												  rset.getString("LOCAL_NAME"),
+												  rset.getString("NICKNAME"),
+												  rset.getString("USER_ID")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);	
+	}
+		return getAllSellBoard;
+	
+	
+
+	}
+
+	/* 관리자 페이지 판매게시판 첨부파일*/
+	public ArrayList<Attachment> selectAllAttachment(Connection conn) {
+		
+		ArrayList<Attachment> getAllAttachment = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			Attachment at = null;
+			
+			while(rset.next()) {
+                at = new Attachment();
+                
+                at.setFileNo(rset.getInt("FILE_NO"));
+                at.setRefNo(rset.getInt("REF_NO"));
+                at.setOriginName(rset.getString("ORIGIN_NAME"));
+                at.setChangeName(rset.getString("CHANGE_NAME")); 
+                at.setFilePath(rset.getString("FILE_PATH"));
+
+                getAllAttachment.add(at);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return getAllAttachment;
 	}
 	
 	

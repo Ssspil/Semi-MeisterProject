@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.member.model.vo.Member, 
+    pageEncoding="UTF-8"  import="com.kh.sellboard.model.vo.SellBoard, 
     							  java.util.ArrayList,
+    							  com.kh.common.model.vo.PageInfo,
     							  com.kh.common.model.vo.Attachment" 
 %>
     
     
 <%
     String contextPath = request.getContextPath();
-
-	ArrayList<Member> submitList = (ArrayList<Member>)request.getAttribute("submitList");
-	ArrayList<Attachment> atArr = (ArrayList<Attachment>)request.getAttribute("atArr");
+	
+ArrayList<SellBoard> getAllSellBoard  = (ArrayList<SellBoard>)request.getAttribute("getAllSellBoard");
 	
 
 %>
@@ -22,12 +22,6 @@
 <meta name="author" content="JSP" />
 <title>관리자 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-<!--  부트스트립 ajax까지 가져와야함 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!--  jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -48,6 +42,12 @@ table>tfoot {
 	text-align : center;
 }
 
+table>tfoot>tr:hover{
+	background-color : orange;
+	cursor : pointer;
+	color : darkblue;
+	
+}
  	
 </style>
     
@@ -126,117 +126,56 @@ table>tfoot {
             
                 
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">마이스터 신청 관리</h1>
+                    <h1 class="mt-4">판매게시판 관리</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">전문가 신청 목록</li>
+                        <li class="breadcrumb-item active">판매게시글 목록</li>
                     </ol>           
 				
 				
 				<div class="myOuter">
+				<form action="<%= contextPath %>/blackremove.ad" method="post">
 					
 					<table align="center" border="1">
-							
-						
+
 						<tbody>
 						    <tr>
-						      <th width="100">신청번호</th>
-						      <th width="100">회원번호</th>
-						      <th width="100">이름</th>
-						      <th width="50">성별</th>
-						      <th width="250">이메일</th>
-						      <th width="200">핸드폰</th>
-						      <th width="100">전문분야</th>
-						      <th width="100">상세보기</th>
+						      <th width="100">글 번호</th>
+						      <th width="250">작성자 아이디</th>
+						      <th width="150">닉네임</th>
+						      <th width="450">제목</th>
+						      <th width="150">작성일</th>
+						      <th width="100">삭제</th>
 						    </tr>
 						</tbody>
-
+							
+						
 						<tfoot>
-					    <% for(Member m : submitList) { %>
-					    	<% if( submitList.isEmpty() ) { %>
-						    	<tr>
-						    		<td colspan="8">리스트가 없습니다.</td>
-						    	</tr>
-					    	<% } else { %>	<!-- 비어있지 않을 경우 -->
-						    	<tr>
-						    		<td><%= m.getSubNo() %></td>
-						    		<td><%= m.getUserNo() %></td>
-						    		<td><%= m.getUserName() %></td>
-						    		<td><%= m.getGender() %></td>
-						    		<td><%= m.getEmail() %></td>
-						    		<td><%= m.getPhone() %></td>
-						    		<td><%= m.getSpeciality() %></td>
-						    		<td>
-						    			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ex<%= m.getSubNo() %>">보기</button>
-                             			<!-- 모달 테스트 -->
-                                            <div id="ex<%= m.getSubNo()%>" class="modal" tabindex="-1">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
+					    <% for(SellBoard s : getAllSellBoard) { %>
+					    	<% if( getAllSellBoard.isEmpty() ) { %>
+					    	<tr>
+					    		<td colspan="8">없습니다</td>
+					    	</tr>
+					    	<% } else { %>
+							<tr>
+						      <td><%= s.getSellNo() %></td>
+						      <td><%= s.getUserId() %></td>
+						      <td><%= s.getNickname() %></td>
+						      <td><%= s.getSellTitle() %></td>
+						      <td><%= s.getSellDate() %></td>
+						      <td><button type="button" class="btn btn-danger btn-sm">삭제하기</button></td>
+					    	</tr>
 
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">전문가 인증 첨부파일</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        
-                                                        <div class="modal-body" align="center">
-	                                               			<% for(Attachment at : atArr) { %>
-	                                                  			<% if(at.getRefNo() == m.getSubNo()) { %>
-	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="400" height="400" />
-	                                                  			 		<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
-                                                        				<input type="hidden" name="subNo" id="subNo" value="<%= m.getSubNo() %>"/>
-	                                                  			<% } %>
-	                                                  		<% } %>
-                                                        	
-                                                        </div>
-                                                        
-                                                        <div class="modal-footer">
-                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove('<%= m.getUserNo() %>','<%= m.getSubNo() %>');">승인</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--  모달 테스트 끝 -->
-						    		</td>
-						    	</tr>
 					  		<% } %>
 					  <% } %>
 					  </tfoot>
+
 					  </table>
+					</form>
 				</div>
 				<!--  myOuter끝 -->
 				
                 </div>    	
-		
-			<script>
-				function ExApprove(userNo,subNo){
-					if(confirm("정말로 승인하시겠습니까?")){
-						
-						$(function(){
-							$.ajax({
-								url : "exCommit.do",
-								data : {userNo,
-										subNo },
-								type : "post",
-								success : function (result){
-									alert(result);
-									location.reload();
-								},
-					            error : function(request, status, error){
-					                console.log(request, status, error);
-					            }
-							});
-						});
-						
-						
-					} else {
-						return;
-					}
-				}
-			</script>
-		
+
                 		
             </main> 
             <footer class="py-4 bg-light mt-auto">
@@ -248,6 +187,7 @@ table>tfoot {
             </footer>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
