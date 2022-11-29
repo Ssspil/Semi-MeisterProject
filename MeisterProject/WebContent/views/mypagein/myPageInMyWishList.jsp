@@ -172,45 +172,7 @@ display:none;}
 
         </div>
 
-        <div id="contenthead"></div>  
-                                                         
-	    <div id="main2">
-		    <!-- 테스트용 반복문 -->
-		    <%for(int i = 0; i<= 5; i++) { %>
-		        <div id="sellboard1" class="board board<%=i%> <%=i > 5 ? "hide" : ""%>"style="position: relative;">
-		        	<div href="#" class="like-button" title="Like Button">
-		    			<i class="fa fa-heart fa-1x">♥</i>
-		  			</div>
-		            <img src="resources/image/peng.jpg" id="img">
-		            
-		            <br><br>
-		            <div id="title">재능판매글 제목</div>
-		            <br>
-		            <div id="price">300.000원</div>
-				</div>                                             
-		        <div id="sellboard2" style="position: relative;">
-		        	<div href="#" class="like-button" title="Like Button">
-		    			<i class="fa fa-heart fa-1x">♥</i>
-		  			</div>
-		            <img src="resources/image/peng.jpg" id="img">
-		            <br><br>
-		            <div id="title">재능판매글 제목</div>
-		            <br>
-		            <div id="price">300.000원</div>
-				</div>
-				<div id="main2">                                                  
-			        <div id="sellboard3" style="position: relative;">
-			        	<div href="#" class="like-button" title="Like Button">
-			    			<i class="fa fa-heart fa-1x">♥</i>
-			  			</div>
-			            <img src="resources/image/peng.jpg" id="img">
-			            <br><br>
-			            <div id="title">재능판매글 제목</div>
-			            <br>
-			            <div id="price">300.000원</div>
-					</div>
-			<%} %>
-		 		 </div> <!-- main2 -->
+       
         </div> <!-- main2 -->
 
         
