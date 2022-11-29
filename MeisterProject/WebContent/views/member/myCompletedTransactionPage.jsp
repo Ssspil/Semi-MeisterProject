@@ -48,7 +48,7 @@
 }
 #ex1{
     width:700px;
-    height:500px;
+    height:350px;
 }
 textarea {
     width: 400px;
@@ -85,6 +85,36 @@ textarea {
 	margin-left: 150px;
 	background-color: inherit;
 }
+       #review{
+box-sizing: border-box;
+height: 70px;
+border:3px solid orange;
+width:60%;
+margin:auto;
+margin-bottom:30px;
+border-radius: 15px;
+padding: 16px;
+}
+#myRiview{
+    font-weight: bold;
+}
+#star{
+    position: relative;
+    left: 80px; 
+    top:-2px;
+}
+#reviewBody{
+        width: 528px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-inline-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+    position: relative;
+    left: 30px;
+    top:4px;
+
+}
 </style>
 </head>
 <body>
@@ -120,16 +150,9 @@ textarea {
 		            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-					
-					<%if(review.get(i).getReviewContent() != null){ %>
-			       		<button id="btn1" >리뷰삭제</button>
-				        <button id="btn2" >리뷰수정</button>
-				        <button id="btn3" onclick="show();" disabled style="background-color : gray;">리뷰쓰기</button>
-				    <%} else{ %>
-				    	<button id="btn1" disabled style="background-color : gray;">리뷰삭제</button>
-				        <button id="btn2" disabled style="background-color : gray;">리뷰수정</button>
-				        <button id="btn3" onclick="show();">리뷰쓰기</button>
-				    <%} %>
+		       		<button id="btn1" >리뷰삭제</button>
+			        <button id="btn2" >리뷰수정</button>
+			        <button id="btn3" onclick="show();">리뷰쓰기</button>
 		        </div>
 			   
 			   	<div id="ex1" class="modal">
@@ -148,14 +171,20 @@ textarea {
 						<input type="hidden" name="sellNo" value="<%=s2.get(i).getSellNo() %>">
 						<button id="revSubmit" type="submit">제출하기</button>
 					</form>
-				</div>
 				
+				</div>
+				<!-- 나의 리뷰보는 div -->
+				   <div id="review">
+        <span id="myRiview">나의 리뷰:</span>
+        <span id="reviewBody">리뷰 내용이 들어가이 들어가야이 들어가야이 들어가야이 들어가야이 들어가야야합니다</span>
+        <span id="star">별점들어가야합니다</span>
+    					</div>
 				<div id="ex2" class="modal">
 					<form action="<%=request.getContextPath() %>/reviewUpdate.rv" method="post">
 						<h3>리뷰 수정</h3>
 						<hr>
 						<h6>리뷰 내용</h6>
-						<textarea name="reviewText" rows="3" cols="20" required><%=review.get(i).getReviewContent() %></textarea>
+						<textarea name="reviewText" rows="3" cols="20" placeholder="여기에 리뷰 내용을 작성하세요" required></textarea>
 						<hr>
 						<h6 id="avg">평점</h6>
 						<span class="star">
