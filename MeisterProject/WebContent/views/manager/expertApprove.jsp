@@ -191,7 +191,7 @@ table>tfoot {
                                                         </div>
                                                         
                                                         <div class="modal-footer">
-                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove();">승인</button>
+                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove('<%= m.getUserNo() %>','<%= m.getSubNo() %>');">승인</button>
 
                                                         </div>
 
@@ -211,17 +211,18 @@ table>tfoot {
                 </div>    	
 		
 			<script>
-				function ExApprove(){
+				function ExApprove(userNo,subNo){
 					if(confirm("정말로 승인하시겠습니까?")){
 						
 						$(function(){
 							$.ajax({
 								url : "exCommit.do",
-								data : {userNo : $('#userNo').val(),
-										subNo : $('#subNo').val()},
+								data : {userNo,
+										subNo },
 								type : "post",
-								success : function (){
-									alert("마이스터를 승인하였습니다.");
+								success : function (result){
+									alert(result);
+									location.reload();
 								},
 					            error : function(request, status, error){
 					                console.log(request, status, error);
