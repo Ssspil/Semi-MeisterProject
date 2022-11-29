@@ -227,4 +227,17 @@
 	 	WHERE SELL_NO = ?
 	</entry>
 	
+	<entry key="selectAllSellBoard">
+		SELECT SELL_NO,
+				USER_ID,
+				NICKNAME,
+				SELL_TITLE,
+				SELL_DATE,
+				SELL_CONTENT
+		FROM SELL
+		JOIN MEMBER USING(USER_NO)
+        ORDER BY SELL_DATE DESC
+		
+	</entry>
+	
 </properties>

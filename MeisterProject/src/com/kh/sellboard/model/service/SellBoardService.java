@@ -284,6 +284,35 @@ public class SellBoardService {
 		return result;
 		
 	}
+	
+	/* 관리자 페이지 판매게시판 */
+	public ArrayList<SellBoard> selectAllSellBoard() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<SellBoard> getAllSellBoard = new SellBoardDao().selectAllSellBoard(conn);
+		
+		close();
+		
+		return getAllSellBoard;
+		
+	}
+	
+	/* 관리자 페이지 판매게시판 첨부파일*/
+//	public ArrayList<Attachment> selectAllAttachment(){
+//		
+//		Connection conn = getConnection();
+//		
+//		ArrayList<Attachment> getAllAttachment = new SellBoardDao().selectAllAttachment(conn);
+//		
+//		close();
+//		
+//		return getAllAttachment;
+//		
+//	}
+	
+	
+	
 
 
 

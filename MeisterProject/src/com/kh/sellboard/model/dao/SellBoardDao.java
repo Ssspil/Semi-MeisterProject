@@ -730,6 +730,41 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		return result;
 	}
 	
+	// 관리자 페이지 판매게시판
+	public ArrayList<SellBoard> selectAllSellBoard(Connection conn){
+		
+		ArrayList<SellBoard> getAllSellBoard = new ArrayList<>();
+		PreparedStatement psmt =  null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				getAllSellBoard.add(new SellBoard(rset.getInt("SELL_NO"),
+													rset.getString("USER_ID"),
+													rset.getString("NICKNAME"),
+													rset.getString("SELL_TITLE"),
+													rset.getDate("SELL_DATE"),
+													rset.getString("SELL_CONTENT")
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);	
+	}
+		return getAllSellBoard;
+	
+	
+
+	}
+	
 	
 
 }

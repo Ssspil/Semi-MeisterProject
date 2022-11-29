@@ -32,7 +32,8 @@
 			width: 70%;
 	        height: 100%;
 	       /* 상 , 우 , 하, 좌  띄우기 */
-			margin: 150px 200px 20px 200px;
+		    padding-top: 150px;
+			margin: 0 auto;
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 			background-color: mintcream;
 			position: relative;

@@ -21,6 +21,7 @@ public class SellBoard {
 	private String interestName;
 	private String sellDetail;
 	private String sellRegulation;
+	private String userId;
 	
 	public SellBoard() {
 		
@@ -29,7 +30,7 @@ public class SellBoard {
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
 			Date sellDate, String status, int userNO, String titleImg, int localNo, int interestNo, String nickname,
-			String changeName, String filePath, String sellDetail, String sellRegulation) {
+			String changeName, String filePath, String sellDetail, String sellRegulation, String userId) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -48,6 +49,7 @@ public class SellBoard {
 		this.filePath = filePath;
 		this.sellDetail = sellDetail;
 		this.sellRegulation = sellRegulation;
+		this.userId = userId;
 	}
 	
 	// 양진호
@@ -141,6 +143,16 @@ public class SellBoard {
 		this.price = price;
 		this.interestName = interestName;
 		this.userNO = userNO;
+	}
+	
+	public SellBoard(int sellNo, String userId, String nickname, String sellTitle, Date sellDate, String sellContent) {
+		super();
+		this.sellNo = sellNo;
+		this.userId = userId;
+		this.nickname = nickname;
+		this.sellTitle = sellTitle;
+		this.sellDate = sellDate;
+		this.sellContent = sellContent;
 	}
 	
 	public int getSellNo() {
@@ -287,6 +299,14 @@ public class SellBoard {
 	public void setSellRegulation(String sellRegulation) {
 		this.sellRegulation = sellRegulation;
 	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	
 	
@@ -298,7 +318,7 @@ public class SellBoard {
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", localNo=" + localNo
 				+ ", interestNo=" + interestNo + ", nickname=" + nickname + ", interestName="+ interestName +""
-						+ ", sellDetail="+ sellDetail +",, sellRegulation="+ sellRegulation +"]";
+						+ ", sellDetail="+ sellDetail +", sellRegulation="+ sellRegulation +", userId="+ userId +"]";
 	}
 
 	
