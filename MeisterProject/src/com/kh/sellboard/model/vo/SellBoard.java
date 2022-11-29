@@ -121,7 +121,7 @@ public class SellBoard {
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int interestNo, int localNo, String nickname, String titleImg) {
+			int interestNo, int localNo, String nickname, String titleImg, String localName, String interestName) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -132,6 +132,8 @@ public class SellBoard {
 		this.localNo = localNo;
 		this.nickname = nickname;
 		this.titleImg = titleImg;
+		this.localName = localName;
+		this.interestName = interestName;
 	}
 	
 	// 판매 게시판 상세조회 부분 생성자

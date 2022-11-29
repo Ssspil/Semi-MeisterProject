@@ -13,14 +13,18 @@
 					        S.PRICE as PRICE,
 					        S.SELL_RECOMMEND as SELL_RECOMMEND,
 					        S.SELL_DATE as SELL_DATE,
-					        S.INTEREST_NO AS INTEREST_NO,
-					        S.LOCAL_NO AS LOCAL_NO,
+					        INTEREST_NO AS INTEREST_NO,
+					        LOCAL_NO AS LOCAL_NO,
 					        M.NICKNAME AS NICKNAME,
 					        FILE_PATH || CHANGE_NAME AS TITLEIMG,
-					        USER_NO
+					        USER_NO,
+					        LOCAL_NAME,
+					        INTEREST_NAME
 					FROM SELL S
 					JOIN MEMBER M USING (USER_NO)
 					JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
+					JOIN INTEREST I USING (INTEREST_NO)
+                    JOIN LOCAL L USING (LOCAL_NO)
 					WHERE S.STATUS = 'Y'
 					$1
 					$2

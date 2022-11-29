@@ -101,12 +101,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
     	if(local_no == 0) {
     		sql = sql.replace("$1", "");
     	}else {
-    		sql = sql.replace("$1", "AND S.LOCAL_NO = ?");
+    		sql = sql.replace("$1", "AND LOCAL_NO = ?");
     	}
     	if(interest_no == 0) {
     		sql = sql.replace("$2", "");
     	}else {
-    		sql = sql.replace("$2", "AND S.INTEREST_NO = ?");
+    		sql = sql.replace("$2", "AND INTEREST_NO = ?");
     	}
     	
     	try {
@@ -140,7 +140,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCAL_NAME"),
+										rset.getString("INTEREST_NAME")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +187,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));	
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCALNAME"),
+										rset.getString("INTERESTNAME")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -799,8 +803,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
                 at.setChangeName(rset.getString("CHANGE_NAME")); 
                 at.setFilePath(rset.getString("FILE_PATH"));
 
-                
-
+                getAllAttachment.add(at);
 			}
 			
 		} catch (SQLException e) {
