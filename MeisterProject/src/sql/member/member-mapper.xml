@@ -351,4 +351,44 @@
 		        ORDER BY NUM DESC) B
 		WHERE ROWNUM = 1
 	</entry>
+	
+	<entry key="expertWait">
+		UPDATE MEMBER
+		SET EXPERT = 'W',
+			EXP_SUBMIT = 'Y'
+		WHERE USER_NO = ?
+	</entry>
+	
+	<!-- 전문가 승인 되었을 떄 개인정도 가져오는 객체에 담을 쿼리문 -->
+	<entry key="exportData">
+		SELECT SUBNO,
+			   USER_NO,
+			   USER_NAME,
+			   GENDER,
+			   EMAIL,
+			   PHONE,
+			   SPECIALITY,
+			   EXP_SUBMIT
+		FROM SUBMIT
+		WHERE SUBNO = ?
+	</entry>
+	
+	<!--  개인정보 담았으니 SUBMIT테이블에 값 지워주는 쿼리문 -->
+	<entry key="deleteSubmit">
+	DELETE SUBMIT
+	WHERE SUBNO = ?
+	</entry>
+	
+	
+	<!-- 전문가된 개인정보를 넣어주기 -->
+	<entry key="updateToExpert">
+		UPDATE MEMBER
+		SET USER_NAME = ?,
+			GENDER = ?,
+			EMAIL = ?,
+			PHONE = ?,
+			SPECIALITY = ?,
+			EXPERT = 'Y'
+		WHERE USER_NO = ?
+	</entry>
 </properties>

@@ -85,13 +85,43 @@ textarea {
 	margin-left: 150px;
 	background-color: inherit;
 }
+       #review{
+box-sizing: border-box;
+height: 70px;
+border:3px solid orange;
+width:60%;
+margin:auto;
+margin-bottom:30px;
+border-radius: 15px;
+padding: 16px;
+}
+#myRiview{
+    font-weight: bold;
+}
+#star{
+    position: relative;
+    left: 80px; 
+    top:-2px;
+}
+#reviewBody{
+        width: 528px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-inline-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+    position: relative;
+    left: 30px;
+    top:4px;
+
+}
 </style>
 </head>
 <body>
 
 <div id="nameBody_2">
 <div id="contenthead"></div>
-	<%if(!s2.isEmpty()){ %>
+	<%if(s2.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
@@ -141,8 +171,14 @@ textarea {
 						<input type="hidden" name="sellNo" value="<%=s2.get(i).getSellNo() %>">
 						<button id="revSubmit" type="submit">제출하기</button>
 					</form>
-				</div>
 				
+				</div>
+				<!-- 나의 리뷰보는 div -->
+				   <div id="review">
+        <span id="myRiview">나의 리뷰:</span>
+        <span id="reviewBody">리뷰 내용이 들어가이 들어가야이 들어가야이 들어가야이 들어가야이 들어가야야합니다</span>
+        <span id="star">별점들어가야합니다</span>
+    					</div>
 				<div id="ex2" class="modal">
 					<form action="<%=request.getContextPath() %>/reviewUpdate.rv" method="post">
 						<h3>리뷰 수정</h3>

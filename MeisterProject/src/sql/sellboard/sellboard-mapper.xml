@@ -13,15 +13,19 @@
 					        S.PRICE as PRICE,
 					        S.SELL_RECOMMEND as SELL_RECOMMEND,
 					        S.SELL_DATE as SELL_DATE,
-					        S.INTEREST_NO AS INTEREST_NO,
-					        S.LOCAL_NO AS LOCAL_NO,
+					        INTEREST_NO AS INTEREST_NO,
+					        LOCAL_NO AS LOCAL_NO,
 					        M.NICKNAME AS NICKNAME,
 					        FILE_PATH || CHANGE_NAME AS TITLEIMG,
-					        USER_NO
+					        USER_NO,
+					        LOCAL_NAME,
+					        INTEREST_NAME
 					FROM SELL S
 					JOIN MEMBER M USING (USER_NO)
 					JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
-					WHERE S.STATUS = 'Y'
+					JOIN INTEREST I USING (INTEREST_NO)
+                    JOIN LOCAL L USING (LOCAL_NO)
+					WHERE S.STATUS = 'Y' AND FILE_LEVEL=2
 					$1
 					$2
 					ORDER BY SELL_DATE DESC) A
@@ -93,7 +97,7 @@
 				FILE_PATH,
 				FILE_LEVEL
 		FROM ATTACHMENT
-		WHERE REF_NO = ?
+		WHERE REF_NO = ? AND FILE_LEVEL = 2
 		ORDER BY FILE_LEVEL
 	</entry>
 		
@@ -156,7 +160,8 @@
 			   NICKNAME
 		FROM SELL S
 		JOIN MEMBER M USING (USER_NO)
-		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
+		JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO) AND FILE_LEVEL=2
+		WHERE S.STATUS = 'Y'
         ORDER BY SELL_DATE DESC
 	</entry>
 	
@@ -227,4 +232,44 @@
 	 	WHERE SELL_NO = ?
 	</entry>
 	
+	<!-- 관리자에서 게시글 다가져오는 쿼리문 -->
+	<entry key="selectAllSellBoard">
+		SELECT SELL_NO,
+		       SELL_TITLE,
+		       SELL_CONTENT,
+		       PRICE,
+		       SELL_COUNT,
+		       SELL_RECOMMEND,
+		       SELL_DATE,
+		       SELL_DETAIL,
+		       SELL_REGULATION,
+		       S.STATUS AS STATUS,
+		       INTEREST_NAME,
+		       LOCAL_NAME,
+			   NICKNAME,
+			   USER_ID
+		FROM SELL S
+		JOIN MEMBER USING(USER_NO)
+        JOIN INTEREST USING(INTEREST_NO)
+        JOIN LOCAL USING(LOCAL_NO)
+		ORDER BY SELL_DATE DESC
+	</entry>
+	
+	<!-- 첨부파일 전체 다가져오는 쿼리문 -->
+	<entry key="selectAllAttachment">
+		SELECT FILE_NO,
+			   REF_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH
+		FROM ATTACHMENT
+		WHERE FILE_LEVEL = 2
+	</entry>
+	
+	<!-- 관리자가 판매게시글 삭제(상태변경)하는 쿼리문 -->
+	<entry key="deleteSellboard">
+		UPDATE SELL
+		SET STATUS = 'N'
+		WHERE SELL_NO = ?
+	</entry>
 </properties>

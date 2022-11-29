@@ -47,7 +47,7 @@
 <body>
 <div id="nameBody_3">
 <div id="contenthead"></div>
-	<%if(!s3.isEmpty()){ %>
+	<%if(s3.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>

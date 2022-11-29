@@ -14,6 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- 홈페이지 아이콘 -->
+ <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
 <title>판매 상세페이지</title>
 <style>
@@ -32,7 +34,8 @@
 			width: 70%;
 	        height: 100%;
 	       /* 상 , 우 , 하, 좌  띄우기 */
-			margin: 150px 200px 20px 200px;
+		    padding-top: 150px;
+			margin: 0 auto;
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 			background-color: mintcream;
 			position: relative;

@@ -21,15 +21,54 @@ public class SellBoard {
 	private String interestName;
 	private String sellDetail;
 	private String sellRegulation;
+	private String userId;
+	private String localName;
+	
+	
 	
 	public SellBoard() {
 		
 	}
 	
+
+	
+	
+	// 전체 매개변수 생성자
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
+			Date sellDate, String status, int userNO, String titleImg, int localNo, int interestNo, String nickname,
+			String changeName, String filePath, String interestName, String sellDetail, String sellRegulation,
+			String userId, String localName) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellContent = sellContent;
+		this.price = price;
+		this.sellCount = sellCount;
+		this.sellRecommend = sellRecommend;
+		this.sellDate = sellDate;
+		this.status = status;
+		this.userNO = userNO;
+		this.titleImg = titleImg;
+		this.localNo = localNo;
+		this.interestNo = interestNo;
+		this.nickname = nickname;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.interestName = interestName;
+		this.sellDetail = sellDetail;
+		this.sellRegulation = sellRegulation;
+		this.userId = userId;
+		this.localName = localName;
+	}
+
+
+
+
+
 	// 기본생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend,
 			Date sellDate, String status, int userNO, String titleImg, int localNo, int interestNo, String nickname,
-			String changeName, String filePath, String sellDetail, String sellRegulation) {
+			String changeName, String filePath, String sellDetail, String sellRegulation, String userId) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -48,6 +87,8 @@ public class SellBoard {
 		this.filePath = filePath;
 		this.sellDetail = sellDetail;
 		this.sellRegulation = sellRegulation;
+		this.userId = userId;
+		
 	}
 	
 	// 양진호
@@ -80,7 +121,7 @@ public class SellBoard {
 	// 양진호 수정
 	// 판매 게시판 리스트 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
-			int interestNo, int localNo, String nickname, String titleImg) {
+			int interestNo, int localNo, String nickname, String titleImg, String localName, String interestName) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -91,6 +132,8 @@ public class SellBoard {
 		this.localNo = localNo;
 		this.nickname = nickname;
 		this.titleImg = titleImg;
+		this.localName = localName;
+		this.interestName = interestName;
 	}
 	
 	// 판매 게시판 상세조회 부분 생성자
@@ -141,6 +184,25 @@ public class SellBoard {
 		this.price = price;
 		this.interestName = interestName;
 		this.userNO = userNO;
+	}
+	
+	// 관리자페이지에 보여줄 판매게시글 생성자
+	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellCount, int sellRecommend, Date sellDate,
+			            String sellRegulation, String status, String interestName, String localName, String nickname, String userId) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.sellContent = sellContent;
+		this.price = price;
+		this.sellCount = sellCount;
+		this.sellRecommend = sellRecommend;
+		this.sellDate = sellDate;
+		this.sellRegulation = sellRegulation;
+		this.status = status;
+		this.interestName = interestName;
+		this.localName = localName;
+		this.nickname = nickname;
+		this.userId = userId;
 	}
 	
 	public int getSellNo() {
@@ -264,6 +326,14 @@ public class SellBoard {
 		this.filePath = filePath;
 	}
 	
+	public String getLocalName() {
+		return localName;
+	}
+
+	public void setLocalName(String localName) {
+		this.localName = localName;
+	}
+	
 	public String getInterestName() {
 		return interestName;
 	}
@@ -287,6 +357,14 @@ public class SellBoard {
 	public void setSellRegulation(String sellRegulation) {
 		this.sellRegulation = sellRegulation;
 	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	
 	
@@ -298,7 +376,7 @@ public class SellBoard {
 				+ price + ", sellCount=" + sellCount + ", sellRecommend=" + sellRecommend + ", sellDate=" + sellDate
 				+ ", status=" + status + ", userNO=" + userNO + ", titleImg=" + titleImg + ", localNo=" + localNo
 				+ ", interestNo=" + interestNo + ", nickname=" + nickname + ", interestName="+ interestName +""
-						+ ", sellDetail="+ sellDetail +",, sellRegulation="+ sellRegulation +"]";
+						+ ", sellDetail="+ sellDetail +", sellRegulation="+ sellRegulation +", userId="+ userId +"]";
 	}
 
 	
