@@ -311,6 +311,7 @@ table>tfoot>tr:hover {
 					  htmls +=				"<th style='width: 100px;'>닉네임</th>";
 					  htmls +=				"<th style='width: 100px;'>작성일</th>";
 					  htmls +=				"<th style='width: 200px;'>댓글 상세</th>";
+					  htmls +=				"<th style='width: 100px;'>삭제상태</th>";
 					  htmls +=				"<th style='width: 100px;'>삭제</th>";
 					  htmls +=			"</tr>";
 					  htmls +=		"</thead>";
@@ -321,7 +322,8 @@ table>tfoot>tr:hover {
 						htmls += 			"<td>"+json[i].mbNic+"</td>";
 						htmls += 			"<td>"+json[i].replyDate+"</td>";
 						htmls += 			"<td>"+json[i].replyContent+"</td>";
-						htmls +=    		"<td><button type='button' id='btn1' name='rno' onclick='replyDelete'>삭제하기</button></td>";
+						htmls +=			"<td>"+json[i].status+"</td>";
+						htmls +=    		"<td><button type='button' id='btn1' name='rno' onclick='replyDelete("+json[i].replyNo+", "+bno+")'>삭제하기</button></td>";
 						htmls += 		"</tr>";
 						htmls += 	"</tbody>";
 						htmls +="</table>";
@@ -334,8 +336,10 @@ table>tfoot>tr:hover {
 			});
 		};
 		
+		<!-- 댓글 삭제하기 기능 -->
 		function replyDelete(rno, bno){
-			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
+			if()
+			location.href="<%=contextPath%>" + "/deleteList.ro?rno="+rno+"&bno="+bno;
 		}
 	</script>
 		

@@ -334,7 +334,8 @@
 		    M.USER_ID,
 		    M.NICKNAME,
 		    R.REPLY_DATE,
-		    R.REPLY_CONTENT
+		    R.REPLY_CONTENT,
+		    R.STATUS
 		FROM REPLY R
 		JOIN MEMBER M USING(USER_NO)
 		WHERE BOARD_NO = ?
@@ -345,13 +346,6 @@
 		UPDATE REPLY
 		SET STATUS = 'N'
 		WHERE REPLY_NO = ?
-	</entry>
-	
-	<entry key="modalList">
-		SELECT 
-			BOARD_CONTENT
-		FROM BOARD
-		WHERE BOARD_NO = ?
 	</entry>
 	
 </properties>

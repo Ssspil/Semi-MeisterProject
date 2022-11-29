@@ -622,7 +622,7 @@ body {
 		
 		// 댓글 리스트
 		function selectReplyList(){
-			
+	
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
 		 	var index = 0;

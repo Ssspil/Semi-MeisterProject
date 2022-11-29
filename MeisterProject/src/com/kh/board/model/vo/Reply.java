@@ -12,6 +12,7 @@ public class Reply {
 	private int userNo;
 	private String mbNic;
 	private String boardTitle;
+	private String status;
 	private Attachment at;
 	private String userId;
 
@@ -32,6 +33,7 @@ public class Reply {
 		this.boardNo = boardNo;
 		this.userNo = userNo;
 		this.mbNic = mbNic;
+		
 	}
 
 	// 댓글 리스트
@@ -44,13 +46,14 @@ public class Reply {
 		this.mbNic = mbNic;
 	}
 	
-	public Reply(int replyNo, String user_id, String mbNic, String replyDate, String replyContent) {
+	public Reply(int replyNo, String user_id, String mbNic, String replyDate, String replyContent, String status) {
 		super();
 		this.replyNo = replyNo;
 		this.userId = user_id;
 		this.mbNic = mbNic;
 		this.replyDate = replyDate;
 		this.replyContent = replyContent;
+		this.status = status;
 	}
 	
 	// 댓글 등록
@@ -72,15 +75,16 @@ public class Reply {
 		this.userNo = userNo;
 	}
 	
-	public Reply(int boardNo,int replyNo, String userId, String mbNic , String replyDate, String replyContent) {
-		super();
-		this.boardNo = boardNo;
-		this.replyNo = replyNo;
-		this.userId = userId;
-		this.mbNic = mbNic;
-		this.replyDate = replyDate;
-		this.replyContent = replyContent;
-	}
+//	public Reply(int boardNo,int replyNo, String userId, String mbNic , String replyDate, String replyContent, String status) {
+//		super();
+//		this.boardNo = boardNo;
+//		this.replyNo = replyNo;
+//		this.userId = userId;
+//		this.mbNic = mbNic;
+//		this.replyDate = replyDate;
+//		this.replyContent = replyContent;
+//		this.status = status;
+//	}
 
 	public String getBoardTitle() {
 		return boardTitle;
@@ -187,6 +191,15 @@ public class Reply {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

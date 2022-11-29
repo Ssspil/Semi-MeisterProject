@@ -967,7 +967,8 @@ public class BoardDao {
 									rset.getString("USER_ID"),
 									rset.getString("NICKNAME"), 
 									rset.getString("REPLY_DATE"),
-									rset.getString("REPLY_CONTENT")));
+									rset.getString("REPLY_CONTENT"),
+									rset.getString("STATUS")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -979,39 +980,27 @@ public class BoardDao {
 		return rlist;
 	}
 	
-	
-	public ArrayList<Board> modalList(Connection conn, int boardNo) {
+	// 관리자 댓글 삭제
+	public int deleteReplylist(int replyNo, Connection conn) {
 
-		ArrayList<Board> list = new ArrayList<>();
+		int result = 0;
 
 		PreparedStatement psmt = null;
 
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("deleteReplylist");
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			
-			psmt.setInt(1, boardNo);
+			psmt.setInt(1, replyNo);
 
-			rset = psmt.executeQuery();
-
-			while (rset.next()) {
-					Board b;
-				b = new Board(rset.getString("BOARD_CONTENT"));
-	
-				list.add(b);
-			}
+			result = psmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(psmt);
 		}
-
-		return list;
+		return result;
 	}
 
 
