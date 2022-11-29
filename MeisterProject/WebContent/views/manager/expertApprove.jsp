@@ -183,14 +183,16 @@ table>tfoot {
 	                                               			<% for(Attachment at : atArr) { %>
 	                                                  			<% if(at.getRefNo() == m.getSubNo()) { %>
 	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="400" height="400" />
+	                                                  			 		<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
+                                                        				<input type="hidden" name="subNo" id="subNo" value="<%= m.getSubNo() %>"/>
 	                                                  			<% } %>
 	                                                  		<% } %>
                                                         	
                                                         </div>
                                                         
                                                         <div class="modal-footer">
-                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove();">승인</button>
-                                                        	<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
+                                                        	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove('<%= m.getUserNo() %>','<%= m.getSubNo() %>');">승인</button>
+
                                                         </div>
 
                                                     </div>
@@ -209,16 +211,18 @@ table>tfoot {
                 </div>    	
 		
 			<script>
-				function ExApprove(){
+				function ExApprove(userNo,subNo){
 					if(confirm("정말로 승인하시겠습니까?")){
 						
 						$(function(){
 							$.ajax({
 								url : "exCommit.do",
-								data : {userNo : $('#userNo').val()},
+								data : {userNo,
+										subNo },
 								type : "post",
-								success : function (){
-									alert("마이스터를 승인하였습니다.");
+								success : function (result){
+									alert(result);
+									location.reload();
 								},
 					            error : function(request, status, error){
 					                console.log(request, status, error);

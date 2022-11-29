@@ -109,6 +109,7 @@ svg {
 	height : 150px;
 	width: 70%;
     margin: 15px auto auto auto;
+    
 }
 .outer .icon-area .icon-container{
 	position : relative;
@@ -116,19 +117,23 @@ svg {
 	left : 10%;
 	width : 80%;
 	height : 120px;
+    align-items: center;
+    justify-content: center;
 	
 }
 .icon{
-	float :left;
-	margin-left: 25px;
+	display : inline-block;
+	margin-right : 2%;
+	margin-left : 2%;
 }
 
 .icon img:hover, .icon a:hover{
-	width:90px;
-	height:100px;
+	width:100px;
 	text-decoration : none;
 	color : orange;
 }
+
+
 .icon a{
 	color : black;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -218,7 +223,7 @@ svg {
 	float : left;
 }
 .textColor1{
-	color:red;	
+	color: orange;	
 }
 
 .text-wrap span.sell-Price {

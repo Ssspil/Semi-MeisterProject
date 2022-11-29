@@ -74,7 +74,7 @@ height:100%;
     width: 60%;
     margin: auto;
     padding: 15px;
-    margin-bottom:30px;
+    
     border-radius: 15px;
 }
 .name3Body{

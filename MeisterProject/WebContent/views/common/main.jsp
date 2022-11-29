@@ -170,43 +170,43 @@
 
         <div class="icon-area">
             <div class="icon-container" align="center">
-                <div class="icon">
+                <div class="icon" id="icon1">
                     <a href="<%= contextPath %>/market.se">
                         <img src="./resources/image/icon1.gif" width="80" height="90" />
                         <br><b>전체</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon2">
                     <a href="<%= contextPath %>/market.se?interest_no=10">
                         <img src="./resources/image/icon2.gif" width="80" height="90" />
                         <br><b>영상</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon3">
                     <a href="<%= contextPath %>/market.se?interest_no=20">
                         <img src="./resources/image/icon3.gif" width="80" height="90" />
                         <br><b>영화</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon4">
                     <a href="<%= contextPath %>/market.se?interest_no=30">
                         <img src="./resources/image/icon4.gif" width="80" height="90" />
                         <br><b>게임</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon1">
                     <a href="<%= contextPath %>/market.se?interest_no=40">
                         <img src="./resources/image/icon5.gif" width="80" height="90" />
                         <br><b>IT</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon5">
                     <a href="<%= contextPath %>/market.se?interest_no=50">
                         <img src="./resources/image/icon6.gif" width="80" height="90" />
                         <br><b>운동</b>
                     </a>
                 </div>
-                <div class="icon">
+                <div class="icon" id="icon6">
                     <a href="<%= contextPath %>/market.se?interest_no=60">
                         <img src="./resources/image/icon7.gif" width="80" height="90" />
                         <br><b>요리</b>
@@ -290,8 +290,8 @@
                 <%  } %>
                 <% for (int i = 0; i < 1; i++) {%>
                 <div class="area9">
-                    <h5>게시글이 없습니다.</h5>
-                    <span>게시글이 없습니다.</span><br>
+                    <h5>판매 게시글이 없습니다.</h5>
+                    <span>재능 판매 게시글이 없습니다.</span><br>
                 </div>
                 <% } %>
                 
@@ -331,8 +331,8 @@
                 <%  } %>
                 <% for (int i = 0 ; i < 2; i++) { %>
                 <div class="area9">
-                    <h5>게시글이 없습니다.</h5>
-                    <span>게시글이 없습니다.</span><br>
+                    <h5>판매 게시글이 없습니다.</h5>
+                    <span>재능 판매 게시글이 없습니다.</span><br>
                 </div>
                 <% } %>
                 
@@ -340,8 +340,8 @@
                 <% } else { %>
                 <% for(int i = 0; i < 3; i++) {%>
                 <div class="area9">
-                    <h5>게시글이 없습니다.</h5>
-                    <span>게시글이 없습니다.</span><br>
+                    <h5>판매 게시글이 없습니다.</h5>
+                    <span>재능 판매 게시글이 없습니다.</span><br>
                 </div>
                 <% } %>
                 <% } %>
