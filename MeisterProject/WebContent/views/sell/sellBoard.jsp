@@ -257,14 +257,11 @@ p button{
 					
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon" > 
-								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" width="20" height="20" id= "zzim"> </button>
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" id= "zzim" width="20" height="20" > </button>
 						</p>
-						
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
-					
 					<p>
 						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
-							
 							관심사 :<%= sb.getInterestNo() %><br>							
 							지역 : <%= sb.getLocalNo() %><br>					
 						<img src="./resources/image/sell_price.png" width="25" height="25">
