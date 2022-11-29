@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.sellboard.model.service.SellBoardService;
 
 /**
- * Servlet implementation class ExpertCommitController
+ * Servlet implementation class SellboardDeleteController
  */
-@WebServlet("/exCommit.do")
-public class ExpertCommitController extends HttpServlet {
+@WebServlet("/deleteSellboard.do")
+public class SellboardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExpertCommitController() {
+    public SellboardDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +30,36 @@ public class ExpertCommitController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int subNo = Integer.parseInt(request.getParameter("subNo"));
+	    // 관리자가 아니면 실행 안되게 하는 것.
+	    if( !(request.getSession().getAttribute("loginUser") != null && 
+	            ((Member)request.getSession().getAttribute("loginUser")).getUserId().equals("admin@admin.com"))) {
+	        request.setAttribute("errorMsg", "관리자 권한이 없습니다.");
+	        request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+	        
+	        return;
+	    }
+	    
+	    System.out.println("관리자가 판매게시글 삭제하기");
 		
-		System.out.println("유저번호 : " + userNo);
-		System.out.println("신청번호 : " + subNo);
+		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
-		Member ExMem = new MemberService().exportData(subNo);
-		System.out.println("SUBMIT 에서 가져왔음 " + ExMem);
-		
-		int result = new MemberService().expertCommit(ExMem);
+		int result = new SellBoardService().deleteSellboard(sellNo);
 		
 		if(result > 0) {
 			response.setContentType("application/json; charset=UTF-8");
 			
-			// GSON : Google JSON
-			Gson gson = new Gson();
-			gson.toJson("성공적으로 마이스터 처리가 되었습니다.", response.getWriter());
-		} 
+			new Gson().toJson("성공적으로 삭제하였습니다.", response.getWriter());
+		} else {
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
+
+		
+		
 	}
 
 	/**

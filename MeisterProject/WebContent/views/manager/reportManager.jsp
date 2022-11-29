@@ -181,7 +181,7 @@ table{
                                                         	<h2><%= re.getReportTitle() %></h2>
                                                         	<hr>
                                                         	
-                                                        	<table>
+                                                        	<table style="text-align:center;">
                                                         		<tr>
                                                         			<th width="700">내용</th>
                                                         			<th width="700">사진</th>

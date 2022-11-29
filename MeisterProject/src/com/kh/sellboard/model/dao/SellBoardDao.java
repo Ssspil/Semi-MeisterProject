@@ -91,7 +91,7 @@ public class SellBoardDao {
     
     
     // 판매게시판 메인 리스트와 페이징처리
-public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , int local_no, int interest_no ){
+ 	public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , int local_no, int interest_no ){
     	
     	ArrayList<SellBoard> list = new ArrayList<>();
     	
@@ -101,12 +101,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
     	if(local_no == 0) {
     		sql = sql.replace("$1", "");
     	}else {
-    		sql = sql.replace("$1", "AND S.LOCAL_NO = ?");
+    		sql = sql.replace("$1", "AND LOCAL_NO = ?");
     	}
     	if(interest_no == 0) {
     		sql = sql.replace("$2", "");
     	}else {
-    		sql = sql.replace("$2", "AND S.INTEREST_NO = ?");
+    		sql = sql.replace("$2", "AND INTEREST_NO = ?");
     	}
     	
     	try {
@@ -140,7 +140,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCAL_NAME"),
+										rset.getString("INTEREST_NAME")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -168,7 +170,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
 			int endRow = startRow + pi.getBoardLimit() -1;
 			
-			
 			psmt.setString(1, "%"+search+"%");
 			psmt.setString(2, "%"+search+"%");
 			psmt.setInt(3, startRow);
@@ -185,7 +186,9 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 										rset.getInt("INTEREST_NO"),
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
-										rset.getString("TITLEIMG")));	
+										rset.getString("TITLEIMG"),
+										rset.getString("LOCALNAME"),
+										rset.getString("INTERESTNAME")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -194,7 +197,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 		return list;
-		
 	}
 
     
@@ -423,7 +425,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
         }
         return result;
         
-        
     }
 
 
@@ -517,16 +518,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
                 
                 sellList.add(sb);
             }
-			
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return sellList;
 	}
+	
 	
 	public int updateSellBoard(Connection conn, SellBoard s) {
 		
@@ -556,6 +553,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 	}
 	
+	
 	public int updateAttachment(Attachment at, Connection conn) {
 		
 		int result = 0;
@@ -577,9 +575,8 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 		return result;
-		
-		
 	}
+
 	
 	public int deleteSellBoard(int sellNo, Connection conn) {
 		
@@ -650,7 +647,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(rset);
 			close(psmt);
 		}
-	
 		return result;
 	}
 	
@@ -727,6 +723,111 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(rset);
 			close(psmt);
 		}
+		return result;
+	}
+	
+	// 관리자 페이지 판매게시판
+	public ArrayList<SellBoard> selectAllSellBoard(Connection conn){
+		
+		ArrayList<SellBoard> getAllSellBoard = new ArrayList<>();
+		PreparedStatement psmt =  null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllSellBoard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			while(rset.next()) {
+				getAllSellBoard.add(new SellBoard(rset.getInt("SELL_NO"),
+												  rset.getString("SELL_TITLE"),
+												  rset.getString("SELL_CONTENT"),
+												  rset.getInt("PRICE"),
+												  rset.getInt("SELL_COUNT"),
+												  rset.getInt("SELL_RECOMMEND"),
+												  rset.getDate("SELL_DATE"),
+												  rset.getString("SELL_REGULATION"),
+												  rset.getString("STATUS"),
+												  rset.getString("INTEREST_NAME"),
+												  rset.getString("LOCAL_NAME"),
+												  rset.getString("NICKNAME"),
+												  rset.getString("USER_ID")
+				));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(psmt);	
+		}
+		return getAllSellBoard;
+	}
+
+	/* 관리자 페이지 판매게시판 첨부파일*/
+	public ArrayList<Attachment> selectAllAttachment(Connection conn) {
+		
+		ArrayList<Attachment> getAllAttachment = new ArrayList<>();
+		
+		PreparedStatement psmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllAttachment");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			rset = psmt.executeQuery();
+			
+			Attachment at = null;
+			
+			while(rset.next()) {
+                at = new Attachment();
+                
+                at.setFileNo(rset.getInt("FILE_NO"));
+                at.setRefNo(rset.getInt("REF_NO"));
+                at.setOriginName(rset.getString("ORIGIN_NAME"));
+                at.setChangeName(rset.getString("CHANGE_NAME")); 
+                at.setFilePath(rset.getString("FILE_PATH"));
+
+                getAllAttachment.add(at);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return getAllAttachment;
+	}
+
+	// 관리자가 판매게시글 삭제하는 메소드
+	public int deleteSellboard(Connection conn ,int sellNo) {
+		
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("deleteSellboard");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sellNo);
+			
+			result = psmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+
 		return result;
 	}
 	

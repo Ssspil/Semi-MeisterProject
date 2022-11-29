@@ -27,6 +27,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 홈페이지 아이콘 -->
+<link rel="icon" href="./resources/image/mainLogo.png" />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- iamport.payment.js -->
@@ -60,7 +62,6 @@ h2{
     padding-bottom: 16px;
     margin-bottom: 8px;
 }
-
 
 /*글등록 버튼*/
 #sellEnrollBtn{
@@ -176,6 +177,7 @@ div.thumbnail #thumbImg{
 	-webkit-transform:scale(1);
 	z-index : -1;
 }
+/*마켓글 호버시 썸네일 크기 변경*/
 div.thumbnail #thumbImg:hover{
 	transform : scale(1.05); 
 	-webkit-transform:scale(1.05);
@@ -193,13 +195,12 @@ p.heartIcon{
 	text-align: right;
 }
 
+/*하트 버튼*/
 p button{
   	background-color:transparent;	
   	border : 0px;
 	outline: 0;
-	color: orange;
 }
-
 </style>
 
 </head>
@@ -243,7 +244,7 @@ p button{
 	        </ul> 
 	        
 	    </div> 
-		
+	    
 		<!----- 메인 썸네일 ------>
 		<div class="main">
 		<% if(list.isEmpty()){ %>
@@ -254,19 +255,15 @@ p button{
 			<%for(SellBoard sb : list ) {%>
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="<%=sb.getSellNo() %>">
-					
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon" > 
-								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" width="20" height="20" id= "zzim"> </button>
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" id= "zzim" width="20" height="20" > </button>
 						</p>
-						
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
-					
-					<p>
+					<p id="explain">
 						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
-							
-							관심사 :<%= sb.getInterestNo() %><br>							
-							지역 : <%= sb.getLocalNo() %><br>					
+							<img src="./resources/image/sell_interest.png" width="20" height="20"> <%= sb.getInterestName() %>  //					
+							<i class="fa-solid fa-location-dot"></i> <%= sb.getLocalName() %><br>					
 						<img src="./resources/image/sell_price.png" width="25" height="25">
 						<c:set var = "price" value="<%= sb.getPrice() %>"/>
 						<b> <fmt:formatNumber value="${price }"  /> 원 </b> <br>

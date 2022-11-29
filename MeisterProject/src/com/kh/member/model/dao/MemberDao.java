@@ -1277,17 +1277,7 @@ public class MemberDao {
 		return subNo;
 	}
 
-	/**
-	 * 아직 못했슈
-	 * @param userNo
-	 * @return
-	 */
-	public int expertCommit(int userNo) {
-		
-		
-		
-		return 0;
-	}
+
 
 	/**
 	 * MEMBER.submit 제출했으면 승인 받을때 까지 W로 바꾸는 메소드
@@ -1313,5 +1303,120 @@ public class MemberDao {
 			JDBCTemplate.close(psmt);
 		}
 		
+	}
+
+	/**
+	 * 전문가 제출한 개인정보를 객체에 담아 가져오는 메소드
+	 * @param conn
+	 * @param subNo
+	 * @return
+	 */
+	public Member exportData(Connection conn, int subNo) {
+		
+		Member ExMem = new Member();
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("exportData");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, subNo);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				ExMem = new Member(rset.getInt("SUBNO"),
+							   rset.getInt("USER_NO"),
+							   rset.getString("USER_NAME"),
+							   rset.getString("GENDER"),
+							   rset.getString("EMAIL"),
+							   rset.getString("PHONE"),
+							   rset.getString("SPECIALITY")
+							   );
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return ExMem;
+	}
+
+	
+	/**
+	 * 개인정보 담았으니 SUBMIT 테이블에서 데이터를 지워주는 메소드
+	 * @param conn
+	 * @param subNo
+	 * @return
+	 */
+	public int deleteSubmit(Connection conn, int subNo) {
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteSubmit");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, subNo);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(psmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * MEMBER 테이블에 전문가의 개인정보를 넣기
+	 * @param conn
+	 * @param exMem
+	 * @return
+	 */
+	public int updateToExpert(Connection conn, Member exMem) {
+
+		int result = 0;
+		
+		PreparedStatement psmt = null;
+		
+		String sql = prop.getProperty("updateToExpert");
+		
+		try {
+			psmt  = conn.prepareStatement(sql);
+//			UPDATE MEMBER
+//			SET USER_NAME = ?,
+//				GENDER = ?,
+//				EMAIL = ?,
+//				PHONE = ?,
+//				SPECIALITY = ?,
+//				EXPERT = 'Y'
+//			WHERE USER_NO = ?
+			
+			psmt.setString(1, exMem.getUserName());
+			psmt.setString(2, exMem.getGender());
+			psmt.setString(3, exMem.getEmail());
+			psmt.setString(4, exMem.getPhone());
+			psmt.setString(5, exMem.getSpeciality());
+			psmt.setInt(6, exMem.getUserNo());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

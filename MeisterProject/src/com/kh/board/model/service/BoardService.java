@@ -304,16 +304,16 @@ public class BoardService {
 		return result;
 	}
 	
-	public int countRecommend(int boardNo, int num) {
-		
-		Connection conn = getConnection();
-	
-		int result = new BoardDao().countRecommend(conn, boardNo);
-	
-		close();
-	
-		return result;
-	}
+//	public int countRecommend(int boardNo, int num) {
+//		
+//		Connection conn = getConnection();
+//	
+//		int result = new BoardDao().countRecommend(conn, boardNo);
+//	
+//		close();
+//	
+//		return result;
+//	}
 
 	/**
 	 * 게시글 전체 다 가져오는 메소드
@@ -368,14 +368,12 @@ public class BoardService {
 		return rlist;
 	}
 	
-	public ArrayList<Board> modalList() {
-		
+	public ArrayList<Board> modalList(int boardNo) {
 		Connection conn = getConnection();
 
-		ArrayList<Board> list = new BoardDao().modalList(conn);
+		ArrayList<Board> list = new BoardDao().modalList(conn,boardNo);
 
 		close();
-		
 		return list;
 	}
 

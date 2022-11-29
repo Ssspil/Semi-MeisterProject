@@ -12,25 +12,35 @@
 <title>Insert title here</title>
 <style>
 	.outer{
-		width : 800px;
-		margin: 150px 200px 200px 400px;
-		text-align : center;
+		width : 50%;
+		padding-top: 150px;
+		margin: 0 auto;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		text-align: center;
 	}
 	.product-name{
+		border : 1px solid #e4e5ed;
 		text-align : center;
 		padding : 5%;
+		border-radius: 10px;
 	}
 	.payment-info{
-		border : 1px solid;
+		text-align: justify;
+		border : 1px solid #e4e5ed;
 		padding : 5%;
+		border-radius: 10px;
 	}
 	.pay-method{
 		float: right;
 		font-size: small;
-		
+		border-radius: 10px;
 	}
 	.btn-cls{
 		text-align : center;
+	}
+	.btn-cls a:hover{
+		transition: 1s;
+		transform: scale(1.1);
 	}
 	
 </style>
@@ -42,7 +52,7 @@
 		    <h3>결제 완료</h3>
 		    <br>
 		
-		    <div style="border: 1px solid;">
+		    <div>
 		        
 		        <div class="product-name">
 			        <div>

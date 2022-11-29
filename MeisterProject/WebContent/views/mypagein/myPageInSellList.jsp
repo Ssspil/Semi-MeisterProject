@@ -43,7 +43,8 @@ width: 60%;
 #main2{
     box-sizing: border-box;
     margin: auto;
-    width: 95%;
+    width: 895PX;
+
 }
 #titleName{
 font-size: 30px;

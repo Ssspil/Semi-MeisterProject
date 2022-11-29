@@ -980,7 +980,7 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<Board> modalList(Connection conn) {
+	public ArrayList<Board> modalList(Connection conn, int boardNo) {
 
 		ArrayList<Board> list = new ArrayList<>();
 
@@ -988,18 +988,19 @@ public class BoardDao {
 
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("modalList");
+		String sql = prop.getProperty("selectList");
 
 		try {
 			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, boardNo);
+
 			rset = psmt.executeQuery();
 
 			while (rset.next()) {
-				Board b = new Board();
-				b.setBoardNo(rset.getInt(1));
-				b.setBoardContent(rset.getString(2));
-				b.setTitleImg(rset.getString(3));
-
+					Board b;
+				b = new Board(rset.getString("BOARD_CONTENT"));
+	
 				list.add(b);
 			}
 
@@ -1012,5 +1013,6 @@ public class BoardDao {
 
 		return list;
 	}
+
 
 }	

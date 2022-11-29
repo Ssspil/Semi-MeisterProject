@@ -23,28 +23,51 @@
 
 <style>
 	.outer{
-		width : 800px;
-		margin: 150px 200px 200px 400px;
+		width : 50%;
+		padding-top: 150px;
+		margin: 0 auto;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	}
 	.order-history{
-		border: 1px solid;
+		border: 1px solid #e4e5ed;
 		padding : 3%;
+		border-radius: 10px;
 	}
 	.payment-method{
-		border: 1px solid;
+		border: 1px solid #e4e5ed;
 		padding : 3%;
+		border-radius: 10px;
 	}
 	.description{
-		border : 1px solid;
+		border : 1px solid #e4e5ed;
 		padding : 2%;
+		border-radius: 10px;
 	}
 	.tb1{
-		text-align : center;
+		text-align : justify;
 		padding : 2%;
-		
+		border: 1px solid #e4e5ed;	
+		border-radius: 10px;
 	}	
 	.btn-form{
 		margin : auto;
+	}
+	.tb{
+		text-align: justify;
+	}
+	#h3{
+		text-align: center;
+	}
+	.btn-form a:hover{
+		transition: 1s;
+		transform: scale(1.1);
+	}
+	.btn-form button:hover{
+		transition: 1s;
+		transform: scale(1.1);
+	}
+	h6{
+		color: orange;
 	}
 </style>
 </head>
@@ -53,70 +76,51 @@
 
     
     <div class="outer">
-	    <h3>결제하기</h3>
+	    <h3 id="h3">결제하기</h3>
 	    <br><br>
 
 	    <div class="order-history">
 	        <b>주문 내역</b>
-	        <table>
+			<br><br>
+	        <table class="tb">
 	            <tr>
 	                <td>
 	                    <img src="<%=contextPath%>/<%= at.getFilePath()+ at.getChangeName() %>" width="300" height="150">
 	                </td>
 	                <td>
-	                    <%= pm.getSellTitle() %><br>
-	                    <%= pm.getNickname() %> ●
+	                </td>
+	                <td>
+	                    <b><%= pm.getSellTitle() %></b><br>
+	                    <h6><%= pm.getNickname() %>  ●</h6>
 	                </td>
 	            </tr>
 	            <tr>
+	            	<td>
+	            	</td>
+	            </tr>
+	            <tr>
 	                <th>
-	                    제목
+	                    기본항목
 	                </th>
 	                <th>
 	                    게시일
 	                </th>
 	                <th>
-	                    가격
+	                   가격
 	                </th>
 	            </tr>
 	            <tr>
 	                <td>
-	                    <%= pm.getSellTitle() %>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><%= pm.getSellTitle() %></b>
 	                </td>
 	                <td>
-	                   <%= pm.getSellDate() %>
+						&nbsp;&nbsp;<%= pm.getSellDate() %>
 	                </td>
 	                <td>
-	                    <%= pm.getPrice() %> 원
+						&nbsp;&nbsp;&nbsp;&nbsp;<b><%= pm.getPrice() %></b> 원
 	                </td>
 	            </tr>
 	        </table>
-	        <table>
-	        	<tr>
-	        		<td>
-	        			제목
-	        		</td>
-	        		<td>
-	        			게시일
-	        		</td>
-	        		<td>
-	        			가격
-	        		</td>
-	        	</tr>
-	        </table>
-	        
-	         <!-- <div>
-		         <span>
-		    		제목
-		   		 </span>
-		   		 
-		   		 <span style="float: right;">
-		   		 	게시일
-		   		 </span>
-		   		 <span style="float: right;">
-		   		 	가격
-		   		 </span>
-	   		 </div> -->
 	    </div>
 	   
 	    <br>
@@ -128,17 +132,17 @@
 	    </div>
 	    
 	    <div class="description">
-	        위의 라디오 버튼을 누르면 설명이 바뀌는곳<br>
+	        신용카드 결제만 가능합니다.<br>
 	    </div>
 	    <br>
-	    <div class= tb1 style="border: 1px solid;">
+	    <div class= tb1>
 	        <table>
 	            <tr>
 	                <td>
 	                    총 결제 금액
 	                </td>
 	                <td>
-	                    <b><%= pm.getPrice() %></b> 원
+	                    <b style="font-size: large;"><%= pm.getPrice() %></b> 원
 	                </td>
 	            </tr>
 	            <tr>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="com.kh.board.model.vo.*, java.util.ArrayList" 
+    pageEncoding="UTF-8"  import="com.kh.board.model.vo.*, java.util.ArrayList, com.kh.common.model.vo.Attachment" 
 %>
     
     
@@ -9,6 +9,8 @@
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	
 	ArrayList<Reply> rlist = (ArrayList<Reply>) request.getAttribute("rlist");
+	
+	Attachment at = (Attachment) request.getAttribute("at");
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
@@ -57,7 +59,7 @@ table>tfoot>tr:hover {
 	display: none;
 	z-index: 2;
 }
-.modal_content {
+.modal-content {
 	width: 1000px; height: 400px;
 	background: #fff; border-radius: 10px;
 	position: relative; top: 24%; left: 50%;
@@ -83,14 +85,13 @@ table>tfoot>tr:hover {
     
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
-<script>
-	let msg = "<%=alertMsg%>";
-
-	if (msg != "null") {
-		alert(msg);
-	<%session.removeAttribute("alertMsg");%>
-	}
-</script>
+ <script>
+ 	let msg = "<%=alertMsg%>";
+  	if (msg != "null") { 
+ 		alert(msg); 
+ 	<%session.removeAttribute("alertMsg");%>
+ 	} 
+ </script> 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -220,17 +221,7 @@ table>tfoot>tr:hover {
 						      <% } %>
 						    </tr>
 					    </tfoot>
-<!-- 						<script> -->
-<!-- // 							$(function(){ -->
-<%-- 							$('.user<%=list.get(0).getBoardNo() %>').click(function(){ --%>
-<!--  								if($(this).children().children('[type="checkbox"]:checked') == true){ -->
-<!-- // 									$(this).children().children('[name="user"]').attr("checked", false); -->
-<!-- // 								} else { -->
-<!-- // 									$(this).children().children('[name="user"]').attr("checked", true);  -->
-<!-- // 								} -->
-<!-- // 							}); -->
-<!-- // 						}) -->
-<!-- 					  	</script> -->
+
  					  </table>
 <!--  					</form> -->
  				</div>
@@ -249,35 +240,8 @@ table>tfoot>tr:hover {
 
 	<!-- 모달창 -->
 	<div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<table class="center">
-				<tr>
-					<th style="width:500px;">글내용</th>
-					<th style="width:500px;">커뮤니티 게시글 사진</th>
-				</tr>
-				<% for(int i= 0; i < list.size(); i++) { %>
-				<tr>
-					<td style="height: 100px;"><%=list.get(i).getBoardContent() %></td>
-					<td style="height: 100px;"><%=list.get(i).getTitleImg() %></td>
-				</tr>
-				<% } %>
-			</table>
-			<br> <br>
-			<table class="table">
-				<thead>
-					<tr>
-						<th style="width: 100px;">댓글 번호</th>
-						<th style="width: 150px;">작성자 아이디</th>
-						<th style="width: 100px;">닉네임</th>
-						<th style="width: 100px;">작성일</th>
-						<th style="width: 200px;">댓글 상세</th>
-						<th style="width: 100px;">삭제</th>
-					</tr>
-				</thead>
-				<tbody class="comments-list">
-					
-				</tbody>
-			</table>
+		<div class="modal-content" title="클릭하면 창이 닫힙니다.">
+
 		</div>
 	</div>
 	
@@ -304,44 +268,74 @@ table>tfoot>tr:hover {
 			}
 		}
 	</script>
-		
+	
+	<!-- 모달창 클릭 이벤트 -->
 	<script>
 		$(function() {
  			$(".btn").click(function() {
  				$(".modal").fadeIn();
  			});
- 			$(".modal_content").click(function() {
+ 			$(".modal-content").click(function() {
  				$(".modal").fadeOut();
  			});
 		});
 	</script>		
 	
+	<!-- 모달창 화면 -->
 	<script>
 		function showBoard(bno) {
+
 			$.ajax({
 				url : "boardModal.ad",
 				data : {bno : bno, type:"reply"},
 				success : function(data) {
 					let htmls="";
-					
-					let json = JSON.parse(data);
+					let json = data.rlist;
+					  htmls += 	"<table>";
+					  htmls +=	 	"<tr>";
+					  htmls += 			"<th style='width:500px;'>글내용</th>";
+					  htmls +=			"<th style='width:500px;'>커뮤니티 게시글 사진</th>";
+					  htmls += 	 	"</tr>";
+					  htmls +=   	"<tr class='board-list'>";
+					  htmls +=			"<td>"+data.bs.boardContent+"</td>";
+					  htmls +=			"<td>"+"<img style='height:300px;' src='<%=contextPath %>/"+data.at?.filePath+"/"+data.at?.changeName+"'>"+"</td>";
+					  htmls +=		"</tr>";
+					  htmls +=	"</table>";
 				  for(var i = 0; i < json.length; i++){
-					  htmls += '<tr>';
-					htmls += 	'<td>'+json[i].replyNo+'</td>';
-					htmls +=	'<td>'+json[i].userId+'</td>';	
-					htmls += 	'<td>'+json[i].mbNic+'</td>';
-					htmls += 	'<td>'+json[i].replyDate+'</td>';
-					htmls += 	'<td>'+json[i].replyContent+'</td>';
-					htmls +=    '<td><button type="button" id="btn1" name="rno" onclick="replyDelete">삭제하기</button></td>';
-					htmls += '</tr>';
+					  htmls +=	"<br> <br>";
+					  htmls +=	"<table class='table'>";
+					  htmls +=		"<thead>";
+					  htmls +=			"<tr>";
+					  htmls +=				"<th style='width: 100px;'>댓글 번호</th>";
+					  htmls +=				"<th style='width: 150px;'>작성자 아이디</th>";
+					  htmls +=				"<th style='width: 100px;'>닉네임</th>";
+					  htmls +=				"<th style='width: 100px;'>작성일</th>";
+					  htmls +=				"<th style='width: 200px;'>댓글 상세</th>";
+					  htmls +=				"<th style='width: 100px;'>삭제</th>";
+					  htmls +=			"</tr>";
+					  htmls +=		"</thead>";
+						htmls += 	"<tbody class='comments-list'>";
+						htmls += 		"<tr>";
+						htmls += 			"<td>"+json[i].replyNo+"</td>";
+						htmls +=			"<td>"+json[i].userId+"</td>";	
+						htmls += 			"<td>"+json[i].mbNic+"</td>";
+						htmls += 			"<td>"+json[i].replyDate+"</td>";
+						htmls += 			"<td>"+json[i].replyContent+"</td>";
+						htmls +=    		"<td><button type='button' id='btn1' name='rno' onclick='replyDelete'>삭제하기</button></td>";
+						htmls += 		"</tr>";
+						htmls += 	"</tbody>";
+						htmls +="</table>";
 	              };
-				  
-				  $(".comments-list").html(htmls);
+				  $(".modal .modal-content").html(htmls);
 		},
 			error : function() {
 				console.log("댓글리스트조회용 ajax통신 실패~");
 				}
-			})
+			});
+		};
+		
+		function replyDelete(rno, bno){
+			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
 	</script>
 		

@@ -1,4 +1,7 @@
 package com.kh.board.model.vo;
+
+import com.kh.common.model.vo.Attachment;
+
 public class Board {
    private int boardNo;
    private String boardTitle;
@@ -11,8 +14,9 @@ public class Board {
    private int userNo;
    private String titleImg;
    private int replyCount;   // 커뮤니티 게시판에 썸네일 표시용
-   private String memberNic;
+private String memberNic;
    private String userId;
+   private Attachment at;
    
    
    public String getUserId() {
@@ -141,12 +145,12 @@ public Board() {
 }
 	
 	//modal
-	public Board( String boardContent) {
-		super();
+	   public Board(String boardContent) {
+			super();
+			
+			this.boardContent = boardContent;
+		}
 	
-		this.boardContent = boardContent;
-		
-	}
 	
 	public int getReplyCount() {
 		return replyCount;
@@ -249,6 +253,12 @@ public void setReplyCount(int replyCount) {
    public void setMemberNic(String memberNic) {
       this.memberNic = memberNic;
    }
+public Attachment getAt() {
+	return at;
+}
+public void setAt(Attachment at) {
+	this.at = at;
+}
    
    
 
