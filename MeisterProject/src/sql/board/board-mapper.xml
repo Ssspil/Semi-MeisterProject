@@ -115,7 +115,7 @@
 			CHANGE_NAME = ?,
 			FILE_PATH = ?,
 			UPLOAD_DATE = SYSDATE
-		WHERE FILE_NO = ?
+		WHERE FILE_NO = ? AND FILE_LEVEL = 1
 	</entry>
 	
 	<!-- 게시글 삭제 쿼리문 -->
@@ -129,7 +129,7 @@
 	<entry key="deleteAttachment">
 		UPDATE ATTACHMENT
 		SET STATUS = 'N'
-		WHERE REF_NO = ?
+		WHERE REF_NO = ? AND FILE_LEVEL = 1
 	</entry>
 	
 	<!-- 게시글 상세보기 쿼리문 -->
