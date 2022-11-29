@@ -91,7 +91,7 @@ public class SellBoardDao {
     
     
     // 판매게시판 메인 리스트와 페이징처리
-public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , int local_no, int interest_no ){
+ 	public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , int local_no, int interest_no ){
     	
     	ArrayList<SellBoard> list = new ArrayList<>();
     	
@@ -170,7 +170,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
 			int endRow = startRow + pi.getBoardLimit() -1;
 			
-			
 			psmt.setString(1, "%"+search+"%");
 			psmt.setString(2, "%"+search+"%");
 			psmt.setInt(3, startRow);
@@ -198,7 +197,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 		return list;
-		
 	}
 
     
@@ -427,7 +425,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
         }
         return result;
         
-        
     }
 
 
@@ -521,16 +518,12 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
                 
                 sellList.add(sb);
             }
-			
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return sellList;
 	}
+	
 	
 	public int updateSellBoard(Connection conn, SellBoard s) {
 		
@@ -560,6 +553,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		
 	}
 	
+	
 	public int updateAttachment(Attachment at, Connection conn) {
 		
 		int result = 0;
@@ -581,9 +575,8 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(psmt);
 		}
 		return result;
-		
-		
 	}
+
 	
 	public int deleteSellBoard(int sellNo, Connection conn) {
 		
@@ -654,7 +647,6 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 			close(rset);
 			close(psmt);
 		}
-	
 		return result;
 	}
 	
@@ -761,7 +753,7 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 												  rset.getString("LOCAL_NAME"),
 												  rset.getString("NICKNAME"),
 												  rset.getString("USER_ID")
-						));
+				));
 			}
 			
 		} catch (SQLException e) {
@@ -769,11 +761,8 @@ public ArrayList<SellBoard> selectSellBoardList(Connection conn, PageInfo pi , i
 		}finally {
 			close(rset);
 			close(psmt);	
-	}
+		}
 		return getAllSellBoard;
-	
-	
-
 	}
 
 	/* 관리자 페이지 판매게시판 첨부파일*/
