@@ -257,7 +257,8 @@ p button{
 					<input type="hidden" value="<%=sb.getSellNo() %>">
 						<!-- 찜 하트 아이콘 -->
 						<p class="heartIcon" > 
-								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" id= "zzim" width="20" height="20" > </button>
+								<button onclick="heartAttack('<%= sb.getSellNo()%>')">
+								<img src="./resources/image/sell_noZzim.png" id= "zzim" width="20" height="20" > </button>
 						</p>
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
 					<p id="explain">
@@ -298,7 +299,6 @@ p button{
 				else {
 					zzim.src = "./resources/image/sell_zzim.png";
 				}
-			 
 			 
 				$.ajax({
 					url : "sellBoardLike.se",

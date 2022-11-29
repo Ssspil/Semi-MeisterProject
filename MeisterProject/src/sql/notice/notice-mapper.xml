@@ -68,15 +68,6 @@
 	
 	
 	<entry key="searchNotice">
-	<!--  	SELECT NOTICE_NO,
-			   NOTICE_TITLE,
-			   CREATE_DATE
-		FROM NOTICE
-		WHERE NOTICE_TITLE LIKE ?
-		  AND STATUS = 'Y'
-		ORDER BY NOTICE_NO DESC
-		-->
-	
 		SELECT *
 		FROM (SELECT ROWNUM RNUM,
 			  A.* 
