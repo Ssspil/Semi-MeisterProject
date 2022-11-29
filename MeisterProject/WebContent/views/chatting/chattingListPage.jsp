@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.chatting.model.vo.Chatting, java.time.LocalTime, java.time.LocalDate" %>
+<!--  google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <%
+
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
 	int userNo = (Integer) request.getAttribute("userNo");
@@ -92,22 +97,31 @@
     	background-color: white;
     }
     #inputNick{
-    	width: 100px;
-    	margin-top: 10px;
+ 		color:orange;
+    	margin-top: 55px;
     	margin-bottom: 10px;
     	margin-right: 30px;
+    	font-weight:bold;
+    	font-family: 'Nanum Gothic', sans-serif;
     }
-    #inputDate{
-    	width: 400px;
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	text-align: center;
-    }
-    #inputDate{
-    	width: 130px;
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	text-align: right;
+    #inputDate {
+    margin-top: 10px;
+    color: lightgray;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+    left: 135px;
+    width: 55px;
+    top: -43px;
+}
+    #inputContent{
+    overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-inline-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+    	font-size:28px;
+    	width: 427px;
+    	font-family: 'Nanum Gothic', sans-serif;
     }
 </style>
 </head>
@@ -144,7 +158,7 @@
 							id: 'inputNick',
 							type: 'text',
 							value: '    <%=nickNameList[count] %>',
-							name: 'receiverNick'
+							name: 'receiverNick',
 						})
 					);
 					$('#selectForm<%=count%>').append(
@@ -179,8 +193,9 @@
 							name: 'sellNo'
 						})
 					);
-					$('#divList<%=count%>').css({'width': '500px', 'height': '50px', 'background-color': 'aliceblue', 'margin' :'auto', 'margin-bottom' : '5px'});
-					$('#selectForm<%=count%>>input').css({'border': 'none', 'background-color': 'aliceblue'});
+					$('#divList<%=count%>').css({'width': '850px', 'height': '150px', 'background-color': 'white', 'margin' :'auto', 'margin-bottom' : '5px','border' : '3px solid black' 
+						,'border-radius' : '15px'});
+					$('#selectForm<%=count%>>input').css({'border': 'none', 'background-color': 'white'});
 					$('#selectForm<%=count%>>input').attr({'readonly': 'true'});
 					
 					$('.outer').append(
