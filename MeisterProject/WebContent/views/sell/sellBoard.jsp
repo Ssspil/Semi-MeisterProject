@@ -27,6 +27,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 홈페이지 아이콘 -->
+<link rel="icon" href="./resources/image/mainLogo.png" />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- iamport.payment.js -->
@@ -60,12 +62,6 @@ h2{
     padding-bottom: 16px;
     margin-bottom: 8px;
 }
-
-.category {
-	display : inline-block;
-	float : left;
-}
-
 
 /*글등록 버튼*/
 #sellEnrollBtn{
@@ -181,6 +177,7 @@ div.thumbnail #thumbImg{
 	-webkit-transform:scale(1);
 	z-index : -1;
 }
+/*마켓글 호버시 썸네일 크기 변경*/
 div.thumbnail #thumbImg:hover{
 	transform : scale(1.05); 
 	-webkit-transform:scale(1.05);
@@ -198,13 +195,12 @@ p.heartIcon{
 	text-align: right;
 }
 
+/*하트 버튼*/
 p button{
   	background-color:transparent;	
   	border : 0px;
 	outline: 0;
-	color: orange;
 }
-
 </style>
 
 </head>
@@ -216,23 +212,6 @@ p button{
 		<h2>마켓</h2>
 		
 		<br>
-		<div class="category">
-			<a href="market.se">관심분야</a>
-			<% for(SellBoard sb : list ) {  %> 
-				<span>
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
-				</span>
-				<span id="interest">		
-					<a color="textSecondary" href="<%= contextPath %>/market.se?interest_no=<%=sb.getInterestNo() %>" class="css-1arz1ip e1lsgt8r0"><%= sb.getInterestName() %></a>
-				</span>
-				<span>
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path xmlns="http://www.w3.org/2000/svg" d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z" transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path></svg>
-				</span>
-				<span id="local">		
-				<a color="textSecondary" href="<%= contextPath %>/market.se?interest_no=<%=sb.getInterestNo() %>&local_no=<%=sb.getLocalNo()%>" class="css-1arz1ip e1lsgt8r0"><%= sb.getLocalName() %></a>
-				</span>
-				<% } %>
-		</div>
 		<!------ 전문가/비전문가 글등록 버튼 유무  ------>
 		<div>
 		<%if(loginUser !=null && loginUser.getExpert().equals("Y")) { %>					
@@ -281,10 +260,10 @@ p button{
 								<button onclick="heartAttack('<%= sb.getSellNo()%>')"> <img src="./resources/image/sell_noZzim.png" id= "zzim" width="20" height="20" > </button>
 						</p>
 					<img src="<%=contextPath %>/<%=sb.getTitleImg()%>" id="thumbImg" width="230px" height="210px">
-					<p>
+					<p id="explain">
 						<img src="./resources/image/sell_title.png" width="20" height="20"> <%=sb.getSellTitle() %> <br>					
-							관심사 :<%= sb.getInterestName() %><br>							
-							지역 : <%= sb.getLocalName() %><br>					
+							<img src="./resources/image/sell_interest.png" width="20" height="20"> <%= sb.getInterestName() %>  //					
+							<i class="fa-solid fa-location-dot"></i> <%= sb.getLocalName() %><br>					
 						<img src="./resources/image/sell_price.png" width="25" height="25">
 						<c:set var = "price" value="<%= sb.getPrice() %>"/>
 						<b> <fmt:formatNumber value="${price }"  /> 원 </b> <br>

@@ -14,6 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- 홈페이지 아이콘 -->
+ <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
 <title>판매 상세페이지</title>
 <style>
