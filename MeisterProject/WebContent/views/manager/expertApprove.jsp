@@ -183,6 +183,8 @@ table>tfoot {
 	                                               			<% for(Attachment at : atArr) { %>
 	                                                  			<% if(at.getRefNo() == m.getSubNo()) { %>
 	                                                  			 		<img src="<%= contextPath %>/<%= at.getFilePath() %><%= at.getChangeName() %>" width="400" height="400" />
+	                                                  			 		<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
+                                                        				<input type="hidden" name="subNo" id="subNo" value="<%= m.getSubNo() %>"/>
 	                                                  			<% } %>
 	                                                  		<% } %>
                                                         	
@@ -190,7 +192,7 @@ table>tfoot {
                                                         
                                                         <div class="modal-footer">
                                                         	<button type="button" class="btn btn-danger btn-sm" onclick="ExApprove();">승인</button>
-                                                        	<input type="hidden" name="userNo" id="userNo" value="<%= m.getUserNo() %>"/>
+
                                                         </div>
 
                                                     </div>
@@ -215,7 +217,8 @@ table>tfoot {
 						$(function(){
 							$.ajax({
 								url : "exCommit.do",
-								data : {userNo : $('#userNo').val()},
+								data : {userNo : $('#userNo').val(),
+										subNo : $('#subNo').val()},
 								type : "post",
 								success : function (){
 									alert("마이스터를 승인하였습니다.");

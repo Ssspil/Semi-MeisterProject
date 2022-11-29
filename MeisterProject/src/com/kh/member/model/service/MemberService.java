@@ -126,16 +126,22 @@ public class MemberService {
 	 public int expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
+		 // SUBMIT테이블에 값넣기
 		 int result1 = new MemberDao().expertSubmit(conn, m);
+		 // MEMBER테이블에 EXPERT 'W'로 바꾸어주기
+		 new MemberDao().expertWait(conn ,m.getUserNo());
 		 
 		 int result2 = 1;
-		 //				at.setRefNo(subNo);
 		 if(at != null) {
+			 // SUBMIT테이블에 값 넣어줬으니 그에 생성된 신청번호를 가져와서
 			 int subNo = new MemberDao().selectSubNo(conn, m);
+			 // 첨부파일에 참조호로 넣는다.
 			 result2 = new MemberDao().insertExpertAttachment(conn, at, subNo);
 		 }
 		 
 		 if (result1 > 0 && result2 > 0) {
+			 
+			 
 			 JDBCTemplate.commit(conn);
 		 } else {
 			 JDBCTemplate.rollback(conn);

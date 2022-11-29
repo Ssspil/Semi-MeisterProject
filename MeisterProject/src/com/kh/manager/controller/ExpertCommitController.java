@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class ExpertCommitController
@@ -32,9 +33,12 @@ public class ExpertCommitController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int subNo = Integer.parseInt(request.getParameter("subNo"));
 		
-		System.out.println(userNo);
-//		Member ExMem = 
+		System.out.println("유저번호 : " + userNo);
+		System.out.println("신청번호 : " + subNo);
+		
+		//Member ExMem = new MemberService().exportData(subNo, userNo);
 //		int result = new MemberService().expertCommit(userNo);
 		
 	}

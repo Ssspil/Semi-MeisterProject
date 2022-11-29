@@ -48,7 +48,8 @@ public class ExpertApproveConroller extends HttpServlet {
 	    
 
 	    	
-
+	    System.out.println(submitList);
+	    System.out.println(atArr);
 	    	
 	    
 	    System.out.println("전문가 승인 관리 페이지로 이동");
