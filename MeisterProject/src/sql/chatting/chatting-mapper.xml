@@ -59,6 +59,7 @@
 		WHERE (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?) OR (SENDER = ? AND RECEIVER = ? AND SELL_NO = ?)
 		ORDER BY CHAT_NO
 	</entry>
+	
 	<entry key="getProfile">
 		SELECT FILE_NO,
 			   ORIGIN_NAME,
@@ -66,5 +67,12 @@
 			   FILE_PATH
 	   	FROM ATTACHMENT
 	   	WHERE REF_NO = ? AND FILE_LEVEL = 5
+	</entry>
+	
+	<entry key="selectSellTitle">
+		SELECT 
+			SELL_TITLE
+		FROM SELL
+		WHERE SELL_NO = ?
 	</entry>
 </properties>

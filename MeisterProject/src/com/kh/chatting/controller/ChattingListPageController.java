@@ -48,6 +48,7 @@ public class ChattingListPageController extends HttpServlet {
 		ArrayList<Integer> receiverList = new ChattingService().selectAllReceiver();
 		ArrayList<Integer> senderList = new ChattingService().selectAllSender();
 		ArrayList<Integer> sellList = new ChattingService().selectAllSellNo();
+		ArrayList<String> sellTitleList = new ArrayList<String>();
 		
 		for(int i = 0; i < senderList.size(); i++) {
 			list.add(new ChattingService().selectChatList(receiverList.get(i), senderList.get(i), sellList.get(i)));			
@@ -70,12 +71,11 @@ public class ChattingListPageController extends HttpServlet {
                 }
             }
         }
-
-		System.out.println(receiverList.size());
-		//Attachment profile = new ChattingService().getProfile(receiver);
-
-		System.out.println(list);
-
+		
+		for(int i = 0; i < list.size(); i++) {
+			sellTitleList.add(new ChattingService().selectAllSellTitle(list.get(i).getSellNo()));
+		}
+		
 		String[] nickNameList = null;
 		String receiverName = "";
 
@@ -90,10 +90,12 @@ public class ChattingListPageController extends HttpServlet {
 				nickNameList[i] = receiverName;
 			}
 		}
-		
+		System.out.println(sellTitleList);
+		System.out.println(list);
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("list", list);
 		request.setAttribute("nickNameList", nickNameList);
+		request.setAttribute("sellTitle", sellTitleList);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingListPage.jsp");
