@@ -61,7 +61,8 @@ public class BoardLikeController extends HttpServlet {
 				result = boardService.deleteRecommend(boardNo, userNo);
 			}
 		}
-		recommend = boardService.countRecommend(boardNo);
+		
+		recommend = boardService.countRecommend(boardNo); // 갯수 반환
 		
 		response.setContentType("application/json; charset=UTF-8");
 		

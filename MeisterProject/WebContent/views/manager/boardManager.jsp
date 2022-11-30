@@ -296,8 +296,8 @@ table>tfoot>tr:hover {
 					  htmls +=			"<th style='width:500px;'>커뮤니티 게시글 사진</th>";
 					  htmls += 	 	"</tr>";
 					  htmls +=   	"<tr class='board-list'>";
-					  htmls +=			"<td>"+data.bs?.boardContent+"</td>";
-					  htmls +=			"<td>"+"<img style='height:300px;' src='<%=contextPath %>/"+data.at?.filePath+"/"+data.at?.changeName+"'>"+"</td>";
+					  htmls +=			"<td style='height: 300px;'>"+data.bs.boardContent+"</td>";
+					  htmls +=			"<td>"+"<img style='width:500px; height:300px;' src='<%=contextPath %>/"+data.at?.filePath+"/"+data.at?.changeName+"'>"+"</td>";
 					  htmls +=		"</tr>";
 					  htmls +=	"</table>";
 				  for(var i = 0; i < json.length; i++){
