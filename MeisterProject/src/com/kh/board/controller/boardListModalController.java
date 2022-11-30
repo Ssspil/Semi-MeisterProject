@@ -62,9 +62,6 @@ public class boardListModalController extends HttpServlet {
 			
 			ArrayList<Reply> rlist = new BoardService().replyList(boardNo);
 			
-			
-			
-			
 			response.setContentType("application/json; charset=UTF-8");
 			
 			HashMap<String, Object> b = new HashMap<>();

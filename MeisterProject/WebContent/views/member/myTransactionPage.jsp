@@ -50,7 +50,7 @@ height:100%;
     border-bottom: 2px solid orange;
     height: 70px;
     margin: auto;
-    width: 60%;
+    width: 882px;
 }
 
 #contenthead{
@@ -61,27 +61,18 @@ height:100%;
     box-sizing: border-box;
     border: 3px solid black;
     height:271px;
-    width: 60%;
+    width: 882px;
     margin: auto;
     padding: 15px;
     margin-bottom:30px;
     border-radius: 15px;
 }
-.name2Body{
-    box-sizing: border-box;
-    border: 3px solid black;
-    height:271px;
-    width: 60%;
-    margin: auto;
-    padding: 15px;
-    
-    border-radius: 15px;
-}
+
 .name3Body{
     box-sizing: border-box;
     border: 3px solid black;
     height:271px;
-    width: 60%;
+    width:882px;
     margin: auto;
     padding: 15px;
     margin-bottom:30px;
@@ -180,6 +171,7 @@ border-top: 2px solid black;
 width: 60%;
 margin: auto;
 height: 50px;
+
 }
 #page3{
 box-sizing: border-box;
@@ -269,7 +261,7 @@ height:100px;
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
 			<br>
 			<div id="null">진행중인 거래가 없습니다.</div>
-			<div id="null2">쇼핑 ㄱㄱ</div>
+			<div id="null2">마켓을 방문해주세요!</div>
 			
 		</div>
 		<%}else {%>
