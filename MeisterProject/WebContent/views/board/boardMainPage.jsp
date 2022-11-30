@@ -685,11 +685,14 @@ position: relative;
       $(".page_wrap span").removeClass("sel");
       $(".page" + currentPage).addClass("sel");
    }
-   
-// 엔터눌렀을떄도 검색 허용
+ //엔터키 눌러도 검색허용
 function searchEnter(){
 	   if(window.event.keycode == 13) search();
 };
+
+
+
+
 // 게시글이없으면 상세보기페이지로 이동못하게만들기
 function detail(no){
 	   if(no != 0) location.href="<%=contextPath%>" + "/detail.bo?type=1&bno=" + no;
