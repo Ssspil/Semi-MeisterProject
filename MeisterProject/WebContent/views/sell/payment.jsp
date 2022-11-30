@@ -19,7 +19,7 @@
 <!-- 홈페이지 아이콘 -->
  <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제 페이지</title>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- iamport.payment.js -->
@@ -227,7 +227,6 @@
 			
 			                let msg = '결제가 완료되었습니다.';
 			                alert(msg);
-			                location.href= "결제 완료 후 이동할 페이지 url"
 			                location.href= "<%=contextPath%>/paycom.se?sno=<%= (int) request.getAttribute("sno") %>"
 			            } else {
 			

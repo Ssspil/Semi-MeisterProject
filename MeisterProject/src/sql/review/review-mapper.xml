@@ -31,4 +31,17 @@
 		WHERE REVIEW_NO = ?
 	</entry>
 	
+	<entry key="selectAllReview">
+		SELECT REVIEW_NO,
+				REVIEW_CONTENT,
+				AVG,
+				REVIEW_DATE,
+				USER_NO,
+				SELL_NO
+		FROM REVIW
+		JOIN MEMBER USING(USER_NO)
+		JOIN SELL USING(SELL_NO)
+				
+	</entry>
+	
 </properties>

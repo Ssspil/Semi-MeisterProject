@@ -9,6 +9,8 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.review.model.dao.ReviewDao;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.dao.SellBoardDao;
 import com.kh.sellboard.model.vo.SellBoard;
 import static com.kh.common.JDBCTemplate.*;
@@ -328,6 +330,20 @@ public class SellBoardService {
 		
 		return result;
 	}
+	
+	// 리뷰 가져오는 메소드
+	public ArrayList<Review> selectAllReview(int sellNo){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Review> getAllReview = new SellBoardDao().selectAllReview(conn, sellNo);
+		
+		JDBCTemplate.close();
+		
+		return getAllReview;
+	}
+
+
 	
 	
 	

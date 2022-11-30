@@ -1,5 +1,7 @@
 package com.kh.review.model.vo;
 
+import java.util.Date;
+
 public class Review {
 	private int reviewNo;
 	private String reviewContent;
@@ -7,6 +9,7 @@ public class Review {
 	private String reviewDate;
 	private int userNo;
 	private int sellNo;
+	private String nickname;
 	
 	public Review() {
 		super();
@@ -31,6 +34,18 @@ public class Review {
 		this.userNo = userNo;
 		this.sellNo = sellNo;
 	}
+	
+	public Review(int reviewNo, String reviewContent, double avg, String reviewDate, int sellNo, String nickname) {
+		super();
+		this.reviewNo = reviewNo;
+		this.reviewContent = reviewContent;
+		this.avg = avg;
+		this.reviewDate = reviewDate;
+		this.sellNo = sellNo;
+		this.nickname = nickname;
+	}
+
+
 
 
 
@@ -82,6 +97,14 @@ public class Review {
 
 	public void setSellNo(int sellNo) {
 		this.sellNo = sellNo;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override

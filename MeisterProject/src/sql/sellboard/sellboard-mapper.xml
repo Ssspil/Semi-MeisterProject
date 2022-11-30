@@ -289,4 +289,20 @@
 		SET STATUS = 'N'
 		WHERE SELL_NO = ?
 	</entry>
+	
+	<!-- 리뷰 가져오는 쿼리문 -->
+	<entry key="selectAllReview">
+		SELECT REVIEW_NO,
+				REVIEW_CONTENT,
+				AVG,
+				REVIEW_DATE,
+                R.SELL_NO,
+                NICKNAME
+		FROM REVIEW R
+		JOIN MEMBER M ON (M.USER_NO = R.USER_NO)
+		JOIN SELL S ON(S.SELL_NO = R.SELL_NO)
+        WHERE S.STATUS = 'Y' AND R.SELL_NO = ?
+        ORDER BY SELL_DATE DESC
+				
+	</entry>
 </properties>

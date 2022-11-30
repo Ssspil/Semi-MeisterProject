@@ -17,6 +17,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Interest;
 import com.kh.common.model.vo.Local;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.review.model.vo.Review;
 import com.kh.sellboard.model.vo.SellBoard;
 
 import static com.kh.common.JDBCTemplate.*;
@@ -831,6 +832,40 @@ public class SellBoardDao {
 
 		return result;
 	}
+	
+	// 리뷰 가져오는 메소드
+		public ArrayList<Review> selectAllReview(Connection conn, int sellNo){
+			
+			ArrayList<Review> getAllReview = new ArrayList<>();
+			PreparedStatement psmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectAllReview");
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, sellNo);
+				rset = psmt.executeQuery();
+				
+				while(rset.next()) {
+					getAllReview.add(new Review(rset.getInt("REVIEW_NO"),
+												rset.getString("REVIEW_CONTENT"),
+												rset.getDouble("AVG"),
+												rset.getString("REVIEW_DATE"),
+												rset.getInt("SELL_NO"),
+												rset.getString("NICKNAME")	
+						
+							));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				
+				close(rset);
+				close(psmt);
+			}
+			return getAllReview;
+		}
 	
 	
 

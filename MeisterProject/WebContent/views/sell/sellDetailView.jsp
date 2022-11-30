@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.common.model.vo.Interest, com.kh.common.model.vo.Local,
-    com.kh.sellboard.model.vo.SellBoard, com.kh.common.model.vo.Attachment"%>
+    com.kh.sellboard.model.vo.SellBoard, com.kh.common.model.vo.Attachment, com.kh.review.model.vo.Review"%>
 <%
 	ArrayList<Interest> interest = (ArrayList<Interest>) request.getAttribute("interest");	
 	ArrayList<Local> local = (ArrayList<Local>) request.getAttribute("local");
 	
 	ArrayList<Attachment> list = (ArrayList<Attachment>) request.getAttribute("list"); 
+	ArrayList<Review> getAllReview = (ArrayList<Review>) request.getAttribute("getAllReview");
 	SellBoard s = (SellBoard) request.getAttribute("s");
 	
 	Attachment at = (Attachment) request.getAttribute("at");
@@ -39,11 +40,11 @@
 		    padding-top: 150px;
 			margin: 0 auto;
 			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-			background-color: mintcream;
 			position: relative;
 	}
 	.container{
 		width: 500px;
+		display: table-cell;
 	}
 	ul.tabs li{
 		background: none;
@@ -73,14 +74,12 @@
 		height: 100%;
 		float: left;
 		box-sizing: border-box;
-		background: mintcream;
 		padding: 5%;
 	}
 	.right{
 		width: 40%;
 		float: right;
 		box-sizing: border-box;
-		background: mintcream;
 		padding: 5%;
 		text-align : center;
 	}
@@ -140,6 +139,13 @@
 	.category a:hover{
 		color: orange;
 	}
+	#review-tb{
+		text-align: center;
+		font-size: medium;
+	}
+	#review-tb th{
+		font-size: small;
+	}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -175,12 +181,13 @@
 				</section>
 				<br><br>
 
-				<div class="container" style="display: table-cell;">
+				<div class="container">
 
 					<ul class="tabs">
 						<li class="tab-link current" data-tab="tab-1">&nbsp;서비스 설명&nbsp;</li>
 						<li class="tab-link" data-tab="tab-2">&nbsp;가격 정보&nbsp;</li>
-						<li class="tab-link" data-tab="tab-3" style="width: 100px; text-align: center;">리뷰</li>
+						<li class="tab-link" data-tab="tab-3" style="width: 100px; text-align: center;">리뷰	
+						</li>
 						<li class="tab-link" data-tab="tab-4">&nbsp;취소/환불&nbsp;</li>
 					</ul>
 		
@@ -192,8 +199,52 @@
 						<b> <fmt:formatNumber value="${price }"  /> </b> 원 으로 책정 되었습니다.
 					</div>
 					<div id="tab-3" class="tab-content">
-						리뷰가 나오게 값을 가져와야 하는데
-						이 탭을 누르면 리뷰가
+						
+												
+						
+							<table id="review-tb">
+								<tbody>
+									<tr>
+										<th>
+											닉네임
+										</th>
+										<th>
+											리뷰 내용
+										</th>
+										<th>
+											평점
+										</th>
+										<th>
+											리뷰작성일
+										</th>
+
+									</tr>
+
+								</tbody>
+								<% for(Review rv: getAllReview) { %>
+									<% if( getAllReview.isEmpty() ) { %>
+									<% } else { %>
+								<tfoot>
+									<tr>
+										<td>
+											<%= rv.getNickname() %>
+										</td>
+										<td>
+											<%=rv.getReviewContent() %>
+										</td>
+										<td>
+											<%= rv.getAvg() %>
+										</td>
+										<td>
+											<%= rv.getReviewDate() %>
+										</td>
+										
+									</tr>
+								</tfoot>
+								<% } %>	
+							<% } %>	
+							</table>
+					
 					</div>
 					<div id="tab-4" class="tab-content">
 						<%= s.getSellRegulation() %>
@@ -205,9 +256,6 @@
 		<div class="right">
 			<div class="sell-info">
 				<section>
-						<!-- <section>
-						좋아요 넣을 섹션 ♡
-						</section> -->
 
 						<section>
 						<h5><%= s.getSellTitle() %></h5>
@@ -230,6 +278,9 @@
 								<div>
 								<%= s.getSellContent() %>
 								</div>
+								<div>
+								별점과 평균
+								</div>
 
 								<br>
 								
@@ -239,9 +290,10 @@
 									<form action="askToSeller.ch?sno=<%=(int)request.getAttribute("sno") %>" method="post">
 									<input type="hidden" name="sellNo" value=<%=s.getSellNo() %> >
 									<input type="hidden" name="receiver" value=<%=s.getUserNO() %> >
-									
-									<%-- <a href="<%=contextPath%>/askToSeller.ch" id="inquireBtn" class="btn btn-primary">문의하기</a> --%>
-									<button id="inquireBtn" class="btn btn-primary">문의하기</button>
+									<%if(loginUser != null && loginUser.getUserNo() != s.getUserNO()) {%>
+										<!-- 자신의 게시글에는 문의하기가 보이지 않는다 -->
+										<button id="inquireBtn" class="btn btn-primary">문의하기</button>
+									<% }%>
 									</form>
 									
 									<br>
@@ -282,9 +334,8 @@
 				<a href="<%=contextPath %>/market.se?currentPage=1" class="btn btn-secondary btn-sm">목록</a>
 				<%if(loginUser != null && loginUser.getUserNo() == s.getUserNO()) {%>
 						<!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우에만 보여진다. -->
-						<!-- <a href="<%=contextPath%>/updateForm.se?sno=<%= s.getSellNo() %>" class="btn btn-warning btn-sm">수정하기</a>  -->
 						<a href="<%=contextPath %>/delete.se?sno=<%= s.getSellNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-					<%} %>
+					<% }%>
 				
 				</div>
 		

@@ -13,7 +13,7 @@
 <!-- 홈페이지 아이콘 -->
  <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제완료 페이지</title>
 <style>
 	.outer{
 		width : 50%;
