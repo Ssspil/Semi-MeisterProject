@@ -187,8 +187,9 @@ public class SellBoardDao {
 										rset.getInt("LOCAL_NO"),
 										rset.getString("NICKNAME"),
 										rset.getString("TITLEIMG"),
-										rset.getString("LOCALNAME"),
-										rset.getString("INTERESTNAME")));	
+										rset.getInt("USER_NO"),
+										rset.getString("LOCAL_NAME"),
+										rset.getString("INTEREST_NAME")));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
