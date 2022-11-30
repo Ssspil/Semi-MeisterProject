@@ -53,9 +53,7 @@ public class ChattingListPageController extends HttpServlet {
 		for(int i = 0; i < senderList.size(); i++) {
 			list.add(new ChattingService().selectChatList(receiverList.get(i), senderList.get(i), sellList.get(i)));			
 		}
-		
-		System.out.println(list);
-		System.out.println(list.size());
+
 		for (int i = 0; i < list.size()-1; i++) {
             for (int j = 0; j < list.size()-1; j++) {
                 if (i == j) {
@@ -64,8 +62,7 @@ public class ChattingListPageController extends HttpServlet {
                 }
             }
         }
-		System.out.println(list);
-		System.out.println(list.size());
+		
 		for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < list.size(); j++) {
                 if (i == j) {

@@ -317,9 +317,9 @@
 	<form action="<%=contextPath%>/chatting.me" method="post">
 		<div class="outer">
 				<input id="user" type="hidden" value="<%=nickName%>" readonly> 
-				<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
+				<input id="sender" type="text" value="<%=userNo%>" readonly> 
 				<input id="opponent" type="hidden" value=<%=nickName %> readonly>
-				<input id="receiver" name="receiver" type="hidden" value=<%=receiver %> readonly> 
+				<input id="receiver" name="receiver" type="text" value=<%=receiver %> readonly> 
 				<input id="sellNo" name="sellNo" type="hidden" value=<%=sellNo %> readonly>  
 	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 				<br>
