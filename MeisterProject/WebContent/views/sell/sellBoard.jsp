@@ -308,6 +308,11 @@ p button{
 						if (data.result == 1) {
 							$("#zzim").attr("src", "./resources/image/sell_zzim.png");
 							alert("찜 등록 완료!");
+								if(confirm("찜 목록 페이지로 이동하시겠습니까?") == true){
+									location.href = "<%= contextPath%>/wishList.se";
+								}else{
+									return false;
+								}
 						} else if (data.result == 2) {
 								$.ajax({
 									url : "sellBoardLike.se",
@@ -320,22 +325,23 @@ p button{
 										} //if
 									}, //success
 									error : function() {
-										console.log("ERROR > ");
+										console.log("찜 취소 오류 ");
 									} //error
 								}) //$.ajax
-							} //if
+							} // else if
 						 else {
 							alert("오류가 발생했습니다.");
 						}
-					},
+					}, //success
 					error : function() {
-						console.log("ERROR>>");
+						console.log("찜 등록 오류");
 					},
 					done : function() {
 						likeBtn = true;
-				} 
+					} //done
 			 })//$.ajax
-		 }
+		 } //function
+		 
      	</script>
 		    
 		    
