@@ -33,18 +33,18 @@ public class ChattingToDBController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String chatData = request.getParameter("chatData");
-		
+		HttpSession session = request.getSession();
 		int result = new ChattingService().insertChatting(chatData);
-		System.out.println(result);
+		int receiver = Integer.parseInt(request.getParameter("receiver"));
+		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
 		if(result == 0) {
 			request.setAttribute("errorMsg", "채팅 입력 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "채팅 저장 성공");
-
-			response.sendRedirect(request.getContextPath()+"/mypage.me");
+			session.setAttribute("receiver", receiver);
+			session.setAttribute("sellNo", sellNo);
+			response.sendRedirect(request.getContextPath()+"/askToSeller.ch");
 		}
 	}
 
