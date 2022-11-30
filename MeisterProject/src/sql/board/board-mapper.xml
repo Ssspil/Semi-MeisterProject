@@ -229,15 +229,16 @@
 	</entry>
 	
 	<entry key="myCommunity">
-		SELECT  BOARD_NO,
+		SELECT  B.BOARD_NO,
                 BOARD_TITLE,
                 BOARD_CONTENT,
-                REPLY_COUNT,
-                BOARD_RECOMMEND,
+                (SELECT COUNT(REPLY_NO) FROM REPLY WHERE BOARD_NO = B.BOARD_NO) REPLY_COUNT,
+                 (SELECT COUNT(RED_NO) FROM RECOMMEND WHERE BOARD_NO = B.BOARD_NO) BOARD_RECOMMEND,
                 B.USER_NO,
                 TO_CHAR(BOARD_DATE,'YYYY-MM-DD') BOARD_DATE
        	FROM BOARD B
-        LEFT OUTER JOIN REPLY R USING(BOARD_NO)
+       LEFT OUTER JOIN REPLY R 
+            ON B.USER_NO = R.REPLY_NO
 		WHERE B.STATUS = 'Y'
         AND B.USER_NO = ?
 	</entry>
@@ -252,7 +253,8 @@
 		    R.USER_NO
 	    FROM REPLY R
 	    LEFT OUTER JOIN BOARD B USING(BOARD_NO)
-	    WHERE R.STATUS = 'Y'
+	    WHERE B.STATUS = 'Y'
+	    AND R.STATUS = 'Y'
 	    AND R.USER_NO = ?
 	</entry>
 	
