@@ -136,7 +136,6 @@ table>tfoot>tr:hover {
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%= contextPath %>/board.ad">커뮤니티</a>
                                     <a class="nav-link" href="<%= contextPath %>/sellboard.ad">판매게시판</a>
-                                    <a class="nav-link" href="<%= contextPath %>/review.ad">리뷰</a>
                                 </nav>
                             </div>
                             
@@ -327,7 +326,7 @@ table>tfoot>tr:hover {
 						htmls += 	"</tbody>";
 						htmls +="</table>";
 	              };
-				  $(".modal .modal-content").html(htmls);
+				  $(".modal  
 		},
 			error : function() {
 				console.log("댓글리스트조회용 ajax통신 실패~");

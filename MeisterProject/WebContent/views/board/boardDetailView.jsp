@@ -703,7 +703,7 @@ body {
 		// 좋아요 기능
 		let likeBtn = true; // 변수 likeBtn을 true로 선언
 		
-		$(document).on("click", "div.like", (e) => { // 이벤트 인자
+		$(document).on("click", "div.like", (e) => { /* 이벤트 인자 */
 			e.preventDefault();// 한번 클릭후 다음 클릭 방지
 			likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 			$.ajax({
