@@ -638,7 +638,7 @@ body {
 						htmls += '<li data-x-1  data-z-1 class="comments-list-item">';
 						htmls += '<div data-c-1 data-x-1 class="comment-wrapper">';
 						htmls += '<div data-c-1 class="profile-image">';
-						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"' alt='aa'>";
+						htmls +=  "<img data-c-1 class='image' src='<%=contextPath %>/"+i.at.filePath+"/"+i.at.changeName+"'>";
 						htmls += '</div>';
 						htmls += '<div data-c-1 class="comment-information">';
 						htmls +=    '<div data-c-1 class="user-info">';
@@ -652,7 +652,6 @@ body {
 						htmls +=    '<div data-c-1 class="comment-action">';
 						htmls +=        '<div data-c-1 class="comment-react">';
 						htmls +=            '<span data-c-1 class="text">'+i.replyDate+'</span>';
-// 						htmls +=            '<span data-c-1 class="divider" style="margin:s 0 0.5rem; color: black;">·</span>';
 						htmls +=            '<div data-c-1 class="like-area">';
 						htmls +=                '<span data-c-1 class="text"></span>';
 						htmls +=            '</div>';
@@ -682,7 +681,7 @@ body {
 		
 		// 댓글 수정
 		function replyUpdate(index, rno, bno){
-			var isUpdate = $("#replycontent"+index).attr("contenteditable");
+			var isUpdate = $("#replycontent"+index).attr("contenteditable"); // contenteditable: div 태그를 편집하고 싶을 때 사용 사용방법: ("contenteditable", true)
 			
 			if(isUpdate == "false"){
 				$("#replycontent"+index).attr("contenteditable", true);
@@ -711,11 +710,11 @@ body {
 				type : "post",
 				data : { boardNo : <%=b.getBoardNo() %>, type : "I" },
 				success : function(data) {
-					if (data.result == 1) {
+					if (data.result == 1) { // 성공 시 좋아요 카운터 1
 						alert("좋아요가 등록되었습니다.");
 						$(".like > .text2").text("좋아요 " + data.recommend);
-					} else if (data.result == 2) {
-						if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) {
+					} else if (data.result == 2) { // 한번 더 클릭 시 1 + 1 증가 할 때 한번 더 비동기 통신 요청을 보냄 
+						if (confirm("이미 좋아요를 누르신 글입니다.\n취소하시겠습니까?")) { // result 값이 2일때 확인 여부 
 							$.ajax({
 								url : "boardLike.bo",
 								type : "post",
@@ -727,7 +726,7 @@ body {
 									}
 								},
 								error : function() {
-									console.log("ERROR >> ");
+									console.log("error");
 								}
 							})
 						}
@@ -736,9 +735,9 @@ body {
 					}
 				},
 				error : function() {
-					console.log("ERROR >> ");
+					console.log("error");
 				},
-				done : function() {
+				done : function() { // 성공 시 버튼 실행
 					likeBtn = true;
 				}
 			});

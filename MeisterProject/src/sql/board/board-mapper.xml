@@ -350,26 +350,28 @@
 		 AND STATUS = 'Y'
 	</entry>
 	
-	<!— 게시글 전체 가져오는 쿼리문 —>
+	<!-- 게시글 전체 가져오는 쿼리문 -->
 	<entry key="selectAllList">
-		SELECT  BOARD_NO,
-		       BOARD_TITLE,
-		       BOARD_CONTENT,
-		       BOARD_COUNT,
-		       BOARD_RECOMMEND,
-		       REPLY_COUNT,
-		       BOARD_TYPE
-		FROM (		SELECT DISTINCT BOARD_NO,
-		               BOARD_TITLE,
-					   BOARD_CONTENT,
-					   BOARD_COUNT,
-					   BOARD_RECOMMEND,
-					   REPLY_COUNT,
-					   BOARD_TYPE,
-		               BOARD_DATE
-				FROM BOARD B
-		        LEFT JOIN REPLY R USING(BOARD_NO)
-				WHERE B.STATUS = 'Y' ) A
+		SELECT  
+		    BOARD_NO,
+		    BOARD_TITLE,
+		    BOARD_CONTENT,
+		    BOARD_COUNT,
+		    BOARD_RECOMMEND,
+		    REPLY_COUNT,
+		    BOARD_TYPE
+		FROM (SELECT DISTINCT 
+			        B.BOARD_NO,
+			        BOARD_TITLE,
+			        BOARD_CONTENT,
+			        BOARD_COUNT,
+			        (SELECT COUNT(RED_NO) FROM RECOMMEND WHERE BOARD_NO = B.BOARD_NO) BOARD_RECOMMEND,
+			        (SELECT COUNT(REPLY_NO) FROM REPLY WHERE BOARD_NO = B.BOARD_NO) REPLY_COUNT,
+			        BOARD_TYPE,
+			        BOARD_DATE
+			FROM BOARD B
+			LEFT OUTER JOIN REPLY R ON B.USER_NO = R.REPLY_NO
+			WHERE B.STATUS = 'Y' ) A
 		ORDER BY BOARD_DATE DESC
 	</entry>
 	
