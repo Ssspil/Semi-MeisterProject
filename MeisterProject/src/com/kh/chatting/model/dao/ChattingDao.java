@@ -331,4 +331,33 @@ public class ChattingDao {
 		
 		return at;
 	}
+	
+	public String selectAllSellTitle(Connection conn, int sellNo){
+		String title = "";
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSellTitle");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, sellNo);
+			
+			rset = psmt.executeQuery();
+
+			while(rset.next()) {
+				title = rset.getString("SELL_TITLE");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(psmt);
+		}
+		
+		return title;
+	}
 }
