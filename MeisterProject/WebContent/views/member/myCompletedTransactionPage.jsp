@@ -124,7 +124,7 @@ textarea {
 	box-sizing: border-box;
 	height: 70px;
 	border:3px solid orange;
-	width:60%;
+	width:882px;
 	margin:auto;
 	margin-bottom:30px;
 	border-radius: 15px;
@@ -166,7 +166,7 @@ textarea {
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
 			<br>
 			<div id="null">완료된 거래가 없습니다.</div>
-			<div id="null2">쇼핑 ㄱㄱ</div>
+			<div id="null2">마켓을 방문해주세요!</div>
 		</div>
 		<%}else {%>
    		<%for(int i =0; i < s2.size(); i++) { %>

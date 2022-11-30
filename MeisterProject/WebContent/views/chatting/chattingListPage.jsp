@@ -104,13 +104,14 @@
     	margin-right: 30px;
     	font-weight:bold;
     	font-family: 'Nanum Gothic', sans-serif;
+    	    width: 214px;
     }
     #inputDate {
     margin-top: 10px;
     color: lightgray;
     font-family: 'Nanum Gothic', sans-serif;
     position: relative;
-    left: 135px;
+    left: 100px;
     width: 55px;
     top: -43px;
 }
