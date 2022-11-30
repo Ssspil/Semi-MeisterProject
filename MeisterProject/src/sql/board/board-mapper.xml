@@ -318,6 +318,7 @@
 		    B.STATUS
 	    FROM BOARD B
 	    JOIN MEMBER M USING(USER_NO)
+	    WHERE B.STATUS = 'Y'
 	</entry>
 	
 	<!-- 관리자 커뮤니티 게시글 삭제  -->
@@ -346,6 +347,7 @@
 		UPDATE REPLY
 		SET STATUS = 'N'
 		WHERE REPLY_NO = ?
+		 AND STATUS = 'Y'
 	</entry>
 	
 </properties>

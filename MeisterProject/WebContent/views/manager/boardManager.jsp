@@ -214,7 +214,7 @@ table>tfoot>tr:hover {
 								<td><%=list.get(i).getMemberNic() %></td>
 								<td><%=list.get(i).getBoardTitle() %></td>
 								<td><%=list.get(i).getBoardDate() %></td>
- 								<td><button class="btn btn-info btn-sm" type="button" onclick="showBoard('<%=list.get(i).getBoardNo()%>')">보기</button></td>
+								<td><button class="btn btn-info btn-sm btn1" type="button" onclick= "showBoard('<%=list.get(i).getBoardNo()%>')">보기</button></td>
 								<td><%=list.get(i).getStatus() %></td>
 								<td><a href="<%=contextPath %>/boardremove.ad?bno=<%=list.get(i).getBoardNo() %>">삭제하기</a></td>
 							      <% } %>
@@ -272,7 +272,7 @@ table>tfoot>tr:hover {
 	<!-- 모달창 클릭 이벤트 -->
 	<script>
 		$(function() {
- 			$(".btn").click(function() {
+ 			$(".btn1").click(function() {
  				$(".modal").fadeIn();
  			});
  			$(".modal-content").click(function() {
@@ -284,12 +284,11 @@ table>tfoot>tr:hover {
 	<!-- 모달창 화면 -->
 	<script>
 		function showBoard(bno) {
-
 			$.ajax({
 				url : "boardModal.ad",
 				data : {bno : bno, type:"reply"},
 				success : function(data) {
-					let htmls="";
+					let htmls=""; 
 					let json = data.rlist;
 					  htmls += 	"<table>";
 					  htmls +=	 	"<tr>";
@@ -297,7 +296,7 @@ table>tfoot>tr:hover {
 					  htmls +=			"<th style='width:500px;'>커뮤니티 게시글 사진</th>";
 					  htmls += 	 	"</tr>";
 					  htmls +=   	"<tr class='board-list'>";
-					  htmls +=			"<td>"+data.bs.boardContent+"</td>";
+					  htmls +=			"<td>"+data.bs?.boardContent+"</td>";
 					  htmls +=			"<td>"+"<img style='height:300px;' src='<%=contextPath %>/"+data.at?.filePath+"/"+data.at?.changeName+"'>"+"</td>";
 					  htmls +=		"</tr>";
 					  htmls +=	"</table>";
@@ -323,7 +322,7 @@ table>tfoot>tr:hover {
 						htmls += 			"<td>"+json[i].replyDate+"</td>";
 						htmls += 			"<td>"+json[i].replyContent+"</td>";
 						htmls +=			"<td>"+json[i].status+"</td>";
-						htmls +=    		"<td><button type='button' id='btn1' name='rno' onclick='replyDelete("+json[i].replyNo+", "+bno+")'>삭제하기</button></td>";
+ 						htmls +=    		"<td><button type='button' id='btn1' name='rno' onclick='replyDelete("+json[i].replyNo+", "+bno+")'>삭제하기</button></td>";
 						htmls += 		"</tr>";
 						htmls += 	"</tbody>";
 						htmls +="</table>";
@@ -338,16 +337,16 @@ table>tfoot>tr:hover {
 		
 		<!-- 댓글 삭제하기 기능 -->
 		function replyDelete(rno, bno){
-			if()
 			location.href="<%=contextPath%>" + "/deleteList.ro?rno="+rno+"&bno="+bno;
 		}
-	</script>
+ 	</script> 
 		
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<%= contextPath %>/resources/js/manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    
 
 </body>
 </html>

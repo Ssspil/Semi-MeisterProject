@@ -38,7 +38,8 @@ public class ReplyListDeleteController extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "성공적으로 댓글을 삭제했습니다.");
 			response.sendRedirect(request.getContextPath()+"/board.ad");
 		} else {
-			request.setAttribute("errorMsg","댓글 삭제 실패");
+			request.setAttribute("errorMsg","이미 삭제된 댓글입니다.");
+			request.setAttribute("location","board.ad");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	
