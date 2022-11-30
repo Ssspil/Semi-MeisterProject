@@ -79,15 +79,16 @@ public class ExpertSubmitController extends HttpServlet {
 			
 
 			
-			int result = new MemberService().expertSubmit(m, at);
+			Member UpdateMem = new MemberService().expertSubmit(m, at);
 			
 			
 			System.out.println("마이스터 신청하기");
-			if(result > 0) {
+			if(UpdateMem != null) {
 				HttpSession session = request.getSession();
-				
-				
 				session.setAttribute("alertMsg", "전문가 신청이 제출되었습니다.");
+				
+				session.setAttribute("loginUser", UpdateMem);
+				
 				response.sendRedirect(request.getContextPath()+"/mypage.me");
 			} else {
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
