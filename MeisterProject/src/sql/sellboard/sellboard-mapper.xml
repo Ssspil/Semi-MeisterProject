@@ -127,7 +127,18 @@
 	</entry>
 		
 	<entry key="selectSearchSellBoardList">
-	SELECT *
+	SELECT SELL_NO,
+           SELL_TITLE,
+           PRICE,
+           SELL_RECOMMEND,
+           SELL_DATE,
+           INTEREST_NO,
+           LOCAL_NO,
+           NICKNAME,
+           TITLEIMG,
+           USER_NO,
+           LOCAL_NAME,
+           INTEREST_NAME
 	FROM (SELECT ROWNUM RNUM,
 			A.*
 			FROM  (SELECT  S.SELL_NO as SELL_NO,
@@ -135,15 +146,21 @@
 					        S.PRICE as PRICE,
 					        S.SELL_RECOMMEND as SELL_RECOMMEND,
 					        S.SELL_DATE as SELL_DATE,
-					        S.INTEREST_NO AS INTEREST_NO,
-					        S.LOCAL_NO AS LOCAL_NO,
+					        INTEREST_NO AS INTEREST_NO,
+					        LOCAL_NO AS LOCAL_NO,
 					        M.NICKNAME AS NICKNAME,
-					        FILE_PATH || CHANGE_NAME AS TITLEIMG
+					        FILE_PATH || CHANGE_NAME AS TITLEIMG,
+					        USER_NO,
+					        LOCAL_NAME,
+					        INTEREST_NAME
 					FROM SELL S
 					JOIN MEMBER M USING (USER_NO)
 					JOIN ATTACHMENT A ON (A.REF_NO = S.SELL_NO)
-					WHERE S.STATUS = 'Y'
-                        AND (SELL_TITLE LIKE ? OR NICKNAME LIKE ?)
+					JOIN INTEREST I USING (INTEREST_NO)
+                    JOIN LOCAL L USING (LOCAL_NO)
+					WHERE S.STATUS = 'Y' AND FILE_LEVEL=2 
+						AND (NICKNAME LIKE ? OR SELL_TITLE LIKE ?)
+
 					ORDER BY SELL_DATE DESC) A
 		  )
 		WHERE RNUM BETWEEN ? AND ?
