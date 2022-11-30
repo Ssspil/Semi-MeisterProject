@@ -1,4 +1,4 @@
-<%@page import="oracle.net.aso.l"%>
+ <%@page import="oracle.net.aso.l"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.board.model.vo.*, com.kh.common.model.vo.Attachment, java.util.ArrayList" %>
 <%
@@ -596,7 +596,7 @@ body {
 		$(function() {
 			selectReplyList();
 			
-			//setInterval(selectReplyList, 2000);
+			setInterval(selectReplyList, 2000);
 		})
 		
 		// 댓글 등록
@@ -626,7 +626,7 @@ body {
 		 	var loginNo = "<%=loginUser.getUserNo()%>";
 		 	var bno = "<%=b.getBoardNo()%>";
 		 	var index = 0;
-		 	
+		 	 
 			$.ajax({
 				url : "rlist.bo",
 				data : {bno : ${b.boardNo}},
@@ -645,8 +645,8 @@ body {
 						htmls +=        '<span data-c-1 class="user-name">'+i.mbNic+'</span>';
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="content">';
-						htmls +=        '<p data-c-1 class="text comment-input">';
-						htmls +=            '<span data-c-1 id="replycontent'+index+'" style="font-weight: 400px;width:100%; display:block" contenteditable=false>'+i.replyContent+'</span>';
+						htmls +=        '<p data-c-1 class="text comment-input">'; // 
+						htmls +=            '<span data-c-1 id="replycontent'+index+'" style="font-weight: 400px;width:100%; display:block" contenteditable=false>'+i.replyContent+'</span>'; //
 						htmls +=        '</p>';
 						htmls +=    '</div>';
 						htmls +=    '<div data-c-1 class="comment-action">';
@@ -656,12 +656,13 @@ body {
 						htmls +=                '<span data-c-1 class="text"></span>';
 						htmls +=            '</div>';
 						htmls +=        '</div>';
-						if(loginNo == i.userNo){
+						if(loginNo == i.userNo){ // 로그인 유저
 			                htmls    +=        '<div data-c-1 class="more-action">';
 			                htmls    +=            '<div data-c-1 class="btn-sgroup">';
+			                							// 내가 등록한 댓글 수정하기 삭제하기 버튼 보여주기
                 			htmls	 +=					'<button type="button" id="btn1" name="rno" onclick="replyUpdate('+index+', '+i.replyNo+', '+bno+')";>수정하기</button>';
-			                htmls    +=                '<button type="button" id="btn1" name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
-						} else {
+			                htmls    +=               	'<button type="button" id="btn1" name="rno" onclick="replyDelete('+i.replyNo+', '+bno+')">삭제하기</button>';			
+						} else {						// 내가 등록한 댓글이 아니면 신고하기 버튼 보여주기
 				               htmls    +=                "<a href='<%=contextPath %>/report.me?rno="+i.replyNo+"'><button type='button' id='btn2'>신고하기</button></a>";
 				               htmls    +=            '</div>';
 			                htmls    +=        '</div>';
@@ -684,7 +685,7 @@ body {
 			var isUpdate = $("#replycontent"+index).attr("contenteditable");
 			// contenteditable: 태그를 편집하고 싶을 때 사용 // 사용방법: ("contenteditable", true)
 			
-			if(isUpdate == "false"){
+			if(isUpdate == "false"){ // 문자열 비교 false(X)
 				$("#replycontent"+index).attr("contenteditable", true);
 				$("#replycontent"+index).focus();
 				return false;
@@ -700,16 +701,16 @@ body {
 			location.href="<%=contextPath%>" + "/delete.ro?rno="+rno+"&bno="+bno;
 		}
 		
-		// 좋아요 기능
-		let likeBtn = true; // 변수 likeBtn을 true로 선언
+// 			e.preventDefault();// 한번 클릭후 다음 클릭 방지
+// 			likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
+// 		let likeBtn = true; // 변수 likeBtn을 true로 선언
 		
+		// 좋아요 기능
 		$(document).on("click", "div.like", (e) => { /* 이벤트 인자 */
-			e.preventDefault();// 한번 클릭후 다음 클릭 방지
-			likeBtn = false; // 변수 likeBtn을 true에서 false로 변경
 			$.ajax({
 				url : "boardLike.bo",
 				type : "post",
-				data : { boardNo : <%=b.getBoardNo() %>, type : "I" },
+				data : { boardNo : <%=b.getBoardNo() %>, type : "I" }, //Insert의 약자
 				success : function(data) {
 					if (data.result == 1) { // 성공 시 좋아요 카운터 1
 						alert("좋아요가 등록되었습니다.");
@@ -719,7 +720,7 @@ body {
 							$.ajax({
 								url : "boardLike.bo",
 								type : "post",
-								data : { boardNo : <%=b.getBoardNo() %>, type : "D" },
+								data : { boardNo : <%=b.getBoardNo() %>, type : "D" }, // Delete의 약자
 								success : function(data) {
 									if (data.result == 1) {
 										alert("취소되었습니다.");
@@ -738,9 +739,9 @@ body {
 				error : function() {
 					console.log("error");
 				},
-				done : function() { // 성공 시 버튼 실행
-					likeBtn = true;
-				}
+// 				done : function() { // 성공 시 버튼 실행
+// 					likeBtn = true;
+// 				}
 			});
 		});
  	</script>

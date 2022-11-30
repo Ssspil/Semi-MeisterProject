@@ -178,6 +178,7 @@
     </script>
     
     <script>
+    // 비밀번호 유효성 검사
     	$(function(){
 		    $("#userPwd").keyup(function(){
 		      $("#chkNotice").html("");
@@ -219,6 +220,7 @@
    
     </script>
     <script>
+    // 닉네임 유효성 검사
 	    function nicknameCheck() {
 	    	let regExp = /^[가-힣]+$/gmi;
 	    	let nickname = $("#nickname").val();
@@ -236,6 +238,7 @@
 	        	return false;
 	        }
 	    	
+    		// 닉네임 중복체크 (비동기 서버로 요청)
 	    	$.ajax({
 	    		url : "check.me",
 	    		method : "post",
@@ -258,6 +261,7 @@
 	    }
     </script>
     <script>
+    // 아이디 유효성 체크
 	    function idCheck(){
 	    	// 아이디를 입력하는 input 요소 객체
 	        let $userId = $("#userId");
@@ -278,6 +282,7 @@
 	        }
 	    
 	    	// name이 userId인 요소가 member.jsp에도 있어서 확실하게 어디에 속해있는 요소인지 잘 적어줘야함.
+	    	// 아이디 중복체크 검사 
 	    	$.ajax({
 	    		url : "check.me",
 	    		method : "post", // 디폴트 post

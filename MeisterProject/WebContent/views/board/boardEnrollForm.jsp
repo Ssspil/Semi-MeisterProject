@@ -209,7 +209,7 @@
       <div id="wrap2">
          <div id="wrap-title">
                <div id="wrap-title2" style="font-size:1">
-                  <font style="font-size: 30px; font-weight: bold;"><%= type == 2 ? "궁금해요" : "게시판" %> 글작성</font>
+                  <font style="font-size: 30px; font-weight: bold;"><%= type == 2 ? "궁금해요" : "게시판" %> 글작성</font> <!-- 삼항 연산자를 통해 type별 글작성 구분 -->
                   <button   type="submit" id="btn" style="font-size: 20px; font-weight: bold;">등록</button>
                   <input type="hidden" name="type" value="<%=type %>">   
                </div>
@@ -248,16 +248,14 @@
    </div>
    
    <%@ include file="../common/footer.jsp" %>
-   
-   <script>
-	 
-   </script>
      
     <script>
+    // 파일을 올릴 때 마다 파일명이 바뀌도록 해주는 함수
        function fileChange(){
          $("#fileName").text($("#input-file")[0].files[0].name);
        }
        
+    // 이미지 미리보기 화면
        function readImage(input) {
     	    if (input.files && input.files[0]) {
     	        const reader = new FileReader();

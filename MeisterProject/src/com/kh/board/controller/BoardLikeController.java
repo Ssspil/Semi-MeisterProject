@@ -48,14 +48,14 @@ public class BoardLikeController extends HttpServlet {
 		if (type.equals("I")) {
 			int count = boardService.selectRecommend(boardNo, userNo);
 			
-			if (count == 0) {
+			if (count == 0) { 
 				result = boardService.insertRecommend(boardNo, userNo);
 			} else {
 				result = 2;
 			}
 		} else if (type.equals("D")) {
-			int count = boardService.selectRecommend(boardNo, userNo);
-			if (count == 0) {
+			int count = boardService.selectRecommend(boardNo, userNo); // 있는지만 체크 또는 확인 다시조회를해서
+			if (count == 0) { // 1이면 게시글이 있다는것
 				result = -2;
 			} else {
 				result = boardService.deleteRecommend(boardNo, userNo);

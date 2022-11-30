@@ -64,13 +64,16 @@ public class boardListModalController extends HttpServlet {
 			
 			response.setContentType("application/json; charset=UTF-8");
 			
-			HashMap<String, Object> b = new HashMap<>();
+			HashMap<String, Object> b = new HashMap<>(); // 키와 벨류로 이루어진 한쌍의 자료구조
 			
 			Board bs = new BoardService().selectBoard(boardNo);
 			
 			b.put("at", at);
 			b.put("rlist", rlist);
 			b.put("bs", bs);
+			
+			b.get("at"); // == at
+			b.get("rlist"); // == at
 			
 			Gson gson = new Gson();
 			response.getWriter().print(gson.toJson(b));
