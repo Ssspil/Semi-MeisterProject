@@ -11,10 +11,12 @@
 	Attachment at = (Attachment) request.getAttribute("at");
 	
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
- <!-- 홈페이지 아이콘 -->
+<!-- 홈페이지 아이콘 -->
  <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
 <title>판매 상세페이지</title>
@@ -186,7 +188,8 @@
 						<%= s.getSellDetail() %>
 					</div>
 					<div id="tab-2" class="tab-content">
-						<%= s.getPrice() %> 원 으로 책정 되었습니다.
+						<c:set var = "price" value="<%= s.getPrice() %>"/>
+						<b> <fmt:formatNumber value="${price }"  /> </b> 원 으로 책정 되었습니다.
 					</div>
 					<div id="tab-3" class="tab-content">
 						리뷰가 나오게 값을 가져와야 하는데
@@ -202,9 +205,9 @@
 		<div class="right">
 			<div class="sell-info">
 				<section>
-						<section>
+						<!-- <section>
 						좋아요 넣을 섹션 ♡
-						</section>
+						</section> -->
 
 						<section>
 						<h5><%= s.getSellTitle() %></h5>
@@ -219,8 +222,9 @@
 								</div>
 								<br>
 								<div>
-								<b>가격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<%= s.getPrice() %> 원
+								<b>가격&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:set var = "price" value="<%= s.getPrice() %>"/>
+								<b> <fmt:formatNumber value="${price }"  /></b>원
 								</div>
 								<br>
 								<div>

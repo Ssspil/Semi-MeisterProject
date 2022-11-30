@@ -148,33 +148,16 @@
 				<td>
 				<select name="interest" id="interest_select" class="cate" required>
 					<option style="text-align: center;" value="0">관심분야 선택</option>
-					<!-- <option value="10">영상</option>
-					<option style="text-align: center;" value="20">영화</option>
-					<option style="text-align: center;" value="30">게임</option>
-					<option style="text-align: center;" value="40">IT</option>
-					<option style="text-align: center;" value="50">운동</option>
-					<option style="text-align: center;" value="60">요리</option> -->
 					<% for(Interest i : interest) { %>
 								<option value="<%= i.getInterestNo() %>"><%= i.getInterestName() %></option>
 								
 							<%} %>
 				</select>
-					<!-- 선택하게 alert로 알려줘야함 막아야 -->
+					<!-- 꼭 선택하고 넘어가도록 alert로 알려줘야함 막아야 -->
 				<br>
 				<br>
 				<select name="local" id="local_select" class="cate" >
 					<option style="text-align: center;" value="115">지역 선택</option>
-					<!-- <option style="text-align: center;" value="5">서울</option>
-					<option style="text-align: center;" value="15">인천</option>
-					<option style="text-align: center;" value="25">부산</option>
-					<option style="text-align: center;" value="35">울산</option>
-					<option style="text-align: center;" value="45">대전</option>
-					<option style="text-align: center;" value="55">광주</option>
-					<option style="text-align: center;" value="65">경기</option>
-					<option style="text-align: center;" value="75">충북/충남</option>
-					<option style="text-align: center;" value="85">전북/전남</option>
-					<option style="text-align: center;" value="95">경북/경남</option>
-					<option style="text-align: center;" value="105">제주</option> -->
 					<% for(Local l : local) { %>
 								<option value="<%= l.getLocalNo() %>"><%= l.getLocalName() %></option>
 								
@@ -286,8 +269,10 @@
 			
 			
 		<br><br>
-		 <div id="file-area">
-		<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
+		
+		<!-- 영역부분 클릭시 파일 첨부가 가능하고 썸네일 -->
+		<div id="file-area">
+			<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
 		</div>
 	
 		<script>
@@ -325,7 +310,7 @@
 	</div>
 	
 	
-
+	<!-- 온라인 선택시 지역선택하는 카테고리를 안보이게 하는 스크립트 -->
 	<script>
         let radios = document.querySelectorAll("[name=onoff]");
         let selects = document.querySelectorAll("[id$='_select']");

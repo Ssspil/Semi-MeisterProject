@@ -11,9 +11,13 @@
 	Attachment at = (Attachment) request.getAttribute("at");
 	
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 홈페이지 아이콘 -->
+ <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery -->
@@ -23,7 +27,7 @@
 
 <style>
 	.outer{
-		width : 50%;
+		width : 40%;
 		padding-top: 150px;
 		margin: 0 auto;
 		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -44,7 +48,7 @@
 		border-radius: 10px;
 	}
 	.tb1{
-		text-align : justify;
+		text-align : left;
 		padding : 2%;
 		border: 1px solid #e4e5ed;	
 		border-radius: 10px;
@@ -53,7 +57,7 @@
 		margin : auto;
 	}
 	.tb{
-		text-align: justify;
+		text-align: center;
 	}
 	#h3{
 		text-align: center;
@@ -69,6 +73,13 @@
 	h6{
 		color: orange;
 	}
+/* 	.titleAndNick{
+		overflow:hidden;
+		max-width : 100%;
+		text-overflow:ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient:vertical;
+	       -webkit-line-clamp:1;} */
 </style>
 </head>
 <body>
@@ -89,7 +100,7 @@
 	                </td>
 	                <td>
 	                </td>
-	                <td>
+	                <td class="titleAndNick">
 	                    <b><%= pm.getSellTitle() %></b><br>
 	                    <h6><%= pm.getNickname() %>  ●</h6>
 	                </td>
@@ -111,13 +122,15 @@
 	            </tr>
 	            <tr>
 	                <td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><%= pm.getSellTitle() %></b>
+						<b><%= pm.getSellTitle() %></b>
 	                </td>
 	                <td>
-						&nbsp;&nbsp;<%= pm.getSellDate() %>
+						&nbsp;<%= pm.getSellDate() %>
 	                </td>
 	                <td>
-						&nbsp;&nbsp;&nbsp;&nbsp;<b><%= pm.getPrice() %></b> 원
+	                	&nbsp;	
+						<c:set var = "price" value="<%= pm.getPrice() %>"/>
+						<b> <fmt:formatNumber value="${price }"  /> </b> 원
 	                </td>
 	            </tr>
 	        </table>
@@ -135,24 +148,28 @@
 	        신용카드 결제만 가능합니다.<br>
 	    </div>
 	    <br>
-	    <div class= tb1>
-	        <table>
+	    <div class= "tb1">
+	        <table class="tb1">
 	            <tr>
 	                <td>
 	                    총 결제 금액
 	                </td>
 	                <td>
-	                    <b style="font-size: large;"><%= pm.getPrice() %></b> 원
+	                    <b style="font-size: large;"><c:set var = "price" value="<%= pm.getPrice() %>"/>
+						<fmt:formatNumber value="${price }"  /></b> 원
 	                </td>
 	            </tr>
+				<tr>
+					<td>
+						
+					</td>
+				</tr>
 	            <tr>
-	                <td>
+	                <td style=text-align:center;>
 	                	<label for="cbox">
-	                    <input id="cbox" type="checkbox"> 결제에 동의합니다.(필수)
+	                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="cbox" type="checkbox"> &nbsp;결제에 동의합니다.(필수)
 	                    </label>
-	                </td>
-	                <td>
-	                
 	                </td>
 	            </tr>
 	            <tr>
@@ -165,6 +182,8 @@
 	            </tr>
 	
 	        </table>
+	        
+	       	
 	        <script>
 	        $(document).ready(function(){
 	        	

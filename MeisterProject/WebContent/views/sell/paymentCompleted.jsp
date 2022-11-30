@@ -5,9 +5,13 @@
 	Attachment at = (Attachment) request.getAttribute("at");
 
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 홈페이지 아이콘 -->
+ <link rel="icon" href="./resources/image/mainLogo.png" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -90,7 +94,8 @@
 		            </tr>
 		            <tr>
 		                <td>
-		                    <%= pc.getPrice() %> 원
+		                    <c:set var = "price" value="<%= pc.getPrice() %>"/>
+						<b> <fmt:formatNumber value="${price }"  /> </b> 원
 		                </td>
 		                <td>
 		
@@ -102,7 +107,8 @@
 		
 		                </td>
 		                <td>
-		                    <b><%= pc.getPrice() %></b> 원
+		                    <c:set var = "price" value="<%= pc.getPrice() %>"/>
+						<b> <fmt:formatNumber value="${price }"  /> </b> 원
 		                </td>
 		            </tr>            
 		        </table>
