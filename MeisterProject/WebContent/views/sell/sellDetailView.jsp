@@ -221,16 +221,11 @@
 									</tr>
 
 								</tbody>
-								
-								<tfoot>
 								<% for(Review rv: getAllReview) { %>
 									<% if( getAllReview.isEmpty() ) { %>
-									<tr>
-										<td>등록된 리뷰가 없습니다.</td>
-									</tr>
 									<% } else { %>
+								<tfoot>
 									<tr>
-										
 										<td>
 											<%= rv.getNickname() %>
 										</td>
@@ -363,9 +358,7 @@
 				})
 			})
 		</script>	
-	</div>	
-	
-	
+	</div>
 
 	
 	<%@ include file="../common/footer.jsp" %>
