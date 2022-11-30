@@ -53,7 +53,7 @@ public class SellDetailController extends HttpServlet {
 		
 		ArrayList<Review> getAllReview = new SellBoardService().selectAllReview(sellNo);
 		System.out.println(getAllReview.get(0).getAvg());
-		
+		request.setAttribute("getAllReview", getAllReview);
 
 		 
 
@@ -72,7 +72,7 @@ public class SellDetailController extends HttpServlet {
 			request.setAttribute("s", s);
 			request.setAttribute("at", at);
 			request.setAttribute("sno", sellNo);
-			request.setAttribute("getAllReview", getAllReview);
+			
 			request.getRequestDispatcher("views/sell/sellDetailView.jsp").forward(request, response);
 			
 		}else {
