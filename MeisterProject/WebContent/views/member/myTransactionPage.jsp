@@ -50,7 +50,7 @@ height:100%;
     border-bottom: 2px solid orange;
     height: 70px;
     margin: auto;
-    width: 60%;
+    width: 882px;
 }
 
 #contenthead{
@@ -61,27 +61,27 @@ height:100%;
     box-sizing: border-box;
     border: 3px solid black;
     height:271px;
-    width: 60%;
+    width: 882px;
     margin: auto;
     padding: 15px;
     margin-bottom:30px;
-    border-radius: 15px;
+    border-radius: 15px; 
 }
-.name2Body{
-    box-sizing: border-box;
-    border: 3px solid black;
-    height:271px;
-    width: 60%;
-    margin: auto;
-    padding: 15px;
-    
-    border-radius: 15px;
+.name1Body:hover{
+border:3px solid yellow;
 }
+.name2Body:hover{
+border:3px solid yellow;
+}
+.name3Body:hover{
+border:3px solid yellow;
+}
+
 .name3Body{
     box-sizing: border-box;
     border: 3px solid black;
     height:271px;
-    width: 60%;
+    width:882px;
     margin: auto;
     padding: 15px;
     margin-bottom:30px;
@@ -180,6 +180,7 @@ border-top: 2px solid black;
 width: 60%;
 margin: auto;
 height: 50px;
+
 }
 #page3{
 box-sizing: border-box;
@@ -238,6 +239,12 @@ margin:auto;
 #ddddd{
 height:100px;
 }
+.color{
+background-color:orange;
+}
+.color1{
+background-color:white;
+}
 </style>
 </head>
 <body>
@@ -269,7 +276,7 @@ height:100px;
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
 			<br>
 			<div id="null">진행중인 거래가 없습니다.</div>
-			<div id="null2">쇼핑 ㄱㄱ</div>
+			<div id="null2">마켓을 방문해주세요!</div>
 			
 		</div>
 		<%}else {%>
@@ -351,6 +358,8 @@ height:100px;
          $("#page").show();
          $("#page2").hide();
          $("#page3").hide();
+         $("#current").addClass("color");
+         $("#current").removeClass("color");
      
       } else if (type == "complete") {
          $("#nameBody_2").show();
@@ -358,7 +367,10 @@ height:100px;
          $("#nameBody_3").hide();
          $("#page2").show();
          $("#page").hide();
-         $("#page3").hide();	
+         $("#page3").hide();
+//          $("#complete").addClass("color");
+//          $("#current").addClass("color1");
+//          $("#cancel").addClass("color1");
       } else if(type == "cancel") {
          $("#nameBody_3").show();
          $("#nameBody_1").hide();
@@ -366,6 +378,9 @@ height:100px;
          $("#page3").show();
          $("#page").hide();
          $("#page2").hide();
+//          $("#cancel").addClass("color");
+//          $("#complete").addClass("color1");
+//          $("#current").addClass("color1");
        }
 
       }  

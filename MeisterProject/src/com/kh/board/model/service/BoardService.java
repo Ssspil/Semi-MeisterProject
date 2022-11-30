@@ -152,7 +152,6 @@ public class BoardService {
 		
 		ArrayList<Board> list = new BoardDao().searchList(conn , searchType , keyword);
 		
-		close();
 		
 		return list;
 		
@@ -366,15 +365,6 @@ public class BoardService {
 		close();
 
 		return rlist;
-	}
-	
-	public ArrayList<Board> modalList(int boardNo) {
-		Connection conn = getConnection();
-
-		ArrayList<Board> list = new BoardDao().modalList(conn,boardNo);
-
-		close();
-		return list;
 	}
 
 	public int deleteReplylist(int replyNo) {

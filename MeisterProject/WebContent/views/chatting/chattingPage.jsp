@@ -303,7 +303,6 @@
 		<%} else{%>
 			조회된 문의가 없습니다
 		<%}%>
-		}
 	</script>
 	<div class="upside">
 		<br>
@@ -323,7 +322,7 @@
 				<input id="sellNo" type="hidden" value=<%=sellNo %> readonly>  
 	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 				<br>
-				<input id="chatData" type="text" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+				<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
 			<br>
 		</div>
 		<div class="chat-format">

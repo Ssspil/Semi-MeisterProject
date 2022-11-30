@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String errorMsg = (String) request.getAttribute("errorMsg");
+//	String location = (String) request.getAttribute("location");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,9 @@
 	<!-- <h1 style="color:red; text-align:center;"><%= errorMsg %></h1> -->
 	
 	<script>
-		alert("에러 났어유 ^_^ ㅋ");
-		location.href = 'loginForm.me';
+		alert("<%= errorMsg %>");
+<%-- 		location.href = '<%=location%>'; --%>
+		location.href = 'mainLoad.do';
 	</script>
 
 

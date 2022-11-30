@@ -119,6 +119,7 @@ background-color:rgb(250, 247, 247);
 float: left;
 }
 #titlepost{
+font-weight:bold;
 float: left;
 }
 #titlepost1{
@@ -132,11 +133,15 @@ overflow: hidden;
 -webkit-line-clamp: 1;
 
 }
+.bodyClick1{
+background-color:rgb(255, 200, 98);
+}
 #body{
 float: left;
 }
 #bodypost{
 float: left;
+font-weight:bold;
 }
 #bodypost1{
 float: left;
@@ -157,6 +162,7 @@ top: -15px;
 }
 #footerpost{
 float: left;
+font-weight:bold;
 }
 #footerpost1{
 float: left;
@@ -347,7 +353,7 @@ height:100px;
 	})
 
    function menuClick(type) {
-      /* body2 : 게시판 , */
+
       if (type == "name1") {
          $("#nameBody_1").show();
          $("#nameBody_2").hide();
