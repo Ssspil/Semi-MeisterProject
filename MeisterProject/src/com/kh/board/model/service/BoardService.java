@@ -152,7 +152,6 @@ public class BoardService {
 		
 		ArrayList<Board> list = new BoardDao().searchList(conn , searchType , keyword);
 		
-		close();
 		
 		return list;
 		

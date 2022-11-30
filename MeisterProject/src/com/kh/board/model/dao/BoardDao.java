@@ -47,6 +47,10 @@ public class BoardDao {
 			sql = prop.getProperty("selectListSearchCount");
 			keyword="%"+keyword+"%";
 		}
+//		if(!"".equals(keyword)) {
+//			sql = prop.getProperty("selectListSearchCount");
+//			keyword="%"+keyword+"%";
+//		}
 
 		try {
 			psmt = conn.prepareStatement(sql);
