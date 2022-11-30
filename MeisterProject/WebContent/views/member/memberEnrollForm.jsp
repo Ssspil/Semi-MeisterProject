@@ -73,7 +73,7 @@
         background-size: 20px;
     }
     
-    *:focus {
+    *:focus, a:not:focus {
      outline: none;
      border: 1px solid orange;
 	}
