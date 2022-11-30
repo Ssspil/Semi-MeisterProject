@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,11 +38,14 @@ public class PasswordChangeController extends HttpServlet {
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "비밀번호 변경 성공 다시 로그인 해주세요");		    
-		    
-		    response.sendRedirect(request.getContextPath());
-		    
-		    session.invalidate();		    
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('비밀번호를 변경하였습니다');location.href='mainLoad.do'</script>"); 
+			writer.close();	    
+			session.invalidate();
+			response.sendRedirect("pagePath");	
+			
 		} else {
 			request.setAttribute("errorMsg", "비밀번호 변경에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
