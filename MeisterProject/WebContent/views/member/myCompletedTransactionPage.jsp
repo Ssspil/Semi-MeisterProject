@@ -25,6 +25,16 @@
 <title>Insert title here</title>
 
 <style>
+.name2Body{
+    box-sizing: border-box;
+    border: 3px solid black;
+    height:271px;
+    width: 882px;
+    margin: auto;
+    padding: 15px;
+    
+    border-radius: 15px;
+}
 .page_wrap2 {
 	text-align: center;
 	position: relative;
@@ -118,12 +128,16 @@ textarea {
 	margin:auto;
 	margin-bottom:30px;
 	border-radius: 15px;
-	padding: 16px;
+	
+	position: relative;
+    top: -24px;
 }
 #myRiview{
     font-weight: bold;
+    position: relative;
+    left: 28px;
 }
-#star{
+.setStar{
     position: relative;
     left: 80px; 
     top:-2px;
@@ -136,7 +150,7 @@ textarea {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
     position: relative;
-    left: 30px;
+    left: 75px;
     top:4px;
 
 }
@@ -185,7 +199,7 @@ textarea {
 				        <button id="btn3" onclick="show('<%=s2.get(i).getSellNo() %>');">리뷰쓰기</button>
 			        <%} %>
 		        </div>
-			   
+			   <br>
 				
 				<!-- 나의 리뷰보는 div -->
 				<%if(review.get(i) != null){ %>
@@ -197,6 +211,7 @@ textarea {
 							<span style="width: <%=(int)(review.get(i).getAvg()*20) %>%">★★★★★</span>
 						</span>
 	    			</div>
+	    			
     			<%} %>
         	<%} %>
    		<%} %>
