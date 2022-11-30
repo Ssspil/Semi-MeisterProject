@@ -68,7 +68,6 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<%= contextPath %>/board.ad">커뮤니티</a>
                                     <a class="nav-link" href="<%= contextPath %>/sellboard.ad">판매게시판</a>
-                                    <a class="nav-link" href="<%= contextPath %>/review.ad">리뷰</a>
                                 </nav>
                             </div>
                             
