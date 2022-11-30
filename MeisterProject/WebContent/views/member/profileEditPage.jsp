@@ -38,7 +38,7 @@
     	margin-bottom: 10px;
     }
     #fileUploadBtn{
-    	margin-top: 70px;
+    	margin-top: 10px;
     }
     input{
     	border: 1px solid gray;
