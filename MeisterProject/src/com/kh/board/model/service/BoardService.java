@@ -366,15 +366,6 @@ public class BoardService {
 
 		return rlist;
 	}
-	
-	public ArrayList<Board> modalList(int boardNo) {
-		Connection conn = getConnection();
-
-		ArrayList<Board> list = new BoardDao().modalList(conn,boardNo);
-
-		close();
-		return list;
-	}
 
 	public int deleteReplylist(int replyNo) {
 			
