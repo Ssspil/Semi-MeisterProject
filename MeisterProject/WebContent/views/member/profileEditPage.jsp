@@ -156,7 +156,7 @@
 		
 		$ (function selectInterest(){
 			$("#interest").val("<%=interests%>").prop("selected", true);
-			$('#textInterest').val($('#interest').val());
+			$('#textInterest').val($("#interest option:selected").text());
 		});
 		
 		$(function phoneSelect(){
@@ -219,7 +219,7 @@
 		
 		$(function(){
 			$('#interest').change(function(){
-				$('#textInterest').val($('#interest').val());
+				$('#textInterest').val($("#interest option:selected").text());
 			})
 		});
 		
