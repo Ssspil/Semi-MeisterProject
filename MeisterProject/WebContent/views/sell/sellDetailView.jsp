@@ -14,6 +14,7 @@
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -221,10 +222,14 @@
 									</tr>
 
 								</tbody>
-								<% for(Review rv: getAllReview) { %>
-									<% if( getAllReview.isEmpty() ) { %>
-									<% } else { %>
+								
 								<tfoot>
+								<% for(Review rv: getAllReview) { %>
+									<% if( getAllReview.isEmpty() ) { %>		
+									<tr>
+										<td>등록된 리뷰가 없습니다.</td>
+									</tr>
+									<% } else { %>
 									<tr>
 										<td>
 											<%= rv.getNickname() %>
@@ -278,8 +283,25 @@
 								<div>
 								<%= s.getSellContent() %>
 								</div>
+								<br>
+								
+								
+								<!-- 리뷰 평균 구하기 -->
 								<div>
-								별점과 평균
+								
+								<c:set var = "total" value = "0" />
+
+								<c:forEach var="result" items="${getAllReview}" varStatus="status">     
+								
+								<c:set var= "total" value="${total + result.avg}"/>
+								
+								</c:forEach>
+								
+								<%-- <c:out value="${total/fn:length(getAllReview)}"/> --%>
+								평점 : <fmt:formatNumber value="${total/fn:length(getAllReview)}" pattern="#.##"/>								
+								  
+								<c:if test="${getAllReview == null or fn:length(getAllReview) == 0}">리뷰가 없습니다.</c:if>  
+								
 								</div>
 
 								<br>
