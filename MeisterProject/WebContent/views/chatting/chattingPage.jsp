@@ -13,6 +13,12 @@
 	int sellNo = (Integer) request.getAttribute("sellNo");
 	int status = (Integer) request.getAttribute("status");
 	int receiver = (Integer) request.getAttribute("receiver");
+	int sender = (Integer) request.getAttribute("sender");
+	
+	if(userNo == receiver){
+		receiver = sender;
+	}
+	
 	LocalDate today = LocalDate.now();
 	String nowDate = today.toString();
 	nowDate = nowDate.replace("-", "");
@@ -317,13 +323,13 @@
 	<form action="<%=contextPath%>/chatting.me" method="post">
 		<div class="outer">
 				<input id="user" type="hidden" value="<%=nickName%>" readonly> 
-				<input id="sender" type="text" value="<%=userNo%>" readonly> 
+				<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
 				<input id="opponent" type="hidden" value=<%=nickName %> readonly>
-				<input id="receiver" name="receiver" type="text" value=<%=receiver %> readonly> 
+				<input id="receiver" name="receiver" type="hidden" value=<%=receiver %> readonly> 
 				<input id="sellNo" name="sellNo" type="hidden" value=<%=sellNo %> readonly>  
 	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 				<br>
-				<input id="chatData" type="text" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+				<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
 			<br>
 		</div>
 		<div class="chat-format">
@@ -333,7 +339,7 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		var webSocket = new WebSocket("ws://192.168.20.13:8888/meister/broadsocket");
+		var webSocket = new WebSocket("ws://192.168.220.1:8888/meister/broadsocket");
 		console.log(webSocket);
 		let count = 0;
 		let cnt = 0;

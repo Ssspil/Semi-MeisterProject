@@ -150,7 +150,7 @@
 					$('#selectForm<%=count%>').append(
 						$('<input>').prop({
 							id: 'input',
-							type: 'text',
+							type: 'hidden',
 							value: "<%=c.getSender() %>",
 							name: 'sender'
 						})
@@ -166,7 +166,7 @@
 					$('#selectForm<%=count%>').append(
 						$('<input>').prop({
 							id: 'input',
-							type: 'text',
+							type: 'hidden',
 							value: "<%=c.getReceiver() %>",
 							name: 'receiver'
 						})

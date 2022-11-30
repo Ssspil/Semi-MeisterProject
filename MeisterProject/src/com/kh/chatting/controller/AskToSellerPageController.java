@@ -45,24 +45,31 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("nickname", nickName);
 		
-		int sender = Integer.parseInt(request.getParameter("sender"));
+		int sender = 0;
 		if(request.getParameter("sender") == null) {
 			sender = userNo;
 		}
+		else {
+			sender = Integer.parseInt(request.getParameter("sender"));
+		}
 
-		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = 0;
+		int receiver = 0;
 		
 		if(request.getParameter("receiver") == null){
 			receiver = (Integer) (session.getAttribute("receiver"));
 		}
-		
+		else {
+			receiver = Integer.parseInt(request.getParameter("receiver"));
+		}
 		if(request.getParameter("sellNo") == null){
 			sellNo = (Integer) (session.getAttribute("sellNo"));
 		}
 		else {
 			sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		}
+		System.out.println("sender : "+sender);
+		System.out.println("receiver : "+receiver);
 		
 		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
 		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, sender, sellNo);
@@ -94,6 +101,7 @@ public class AskToSellerPageController extends HttpServlet {
 		request.setAttribute("sellNo", sellNo);
 		request.setAttribute("userNo", userNo);
 		request.setAttribute("receiver", receiver);
+		request.setAttribute("sender", sender);
 		//RequestDispatcher view = request.getRequestDispatcher("views/chatting/sellerNoteListPage.jsp");
 
 		RequestDispatcher view = request.getRequestDispatcher("views/chatting/chattingPage.jsp");
