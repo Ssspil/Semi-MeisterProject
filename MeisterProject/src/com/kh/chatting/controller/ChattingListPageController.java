@@ -55,15 +55,17 @@ public class ChattingListPageController extends HttpServlet {
 		}
 		
 		System.out.println(list);
-		for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.size(); j++) {
+		System.out.println(list.size());
+		for (int i = 0; i < list.size()-1; i++) {
+            for (int j = 0; j < list.size()-1; j++) {
                 if (i == j) {
                 } else if (list.get(j).getChatContent().equals(list.get(i).getChatContent())) {
                     list.remove(j);
                 }
             }
         }
-		 
+		System.out.println(list);
+		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
             for (int j = 0; j < list.size(); j++) {
                 if (i == j) {
