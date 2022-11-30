@@ -66,6 +66,14 @@ public class ChattingService {
 		return list;
 	}
 	
+	public String selectAllSellTitle(int sellNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String title = new ChattingDao().selectAllSellTitle(conn, sellNo);
+		
+		JDBCTemplate.close();
+		return title;
+	}
+	
 	public ArrayList<Chatting> selectChatDetail(int receiver, int sender, int sellNo){
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Chatting> list = new ChattingDao().selectChatDetail(conn, receiver, sender, sellNo);

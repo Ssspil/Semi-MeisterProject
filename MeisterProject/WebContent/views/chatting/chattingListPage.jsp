@@ -8,6 +8,7 @@
 <%
 
 	ArrayList<Chatting> list = (ArrayList<Chatting>) request.getAttribute("list");
+	ArrayList<String> sellTitle = (ArrayList<String>) request.getAttribute("sellTitle"); 
 	String[] nickNameList = (String[]) request.getAttribute("nickNameList");
 	int userNo = (Integer) request.getAttribute("userNo");
 	int count = 0;
@@ -51,7 +52,7 @@
 					dateList.add("0분 전");
 				}
 				else{
-					dateList.add(diffMin+"시간 전");
+					dateList.add(diffMin+"분 전");
 				}
 			}
 			else{
@@ -103,13 +104,14 @@
     	margin-right: 30px;
     	font-weight:bold;
     	font-family: 'Nanum Gothic', sans-serif;
+    	    width: 214px;
     }
     #inputDate {
     margin-top: 10px;
     color: lightgray;
     font-family: 'Nanum Gothic', sans-serif;
     position: relative;
-    left: 135px;
+    left: 100px;
     width: 55px;
     top: -43px;
 }
@@ -157,7 +159,7 @@
 						$('<input>').prop({
 							id: 'inputNick',
 							type: 'text',
-							value: '    <%=nickNameList[count] %>',
+							value: '    <%=sellTitle.get(count)%> > <%=nickNameList[count] %>',
 							name: 'receiverNick',
 						})
 					);
@@ -212,10 +214,13 @@
 					<%}%>
 				});
 				
-				
-				<%count += 1;%>
+				<%if(count <= list.size()){%>
+					<%count += 1;%>
+				<%}%>
 			<%}%>
-		<%} %>
+		<%} else{%>
+			조회된 채팅이 없습니다
+		<%}%>
 		
 
 	</script>

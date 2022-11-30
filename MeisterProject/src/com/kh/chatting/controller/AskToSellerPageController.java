@@ -56,11 +56,6 @@ public class AskToSellerPageController extends HttpServlet {
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
 		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
 		
-		System.out.println("userNo : "+userNo);
-		System.out.println("sender : "+sender);
-		System.out.println("receiver : "+receiver);
-		System.out.println("sellNo : "+sellNo);
-		
 		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
 		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, sender, sellNo);
 		
@@ -81,7 +76,6 @@ public class AskToSellerPageController extends HttpServlet {
 		}
 		request.setAttribute("oppNick", senderName);
 	
-		System.out.println(senderName);
 		
 		Attachment profileOpp = new ChattingService().getProfile(receiver);
 

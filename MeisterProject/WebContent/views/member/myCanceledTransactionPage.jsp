@@ -47,13 +47,13 @@
 <body>
 <div id="nameBody_3">
 <div id="contenthead"></div>
-	<%if(s3.size() = null){ %>
+	<%if(s3.isEmpty()){ %>
 	   <div id="ddddd"></div>
          <div id="nullhead">
 			<div id="img1"><i class="bi bi-emoji-expressionless"></i></div>
 			<br>
 			<div id="null">취소된 거래가 없습니다.</div>
-			<div id="null2">쇼핑 ㄱㄱ</div>
+			<div id="null2">마켓을 방문해주세요!</div>
 			
 		</div>
 		<%}else {%>
