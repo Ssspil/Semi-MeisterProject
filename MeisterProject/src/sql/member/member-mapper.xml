@@ -264,11 +264,11 @@
 		  			SELECT rownum rnum, SELL_NO, SELL_TITLE, PRICE, INTEREST_NAME
 		            FROM SELL
 		            JOIN INTEREST USING(INTEREST_NO)
-		            where user_no = ?
+		            where user_no = ? and status = 'Y'
 					) SELL
 				where rnum <= ?
 			)
-		where  rnum >= ?       
+		where  rnum >= ?     
 		]]>
 	</entry>
 	
@@ -304,7 +304,7 @@
 		SELECT SELL_NO, SELL_TITLE, SELL_CONTENT, PRICE, INTEREST_NAME, USER_NO
 		FROM SELL
 		JOIN INTEREST USING(INTEREST_NO)
-		WHERE SELL_NO = ?
+		WHERE SELL_NO = ? AND STATUS = 'Y'
 	</entry>
 	
 	<entry key="updateStatus">
