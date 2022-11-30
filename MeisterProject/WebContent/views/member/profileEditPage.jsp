@@ -224,7 +224,7 @@
 		});
 		
 		$(function(){
-			if("<%=expert%>" == 'N'){
+			if("<%=expert%>" == 'N'|| "<%=expert%>" == 'W'){
 				$('#emailFront').attr("disabled", true);
 				$('#userName').attr("disabled", true);
 				$('#phoneMid').attr("disabled", true);

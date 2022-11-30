@@ -123,7 +123,7 @@ public class MemberService {
 	  * @param at
 	  * @return
 	  */
-	 public int expertSubmit(Member m, Attachment at) {
+	 public Member expertSubmit(Member m, Attachment at) {
 		 Connection conn = JDBCTemplate.getConnection();
 		 
 		 // SUBMIT테이블에 값넣기
@@ -139,8 +139,10 @@ public class MemberService {
 			 result2 = new MemberDao().insertExpertAttachment(conn, at, subNo);
 		 }
 		 
+		 Member UpdateMem = null;
 		 if (result1 > 0 && result2 > 0) {
 			 
+			 UpdateMem = new MemberDao().selectMemberByNo(conn, m.getUserNo());
 			 
 			 JDBCTemplate.commit(conn);
 		 } else {
@@ -149,7 +151,7 @@ public class MemberService {
 			 
 		 JDBCTemplate.close();
 		 
-		 return result1 * result2;
+		 return UpdateMem;
 	 }
 	
 	 public Member selectMember(int userNo) {
