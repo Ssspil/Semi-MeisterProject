@@ -53,8 +53,22 @@ public class AskToSellerPageController extends HttpServlet {
 			sender = Integer.parseInt(request.getParameter("sender"));
 		}
 
-		int receiver = Integer.parseInt(request.getParameter("receiver"));
-		int sellNo = Integer.parseInt(request.getParameter("sellNo"));
+		int receiver = 0;
+		int sellNo = 0;
+		
+		if(request.getParameter("receiver") == null){
+			receiver = (Integer) (session.getAttribute("receiver"));
+		}
+		else {
+			receiver = Integer.parseInt(request.getParameter("receiver"));
+		}
+		
+		if(request.getParameter("sellNo") == null){
+			sellNo = (Integer) (session.getAttribute("sellNo"));
+		}
+		else {
+			sellNo = Integer.parseInt(request.getParameter("sellNo"));
+		}
 		
 		ArrayList<Chatting> list = new ChattingService().selectChatDetail(receiver, sender, sellNo);
 		ArrayList<String> dateList = new ChattingService().selectChatDate(receiver, sender, sellNo);

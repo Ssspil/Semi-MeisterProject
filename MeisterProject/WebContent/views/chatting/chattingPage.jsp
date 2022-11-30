@@ -11,6 +11,7 @@
 	ArrayList<String> dateList = new ArrayList<String>();
 	int userNo = (Integer) request.getAttribute("userNo");
 	int sellNo = (Integer) request.getAttribute("sellNo");
+	int status = (Integer) request.getAttribute("status");
 	int receiver = (Integer) request.getAttribute("receiver");
 	LocalDate today = LocalDate.now();
 	String nowDate = today.toString();
@@ -318,16 +319,16 @@
 				<input id="user" type="hidden" value="<%=nickName%>" readonly> 
 				<input id="sender" type="hidden" value="<%=userNo%>" readonly> 
 				<input id="opponent" type="hidden" value=<%=nickName %> readonly>
-				<input id="receiver" type="hidden" value=<%=receiver %> readonly> 
-				<input id="sellNo" type="hidden" value=<%=sellNo %> readonly>  
+				<input id="receiver" name="receiver" type="hidden" value=<%=receiver %> readonly> 
+				<input id="sellNo" name="sellNo" type="hidden" value=<%=sellNo %> readonly>  
 	<!-- 			<input onclick="disconnect()" value="Disconnect" type="button">  -->
 				<br>
-				<input id="chatData" type="hidden" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
+				<input id="chatData" type="text" name="chatData" value="" size="50" placeholder="대화내용확인 용도" readonly>
 			<br>
 		</div>
 		<div class="chat-format">
 			<input id="textMessage" type="text" value=""> 
-			<input id="sendBtn" onclick="sendMessage(); moveScroll();" value="Send" type="button">
+			<input id="sendBtn" onclick="sendMessage(); moveScroll();" value="Send" type="submit">
 			<button type="submit">저장하기</button>	
 		</div>
 	</form>
@@ -476,11 +477,11 @@
 		function disconnect() {
 			webSocket.close();
 		}
- 		const beforeUnloadListener = (event) => {
- 		  event.preventDefault();
- 		  return event.returnValue = "Are you sure you want to exit?";
- 		};
- 		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
+//  		const beforeUnloadListener = (event) => {
+//  		  event.preventDefault();
+//  		  return event.returnValue = "Are you sure you want to exit?";
+//  		};
+//  		window.addEventListener("beforeunload", beforeUnloadListener, {capture: true});
  		
  		function moveScroll(){
  			$(".outer").scrollTop($(".outer")[0].scrollHeight);
