@@ -119,7 +119,7 @@ public class SellBoard {
 	}
 	
 	// 양진호 수정
-	// 판매 게시판 리스트 부분 생성자
+	// 판매 게시판 리스트 부분 생성자 
 	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
 			int interestNo, int localNo, String nickname, String titleImg, String localName, String interestName) {
 		super();
@@ -135,6 +135,26 @@ public class SellBoard {
 		this.localName = localName;
 		this.interestName = interestName;
 	}
+	
+	
+	// 검색할때 생성자
+	public SellBoard(int sellNo, String sellTitle, int price, int sellRecommend, Date sellDate,
+			int interestNo, int localNo, String nickname, String titleImg,int userNO, String localName, String interestName) {
+		super();
+		this.sellNo = sellNo;
+		this.sellTitle = sellTitle;
+		this.price = price;
+		this.sellRecommend = sellRecommend;
+		this.sellDate = sellDate;
+		this.interestNo = interestNo;
+		this.localNo = localNo;
+		this.nickname = nickname;
+		this.titleImg = titleImg;
+		this.userNO = userNO;
+		this.localName = localName;
+		this.interestName = interestName;
+	}
+	
 	
 	// 판매 게시판 상세조회 부분 생성자
 	public SellBoard(int sellNo, String sellTitle, String sellContent, int price, int sellRecommend, Date sellDate,
@@ -205,6 +225,11 @@ public class SellBoard {
 		this.userId = userId;
 	}
 	
+
+
+
+
+
 	public int getSellNo() {
 		return sellNo;
 	}

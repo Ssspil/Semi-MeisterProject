@@ -73,9 +73,7 @@
 		            <br><br>
 		            <span id="price"><%=s3.get(i).getPrice() %> 원</span>
 		            <br>
-		            <button id="btn1" >리뷰삭제</button>
-		            <button id="btn2" >리뷰수정</button>
-		            <button id="btn3" >리뷰쓰기</button>
+		            <button id="btn1" onclick="location.href='<%=request.getContextPath()%>/report.me'">신고하기</button>
 		        </div>
         	<%} %>
    		<%} %>

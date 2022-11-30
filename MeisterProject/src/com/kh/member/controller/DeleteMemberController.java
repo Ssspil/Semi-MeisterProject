@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +36,14 @@ public class DeleteMemberController extends HttpServlet {
 		int result = new MemberService().deleteMember(userNo);
 		
 		if(result > 0) {
-			HttpSession session = request.getSession();		    
-			session.invalidate();		    
-		    
-		    response.sendRedirect(request.getContextPath());
+			HttpSession session = request.getSession();
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('탈퇴 처리가 완료되었습니다');location.href='mainLoad.do'</script>"); 
+			writer.close();	    
+			session.invalidate();
+			response.sendRedirect("pagePath");	
 		    
 		} else {
 			request.setAttribute("errorMsg", "비밀번호 변경에 실패했습니다.");
