@@ -290,8 +290,8 @@ height:100px;
             <div id="footer">
                 <div id="footerpost">커뮤니티 작성 날짜</div>
                 <div id="footerpost1"><%=list.get(i).getBoardDate() %></div>
-                <div id="footerpost2"><i class="bi bi-chat-dots"></i> <%=list.get(i).getReplyCount() %>
-                 <i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getBoardRecommend()%> </div>
+                <div id="footerpost2"><i class="bi bi-hand-thumbs-up"></i> <%=list.get(i).getReplyCount() %>
+                  <i class="bi bi-chat-dots"></i> <%=list.get(i).getBoardRecommend()%> </div>
             </div>
    
        		<br>
