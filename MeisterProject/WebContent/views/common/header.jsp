@@ -65,9 +65,9 @@
                             <a href="<%= contextPath %>/boardlist.bo">커뮤니티</a>
                         </li>
                         <li>
-                            <div class="search">
-                                <input type="search" id="header-search" name="search" placeholder="마이스터 검색" onkeypress="if( event.keyCode == 13 ){ searchData2();}">
-                            </div>
+                          <div class="search">
+                              <input type="search" id="header-search" name="search" placeholder="마이스터 검색" onkeypress="if( event.keyCode == 13 ){ searchData2();}">
+                          </div>
                         </li>
                     </ul>
                 </div> <!-- 메인메뉴 네비게이션 바 끝-->

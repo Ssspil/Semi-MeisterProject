@@ -8,11 +8,11 @@
 	SELECT *
 	FROM (SELECT ROWNUM RNUM,
 			A.*
-			FROM  (SELECT  S.SELL_NO as SELL_NO,
-					        S.SELL_TITLE as SELL_TITLE,
-					        S.PRICE as PRICE,
-					        S.SELL_RECOMMEND as SELL_RECOMMEND,
-					        S.SELL_DATE as SELL_DATE,
+			FROM  (SELECT  S.SELL_NO AS SELL_NO,
+					        S.SELL_TITLE AS SELL_TITLE,
+					        S.PRICE AS PRICE,
+					        S.SELL_RECOMMEND AS SELL_RECOMMEND,
+					        S.SELL_DATE AS SELL_DATE,
 					        INTEREST_NO AS INTEREST_NO,
 					        LOCAL_NO AS LOCAL_NO,
 					        M.NICKNAME AS NICKNAME,
