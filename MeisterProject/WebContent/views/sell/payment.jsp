@@ -52,9 +52,12 @@
 		padding : 2%;
 		border: 1px solid #e4e5ed;	
 		border-radius: 10px;
+		width:100%;
 	}	
 	.btn-form{
 		margin : auto;
+		text-align : center;
+		width : 100%;
 	}
 	.tb{
 		text-align: center;
@@ -73,13 +76,7 @@
 	h6{
 		color: orange;
 	}
-/* 	.titleAndNick{
-		overflow:hidden;
-		max-width : 100%;
-		text-overflow:ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient:vertical;
-	       -webkit-line-clamp:1;} */
+
 </style>
 </head>
 <body>
@@ -155,7 +152,7 @@
 	                    총 결제 금액
 	                </td>
 	                <td>
-	                    <b style="font-size: large;"><c:set var = "price" value="<%= pm.getPrice() %>"/>
+	                    <b style="font-size: large; color:orange;"><c:set var = "price" value="<%= pm.getPrice() %>"/>
 						<fmt:formatNumber value="${price }"  /></b> 원
 	                </td>
 	            </tr>
@@ -165,18 +162,16 @@
 					</td>
 				</tr>
 	            <tr>
-	                <td style=text-align:center;>
+	                <td style=text-align:center; colspan="2">
 	                	<label for="cbox">
-	                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="cbox" type="checkbox"> &nbsp;결제에 동의합니다.(필수)
+	                    <input id="cbox" type="checkbox"> &nbsp;결제에 동의합니다.(필수)
 	                    </label>
 	                </td>
 	            </tr>
 	            <tr>
-	                <td class=btn-form>
+	                <td class=btn-form colspan="2">
 	                    <a href="<%=contextPath%>/detail.se?sno=<%= (int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-primary">이전으로</a>
 	                    <button onclick="requestPay()" class="btn btn-warning" id="payBtn" disabled>결제하기</button>
-	                    <a href="<%=contextPath%>/paycom.se?sno=<%=(int)request.getAttribute("sno") %>" id="paymentBtn" class="btn btn-primary">결제안하고 넘어가는 버튼</a>
 	                </td>
 	
 	            </tr>
