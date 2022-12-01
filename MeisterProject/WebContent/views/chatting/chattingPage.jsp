@@ -339,7 +339,7 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		var webSocket = new WebSocket("ws://192.168.128.1:8888/meister/broadsocket");
+		var webSocket = new WebSocket("ws://192.168.20.13:8888/meister/broadsocket");
 		console.log(webSocket);
 		let count = 0;
 		let cnt = 0;
