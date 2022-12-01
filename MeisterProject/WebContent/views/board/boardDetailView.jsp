@@ -596,7 +596,7 @@ body {
 		$(function() {
 			selectReplyList();
 			
-			setInterval(selectReplyList, 2000);
+// 			setInterval(selectReplyList, 2000);
 		})
 		
 		// 댓글 등록

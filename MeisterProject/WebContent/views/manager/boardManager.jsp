@@ -326,7 +326,7 @@ table>tfoot>tr:hover {
 						htmls += 	"</tbody>";
 						htmls +="</table>";
 	              };
-				  $(".modal  
+	              $(".modal .modal-content").html(htmls);
 		},
 			error : function() {
 				console.log("댓글리스트조회용 ajax통신 실패~");
