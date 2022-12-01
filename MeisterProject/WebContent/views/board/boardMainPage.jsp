@@ -544,22 +544,28 @@ position: relative;
 
 <!-- 						시간기능  -->
 						<%
-							String boardDate = list.get(i).getBoardDate();
+						String boardDate = list.get(i).getBoardDate();
 						int now = Integer.parseInt(nowDate);
 						int insertDate = Integer.parseInt(boardDate);
 
 						int sum = 0;
 						int sum2 = 0;
-
-						sum += Integer.parseInt(nowDate.substring(2, 4)) * 1440 + Integer.parseInt(nowDate.substring(4, 6)) * 60
+						int diffDate = 0;
+						diffDate = now - Integer.parseInt(boardDate);
+						System.out.println(nowDate);
+						System.out.println(boardDate);
+						sum += Integer.parseInt(nowDate.substring(0, 2)) * 43200 + Integer.parseInt(nowDate.substring(2, 4)) * 1440 + Integer.parseInt(nowDate.substring(4, 6)) * 60
 								+ Integer.parseInt(nowDate.substring(6, 8));
 
-						sum2 += Integer.parseInt(boardDate.substring(2, 4)) * 1440 + Integer.parseInt(boardDate.substring(4, 6)) * 60
+						sum2 += Integer.parseInt(boardDate.substring(0, 2)) * 43200 + Integer.parseInt(boardDate.substring(2, 4)) * 1440 + Integer.parseInt(boardDate.substring(4, 6)) * 60
 								+ Integer.parseInt(boardDate.substring(6, 8));
 
 						int year = Integer.parseInt(nowDate.substring(0, 2));
 						int year2 = Integer.parseInt(boardDate.substring(0, 2));
-
+						
+						System.out.println(sum);
+						System.out.println(sum2);
+						
 						int calTime = sum - sum2;
 						String result = "";
 
@@ -569,10 +575,14 @@ position: relative;
 							result = (calTime / 60) + "시간전";
 						} else if (calTime > 1440) {
 							result = (calTime / 1440) + "일전";
+						} else if (calTime > 1440*30) {
+							result = (calTime / 1440) + "달전";
+						} else {
+							if (year > year2) {
+								result = (year - year2) + "년전";
+							}
 						}
-						if (year > year2) {
-							result = (year - year2) + "년전";
-						}
+					
 						%>
 						<div class="foot_wrap" style="float: right">
 							<span id="date"><span id="chat2"><i
