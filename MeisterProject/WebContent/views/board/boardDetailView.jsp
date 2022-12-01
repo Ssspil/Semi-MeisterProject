@@ -604,12 +604,12 @@ body {
 			$.ajax({
 				url : "rinsert.bo",
 				data : {
-					content : $("#replyContent").val(),
-					bno     : ${b.boardNo}
+					content : $("#replyContent").val(), // 댓글 내용
+					bno     : ${b.boardNo} // 게시물 번호
 				},
 				type : "post",
 				success : function(result) {
-					if(result > 0) { // 댓글등록 성공 => 갱신된 댓글리스트 조회
+					if(result > 0) { // result => 1이면 댓글등록 성공 => 갱신된 댓글리스트 조회
 						selectReplyList();
 						$("#replyContent").val("");
 					}
