@@ -335,7 +335,6 @@
 		<div class="chat-format">
 			<input id="textMessage" type="text" value=""> 
 			<input id="sendBtn" onclick="sendMessage(); moveScroll();" value="Send" type="submit">
-			<button type="submit">저장하기</button>	
 		</div>
 	</form>
 	<script type="text/javascript">
