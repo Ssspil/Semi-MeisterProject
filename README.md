@@ -1,6 +1,6 @@
 # MeisterProject
-재능마켓플랫폼 홈페이지 - 세미프로젝트<br>
-크몽 과 숨고 사이트를 참고하여 만든 홈페이지!
+크몽 과 숨고 사이트를 참고하여 만든 홈페이지!<br>
+<img src="https://user-images.githubusercontent.com/92138800/207755353-c7b6ad32-55aa-4967-8cd8-f02b9d666333.png" width="300"/>
 <br><br>
 
 ## :dizzy: 프로젝트 기간 
