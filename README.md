@@ -138,8 +138,11 @@ FROM (SELECT ROWNUM RNUM,
 ## :full_moon: 주요기능
 <table>
 <tr>
-	<th width="300px">
+	<th>
 		메인페이지
+	</th>
+	<th>
+		
 	</th>
 </tr>
 <tr>
