@@ -151,13 +151,14 @@ FROM (SELECT ROWNUM RNUM,
 	<th width="300px">
 		판매페이지 등록하기
 	</th>
-	<th width="300px">
-		판매페이지 하기
-	</th>
+	<th width="300px">재능구매하기</th>
 </tr>
 <tr>
 	<td>
 		 <img src="https://user-images.githubusercontent.com/92138800/210165899-16244e1b-270a-43c8-874c-99f97c074445.gif"width="300" height="400" />
+	</td>
+	<td>
+		![화면 기록 2023-01-01 오후 7 35 41](https://user-images.githubusercontent.com/92138800/210167826-976fa00b-6007-4333-8c01-6e65632749ee.gif)
 	</td>
 </tr>
 </table>
