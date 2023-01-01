@@ -142,7 +142,7 @@ FROM (SELECT ROWNUM RNUM,
 		메인페이지
 	</th>
 	<th>
-		
+		관리자페이지
 	</th>
 </tr>
 <tr>
