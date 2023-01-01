@@ -137,27 +137,31 @@ FROM (SELECT ROWNUM RNUM,
 
 ## :full_moon: 주요기능
 <table>
-  <tr>
-    <th width="300px">메인페이지</th>
-  </tr>
-  <tr>
-    <td>
-      <img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="300" height="400" />            </td>
-  </tr>
-    <tr>
-      <th width="300px">판매페이지 등록하기</th>
-      <th width="300px">판매페이지 하기</th>
-    </tr>
-    <tr>
-    <td>
-      ㅋㅋ           
-     td>
-  </tr>
+<tr>
+	<th width="300px">
+		메인페이지
+	</th>
+</tr>
+<tr>
+	<td>
+		<img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="300" height="400"/>
+	</td>
+</tr>
+<tr>
+	<th width="300px">
+		판매페이지 등록하기
+	</th>
+	<th width="300px">
+		판매페이지 하기
+	</th>
+</tr>
+<tr>
+	<td>
+		 ㅋㅋ
+	</td>
+</tr>
 </table>
 
-```
-zz
-```
 
 ___
 ***
