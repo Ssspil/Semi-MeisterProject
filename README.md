@@ -133,7 +133,7 @@ FROM (SELECT ROWNUM RNUM,
   WHERE RNUM BETWEEN ? AND ?
 </entry>
 ```
-
+<br>
 
 ## :full_moon: 주요기능
 <table>
@@ -161,9 +161,17 @@ FROM (SELECT ROWNUM RNUM,
 		<img src="https://user-images.githubusercontent.com/92138800/210167826-976fa00b-6007-4333-8c01-6e65632749ee.gif" width="300" height="300" />
 	</td>
 </tr>
+<tr>
+	<th>커뮤니티
+	</th>
+</tr>
+<tr>
+	<td>
+	<img src="https://user-images.githubusercontent.com/92138800/210168154-c192d7a0-d7eb-46f3-ad1c-6de904b406c8.gif" width="300" height="300" />
+	</td>
+<tr>
 </table>
 
 
 ___
 ***
-___
