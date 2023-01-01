@@ -157,7 +157,7 @@ FROM (SELECT ROWNUM RNUM,
 </tr>
 <tr>
 	<td>
-		 ㅋㅋ
+		 <img src="https://user-images.githubusercontent.com/92138800/210165899-16244e1b-270a-43c8-874c-99f97c074445.gif"width="300" height="400" />
 	</td>
 </tr>
 </table>
