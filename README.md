@@ -149,6 +149,9 @@ FROM (SELECT ROWNUM RNUM,
 	<td>
 		<img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="300" height="400"/>
 	</td>
+	<td>
+		<img src="https://user-images.githubusercontent.com/92138800/210168693-506c56c8-5ffe-4c94-bd6e-961bf236a08b.gif" width="500" height="400" />
+	</td>
 </tr>
 <tr>
 	<th width="300px">
