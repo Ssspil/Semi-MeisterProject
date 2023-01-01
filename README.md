@@ -136,9 +136,23 @@ FROM (SELECT ROWNUM RNUM,
 
 
 ## :full_moon: 주요기능
->인용글1
->> 인용글2
->>> 인용글3
+<table>
+  <tr>
+    <th width="500px">메인페이지</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="500" height="500" />            </td>
+  </tr>
+    <tr>
+      <th width="500px">판매페이지 등록하기</th>
+      <th width="500px">판매페이지 하기</th>
+    </tr>
+    <tr>
+    <td>
+      <img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="500" height="500" />            </td>
+  </tr>
+</table>
 
 ```
 zz
