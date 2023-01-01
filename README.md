@@ -144,14 +144,15 @@ FROM (SELECT ROWNUM RNUM,
 	<th>
 		관리자페이지
 	</th>
+
 </tr>
 <tr>
 	<td>
 		<img src="https://user-images.githubusercontent.com/92138800/210165689-6d9f4dd2-7f13-49ac-a173-e0a0cdba8d6a.gif" width="300" height="300"/>
 	</td>
 	<td>
-		<img src="https://user-images.githubusercontent.com/92138800/210168693-506c56c8-5ffe-4c94-bd6e-961bf236a08b.gif" width="300" height="300" />
-	</td>
+		<img width="400" alt="21 오후 8 33 32" src="https://user-images.githubusercontent.com/92138800/210169348-cbe05bc1-951a-4b56-a534-e34f517e7768.png"></td>
+
 </tr>
 <tr>
 	<th width="300px">
@@ -170,13 +171,21 @@ FROM (SELECT ROWNUM RNUM,
 <tr>
 	<th>커뮤니티
 	</th>
+	<th>
+		공지사항
+	</th>
 </tr>
 <tr>
 	<td>
 	<img src="https://user-images.githubusercontent.com/92138800/210168154-c192d7a0-d7eb-46f3-ad1c-6de904b406c8.gif" width="300" height="300" />
 	</td>
+	<td>
+	<img width="300" alt="1" src="https://user-images.githubusercontent.com/92138800/210169255-5fd67eb7-fb57-4f9d-8077-20781867d027.png">
+	</td>
 <tr>
 </table>
+
+
 
 
 ___
